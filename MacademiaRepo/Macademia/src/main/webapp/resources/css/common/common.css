@@ -1,0 +1,39 @@
+<script src="https://kit.fontawesome.com/336f32a815.js" crossorigin="anonymous"></script>
+<style>
+    @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 100;
+        font-style: normal;
+    }
+    html, body{
+        padding: 0px;
+        margin: 0px;
+        font-family: 'Pretendard-Regular';
+        font-size: 12px;
+    }
+    div>*{
+        box-sizing: border-box;
+    }
+    /* aside, main{
+        border: 1px solid black;
+    } */
+    #wrap{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    header{
+        width: 100vw;
+        height: 10vh;
+        border-bottom: 1px solid gainsboro;
+    }
+    aside{
+        width: 20vw;
+        height: 90vh;
+    }
+    main{
+        width: 60vw;
+    }
+</style>
