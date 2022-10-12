@@ -74,12 +74,21 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 1fr 1fr 1.5fr 2fr;
+			grid-template-rows: 20% 7% 40% 30%;
 		}
 
 		#note-header-area{
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
+			justify-items: center;
+		}
+
+		#note-header-area > a{
+			width: 90%;
+			height: 90%;
+			text-align: center;
+			margin-top: 5%;
+			border: 1px solid #6667AB;
 		}
 
 		.header-area-content{
@@ -88,16 +97,26 @@
 			grid-template-rows: 1.5fr 0.5fr;
 		}
 
-	
 		#note-search-area > form{
+			height: 100%;
+			border: 1px solid black;
 			display: grid;
-			grid-template-columns: 1fr 2fr 1fr;
+			grid-template-columns: 10% 70% 20%;
+			justify-items: center;
 		}
+
+		#note-search-area > form > div > *{
+			height: 100%;	
+			border: 1px solid black;
+		}
+
 
 		#note-info-area{
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
 			grid-template-rows: repeat(6, 1fr);
+			justify-items: center;
+			border: 1px solid #6667AB;
 		}
 
 		#note-detail-area{
@@ -106,6 +125,7 @@
 			grid-template-rows: repeat(5,1fr) 2fr;
 		}
 
+		/* #1315a6 #6667AB */
     </style>
 </head>
 <body>
@@ -165,19 +185,27 @@
 						<h5>쪽지</h5>
 					</div>
 				</a>
+
+				<a href="">
+					<div class="header-area-content">
+						<img src="" alt="">
+						<h5>회신</h5>
+					</div>
+				</a>
 				
-				<div class="header-area-content">
-					<img src="" alt="">
-					<h5>회신</h5>
-				</div>
-				<div class="header-area-content">
-					<img src="" alt="">
-					<h5>새로고침</h5>
-				</div>
-				<div class="header-area-content">
-					<img src="" alt="">
-					<h5>삭제</h5>
-				</div>
+				<a href="">
+					<div class="header-area-content">
+						<img src="" alt="">
+						<h5>새로고침</h5>
+					</div>
+				</a>
+
+				<a href="">
+					<div class="header-area-content">
+						<img src="" alt="">
+						<h5>삭제</h5>
+					</div>
+				</a>
 
 			</div>
 
@@ -191,8 +219,8 @@
 							<option value="comment">내용</option>
 						</select>
 					</div>
-					<div>
-						<input type="text" name="">
+					<div style="width: 100%;">
+						<input type="text" name="" style="width: 100%;" >
 					</div>
 					<div>
 						<input type="submit" value="검색하기">
