@@ -13,9 +13,11 @@
 		<header>
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
-		<aside></aside>
+		<aside>
+			<%@include file="/WEB-INF/views/employee/main-sidebar.jsp" %>
+		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/home-content.jsp" %>
+			<%@include file="/WEB-INF/views/employee/main-content.jsp" %>
 		</main>
 		<aside></aside>
 	</div>

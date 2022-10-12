@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+
+<!-- 부트스트랩 -->
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 <style>
     /* 헤더 공통 */
     #header-wrap{
@@ -70,13 +79,13 @@
     </div>
     <div id="nav-area">
         <div id="nav-menu1">
-            <a href="">
+            <a href="${root}">
                 <i class="fa-solid fa-house fa-2x"></i><br>
                 <label for="">홈</label>
             </a>
         </div>
         <div id="nav-menu2">
-            <a href="">
+            <a href="${root}/employee/main">
                 <i class="fa-solid fa-people-group fa-2x"></i><br>
                 <label for="">직원</label>
             </a>
