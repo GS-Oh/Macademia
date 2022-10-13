@@ -6,75 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
-	    /* 공통 */
-	    html, body{
-	        padding: 0px;
-	        margin: 0px;
-	    }
-	    div, aside, main, header, input {
-	        box-sizing: border-box;
-	    }
 	
-	    #wrap{
-	        border: 3px solid black;
-	        width: 80vw;
-	        height: 80vh;
-	        display: grid;
-	        grid-template-columns: 2fr 8fr;
-	        grid-template-rows: 1fr 9fr;
-	    }
-	    
-	    header{
-	        border: 1px solid black;
-	        grid-column: span 2;
-	        display: flex;
-	        justify-content: space-between;
-	    }
-	    
-	    header > div{
-	        border: 1px solid pink;
-	        width: 30%;
-	        height: 100%;
-	        display: flex;
-	        text-align: center;
-	        align-items: center;
-	    }
-	
-		#header-search-area{
-			display: flex;
-		}
-
-	    .header-img-outer{
-	        height: 100%;
-	        width: 30%;
-	        border: 1px solid pink;
-	    }
-	
-	    aside{
-	        border: 1px solid black;
-	        padding-top: 50px;
-	        display: grid;
-	        grid-template-rows: repeat(6, 1fr) 2fr 1fr 1fr;
-	        place-content: center;
-	        justify-items: center;
-	    }
-	
-	    aside div {
-	        font-size: 1.2rem;
-	    }
-	
-	    aside div a{
-	        text-decoration: none;
-	        color: blue;
-	    }
-	
-		/* 공통 끝 */
-
-
+	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
 
 		main{
 			display: grid;
-			grid-template-rows: 20% 7% 40% 30%;
+			grid-template-rows: 15% 7% 44% 34%;
 		}
 
 		#note-header-area{
@@ -84,26 +21,41 @@
 		}
 
 		#note-header-area > a{
-			width: 90%;
+			width: 80%;
 			height: 90%;
 			text-align: center;
+			text-decoration: none;
+			color: #6667AB;
 			margin-top: 5%;
-			border: 1px solid #6667AB;
 		}
 
 		.header-area-content{
 			display: grid;
 			height: 100%;
 			grid-template-rows: 1.5fr 0.5fr;
+			justify-items: center;
+		}
+
+		.header-area-content > img{
+			border: 1px solid black;
+			width: 70%;
+		}
+
+	
+		#note-search-area{
+			margin: 10px 0px 10px 0px;
 		}
 
 		#note-search-area > form{
 			height: 100%;
-			border: 1px solid black;
 			display: grid;
-			grid-template-columns: 10% 70% 20%;
+			grid-template-columns: 13% 65% 17%;
+			padding-left: 6%;
 			justify-items: center;
 		}
+
+		
+
 
 		#note-search-area > form > div > *{
 			height: 100%;	
@@ -113,16 +65,52 @@
 
 		#note-info-area{
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
-			grid-template-rows: repeat(6, 1fr);
-			justify-items: center;
-			border: 1px solid #6667AB;
+			grid-template-columns: 50px 1fr 1fr 1fr 2fr 1fr;
+			grid-template-rows: repeat(8, 1fr);
+			place-items: center;
+			border: 3px solid #6667AB;
+			border-radius: 10px;
+
+			grid-auto-rows: 1fr;
+			grid-auto-flow: row;
+
 		}
+
+		#note-info-area > div{
+			border-right: 1px dashed black;
+			width: 100%;
+			text-align: center;
+		}
+
+		.info-header{
+			background-color: #1315a6;
+			color: white;
+		}
+
 
 		#note-detail-area{
 			display: grid;
 			grid-template-columns: 2fr 8fr;
 			grid-template-rows: repeat(5,1fr) 2fr;
+			margin-top: 15px;
+			border: 3px solid #1315a6;
+			border-radius: 10px;
+		}
+
+		.detail-area-title{
+			background-color: #6667AB;
+			border-right: 1px solid black;
+			margin-bottom: 5px;
+			color: white;
+			align-items: center;
+			text-align: center;
+			padding-top: 5px;
+		}
+
+		.detail-area-content{
+			border-top: 2px solid #6667AB;
+			align-items: center;
+			padding: 5px 0px 0px 10px;
 		}
 
 		/* #1315a6 #6667AB */
@@ -130,49 +118,12 @@
 </head>
 <body>
 
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
     <div id="wrap">
 
-        <header>
-            
-            <!-- 로고 / 급여관리 -->
-            <div>
-                <div class="header-img-outer">
-                    <img alt="로고" src="">
-                </div>
-                <div>
-                    <h1><a href="/md/messenger/main">메신저</a></h1>
-                </div>
-            </div>
-
-            <!-- 프로필 사진, 직원명 부서명 직책 -->
-            <div style="width: 50%;">
-				<div id="header-search-area">
-					<input type="text" name="">
-					<input type="submit" value="검색">
-				</div>
-                <div class="header-img-outer">
-                    <img alt="프로필 사진" src="">
-                </div>
-                <div>
-                    <h4>직원명</h4>
-                    <h4>부서명-직책</h4>
-                </div>
-            </div>
-
-        </header>
-
-        <aside>
-            <div><a href="">홈</a></div>
-            <div><a href="/md/messenger/profile">나의 프로필</a></div>
-            <div><a href="">채팅</a></div>
-            <div><a href="">쪽지</a></div>
-            <div><a href="">파일보관함</a></div>
-            <div><a href="">공지톡</a></div>
-			<div></div>
-            <div><a href="">메신저 알림</a></div>
-            <div><a href="">메신저 환경설정</a></div>
-        </aside>
+		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
+        
 
         <main>
 
@@ -213,7 +164,8 @@
 			<div id="note-search-area">
 				<form action="">
 					<div>
-						<select name="" id="">
+						
+						<select name="" id="" >
 							<option value="msgNo">보낸사람</option>
 							<option value="recipientNo">받은사람</option>
 							<option value="comment">내용</option>
@@ -231,34 +183,49 @@
 
 			<!--  -->
 			<div id="note-info-area">
+
+				<div class="info-header"><input type="checkbox"></div>
+				<div class="info-header">보낸사람</div>
+				<div class="info-header">받은사람</div>
+				<div class="info-header">첨부종류</div>
+				<div class="info-header">내용</div>
+				<div class="info-header">날짜</div>
+				
+				<div><input type="checkbox"></div>
 				<div>보낸사람</div>
 				<div>받은사람</div>
 				<div>첨부종류</div>
 				<div>내용</div>
 				<div>날짜</div>
-
+				<div><input type="checkbox"></div>
 				<div>보낸사람</div>
 				<div>받은사람</div>
 				<div>첨부종류</div>
 				<div>내용</div>
-				<div>날짜</div>
-
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				
+		
 			</div>
 
 			<!--  -->
 			<div id="note-detail-area">
-				<div>보낸 사람</div>
-				<div>2</div>
-				<div>받은 사람</div>
-				<div>4</div>
-				<div>제목</div>
-				<div>6</div>
-				<div>보낸 날짜</div>
-				<div>8</div>
-				<div>받은 날짜</div>
-				<div>1</div>
-				<div>내용</div>
-				<div>3</div>
+				<div class="detail-area-title">보낸 사람</div>
+				<div class="detail-area-content">2</div>
+				<div class="detail-area-title">받은 사람</div>
+				<div class="detail-area-content">4</div>
+				<div class="detail-area-title">제목</div>
+				<div class="detail-area-content">6</div>
+				<div class="detail-area-title">보낸 날짜</div>
+				<div class="detail-area-content">8</div>
+				<div class="detail-area-title">받은 날짜</div>
+				<div class="detail-area-content">1</div>
+				<div class="detail-area-title">내용</div>
+				<div class="detail-area-content">3</div>
 			</div>
 
 

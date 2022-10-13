@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+	    /* 공통 */
+	    html, body{
+	        padding: 0px;
+	        margin: 0px;
+	    }
+	    div, aside, main, header, input {
+	        box-sizing: border-box;
+	    }
+	
+	    #wrap{
+	        border: 3px solid black;
+	        width: 80vw;
+	        height: 80vh;
+	        display: grid;
+	        grid-template-columns: 2fr 8fr;
+	        grid-template-rows: 10% 90%;
+	    }
+	    
+	    header{
+	        border: 1px solid black;
+	        grid-column: span 2;
+	        display: flex;
+	        justify-content: space-between;
+	    }
+	    
+	    header > div{
+	        border: 1px solid pink;
+	        width: 30%;
+	        height: 100%;
+	        display: flex;
+	        text-align: center;
+	        align-items: center;
+	    }
+	
+		#header-search-area{
+			display: flex;
+		}
+
+	    .header-img-outer{
+	        height: 100%;
+	        width: 30%;
+	        border: 1px solid pink;
+	    }
+	
+	    aside{
+	        border: 1px solid black;
+	        padding-top: 50px;
+	        display: grid;
+	        grid-template-rows: repeat(6, 1fr) 2fr 1fr 1fr;
+	        place-content: center;
+	        justify-items: center;
+	        over-flow-y:auto;
+	        max-height: 100%;
+  			height: 100%;
+	    }
+	
+	    aside div {
+	        font-size: 1.2rem;
+	    }
+	
+	    aside div a{
+	        text-decoration: none;
+	        color: blue;
+	    }
+	
+		/* 공통 끝 */
+
+		
