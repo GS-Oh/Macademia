@@ -9,22 +9,24 @@
 	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
 
 		main > form{
+			margin-top : 50px;
 			height: 100%;
 			display: grid;
-			grid-template-columns: 1.5fr 7.5fr;
-			grid-template-rows: 1fr 1fr 1fr 2fr 2fr;
+			grid-template-rows: 5% 5% 5% 35% 25% 25%;
 		}
 	
-		#attemp-area-wrap{
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			height: 70%;
+		.write-header-area{
+			display: grid; grid-template-columns: 15% 70% 5%;
+			justify-content: center;
 		}
 
-		.attemp-area{
+		#profile-img-wrap{
 			display: grid;
-			grid-template-rows: 8fr 2fr;
+			grid-template-rows: 80% 20%;
 		}
+
+		
+
 
     </style>
 </head>
@@ -40,51 +42,43 @@
 
         <main>
             <form action="">
-				
-				<div> 받는 사람</div>
-				<div >
-					<input type="text">
+				<!--  -->
+				<div class="write-header-area">
+					<span class="input-group-text">받는사람</span>
+					<input type="text" class="form-control" >
 					<a href="/md/messenger/note/recipient"> 검색하기 </a>
 				</div>
-
-				<div>참조인</div>
-				<div>
-					<input type="text">
-					<button onclick=""></button>
+				<!--  -->
+				<div class="write-header-area">
+					<span class="input-group-text">참조인</span>
+					<input type="text" class="form-control" >
+					<a href="/md/messenger/note/recipient"> 검색하기 </a>
+				</div>
+				<!--  -->
+				<div class="write-header-area">
+					<span class="input-group-text">제목</span>
+					<input type="text" class="form-control" >
+				</div>
+				<!--  -->
+				<div class="write-header-area">
+					<span class="input-group-text">내용</span>
+					<input type="text" class="form-control" >
+				</div>
+			
+				<!--  -->
+				<div class="write-header-area">
+					<span class="input-group-text">파일첨부</span>
+					<div id="profile-img-wrap" class="form-control">
+						<img id="profile-img-thumb" src="" width="60%" height="100%">
+						<input  type="file" name="profile">
+					</div>
 				</div>
 
-				<div>제목</div>
-				<div>6</div>
 
-				<div>내용</div>
-				<div>8</div>
-
-				<div>첨부하기</div>
-				<div id="attemp-area-wrap">
-
-					<div class="attemp-area">
-						<div id="profile-tumb">
-							<img id="profile-img-thumb" src="" width="100%" height="100%">
-						</div>
-						<div><input type="file" name="profile" value="이미지첨부하기"></div>
-					</div>
-
-					<div class="attemp-area">
-						<div id="profile-tumb">
-							<img id="profile-img-thumb" src="" width="100%" height="100%">
-						</div>
-						<div><input type="file" name="profile" value="이미지첨부하기"></div>
-					</div>
-					
-					<div>1</div>
-					<div>2</div>
-				</div>
-				
-				<div></div>
-
-				<div>
-					<input type="submit" value="전송">
-					<button onclick="">닫기</button>
+				<!--  -->
+				<div style="text-align: center; margin-top:50px;">
+					<input  class="btn btn-primary" type="submit" value="전송">
+					<button class="btn btn-primary" onclick="" >닫기</button>
 				</div>
 
 			</form>
