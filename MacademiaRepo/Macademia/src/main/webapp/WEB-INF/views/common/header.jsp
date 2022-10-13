@@ -79,7 +79,7 @@
     </div>
     <div id="nav-area">
         <div id="nav-menu1">
-            <a href="${root}">
+            <a href="${root}/home">
                 <i class="fa-solid fa-house fa-2x"></i><br>
                 <label for="">홈</label>
             </a>
@@ -91,7 +91,7 @@
             </a>
         </div>
         <div id="nav-menu3">
-            <a href="">
+            <a href="${root}/student/roll">
                 <i class="fa-solid fa-chalkboard-user fa-2x"></i><br>
                 <label for="">학생</label>
             </a>

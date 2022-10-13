@@ -30,20 +30,19 @@
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: 3vh;
         row-gap: 10px;
-        /* align-content: center; */
     }
-    #atdc-table>div{
+    /* #atdc-table>div{
         border-bottom: 1px solid gray;
-    }
+    } */
 </style>
 
 
 
 <div id="main-content-wrap">
-    <div><h4>나의 근태 현황</h4></div>
+    <div><h4>학생 출결 관리</h4></div>
     <div>
-        <h4><input type="month" value="2022-10"></h4>
-        <input type="submit">
+        <input type="text" placeholder="강의명을 입력해주세요">
+        <input type="submit" value="강의 검색">
     </div>
     <div id="monthly-atdc">
 
@@ -68,11 +67,11 @@
     </div>
 
     <div id="atdc-table">
-        <div><b>일자</b></div>
-        <div><b>이름</b></div>
-        <div><b>부서</b></div>
-        <div><b>직급</b></div>
-        <div><b>업무시작</b></div>
+        <div><b>개강일자</b></div>
+        <div><b>카테고리</b></div>
+        <div><b>강의명</b></div>
+        <div><b>강의실</b></div>
+        <div><b>담당강사</b></div>
         <div><b>업무종료</b></div>
         <div><b>총 근무시간</b></div>
         <div><b>비고</b></div>
