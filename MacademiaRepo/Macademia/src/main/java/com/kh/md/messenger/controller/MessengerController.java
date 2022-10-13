@@ -18,6 +18,11 @@ public class MessengerController {
 		return "messenger/profile";
 	}
 	
+	@GetMapping("profile/edit")
+	public String profileEdit() {
+		return "messenger/profileEdit";
+	}
+	
 	@GetMapping("note")
 	public String note() {
 		return "messenger/note";

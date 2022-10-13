@@ -58,25 +58,7 @@
 
         <main>
             
-			<div style="margin-top: 20px;"><h2>기본 프로필 관리</h2></div>
-
-			<div id="profile-main-content">
-				<div id="main-content-img-wrap" >
-					<img src="" alt="" width="100%" height="90%" style="border:1px solid black">
-					<span style="height: 10%;">파일명</span>
-				</div>
-				<div>직원명</div>
-				<div>3-공백</div>
-				<div style="grid-row: span 2;">자기소개글</div>
-				<div><button onclick="" class="btn btn-primary"><a href="/md/messenger/profile/edit" style="color: white;">편집</a></button></div>
-				<div>6-공백</div>
-			</div>
-
-			<div id="profile-bottom-content">
-				<div>부서명-직책</div>
-				<div>개인정보들</div>
-				<div>개인정보들</div>
-			</div>
+			
 			
         </main>
 
