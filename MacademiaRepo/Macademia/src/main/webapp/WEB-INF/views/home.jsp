@@ -17,7 +17,7 @@
 		<main>
 			<%@include file="/WEB-INF/views/home-content.jsp" %>
 		</main>
-		<aside></aside>
+		<!-- <aside></aside> -->
 	</div>
 
 </body>

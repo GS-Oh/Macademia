@@ -19,7 +19,7 @@
 		<main>
 			<%@include file="/WEB-INF/views/employee/main-content.jsp" %>
 		</main>
-		<aside></aside>
+		<!-- <aside></aside> -->
 	</div>
 
 </body>
