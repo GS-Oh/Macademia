@@ -6,7 +6,6 @@
 	
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
-	
 </head>
 <body>
 	
@@ -18,7 +17,7 @@
 			<%@include file="/WEB-INF/views/board/board-sidebar.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/board/board-content.jsp" %>
+			<%@include file="/WEB-INF/views/board/detail-content.jsp" %>
 		</main>
 	</div>
 
