@@ -23,17 +23,18 @@
     #main-content-wrap>div{
         /* border: 1px solid red; */
     }
-    #atdc-table{
+    #class-list{
         border-top: 1px solid gray;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 3vh;
         row-gap: 10px;
     }
-    /* #atdc-table>div{
+    #class-list>div{
         border-bottom: 1px solid gray;
-    } */
+        padding-left: 10px;
+    }
 </style>
 
 
@@ -66,183 +67,23 @@
 
     </div>
 
-    <div id="atdc-table">
-        <div><b>개강일자</b></div>
+    <div id="class-list">
         <div><b>카테고리</b></div>
         <div><b>강의명</b></div>
-        <div><b>강의실</b></div>
         <div><b>담당강사</b></div>
-        <div><b>업무종료</b></div>
-        <div><b>총 근무시간</b></div>
-        <div><b>비고</b></div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
-        <div>13일</div>
-        <div>홍길동</div>
-        <div>인사</div>
-        <div>대리</div>
-        <div>08:50:09</div>
-        <div>18:00:23</div>
-        <div>9h 12m 33s</div>
-        <div>칼퇴</div>
+        <div><b>강의실</b></div>
+        <div><b>강의 기간</b></div>
+        <div><b>수업 시간</b></div>
+        <div><b>수강 인원</b></div>
+
+        <div>디지털 컨버전스</div>
+        <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
+        <div>심투용</div>
+        <div>20-D</div>
+        <div>10.17 ~ 11.24</div>
+        <div>15:30 ~ 22:00</div>
+        <div>30명</div>
+        
     </div>
 
 </div>
