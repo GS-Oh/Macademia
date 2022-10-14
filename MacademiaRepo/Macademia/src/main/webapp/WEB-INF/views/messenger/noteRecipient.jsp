@@ -14,12 +14,51 @@
 			grid-template-columns: 3fr 7fr;
 			grid-template-rows: 7fr 3fr;
 		}
+		
 	
+
+		#recipient-search-area{
+			overflow-y: scroll;
+		}
+
+		#recipient-search-area > ul > h5{
+			margin-top: 20px;
+			font-size: 1.3rem;
+			font-weight: 900;
+			text-align: left;
+			color: #1315a6;
+			margin-top: 50px;
+		}
+
+		.search-header{
+			margin-top: 20px;
+		}
+
+		.search-header > li{
+			margin-top: 20px;
+		}
+
+
 		#recipient-select-area{
 			display: grid;
 			grid-template-columns: 0.5fr 1fr 1fr 1fr;
 			grid-template-rows: repeat(11, 1fr);
+			align-items: center;
+			justify-items: center;
 		}
+
+		.select-header{
+			background-color: #6667AB;
+			width: 90%;
+			color: white;
+			text-align: center;
+		}
+
+		.select-content{
+			width: 90%;
+			text-align: center;
+		}
+
 
 		#recipient-submit-area > form{
 			display: grid;
@@ -50,30 +89,63 @@
        
 
         <main>
-            
-			<div>
-				<!-- 대분류 -->
-				<div>개발부</div>
-				<div>영업부</div>
-				<div>인사부</div>
-				<div>재무부</div>
+			<div id="recipient-search-area">
+
+				<ul>
+					<h5>개발부(대분류)</h5>
+					<ul class="search-header">
+						<li>프론트(중분류)
+							<ul>
+								<li>html(소부서)</li>
+								<li>html(소부서)</li>
+								<li>html(소부서)</li>
+								<li>html(소부서)</li>
+							</ul>
+						</li>
+						<li>프론트(중분류)
+							<ul>
+								<li>html(소부서)</li>
+							</ul>
+						</li><li>프론트(중분류)
+							<ul>
+								<li>html(소부서)</li>
+							</ul>
+						</li><li>프론트(중분류)
+							<ul>
+								<li>html(소부서)</li>
+							</ul>
+						</li>
+					</ul>
+			
+					<h5>개발부(대분류)</h5>
+					<ul class="search-header">
+						<li>프론트(중분류)
+							<ul>
+								<li>html(소부서)</li>
+							</ul>
+						</li>
+					</ul>
+
+
+
+				</ul>
 			</div>
 
+			<!--  -->
 			<div id="recipient-select-area">
-				<div> <input type="checkbox"> </div>
-				<div>성명</div>
-				<div>직책</div>
-				<div>부서</div>	
 
-				<div> <input type="checkbox"> </div>
-				<div>성명</div>
-				<div>직책</div>
-				<div>부서</div>	
-				
+				<div class="select-header"> <input type="checkbox"> </div>
+				<div class="select-header">성명</div>
+				<div class="select-header">직책</div>
+				<div class="select-header">부서</div>	
 
+				<div class="select-content"> <input type="checkbox"> </div>
+				<div class="select-content">성명</div>
+				<div class="select-content">직책</div>
+				<div class="select-content">부서</div>	
 
 			</div>
-
+			<!--  -->
 			<div id="recipient-submit-area" style="grid-column: span 2;">
 				<form action="">
 					<div class="submit-select" >받는이 : <input type="text" name="" ></div>

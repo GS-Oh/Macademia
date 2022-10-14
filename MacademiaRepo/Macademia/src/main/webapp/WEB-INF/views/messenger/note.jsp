@@ -76,15 +76,16 @@
 
 		}
 
+		.info-header{
+			background-color: #1315a6;
+			color: white;
+		}
+
+
 		#note-info-area > div{
 			border-right: 1px dashed black;
 			width: 100%;
 			text-align: center;
-		}
-
-		.info-header{
-			background-color: #1315a6;
-			color: white;
 		}
 
 
