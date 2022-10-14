@@ -74,12 +74,17 @@
 			grid-auto-rows: 1fr;
 			grid-auto-flow: row;
 
+			overflow-y: scroll;
+			
+
+
 		}
 
 		.info-header{
 			background-color: #1315a6;
 			color: white;
 		}
+
 
 
 		#note-info-area > div{
@@ -176,7 +181,7 @@
 						<input type="text" name="" style="width: 100%;" >
 					</div>
 					<div>
-						<input type="submit" value="검색하기">
+						<input class="btn btn-outline-dark" type="submit" value="검색하기">
 					</div>
 				</form>
 			</div>
@@ -198,6 +203,21 @@
 				<div>첨부종류</div>
 				<div>내용</div>
 				<div>날짜</div>
+
+				<div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div>
+
+				<div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div>
+				
 				<div><input type="checkbox"></div>
 				<div>보낸사람</div>
 				<div>받은사람</div>
@@ -209,8 +229,91 @@
 				<div>첨부종류</div>
 				<div>내용</div>
 				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div>
+
+				<div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div>
+
+				<div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div><div><input type="checkbox"></div>
+				<div>보낸사람</div>
+				<div>받은사람</div>
+				<div>첨부종류</div>
+				<div>내용</div>
+				<div>날짜</div>
 				
-		
 			</div>
 
 			<!--  -->

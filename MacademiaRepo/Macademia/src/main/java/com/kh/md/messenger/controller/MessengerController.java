@@ -53,4 +53,8 @@ public class MessengerController {
 		return "messenger/noticeDetail";
 	}
 	
+	@GetMapping("notice/edit")
+	public String noticeEdit() {
+		return "messenger/noticeEdit";
+	}
 }//class
