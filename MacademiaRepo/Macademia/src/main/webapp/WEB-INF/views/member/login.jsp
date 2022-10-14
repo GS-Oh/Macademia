@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <c:set var="root" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
@@ -10,75 +12,122 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 	body{
-		background-image: url("/md/resources/img/background/login_background11.jpg");
+		background-image: url("/md/resources/img/background/login_background12.jpg");
         background-size: cover;
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0;
+        font-family: 'Noto Sans KR', sans-serif;
 	}
-    #container{
-        width: 20vw;
-        height: 25vh;
-        font-family: 'Open Sans', sans-serif;
+    body::before{
+        content: "";
+        position: absolute; z-index: 1;
+        top:0; right: 0; bottom: 0; left: 0;
+        background-color: rgba(0, 0, 0, 0.05);
+
     }
+    #container{
+        width: 400px;
+        z-index: 2;
+        position: relative;
+        
+    }
+
     h1{
         text-align: center;
         color: #3b297d;
         font-weight: bold;
+        font-size: 45px;
         margin: 0;
+        display: inline-block;
+        position:absolute;
+        top: -60px;
+        left: 55px;
+        
+    }
+    #container img{
+        position:absolute;
+        top: -60px;
+        right: 35px;
     }
     .input-group{
         width: 100%;
         position: relative;
     }
     .input-group > input{
-        width: 90%;
+        width: 100%;
         background-color: transparent;
         border: none;
-        border-bottom: 2px solid #dddddd;
-        color: white;
-        font-size: 1.2vw;
-        padding: 2vw 1vw 0.2vw 1vw;
+        border-bottom: 2px solid white;
+        font-size: 25px;
+        padding: 38px 10px 5px;
         outline: none;
-
+        box-sizing: border-box;
+        color: rgb(77, 77, 77);
+        font-family: 'Noto Sans KR', sans-serif;
     }
     .input-group > label{
         position: absolute;
-        font-size: 1.2vw;
-        top: 1.5vw;
-        left: 0.5vw;
+        font-size: 25px;
+        top: 30px;
+        left: 10px;
         color: white;
+        
     }
     .input-group input:focus + label,.input-group input:valid + label{
         position: absolute;
-        font-size: 1vw;
-        top: 0.5vw;
-        left: 0.5vw;
-        transition:all 0.3s ease;
-        color:rgb(82, 40, 178);
+        font-size: 18px;
+        top: 9px;
+        left: 10px;
+        transition:0.3s ease;
+        color: #483296;
         font-weight: bold;
     }
-    #submit-btn{
+    #btn{
         display: block;
         width: 100%;
         height: 50px;   
-        border-radius: 1.5vw;
+        border-radius: 25px;
         border: none;
-        margin-top: 1vw;
+        margin-top: 30px;
         background-color: #634fad;
         color: white;
-        font-size: 1.2vw;
-        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
     }
-    #submit-btn:hover{
-        background-color: rgb(70, 39, 165);
+    #btn:hover{
+        background-color: rgb(70, 44, 148);
         cursor: pointer;
-        transition:all 0.3s ease;
+        transition:0.3s ease;
+    }
+    #find-pwd{
+        text-align: center;
+        margin-top: 20px;
+           
+    }
+    a{
+        text-decoration: none;
+        font-size: 17px; 
+        color:rgb(64, 44, 125);
+
+    }
+    a:active{
+        color:rgb(88, 67, 152);
+    }
+    
+    .warning{
+        color: rgb(255, 34, 34) !important;
+        animation: warning 0.3s ease;
+        animation-iteration-count: 3;  
+    }
+    @keyframes warning{
+        0% {transform: translateX(-5px);}
+        25% {transform: translateX(5px);}
+        50% {transform: translateX(-5px);}
+        75% {transform: translateX(5px);}
     }
     
 </style>
@@ -86,21 +135,47 @@
 <body>
 <div id="container">
     <h1>MACADAMIA</h1>
+    <img src="/md/resources/img/background/macadamia.png" alt="로고" width="40px" height="40px">
 	<form action="${root}/member/login" method="post" id="login-form">
 
 	  <div class="input-group">
-	    <input id="input-id" type="text" class="form-control" required>
+	    <input id="id" type="text" class="form-control" required>
         <label class="input-group-text" for="input-id">ID</label>
 	  </div>
 	
 	  <div class="input-group">
-	    <input id="input-pwd" type="password" class="form-control" required>
+	    <input id="pwd" type="password" class="form-control" required>
         <label class="input-group-text" for="input-pwd">PWD</label>
 	  </div>
-      
-	  <button type="submit" id="submit-btn">로그인</button>
+	  <button type="submit" id="btn">로그인</button>
+      <div id="find-pwd">
+        <a href="">비밀번호를 잊으셨나요?</a>
+      </div>
+
 	</form>
 </div>
+
+<script>
+    
+    const id = $('#id');
+    const pwd = $('#pwd');
+    const btn = $('#btn');
+
+    $(btn).on('click',function(){
+        if($(id).val()==""){
+            $(id).next('label').addClass('warning');
+            setTimeout(function(){
+                $('label').removeClass('warning')
+            },1000);
+        }else if($(pwd).val()==""){
+            $(pwd).next('label').addClass('warning');
+            setTimeout(function(){
+                $('label').removeClass('warning')
+            },1000);
+        }
+    });
+
+</script>
 
 </body>
 </html>
