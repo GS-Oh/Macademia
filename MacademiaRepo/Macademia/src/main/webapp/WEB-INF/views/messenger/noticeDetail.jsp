@@ -11,31 +11,74 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 10% 50% ;
+			grid-template-rows: 10% 70% auto;
+			border-radius : 10px;
+			width : 90%;
+			margin: 5%;
 		}
+
 
 		#detail-header{
 			display: grid;
-			grid-template-columns: 10% 60% 15% 15%;
+			grid-template-columns: 6% 74% 10% 10%;
+			align-items: center;
 		}
 
-
-		#reply-list{
-			display: grid;
-			grid-template-columns: 2fr 9fr;
-			grid-template-rows: repeat(3, 1fr);
+		#detail-content > a{
+			text-decoration: none;
+			float: right;
+			margin-right: 20px;
 		}
 
-		#reply-insert{
-			width: 80%;
-			height: 200px;
-			margin-top: 30px;
-			display: grid;
-			grid-template-rows: 50px 100px 50px;
-			border: 1px solid gray;
+		#detail-content > textarea{
+			border: 3px solid lightseagreen;
+			width: 100%;
+			height: 90%;
+		}
+
+		/* 댓글영역 */
+		#reply-area{
+			border: 3px solid lightseagreen;
 			border-radius: 10px;
 		}
 
+		#reply-area > h3{
+			margin: 10px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid black;
+		}
+
+		.reply-list{
+			display: grid;
+			grid-template-columns: 1fr 9fr;
+			grid-template-rows: 20% 60% 20%;
+			align-items: center;
+			padding : 10px;
+			margin-bottom: 5px;
+			border-bottom: 1px solid lightgray;
+		}
+
+		.reply-img-wrap{
+			grid-row: span 3;
+			height: 100%;
+			width: 100%;
+			margin-right: 80px;
+		}
+
+
+		#reply-insert{
+			margin: 5% 5% 5% 10%;
+			width: 80%;
+			
+			display: grid;
+			grid-template-rows: 20% 60% 20%;
+			align-items: center;
+
+			border: 3px solid gray;
+			border-radius: 10px;
+		}
+
+		
     </style>
 </head>
 <body>
@@ -49,10 +92,12 @@
         
 
         <main>
+
+
             <!--  -->
 			<div id="detail-header">
-				<div>공지</div>
-				<div>[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?</div>
+				<div><span  class="badge bg-info" >공지</span></div>
+				<div><h3>[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?</h3></div>
 				<div>조회 수 : 3</div>
 				<div>댓글 수 : 3</div>
 			</div>
@@ -60,45 +105,58 @@
 			<!--  -->
 			<div id="detail-content">
 
-				<textarea name="" id="" cols="30" rows="10" style="width: 90%; height: 90%;">
+				<textarea name="" id="" cols="30" rows="10" ></textarea>
 
-				</textarea>
-
+				<a href="" class="badge bg-warning">삭제하기</a>
+				<a href="/md/messenger/notice/edit" class="badge bg-success">수정하기</a>
 			</div>
+			
 
-			<!--  -->
-			<div style="text-align: right;">
-				<a href="">수정하기</a>
-				<a href="">삭제하기</a>
-			</div>
 
 			<!--  -->
 			<div id="reply-area">
 
 				<h3>댓글</h3>
 
-				<div id="reply-list">
+				<!-- 리스트 만큼 이거 반복 -->
+				<div class="reply-list">
+					<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
+					<div><span>작성자닉네임</span></div>
+					<div><h4>내용</h4></div>
+					<div><h6 style="color:gray">작성일자</h6></div>
+				</div>
 
-					<div style="grid-row: span 3;"><img src="" alt="">1</div>
-					<div>작성자닉네임</div>
-					<div>내용</div>
-					<div>작성일자</div>
+				<!-- 리스트 만큼 이거 반복 -->
+				<div class="reply-list">
+					<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
+					<div><span>작성자닉네임</span></div>
+					<div><h4>내용</h4></div>
+					<div><h6 style="color:gray">작성일자</h6></div>
+				</div>
 
+				<!-- 리스트 만큼 이거 반복 -->
+				<div class="reply-list">
+					<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
+					<div><span>작성자닉네임</span></div>
+					<div><h4>내용</h4></div>
+					<div><h6 style="color:gray">작성일자</h6></div>
 				</div>
 
 
 				<div id="reply-insert">
 
-					<label for="comment">로그인한사람닉네임</label>
-					<textarea class="form-control" rows="5" id="comment" name="text">
-
-					</textarea>
-					<button type="submit" class="btn btn-primary" style="width: 20%;">Submit</button>
+					<div style="margin-left: 10px;">
+						<label for="comment"><span  class="badge bg-secondary" >로그인한사람닉네임</span></label>
+					</div>
+					<div style="margin: 10px;">
+						<textarea class="form-control" rows="4" id="comment" name="text">
+						</textarea>
+					</div>	
+					<div >
+						<button type="submit" class="badge bg-info" style="float: right;">등록하기</button>
+					</div>	
 
 				</div>
-
-
-
 
 			</div>
 
