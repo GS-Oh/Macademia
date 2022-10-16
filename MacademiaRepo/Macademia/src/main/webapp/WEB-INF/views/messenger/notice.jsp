@@ -11,8 +11,6 @@
 		main{
 			display: grid;
 			grid-template-rows: 10% 70% 5% 5%;
-			width:90%;
-			margin-left:5%;
 		}
 
 
