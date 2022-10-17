@@ -16,11 +16,34 @@
     }
 
     #management-select-area{
-        border-bottom: 2px solid burlywood;
+        border-bottom: 2px solid #6667AB;
         
     }
 
-    #management-select-area > form{
+	#management-select-area{
+		display: grid;
+		align-items: center;
+	}
+
+	#management-select-area > form{
+		display: flex;
+		justify-content: space-between;
+	}
+
+	#management-select-area > form > div{
+		width: 100%;
+
+		display: grid;
+		grid-template-columns: 35% auto;
+		align-items: center;
+		justify-items: center;
+	}
+
+	#management-select-area > form > div > label{
+		font-size: 1.5rem;
+	}
+
+    /* #management-select-area > form{
         display: grid;
         grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
         
@@ -29,7 +52,7 @@
     #management-select-area > form > div{
         display: flex;
         align-items: center;
-    }
+    } */
 
     #management-select-result{
         display: grid;
@@ -76,8 +99,8 @@
 	                <form action="" method="">
 	
 	                    <div>
-	                        <h4>발급년월</h4>
-	                        <select name="" id="">
+	                        <label for="year-select" class="form-label">발급년월</label>
+	                        <select name="" id="year-select" class="form-select">
 	                            <option value="">2022-03</option>
 	                            <option value="">2022-04</option>
 	                            <option value="">2022-05</option>
@@ -89,8 +112,8 @@
 	                    </div>
 	
 	                    <div>
-	                        <h4>부서명</h4>
-	                        <select name="" id="">
+	                        <label for="depart-select" class="form-label">부서명</label>
+	                        <select name="" id="depart-select" class="form-select">
 	                            <option value="" selected>개발부</option>
 	                            <option value="">인사부</option>
 	                            <option value="" >재무부</option>
@@ -98,8 +121,8 @@
 	                    </div>
 	
 	                    <div>
-	                        <h4>사원명</h4>
-	                        <select name="" id="">
+	                        <label for="name-select" class="form-label">사원명</label>
+	                        <select name="" id="name-select" class="form-select">
 	                            <option value="" selected>오귀석</option>
 	                            <option value="">육귀석</option>
 	                            <option value="" >칠귀석</option>
@@ -107,7 +130,7 @@
 	                    </div>
 	
 	                    <div>
-	                        <input type="submit" value="검색">
+	                        <input type="submit" value="검색" style="background-color: #6667AB; color:white; width: 70%; height: 80%;">
 	                    </div>
 	
 	                </form>

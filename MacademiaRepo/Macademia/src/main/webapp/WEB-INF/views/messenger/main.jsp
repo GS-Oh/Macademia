@@ -75,11 +75,17 @@
 
     </style>
 </head>
-<body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+	<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+	</header>
+<body>
+
+
+	
     <div id="wrap">
 
+		
 		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
         
 		
