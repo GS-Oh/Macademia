@@ -13,4 +13,9 @@ public class PlanController {
 		
 		return "/plan/planList";
 	}
+	@GetMapping("write")
+	public String planWrite(){
+		
+		return "/plan/planWrite";
+	}
 }

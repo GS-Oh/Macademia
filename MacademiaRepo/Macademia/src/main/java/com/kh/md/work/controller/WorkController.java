@@ -13,5 +13,16 @@ public class WorkController {
 		
 		return "/work/workList";
 	}
+	
+	@GetMapping("write")
+	public String workWrite() {
+		
+		return "/work/workWrite";
+	}
+	
+	@GetMapping("complate")
+	public String workComplate() {
+		return "/work/workComplate";
+	}
 
 }
