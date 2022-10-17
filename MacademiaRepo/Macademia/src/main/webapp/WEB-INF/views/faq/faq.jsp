@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>관리자</title>
+	<title>자주묻는질문</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
 	
@@ -18,7 +18,7 @@
 			~어사이드~
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/admin/main-content.jsp" %>
+			<%@include file="/WEB-INF/views/faq/faq-content.jsp" %>
 		</main>
 	</div>
 
