@@ -19,7 +19,7 @@
         box-sizing: border-box;
         display: flex;
     }
-    #header-wrap a{
+    a{
         text-decoration: none;
     }
     #header-wrap i, #header-wrap label{
@@ -91,13 +91,13 @@
             </a>
         </div>
         <div id="nav-menu3">
-            <a href="${root}/student/roll">
+            <a href="${root}/student/main">
                 <i class="fa-solid fa-chalkboard-user fa-2x"></i><br>
-                <label for="">학생</label>
+                <label for="">학사</label>
             </a>
         </div>
         <div id="nav-menu4">
-            <a href="">
+            <a href="${root}/plan/list">
                 <i class="fa-regular fa-calendar-days fa-2x"></i><br>
                 <label for="">일정</label>
             </a>
@@ -115,19 +115,19 @@
             </a>
         </div>
         <div id="nav-menu7">
-            <a href="">
+            <a href="${root}/board/main">
                 <i class="fa-regular fa-note-sticky fa-2x"></i><br>
                 <label for="">게시판</label>
             </a>
         </div>
         <div id="nav-menu8">
-            <a href="">
+            <a href="${root}/payroll/main">
                 <i class="fa-regular fa-credit-card fa-2x"></i><br>
                 <label for="">급여</label>
             </a>
         </div>
         <div id="nav-menu9">
-            <a href="">
+            <a href="${root}/messenger/main">
                 <i class="fa-solid fa-comments fa-2x"></i><br>
                 <label for="">메신저</label>
             </a>
