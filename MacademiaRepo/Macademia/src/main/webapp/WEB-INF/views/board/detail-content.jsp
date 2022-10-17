@@ -57,7 +57,7 @@
 						<textarea style="width:100%;" name="content"></textarea>
 					</p>
 					<p style="text-align: right;">
-						<button type="submit">댓글작성</button>
+						<button type="submit" class="reply">댓글작성</button>
 					</p>
 				</form>
 

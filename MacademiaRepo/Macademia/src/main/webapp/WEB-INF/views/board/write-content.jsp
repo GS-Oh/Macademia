@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+ 
    <div class="board_wrap">
         <div class="board_title">
             <strong>게시판</strong>
@@ -27,7 +27,8 @@
 	                    </dl>
 	                </div>
 	                <div class="cont">
-	                    <textarea placeholder="내용 입력"></textarea>
+					        <textarea name="weditor" id="weditor" 
+			                  placeholder="내용을 입력해주세요"></textarea>
 	                </div>
 	            </div>
 	            <div class="bt_wrap">
@@ -37,4 +38,37 @@
             </form>
         </div>
     </div>
-</body>
+   	
+   	<script src="../resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		var oEditors = [];
+
+		nhn.husky.EZCreator.createInIFrame({
+
+		    oAppRef: oEditors,
+
+		    elPlaceHolder: "weditor",
+
+		    sSkinURI: "../resources/smarteditor/SmartEditor2Skin.html",
+
+		    fCreator: "createSEditor2"
+
+		});
+		
+		submitPost = function() {
+			  oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
+			  let content = document.getElementById("weditor").value
+
+			  if(content == '') {
+			    alert("내용을 입력해주세요.")
+			    oEditors.getById["editorTxt"].exec("FOCUS")
+			    return
+			  } else {
+			    console.log(content)
+			  }
+			}
+	</script>
+	 
+
+	
+

@@ -14,6 +14,12 @@
                         <dt>제목</dt>
                         <dd><input type="text" placeholder="제목 입력" value="글 제목이 들어갑니다"></dd>
                     </dl>
+                      <div class="info">
+	                    <dl>
+	                        <dt>카테고리</dt>
+	                        <dd><input type="text" placeholder="OO게시판"></dd>
+	                    </dl>
+	                    <dl>
                      <dl>
                         <dt>첨부파일</dt>
                         <dd><input type="file" placeholder="첨부파일"></dd>
@@ -23,7 +29,7 @@
                    
                 </div>
                 <div class="cont">
-                    <textarea placeholder="내용 입력">
+                    <textarea placeholder="내용 입력" id="weditor" name="weditor">
 글 내용이 들어갑니다.
 글 내용이 들어갑니다.
 글 내용이 들어갑니다.
@@ -41,4 +47,32 @@
             </div>
         </div>
     </div>
-</body>
+	<script src="../resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		var oEditors = [];
+
+		nhn.husky.EZCreator.createInIFrame({
+
+		    oAppRef: oEditors,
+
+		    elPlaceHolder: "weditor",
+
+		    sSkinURI: "../resources/smarteditor/SmartEditor2Skin.html",
+
+		    fCreator: "createSEditor2"
+
+		});
+		
+		submitPost = function() {
+			  oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
+			  let content = document.getElementById("weditor").value
+
+			  if(content == '') {
+			    alert("내용을 입력해주세요.")
+			    oEditors.getById["editorTxt"].exec("FOCUS")
+			    return
+			  } else {
+			    console.log(content)
+			  }
+			}
+	</script>

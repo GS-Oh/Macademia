@@ -3,13 +3,10 @@
 <html>
 <head>
 	<title>게시판</title>
-	
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
-	
 </head>
 <body>
-	
 	<div id="wrap">
 		<header>
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -21,6 +18,4 @@
 			<%@include file="/WEB-INF/views/board/write-content.jsp" %>
 		</main>
 	</div>
-
-</body>
 </html>
