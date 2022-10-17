@@ -153,16 +153,15 @@
         
             <div class="modal-content">
     
-            <div class="modal-content">
-                <a class="btn btn-outline-dark" href="">보내기</a>
-            </div>
-    
-            <div class="modal-content">
-                <a class="btn btn-outline-dark" href="">삭제하기</a>
-            </div>
-
+                <div class="modal-content">
+                    <a class="btn btn-outline-dark" href="">보내기</a>
+                </div>
+                <div class="modal-content">
+                    <a class="btn btn-outline-dark" href="">삭제하기</a>
+                </div>
      
              </div>
+             
         </div>
     </div>
 

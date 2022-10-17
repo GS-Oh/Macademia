@@ -33,6 +33,11 @@ public class MessengerController {
 		return "messenger/noteWrite";
 	}
 	
+	@GetMapping("note/reply")
+	public String noteReply() {
+		return "messenger/noteReply";
+	}
+	
 	@GetMapping("note/recipient")
 	public String noteRecipient() {
 		return "messenger/noteRecipient";
@@ -43,11 +48,20 @@ public class MessengerController {
 		return "messenger/fileBox";
 	}
 	
+	@GetMapping("fileBox/etc")
+	public String fileBoxEtc() {
+		return "messenger/fileBoxEtc";
+	} 
+	
+	
 	@GetMapping("notice")
 	public String notice() {
 		return "messenger/notice";
 	}
 
+
+	
+	
 	@GetMapping("notice/detail")
 	public String noticeDetail() {
 		return "messenger/noticeDetail";
