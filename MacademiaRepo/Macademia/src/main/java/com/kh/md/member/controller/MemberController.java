@@ -15,8 +15,14 @@ public class MemberController {
 	}
 	@PostMapping("/member/login")
 	public String login(MemberVo vo) {
-		
-		
 		return "home";
+	}
+	@GetMapping("/member/mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
+	@GetMapping("/member/findpwd")
+	public String findPwd() {
+		return "member/find-pwd";
 	}
 }

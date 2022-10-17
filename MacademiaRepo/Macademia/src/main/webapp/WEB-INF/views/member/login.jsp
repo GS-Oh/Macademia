@@ -24,10 +24,10 @@
         font-family: 'Noto Sans KR', sans-serif;
 	}
     body::before{
-        content: "";
+        /* content: ""; */
         position: absolute; z-index: 1;
         top:0; right: 0; bottom: 0; left: 0;
-        background-color: rgba(0, 0, 0, 0.05);
+        /* background-color: rgba(0, 0, 0, 0.05); */
 
     }
     #container{
@@ -39,7 +39,7 @@
 
     h1{
         text-align: center;
-        color: #3b297d;
+        color: #44347f;
         font-weight: bold;
         font-size: 45px;
         margin: 0;
@@ -67,7 +67,7 @@
         padding: 38px 10px 5px;
         outline: none;
         box-sizing: border-box;
-        color: rgb(77, 77, 77);
+        color: rgb(80, 80, 80);
         font-family: 'Noto Sans KR', sans-serif;
     }
     .input-group > label{
@@ -134,7 +134,7 @@
 </head>
 <body>
 <div id="container">
-    <h1>MACADAMIA</h1>
+    <h1>MACADEMIA</h1>
     <img src="/md/resources/img/background/macadamia.png" alt="로고" width="40px" height="40px">
 	<form action="${root}/member/login" method="post" id="login-form">
 
@@ -149,7 +149,7 @@
 	  </div>
 	  <button type="submit" id="btn">로그인</button>
       <div id="find-pwd">
-        <a href="">비밀번호를 잊으셨나요?</a>
+        <a href="${root}/member/findpwd">비밀번호를 잊으셨나요?</a>
       </div>
 
 	</form>
