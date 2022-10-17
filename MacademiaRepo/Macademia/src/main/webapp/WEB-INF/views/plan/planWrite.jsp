@@ -114,15 +114,14 @@ font-family: 'GangwonEdu_OTFBoldA';
 
 font-size:13px;
 
-}#calendar{
-height:100%;
-margin-top:70px;
+}
+#center_top{
+margin-top:80px;
+  font-family: 'AppleSDGothicNeo';
+  margin-left: 20px;
+}
 
-}
-a{
-	color:#fff;
-	text-decoreation:none;
-}
+
 
 
 </style>
@@ -151,12 +150,18 @@ a{
 				
 			<a href="/md/plan/list"><li>나의 일정</li></a>
 			<a href="/md/plan/write"><li>일정 추가</li></a>
-		
+			
 			</ul>
 				
 			</div>
 			<div id="center_menu">
-			 <div id='calendar'></div>
+				<div id="center_top">
+					<h3>일정 추가
+						<hr>
+					</h3>
+					
+				</div>
+			
 
 			</div>
 			<div id="right_menu"></div>
@@ -165,19 +170,5 @@ a{
 		
 
 </body>
-
-<script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-       		height:430,
-       		
-        });
-        calendar.render();
-      });
-
-    </script>
 
 </html>
