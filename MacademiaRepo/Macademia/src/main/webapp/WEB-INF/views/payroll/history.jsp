@@ -44,7 +44,7 @@
     /* 지급년월 본봉 ~~ 실수령액 부분 */
     #history-table-outer{
         display: grid;
-        grid-template-columns: repeat(10, 1fr);
+        grid-template-columns: repeat(10, 10%);
         grid-template-rows: repeat(12, 1fr);
         row-gap: 10px;
         align-content : center;
@@ -137,7 +137,7 @@
                 <div class="history-table-header">실수령액</div>
 
 
-                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-09</a></div>
+                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-07</a></div>
                 <div class="history-table-content">123456789</div>
                 <div class="history-table-content">123456789</div>
                 <div class="history-table-content">123456789</div>
@@ -148,7 +148,7 @@
                 <div class="history-table-content">123456789</div>
                 <div class="history-table-content">123456789</div>
 
-                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-09</a></div>
+                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-08</a></div>
                 <div class="history-table-content">123456789</div>
                 <div class="history-table-content">123456789</div>
                 <div class="history-table-content">123456789</div>

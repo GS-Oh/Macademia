@@ -14,8 +14,14 @@
 
 
 </head>
+
+	<div>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+	</div>
+	
+	
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 
     <div id="wrap">
 

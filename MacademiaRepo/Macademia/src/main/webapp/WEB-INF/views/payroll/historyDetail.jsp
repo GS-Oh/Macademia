@@ -13,20 +13,20 @@
     main{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(4, 10%);
+        grid-template-rows: repeat(3, 8%) 10%;
         text-align : center;
     }
 
-    main > div{
-        border: 1px solid black;
-    }
 
     .main-table-span{
         grid-column : span 2;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+
     }
 
     .main-table-span > div{
-        border: 1px solid palegreen;
         width: 100%;
         height: 100%;
         display: flex;
@@ -34,16 +34,54 @@
     }
 
     .main-table-span > div > div{
-        border: 1px solid darkmagenta;
         width: 40%;
+        display: grid;
+        align-items: center;
     }
 
     .main-table-grid{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(7, 1fr);
+        grid-template-rows: repeat(11, 1fr);
+
         text-align: center;
+        align-items: center;
+        justify-items: center;
+
+        border: 3px solid #6667AB;
+        border-radius: 10px;
+
+        margin: 5px;
     }
+
+    .main-table-grid > h4{
+        grid-column: span 2;
+        background-color: #6667AB;
+        color: white;
+        width: 100%;
+        height: 90%;
+
+        display: grid;
+        align-items: center;
+    }
+
+    #detail-price{
+        border: 5px solid #6667AB;
+        border-radius: 30px;
+        padding : 10px 0px;
+    }
+
+
+    .main-table-grid > div{
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+
+        display: grid;
+        align-items: center;
+    }
+
+
 </style>
 
 </head>
@@ -62,7 +100,7 @@
 
         <main>
 
-            <div class="main-table-span"><h4>급여 지급 명세서</h4></div>
+            <div class="main-table-span"><h4 style="border-bottom: 1px solid black; width: 50%;">급여 지급 명세서</h4></div>
 
             <div class="main-table-span"><h4>2022년 09월분</h4></div>
 
@@ -79,34 +117,46 @@
                 </div>
             </div>
 
-            <div class="main-table-span"><h3>실 수 령 액 :  500,000,000,000</h3></div>
+            <div class="main-table-span" id="detail-price"><h3>실 수 령 액 :  500,000,000,000</h3></div>
 
             <div class="main-table-grid">
-                <h4 style="grid-column: span 2;">보수</h4>
-                <div>1</div>
+                <h4 >보수</h4>
+                <div>보수계</div>
                 <div>2</div>
-                <div>3</div>
+                <div>정근수당</div>
                 <div>4</div>
-                <div>5</div>
+                <div>정근가산금</div>
                 <div>6</div>
+                <div>기술정보수당</div>
                 <div>7</div>
+                <div>특수직무수당</div>
                 <div>7</div>
+                <div>비상근무수당</div>
                 <div>7</div>
+                <div>정액급식비</div>
                 <div>7</div>
+                <div>정액급식비</div>
                 <div>7</div>
+                <div>정액급식비</div>
                 <div>7</div>
-                <div>7</div>
+                <div>정액급식비</div>
                 <div>7</div>
             </div>
 
             <div class="main-table-grid">
-                <h4 style="grid-column: span 2;">공제</h4>
+                <h4 >공제</h4>
                 <div>1</div>
                 <div>2</div>
                 <div>3</div>
                 <div>4</div>
                 <div>5</div>
                 <div>6</div>
+                <div>7</div>
+                <div>7</div>
+                <div>7</div>
+                <div>7</div>
+                <div>7</div>
+                <div>7</div>
                 <div>7</div>
                 <div>7</div>
                 <div>7</div>

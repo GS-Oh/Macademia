@@ -11,7 +11,7 @@ public class PayrollController {
 	
 	@GetMapping("main")
 	public String main() {
-		return "payroll/pMain";
+		return "payroll/main";
 	}
 	
 	@GetMapping("history")
