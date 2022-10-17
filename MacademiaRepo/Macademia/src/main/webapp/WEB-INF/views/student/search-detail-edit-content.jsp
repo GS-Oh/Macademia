@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- 도로명주소 검색 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="${root}/resources/js/search-address/search-address.js"></script> 
+
 <style>
     #search-detail-edit-content-wrap div{
         /* border: 1px solid red; */
@@ -78,13 +82,25 @@
         grid-auto-rows: 30px;
         align-items: center;
     }
+    #student-addr-title{
+        grid-row: span 2;
+    }
     #student-addr{
         display: grid;
-        grid-template-columns: 200px 100px 200px;
+        grid-template-columns: 200px 100px 100px;
+        column-gap: 10px;
+        grid-row: span 2;
         text-align: center;
+    }
+    #sample4_jibunAddress{
+        grid-column: span 2;
     }
     #student-addr>input{
         padding-left: 10px;
+    }
+    #addr-search-btn{
+        background-color: #6667AB;
+        color: white;
     }
     #student-degree>input, #student-major>input{
         width: 200px;
@@ -132,7 +148,7 @@
                 <img src="" width="160px" height="180px" alt="수강생 프로필">
                 <input type="file">
             </div>
-            <div id="student-name"><h3>김고니</h3></div>
+            <div id="student-name"><h3>김곤</h3></div>
             <div>
                 <i class="fa-solid fa-mobile-screen-button fa-2xl"></i>
                 <b><input type="text" value="010-9876-5432"></b>
@@ -154,10 +170,15 @@
                 <input type="radio" id="f" name="gender" disabled>
                 <label for="f">여</label>
             </div>
-            <div class="info-title"><b>주소</b></div>
+            <div class="info-title" id="student-addr-title"><b>주소</b></div>
             <div class="info-border-top" id="student-addr">
-                <input type="text" value="서울시 광진구 자양동" >주소검색
-                <input type="text" value="1번길 3 993-1 201호" >
+                <input type="text" id="sample4_postcode" value="" placeholder="우편번호">
+                <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="sample4_roadAddress" name="" value="서울시 자양로1번길 3" placeholder="도로명주소">
+                <input type="text" id="sample4_jibunAddress" name="" value="자양동 993-1" placeholder="지번주소">
+                <input type="text" id="sample4_detailAddress" name="" value="자양빌라 201호" placeholder="상세주소">
+                <span id="guide" style="color:#999;display:none"></span>
+                <input type="text" id="sample4_extraAddress" placeholder="참고항목">
             </div>
             <div class="info-title"><b>최종학력</b></div>
             <div class="info-border-top" id="student-degree"><input type="text" value="서울대학교"></div>

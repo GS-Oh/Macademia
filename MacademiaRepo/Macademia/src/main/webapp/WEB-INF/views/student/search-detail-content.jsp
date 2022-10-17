@@ -71,13 +71,25 @@
         grid-auto-rows: 30px;
         align-items: center;
     }
+    #student-addr-title{
+        grid-row: span 2;
+    }
     #student-addr{
         display: grid;
-        grid-template-columns: 200px 100px 200px;
+        grid-template-columns: 200px 100px 100px;
+        column-gap: 10px;
+        grid-row: span 2;
         text-align: center;
+    }
+    #sample4_jibunAddress{
+        grid-column: span 2;
     }
     #student-addr>input{
         padding-left: 10px;
+    }
+    #addr-search-btn{
+        background-color: #6667AB;
+        color: white;
     }
     #student-degree>input, #student-major>input{
         width: 200px;
@@ -143,11 +155,16 @@
             <input type="radio" id="f" name="gender" disabled>
             <label for="f">여</label>
         </div>
-        <div class="info-title"><b>주소</b></div>
-        <div class="info-border-top" id="student-addr">
-            <input type="text" value="서울시 광진구 자양동" readonly>주소검색
-            <input type="text" value="1번길 3 993-1 201호" readonly>
-        </div>
+        <div class="info-title" id="student-addr-title"><b>주소</b></div>
+            <div class="info-border-top" id="student-addr">
+                <input type="text" id="sample4_postcode" value="" readonly>
+                <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="sample4_roadAddress" value="서울시 자양로1번길 3" readonly>
+                <input type="text" id="sample4_jibunAddress" value="자양동 993-1" readonly>
+                <input type="text" id="sample4_detailAddress" value="자양빌라 201호" readonly>
+                <span id="guide" style="color:#999;display:none"></span>
+                <input type="hidden" id="sample4_extraAddress" readonly>
+            </div>
         <div class="info-title"><b>최종학력</b></div>
         <div class="info-border-top" id="student-degree"><input type="text" value="서울대학교" readonly></div>
         <div class="info-title"><b>전공</b></div>
