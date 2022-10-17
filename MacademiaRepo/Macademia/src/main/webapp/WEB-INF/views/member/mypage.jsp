@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>MyPage</title>
+	<title>myPage</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
 
