@@ -58,5 +58,10 @@
         text-decoration: none;
         color: blue;
     }
+    
+    main{
+	    	width:90%;
+			margin-left:5%;
+	}
 
     /* 공통 끝 */
