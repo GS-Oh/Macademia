@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- 도로명주소 검색 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="${root}/resources/js/search-address/search-address.js"></script>    
+
 <style>
     #search-detail-edit-content-wrap div{
         /* border: 1px solid red; */
@@ -87,13 +91,25 @@
         grid-auto-rows: 30px;
         align-items: center;
     }
+    #student-addr-title{
+        grid-row: span 2;
+    }
     #student-addr{
         display: grid;
-        grid-template-columns: 200px 100px 200px;
+        grid-template-columns: 200px 100px 100px;
+        column-gap: 10px;
+        grid-row: span 2;
         text-align: center;
+    }
+    #sample4_jibunAddress{
+        grid-column: span 2;
     }
     #student-addr>input{
         padding-left: 10px;
+    }
+    #addr-search-btn{
+        background-color: #6667AB;
+        color: white;
     }
     #student-degree>input, #student-major>input{
         width: 200px;
@@ -176,13 +192,18 @@
                 <input type="radio" id="f" name="gender" required>
                 <label for="f">여</label>
             </div>
-            <div class="info-title">
+            <div class="info-title" id="student-addr-title">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
                 <b>주소</b>
             </div>
             <div class="info-border-top" id="student-addr">
-                <input type="text" value="" required>주소검색
-                <input type="text" value="" required>
+                <input type="text" id="sample4_postcode" placeholder="우편번호">
+                <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="sample4_roadAddress" name="" placeholder="도로명주소">
+                <input type="text" id="sample4_jibunAddress" name="" placeholder="지번주소">
+                <input type="text" id="sample4_detailAddress" name="" placeholder="상세주소">
+                <span id="guide" style="color:#999;display:none"></span>
+                <input type="text" id="sample4_extraAddress" placeholder="참고항목">
             </div>
             <div class="info-title"><b>최종학력</b></div>
             <div class="info-border-top" id="student-degree"><input type="text" value=""></div>

@@ -73,13 +73,13 @@
 
 <div id="header-wrap">
     <div id="logo-area">
-        <a href="">
+        <a href="${root}/member/login">
             <img src="" alt="로고">
         </a>
     </div>
     <div id="nav-area">
         <div id="nav-menu1">
-            <a href="${root}/home">
+            <a href="${root}/member/login">
                 <i class="fa-solid fa-house fa-2x"></i><br>
                 <label for="">홈</label>
             </a>
@@ -103,13 +103,13 @@
             </a>
         </div>
         <div id="nav-menu5">
-            <a href="">
+            <a href="${root}/work/list">
                 <i class="fa-solid fa-list-check fa-2x"></i><br>
                 <label for="">업무</label>
             </a>
         </div>
         <div id="nav-menu6">
-            <a href="">
+            <a href="${root}/sign/list">
                 <i class="fa-solid fa-clipboard-check fa-2x"></i><br>
                 <label for="">결재</label>
             </a>
