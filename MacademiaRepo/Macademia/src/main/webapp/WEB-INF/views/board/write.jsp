@@ -5,6 +5,7 @@
 	<title>게시판</title>
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
+	
 </head>
 <body>
 	<div id="wrap">
