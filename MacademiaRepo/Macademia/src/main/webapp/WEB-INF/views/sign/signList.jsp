@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-  <!-- fullcalendar 언어 CDN -->
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&family=Gowun+Dodum&family=Gugi&family=Poor+Story&display=swap');
 @font-face {
@@ -22,8 +17,6 @@
     font-family: 'AppleSDGothicNeo';
     src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
 }
-
-
 
 ul, li{
 
@@ -113,21 +106,13 @@ font-family: 'GangwonEdu_OTFBoldA';
 #menu-top li:nth-child(1){
 
 font-size:13px;
-
-}#calendar{
-height:100%;
-margin-top:70px;
-
 }
-
 
 
 </style>
 	<title>마카데미아</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
-	
-	
 	
 </head>
 <body>
@@ -141,8 +126,8 @@ margin-top:70px;
 		
 			<div id="side_menu">
 			<ul id="menu-top">
-			<li> <i class="fa-regular fa-calendar-days fa-2x"></i></li>
-                <li class="">일정 관리</li>
+			<li>    <i class="fa-solid fa-clipboard-check fa-2x"></i></li>
+                <li class="">결재 관리</li>
 			</ul>
 			<ul id="menu">
 				
@@ -154,7 +139,7 @@ margin-top:70px;
 				
 			</div>
 			<div id="center_menu">
-			 <div id='calendar'></div>
+			
 
 			</div>
 			<div id="right_menu"></div>
@@ -163,19 +148,4 @@ margin-top:70px;
 		
 
 </body>
-
-<script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-       		height:430,
-       		
-        });
-        calendar.render();
-      });
-
-    </script>
-
 </html>
