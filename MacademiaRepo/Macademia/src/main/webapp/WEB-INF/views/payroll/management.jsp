@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<%@ include file="/resources/css/common/common.css" %>
 <style>
-	<%@ include file="/resources/css/payroll/commonHeaderAside.css" %>
+	<%@ include file="/resources/css/payroll/commonAside.css" %>
 
 
     main{
@@ -43,16 +43,6 @@
 		font-size: 1.5rem;
 	}
 
-    /* #management-select-area > form{
-        display: grid;
-        grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
-        
-    }
-    
-    #management-select-area > form > div{
-        display: flex;
-        align-items: center;
-    } */
 
     #management-select-result{
         display: grid;
@@ -64,15 +54,35 @@
     }
 
     .management-table-header{
+		margin-top: 15px;
+
         font-size: 1.1rem;
         text-align: center;
-        color: plum;
+        color: #6667AB;
+		font-weight: 900;
+
+		border-right: 1px dashed #6667AB;
     }
 
     .management-table-content{
         font-size: 1.1rem;
         text-align: center;
+
+		border-right: 1px dashed #6667AB;
     }
+
+	.result-area{
+		display: grid;
+		grid-column: span 9;
+		grid-template-columns: repeat(7, 1fr) 2fr 2fr;
+	}
+
+	.result-area:hover{
+		background-color: #6667AB;
+		color: white;
+	}
+
+
 
 </style>
 
@@ -81,15 +91,14 @@
 
 
 
-		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-
-
-
-
-
 	    <div id="wrap">
 
-			<%@ include file="/WEB-INF/views/payroll/commonHeaderAside.jsp" %>
+			<header>
+				<%@include file="/WEB-INF/views/common/header.jsp" %>
+	        </header>
+			<aside>		
+				<%@ include file="/WEB-INF/views/payroll/commonAside.jsp" %>
+			</aside>
         
 
 
@@ -114,7 +123,8 @@
 	                    <div>
 	                        <label for="depart-select" class="form-label">부서명</label>
 	                        <select name="" id="depart-select" class="form-select">
-	                            <option value="" selected>개발부</option>
+	                            <option value="" selected>선택안함</option>
+	                            <option value="">개발부</option>
 	                            <option value="">인사부</option>
 	                            <option value="" >재무부</option>
 	                        </select>
@@ -123,7 +133,8 @@
 	                    <div>
 	                        <label for="name-select" class="form-label">사원명</label>
 	                        <select name="" id="name-select" class="form-select">
-	                            <option value="" selected>오귀석</option>
+	                            <option value="" selected>선택안함</option>
+	                            <option value="">오귀석</option>
 	                            <option value="">육귀석</option>
 	                            <option value="" >칠귀석</option>
 	                        </select>
@@ -149,26 +160,31 @@
 	                <div class="management-table-header">지급총액</div>
 	                <div class="management-table-header">실수령액</div>
 	
-	
+					<!-- 해당 월 내역 있으면 이거  -->
+					<div class="result-area">
+						<div class="management-table-content">개발부</div>
+						<div class="management-table-content">오귀석</div>
+						<div class="management-table-content">2022-09</div>
+						<div class="management-table-content">3,000,000</div>
+						<div class="management-table-content">3,000,000</div>
+						<div class="management-table-content">3,000,000</div>
+						<div class="management-table-content">150,000</div>
+						<div class="management-table-content">3,000,000</div>
+						<div class="management-table-content">3,000,000</div>
+					</div>	
+
+
+
+					<!-- 해당 월 내역 없으면 이거 -->
 	                <div class="management-table-content">개발부</div>
 	                <div class="management-table-content">오귀석</div>
-	                <div class="management-table-content">2022-09</div>
-	                <div class="management-table-content">3,000,000</div>
-	                <div class="management-table-content">3,000,000</div>
-	                <div class="management-table-content">3,000,000</div>
-	                <div class="management-table-content">150,000</div>
-	                <div class="management-table-content">3,000,000</div>
-	                <div class="management-table-content">3,000,000</div>
-	
-	
-	                <div class="management-table-content">개발부</div>
-	                <div class="management-table-content">오귀석</div>
-	                <div style="grid-column: span 6; color: red; text-align: center;">
-	                    <a href="/md/payroll/create"> 
-	                        <h3>[급여 대장 작성하기]</h3>
+	                <div style="grid-column: span 7; color: red; text-align: center; ">
+	                    <a href="/md/payroll/create/detail" > 
+	                        <h3 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h3>
 	                    </a>    
 	                </div>
-	
+
+					
 	            </div>
 	
 	

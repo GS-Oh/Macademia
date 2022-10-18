@@ -5,16 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<%@ include file="/resources/css/common/common.css" %>
 	<style>
-	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
+	    <%@ include file="/resources/css/messenger/commonAside.css" %>
 
 
 		main{
 			display: grid;
 			grid-template-rows: 10% 70% auto;
 			border-radius : 10px;
-			width : 90%;
-			margin: 5%;
 		}
 
 
@@ -22,6 +22,7 @@
 			display: grid;
 			grid-template-columns: 6% 74% 10% 10%;
 			align-items: center;
+			font-size: 1.5rem;
 		}
 
 		#detail-content > a{
@@ -42,11 +43,17 @@
 			border-radius: 10px;
 		}
 
-		#reply-area > h3{
+		#reply-area > span{
 			margin: 10px;
 			padding-bottom: 20px;
-			border-bottom: 1px solid black;
 		}
+		
+		#reply-area > span > h3{
+			border-left: 5px solid lightseagreen;
+			padding-left: 10px;
+			margin-left: 10px;
+		}
+
 
 		.reply-list{
 			display: grid;
@@ -83,17 +90,19 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
-        
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
+		</aside>        
 
         <main>
-
-
+			
             <!--  -->
 			<div id="detail-header">
 				<div><span  class="badge bg-info" >공지</span></div>
@@ -107,8 +116,8 @@
 
 				<textarea name="" id="" cols="30" rows="10" ></textarea>
 
-				<a href="" class="badge bg-warning">삭제하기</a>
-				<a href="/md/messenger/notice/edit" class="badge bg-success">수정하기</a>
+				<a href="" class="badge bg-warning"><h5>삭제하기</h5></a>
+				<a href="/md/messenger/notice/edit" class="badge bg-success"><h5>수정하기</h5></a>
 			</div>
 			
 
@@ -116,7 +125,7 @@
 			<!--  -->
 			<div id="reply-area">
 
-				<h3>댓글</h3>
+				<span><h3>댓글</h3></span>
 
 				<!-- 리스트 만큼 이거 반복 -->
 				<div class="reply-list">

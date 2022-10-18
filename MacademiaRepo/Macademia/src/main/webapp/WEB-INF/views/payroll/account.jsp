@@ -5,15 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<%@ include file="/resources/css/common/common.css" %>
+
 <style>
-	<%@ include file="/resources/css/payroll/commonHeaderAside.css" %>
-
-
+	<%@ include file="/resources/css/payroll/commonAside.css" %>
 
     main{
         display : grid;
         grid-template-columns: 1fr 1.5fr;
         grid-template-rows: 1fr 1.5fr;
+
+        font-size : 1.5rem;
     }
 
 
@@ -47,6 +50,7 @@
     /*  */
 
     #account-info-area{
+
         height: 400px;
 
         margin: 20px;
@@ -59,6 +63,9 @@
         border: 2px solid #1315a6 ;
         border-radius: 30px;
     }
+
+  
+
 
     #account-direct{
         display: flex;
@@ -91,11 +98,15 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 
     <div id="wrap">
-		<%@ include file="/WEB-INF/views/payroll/commonHeaderAside.jsp" %>
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/payroll/commonAside.jsp" %>
+		</aside>    
 
         
         <main>
@@ -147,21 +158,21 @@
 
             <div >
                 <h3 class="account-title-name">계좌번호 정보</h3>
-                <div id="account-info-area">
-                    <div>
-                        <h5>급여구분  :   
-                        <select name="" id="">
+                <div id="account-info-area" >
+                    <div >
+                        <h3>급여구분  :   
+                        <select name="" id="" >
                             <option value="월급여">월급여</option>
                             <option value="기본상여금">기본상여금</option>
                             <option value="보너스">보너스</option>
                         </select>
-                        </h5>
+                        </h3>
                     </div>
-                    <div><h5>예금주명  :   오귀석</h5></div>
-                    <div><h5>은 행 명  :   농협은행</h5></div>
-                    <div><h5>계좌번호  :   000-1234-1234-00</h5></div>
+                    <div><h3>예금주명  :   오귀석</h3></div>
+                    <div><h3>은 행 명  :   농협은행</h3></div>
+                    <div><h3>계좌번호  :   000-1234-1234-00</h3></div>
                     <div id="account-direct">
-                        <h5>자동이체  :   </h5>
+                        <h3>자동이체  :   </h3>
                         <div>
                             <input type="button" value="신청하기" style="background-color: #6667AB; color:white"> 
                             <input type="button" value="취소하기">
@@ -175,11 +186,11 @@
                 <h3 class="account-title-name" >자동이체 변경 이력</h3>
                 <div id="account-edit-area">
 
-                    <div><h5>구분</h5></div>
-                    <div><h5>예금주명</h5></div>
-                    <div><h5>은 행 명</h5></div>
-                    <div><h5>계좌번호</h5></div>
-                    <div><h5>일시</h5></div>
+                    <div><h4>구분</h4></div>
+                    <div><h4>예금주명</h4></div>
+                    <div><h4>은 행 명</h4></div>
+                    <div><h4>계좌번호</h4></div>
+                    <div><h4>일시</h4></div>
 
                     <div class="badge bg-danger">취소</div>
                     <div>오귀석</div>

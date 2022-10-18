@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<%@ include file="/resources/css/common/common.css" %>
 <style>
-	<%@ include file="/resources/css/payroll/commonHeaderAside.css" %>
+	<%@ include file="/resources/css/payroll/commonAside.css" %>
 
 
     main{
@@ -87,20 +87,24 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/payroll/commonHeaderAside.jsp" %>
+		<header>
+				<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/payroll/commonAside.jsp" %>
+		</aside>
         
 
         
 
         <main>
 
-            <div class="main-table-span"><h4 style="border-bottom: 1px solid black; width: 50%;">급여 지급 명세서</h4></div>
+            <div class="main-table-span"><h2 style="border-bottom: 3px solid #1315a6; width: 50%;">급여 지급 명세서</h2></div>
 
             <div class="main-table-span"><h4>2022년 09월분</h4></div>
 
@@ -135,29 +139,29 @@
                 <div>7</div>
                 <div>정액급식비</div>
                 <div>7</div>
-                <div>정액급식비</div>
+                <div>명절휴가비</div>
                 <div>7</div>
-                <div>정액급식비</div>
+                <div>직급보조비</div>
                 <div>7</div>
-                <div>정액급식비</div>
+                <div>대민활동비</div>
                 <div>7</div>
             </div>
 
             <div class="main-table-grid">
                 <h4 >공제</h4>
-                <div>1</div>
+                <div>공제계</div>
                 <div>2</div>
-                <div>3</div>
+                <div>기여금</div>
                 <div>4</div>
-                <div>5</div>
+                <div>노인장기요양보험</div>
                 <div>6</div>
+                <div>대한공제회비</div>
                 <div>7</div>
+                <div>직장금고회비</div>
                 <div>7</div>
+                <div>소득세</div>
                 <div>7</div>
-                <div>7</div>
-                <div>7</div>
-                <div>7</div>
-                <div>7</div>
+                <div>지방소득세</div>
                 <div>7</div>
                 <div>7</div>
                 <div>7</div>

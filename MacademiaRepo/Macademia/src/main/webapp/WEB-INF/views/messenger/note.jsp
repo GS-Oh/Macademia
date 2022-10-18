@@ -5,14 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<%@ include file="/resources/css/common/common.css" %>
+	
 	<style>
 	
-	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
+	    <%@ include file="/resources/css/messenger/commonAside.css" %>
 
 		main{
 			display: grid;
 			grid-template-rows: 15% 7% 44% 34%;
 		}
+
 
 		#note-header-area{
 			display: grid;
@@ -49,20 +53,24 @@
 		#note-search-area > form{
 			height: 100%;
 			display: grid;
-			grid-template-columns: 13% 65% 17%;
-			padding-left: 6%;
+			grid-template-columns: 25% 50% 25%;
 			justify-items: center;
+			
 		}
 
-		
-
+		#note-search-area > form > div > select{
+			text-align: center;
+		}
 
 		#note-search-area > form > div > *{
+			width: 100%;
 			height: 100%;	
 			border: 1px solid black;
+			
 		}
 
 
+		/*  */
 		#note-info-area{
 			display: grid;
 			grid-template-columns: 50px 1fr 1fr 1fr 2fr 1fr;
@@ -86,6 +94,10 @@
 			color: white;
 			border-right: 1px dashed white;
 			width: 100%;
+			height: 60%;
+
+			display: grid;
+			align-items: center;
 		}
 
 		
@@ -95,7 +107,7 @@
 			grid-column: span 6;
 			place-items: center;
 			
-			padding-bottom: 5px;
+			padding: 5px 5px 5px 0px;
 
 			border-bottom: 1px dashed black;
 			width: 100%;
@@ -108,30 +120,38 @@
 
 
 
-
+		/*  */
 		#note-detail-area{
 			display: grid;
 			grid-template-columns: 2fr 8fr;
 			grid-template-rows: repeat(5,1fr) 2fr;
 			margin-top: 15px;
-			border: 3px solid #1315a6;
+			border: 3px solid #6667AB;
 			border-radius: 10px;
+
 		}
 
 		.detail-area-title{
 			background-color: #6667AB;
-			border-right: 1px solid black;
-			margin-bottom: 5px;
 			color: white;
 			align-items: center;
 			text-align: center;
 			padding-top: 5px;
+
+			display: grid;
+			align-items: center;
+
+			font-size: 1.5rem;
+			
+			border-bottom: 2px solid white;
 		}
 
 		.detail-area-content{
-			border-top: 2px solid #6667AB;
+			border-top: 2px solid black;
 			align-items: center;
 			padding: 5px 0px 0px 10px;
+
+			font-size: 1.5rem;
 		}
 
 		/* #1315a6 #6667AB */
@@ -139,12 +159,15 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
-        
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
+		</aside>        
 
         <main>
 
@@ -153,28 +176,28 @@
 				
 				<a href="/md/messenger/note/write">
 					<div class="header-area-content">
-						<img src="" alt="">
+						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
 						<h5>쪽지</h5>
 					</div>
 				</a>
 
 				<a href="/md/messenger/note/reply?">
 					<div class="header-area-content">
-						<img src="" alt="">
+						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
 						<h5>회신</h5>
 					</div>
 				</a>
 				
 				<a href="">
 					<div class="header-area-content">
-						<img src="" alt="">
+						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
 						<h5>새로고침</h5>
 					</div>
 				</a>
 
 				<a href="/md/messenger/note/delete?">
 					<div class="header-area-content">
-						<img src="" alt="">
+						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
 						<h5>삭제</h5>
 					</div>
 				</a>
@@ -184,8 +207,7 @@
 			<!--  -->
 			<div id="note-search-area">
 				<form action="">
-					<div>
-						
+					<div style="width: 60%; ">
 						<select name="" id="" >
 							<option value="msgNo">보낸사람</option>
 							<option value="recipientNo">받은사람</option>
@@ -193,9 +215,9 @@
 						</select>
 					</div>
 					<div style="width: 100%;">
-						<input type="text" name="" style="width: 100%;" >
+						<input type="text" name=""  >
 					</div>
-					<div>
+					<div style="width: 40%;">
 						<input class="btn btn-outline-dark" type="submit" value="검색하기">
 					</div>
 				</form>
@@ -240,63 +262,7 @@
 					<div >내용</div>
 					<div >날짜</div>
 				</div>
-				<div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div><div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div>
+			
 
 				
 				
