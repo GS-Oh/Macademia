@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!-- fullcalendar cdn -->
+<!-- fullcalendar -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/ko.js"></script>
@@ -12,11 +12,12 @@
   
       var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
+          locale: 'ko',
+          left: 'title',
+          center: 'prev,next today',
           right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
-        // initialDate: '2020-09-12',
+        locale: "ko",
         navLinks: true, // can click day/week names to navigate views
         businessHours: true, // display business hours
         editable: true,

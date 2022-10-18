@@ -70,23 +70,36 @@
     <div id="atdc-table">
         <div>
             <div><b>이름</b></div>
-            <div><b>부서</b></div>
-            <div><b>직급</b></div>
-            <div><b>업무시작</b></div>
-            <div><b>업무종료</b></div>
-            <div><b>총 근무시간</b></div>
-            <div><b>비고</b></div>
+            <div><b>13</b></div>
+            <div><b>13</b></div>
         </div>
         
         <div>
-            <div>13일</div>
-            <div>홍길동</div>
-            <div>인사</div>
-            <div>대리</div>
-            <div>08:50:09</div>
-            <div>18:00:23</div>
-            <div>9h 12m 33s</div>
-            <div>칼퇴</div>
+            <div>
+                <div>홍길동</div>
+                <div><b>부서</b></div>
+                <div>인사</div>
+                <div><b>직급</b></div>
+                <div>대리</div>
+            </div>
+            <div>
+                
+                <div><b>업무시작</b></div>
+                <div>08:50:09</div>
+                <div><b>업무종료</b></div>
+                <div>18:00:23</div>
+                <div><b>총 근무시간</b></div>
+                <div>9h 12m 33s</div>
+            </div>
+            <div>
+                
+                <div><b>업무시작</b></div>
+                <div>08:50:09</div>
+                <div><b>업무종료</b></div>
+                <div>18:00:23</div>
+                <div><b>총 근무시간</b></div>
+                <div>9h 12m 33s</div>
+            </div> 
         </div>
         
         

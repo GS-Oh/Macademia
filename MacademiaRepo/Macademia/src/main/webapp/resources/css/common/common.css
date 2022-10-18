@@ -1,20 +1,22 @@
 <script src="https://kit.fontawesome.com/336f32a815.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 <style>
-    /* @font-face {
+    @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
         font-weight: 100;
         font-style: normal;
-    } */
+    }
     @font-face {
 	    font-family: 'AppleSDGothicNeo';
 	    src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
+        font-weight: 100;
+        font-style: normal;
 	}
     html, body{
         padding: 0px;
         margin: 0px;
-        font-family: 'AppleSDGothicNeo';
+        font-family: 'AppleSDGothicNeoUL';
         font-size: 12px;
     }
     div>*{
