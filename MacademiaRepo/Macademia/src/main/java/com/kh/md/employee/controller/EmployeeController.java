@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-	@GetMapping("/main")
-	public String main() {
-		return "/employee/main";
+	@GetMapping("/myAtdc")
+	public String myAtdc() {
+		return "/employee/my-atdc";
+	}
+	
+	@GetMapping("/deptAtdc")
+	public String deptAtdc() {
+		return "/employee/dept-atdc";
 	}
 	
 }

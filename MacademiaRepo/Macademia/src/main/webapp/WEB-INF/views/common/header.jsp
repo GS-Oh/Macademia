@@ -85,7 +85,7 @@
             </a>
         </div>
         <div id="nav-menu2">
-            <a href="${root}/employee/main">
+            <a href="${root}/employee/myAtdc">
                 <i class="fa-solid fa-people-group fa-2x"></i><br>
                 <label for="">직원</label>
             </a>
@@ -146,7 +146,7 @@
             </a>
         </div>
         <div id="mypage-icon">
-            <a href="">
+            <a href="${root}/member/mypage">
                 <i class="fa-solid fa-circle-user fa-2x"></i>
             </a>
         </div>
