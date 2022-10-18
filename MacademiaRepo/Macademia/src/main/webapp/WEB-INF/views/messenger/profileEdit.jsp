@@ -5,9 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<%@ include file="/resources/css/common/common.css" %>
+
 	<style>
 	
-	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
+	    <%@ include file="/resources/css/messenger/commonAside.css" %>
 
 
 		main{
@@ -15,11 +18,15 @@
 			grid-template-rows: 10% 40% auto;
 		}
 
+		#profile-title > h1{
+			border-left: 5px solid #1315a6;
+			padding-left: 15px;
+		}
 	
 		#profile-main-content > form{
 			height: 100%;
 			display: grid;
-			grid-template-columns: 1.5fr 1.5fr 1fr;
+			grid-template-columns: 1fr 1.5fr 1fr;
 			grid-template-rows: 1fr 1fr 1fr;
 			border: 3px solid #1315a6;
 			border-radius: 15px;
@@ -52,16 +59,19 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
-        
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
+		</aside>        
 
         <main>
             
-			<div style="margin-top: 20px;"><h2>기본 프로필 편집</h2></div>
+			<div id="profile-title" style="margin-top: 20px;"><h1>기본 프로필 편집</h1></div>
 
 			<div id="profile-main-content">
 				<form action="" method="post" enctype="multipart/form-data">

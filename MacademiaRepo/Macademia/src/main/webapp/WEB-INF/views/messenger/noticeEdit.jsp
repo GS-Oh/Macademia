@@ -5,24 +5,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<%@ include file="/resources/css/common/common.css" %>
+	
 	<style>
-	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
+	    <%@ include file="/resources/css/messenger/commonAside.css" %>
 
 
 		main{
 			display: grid;
 			grid-template-rows: 5% 20% 70% ;
 			border-radius : 10px;
-			width : 90%;
-			margin: 5%;
 		}
 
+		#edit-title{
+			display: grid;
+			align-items: center;
+		}
+
+		#edit-title>h1{
+			border-left: 5px solid lightseagreen;
+			padding-left : 15px;
+			margin-top: 3%;
+		}
 
 		#detail-header{
+			font-size: 1.5rem;
 			display: grid;
 			grid-template-columns: 6% 74% 10% 10%;
 			align-items: center;
 		}
+
+		#detail-header > div{
+			display: grid;
+			justify-items: center;
+		}
+
 
 		#detail-content > a{
 			text-decoration: none;
@@ -42,22 +60,25 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
-        
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
+		</aside>        
 
         <main>
 
-			<div><h6>공지글 수정하기</h6></div>
+			<div id="edit-title"><h1>공지글 수정하기</h1></div>
 
             <!--  -->
 			<div id="detail-header">
 				<div><span  class="badge bg-info" >공지</span></div>
-				<div><h3><input type="text" style="width: 100%; height: 100%;" value="[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?"></h3></div>
+				<div><h3 style="width:100%; height: 100%;"><input type="text" style="width: 100%; height: 100%;" value="[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?"></h3></div>
 				<div>조회 수 : 3</div>
 				<div>댓글 수 : 3</div>
 			</div>
@@ -67,8 +88,8 @@
 
 				<textarea name="" id="" cols="30" rows="10"></textarea>
 
-				<a href="/md/messenger/notice/edit" class="badge bg-warning">삭제하기</a>
-				<a href="" class="badge bg-success">수정하기</a>
+				<a href="/md/messenger/notice/edit" class="badge bg-warning"><h4>삭제하기</h4></a>
+				<a href="" class="badge bg-success"><h4>수정하기</h4></a>
 			</div>
 			
 

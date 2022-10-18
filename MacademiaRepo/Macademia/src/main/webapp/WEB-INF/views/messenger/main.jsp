@@ -5,9 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+		<%@ include file="/resources/css/common/common.css" %>
+		
 	<style>
+		<%@ include file="/resources/css/messenger/commonAside.css" %>
+	
 
-		<%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
 	
 		.main-partition{
 			padding-top : 30px;
@@ -19,6 +22,8 @@
 
 
 		.main-content-wrap{
+			width: 80%;
+			height: 10%;
 			display: flex;
 			flex-wrap: wrap;
 			height: auto;
@@ -74,34 +79,33 @@
 
 
     </style>
+    
 </head>
 
-	<header>
-			<%@include file="/WEB-INF/views/common/header.jsp" %>
-	</header>
 <body>
 
 
 	
     <div id="wrap">
 
-		
-		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
-        
-		
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
+		</aside>
+			
         <main>
             
 			<!-- 부서1 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
 			<div class="main-partition"><h2>개발부</h2><h5 style="color: gray;">(3명)</h5></div>
 
-			<!-- 얘로 감싸고 -->
+			<!-- 부서1- 직원 -- 얘로 감싸고 -->
 			<div class="main-content-wrap">
-
-
 				<!-- 직원 수 만큼 얘 반복 -->
 				<div class="messenger-main-content">
-					<div style="height: 150px; ">
-						<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="프로필사진" src=""  height="100%" style="border: 1px solid black;"></a>
+					<div style="height: 100%; width: 100%; " >
+						<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src=""  width="90%" height="100%" style="border: 1px solid black;"></a>
 					</div>
 					<div class="content-detail">
 						<div id="detail-name">직원명</div>
@@ -109,11 +113,9 @@
 						<div>직책</div>
 					</div>
 				</div>
-
-
 			</div>
 
-			
+
 
 
 
@@ -157,7 +159,6 @@
 		</div>
 		</div>
 	</div>
-
 
 
 

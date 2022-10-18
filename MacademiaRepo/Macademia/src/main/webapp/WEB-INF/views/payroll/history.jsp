@@ -5,28 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<%@ include file="/resources/css/common/common.css" %>
 <style>
 
-    <%@ include file="/resources/css/payroll/commonHeaderAside.css" %>
+    <%@ include file="/resources/css/payroll/commonAside.css" %>
 
     main{
-        border: 1px solid black;
         display: grid;
         grid-template-rows: 10% 10% 10% 65% ;
         overflow-x : scroll;
     }
+
+    /*  */
+    .history-title{
+        display: grid;
+        align-items: center;
+    }
     
-    /* main div {
-        border: 1px solid black;
-    } */
+    .history-title>h3{
+        border-left: 5px solid #1315a6 ;
+        padding-left: 10px;
+    }
 
-
+    /*  */
     #history-header-outer{
         display: grid;
         grid-template-columns: 2fr 8fr;
         align-items: center;
         border: 3px solid #6667AB ;
+       
     }    
 
 
@@ -43,6 +50,8 @@
 
     /* 지급년월 본봉 ~~ 실수령액 부분 */
     #history-table-outer{
+        font-size: 1.3rem;
+
         display: grid;
         grid-template-columns: repeat(10, 10%);
         grid-template-rows: repeat(12, 1fr);
@@ -54,7 +63,8 @@
     }
 
     .history-table-header{
-        font-size: 1.1rem;
+        font-size: 1.5rem;
+
         text-align: center;
         background-color: #6667AB;
         color: white;
@@ -62,10 +72,18 @@
     }
 
     .history-table-content{
+        
         text-align: center;
         margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #6667AB;
     }
 
+    .history-table-content>a{
+        text-decoration: none;
+        color: #1315a6;
+        font-weight: 600;
+    }
 
     /* 페이징처리 */
     #page-area{
@@ -83,17 +101,23 @@
 <body>
 
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
     
 
 
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/payroll/commonHeaderAside.jsp" %>
+		<header>
+				<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/payroll/commonAside.jsp" %>
+		</aside>
         
         <main>
-            <div ><h5>지급내역 조회</h5></div>
+            <!-- 0 -->
+            <div class="history-title" ><h3>지급내역 조회</h3></div>
+
             <!-- 1 -->
             <div id="history-header-outer" >
 
@@ -118,8 +142,8 @@
             </div>
             
             <!-- 2 -->
-            <div style="margin: 50px 20px 10px 20px;">
-                <h4>지급내역 목록 [ TOTAL 3 ] </h4>
+            <div class="history-title" style="margin: 40px 0px;">
+                <h3>지급내역 목록 [ TOTAL 3 ] </h3>
             </div>
 
             <!-- 3 -->

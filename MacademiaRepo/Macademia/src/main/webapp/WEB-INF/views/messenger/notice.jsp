@@ -5,17 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<%@ include file="/resources/css/common/common.css" %>
 	<style>
-	    <%@ include file="/resources/css/messenger/commonHeaderAside.css" %>
+	    <%@ include file="/resources/css/messenger/commonAside.css" %>
 
 		main{
+			width:60vw;
 			display: grid;
 			grid-template-rows: 10% 70% 5% 5%;
 		}
 
 
 		#notice-header > h1{
-			padding-top: 15px;
+			margin-top: 30px;
+			padding-left: 15px;
+			border-left: 5px solid #6667AB;
 		}
 
 
@@ -27,24 +32,32 @@
 			align-items: center;
 			border: 3px solid #6667AB;
 			border-radius: 10px;
+
+			
 		}
 
 		.list-header{
+			height: 60%;
 			text-align: center;
 			background-color: #6667AB;
 			color: white;
 			font-weight: 800;
 			border-right: 1px dashed white;
+
+			display: grid;
+			align-items: center;
 		}
 
 		.list-content{
 			text-align: center;
-			padding-bottom: 10px;
+			padding-bottom: 15px;
 			border-bottom: 1px dashed #6667AB;
+			font-size: 1.4rem;
 		}
 
 		.list-content > a{
 			text-decoration: none;
+			font-weight: 800;
 			color: #1315a6 ;
 		}
 
@@ -69,15 +82,18 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/messenger/commonHeaderAside.jsp" %>
-        
+		<header>
+			<%@include file="/WEB-INF/views/common/header.jsp" %>
+        </header>
+		<aside>		
+			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
+		</aside>        
 
         <main>
-			<div id="notice-header"><h1>메신저 공지글</h1></div>
+			<div id="notice-header"><h1> 메신저 공지글</h1></div>
             
 			<div id="notice-list">
 				<div class="list-header" style="grid-column: span 2;">제목</div>
@@ -85,11 +101,17 @@
 				<div class="list-header">작성일</div>
 				<div class="list-header">조회수</div>
 
+				<!-- 글 수 만큼 반복 -->
 				<div class="list-content"><span  class="badge bg-info" >공지</span></div>
-				<div class="list-content" style="text-align: left;"><a href="/md/messenger/notice/detail">제목누르면상세페이지로 이동</a></div>
+				<div class="list-content" style="text-align: left; "><a href="/md/messenger/notice/detail">제목 누르면 상세페이지로 이동</a></div>
 				<div class="list-content">3</div>
 				<div class="list-content">4</div>
 				<div class="list-content">5</div>
+
+			
+
+
+
 			</div>	
 			
 			<div id="page-area" >
