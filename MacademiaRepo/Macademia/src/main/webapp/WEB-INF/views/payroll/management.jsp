@@ -13,6 +13,8 @@
     main{
         display: grid;
         grid-template-rows: 1fr 8fr;
+
+		
     }
 
     #management-select-area{
@@ -24,7 +26,7 @@
 		display: grid;
 		align-items: center;
 	}
-
+	
 	#management-select-area > form{
 		display: flex;
 		justify-content: space-between;
@@ -56,7 +58,7 @@
     .management-table-header{
 		margin-top: 15px;
 
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         text-align: center;
         color: #6667AB;
 		font-weight: 900;
@@ -65,7 +67,7 @@
     }
 
     .management-table-content{
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         text-align: center;
 
 		border-right: 1px dashed #6667AB;
@@ -108,7 +110,7 @@
 	                <form action="" method="">
 	
 	                    <div>
-	                        <label for="year-select" class="form-label">발급년월</label>
+	                        <label for="year-select" class="form-label"><h2>발급년월</h2></label>
 	                        <select name="" id="year-select" class="form-select">
 	                            <option value="">2022-03</option>
 	                            <option value="">2022-04</option>
@@ -121,7 +123,7 @@
 	                    </div>
 	
 	                    <div>
-	                        <label for="depart-select" class="form-label">부서명</label>
+	                        <label for="depart-select" class="form-label"><h2>부서명</h2></label>
 	                        <select name="" id="depart-select" class="form-select">
 	                            <option value="" selected>선택안함</option>
 	                            <option value="">개발부</option>
@@ -131,7 +133,7 @@
 	                    </div>
 	
 	                    <div>
-	                        <label for="name-select" class="form-label">사원명</label>
+	                        <label for="name-select" class="form-label"><h2>사원명</h2></label>
 	                        <select name="" id="name-select" class="form-select">
 	                            <option value="" selected>선택안함</option>
 	                            <option value="">오귀석</option>
@@ -180,7 +182,7 @@
 	                <div class="management-table-content">오귀석</div>
 	                <div style="grid-column: span 7; color: red; text-align: center; ">
 	                    <a href="/md/payroll/create/detail" > 
-	                        <h3 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h3>
+	                        <h2 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h2>
 	                    </a>    
 	                </div>
 

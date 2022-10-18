@@ -139,7 +139,7 @@
 	
 			<!-- Modal Header -->
 			<div class="modal-header">
-			<h4 class="modal-title">직원명</h4>
+			<h1 class="modal-title">직원명</h1>
 			<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 	
@@ -148,8 +148,8 @@
 				<div id="main-content-img-wrap" >
 					<img src="" alt="" width="150px" height="150px" style="border:1px solid black">
 				</div>
-				<div>부서명</div>
-				<div style="grid-row: span 2;">자기소개글</div>
+				<div><h4>부서명</h4></div>
+				<div style="grid-row: span 2;"><h4>자기소개글</h4></div>
 			</div>
 	
 			<!-- Modal footer -->

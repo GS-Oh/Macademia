@@ -24,6 +24,8 @@
 		}
 
 		#profile-main-content{
+			font-size: 1.8rem;
+
 			display: grid;
 			grid-template-columns: 1fr 1.5fr 1fr;
 			grid-template-rows: 1fr 1fr 1fr;
@@ -85,14 +87,14 @@
 				<div>직원명</div>
 				<div>3-공백</div>
 				<div style="grid-row: span 2;">자기소개글</div>
-				<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white;">편집</a></div>
+				<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white; width: 30%;"><h4>편집</h4></a></div>
 				<div>6-공백</div>
 			</div>
 
 			<div id="profile-bottom-content">
-				<div class="badge bg-secondary"><h5>부서명-직책</h5></div>
-				<div class="badge bg-secondary"><h5>주소</h5></div>
-				<div class="badge bg-secondary"><h5>이메일주소</h5></div>
+				<div class="badge bg-secondary"><h3>부서명-직책</h3></div>
+				<div class="badge bg-secondary"><h3>주소</h3></div>
+				<div class="badge bg-secondary"><h3>이메일주소</h3></div>
 			</div>
 			
         </main>

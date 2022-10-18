@@ -32,6 +32,7 @@
 		}
 
 		#detail-content > textarea{
+			font-size: 2rem;
 			border: 3px solid lightseagreen;
 			width: 100%;
 			height: 90%;
@@ -106,7 +107,7 @@
             <!--  -->
 			<div id="detail-header">
 				<div><span  class="badge bg-info" >공지</span></div>
-				<div><h3>[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?</h3></div>
+				<div><h1>[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?</h1></div>
 				<div>조회 수 : 3</div>
 				<div>댓글 수 : 3</div>
 			</div>
@@ -155,14 +156,13 @@
 				<div id="reply-insert">
 
 					<div style="margin-left: 10px;">
-						<label for="comment"><span  class="badge bg-secondary" >로그인한사람닉네임</span></label>
+						<label for="comment"><h3><span  class="badge bg-secondary" >로그인한사람닉네임</span></h3></label>
 					</div>
 					<div style="margin: 10px;">
-						<textarea class="form-control" rows="4" id="comment" name="text">
-						</textarea>
+						<textarea class="form-control" rows="4" id="comment" name="text"></textarea>
 					</div>	
 					<div >
-						<button type="submit" class="badge bg-info" style="float: right;">등록하기</button>
+						<button type="submit" class="badge bg-info" style="float: right;"><h5>등록하기</h5></button>
 					</div>	
 
 				</div>
