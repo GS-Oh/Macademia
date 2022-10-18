@@ -14,35 +14,56 @@
 			display: grid;
 			grid-template-columns: 4fr 6fr;
 			grid-template-rows: 7fr 3fr;
+			
 		}
 		
 	
 
 		#recipient-search-area{
+			
 			overflow-y: scroll;
 		}
 
-		#recipient-search-area > ul > h5{
+		#recipient-search-area > ul > h2{
 			margin-top: 30px;
-			font-size: 1.3rem;
 			font-weight: 900;
 			text-align: left;
 			color: #1315a6;
 		}
 
 		.search-header{
+			font-size: 1.5rem;
 			margin: 30px 30px 50px 0px;
-			padding-bottom: 50px;
+			padding-bottom: 80px;
 			border-bottom: 1px dashed #1315a6;
 		}
 		
 
 		.search-header > li{
-			margin-top: 20px;
+			margin-top: 15px;
+			margin-left : 50px;
+			padding : 15px;
+			list-style: decimal;
+			font-size: 2rem;
+			color: #6667AB;
+		}
+
+		.search-header > li > ul{
+			padding: 5px;
+			color: #6667AB;
+			font-size: 1.6rem;
+		}
+
+		.search-header > li > ul >li>button{
+			border: none;
+			background-color: none;
+			margin: 10px 0px 10px 0px;
 		}
 
 		/*  */
 		#recipient-select-area{
+
+			font-size: 1.5rem;
 			display: grid;
 			grid-template-columns: 0.5fr 1fr 1fr 1fr;
 			grid-template-rows: repeat(11, 1fr);
@@ -107,36 +128,34 @@
 			<div id="recipient-search-area">
 
 				<ul>
-					<h5>개발부(대분류)</h5>
+					<h2>개발부(대분류)</h2>
 					<ul class="search-header">
 						<li>프론트(중분류)
 							<ul>
-								<li>html(소부서)</li>
-								<li>html(소부서)</li>
-								<li>html(소부서)</li>
-								<li>html(소부서)</li>
+								<li><button>html(소부서)</button></li>
+								<li><button>html(소부서)</button></li>
 							</ul>
 						</li>
 						<li>프론트(중분류)
 							<ul>
-								<li>html(소부서)</li>
+								<li><button>html(소부서)</button></li>
 							</ul>
 						</li><li>프론트(중분류)
 							<ul>
-								<li>html(소부서)</li>
+								<li><button>html(소부서)</button></li>
 							</ul>
 						</li><li>프론트(중분류)
 							<ul>
-								<li>html(소부서)</li>
+								<li><button>html(소부서)</button></li>
 							</ul>
 						</li>
 					</ul>
 			
-					<h5>개발부(대분류)</h5>
+					<h2>개발부(대분류)</h2>
 					<ul class="search-header">
 						<li>프론트(중분류)
 							<ul>
-								<li>html(소부서)</li>
+								<li><button>html(소부서)</button></li>
 							</ul>
 						</li>
 					</ul>
@@ -165,12 +184,12 @@
 			<!--  -->
 			<div id="recipient-submit-area" style="grid-column: span 2;">
 				<form action="">
-					<div class="submit-select " ><span class="badge bg-secondary"> 받는이 : </span><input type="text" name="" ></div>
-					<div class="submit-select" ><span class="badge bg-secondary"> 참조인 : </span><input  type="text" name="" ></div>
+					<div class="submit-select " ><h2><span class="badge bg-secondary"> 받는이 </span></h2><input type="text" name="" ></div>
+					<div class="submit-select" ><h2><span class="badge bg-secondary"> 참조인</span></h2><input  type="text" name="" ></div>
 					<div></div>
 					<div style="text-align: right; padding-right: 20%;">
-						<input type="submit" name="" value="확인" class="btn btn-outline-light text-dark">
-						<input type="button" name="" value="취소" class="btn btn-outline-light text-dark">
+						<input type="submit" name="" value="확인" class="btn btn-outline-info btn-lg text-dark">
+						<input type="button" name="" value="취소" class="btn btn-outline-light btn-lg text-dark">
 					</div>
 				</form>	
 			</div>

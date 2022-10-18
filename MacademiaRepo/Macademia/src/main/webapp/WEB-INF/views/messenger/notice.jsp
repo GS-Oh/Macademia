@@ -74,8 +74,12 @@
 			background-color:#6667AB;
 			border-radius: 5px;
 			color: white;
-			width: 20px;
+			width: 30px;
+			height: 30px;
 			text-align: center;
+
+			display: grid;
+			align-items: center;
 		}
 
     </style>
@@ -115,16 +119,19 @@
 			</div>	
 			
 			<div id="page-area" >
+
+				<a href=""><</a>
 				<a href="">1</a>
 				<a href="">2</a>
 				<a href="">3</a>
 				<a href="">4</a>
 				<a href="">5</a>
+				<a href="">></a>
 			</div>
 
 
 			<div style="text-align: right;">
-				<a class="btn btn-primary" href="" >글 작성</a>
+				<a class="btn btn-primary btn-lg" href="" >글 작성</a>
 			</div>
 	
 

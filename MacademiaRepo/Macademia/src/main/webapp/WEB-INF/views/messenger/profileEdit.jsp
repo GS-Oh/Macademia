@@ -16,6 +16,7 @@
 		main{
 			display: grid;
 			grid-template-rows: 10% 40% auto;
+			margin-top:20px;
 		}
 
 		#profile-title > h1{
@@ -24,6 +25,8 @@
 		}
 	
 		#profile-main-content > form{
+			font-size: 1.5rem;
+
 			height: 100%;
 			display: grid;
 			grid-template-columns: 1fr 1.5fr 1fr;
@@ -82,15 +85,15 @@
 					<div>직원명</div>
 					<div>3-공백</div>
 					<div style="grid-row: span 2;"><textarea name="" id="" rows="9" style="width:90%;">자기소개글</textarea></div>
-					<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white;">수정하기</a></div>
+					<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white; width: 30%;"><h4>수정하기</h4></a></div>
 					<div>6-공백</div>
 				</form>
 			</div>
 
 			<div id="profile-bottom-content">
-				<div class="badge bg-secondary"><h5>부서명-직책</h5></div>
-				<div class="badge bg-secondary"><h5>주소</h5></div>
-				<div class="badge bg-secondary"><h5>이메일주소</h5></div>
+				<div class="badge bg-secondary"><h3>부서명-직책</h3></div>
+				<div class="badge bg-secondary"><h3>주소</h3></div>
+				<div class="badge bg-secondary"><h3>이메일주소</h3></div>
 			</div>
 			
         </main>

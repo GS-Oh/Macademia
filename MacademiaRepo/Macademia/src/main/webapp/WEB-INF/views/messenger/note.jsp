@@ -90,7 +90,7 @@
 		}
 
 		.info-header{
-			background-color: #1315a6;
+			background-color: #6667AB;
 			color: white;
 			border-right: 1px dashed white;
 			width: 100%;
@@ -114,7 +114,7 @@
 		}
 
 		.info-content:hover{
-			background-color: #6667AB;
+			background-color: #1315a6;
 			color: wheat;
 		}
 
@@ -217,8 +217,8 @@
 					<div style="width: 100%;">
 						<input type="text" name=""  >
 					</div>
-					<div style="width: 40%;">
-						<input class="btn btn-outline-dark" type="submit" value="검색하기">
+					<div style="width: 40%;" >
+						<input class="btn btn-outline-dark" type="submit" value="검색하기" style="font-size:1.3rem;">
 					</div>
 				</form>
 			</div>
