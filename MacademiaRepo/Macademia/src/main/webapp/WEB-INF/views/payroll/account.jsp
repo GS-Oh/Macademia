@@ -36,9 +36,10 @@
 
     .account-table-header{
         color: #6667AB;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         font-weight: 900;
         margin: 20px 0px;
+
     }
 
     .account-table-content{
@@ -89,9 +90,7 @@
         border-radius: 30px;
     }
 
-    #account-edit-area > div > h5{
-        color: #6667AB;
-    }
+    
 
 
 </style>
@@ -160,19 +159,19 @@
                 <h3 class="account-title-name">계좌번호 정보</h3>
                 <div id="account-info-area" >
                     <div >
-                        <h3>급여구분  :   
+                        <h4>급여구분  :   
                         <select name="" id="" >
                             <option value="월급여">월급여</option>
                             <option value="기본상여금">기본상여금</option>
                             <option value="보너스">보너스</option>
                         </select>
-                        </h3>
+                        </h4>
                     </div>
-                    <div><h3>예금주명  :   오귀석</h3></div>
-                    <div><h3>은 행 명  :   농협은행</h3></div>
-                    <div><h3>계좌번호  :   000-1234-1234-00</h3></div>
+                    <div><h4>예금주명  :   오귀석</h4></div>
+                    <div><h4>은 행 명  :   농협은행</h4></div>
+                    <div><h4>계좌번호  :   000-1234-1234-00</h4></div>
                     <div id="account-direct">
-                        <h3>자동이체  :   </h3>
+                        <h4>자동이체  :   </h4>
                         <div>
                             <input type="button" value="신청하기" style="background-color: #6667AB; color:white"> 
                             <input type="button" value="취소하기">
@@ -186,11 +185,11 @@
                 <h3 class="account-title-name" >자동이체 변경 이력</h3>
                 <div id="account-edit-area">
 
-                    <div><h4>구분</h4></div>
-                    <div><h4>예금주명</h4></div>
-                    <div><h4>은 행 명</h4></div>
-                    <div><h4>계좌번호</h4></div>
-                    <div><h4>일시</h4></div>
+                    <div class="account-table-header">구분</div>
+                    <div class="account-table-header">예금주명</div>
+                    <div class="account-table-header">은 행 명</div>
+                    <div class="account-table-header">계좌번호</div>
+                    <div class="account-table-header">일시</div>
 
                     <div class="badge bg-danger">취소</div>
                     <div>오귀석</div>
