@@ -156,6 +156,12 @@
 </div>
 
 <script>
+    if('${alertMsg}'!= ''){
+        alert('${alertMsg}');
+    }
+</script>
+
+<script>
     
     const id = $('#id');
     const pwd = $('#pwd');

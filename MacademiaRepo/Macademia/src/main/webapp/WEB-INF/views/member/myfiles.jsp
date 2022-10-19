@@ -9,7 +9,7 @@
 	<style>
 
 		#sidemenu{
-			width: 20vw;
+			width: 17vw;
 			height: 80vh;
 			position: fixed;
 			top:10vh;
@@ -27,7 +27,7 @@
 		<aside>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/member/edit-content.jsp" %>
+			<%@include file="/WEB-INF/views/member/myfiles-content.jsp" %>
 		</main>
 		<div id="sidemenu">
 			<%@include file="/WEB-INF/views/member/mypage-sidemenu.jsp" %>
