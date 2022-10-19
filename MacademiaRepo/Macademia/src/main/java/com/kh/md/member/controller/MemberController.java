@@ -18,15 +18,19 @@ public class MemberController {
 	public String login(MemberVo vo) {
 		return "home";
 	}
+	@GetMapping("/member/logout")
+	public String logout() {
+		return "member/login";
+	}
 	@GetMapping("/member/findpwd")
 	public String findPwd() {
-		return "member/find-pwd";
+		return "member/findpwd";
 	}
 	@PostMapping("/member/findpwd")
 	public String findPwd(String Email, String privateEmail,Model model) {
 		
 		model.addAttribute("alertMsg","임시비밀번호를 발송하였습니다. 개인이메일을 확인해주세요.");
-		return "/";
+		return "member/login";
 	}
 	@GetMapping("/member/mypage")
 	public String myPage() {
