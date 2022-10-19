@@ -87,25 +87,29 @@ color:#6667AB;
 height:8%;
 display:flex;
 color:#fff;
-margin-top:77px;
+
 font-size:14px;
 margin-left:-8px;
 
 }
 #menu-top li{
 font-size:19px;
+margin-top:15px;
 }
 #menu-top li:nth-child(2){
 width:100%;
 height:10%;
 margin: 0 auto;
-margin-top:5px;
+margin-top:15px;
 margin-left:20px;
 font-family: 'GangwonEdu_OTFBoldA';
 }
 #menu-top li:nth-child(1){
 
 font-size:13px;
+}
+h3{
+	 font-family: 'AppleSDGothicNeo';
 }
 
 
@@ -122,29 +126,16 @@ font-size:13px;
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		
-		<div id="content">
+		<aside>
+				<%@include file="/WEB-INF/views/work/workList-sidebar.jsp" %>
+		</aside>
 		
-			<div id="side_menu">
-			<ul id="menu-top">
-			<li> <i class="fa-solid fa-list-check fa-2x"></i></li>
-                <li class="">업무 관리</li>
-			</ul>
-			<ul id="menu">
-				
 			
-			<a href="/md/work/list"><li>나의 업무</li></a>
-			<a href="/md/work/write"><li>업무 요청</li></a>
-			<a href="/md/work/complate"><li>처리한 업무</li></a>
-			</ul>
-				
-			</div>
-			<div id="center_menu">
+			<main>
+			<%@include file="/WEB-INF/views/work/workWrite-content.jsp" %>
+			</main>
 			
-
-			</div>
-			<div id="right_menu"></div>
-		</div>	
-			
+					
 		
 
 </body>

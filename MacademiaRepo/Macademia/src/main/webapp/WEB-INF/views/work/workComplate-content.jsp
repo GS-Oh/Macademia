@@ -53,7 +53,7 @@
     </style>
     
 <div id="center_menu">
-	<h3>나의 업무</h3>
+	<h3>처리한 업무</h3>
 	<hr>
 	<div id="work">
 				<table id="my_work" border="1">
