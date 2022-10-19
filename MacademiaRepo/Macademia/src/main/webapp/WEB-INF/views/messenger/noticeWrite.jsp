@@ -85,13 +85,13 @@
             <form action="" method="post">
                 <div id="detail-header">
                     <div><span  class="badge bg-info" >공지</span></div>
-                    <div><h3 style="width:100%; height: 100%;"><input type="text" style="width: 100%; height: 100%;"></h3></div>
+                    <div><h3 style="width:100%; height: 100%;"><input type="text" name="title" style="width: 100%; height: 100%;"></h3></div>
                 </div>
 
                 <!--  -->
                 <div id="detail-content">
 
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="content" id="" cols="30" rows="10"></textarea>
 
                     <input type="submit" class="btn btn-info btn-lg" value="작성하기" style="text-align:right;">
                     <a href="/md/messenger/notice/" class="btn btn-light btn-lg">돌아가기</a>

@@ -156,10 +156,10 @@
 				<div id="reply-insert">
 
 					<div style="margin-left: 10px;">
-						<label for="comment"><h3><span  class="badge bg-secondary" >로그인한사람닉네임</span></h3></label>
+						<label for="content"><h3><span  class="badge bg-secondary" >로그인한사람닉네임</span></h3></label>
 					</div>
 					<div style="margin: 10px;">
-						<textarea class="form-control" rows="4" id="comment" name="text"></textarea>
+						<textarea class="form-control" rows="4" id="content" name="text"></textarea>
 					</div>	
 					<div >
 						<button type="submit" class="badge bg-info" style="float: right;"><h5>등록하기</h5></button>

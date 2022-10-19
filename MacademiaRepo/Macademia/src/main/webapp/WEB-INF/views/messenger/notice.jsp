@@ -106,13 +106,16 @@
 				<div class="list-header">조회수</div>
 
 				<!-- 글 수 만큼 반복 -->
-				<div class="list-content"><span  class="badge bg-info" >공지</span></div>
-				<div class="list-content" style="text-align: left; "><a href="/md/messenger/notice/detail">제목 누르면 상세페이지로 이동</a></div>
-				<div class="list-content">3</div>
-				<div class="list-content">4</div>
-				<div class="list-content">5</div>
-
-			
+				
+				<c:forEach items="${noticeVoList}" var="noticeVoList">
+				
+					<div class="list-content"><span  class="badge bg-info" >공지</span></div>
+					<div class="list-content" style="text-align: left; "><a href="/md/messenger/notice/detail">${noticeVoList.title}</a></div>
+					<div class="list-content">${noticeVoList.msgNo}</div>
+					<div class="list-content">${noticeVoList.enrollDate}</div>
+					<div class="list-content">${noticeVoList.count}</div>
+				
+				</c:forEach>
 
 
 
