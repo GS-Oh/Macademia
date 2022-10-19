@@ -87,13 +87,13 @@ color:#6667AB;
 height:8%;
 display:flex;
 color:#fff;
-margin-top:77px;
 font-size:14px;
 margin-left:-8px;
 
 }
 #menu-top li{
 font-size:19px;
+margin-top:15px;
 }
 #menu-top li:nth-child(2){
 width:100%;
@@ -102,6 +102,7 @@ margin: 0 auto;
 margin-top:5px;
 margin-left:20px;
 font-family: 'GangwonEdu_OTFBoldA';
+margin-top:15px;
 }
 #menu-top li:nth-child(1){
 
@@ -122,28 +123,13 @@ font-size:13px;
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		
-		<div id="content">
+		<aside>
+		<%@include file="/WEB-INF/views/sign/sign-sidebar.jsp" %>
+		</aside>
 		
-			<div id="side_menu">
-			<ul id="menu-top">
-			<li>    <i class="fa-solid fa-clipboard-check fa-2x"></i></li>
-                <li class="">결재 관리</li>
-			</ul>
-			<ul id="menu">
-				
-			<li>나의 일정</li>
-			<li>일정 추가</li>
-			<li>일정관리</li>
-			<li>일정관리</li>
-			</ul>
-				
-			</div>
-			<div id="center_menu">
-			
-
-			</div>
-			<div id="right_menu"></div>
-		</div>	
+		<main>
+			<%@include file="/WEB-INF/views/work/workList-content.jsp" %>
+			</main>
 			
 		
 

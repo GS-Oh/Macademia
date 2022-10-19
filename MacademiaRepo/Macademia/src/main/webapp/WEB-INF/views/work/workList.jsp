@@ -39,7 +39,7 @@ background-color:#6667AB;
 #center_menu{
 width:70vw;
 height:80vh;
-border: 1px solid blue;
+border: 1px solid #fff;
 
 }
 #right_menu{
