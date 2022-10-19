@@ -37,7 +37,7 @@
     }
     #atdc-table>div{
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         border-bottom: 1px solid lightgray;
         justify-items: center;
         align-items: center;
@@ -89,7 +89,7 @@
             <div><b>업무시작</b></div>
             <div><b>업무종료</b></div>
             <div><b>총 근무시간</b></div>
-            <div><b>근무타입</b></div>
+            <div><b>상태</b></div>
         </div>
 
         <div>

@@ -30,7 +30,7 @@
 			<%@include file="/WEB-INF/views/employee/my-atdc-content.jsp" %>
 		</main>
 		<div id="right-side">
-			<%@include file="/WEB-INF/views/employee/my-atdc-rside-content.jsp" %>
+			
 		</div>
 	</div>
 
