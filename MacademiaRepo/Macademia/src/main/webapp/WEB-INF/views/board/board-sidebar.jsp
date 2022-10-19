@@ -25,7 +25,7 @@
     <div class="side-main-category">게시판
     
         <div class="side-sub-category"><a href="">자유게시판</a></div>
-        <div class="side-sub-category"><a href="">특정게시판1</a></div>
+        <div class="side-sub-category"><a href="">자료공유게시판</a></div>
         <div class="side-sub-category"><a href="">특정게시판2</a></div>
         <div class="side-sub-category"><a href="">특정게시판3</a></div>
 
