@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "messengerMapper">
+	
+	
+	
+	
+	<!-- 게시글 메인화면 -->
+	<select id="selectNoticeAll" resultType="com.kh.md.messenger.vo.MsgNoticeVo">
+	
+		SELECT 
+		     N.NOTICE_NO
+		    ,B.NAME MSG_NO
+		    ,N.TITLE
+		    ,N.CONTENT
+		    ,N.COUNT
+		    ,N.ENROLL_DATE
+		FROM MSG_NOTICE N 
+		JOIN MESSENGER M
+		ON N.MSG_NO = M.MSG_NO
+		JOIN MEMBER B
+		ON M.NO = B.NO
+		WHERE N.CHECK_DELETE = 'O'
+		
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 공지톡 게시글 입력 -->
+	<insert id="insertNotice">
+	
+		INSERT INTO MSG_NOTICE(
+		     NOTICE_NO      
+		    ,MSG_NO 
+		    ,TITLE 
+		    ,CONTENT 
+		) VALUES(
+		    SEQ_MSG_NOTICE_NO.NEXTVAL
+		    ,#{msgNo}
+		    ,#{title}
+		    ,#{content}
+		)
+	
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 공지톡 댓글 입력 -->
+	<insert id="insertReple">
+		INSERT INTO MSG_NOTICE_REPLE(
+		     REPLE_NO
+		    ,MSG_NO
+		    ,NOTICE_NO
+		    ,CONTENT
+		)VALUES(
+		     SEQ_MSG_NOTICE_REPLE_NO.NEXTVAL
+		    ,#{msgNo}
+		    ,#{noticeNo}
+		    ,#{content}
+		)
+	
+	</insert>	
+	
+	
+	
+	
+
+</mapper>

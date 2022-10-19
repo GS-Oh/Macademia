@@ -1,13 +1,30 @@
 package com.kh.md.messenger.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.md.messenger.service.MessengerService;
+import com.kh.md.messenger.vo.MsgNoticeVo;
 
 @Controller
 @RequestMapping("messenger")
 public class MessengerController {
 
+	private final MessengerService ms;
+	
+	@Autowired
+	public MessengerController(MessengerService ms) {
+		this.ms = ms;
+	}
+	
+	
 	@GetMapping("main")
 	public String main() {
 		return "messenger/main";
@@ -53,9 +70,14 @@ public class MessengerController {
 		return "messenger/fileBoxEtc";
 	} 
 	
-	
+	//공지 게시글 ( 메인 화면 )
 	@GetMapping("notice")
-	public String notice() {
+	public String notice(Model model) {
+		
+		List<MsgNoticeVo> noticeVoList = ms.selectNoticeAll();
+		
+		model.addAttribute("noticeVoList", noticeVoList);
+		
 		return "messenger/notice";
 	}
 
@@ -64,9 +86,30 @@ public class MessengerController {
 		return "messenger/noticeWrite";
 	}
 	
+	//공지 게시글 ( 입력 처리 )
+	@PostMapping("notice/write")
+	public String noticeWrite(MsgNoticeVo noticeVo) {
+		
+		//TODO 세션이나 다른곳 저장되어있는 MsgNo로 바꾸기
+		noticeVo.setMsgNo("1");
+		
+		int result = ms.insertNotice(noticeVo);
+		
+		if( result == 1) {
+			
+			return "redirect:/messenger/notice";
+		}else {
+			return "redirect:/";
+			
+		}
+		
+	}
 	
-	@GetMapping("notice/detail")
-	public String noticeDetail() {
+	//작업중
+	@GetMapping("notice/detail/{noticeNo}")
+	public String noticeDetail(@PathVariable int noticeNo) {
+		
+		
 		return "messenger/noticeDetail";
 	}
 	
