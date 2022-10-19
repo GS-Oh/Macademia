@@ -131,7 +131,7 @@
 
 
 			<div style="text-align: right;">
-				<a class="btn btn-primary btn-lg" href="" >글 작성</a>
+				<a class="btn btn-primary btn-lg" href="/md/messenger/notice/write" >글 작성</a>
 			</div>
 	
 

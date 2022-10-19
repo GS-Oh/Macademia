@@ -66,9 +66,14 @@
 			grid-template-columns: 30% 70%;
 			grid-template-rows: 20% 80%;
 			
-			border: 3px solid #1315a6;
+			border: 3px solid #6667AB;
 			border-radius: 15px;
 			align-items: center;
+		}
+
+		.modal-header > h1{
+			border-left: 5px solid #6667AB;
+			padding-left:15px;
 		}
 
 		#main-content-img-wrap{
@@ -154,6 +159,7 @@
 	
 			<!-- Modal footer -->
 			<div class="modal-footer">
+				<a href="/md/messenger/note/write?" class="btn btn-lg bg-secondary" style="color: white;">쪽지보내기</a>
 			</div>
 	
 		</div>
