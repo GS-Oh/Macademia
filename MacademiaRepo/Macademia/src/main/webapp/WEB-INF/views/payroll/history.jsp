@@ -134,7 +134,7 @@
                             <option value="">2021</option>
                             <option value="" selected>2022</option>
                         </select>
-                        <input class="btn btn-outline-dark" type="submit" value="조회">
+                        <input class="btn btn-outline-dark btn-lg" type="submit" value="조회">
                     </div>
 
                 </form>

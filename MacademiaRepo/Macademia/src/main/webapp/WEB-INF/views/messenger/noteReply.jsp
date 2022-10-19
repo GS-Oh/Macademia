@@ -17,6 +17,22 @@
 			grid-template-rows: 5% 5% 5% 35% 25% 25%;
 		}
 	
+		/*  */
+		#reply-title{
+			margin : 50px;
+			margin-left : 100px;
+		}
+
+		#reply-title > h1{
+			border-left: 5px solid #6667AB;
+			padding-left: 15px;
+		}
+
+
+		/*  */
+
+	
+
 		.write-header-area{
 			display: grid; grid-template-columns: 15% 70% 5%;
 			justify-content: center;
@@ -26,8 +42,6 @@
 			display: grid;
 			grid-template-rows: 80% 20%;
 		}
-
-		
 
 
     </style>
@@ -47,26 +61,29 @@
        
 
         <main>
+
+			<div id="reply-title"><h1>쪽지 보내기</h1></div>
+
             <form action="">
 				<!--  -->
 				<div class="write-header-area">
-					<span class="input-group-text">받는사람</span>
-					<div class="form-control"><h5>쪽지번호로 가져온 이름</h5></div>
+					<span class="input-group-text"><h4>받는사람</h4></span>
+					<div class="form-control"><h4>쪽지번호로 가져온 이름</h4></div>
 				</div>
 				<!--  -->
 				<div class="write-header-area">
-					<span class="input-group-text">참조인</span>
+					<span class="input-group-text"><h4>참조인</h4></span>
+					<input type="text" class="form-control">
+					<a href="/md/messenger/note/recipient"><h4>검색하기</h4></a>
+				</div>
+				<!--  -->
+				<div class="write-header-area">
+					<span class="input-group-text"><h4>제목</h4></span>
 					<input type="text" class="form-control" >
-					<a href="/md/messenger/note/recipient"> 검색하기 </a>
 				</div>
 				<!--  -->
 				<div class="write-header-area">
-					<span class="input-group-text">제목</span>
-					<input type="text" class="form-control" >
-				</div>
-				<!--  -->
-				<div class="write-header-area">
-					<span class="input-group-text">내용</span>
+					<span class="input-group-text"><h4>내용</h4></span>
 					<textarea class="form-control" name="" id="" cols="30" rows="10">
                         
                         
@@ -76,7 +93,7 @@
                         
                         
                                                                                                                   원래있던내용가져오기
-                    </textarea>
+                    </textarea></h4>
 				</div>
 			
 				<!--  -->

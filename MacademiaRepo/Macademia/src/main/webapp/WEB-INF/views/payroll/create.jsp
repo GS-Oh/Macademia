@@ -39,8 +39,12 @@
 		justify-items: center;
 	}
 
+	#management-select-area > form > div > select{
+		font-size: 1.3rem;
+	}
+
 	#management-select-area > form > div > label{
-		font-size: 1.5rem;
+		font-size: 2rem;
 	}
 
 
@@ -56,7 +60,7 @@
     .management-table-header{
 		margin-top: 15px;
 
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         text-align: center;
         color: #6667AB;
 		font-weight: 900;
@@ -65,7 +69,7 @@
     }
 
     .management-table-content{
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         text-align: center;
 
 		border-right: 1px dashed #6667AB;
@@ -91,7 +95,7 @@
 	
 	                    <div>
 	                        <label for="year-select" class="form-label">발급년월</label>
-	                        <select name="" id="year-select" class="form-select">
+	                        <select name="" id="year-select" class="form-select" >
 	                            <option value="">2022-03</option>
 	                            <option value="">2022-04</option>
 	                            <option value="">2022-05</option>
@@ -141,7 +145,7 @@
 	                <div class="management-table-content">오귀석</div>
 	                <div style="grid-column: span 7; color: red; text-align: center; ">
 	                    <a href="/md/payroll/create/detail" > 
-	                        <h3 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h3>
+	                        <h2 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h2>
 	                    </a>    
 	                </div>
 

@@ -61,8 +61,10 @@
             display: grid;
             grid-template-columns: 50px auto;
             align-items: center;
-            
+        }
 
+        .etc-content-file > div > span {
+            font-size: 1.5rem;
         }
 
         .etc-content-file:hover{
@@ -160,10 +162,10 @@
             <div class="modal-content">
     
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href="">보내기</a>
+                    <a class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
                 </div>
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href="">삭제하기</a>
+                    <a class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
                 </div>
      
              </div>

@@ -36,6 +36,7 @@
     .main-table-span > div > div{
         width: 40%;
         display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
     }
 
@@ -119,17 +120,17 @@
 
             <div class="main-table-span"><h2 style="border-bottom: 3px solid #1315a6; width: 50%;">급여 지급 명세서</h2></div>
 
-            <div class="main-table-span"><h4>2022년 09월분</h4></div>
+            <div class="main-table-span" style="color:#6667AB"><h1>2022년 09월분</h1></div>
 
             <div class="main-table-span">
                 <div>
                     <div>
-                        <h5>소속 : 개발부</h5>
-                        <h5>성명 : 오귀석</h5>
+                        <h3>소속 : 개발부</h3>
+                        <h3>성명 : 오귀석</h3>
                     </div>
                     <div>
-                        <h5>생년월일 : 0000-00-00</h5>
-                        <h5>직책 : 사원</h5>    
+                        <h3>생년월일 : 0000-00-00</h3>
+                        <h3>직책 : 사원</h3>    
                     </div>
                 </div>
             </div>
@@ -186,8 +187,8 @@
                 </div>
 
                 <div style="grid-column: span 2; align-items: center; width: 100%; height: 100%;">
-                    <input type="submit" value="작성하기" class="btn btn-light" style="background-color: #1315a6 ; color:white;">
-                    <input type="button" value="취소하기" class="btn btn-light">
+                    <input type="submit" value="작성하기" class="btn btn-light btn-lg" style="background-color: #1315a6 ; color:white;">
+                    <input type="button" value="취소하기" class="btn btn-light btn-lg">
                 </div>
             </form>
         </main>

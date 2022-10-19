@@ -59,7 +59,10 @@ public class MessengerController {
 		return "messenger/notice";
 	}
 
-
+	@GetMapping("notice/write")
+	public String noticeWrite() {
+		return "messenger/noticeWrite";
+	}
 	
 	
 	@GetMapping("notice/detail")
