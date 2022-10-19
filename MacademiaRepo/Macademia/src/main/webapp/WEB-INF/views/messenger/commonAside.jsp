@@ -11,7 +11,12 @@
 	
 	
       
-            <div><a href="/md/messenger/main">홈</a></div>
+            <div id="nav-menu9" style="border-bottom:1px solid white; padding-bottom:40%;">
+	            <a href="${root}/messenger/main">
+	                <i class="fa-solid fa-comments fa-2x"></i><br>
+	                <label for="">메신저</label>
+	            </a>
+       		</div>
             <div><a href="/md/messenger/profile">나의 프로필</a></div>
             <div><a href="/md/messenger/note">채팅</a></div>
             <div><a href="/md/messenger/note">쪽지</a></div>
