@@ -110,7 +110,7 @@
 				<c:forEach items="${noticeVoList}" var="noticeVoList">
 				
 					<div class="list-content"><span  class="badge bg-info" >공지</span></div>
-					<div class="list-content" style="text-align: left; "><a href="/md/messenger/notice/detail">${noticeVoList.title}</a></div>
+					<div class="list-content" style="text-align: left; "><a href="${root}/messenger/notice/detail/${noticeVoList.noticeNo}">${noticeVoList.title}</a></div>
 					<div class="list-content">${noticeVoList.msgNo}</div>
 					<div class="list-content">${noticeVoList.enrollDate}</div>
 					<div class="list-content">${noticeVoList.count}</div>
@@ -121,20 +121,27 @@
 
 			</div>	
 			
+			
 			<div id="page-area" >
-
-				<a href=""><</a>
-				<a href="">1</a>
-				<a href="">2</a>
-				<a href="">3</a>
-				<a href="">4</a>
-				<a href="">5</a>
-				<a href="">></a>
+				
+				
+				<c:if test="${pvo.startPage ne 1}">
+					<a href="/md/messenger/notice/${pvo.startPage-1}"><</a>
+				</c:if>
+				
+				<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+					<a href="/md/messenger/notice/${i}">${i}</a>
+				</c:forEach>
+				
+				<c:if test="${pvo.endPage ne pv.maxPage}">
+					<a href="/md/messenger/notice/${pvo.endPage-1}">></a>
+				</c:if>				
+				
 			</div>
 
 
 			<div style="text-align: right;">
-				<a class="btn btn-primary btn-lg" href="/md/messenger/notice/write" >글 작성</a>
+				<a class="btn btn-primary btn-lg" href="/md/messenger/notice/write">글 작성</a>
 			</div>
 	
 

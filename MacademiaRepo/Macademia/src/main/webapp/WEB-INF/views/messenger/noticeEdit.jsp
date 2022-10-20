@@ -14,9 +14,15 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 5% 20% 70% ;
+			grid-template-rows: 5% 90% ;
 			border-radius : 10px;
 		}
+
+		main > form{
+			display: grid;
+			grid-template-rows: 2fr 8fr;
+		}
+
 
 		#edit-title{
 			display: grid;
@@ -49,6 +55,7 @@
 		}
 
 		#detail-content > textarea{
+			font-size : 2rem;
 			border: 3px solid lightseagreen;
 			width: 100%;
 			height: 90%;
@@ -60,9 +67,7 @@
 </head>
 <body>
 
-
-
-    <div id="wrap">
+    <div id="wrap">	
 
 		<header>
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -76,22 +81,20 @@
 			<div id="edit-title"><h1>공지글 수정하기</h1></div>
 
             <!--  -->
-			<div id="detail-header">
-				<div><span  class="badge bg-info" >공지</span></div>
-				<div><h3 style="width:100%; height: 100%;"><input type="text" style="width: 100%; height: 100%;" value="[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?"></h3></div>
-				<div>조회 수 : 3</div>
-				<div>댓글 수 : 3</div>
-			</div>
+			<form action="" method="post">
+				<div id="detail-header">
+					<div><span  class="badge bg-info" >공지</span></div>
+					<div><h2 style="width:90%; height:100%;"><input type="text" style="width: 100%; height: 100%;" name="title" value="${noticeVo.title}" ></h2></div>
+					<div>조회 수 : ${noticeVo.count}</div>
+					<div>작성일자 : ${noticeVo.enrollDate}</div>
+				</div>
 
-			<!--  -->
-			<div id="detail-content">
-
-				<textarea name="" id="" cols="30" rows="10"></textarea>
-
-				<a href="/md/messenger/notice/edit" class="badge bg-warning"><h4>삭제하기</h4></a>
-				<a href="" class="badge bg-success"><h4>수정하기</h4></a>
-			</div>
-			
+				<!--  -->
+				<div id="detail-content">
+					<textarea name="content" id="" cols="30" rows="10">${noticeVo.content}</textarea>
+				</div>
+					<input type="submit" class="btn btn-outline-dark btn-lg "  value="수정하기">
+			</form>
 
 
 			

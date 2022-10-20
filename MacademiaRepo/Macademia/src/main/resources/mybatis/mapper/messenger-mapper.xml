@@ -21,17 +21,40 @@
 		JOIN MEMBER B
 		ON M.NO = B.NO
 		WHERE N.CHECK_DELETE = 'O'
-		
+		ORDER BY N.NOTICE_NO DESC
 	
 	</select>
 	
 	
 	
+	<!-- 게시글 상세화면 -->
+	<select id="selectOneByNo" resultType="com.kh.md.messenger.vo.MsgNoticeVo">
+		
+		SELECT 
+		     N.NOTICE_NO
+		    ,B.NAME MSG_NO
+		    ,N.TITLE
+		    ,N.CONTENT
+		    ,N.COUNT
+		    ,N.ENROLL_DATE
+		FROM MSG_NOTICE N 
+		JOIN MESSENGER M
+		ON N.MSG_NO = M.MSG_NO
+		JOIN MEMBER B
+		ON M.NO = B.NO
+		WHERE N.NOTICE_NO = #{no} 
+		AND N.CHECK_DELETE = 'O'
+		ORDER BY N.NOTICE_NO DESC	
 	
+	</select>
 	
-	
-	
-	
+	<!-- 공지톡 게시글 조회 수 증가 -->
+	<update id="increaseHit">
+		UPDATE MSG_NOTICE
+			SET COUNT = COUNT + 1
+		WHERE NOTICE_NO = #{no}
+		AND CHECK_DELETE = 'O'
+	</update>
 	
 	
 	<!-- 공지톡 게시글 입력 -->
@@ -52,19 +75,48 @@
 	</insert>
 
 
+	<!-- 공지톡 수정 화면 -->
+	<select id="selectEditByNo" resultType="com.kh.md.messenger.vo.MsgNoticeVo">
+		SELECT 
+		     N.NOTICE_NO
+		    ,B.NAME MSG_NO
+		    ,N.TITLE
+		    ,N.CONTENT
+		    ,N.COUNT
+		    ,N.ENROLL_DATE
+		FROM MSG_NOTICE N 
+		JOIN MESSENGER M
+		ON N.MSG_NO = M.MSG_NO
+		JOIN MEMBER B
+		ON M.NO = B.NO
+		WHERE N.NOTICE_NO = #{no} 
+		AND N.CHECK_DELETE = 'O'
+	</select>
+
+	<!-- 공지톡 수정 처리 -->
+	<update id="updateEdit">
+		UPDATE MSG_NOTICE
+			SET  TITLE = #{title}
+				,CONTENT = #{content}
+		WHERE NOTICE_NO = #{noticeNo}
+		AND CHECK_DELETE = 'O'
+	</update>
 
 
+	<!-- 공지톡 삭제 처리 -->
+	<update id="updateDelete">
+		UPDATE MSG_NOTICE
+			SET CHECK_DELETE = 'X'
+		WHERE NOTICE_NO = #{no}
+	</update>
 
 
-
-
-
-
-
-
-
-
-
+	<!-- 공지톡 게시글 총 수 -->
+	<select id="selectTotalCnt" resultType="_int">
+		SELECT COUNT(NOTICE_NO)
+		FROM MSG_NOTICE
+		WHERE CHECK_DELETE = 'O'
+	</select>
 
 
 
@@ -84,6 +136,77 @@
 	
 	</insert>	
 	
+	<!-- 공지톡 댓글 리스트 가져오기 -->
+	<select id="selectRepleList" resultType="com.kh.md.messenger.vo.MsgRepleVo">
+		
+		SELECT 
+		     N.REPLE_NO
+		    ,B.NAME MSG_NO
+		    ,N.NOTICE_NO
+		    ,N.CONTENT
+		    ,N.ENROLL_DATE
+		FROM MSG_NOTICE_REPLE N
+		JOIN MESSENGER M ON N.MSG_NO = M.MSG_NO
+		JOIN MEMBER B ON M.NO = B.NO
+		WHERE N.NOTICE_NO = #{no}
+		AND N.CHECK_DELETE = 'O'
+		ORDER BY N.REPLE_NO DESC
+	</select>
+	
+	
+	<!-- 공지톡 댓글 삭제 -->
+	<update id="updateRepleDelete">
+		UPDATE MSG_NOTICE_REPLE
+			SET CHECK_DELETE = 'X'
+		WHERE REPLE_NO = #{repleNo}
+	</update>
+	
+	
+	<!-- 메신저 등록 체크 -->
+	<select id="selectCheckEnroll" resultType="com.kh.md.messenger.vo.MessengerVo">
+		
+	
+		SELECT 
+		    M.MSG_NO
+		    ,M.NO
+		    ,M.FILE_NAME
+		    ,M.INTRODUCE
+		    ,M.ENROLL_DATE
+		    ,B.NAME
+		    ,B.EMAIL
+		    ,B.ADDRESS
+		    ,B.PHONE
+		    ,B.ACCOUNT
+		    ,B.PHONE
+		    ,B.ACCOUNT
+		    ,B.DEPT
+		    ,B.POSITION
+		FROM MESSENGER M
+		JOIN MEMBER B ON M.NO = #{memberNo}
+		
+	</select>
+	
+	
+	<!-- 메신저 등록 하기 -->
+	<insert id="insertMessenger">
+		
+		INSERT INTO MESSENGER
+		(
+		    MSG_NO
+		    ,NO
+		    ,FILE_NAME
+		    ,INTRODUCE
+		)
+		VALUES
+		(
+		    SEQ_MESSENGER_NO.NEXTVAL
+		    ,#{no}
+		    ,#{fileName}
+		    ,#{introduce}
+		)
+
+	
+	</insert>
 	
 	
 	
