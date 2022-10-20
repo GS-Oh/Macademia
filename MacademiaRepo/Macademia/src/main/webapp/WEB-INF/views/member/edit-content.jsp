@@ -54,22 +54,28 @@
         <input type="text" id="name" name="name" value="아이유" disabled> 
         <label for="email">사내이메일</label>
         <input type="text" id="email" name="email" value="asdf@md.com" disabled> 
-        <label for="email">비밀번호</label>
+        <label for="pwd">비밀번호</label>
         <input type="text" id="pwd" name="pwd"> 
-        <label for="email">비밀번호확인</label>
+        <label for="pwd2">비밀번호확인</label>
         <input type="text" id="pwd2" name="pwd2"> 
-        <label for="email">개인이메일</label>
+        <label for="private-mail">개인이메일</label>
         <input type="text" id="private-mail" name="privateEmail"> 
-        <label for="email">주소</label>
+        <label for="address">주소</label>
         <input type="text" id="address" name="address"> 
-        <label for="email">상세주소</label>
+        <label for="address2">상세주소</label>
         <input type="text" id="address2" name="address2"> 
-        <label for="email">전화번호</label>
-        <input type="text" id="phone" name="phone"> 
-        <label for="email">은행</label>
-        <input type="text" id="bank" name="bank"> 
+        <label for="phone">전화번호</label>
+        <input type="text" id="phone" name="phone" placeholder="'-'없이 입력"> 
+        <label for="bank">은행</label>
+        <select name="bank">
+            <option>국민은행</option>
+            <option>농협</option>
+            <option>기업은행</option>
+            <option>신한은행</option>
+            <option>하나은행</option>
+        </select>
         <label for="email">계좌번호</label>
-        <input type="text" id="account" name="account"> 
+        <input type="text" id="account" name="account" placeholder="'-'없이 입력"> 
         <label for="email">프로필사진</label>
         <input type="file" id="profile" name="profile"> 
         <input type="submit" id="submit-btn" value="수정완료">
@@ -83,14 +89,13 @@
 const width = 500;
 const height = 500;
 window.onload = function(){
-    document.getElementById("address").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
+    document.getElementById("address").addEventListener("click", function(){ 
         new daum.Postcode({
             width:width,
             height:height,
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address").value = data.address; // 주소 넣기
-                document.getElementById("address2").focus(); //상세입력 포커싱
+            oncomplete: function(data) { 
+                document.getElementById("address").value = data.address; 
+                document.getElementById("address2").focus(); 
             }
         }).open({
             top:window.screen.height/2-width/2,
@@ -98,4 +103,7 @@ window.onload = function(){
         });
     });
 }
+</script>
+<script>
+
 </script>

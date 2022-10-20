@@ -7,7 +7,7 @@
     #mypage-sidemenu{
         width: 17vw;
         height: 90vh;
-        background-color: rgb(133, 135, 203);
+        background-color: rgb(133, 133, 200);
         font-size: 20px;
         text-align: end;
         font-family: 'Noto Sans KR', sans-serif;
