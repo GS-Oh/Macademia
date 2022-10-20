@@ -10,7 +10,7 @@
         /* border: 3px solid black; */
         padding: 2vw;
         display: grid;
-        grid-template-rows: 10vh 10vh;
+        grid-template-rows: 10vh 30vh 10vh 10vh;
         row-gap: 10px;
     }
     #main-content-wrap>div:nth-child(1){
@@ -19,17 +19,23 @@
         align-items: center;
     }
     #main-content-wrap>div:nth-child(2){
+        border: 1px solid blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #main-content-wrap>div:nth-child(3){
+        /* border: 1px solid blue; */
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    #main-content-wrap>div:nth-child(4){
         display: flex;
         justify-content: center;
         align-items: flex-start;
     }
 
-    /*  */
-    #monthly-atdc{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-items: center;
-    }
 
     /*  */
     #atdc-table>div>div{
@@ -56,32 +62,38 @@
 
 <div id="main-content-wrap">
     <div>
+        <h4>근무 관리</h4>
+    </div>
+
+    <div>
+        <form action="">
+            <div>
+                <div>
+                    <button></button>
+                </div>
+                <div>
+                    <h4>19D</h4>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <h4>이번달 총 근무시간</h4>
+                </div>
+                <div>
+                <h4>72h 30m 89s</h4>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
         <h4>나의 근태 현황</h4>
     </div>
 
     <div>
-        <h4><input type="month" value="2022-10"></h4>
+        <h4><input type="date" value="2022-10-20"></h4>
     </div>
-
-    <!-- <div id="monthly-atdc">
-        <div>
-            <div>
-                <h4>이번달 총 근무일자</h4>
-            </div>
-            <div>
-                <h4>19D</h4>
-            </div>
-        </div>
-
-        <div>
-            <div>
-                <h4>이번달 총 근무시간</h4>
-            </div>
-            <div>
-               <h4>72h 30m 89s</h4>
-            </div>
-        </div>
-    </div> -->
 
     <div id="atdc-table">
         <div id="atdc-table-title">

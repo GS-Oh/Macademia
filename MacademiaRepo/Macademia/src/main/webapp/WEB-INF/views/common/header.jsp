@@ -86,8 +86,8 @@
         </div>
         <div id="nav-menu2">
             <a href="${root}/employee/myAtdc">
-                <i class="fa-solid fa-people-group fa-2x"></i><br>
-                <label for="">직원</label>
+                <i class="fa-solid fa-business-time fa-2x"></i><br>
+                <label for="">근무</label>
             </a>
         </div>
         <div id="nav-menu3">
