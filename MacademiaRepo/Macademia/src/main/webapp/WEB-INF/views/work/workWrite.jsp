@@ -24,14 +24,14 @@ list-style:none;
 }
 #content{
 width:100vw;
-height:80vh;
+height:100vh;
 
 display: flex;
 
 }
 #side_menu{
 width:13vw;
-height:80vh;
+height:100vh;
 border-radius:0 7px 7px 0 ;
 
 background-color:#6667AB;
@@ -39,7 +39,7 @@ background-color:#6667AB;
 #center_menu{
 width:70vw;
 height:80vh;
-border: 1px solid blue;
+border: 1px solid #fff;
 
 }
 #right_menu{

@@ -8,9 +8,11 @@
 			<ul id="menu">
 				
 			
-			<a href="/md/work/list"><li>나의 업무</li></a>
-			<a href="/md/work/write"><li>업무 요청</li></a>
-			<a href="/md/work/complate"><li>처리한 업무</li></a>
+				
+			<a href="/md/sign/list"><li>나의 결재</li></a>
+			<a href="/md/sign/write"><li>기안서 작성</li></a>
+			<a href="/md/sign/complateSign"><li>결재 완료 문서</li></a>
+			<a href="/md/sign/reference"><li>수신참조</li></a>
 			</ul>
 				
 			</div>

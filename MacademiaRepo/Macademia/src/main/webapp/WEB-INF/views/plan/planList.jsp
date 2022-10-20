@@ -31,14 +31,14 @@ list-style:none;
 }
 #content{
 width:100vw;
-height:80vh;
+height:100vh;
 
 display: flex;
 
 }
 #side_menu{
 width:13vw;
-height:80vh;
+height:100vh;
 border-radius:0 7px 7px 0 ;
 
 background-color:#6667AB;
