@@ -14,4 +14,19 @@ public class SignController {
 		return "/sign/signList";
 		
 	}
+	@GetMapping("write")
+	public String signWrtie() {
+		
+		return "/sign/write";
+	}
+	@GetMapping("complateSign")
+	public String ComplateSign() {
+		
+		return "/sign/complateSign";
+	}
+	@GetMapping("reference")
+	public String reference() {
+		
+		return "/sign/reference";
+	}
 }

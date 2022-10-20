@@ -31,15 +31,15 @@ display: flex;
 }
 #side_menu{
 width:13vw;
-height:80vh;
+height:100vh;
 border-radius:0 7px 7px 0 ;
 
 background-color:#6667AB;
 }
 #center_menu{
 width:70vw;
-height:80vh;
-border: 1px solid blue;
+height:100vh;
+border: 1px solid white;
 
 }
 #right_menu{
@@ -128,7 +128,7 @@ font-size:13px;
 		</aside>
 		
 		<main>
-			<%@include file="/WEB-INF/views/work/workList-content.jsp" %>
+			<%@include file="/WEB-INF/views/sign/signList-content.jsp" %>
 			</main>
 			
 		

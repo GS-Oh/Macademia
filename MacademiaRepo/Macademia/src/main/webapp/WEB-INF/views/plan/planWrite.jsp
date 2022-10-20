@@ -31,22 +31,22 @@ list-style:none;
 }
 #content{
 width:100vw;
-height:80vh;
+height:100vh;
 
 display: flex;
 
 }
 #side_menu{
 width:13vw;
-height:80vh;
+height:100vh;
 border-radius:0 7px 7px 0 ;
 
 background-color:#6667AB;
 }
 #center_menu{
 width:70vw;
-height:80vh;
-border: 1px solid blue;
+height:100vh;
+
 
 }
 #right_menu{
@@ -57,7 +57,7 @@ height:80vh;
 #test{
 width: 100px;
 height: 100px;
-border: 1px solid red;
+
 }
 #menu{
 width:100%;

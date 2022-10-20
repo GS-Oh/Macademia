@@ -24,7 +24,7 @@ list-style:none;
 }
 #content{
 width:100vw;
-height:100vh;
+height:80vh;
 
 display: flex;
 
@@ -38,9 +38,8 @@ background-color:#6667AB;
 }
 #center_menu{
 width:70vw;
-height:80vh;
-border: 1px solid #fff
-;
+height:100vh;
+border: 1px solid white;
 
 }
 #right_menu{
@@ -88,7 +87,6 @@ color:#6667AB;
 height:8%;
 display:flex;
 color:#fff;
-
 font-size:14px;
 margin-left:-8px;
 
@@ -101,16 +99,14 @@ margin-top:15px;
 width:100%;
 height:10%;
 margin: 0 auto;
-margin-top:15px;
+margin-top:5px;
 margin-left:20px;
 font-family: 'GangwonEdu_OTFBoldA';
+margin-top:15px;
 }
 #menu-top li:nth-child(1){
 
 font-size:13px;
-}
-h3{
-	 font-family: 'AppleSDGothicNeo';
 }
 
 
@@ -128,16 +124,13 @@ h3{
 		</header>
 		
 		<aside>
-				<%@include file="/WEB-INF/views/work/workList-sidebar.jsp" %>
+		<%@include file="/WEB-INF/views/sign/sign-sidebar.jsp" %>
 		</aside>
 		
-			
-			<main>
-			<%@include file="/WEB-INF/views/work/workComplate-content.jsp" %>
-		
+		<main>
+			<%@include file="/WEB-INF/views/sign/write-content.jsp" %>
 			</main>
 			
-					
 		
 
 </body>
