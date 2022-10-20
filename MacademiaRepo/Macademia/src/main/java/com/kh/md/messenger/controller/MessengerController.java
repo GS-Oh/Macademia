@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.md.messenger.common.PageVo;
+import com.kh.md.messenger.common.Pagination;
 import com.kh.md.messenger.service.MessengerService;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 
@@ -70,17 +72,25 @@ public class MessengerController {
 		return "messenger/fileBoxEtc";
 	} 
 	
+	
 	//공지 게시글 ( 메인 화면 )
-	@GetMapping("notice")
-	public String notice(Model model) {
+	@GetMapping("notice/{pno}")
+	public String notice(@PathVariable int pno, Model model) {
 		
-		List<MsgNoticeVo> noticeVoList = ms.selectNoticeAll();
+		//페이징 처리
+		int totalCount = ms.selectTotalCnt(); //전체게시글 수 구하기
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		
+		List<MsgNoticeVo> noticeVoList = ms.selectNoticeAll(pvo);
 		
 		model.addAttribute("noticeVoList", noticeVoList);
+		model.addAttribute("pvo", pvo);
 		
 		return "messenger/notice";
 	}
 
+	
 	@GetMapping("notice/write")
 	public String noticeWrite() {
 		return "messenger/noticeWrite";
@@ -96,8 +106,7 @@ public class MessengerController {
 		int result = ms.insertNotice(noticeVo);
 		
 		if( result == 1) {
-			
-			return "redirect:/messenger/notice";
+			return "redirect:/messenger/notice/1";
 		}else {
 			return "redirect:/";
 			
@@ -105,16 +114,67 @@ public class MessengerController {
 		
 	}
 	
-	//작업중
-	@GetMapping("notice/detail/{noticeNo}")
-	public String noticeDetail(@PathVariable int noticeNo) {
+	//공지 게시글 ( 상세 페이지 화면 )
+	@GetMapping("notice/detail/{no}")
+	public String noticeDetail(@PathVariable String no, Model model) {
 		
+		MsgNoticeVo noticeVo = ms.selectOneByNo(no);
+		
+		model.addAttribute("noticeVo" ,noticeVo);
 		
 		return "messenger/noticeDetail";
 	}
 	
-	@GetMapping("notice/edit")
-	public String noticeEdit() {
+	
+	//공지 게시글 ( 수정 페이지 화면 )
+	@GetMapping("notice/edit/{no}")
+	public String noticeEdit(@PathVariable String no, Model model) {
+		
+		MsgNoticeVo noticeVo = ms.selectEditByNo(no);
+		
+		model.addAttribute("noticeVo", noticeVo);
+		
 		return "messenger/noticeEdit";
 	}
+	
+	
+	//공지 게시글 ( 수정 처리 )
+	@PostMapping("notice/edit/{no}")
+	public String noticeEdit(@PathVariable String no, MsgNoticeVo noticeVo) {
+		
+		noticeVo.setNoticeNo(no);
+		
+		int result = ms.updateEdit(noticeVo);
+		
+		if(result == 1) {
+			return "redirect:/messenger/notice/detail/"+ no;
+		}else {
+			return "redirect:/messenger/notice";
+		}
+	}
+
+	//공지 게시글 ( 삭제 처리 )
+	@GetMapping("notice/delete/{no}")
+	public String noticeDelete(@PathVariable String no) {
+		
+		int result = ms.updateDelete(no);
+		
+		if(result == 1) {
+			return "redirect:/messenger/notice";
+		}else {
+			return "common/errorPage";
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }//class

@@ -91,7 +91,7 @@
 </head>
 <body>
 
-
+	<h1>${noticeVo}</h1>
 
     <div id="wrap">
 
@@ -107,18 +107,18 @@
             <!--  -->
 			<div id="detail-header">
 				<div><span  class="badge bg-info" >공지</span></div>
-				<div><h1>[스팸대전 그후] 그 많던 스팸은 어디로 갔을까요?</h1></div>
-				<div>조회 수 : 3</div>
-				<div>댓글 수 : 3</div>
+				<div><h1>${noticeVo.title}</h1></div>
+				<div>조회 수 : ${noticeVo.count}</div>
+				<div>작성일자 : ${noticeVo.enrollDate}</div>
 			</div>
 
 			<!--  -->
 			<div id="detail-content">
 
-				<textarea name="" id="" cols="30" rows="10" ></textarea>
+				<textarea name="" id="" cols="30" rows="10" readonly>${noticeVo.content}</textarea>
 
-				<a href="" class="badge bg-warning"><h5>삭제하기</h5></a>
-				<a href="/md/messenger/notice/edit" class="badge bg-success"><h5>수정하기</h5></a>
+				<a href="/md/messenger/notice/delete/${noticeVo.noticeNo}" class="badge bg-warning"><h5>삭제하기</h5></a>
+				<a href="/md/messenger/notice/edit/${noticeVo.noticeNo}" class="badge bg-success"><h5>수정하기</h5></a>
 			</div>
 			
 

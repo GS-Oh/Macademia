@@ -21,7 +21,7 @@
             <div><a href="/md/messenger/note">채팅</a></div>
             <div><a href="/md/messenger/note">쪽지</a></div>
             <div><a href="/md/messenger/fileBox">파일보관함</a></div>
-            <div><a href="/md/messenger/notice">공지톡</a></div>
+            <div><a href="/md/messenger/notice/1">공지톡</a></div>
 			<div></div>
             <div><a href="">메신저 알림</a></div>
             <div><a href="">메신저 환경설정</a></div>
