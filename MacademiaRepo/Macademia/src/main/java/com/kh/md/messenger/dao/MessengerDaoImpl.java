@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.md.messenger.common.PageVo;
+import com.kh.md.messenger.vo.MessengerVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -88,6 +89,19 @@ public class MessengerDaoImpl implements MessengerDao{
 	@Override
 	public int updateRepleDelete(SqlSessionTemplate sst, String repleNo) {
 		return sst.update("messengerMapper.updateRepleDelete", repleNo);
+	}
+
+	//메신저 ( 등록 체크 )
+	@Override
+	public MessengerVo selectCheckEnroll(SqlSessionTemplate sst, String memberNo) {
+		return sst.selectOne("messengerMapper.selectCheckEnroll", memberNo);
+	}
+
+
+	//메신저 ( 등록 하기 )
+	@Override
+	public int insertMessenger(SqlSessionTemplate sst, MessengerVo msgVo) {
+		return sst.insert("messengerMapper.insertMessenger", msgVo);
 	}
 
 	

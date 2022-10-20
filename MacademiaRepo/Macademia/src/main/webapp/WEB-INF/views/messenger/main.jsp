@@ -110,12 +110,12 @@
 				<!-- 직원 수 만큼 얘 반복 -->
 				<div class="messenger-main-content">
 					<div style="height: 100%; width: 100%; " >
-						<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src=""  width="90%" height="100%" style="border: 1px solid black;"></a>
+						<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src="${root}/resources/upload/messenger/${msgVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 					</div>
 					<div class="content-detail">
-						<div id="detail-name">직원명</div>
-						<div>부서명</div>
-						<div>직책</div>
+						<div id="detail-name">${msgVo.name}</div>
+						<div>${msgVo.dept}</div>
+						<div>${msgVo.position}</div>
 					</div>
 				</div>
 			</div>
@@ -144,17 +144,17 @@
 	
 			<!-- Modal Header -->
 			<div class="modal-header">
-			<h1 class="modal-title">직원명</h1>
+			<h1 class="modal-title">${msgVo.name}</h1>
 			<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 	
 			<!-- Modal body -->
 			<div id="profile-main-content">
 				<div id="main-content-img-wrap" >
-					<img src="" alt="" width="150px" height="150px" style="border:1px solid black">
+					<img src="${root}/resources/upload/messenger/${msgVo.fileName}" alt="" width="150px" height="150px" style="border:1px solid black">
 				</div>
-				<div><h4>부서명</h4></div>
-				<div style="grid-row: span 2;"><h4>자기소개글</h4></div>
+				<div><h4>${msgVo.dept}</h4></div>
+				<div style="grid-row: span 2;"><h4>${msgVo.introduce}</h4></div>
 			</div>
 	
 			<!-- Modal footer -->

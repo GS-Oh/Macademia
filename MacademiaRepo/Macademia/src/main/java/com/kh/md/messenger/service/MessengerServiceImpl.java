@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.dao.MessengerDao;
+import com.kh.md.messenger.vo.MessengerVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -86,9 +87,23 @@ public class MessengerServiceImpl implements MessengerService{
 		return dao.selectRepleList(sst, no);
 	}
 
+	//공지톡 댓글 삭제
 	@Override
 	public int updateRepleDelete(String repleNo) {
 		return dao.updateRepleDelete(sst, repleNo);
+	}
+
+	
+	//메신저 등록 체크
+	@Override
+	public MessengerVo selectCheckEnroll(String memberNo) {
+		return dao.selectCheckEnroll(sst, memberNo);
+	}
+	
+	//메신저 등록 하기
+	@Override
+	public int insertMessenger(MessengerVo msgVo) {
+		return dao.insertMessenger(sst, msgVo);
 	}
 	
 	

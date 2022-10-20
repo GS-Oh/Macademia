@@ -3,6 +3,7 @@ package com.kh.md.messenger.service;
 import java.util.List;
 
 import com.kh.md.messenger.common.PageVo;
+import com.kh.md.messenger.vo.MessengerVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -40,6 +41,13 @@ public interface MessengerService {
 
 	//공지 게시글 ( 댓글 삭제 )
 	int updateRepleDelete(String repleNo);
+
+
+	//메신저 ( 등록 체크 )
+	MessengerVo selectCheckEnroll(String memberNo);
+
+	//메신저 ( 등록 하기 )
+	int insertMessenger(MessengerVo msgVo);
 	
 
 	

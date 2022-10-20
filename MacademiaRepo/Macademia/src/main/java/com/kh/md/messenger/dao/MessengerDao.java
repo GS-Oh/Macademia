@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.md.messenger.common.PageVo;
+import com.kh.md.messenger.vo.MessengerVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -42,6 +43,12 @@ public interface MessengerDao {
 
 	//공지톡 ( 댓글 삭제하기 )
 	int updateRepleDelete(SqlSessionTemplate sst, String repleNo);
+
+	//메신저 ( 등록 체크 )
+	MessengerVo selectCheckEnroll(SqlSessionTemplate sst, String memberNo);
+
+	//메신저 ( 등록 하기 )
+	int insertMessenger(SqlSessionTemplate sst, MessengerVo msgVo);
 	
 	
 	

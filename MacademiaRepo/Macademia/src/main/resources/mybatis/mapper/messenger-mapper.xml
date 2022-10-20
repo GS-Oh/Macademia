@@ -162,7 +162,51 @@
 	</update>
 	
 	
+	<!-- 메신저 등록 체크 -->
+	<select id="selectCheckEnroll" resultType="com.kh.md.messenger.vo.MessengerVo">
+		
 	
+		SELECT 
+		    M.MSG_NO
+		    ,M.NO
+		    ,M.FILE_NAME
+		    ,M.INTRODUCE
+		    ,M.ENROLL_DATE
+		    ,B.NAME
+		    ,B.EMAIL
+		    ,B.ADDRESS
+		    ,B.PHONE
+		    ,B.ACCOUNT
+		    ,B.PHONE
+		    ,B.ACCOUNT
+		    ,B.DEPT
+		    ,B.POSITION
+		FROM MESSENGER M
+		JOIN MEMBER B ON M.NO = #{memberNo}
+		
+	</select>
+	
+	
+	<!-- 메신저 등록 하기 -->
+	<insert id="insertMessenger">
+		
+		INSERT INTO MESSENGER
+		(
+		    MSG_NO
+		    ,NO
+		    ,FILE_NAME
+		    ,INTRODUCE
+		)
+		VALUES
+		(
+		    SEQ_MESSENGER_NO.NEXTVAL
+		    ,#{no}
+		    ,#{fileName}
+		    ,#{introduce}
+		)
+
+	
+	</insert>
 	
 	
 	

@@ -2,6 +2,9 @@ package com.kh.md.messenger.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.md.messenger.common.FileUploader;
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.common.Pagination;
 import com.kh.md.messenger.service.MessengerService;
+import com.kh.md.messenger.vo.MessengerVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -30,9 +35,48 @@ public class MessengerController {
 	
 	
 	@GetMapping("main")
-	public String main() {
-		return "messenger/main";
+	public String main(HttpSession session) {
+		
+		//TODO 세션에서 멤버넘버 가져오기
+		String memberNo = "5";
+		
+		//메신저 등록되어있는지 체크
+		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
+		
+		if(msgVo != null) {
+			session.setAttribute("msgVo", msgVo);
+			return "messenger/main";
+		}else {
+			return "messenger/enroll";
+		}
+		
 	}
+	
+	@PostMapping("enroll")
+	public String enroll(MessengerVo msgVo, HttpSession session, HttpServletRequest req) {
+		
+		//TODO 세션에서 멤버넘버 가져오기
+		String memberNo = "5";
+		msgVo.setNo(memberNo);
+		
+		if(msgVo.getProfile() != null && !msgVo.getProfile().isEmpty()) {
+			String savePath = req.getServletContext().getRealPath("resources/upload/messenger/");
+			String changeName = FileUploader.fileUpload(msgVo.getProfile(), savePath);
+			msgVo.setFileName(changeName);
+		}
+		
+		int result = ms.insertMessenger(msgVo);
+		
+		if(result == 1) {
+			return "redirect:/messenger/main";
+			
+		}else {
+			return "";
+		}
+		
+		
+	}
+	
 	
 	@GetMapping("profile")
 	public String profile() {
