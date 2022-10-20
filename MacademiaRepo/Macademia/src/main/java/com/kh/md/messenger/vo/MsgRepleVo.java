@@ -1,6 +1,9 @@
 package com.kh.md.messenger.vo;
 
-public class MessengerRepleVo {
+import lombok.Data;
+
+@Data
+public class MsgRepleVo {
 
 	private String repleNo;
 	private String msgNo;

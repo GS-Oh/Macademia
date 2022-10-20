@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
+import com.kh.md.messenger.vo.MsgRepleVo;
 
 
 public interface MessengerService {
@@ -30,6 +31,15 @@ public interface MessengerService {
 
 	//공지 게시글 ( 총 게시글 수 )
 	int selectTotalCnt();
+
+	//공지 게시글 ( 댓글 입력 )
+	int insertReple(MsgRepleVo repleVo);
+
+	//공지 게시글 ( 댓글 목록 가져오기 )
+	List<MsgRepleVo> selectRepleList(String no);
+
+	//공지 게시글 ( 댓글 삭제 )
+	int updateRepleDelete(String repleNo);
 	
 
 	

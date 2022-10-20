@@ -21,7 +21,7 @@
 		JOIN MEMBER B
 		ON M.NO = B.NO
 		WHERE N.CHECK_DELETE = 'O'
-		
+		ORDER BY N.NOTICE_NO DESC
 	
 	</select>
 	
@@ -44,7 +44,7 @@
 		ON M.NO = B.NO
 		WHERE N.NOTICE_NO = #{no} 
 		AND N.CHECK_DELETE = 'O'
-			
+		ORDER BY N.NOTICE_NO DESC	
 	
 	</select>
 	
@@ -135,6 +135,33 @@
 		)
 	
 	</insert>	
+	
+	<!-- 공지톡 댓글 리스트 가져오기 -->
+	<select id="selectRepleList" resultType="com.kh.md.messenger.vo.MsgRepleVo">
+		
+		SELECT 
+		     N.REPLE_NO
+		    ,B.NAME MSG_NO
+		    ,N.NOTICE_NO
+		    ,N.CONTENT
+		    ,N.ENROLL_DATE
+		FROM MSG_NOTICE_REPLE N
+		JOIN MESSENGER M ON N.MSG_NO = M.MSG_NO
+		JOIN MEMBER B ON M.NO = B.NO
+		WHERE N.NOTICE_NO = #{no}
+		AND N.CHECK_DELETE = 'O'
+		ORDER BY N.REPLE_NO DESC
+	</select>
+	
+	
+	<!-- 공지톡 댓글 삭제 -->
+	<update id="updateRepleDelete">
+		UPDATE MSG_NOTICE_REPLE
+			SET CHECK_DELETE = 'X'
+		WHERE REPLE_NO = #{repleNo}
+	</update>
+	
+	
 	
 	
 	

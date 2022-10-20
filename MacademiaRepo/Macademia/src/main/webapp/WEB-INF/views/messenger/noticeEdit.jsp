@@ -67,8 +67,6 @@
 </head>
 <body>
 
-
-	<h1>${noticeVo}</h1>
     <div id="wrap">	
 
 		<header>

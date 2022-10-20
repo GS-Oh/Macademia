@@ -66,6 +66,12 @@
 			border-bottom: 1px solid lightgray;
 		}
 
+		#reple-list-ps{
+			display: grid;
+			grid-template-columns: 90% 10%;
+		}
+
+
 		.reply-img-wrap{
 			grid-row: span 3;
 			height: 100%;
@@ -90,8 +96,6 @@
     </style>
 </head>
 <body>
-
-	<h1>${noticeVo}</h1>
 
     <div id="wrap">
 
@@ -126,43 +130,36 @@
 			<!--  -->
 			<div id="reply-area">
 
-				<span><h3>댓글</h3></span>
-
-				<!-- 리스트 만큼 이거 반복 -->
-				<div class="reply-list">
-					<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
-					<div><span>작성자닉네임</span></div>
-					<div><h4>내용</h4></div>
-					<div><h6 style="color:gray">작성일자</h6></div>
-				</div>
-
-				<!-- 리스트 만큼 이거 반복 -->
-				<div class="reply-list">
-					<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
-					<div><span>작성자닉네임</span></div>
-					<div><h4>내용</h4></div>
-					<div><h6 style="color:gray">작성일자</h6></div>
-				</div>
-
-				<!-- 리스트 만큼 이거 반복 -->
-				<div class="reply-list">
-					<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
-					<div><span>작성자닉네임</span></div>
-					<div><h4>내용</h4></div>
-					<div><h6 style="color:gray">작성일자</h6></div>
-				</div>
+				<span ><h3>댓글</h3></span>
+				
+					<div id="reple-list-ps">
+						<c:forEach items="${repleVoList}" var="repleVo">				
+							<!-- 리스트 만큼 이거 반복 -->
+								<div class="reply-list">
+									<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
+									<div><span>${repleVo.msgNo}</span></div>
+									<div><h4>${repleVo.content}</h4></div>
+									<div><h6 style="color:gray">${repleVo.enrollDate}</h6></div>
+								</div>
+		
+		
+								<c:if test="${repleVo.msgNo eq noticeVo.msgNo }">
+									<div><a href="/md/messenger/notice/reple/delete/${repleVo.repleNo}/${noticeVo.noticeNo}" class="btn btn-lg">삭제하기</a></div>
+								</c:if>
+						</c:forEach>
+					</div>
 
 
 				<div id="reply-insert">
 
 					<div style="margin-left: 10px;">
-						<label for="content"><h3><span  class="badge bg-secondary" >로그인한사람닉네임</span></h3></label>
+						<label for="content"><h3><span  class="badge bg-secondary" >${noticeVo.msgNo}</span></h3></label>
 					</div>
 					<div style="margin: 10px;">
-						<textarea class="form-control" rows="4" id="content" name="text"></textarea>
+						<textarea id="reple-content" class="form-control" rows="4" id="content" name="text"></textarea>
 					</div>	
 					<div >
-						<button type="submit" class="badge bg-info" style="float: right;"><h5>등록하기</h5></button>
+						<button id="reple-btn" class="badge bg-info" style="float: right;"><h5>등록하기</h5></button>
 					</div>	
 
 				</div>
@@ -173,5 +170,56 @@
 
 
     </div>
+
+	<script>
+	
+		const repleBtn = document.querySelector('#reple-btn');
+		
+		repleBtn.addEventListener('click', function(){
+			
+			const repleContent = document.querySelector('#reple-content').value;
+			const repleWriterNick = '${noticeVo.msgNo}';
+			const repleNo = '${repleVo.repleNo}'
+			const now = new Date();
+			
+			$.ajax({
+				
+				url : "${root}/messenger/notice/reple/write",
+				type : "post",
+				data : { 
+					content : repleContent,
+					noticeNo : '${noticeVo.noticeNo}'
+				},
+				success : function(result){
+					if(result == 'ok'){
+						const target = document.querySelector('#reple-list-ps');
+						$(target).prepend('<div class="reply-list"><div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div><div><span>'
+												+ repleWriterNick +'</span></div><div><h4>'+repleContent+'</h4></div><div><h6 style="color:gray">'
+												+ now.getFullYear()+"-"+now.getMonth()+"-"+now.getDay()+'</h6></div></div><div><a href="/md/messenger/notice/reple/delete/'+repleNo+'" class="btn btn-lg">삭제하기</a></div>');
+						
+						//기존에 입력한 내용 지우기
+						document.querySelector('#reple-content').value = "";
+					}else{
+						alert("댓글 작성 실패 ....");
+					}
+				},
+				error : function(){
+					alert("통신 에러 ...");
+				}
+				
+				
+			});
+			
+		});
+		
+		
+	
+	</script>
+
+
+
+
+
+
 
 </html>

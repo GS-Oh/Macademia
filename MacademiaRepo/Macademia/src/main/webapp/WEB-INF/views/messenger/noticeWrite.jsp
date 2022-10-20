@@ -94,7 +94,7 @@
                     <textarea name="content" id="" cols="30" rows="10"></textarea>
 
                     <input type="submit" class="btn btn-info btn-lg" value="작성하기" style="text-align:right;">
-                    <a href="/md/messenger/notice/" class="btn btn-light btn-lg">돌아가기</a>
+                    <a href="/md/messenger/notice/1" class="btn btn-light btn-lg">돌아가기</a>
                 </div>
             </form>
 

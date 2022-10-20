@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
+import com.kh.md.messenger.vo.MsgRepleVo;
 
 @Repository
 public class MessengerDaoImpl implements MessengerDao{
@@ -66,6 +67,27 @@ public class MessengerDaoImpl implements MessengerDao{
 	@Override
 	public int selectTotalCnt(SqlSessionTemplate sst) {
 		return sst.selectOne("messengerMapper.selectTotalCnt");
+	}
+
+
+	//공지톡 게시글 ( 댓글 입력 )
+	@Override
+	public int insertReple(SqlSessionTemplate sst, MsgRepleVo repleVo) {
+		return sst.insert("messengerMapper.insertReple",repleVo);
+	}
+
+
+	//공지톡 게시글 ( 댓글 리스트 가져오기 )
+	@Override
+	public List<MsgRepleVo> selectRepleList(SqlSessionTemplate sst, String no) {
+		return sst.selectList("messengerMapper.selectRepleList",no);
+	}
+
+
+	//공지톡 게시글 ( 댓글 삭제 )
+	@Override
+	public int updateRepleDelete(SqlSessionTemplate sst, String repleNo) {
+		return sst.update("messengerMapper.updateRepleDelete", repleNo);
 	}
 
 	
