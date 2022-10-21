@@ -129,6 +129,8 @@ public class MessengerController {
 		List<MsgNoteVo> mnVoList = ms.selectNoteKeyword(map);
 		if(mnVoList != null) {
 			model.addAttribute("mnVoList", mnVoList);
+			model.addAttribute("menu", menu);
+			model.addAttribute("keyword", keyword);
 			return "messenger/note";
 		}else {
 			return "";

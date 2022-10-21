@@ -216,7 +216,7 @@
 						</select>
 					</div>
 					<div style="width: 100%;">
-						<input type="text" name="keyword">
+						<input type="text" name="keyword" value="${keyword}">
 					</div>
 					<div style="width: 40%;" >
 						<input class="btn btn-outline-dark" type="submit" value="검색하기" style="font-size:1.3rem;">
@@ -231,56 +231,105 @@
 				<div class="info-header"><input type="checkbox"></div>
 				<div class="info-header">보낸사람</div>
 				<div class="info-header">받은사람</div>
-				<div class="info-header">첨부종류</div>
+				<div class="info-header">제목</div>
 				<div class="info-header">내용</div>
 				<div class="info-header">날짜</div>
 
 
 
 				<!-- 쪽지 수 만큼 여기 반복 -->
-				
 				<c:forEach items="${mnVoList}" var="mnVo">
 				
 					<div class="info-content">
-						<div><input type="checkbox"></div>
-						<div>${mnVo.msgNo}</div>
-						<div>${mnVo.receiveNo}</div>
-						<div>${mnVo.fileName}</div>
-						<div>${mnVo.content}</div>
-						<div>${mnVo.sendDate}</div>
+						<div><input type="checkbox" class="msg-checkBox"></div>
+						<div class="msg-sender">${mnVo.msgNo}</div>
+						<div class="msg-receive">${mnVo.receiveNo}</div>
+						<div class="msg-title">${mnVo.title}</div>
+						<div class="msg-content">${mnVo.content}</div>
+						<div class="msg-sendDate">${mnVo.sendDate}</div>
 					</div>
 					
 				</c:forEach>
 				
 				
-			
-
 				
 				
 			</div>
-
+			
 			<!--  -->
 			<div id="note-detail-area">
 				<div class="detail-area-title">보낸 사람</div>
-				<div class="detail-area-content">2</div>
+				<div class="detail-area-content" id="detail-sender">2</div>
 				<div class="detail-area-title">받은 사람</div>
-				<div class="detail-area-content">4</div>
+				<div class="detail-area-content" id="detail-receive">4</div>
 				<div class="detail-area-title">제목</div>
-				<div class="detail-area-content">6</div>
+				<div class="detail-area-content" id="detail-title">6</div>
 				<div class="detail-area-title">보낸 날짜</div>
-				<div class="detail-area-content">8</div>
-				<div class="detail-area-title">받은 날짜</div>
-				<div class="detail-area-content">1</div>
+				<div class="detail-area-content" id="detail-sendDate">8</div>
+				<div class="detail-area-title">첨부파일</div>
+				<div class="detail-area-content" id="detail-file">3</div>
 				<div class="detail-area-title">내용</div>
-				<div class="detail-area-content">3</div>
+				<div class="detail-area-content" id="detail-content">3</div>
+				
 			</div>
-
-
-
+			
+			
+			<!-- <div class="msg-fileName">${mnVo.fileName}</div> -->
+			
+			<!-- <div class="detail-area-title">받은 날짜</div>
+			<div class="detail-area-content" id="detail-receiveDate">1</div> -->
 
         </main>
 
 
     </div>
+    
+    <!-- 검색 값 유지 -->
+	<c:if test="${not empty menu}">
+		<script>
+			window.onload = function(){
+				document.querySelector('option[value=${menu}').selected = true;
+			}
+		</script>
+	</c:if>
+
+	<script>
+		const content = document.querySelectorAll('.info-content');
+
+		const msgCheckBox = document.querySelectorAll('.msg-checkBox');
+		const msgSender = document.querySelectorAll('.msg-sender');
+		const msgReceive = document.querySelectorAll('.msg-receive');
+		const msgTitle = document.querySelectorAll('.msg-title');
+		const msgContent = document.querySelectorAll('.msg-content');
+		const msgSendDate = document.querySelectorAll('.msg-sendDate');
+
+		
+		const detailSender = document.querySelector('#detail-sender');
+		const detailReceive = document.querySelector('#detail-receive');
+		const detailTitle = document.querySelector('#detail-title');
+		const detailSendDate = document.querySelector('#detail-sendDate');
+		const detailFile = document.querySelector('#detail-file');
+		const detailContent = document.querySelector('#detail-content');
+
+
+		for(let i=0; i<content.length; ++i){
+
+			content[i].addEventListener('click', function(){
+
+				msgCheckBox[i].checked = true;
+				detailSender.innerText = msgSender[i].innerText;
+				detailReceive.innerText = msgReceive[i].innerText;
+				detailTitle.innerText = msgTitle[i].innerText;
+				detailSendDate.innerText = msgSendDate[i].innerText;
+				detailFile.innerText = msgSender[i].innerText;
+				detailContent.innerText = msgContent[i].innerText;
+
+			});	
+		};
+	
+
+	</script>
+
+
 
 </html>
