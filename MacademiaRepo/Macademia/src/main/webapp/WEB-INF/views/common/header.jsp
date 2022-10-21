@@ -42,7 +42,7 @@
         width: 60vw;
         padding: 0vw 6vw;
         display: grid;
-        grid-template-columns: repeat(10, 4vw);
+        grid-template-columns: repeat(11, 4vw);
         justify-content: center;
     }
     #nav-area a, #alert-area a{
@@ -97,43 +97,49 @@
             </a>
         </div>
         <div id="nav-menu4">
+            <a href="">
+            	<i class="fa-solid fa-sitemap fa-2x"></i><br>
+                <label for="">조직도</label>
+            </a>
+        </div>
+        <div id="nav-menu5">
             <a href="${root}/plan/list">
                 <i class="fa-regular fa-calendar-days fa-2x"></i><br>
                 <label for="">일정</label>
             </a>
         </div>
-        <div id="nav-menu5">
+        <div id="nav-menu6">
             <a href="${root}/work/list">
                 <i class="fa-solid fa-list-check fa-2x"></i><br>
                 <label for="">업무</label>
             </a>
         </div>
-        <div id="nav-menu6">
+        <div id="nav-menu7">
             <a href="${root}/sign/list">
                 <i class="fa-solid fa-clipboard-check fa-2x"></i><br>
                 <label for="">결재</label>
             </a>
         </div>
-        <div id="nav-menu7">
+        <div id="nav-menu8">
             <a href="${root}/board/main">
                 <i class="fa-regular fa-note-sticky fa-2x"></i><br>
                 <label for="">게시판</label>
             </a>
         </div>
-        <div id="nav-menu8">
+        <div id="nav-menu9">
             <a href="${root}/payroll/main">
                 <i class="fa-regular fa-credit-card fa-2x"></i><br>
                 <label for="">급여</label>
             </a>
         </div>
-        <div id="nav-menu9">
+        <div id="nav-menu10">
             <a href="${root}/messenger/main">
                 <i class="fa-solid fa-comments fa-2x"></i><br>
                 <label for="">메신저</label>
             </a>
         </div>
-        <div id="nav-menu10">
-            <a href="">
+        <div id="nav-menu11">
+            <a href="${root}/admin/main">
                 <i class="fa-solid fa-user-gear fa-2x"></i><br>
                 <label for="">관리자</label>
             </a>
