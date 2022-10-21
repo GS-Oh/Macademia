@@ -11,4 +11,16 @@ public class MailController {
 	public String mailHome() {
 		return "mail/mail";
 	}
+	@GetMapping("send")
+	public String sendMail() {
+		return "mail/sendmail";
+	}
+	@GetMapping("receive")
+	public String receiveMail() {
+		return "mail/receivemail";
+	}
+	@GetMapping("write")
+	public String writeMail() {
+		return "mail/writemail";
+	}
 }
