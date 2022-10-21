@@ -37,10 +37,11 @@ border-radius:0 7px 7px 0 ;
 background-color:#6667AB;
 }
 #center_menu{
-width:70vw;
-height:80vh;
-border: 1px solid #fff;
 
+width:70vw;
+height:100vh;
+border: 1px solid #fff;
+border-right: 1px solid gray;
 }
 #right_menu{
 width:20vw;
@@ -57,7 +58,7 @@ width:100%;
 margin:0;
 padding:0;
 
-border-top:1px solid #ffffff6e;;
+border-top:1px solid #ffffff6e;
 }
 #menu li {
     text-align: center;

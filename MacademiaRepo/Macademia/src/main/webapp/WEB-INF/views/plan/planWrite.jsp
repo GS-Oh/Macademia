@@ -23,7 +23,7 @@
     src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
 }
 
-
+ 
 
 ul, li{
 
@@ -46,6 +46,8 @@ background-color:#6667AB;
 #center_menu{
 width:70vw;
 height:100vh;
+border: 1px solid #fff;
+border-rgiht: 1px solid gray;
 
 
 }
@@ -94,19 +96,20 @@ color:#6667AB;
 height:8%;
 display:flex;
 color:#fff;
-margin-top:77px;
+
 font-size:14px;
 margin-left:-8px;
 
 }
 #menu-top li{
 font-size:19px;
+margin-top:15px;
 }
 #menu-top li:nth-child(2){
 width:100%;
 height:10%;
 margin: 0 auto;
-margin-top:5px;
+margin-top:15px;
 margin-left:20px;
 font-family: 'GangwonEdu_OTFBoldA';
 }
@@ -139,33 +142,13 @@ margin-top:80px;
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		
-		<div id="content">
+		<aside>
+			<%@include file="/WEB-INF/views/plan/plan-sidebar.jsp" %>
+		</aside>
 		
-			<div id="side_menu">
-			<ul id="menu-top">
-			<li> <i class="fa-regular fa-calendar-days fa-2x"></i></li>
-                <li class="">일정 관리</li>
-			</ul>
-			<ul id="menu">
-				
-			<a href="/md/plan/list"><li>나의 일정</li></a>
-			<a href="/md/plan/write"><li>일정 추가</li></a>
-			
-			</ul>
-				
-			</div>
-			<div id="center_menu">
-				<div id="center_top">
-					<h3>일정 추가
-						<hr>
-					</h3>
-					
-				</div>
-			
-
-			</div>
-			<div id="right_menu"></div>
-		</div>	
+		<main>
+			<%@include file="/WEB-INF/views/plan/planWrite-content.jsp" %>
+		</main>
 			
 		
 

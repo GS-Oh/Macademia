@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
     
     <style>
-    h3{
+      h3{
     margin: 15px 0 0	;
-    
-    
+    font-weight:900;
     }
     #work {
     margin: 0 auto;
