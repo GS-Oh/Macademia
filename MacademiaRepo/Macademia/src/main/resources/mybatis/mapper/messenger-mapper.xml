@@ -166,23 +166,27 @@
 	<select id="selectCheckEnroll" resultType="com.kh.md.messenger.vo.MessengerVo">
 		
 	
-		SELECT 
-		    M.MSG_NO
-		    ,M.NO
-		    ,M.FILE_NAME
-		    ,M.INTRODUCE
-		    ,M.ENROLL_DATE
-		    ,B.NAME
-		    ,B.EMAIL
-		    ,B.ADDRESS
-		    ,B.PHONE
-		    ,B.ACCOUNT
-		    ,B.PHONE
-		    ,B.ACCOUNT
-		    ,B.DEPT
-		    ,B.POSITION
-		FROM MESSENGER M
-		JOIN MEMBER B ON M.NO = #{memberNo}
+		SELECT K.* 
+			FROM
+			(
+			    SELECT 
+			        M.MSG_NO
+			        ,M.NO
+			        ,M.FILE_NAME
+			        ,M.INTRODUCE
+			        ,M.ENROLL_DATE
+			        ,B.NAME
+			        ,B.EMAIL
+			        ,B.ADDRESS
+			        ,B.PHONE
+			        ,B.ACCOUNT
+			        ,B.DEPT
+			        ,B.POSITION
+			    FROM MESSENGER M
+			    JOIN MEMBER B ON M.NO = B.NO
+			    ORDER BY MSG_NO DESC
+			) K
+		WHERE K.NO=#{memberNo}
 		
 	</select>
 	
@@ -208,7 +212,43 @@
 	
 	</insert>
 	
+	<!-- 메신저 등록 회원 가져오기 -->
+	<select id="selectAllMsg" resultType="com.kh.md.messenger.vo.MessengerVo">
+		
+		SELECT 
+		    M.MSG_NO
+		    ,M.NO
+		    ,M.FILE_NAME
+		    ,M.INTRODUCE
+		    ,M.ENROLL_DATE
+		    ,B.NAME
+		    ,B.EMAIL
+		    ,B.ADDRESS
+		    ,B.PHONE
+		    ,B.ACCOUNT
+		    ,B.DEPT
+		    ,B.POSITION
+		FROM MESSENGER M
+		JOIN MEMBER B ON M.NO = B.NO
+		ORDER BY MSG_NO DESC
 	
-	
+	</select>
+
+
+	<!-- 메신저 프로필 변경 -->
+	<update id="updateMsgOne">
+		UPDATE MESSENGER
+			SET   FILE_NAME = #{fileName}
+				, INTRODUCE= #{introduce}
+		WHERE NO = #{no}
+	</update>	
+
+
+
+
+
+
+
+
 
 </mapper>

@@ -49,6 +49,14 @@ public interface MessengerDao {
 
 	//메신저 ( 등록 하기 )
 	int insertMessenger(SqlSessionTemplate sst, MessengerVo msgVo);
+
+	//메신저 ( 등록 회원 모두 가져가기 )
+	List<MessengerVo> selectAllMsg(SqlSessionTemplate sst);
+
+	//메신저 ( 프로필 변경하기 )
+	int updateMsgOne(SqlSessionTemplate sst, MessengerVo vo);
+
+	
 	
 	
 	

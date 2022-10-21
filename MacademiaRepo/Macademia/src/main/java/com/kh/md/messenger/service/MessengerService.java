@@ -48,6 +48,12 @@ public interface MessengerService {
 
 	//메신저 ( 등록 하기 )
 	int insertMessenger(MessengerVo msgVo);
+
+	//메신저 ( 등록 회원 모두 가져가기 )
+	List<MessengerVo> selectAllMsg();
+
+	//메신저 ( 메신저 프로필 변경하기 )
+	MessengerVo updateMsgOne(MessengerVo vo);
 	
 
 	

@@ -104,6 +104,20 @@ public class MessengerDaoImpl implements MessengerDao{
 		return sst.insert("messengerMapper.insertMessenger", msgVo);
 	}
 
+
+	//메신저 ( 등록 회원 가져가기 )
+	@Override
+	public List<MessengerVo> selectAllMsg(SqlSessionTemplate sst) {
+		return sst.selectList("messengerMapper.selectAllMsg");
+	}
+
+
+	//메신저 ( 프로필 변경하기 )
+	@Override
+	public int updateMsgOne(SqlSessionTemplate sst, MessengerVo vo) {
+		return sst.update("messengerMapper.updateMsgOne",vo);
+	}
+
 	
 	
 	

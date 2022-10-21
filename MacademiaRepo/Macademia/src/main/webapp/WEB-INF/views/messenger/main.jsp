@@ -102,33 +102,85 @@
 			
         <main>
             
-			<!-- 부서1 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
+            
+            
+			<!-- 개발부 -->
 			<div class="main-partition"><h2>개발부</h2><h5 style="color: gray;">(3명)</h5></div>
-
-			<!-- 부서1- 직원 -- 얘로 감싸고 -->
+			
+			<!-- 개발부 직원 -- 얘로 감싸고 -->
 			<div class="main-content-wrap">
-				<!-- 직원 수 만큼 얘 반복 -->
-				<div class="messenger-main-content">
-					<div style="height: 100%; width: 100%; " >
-						<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src="${root}/resources/upload/messenger/${msgVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
-					</div>
-					<div class="content-detail">
-						<div id="detail-name">${msgVo.name}</div>
-						<div>${msgVo.dept}</div>
-						<div>${msgVo.position}</div>
-					</div>
-				</div>
+			
+				<!-- 개발부 직원 수 만큼 반복 -->
+				<c:forEach items="${msgVoList}" var="msgTotalVo">
+					<c:if test="${msgTotalVo.dept eq '개발부'}">
+						<div class="messenger-main-content">
+							<div style="height: 100%; width: 100%; " >
+								<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" onclick="modalCall"><img alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+							</div>
+							<div class="content-detail">
+								<div id="detail-name">${msgTotalVo.name}</div>
+								<div>${msgTotalVo.dept}</div>
+								<div>${msgTotalVo.position}</div>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+				
 			</div>
 
 
 
+			<!-- 인사부 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
+			<div class="main-partition"><h2>인사부</h2><h5 style="color: gray;">(3명)</h5></div>
+			<!-- 인사부 직원 -- 얘로 감싸고 -->
+			<div class="main-content-wrap">
+			
+				<!-- 개발부 직원 수 만큼 반복 -->
+				<c:forEach items="${msgVoList}" var="msgTotalVo">
+					<c:if test="${msgTotalVo.dept eq '인사부'}">
+						<div class="messenger-main-content">
+							<div style="height: 100%; width: 100%; " >
+								<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+							</div>
+							<div class="content-detail">
+								<div id="detail-name">${msgTotalVo.name}</div>
+								<div>${msgTotalVo.dept}</div>
+								<div>${msgTotalVo.position}</div>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+				
+			</div>
+			
+			
+			
+			
 
+			<!-- 영업부 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
+			<div class="main-partition"><h2>영업부</h2><h5 style="color: gray;">(3명)</h5></div>
+			<!-- 영업부 직원 -- 얘로 감싸고 -->
+			<div class="main-content-wrap">
+			
+				<!-- 영업부 직원 수 만큼 반복 -->
+				<c:forEach items="${msgVoList}" var="msgTotalVo">
+					<c:if test="${msgTotalVo.dept eq '영업부'}">
+						<div class="messenger-main-content">
+							<div style="height: 100%; width: 100%; " >
+								<a id="modal-call" data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+							</div>
+							<div class="content-detail">
+								<div id="detail-name">${msgTotalVo.name}</div>
+								<div>${msgTotalVo.dept}</div>
+								<div>${msgTotalVo.position}</div>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+				
+			</div>
 
-
-
-
-
-
+			
 
         </main>
 
@@ -144,17 +196,17 @@
 	
 			<!-- Modal Header -->
 			<div class="modal-header">
-			<h1 class="modal-title">${msgVo.name}</h1>
+			<h1 class="modal-title modal-name">${msgTotalVo.name}</h1>
 			<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 	
 			<!-- Modal body -->
 			<div id="profile-main-content">
 				<div id="main-content-img-wrap" >
-					<img src="${root}/resources/upload/messenger/${msgVo.fileName}" alt="" width="150px" height="150px" style="border:1px solid black">
+					<img src="${root}/resources/upload/messenger/${msgTotalVo.fileName}" alt="" width="150px" height="150px" style="border:1px solid black">
 				</div>
-				<div><h4>${msgVo.dept}</h4></div>
-				<div style="grid-row: span 2;"><h4>${msgVo.introduce}</h4></div>
+				<div><h4>${msgTotalVo.dept}</h4></div>
+				<div style="grid-row: span 2;"><h4>${msgTotalVo.introduce}</h4></div>
 			</div>
 	
 			<!-- Modal footer -->
@@ -165,6 +217,9 @@
 		</div>
 		</div>
 	</div>
+
+
+	
 
 
 

@@ -1,5 +1,6 @@
 package com.kh.md.messenger.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class MessengerController {
 		this.ms = ms;
 	}
 	
-	
+	//메신저 등록확인 및 메인페이지 이동
 	@GetMapping("main")
 	public String main(HttpSession session) {
 		
@@ -44,7 +45,13 @@ public class MessengerController {
 		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
 		
 		if(msgVo != null) {
+			
 			session.setAttribute("msgVo", msgVo);
+			
+			//메신저에 모든 정보 가져가기
+			List<MessengerVo> msgVoList = ms.selectAllMsg();
+			session.setAttribute("msgVoList", msgVoList);
+			
 			return "messenger/main";
 		}else {
 			return "messenger/enroll";
@@ -52,6 +59,7 @@ public class MessengerController {
 		
 	}
 	
+	// 메신저 등록하기
 	@PostMapping("enroll")
 	public String enroll(MessengerVo msgVo, HttpSession session, HttpServletRequest req) {
 		
@@ -78,25 +86,84 @@ public class MessengerController {
 	}
 	
 	
+	
+	
+	//메신저 나의 프로필 페이지
 	@GetMapping("profile")
 	public String profile() {
 		return "messenger/profile";
 	}
 	
+	
+	
+	//메신저 프로필 수정 화면
 	@GetMapping("profile/edit")
 	public String profileEdit() {
 		return "messenger/profileEdit";
 	}
 	
+	
+	//메신저 프로필 수정 처리
+	@PostMapping("profile/edit")
+	public String profileEdit(MessengerVo vo ,HttpServletRequest req, HttpSession session) {
+		
+		//기존 파일 삭제
+		String savePath = req.getServletContext().getRealPath("/resources/upload/messenger/"); //req로 기존 파일 경로 가져오고
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); // 세션에 msgVo 통해서 파일 이름 가져오고
+		String fileName = msgVo.getFileName();
+		File f= new File(savePath + fileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		
+		
+		//신규로 받은 파일 업로드, 저장된 파일명 얻기
+		if(!vo.getProfile().isEmpty()) {
+			String changeName = FileUploader.fileUpload(vo.getProfile(), savePath);
+			vo.setFileName(changeName);
+		}
+		
+		//회원번호 세션에서 얻어와서 - 세팅 마무리 해준 vo로 - db에 업데이트
+		vo.setNo(msgVo.getNo());
+		MessengerVo updateMember = ms.updateMsgOne(vo);
+		
+		if(updateMember != null) {
+			session.setAttribute("msgVo", updateMember);
+			return "messenger/profile";
+		}else {
+			return "";
+		}
+		
+	}
+	
+	
+	
+	
+	//쪽지 메인 페이지
 	@GetMapping("note")
 	public String note() {
 		return "messenger/note";
 	}
 	
+	//쪽지 보내기 [ 화면 ] 
 	@GetMapping("note/write")
 	public String noteWrite() {
 		return "messenger/noteWrite";
 	}
+	
+	//쪽지 보내기 [ 처리 ]
+	@PostMapping("note/write")
+	public String noteWrite(String receiveNo, String reveiceName) {
+		
+		
+		
+		
+		
+		return "";
+	}
+	
+	
 	
 	@GetMapping("note/reply")
 	public String noteReply() {

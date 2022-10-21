@@ -105,6 +105,28 @@ public class MessengerServiceImpl implements MessengerService{
 	public int insertMessenger(MessengerVo msgVo) {
 		return dao.insertMessenger(sst, msgVo);
 	}
+
+	//메신저 회원 모두 가져가지
+	@Override
+	public List<MessengerVo> selectAllMsg() {
+		return dao.selectAllMsg(sst);
+	}
+	
+	//메신저 프로필 변경하기
+	@Override
+	public MessengerVo updateMsgOne(MessengerVo vo) {
+		
+		int result = dao.updateMsgOne(sst, vo);
+		System.out.println(result);
+		//업데이트된 메신저 멤버로 세션에 다시 넣어주기
+		
+		MessengerVo updateMsgVo = null;
+		if(result == 1) {
+			updateMsgVo = dao.selectCheckEnroll(sst, vo.getNo()); //번호로 메신저 멤버 1명 가져오는거 재사용
+		}
+		
+		return  updateMsgVo;
+	}
 	
 	
 
