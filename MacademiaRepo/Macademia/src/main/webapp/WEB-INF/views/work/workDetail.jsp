@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-  <!-- fullcalendar 언어 CDN -->
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&family=Gowun+Dodum&family=Gugi&family=Poor+Story&display=swap');
 @font-face {
@@ -23,15 +18,13 @@
     src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
 }
 
-
-
 ul, li{
 
 list-style:none;
 }
 #content{
 width:100vw;
-height:100vh;
+height:80vh;
 
 display: flex;
 
@@ -45,15 +38,10 @@ background-color:#6667AB;
 }
 #center_menu{
 width:70vw;
-height:100vh;
+height:80vh;
 border: 1px solid #fff;
-border-radius:15px;
-
 
 }
-
-
-
 #right_menu{
 width:20vw;
 height:80vh;
@@ -119,48 +107,9 @@ font-family: 'GangwonEdu_OTFBoldA';
 #menu-top li:nth-child(1){
 
 font-size:13px;
-
-}#calendar{
-height:100%;
-
-
 }
-a{
-	color:#fff;
-	text-decoreation:none;
-}
-.fc-day-sun a {
-  color: red;
-  text-decoration: none;
-}
-.fc-day-mon a{
-color:#fff;
-}
-.fc-day-tue a{
-color:#fff;
-}
-.fc-day-wed a{
-color:#fff;
-}
-.fc-day-thu a{
-color:#fff;
-}
-.fc-day-fri a{
-color:#fff;
-}
-.fc-day-sat a{
-color:#fff;
-}
-.fc-daygrid-day-number{
-
-}
-
-
-/* 토요일 날짜 파란색 */
-
-.fc-col-header-cell{
- background-color:#6667AB;
- color:#fff;
+h3{
+	 font-family: 'AppleSDGothicNeo';
 }
 
 
@@ -168,8 +117,6 @@ color:#fff;
 	<title>마카데미아</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
-	
-	
 	
 </head>
 <body>
@@ -179,34 +126,17 @@ color:#fff;
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		
-		
 		<aside>
-			<%@include file="/WEB-INF/views/plan/plan-sidebar.jsp" %>
+				<%@include file="/WEB-INF/views/work/workList-sidebar.jsp" %>
 		</aside>
 		
-		<main>
-				<%@include file="/WEB-INF/views/plan/planList-content.jsp" %>
 			
-		</main>
+			<main>
+			<%@include file="/WEB-INF/views/work/workDetail-content.jsp" %>
+			</main>
 			
-			
-			
+					
 		
 
 </body>
-
-<script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-       		height:430,
-       		
-        });
-        calendar.render();
-      });
-
-    </script>
-
 </html>

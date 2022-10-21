@@ -24,5 +24,8 @@ public class WorkController {
 	public String workComplate() {
 		return "/work/workComplate";
 	}
-
+	@GetMapping("detail")
+	public String workDetail() {
+		return "/work/workDetail";
+	}
 }
