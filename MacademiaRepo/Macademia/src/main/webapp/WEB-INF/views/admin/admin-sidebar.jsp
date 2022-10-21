@@ -4,6 +4,7 @@
    
 <style>
 
+
     .emZvkg {
         position: fixed;
         top: 80px;
@@ -67,6 +68,16 @@
         background-color:#6667AB;
     }
 
+    .jdjRXr > a:hover {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 12px 0px 0px;
+        word-break: keep-all;
+        cursor: pointer;
+        color: white;
+        background-color:#6667AB;
+    }
+
    
     ul {
         display: block;
@@ -97,6 +108,17 @@
     }
 
     .jsjMks:hover {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 12px 0px 0px;
+        word-break: keep-all;
+        cursor: pointer;
+        color: white;
+        background-color:#6667AB;
+    }
+
+  
+    .jsjMks > a:hover {
         font-size: 16px;
         font-weight: 500;
         margin: 12px 0px 0px;
@@ -138,6 +160,9 @@
         font-size: 16px;
         font-weight: 400;
     }
+
+    
+    
 </style>
 
     <div class="sc-fFeiMQ emZvkg">
@@ -147,15 +172,15 @@
                     <h1>관리자</h1>
                     <ul>
                         <!-- 링크 정리하기 -->
-                        <li class="sc-bqiRlB jdjRXr">조직 정보</li>
-                        <li class="sc-bqiRlB jsjMks">구성원 프로필</li>
-                        <li class="sc-bqiRlB jsjMks">출퇴근</li>
-                        <li class="sc-bqiRlB jsjMks">근무/휴가</li>
-                        <li class="sc-bqiRlB jsjMks">비용/복지</li>
+                        <li class="sc-bqiRlB jdjRXr"><a href="${root}/admin/main">조직 정보</a></li>
+                        <li class="sc-bqiRlB jsjMks"><a href="">구성원 프로필</a></li>
+                        <li class="sc-bqiRlB jsjMks"><a href="">출퇴근</a></li>
+                        <li class="sc-bqiRlB jsjMks"><a href="">근무/휴가</a></li>
+                        <li class="sc-bqiRlB jsjMks"><a href="">직원추가</a></li>
+                        <li class="sc-bqiRlB jsjMks"><a href="${root}/notice/main">공지사항</a></li>
+                        <li class="sc-bqiRlB jsjMks"><a href="${root}/meetingRoom/main">회의실 관리</a></li>
                         <li class="sc-bqiRlB jsjMks">증명서</li>
-                        <li class="sc-bqiRlB jsjMks">퇴사자/초대중</li>
                         <li class="sc-bqiRlB jsjMks">기능 사용 설정</li>
-                        <li class="sc-bqiRlB jsjMks">2</li>
                         <li class="sc-bqiRlB jsjMks">기타 설정</li>
                     </ul>
                 </div>

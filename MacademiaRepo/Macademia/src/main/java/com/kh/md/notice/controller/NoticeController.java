@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NoticeController {
 
 	@GetMapping("main")
-	public String NoticeHome() {
+	public String noticeHome() {
 		return "notice/notice";
 	}
 

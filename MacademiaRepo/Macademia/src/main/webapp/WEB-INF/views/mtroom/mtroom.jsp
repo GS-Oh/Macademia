@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>공지사항</title>
+	<title>회의실</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
 	
@@ -17,7 +17,7 @@
 			 <%@include file="/WEB-INF/views/admin/admin-sidebar.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/notice/notice-content.jsp" %>
+			<%@include file="/WEB-INF/views/mtroom/mtroom-content.jsp" %>
 		</main>
 	</div>
 
