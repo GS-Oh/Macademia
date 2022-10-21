@@ -244,11 +244,119 @@
 	</update>	
 
 
+	<!-- 메신저 쪽지 보내기 -->
+	<insert id="insertNoteOne">
+		INSERT INTO MSG_NOTE
+		(
+		     NOTE_NO
+		    ,MSG_NO
+		    ,RECEIVE_NO
+		    ,TITLE
+		    ,CONTENT    
+		    ,FILE_NAME
+		)
+		VALUES
+		(
+		    SEQ_MSG_NOTE_NO.NEXTVAL
+		    ,#{msgNo}
+		    ,#{receiveNo}
+		    ,#{title}
+		    ,#{content}
+		    ,#{fileName}
+		)
+		
+	
+	</insert>
+
+	
+	<!-- 메신저 쪽지 내역 불러오기 -->
+	<select id="selectNoteListByNo" resultType="com.kh.md.messenger.vo.MsgNoteVo">
+	
+		SELECT
+         T.NOTE_NO
+        ,T.MSG_NO
+        ,B.NAME RECEIVE_NO
+        ,T.TITLE
+        ,T.CONTENT
+        ,T.SEND_DATE
+        ,T.RECEIVE_DATE
+        ,T.FILE_NAME
+		FROM 
+		(
+		    SELECT 
+		         M.NOTE_NO
+		        ,B.NAME MSG_NO
+		        ,M.RECEIVE_NO
+		        ,M.TITLE
+		        ,M.CONTENT
+		        ,M.SEND_DATE
+		        ,M.RECEIVE_DATE
+		        ,M.FILE_NAME
+		    FROM MSG_NOTE M
+		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
+		    JOIN MEMBER B ON G.NO = B.NO
+		    WHERE M.MSG_NO = #{msgNo}
+		    OR M.RECEIVE_NO = #{msgNo}
+		    AND M.CHECK_DELETE = 'O'
+		    ORDER BY M.NOTE_NO DESC
+		) T
+		JOIN MEMBER B ON T.RECEIVE_NO = B.NO
+		
+	
+	</select>
 
 
-
-
-
+	<!-- 검색 값으로 쪽지 가져오기 -->
+	<select id="selectNoteKeyword" resultType="com.kh.md.messenger.vo.MsgNoteVo">
+	
+		 SELECT
+	         T.NOTE_NO
+	        ,T.MSG_NO
+	        ,B.NAME RECEIVE_NO
+	        ,T.TITLE
+	        ,T.CONTENT
+	        ,T.SEND_DATE
+	        ,T.RECEIVE_DATE
+	        ,T.FILE_NAME
+		FROM 
+		(
+		    SELECT 
+		         M.NOTE_NO
+		        ,B.NAME MSG_NO
+		        ,M.RECEIVE_NO
+		        ,M.TITLE
+		        ,M.CONTENT
+		        ,M.SEND_DATE
+		        ,M.RECEIVE_DATE
+		        ,M.FILE_NAME
+		    FROM MSG_NOTE M
+		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
+		    JOIN MEMBER B ON G.NO = B.NO
+		    WHERE M.MSG_NO = #{msgNo}
+		    OR M.RECEIVE_NO = #{msgNo}
+		    AND M.CHECK_DELETE = 'O'
+		    ORDER BY M.NOTE_NO DESC
+		) T
+		JOIN MEMBER B ON T.RECEIVE_NO = B.NO
+		
+		<if test="menu == 'msgNo'">
+			WHERE MSG_NO LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="menu == 'receiveNo'">
+			WHERE RECEIVE_NO LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="menu == 'title'">
+			WHERE TITLE LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="menu == 'comment'">
+			WHERE CONTENT LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		
+	</select>	
 
 
 </mapper>

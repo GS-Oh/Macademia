@@ -1,7 +1,9 @@
 package com.kh.md.messenger.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.common.Pagination;
 import com.kh.md.messenger.service.MessengerService;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -88,62 +91,50 @@ public class MessengerController {
 	
 	
 	
-	//메신저 나의 프로필 페이지
-	@GetMapping("profile")
-	public String profile() {
-		return "messenger/profile";
-	}
 	
-	
-	
-	//메신저 프로필 수정 화면
-	@GetMapping("profile/edit")
-	public String profileEdit() {
-		return "messenger/profileEdit";
-	}
-	
-	
-	//메신저 프로필 수정 처리
-	@PostMapping("profile/edit")
-	public String profileEdit(MessengerVo vo ,HttpServletRequest req, HttpSession session) {
-		
-		//기존 파일 삭제
-		String savePath = req.getServletContext().getRealPath("/resources/upload/messenger/"); //req로 기존 파일 경로 가져오고
-		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); // 세션에 msgVo 통해서 파일 이름 가져오고
-		String fileName = msgVo.getFileName();
-		File f= new File(savePath + fileName);
-		
-		if(f.exists()) {
-			f.delete();
-		}
-		
-		
-		//신규로 받은 파일 업로드, 저장된 파일명 얻기
-		if(!vo.getProfile().isEmpty()) {
-			String changeName = FileUploader.fileUpload(vo.getProfile(), savePath);
-			vo.setFileName(changeName);
-		}
-		
-		//회원번호 세션에서 얻어와서 - 세팅 마무리 해준 vo로 - db에 업데이트
-		vo.setNo(msgVo.getNo());
-		MessengerVo updateMember = ms.updateMsgOne(vo);
-		
-		if(updateMember != null) {
-			session.setAttribute("msgVo", updateMember);
-			return "messenger/profile";
-		}else {
-			return "";
-		}
-		
-	}
 	
 	
 	
 	
 	//쪽지 메인 페이지
 	@GetMapping("note")
-	public String note() {
-		return "messenger/note";
+	public String note(HttpSession session, Model model) {
+		
+		//메시지 넘버 세팅
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		
+		List<MsgNoteVo> mnVoList = ms.selectNoteListByNo(msgVo.getMsgNo());
+		
+		if(mnVoList != null) {
+			model.addAttribute("mnVoList", mnVoList);
+			return "messenger/note";
+		}else {
+			return "";
+		}
+		
+	}
+	
+	//쪽지 검색하기
+	@PostMapping("note/search")
+	public String noteSearch(HttpSession session, Model model, String menu, String keyword) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+	
+		//데이터 뭉치기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("msgNo", msgVo.getMsgNo());
+		map.put("keyword", keyword);
+		map.put("menu", menu);
+		
+		List<MsgNoteVo> mnVoList = ms.selectNoteKeyword(map);
+		if(mnVoList != null) {
+			model.addAttribute("mnVoList", mnVoList);
+			return "messenger/note";
+		}else {
+			return "";
+		}
+		
+		
 	}
 	
 	//쪽지 보내기 [ 화면 ] 
@@ -154,16 +145,80 @@ public class MessengerController {
 	
 	//쪽지 보내기 [ 처리 ]
 	@PostMapping("note/write")
-	public String noteWrite(String receiveNo, String reveiceName) {
+	public String noteWrite(MsgNoteVo mnVo ,HttpSession session, HttpServletRequest req, String receiveNo22, String reveiceName22) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		mnVo.setMsgNo(msgVo.getMsgNo());
+		
+		//TODO 검색페이지에서 넘겨받은 값으로 세팅하기
+		String receiveNo = "3";
+		mnVo.setReceiveNo(receiveNo);
+		
+		if(mnVo.getAttFile() != null && !mnVo.getAttFile().isEmpty()) {
+			String savePath = req.getServletContext().getRealPath("resources/upload/messenger/");
+			String changeName = FileUploader.fileUploadNote(mnVo.getAttFile(), savePath);
+			mnVo.setFileName(changeName);
+		}
+		
+		int result = ms.insertNoteOne(mnVo);
+		
+		if(result == 1) {
+			return "redirect:/messenger/note";
+		}else {
+			return "";
+		}
 		
 		
-		
-		
-		
-		return "";
 	}
 	
-	
+	//메신저 나의 프로필 페이지
+		@GetMapping("profile")
+		public String profile() {
+			return "messenger/profile";
+		}
+		
+		
+		
+		//메신저 프로필 수정 화면
+		@GetMapping("profile/edit")
+		public String profileEdit() {
+			return "messenger/profileEdit";
+		}
+		
+		
+		//메신저 프로필 수정 처리
+		@PostMapping("profile/edit")
+		public String profileEdit(MessengerVo vo ,HttpServletRequest req, HttpSession session) {
+			
+			//기존 파일 삭제
+			String savePath = req.getServletContext().getRealPath("/resources/upload/messenger/"); //req로 기존 파일 경로 가져오고
+			MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); // 세션에 msgVo 통해서 파일 이름 가져오고
+			String fileName = msgVo.getFileName();
+			File f= new File(savePath + fileName);
+			
+			if(f.exists()) {
+				f.delete();
+			}
+			
+			
+			//신규로 받은 파일 업로드, 저장된 파일명 얻기
+			if(!vo.getProfile().isEmpty()) {
+				String changeName = FileUploader.fileUpload(vo.getProfile(), savePath);
+				vo.setFileName(changeName);
+			}
+			
+			//회원번호 세션에서 얻어와서 - 세팅 마무리 해준 vo로 - db에 업데이트
+			vo.setNo(msgVo.getNo());
+			MessengerVo updateMember = ms.updateMsgOne(vo);
+			
+			if(updateMember != null) {
+				session.setAttribute("msgVo", updateMember);
+				return "messenger/profile";
+			}else {
+				return "";
+			}
+			
+		}
 	
 	@GetMapping("note/reply")
 	public String noteReply() {

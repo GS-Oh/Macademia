@@ -206,16 +206,17 @@
 
 			<!--  -->
 			<div id="note-search-area">
-				<form action="">
-					<div style="width: 60%; ">
-						<select name="" id="" >
+				<form action="/md/messenger/note/search" method="post">
+					<div style="width: 60%;">
+						<select name="menu" id="" >
 							<option value="msgNo">보낸사람</option>
-							<option value="recipientNo">받은사람</option>
+							<option value="receiveNo">받은사람</option>
+							<option value="title">제목</option>
 							<option value="comment">내용</option>
 						</select>
 					</div>
 					<div style="width: 100%;">
-						<input type="text" name=""  >
+						<input type="text" name="keyword">
 					</div>
 					<div style="width: 40%;" >
 						<input class="btn btn-outline-dark" type="submit" value="검색하기" style="font-size:1.3rem;">
@@ -237,31 +238,21 @@
 
 
 				<!-- 쪽지 수 만큼 여기 반복 -->
-				<div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div>
 				
-				<div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div>
-				<div class="info-content">
-					<div><input type="checkbox"></div>
-					<div >보낸사람</div>
-					<div >받은사람</div>
-					<div >첨부종류</div>
-					<div >내용</div>
-					<div >날짜</div>
-				</div>
+				<c:forEach items="${mnVoList}" var="mnVo">
+				
+					<div class="info-content">
+						<div><input type="checkbox"></div>
+						<div>${mnVo.msgNo}</div>
+						<div>${mnVo.receiveNo}</div>
+						<div>${mnVo.fileName}</div>
+						<div>${mnVo.content}</div>
+						<div>${mnVo.sendDate}</div>
+					</div>
+					
+				</c:forEach>
+				
+				
 			
 
 				

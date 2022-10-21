@@ -1,6 +1,7 @@
 package com.kh.md.messenger.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.dao.MessengerDao;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -126,6 +128,25 @@ public class MessengerServiceImpl implements MessengerService{
 		}
 		
 		return  updateMsgVo;
+	}
+
+	//메신저 쪽지 보내기
+	@Override
+	public int insertNoteOne(MsgNoteVo mnVo) {
+		return dao.insertNoteOne(sst, mnVo);
+	}
+	
+	//메신저 쪽지 내역 불러오기
+	@Override
+	public List<MsgNoteVo> selectNoteListByNo(String msgNo) {
+		return dao.selectNoteListByNo(sst, msgNo);
+	}
+
+	
+	//메신저 검색값으로 쪽지 내역 불러오기
+	@Override
+	public List<MsgNoteVo> selectNoteKeyword(Map<String, String> map) {
+		return dao.selectNoteKeyword(sst, map);
 	}
 	
 	

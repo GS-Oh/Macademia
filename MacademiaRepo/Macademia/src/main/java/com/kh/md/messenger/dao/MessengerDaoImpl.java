@@ -1,6 +1,7 @@
 package com.kh.md.messenger.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -116,6 +118,26 @@ public class MessengerDaoImpl implements MessengerDao{
 	@Override
 	public int updateMsgOne(SqlSessionTemplate sst, MessengerVo vo) {
 		return sst.update("messengerMapper.updateMsgOne",vo);
+	}
+
+	//메신저 ( 쪽지 보내기 )
+	@Override
+	public int insertNoteOne(SqlSessionTemplate sst, MsgNoteVo mnVo) {
+		return sst.insert("messengerMapper.insertNoteOne", mnVo);
+	}
+
+
+	//메신저 ( 쪽지 내역 불러오기 )
+	@Override
+	public List<MsgNoteVo> selectNoteListByNo(SqlSessionTemplate sst, String msgNo) {
+		return sst.selectList("messengerMapper.selectNoteListByNo", msgNo);
+	}
+
+
+	//메신저 ( 검색 값으로 쪽지 내역 불러오기 )
+	@Override
+	public List<MsgNoteVo> selectNoteKeyword(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectList("messengerMapper.selectNoteKeyword",map);
 	}
 
 	
