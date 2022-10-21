@@ -38,9 +38,8 @@
 	<script src="../resources/summernote/summernote-ko-KR.js"></script>	
 	
 	<script>
-	// 툴바생략
 	var setting = {
-            height : 300,
+            height : 400,
             minHeight : null,
             maxHeight : null,
             focus : true,

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <style>
+	main{
+		margin: 0;
+	}
     #side-wrap{
         font-size: 16px;
         background-color: #6667AB;
@@ -20,21 +23,20 @@
 </style>
 
 
-<div id="side-wrap">
-    
-    <div class="side-main-category">메일
-    
-        <div class="side-sub-category"><a href="">전체메일함</a></div>
-        <div class="side-sub-category"><a href="">보낸메일함</a></div>
-        <div class="side-sub-category"><a href="">받은메일함</a></div>
-        <div class="side-sub-category"><a href="">메일쓰기</a></div>
-
-    </div>
-
-    <div class="side-main-category">2
-
-        <div class="side-sub-category"><a href="">2</a></div>
-
-    </div>
-    
-</div>
+<aside class="mail-aside">
+				<div class="mail-btn-group">
+					<a href="#" class="mail-btn">메일쓰기</a>
+					<a href="#" class="mail-btn">내게쓰기</a>
+				</div>
+				<ul class="mail-menu">
+					<li class="active">
+						<a href="#">받은 메일함 <span>89</span></a>
+					</li>
+					<li>
+						<a href="#">보낸 메일함</a>
+					</li>
+					<li>
+						<a href="#">휴지통 <span>24</span></a>
+					</li>
+				</ul>
+			</aside>
