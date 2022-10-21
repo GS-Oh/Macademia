@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <c:set var="root" value="${pageContext.request.contextPath }" />
 
@@ -157,7 +158,11 @@
 
 <script>
     if('${alertMsg}'!= ''){
-        alert('${alertMsg}');
+        Swal.fire({
+            title: '임시비밀번호 발급완료!',
+            text: '개인이메일을 확인해주세요.',
+            icon: 'success',
+        })
     }
 </script>
 
