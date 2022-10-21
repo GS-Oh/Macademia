@@ -47,7 +47,7 @@
 
 	
 
-		#profile-img-wrap{
+		#attFile-img-wrap{
 			display: grid;
 			grid-template-rows: 80% 20%;
 		}
@@ -80,36 +80,36 @@
 
 			<div id="write-title"><h1>쪽지 보내기</h1></div>
 
-            <form action="">
+            <form action="" method="post" enctype="multipart/form-data">
 				<!--  -->
 				<div class="write-header-area" >
 					<span class="input-group-text">받는사람</span>
-					<input type="text" class="form-control" >
+					<input type="text" class="form-control" name="receiveNo" value="${receiveName}" readonly>
 					<a href="/md/messenger/note/recipient" class="badge bg-secondary"><h5>검색하기</h5></a>
 				</div>
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">참조인</span>
-					<input type="text" class="form-control" >
+					<input type="text" class="form-control" name="referNo" readonly>
 					<a href="/md/messenger/note/recipient" class="badge bg-secondary"><h5>검색하기</h5></a>
 				</div>
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">제목</span>
-					<input type="text" class="form-control" >
+					<input type="text" class="form-control" name="title">
 				</div>
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">내용</span>
-					<input type="text" class="form-control" >
+					<input type="text" class="form-control" name="content">
 				</div>
 			
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">파일첨부</span>
-					<div id="profile-img-wrap" class="form-control">
-						<img id="profile-img-thumb" src="" width="50%" height="100%">
-						<input  type="file" name="profile" style="font-size: 1.3rem;">
+					<div id="attFile-img-wrap" class="form-control">
+						<img id="attFile-img-thumb" src="" width="50%" height="100%">
+						<input  type="file" name="attFile" style="font-size: 1.3rem;">
 					</div>
 				</div>
 
@@ -125,5 +125,35 @@
 
 
     </div>
+
+	<script>
+	    // 파일 있는지 확인하기
+	    const fileInputTag = document.querySelector('input[name=attFile]');
+		
+	    // 해당파일에 변화가 생기면 함수가 작동하도록 설정
+	    fileInputTag.onchange = function(){
+	    
+	        //썸네일 보여줄 img태그 가져오기 (url 값 변경할 애 가져오기)
+	        const imgTag = document.querySelector('#attFile-img-thumb');
+	        
+	        //파일에 어떤 변화가 생긴건치 체크 --- 파일 추가하였을때 동작하도록 해주자
+	        if(fileInputTag.files.length > 0){
+	            
+	            //파일 준비
+	            const fr = new FileReader();
+	            
+	            //파일 읽기
+	            fr.readAsDataURL(fileInputTag.files[0]);
+	            
+	            //파일 다 읽어오면 동작하는 함수 생성
+	            fr.onload = function(data){
+	                //썸네일img태그의 src 경로를 - 읽어온 파일의 url로 변경해주기
+	                imgTag.src = data.target.result;
+	            }
+	        }else{
+	            imgTag.src = "";
+	        }
+	    }
+	</script>
 
 </html>

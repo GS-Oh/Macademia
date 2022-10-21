@@ -1,9 +1,11 @@
 package com.kh.md.messenger.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
@@ -48,6 +50,22 @@ public interface MessengerService {
 
 	//메신저 ( 등록 하기 )
 	int insertMessenger(MessengerVo msgVo);
+
+	//메신저 ( 등록 회원 모두 가져가기 )
+	List<MessengerVo> selectAllMsg();
+
+	//메신저 ( 메신저 프로필 변경하기 )
+	MessengerVo updateMsgOne(MessengerVo vo);
+
+	//메신저 ( 쪽지 보내기 )
+	int insertNoteOne(MsgNoteVo mnVo);
+
+	//메신저 ( 쪽지 내역 불러오기 )
+	List<MsgNoteVo> selectNoteListByNo(String msgNo);
+
+	
+	//메신저 ( 검색 값으로 쪽지 불러오기 )
+	List<MsgNoteVo> selectNoteKeyword(Map<String, String> map);
 	
 
 	

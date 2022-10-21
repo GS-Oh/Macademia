@@ -79,26 +79,57 @@
 			<div id="profile-main-content">
 				<form action="" method="post" enctype="multipart/form-data">
 					<div id="main-content-img-wrap" >
-						<img src="" alt="" width="100%" height="90%" style="border:1px solid black">
+						<img id="profile-img-thumb" src="${root}/resources/upload/messenger/${msgVo.fileName}" alt="" width="100%" height="90%" style="border:1px solid black">
 						<input type="file" name="profile" style="height: 10%; width: 100%;" >
 					</div>
-					<div>직원명</div>
+					<div>${msgVo.name}</div>
 					<div>3-공백</div>
-					<div style="grid-row: span 2;"><textarea name="" id="" rows="9" style="width:90%;">자기소개글</textarea></div>
-					<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white; width: 30%;"><h4>수정하기</h4></a></div>
+					<div style="grid-row: span 2;"><textarea name="introduce" id="" rows="9" style="width:90%;">${msgVo.introduce}</textarea></div>
+					<div><input type="submit" class="btn btn-primary btn-lg" style="color: white; width: 30%;" value="수정하기"></div>
 					<div>6-공백</div>
 				</form>
 			</div>
 
 			<div id="profile-bottom-content">
-				<div class="badge bg-secondary"><h3>부서명-직책</h3></div>
-				<div class="badge bg-secondary"><h3>주소</h3></div>
-				<div class="badge bg-secondary"><h3>이메일주소</h3></div>
+				<div class="badge bg-secondary"><h3>${msgVo.dept}-${msgVo.position}</h3></div>
+				<div class="badge bg-secondary"><h3>${msgVo.address}</h3></div>
+				<div class="badge bg-secondary"><h3>${msgVo.email}</h3></div>
 			</div>
 			
         </main>
 
 
     </div>
-
+	
+	<script>
+	    // 파일 있는지 확인하기
+	    const fileInputTag = document.querySelector('input[name=profile]');
+		
+	    // 해당파일에 변화가 생기면 함수가 작동하도록 설정
+	    fileInputTag.onchange = function(){
+	    
+	        //썸네일 보여줄 img태그 가져오기 (url 값 변경할 애 가져오기)
+	        const imgTag = document.querySelector('#profile-img-thumb');
+	        
+	        //파일에 어떤 변화가 생긴건치 체크 --- 파일 추가하였을때 동작하도록 해주자
+	        if(fileInputTag.files.length > 0){
+	            
+	            //파일 준비
+	            const fr = new FileReader();
+	            
+	            //파일 읽기
+	            fr.readAsDataURL(fileInputTag.files[0]);
+	            
+	            //파일 다 읽어오면 동작하는 함수 생성
+	            fr.onload = function(data){
+	                //썸네일img태그의 src 경로를 - 읽어온 파일의 url로 변경해주기
+	                imgTag.src = data.target.result;
+	            }
+	        }else{
+	            imgTag.src = "";
+	        }
+	    }
+	</script>
+	
+	
 </html>
