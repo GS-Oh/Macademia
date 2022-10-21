@@ -26,7 +26,7 @@ div{
 
 .iUwzsw {
     width: 864px;
-    padding: 0px 0px 120px 32px;
+    padding: 28px 0px 120px 32px;
 }
 
 .kSGLpu {
