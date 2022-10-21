@@ -2,6 +2,19 @@
     pageEncoding="UTF-8"%>
 
 <style>
+
+ @font-face {
+	    font-family: 'AppleSDGothicNeo';
+	    src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
+	}
+	
+     body{
+        padding: 0px;
+        margin: 0px;
+        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        font-size: 12px;
+    }
+
     #main-content-wrap>div{
         /* border: 1px solid rebeccapurple; */
     }
