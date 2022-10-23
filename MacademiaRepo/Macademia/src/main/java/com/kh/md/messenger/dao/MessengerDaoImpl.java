@@ -1,5 +1,6 @@
 package com.kh.md.messenger.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -151,6 +152,12 @@ public class MessengerDaoImpl implements MessengerDao{
 	@Override
 	public int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo) {
 		return sst.update("messengerMapper.updateNoteDelete", deleteNoteNo);
+	}
+
+
+	@Override
+	public List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName) {
+		return sst.selectList("messengerMapper.selectDeptMember", deptName);
 	}
 
 	

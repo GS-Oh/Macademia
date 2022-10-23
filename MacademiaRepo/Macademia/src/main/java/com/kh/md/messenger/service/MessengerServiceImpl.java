@@ -1,5 +1,6 @@
 package com.kh.md.messenger.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -160,6 +161,11 @@ public class MessengerServiceImpl implements MessengerService{
 	@Override
 	public int updateNoteDelete(String deleteNoteNo) {
 		return dao.updateNoteDelete(sst, deleteNoteNo);
+	}
+
+	@Override
+	public List<HashMap<String, String>> selectDeptMember(String deptName) {
+		return dao.selectDeptMember(sst, deptName);
 	}
 	
 	

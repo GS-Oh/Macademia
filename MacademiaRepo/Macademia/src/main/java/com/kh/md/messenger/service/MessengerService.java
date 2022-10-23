@@ -1,5 +1,6 @@
 package com.kh.md.messenger.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +75,11 @@ public interface MessengerService {
 
 	//쪽지 ( 쪽지 번호로 삭제 )
 	int updateNoteDelete(String deleteNoteNo);
+
+
+	//쪽지 ( 보낸사람검색 )
+	List<HashMap<String, String>> selectDeptMember(String deptName);
+
 	
 
 	

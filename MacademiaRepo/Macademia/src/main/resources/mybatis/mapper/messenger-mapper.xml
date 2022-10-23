@@ -410,6 +410,25 @@
 
 
 
-
+	<!-- 쪽지- 부서명에 맞는 멤버 가져오기 -->
+	<select id="selectDeptMember" resultType="hashmap">
+		
+		SELECT
+		     M.MSG_NO
+		    ,B.NAME
+		    ,B.DEPT
+		    ,B.POSITION
+		FROM MESSENGER M
+		JOIN MEMBER B ON M.NO = B.NO
+		WHERE DEPT= #{deptName}
+		
+		
+		
+		
+	</select>
+	
+	
+	
+	
 
 </mapper>

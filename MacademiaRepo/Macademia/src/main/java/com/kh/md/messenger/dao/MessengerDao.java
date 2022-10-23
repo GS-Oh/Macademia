@@ -1,5 +1,6 @@
 package com.kh.md.messenger.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,9 @@ public interface MessengerDao {
 
 	//쪽지 ( 번호로 쪽지 삭제 )
 	int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo);
+
+	//쪽지 ( 부서명으로 멤버 가져오기 )
+	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName);
 
 	
 	

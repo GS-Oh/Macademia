@@ -182,7 +182,11 @@ public class MessengerController {
 	
 	//쪽지 보내기 [ 화면 ] 
 	@GetMapping("note/write")
-	public String noteWrite() {
+	public String noteWrite(String receiveNo, String receiveName, Model model) {
+		
+		model.addAttribute("receiveNo",receiveNo);
+		model.addAttribute("receiveName",receiveName);
+		
 		return "messenger/noteWrite";
 	}
 	
@@ -262,6 +266,23 @@ public class MessengerController {
 	public String noteRecipient() {
 		return "messenger/noteRecipient";
 	} 
+	
+	//쪽지 - 해당 부서명 멤버 가져오기
+	@GetMapping("DeptMember")
+	public String deptMember(String deptName, Model model) {
+		
+		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(deptName);
+		
+		if(deptMemberList != null) {
+			model.addAttribute("deptMemberList",deptMemberList);
+			return "messenger/noteRecipient";
+		}else {
+			return "";
+			
+		}
+		
+		
+	}
 	
 	
 	@PostMapping("note/reple/number")
