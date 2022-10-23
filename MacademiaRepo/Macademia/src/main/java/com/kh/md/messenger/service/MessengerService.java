@@ -57,15 +57,23 @@ public interface MessengerService {
 	//메신저 ( 메신저 프로필 변경하기 )
 	MessengerVo updateMsgOne(MessengerVo vo);
 
-	//메신저 ( 쪽지 보내기 )
+	
+	//쪽지 ( 보내기 )
 	int insertNoteOne(MsgNoteVo mnVo);
 
-	//메신저 ( 쪽지 내역 불러오기 )
+	//쪽지 ( 내역 불러오기 )
 	List<MsgNoteVo> selectNoteListByNo(String msgNo);
 
 	
-	//메신저 ( 검색 값으로 쪽지 불러오기 )
+	//쪽지 ( 검색 값으로 쪽지 불러오기 )
 	List<MsgNoteVo> selectNoteKeyword(Map<String, String> map);
+
+
+	//쪽지 ( 쪽지 번호로 쪽지 1개 가져오기 )
+	MsgNoteVo selectNoteByNo(String repleNoteNo);
+
+	//쪽지 ( 쪽지 번호로 삭제 )
+	int updateNoteDelete(String deleteNoteNo);
 	
 
 	

@@ -120,24 +120,37 @@ public class MessengerDaoImpl implements MessengerDao{
 		return sst.update("messengerMapper.updateMsgOne",vo);
 	}
 
-	//메신저 ( 쪽지 보내기 )
+	//쪽지 ( 보내기 )
 	@Override
 	public int insertNoteOne(SqlSessionTemplate sst, MsgNoteVo mnVo) {
 		return sst.insert("messengerMapper.insertNoteOne", mnVo);
 	}
 
 
-	//메신저 ( 쪽지 내역 불러오기 )
+	//쪽지 ( 내역 불러오기 )
 	@Override
 	public List<MsgNoteVo> selectNoteListByNo(SqlSessionTemplate sst, String msgNo) {
 		return sst.selectList("messengerMapper.selectNoteListByNo", msgNo);
 	}
 
 
-	//메신저 ( 검색 값으로 쪽지 내역 불러오기 )
+	//쪽지 ( 검색 값으로 쪽지 내역 불러오기 )
 	@Override
 	public List<MsgNoteVo> selectNoteKeyword(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.selectList("messengerMapper.selectNoteKeyword",map);
+	}
+
+	//쪽지 ( 쪽지 번호로 쪽지 1개 가져오기 )
+	@Override
+	public MsgNoteVo selectNoteByNo(SqlSessionTemplate sst, String repleNoteNo) {
+		return sst.selectOne("messengerMapper.selectNoteByNo", repleNoteNo);
+	}
+
+
+	//쪽지 ( 쪽지 번호로 쪽지 삭제 )
+	@Override
+	public int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo) {
+		return sst.update("messengerMapper.updateNoteDelete", deleteNoteNo);
 	}
 
 	

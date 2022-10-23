@@ -20,8 +20,8 @@
 	            </a>
        		</div>
             <div><a href="/md/messenger/profile">나의 프로필</a></div>
-            <div><a href="/md/messenger/note">채팅</a></div>
-            <div><a href="/md/messenger/note">쪽지</a></div>
+            <div><a href="/md/messenger/noteReceiveBox">받은쪽지함</a></div>
+            <div><a href="/md/messenger/noteSendBox">보낸쪽지함</a></div>
             <div><a href="/md/messenger/fileBox">파일보관함</a></div>
             <div><a href="/md/messenger/notice/1">공지톡</a></div>
 			<div></div>

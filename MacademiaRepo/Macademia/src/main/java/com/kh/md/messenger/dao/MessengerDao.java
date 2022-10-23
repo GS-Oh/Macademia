@@ -58,14 +58,20 @@ public interface MessengerDao {
 	//메신저 ( 프로필 변경하기 )
 	int updateMsgOne(SqlSessionTemplate sst, MessengerVo vo);
 
-	//메신저 ( 쪽지 보내기 )
+	//쪽지 ( 보내기 )
 	int insertNoteOne(SqlSessionTemplate sst, MsgNoteVo mnVo);
 
-	//메신저 ( 쪽지 내역 불러오기 )
+	//쪽지 ( 내역 불러오기 )
 	List<MsgNoteVo> selectNoteListByNo(SqlSessionTemplate sst, String msgNo);
 
-	//메신저 ( 검색 값으로 쪽지 내역 불러오기 )
+	//쪽지 ( 검색 값으로 내역 불러오기 )
 	List<MsgNoteVo> selectNoteKeyword(SqlSessionTemplate sst, Map<String, String> map);
+
+	//쪽지 ( 번호로 쪽지 1개 가져오기 )
+	MsgNoteVo selectNoteByNo(SqlSessionTemplate sst, String repleNoteNo);
+
+	//쪽지 ( 번호로 쪽지 삭제 )
+	int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo);
 
 	
 	

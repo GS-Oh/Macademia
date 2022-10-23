@@ -130,23 +130,36 @@ public class MessengerServiceImpl implements MessengerService{
 		return  updateMsgVo;
 	}
 
-	//메신저 쪽지 보내기
+	
+	//쪽지 - 보내기
 	@Override
 	public int insertNoteOne(MsgNoteVo mnVo) {
 		return dao.insertNoteOne(sst, mnVo);
 	}
 	
-	//메신저 쪽지 내역 불러오기
+	//쪽지 - 내역 불러오기
 	@Override
 	public List<MsgNoteVo> selectNoteListByNo(String msgNo) {
 		return dao.selectNoteListByNo(sst, msgNo);
 	}
 
 	
-	//메신저 검색값으로 쪽지 내역 불러오기
+	//쪽지 - 검색값으로 쪽지 내역 불러오기
 	@Override
 	public List<MsgNoteVo> selectNoteKeyword(Map<String, String> map) {
 		return dao.selectNoteKeyword(sst, map);
+	}
+
+	//쪽지 - 쪽지넘버로 쪽지 1개 가져오기
+	@Override
+	public MsgNoteVo selectNoteByNo(String repleNoteNo) {
+		return dao.selectNoteByNo(sst, repleNoteNo);
+	}
+
+	//쪽지 - 쪽지넘버로 쪽지 삭제
+	@Override
+	public int updateNoteDelete(String deleteNoteNo) {
+		return dao.updateNoteDelete(sst, deleteNoteNo);
 	}
 	
 	
