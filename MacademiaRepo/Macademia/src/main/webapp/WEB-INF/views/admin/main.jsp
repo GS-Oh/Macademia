@@ -29,8 +29,8 @@
 	<meta name="facebook-domain-verification" content="vo5n55gdznhztzukk13vb1m2ghig9y">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
-	<!-- <link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css//bootstrap-select.min.css"> -->
+	 <link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css//bootstrap-select.min.css">
 	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
 	<link rel="stylesheet" href="/webapp/resources/css/admin/bootstrap-select-min.css">
 	<link rel="stylesheet" href="/webapp/resources/css/admin/bootstrap.min.css">

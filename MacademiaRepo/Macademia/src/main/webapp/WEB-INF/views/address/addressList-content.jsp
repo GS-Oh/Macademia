@@ -1,0 +1,200 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Focus - Bootstrap Admin Dashboard </title>
+    
+    <style>
+    main {
+	    width: 80vw;
+	    height: 80vh;
+	    position: relative;
+	    top: 10vh;
+	    left: 20vw;
+	}
+    </style>
+    
+    <!-- Datatable -->
+    <link href="${root}/resources/admin/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="main-wrapper">	
+        
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-12 p-md-0">
+                        <div class="welcome-text">
+                            <h4>주소록</h4>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                	<!-- <div class="col-xl-3 col-lg-2 col-xxl-2 col-md-2 ">
+                        <div class="card" style="height:500px;">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table student-data-table m-t-20" style="color : black; text-align: center;">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                <div class="media-left">
+                                            		<a href="#"><img src="/webapp/resources/admin/assets/images/empty-profile.png" class="img-fluid rounded-circle" alt="" style="width: 150px"></a>
+                                        		</div>
+                                        		</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="mName">사원 이름<br></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="mJob">직위</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="mDept">부서</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="mPhone">연락처</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="mEmail">이메일</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                	
+                    <div class="col-xl-9 col-lg-10 col-xxl-10 col-md-10">
+                        <div class="card" style="height:500px;">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="mList" class="table student-data-table m-t-20" style="color : black; text-align: center; border: none;">
+                                        <thead>
+                                            <tr>
+                                            	<th></th>
+                                                <th>이름</th>
+                                                <th>직위</th>
+                                                <th>부서</th>
+                                                <th>연락처</th>
+                                                <th>상태</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	<c:forEach var="addr" items="${ list }">
+	                                        	<c:if test="${ empty list }">
+	                                        		<tr>
+	                                        			<td colspan="7">조회된 사원이 없습니다.</td>
+	                                        		</tr>
+	                                        	</c:if>
+	                                        	<c:if test="${ !empty list && loginUser != addr.mId }">
+		                                            <tr id="info">
+		                                            	<td></td>
+		                                                <td id="name">${ addr.mName }
+		                                                <input type="hidden" class="mId" value="${ addr.mId }">
+		                                                </td>
+		                                                <td id="job">${ addr.jobName }</td>
+		                                                <td id="dept">${ addr.deptName }</td>
+		                                                <td id="phone">${ addr.phone }</td>
+		                                                <td id="email">${ addr.email }</td>
+		                                                <td><button class="form-control input-default addrMinus" style="background: #593bdb; color: white;">&nbsp-&nbsp</button></td>
+		                                            </tr>
+	                                            </c:if>
+	                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="text-align: right;">
+                                	<button class="form-control input-default" style="background: #593bdb; color: white; display:inline-block; width: 150px;" onclick="location.href='addr/search'">주소록 검색</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+   
+
+          
+    </div>
+
+    
+ 
+	    <script>
+	    
+	 	// sweet alert customize
+		var alert = function(msg, title, icon) {
+			Swal.fire({
+				position: 'top', // 상단 중앙에 띄우기
+				background: '#593bdb', // 알럿창 배경색
+   				color: 'white', // 글자색
+				title : title, // 제목(큰 글씨)
+				text : msg, // 내용(작은 글씨)
+				icon: icon, // info, error 등 icon type
+				timer : 3000, // 자동 종료 타이머
+				customClass : 'sweet-size', 
+				showConfirmButton : false // ok버튼 표시 여부
+			});
+		}
+	    
+	    $(function() {
+			$('#mList td').mouseenter(function() {
+				$(this).parent().css({'color':'purple', 'cursor':'pointer'});
+			}).mouseout(function() {
+				$(this).parent().css({'color':'black'});
+			}).click(function() {
+				var tdName = $(this).parent().children().eq(1).text();
+				var tdJob = $(this).parent().children().eq(2).text();
+				var tdDept = $(this).parent().children().eq(3).text();
+				var tdPhone = $(this).parent().children().eq(4).text();
+				var tdEmail = $(this).parent().children().eq(5).text();
+				
+				$("#mName").text(tdName);
+				$("#mJob").html(tdJob);
+				$("#mDept").html(tdDept);
+				$("#mPhone").html(tdPhone);
+				$("#mEmail").html(tdEmail);
+				
+			});
+		});
+	    
+	 	// 주소록 삭제 버튼
+		$('.addrMinus').click(function() {
+			var thisRow = $(this).closest('tr');
+			var mId = thisRow.find('td:eq(1)').find('input').val();
+			
+			$.ajax({
+				url: "minus.addr",
+				data: {mId:mId},
+				type: "POST",
+				success: function(data) {
+					console.log(data);
+					
+					if(data == "success") {
+						alert("삭제되었습니다.");
+						location.reload();
+					}
+				},
+				error: function() {
+					console.log(data);
+				}
+			});
+		});
+	    </script>
+    <!-- Datatable -->
+    <script src="${root}/resources/admin/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="${root}/resources/admin/assets/js/plugins-init/datatables.init.js"></script>
+
+</body>
+
+</html>
