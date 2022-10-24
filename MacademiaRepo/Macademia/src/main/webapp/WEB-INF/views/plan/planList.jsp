@@ -121,9 +121,16 @@ font-family: 'GangwonEdu_OTFBoldA';
 font-size:13px;
 
 }#calendar{
-height:100%;
+font-size:16px;
+height:1000px;
+}
+.fc-view-harness .fc-view-harness-active .fc .fc-bg-event{
+border:none;
+bottom: px;
+}
 
-
+.fc-view-harness .fc-view-harness-active{
+height:1000px;
 }
 a{
 	color:#fff;
