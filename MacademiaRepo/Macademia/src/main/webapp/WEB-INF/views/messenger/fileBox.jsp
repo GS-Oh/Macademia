@@ -99,8 +99,8 @@
             
 			<div id="fileBox-header">
 				<!-- a링크 버튼 클릭 ajax활용해서 바꿔서 fileBox-Content 내용 바꿔주기 -->
-				<button id="fileBox-header-image"><a href="/md/messenger/fileBox">이미지</a></button> 
-				<button id="fileBox-header-etc"> <a href="/md/messenger/fileBox/etc">기타</a> </button>
+				<button id="fileBox-header-image"><a href="/md/messenger/imgFileBox">이미지</a></button> 
+				<button id="fileBox-header-etc"> <a href="/md/messenger/etcFileBox">기타</a> </button>
 			</div>
 			
 			
@@ -109,11 +109,15 @@
 				<div>
 
 					<!-- 파일 수 만큼 이부분 반복 -->
-					<div class="fileBox-tumb" data-bs-toggle="modal" data-bs-target="#myModal">
-						<div> <img src="" alt="" width="140px" height="140px"> </div>
-						<div> <h4>originName</h4> </div>
-						<div> <h4>2022-10-03</h4> </div>
-					</div>
+					<c:forEach items="${ImgFileVoList}" var="imgFileVo">
+					
+						<div class="fileBox-tumb" data-bs-toggle="modal" data-bs-target="#myModal">
+							<div> <img src="" alt="" width="140px" height="140px"> </div>
+							<div> <h4>originName-${imgFileVo.originName}</h4> </div>
+							<div> <h4>2022-10-03-${imgFileVo.enrollDate}</h4> </div>
+						</div>
+					
+					</c:forEach>
 
 
 					<div class="fileBox-tumb" data-bs-toggle="modal" data-bs-target="#myModal">

@@ -22,6 +22,7 @@ import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.common.Pagination;
 import com.kh.md.messenger.service.MessengerService;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -220,10 +221,10 @@ public class MessengerController {
 	
 	
 	
-	// 쪽지 - 답장하기 [ 화면 ] 처리는 쪽지쓰기 메서드 활용
+	// 쪽지 - 답장하기 [ 화면 ] 처리는 이동된 화면에서 다른 쪽으로 요청해서 처리
 	@GetMapping("note/reple/{repleNoteNo}")
 	public String noteReply(@PathVariable String repleNoteNo, Model model) {
-
+		
 		MsgNoteVo noteRepleVo = ms.selectNoteByNo(repleNoteNo);
 		
 		if(noteRepleVo != null) {
@@ -345,16 +346,58 @@ public class MessengerController {
 		}
 	
 	
-	
-	@GetMapping("fileBox")
-	public String fileBox() {
-		return "messenger/fileBox";
+	//파일보관함 메인 페이지 ( 이미지 파일들 보여주기 )
+	@GetMapping("imgFileBox")
+	public String fileBox(MsgFileboxVo msgFileVo ,HttpSession session, Model model) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		msgFileVo.setMsgNo(msgVo.getMsgNo());
+		
+		List<MsgFileboxVo> ImgFileVoList = ms.selectAllFileImgByNo(msgFileVo.getMsgNo());
+		
+		if(ImgFileVoList != null) {
+			model.addAttribute("ImgFileVoList", ImgFileVoList);
+			return "messenger/fileBox";
+		}else {
+			return "";
+		}
+		
 	}
 	
-	@GetMapping("fileBox/etc")
-	public String fileBoxEtc() {
-		return "messenger/fileBoxEtc";
+	//파일보관함 메인 페이지 ( 이미지 외 파일들 보여주기 )
+	@GetMapping("etcFileBox")
+	public String fileBoxEtc(MsgFileboxVo msgFileVo ,HttpSession session, Model model) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		msgFileVo.setMsgNo(msgVo.getMsgNo());
+		
+		List<MsgFileboxVo> FileVoList = ms.selectAllEtcFileByNo(msgFileVo.getMsgNo());
+		
+		if(FileVoList != null) {
+			model.addAttribute("FileVoList", FileVoList);
+			return "messenger/fileBoxEtc";
+		}else {
+			return "";
+		}
 	} 
+	
+	
+	//파일보관함 ( 이미지 파일 등록하기 )
+	@PostMapping("imgFileBox/Enroll")
+	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, Model model) {
+		
+			
+		
+		return "";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//공지 게시글 ( 메인 화면 )

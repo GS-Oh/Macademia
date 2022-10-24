@@ -422,10 +422,72 @@
 		JOIN MEMBER B ON M.NO = B.NO
 		WHERE DEPT= #{deptName}
 		
-		
-		
-		
 	</select>
+	
+	<!-- 파일보관함 - 이미지 파일 전부 가져오기 -->
+	<select id="selectAllFileImgByNo" resultType="com.kh.md.messenger.vo.MsgFileboxVo">
+		
+		SELECT
+		     FILE_NO
+		    ,MSG_NO
+		    ,ORIGIN_NAME
+		    ,FILE_NAME
+		    ,ENROLL_DATE
+		FROM IMG_FILEBOX
+		WHERE MSG_NO = #{msgNo}
+			AND CHECK_DELETE = 'O'
+		ORDER BY FILE_NO
+	
+	</select>
+	
+	
+	<!-- 파일보관함 - 예외 파일 전부 가져오기 -->
+	<select id="selectAllEtcFileByNo" resultType="com.kh.md.messenger.vo.MsgFileboxVo">
+		
+		SELECT
+		     FILE_NO
+		    ,MSG_NO
+		    ,ORIGIN_NAME
+		    ,FILE_NAME
+		    ,ENROLL_DATE
+		FROM FILEBOX
+		WHERE MSG_NO = #{msgNo}
+			AND CHECK_DELETE = 'O'
+		ORDER BY FILE_NO
+	
+	</select>
+	
+	
+	<insert id="insertImgFilebox">
+	
+		INSERT INTO IMG_FILEBOX
+		(
+		    FILE_NO
+		    ,MSG_NO
+		    ,ORIGIN_NAME
+		    ,FILE_NAME
+		)
+		VALUES
+		(
+		    SEQ_IMG_FILEBOX_NO.NEXTVAL
+		    ,#{msgNo}
+		    ,#{originName}
+		    ,#{fileName}
+		)
+	
+	
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

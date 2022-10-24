@@ -73,7 +73,7 @@
 		/*  */
 		#note-info-area{
 			display: grid;
-			grid-template-columns: 50px 1fr 1fr 1fr 2fr 1fr;
+			grid-template-columns: 50px 1fr 1fr 1fr 2fr 0.5fr;
 			grid-template-rows: repeat(8, 1fr);
 			place-items: center;
 
@@ -103,7 +103,7 @@
 		
 		.info-content{
 			display: grid;
-			grid-template-columns: 50px 1fr 1fr 1fr 2fr 1fr;
+			grid-template-columns: 50px 1fr 1fr 1fr 2fr 0.5fr;
 			grid-column: span 6;
 			place-items: center;
 			
@@ -229,10 +229,11 @@
 
 				<div class="info-header"><input type="checkbox"></div>
 				<div class="info-header">보낸사람</div>
-				<div class="info-header">받은사람</div>
+				<div class="info-header" style="display: none;">받은사람</div>
 				<div class="info-header">제목</div>
-				<div class="info-header">내용</div>
 				<div class="info-header">날짜</div>
+				<div class="info-header">내용</div>
+				<div class="info-header">첨부파일 유무</div>
 
 				<!-- 쪽지 수 만큼 여기 반복 -->
 				<c:forEach items="${mnVoList}" var="mnVo">
@@ -242,10 +243,14 @@
 						<div class="info-content">
 							<div><input type="checkbox" class="msg-checkBox"></div>
 							<div class="msg-sender">${mnVo.sendName}</div>
-							<div class="msg-receive">${mnVo.receiveName}</div>
+							<div class="msg-receive" style="display: none;">${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
-							<div class="msg-content">${mnVo.content}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
+							<div class="msg-content">${mnVo.content}</div>
+							<c:if test="${not empty mnVo.fileName }">
+								<div>파일있음</div>
+								<div class="msg-fileName" style="display: none;">${mnVo.fileName}</div>
+							</c:if>
 						</div>
 					</c:if>
 					
@@ -296,13 +301,14 @@
 	<!-- 쪽지 세부 내용 표시 -->
 	<script>
 		const content = document.querySelectorAll('.info-content');
-
 		const msgCheckBox = document.querySelectorAll('.msg-checkBox');
+
 		const msgSender = document.querySelectorAll('.msg-sender');
 		const msgReceive = document.querySelectorAll('.msg-receive');
 		const msgTitle = document.querySelectorAll('.msg-title');
-		const msgContent = document.querySelectorAll('.msg-content');
 		const msgSendDate = document.querySelectorAll('.msg-sendDate');
+		const msgFile = document.querySelectorAll('.msg-fileName');
+		const msgContent = document.querySelectorAll('.msg-content');
 
 
 		const detailSender = document.querySelector('#detail-sender');
@@ -330,7 +336,7 @@
 				detailReceive.innerText = msgReceive[i].innerText;
 				detailTitle.innerText = msgTitle[i].innerText;
 				detailSendDate.innerText = msgSendDate[i].innerText;
-				detailFile.innerText = msgSender[i].innerText;
+				detailFile.innerText = msgFile[i].innerText;
 				detailContent.innerText = msgContent[i].innerText;
 				
 				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;

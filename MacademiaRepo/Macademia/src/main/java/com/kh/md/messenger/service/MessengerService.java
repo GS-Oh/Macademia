@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -80,7 +81,14 @@ public interface MessengerService {
 	//쪽지 ( 보낸사람검색 )
 	List<HashMap<String, String>> selectDeptMember(String deptName);
 
-	
+	//파일보관함 ( 이미지 파일 전부 가져오기 )
+	List<MsgFileboxVo> selectAllFileImgByNo(String msgNo);
+
+	//파일보관함 ( 예외 파일 전부 가져오기 )
+	List<MsgFileboxVo> selectAllEtcFileByNo(String msgNo);
+
+	//파일보관함 ( 이미지 파일 입력 )
+	int insertImgFilebox(MsgFileboxVo fileVo);
 
 	
 }//class

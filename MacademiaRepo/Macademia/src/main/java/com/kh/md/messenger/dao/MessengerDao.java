@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -77,7 +78,13 @@ public interface MessengerDao {
 	//쪽지 ( 부서명으로 멤버 가져오기 )
 	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName);
 
-	
+	//파일보관함 - 이미지 파일 전부 가져오기
+	List<MsgFileboxVo> selectAllFileImgByNo(SqlSessionTemplate sst, String msgNo);
+
+	//파일보관함 - 예외 파일 전부 가져오기
+	List<MsgFileboxVo> selectAllEtcFileByNo(SqlSessionTemplate sst, String msgNo);
+
+	int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo fileVo);
 	
 	
 	

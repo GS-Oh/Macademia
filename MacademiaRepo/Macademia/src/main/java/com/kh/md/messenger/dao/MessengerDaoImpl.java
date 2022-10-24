@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -154,12 +155,34 @@ public class MessengerDaoImpl implements MessengerDao{
 		return sst.update("messengerMapper.updateNoteDelete", deleteNoteNo);
 	}
 
-
+	//쪽지 - ( 해당 부서 멤버 가져오기 )
 	@Override
 	public List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName) {
 		return sst.selectList("messengerMapper.selectDeptMember", deptName);
 	}
 
+
+	//파일보관함 - ( 이미지 파일 전부 가져오기 )
+	@Override
+	public List<MsgFileboxVo> selectAllFileImgByNo(SqlSessionTemplate sst, String msgNo) {
+		return sst.selectList("messengerMapper.selectAllFileImgByNo", msgNo);
+	}
+
+	//파일보관함 - ( 예외 파일 전부 가져오기 )
+	@Override
+	public List<MsgFileboxVo> selectAllEtcFileByNo(SqlSessionTemplate sst, String msgNo) {
+		return sst.selectList("messengerMapper.selectAllEtcFileByNo", msgNo);
+	}
+
+
+	//파일보관함 - ( 이미지 파일 입력 )
+	@Override
+	public int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo fileVo) {
+		return sst.insert("messengerMapper.insertImgFilebox", fileVo);
+	}
+
+	
+	
 	
 	
 	
