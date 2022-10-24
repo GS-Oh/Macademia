@@ -16,6 +16,7 @@
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
+        
         // initialDate: '2020-09-12',
         navLinks: true, // can click day/week names to navigate views
         businessHours: true, // display business hours

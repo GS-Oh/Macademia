@@ -18,4 +18,14 @@ public class EmployeeController {
 		return "/employee/dept-atdc";
 	}
 	
+	@GetMapping("/myDayoff")
+	public String myDayoff() {
+		return "/employee/my-dayoff";
+	}
+	
+	@GetMapping("/deptDayoff")
+	public String deptDayoff() {
+		return "/employee/dept-dayoff";
+	}
+	
 }

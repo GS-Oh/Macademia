@@ -46,8 +46,8 @@
 
    <div class="side-main-category">휴가 관리
 
-        <div class="side-sub-category"><a href="">나의 휴가현황</a></div>
-        <div class="side-sub-category"><a href="">부서별 휴가현황</a></div>
+        <div class="side-sub-category"><a href="${root}/employee/myDayoff">나의 휴가현황</a></div>
+        <div class="side-sub-category"><a href="${root}/employee/deptDayoff">부서별 휴가현황</a></div>
 
     </div>
     

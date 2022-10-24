@@ -30,8 +30,6 @@
     
         <div class="side-sub-category"><a href="${root}/student/roll">수강생 출결관리</a></div>
         <div class="side-sub-category"><a href="${root}/student/search">수강생 정보조회</a></div>
-        <div class="side-sub-category"><a href="">수강생</a></div>
-        <div class="side-sub-category"><a href="">수강생</a></div>
 
     </div>
 
