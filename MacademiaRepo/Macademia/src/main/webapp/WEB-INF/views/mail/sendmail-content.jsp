@@ -4,9 +4,9 @@
 		<section class="mail-section">
 			<div class="mail-content">
 				<div class="mail-title">
-					<div style="font-size: 3rem;">보낸 메일함</div>
+					<div>보낸 메일함</div>
 					<div>
-						<span>보낸 메일함 메일 개수 : 30개</span>
+						<span>보낸 메일함 메일 개수 : 24개</span>
 					</div>
 				</div>
 				<div class="mail-skill-btn-group">
