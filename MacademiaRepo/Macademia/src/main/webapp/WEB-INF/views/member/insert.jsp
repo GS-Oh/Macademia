@@ -7,6 +7,7 @@
 	<%@include file="/resources/css/common/common.css" %>
 
 	<style>
+
 		#sidemenu{
 			height: 80vh;
 			position: fixed;
@@ -25,7 +26,7 @@
 		<aside>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/member/myboards-content.jsp" %>
+			<%@include file="/WEB-INF/views/member/insert-content.jsp" %>
 		</main>
 		<div id="sidemenu">
 			<%@include file="/WEB-INF/views/member/mypage-sidemenu.jsp" %>

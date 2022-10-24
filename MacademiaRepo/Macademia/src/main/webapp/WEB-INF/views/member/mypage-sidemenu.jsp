@@ -2,15 +2,14 @@
     pageEncoding="UTF-8"%>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 
     #mypage-sidemenu{
-        width: 17vw;
+        width: 13vw;
         height: 90vh;
         background-color: rgb(133, 133, 200);
         font-size: 20px;
         text-align: end;
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
         border-top-left-radius: 15px;
         border-bottom-left-radius: 15px;
     }
@@ -55,6 +54,7 @@
 
 <div id="mypage-sidemenu">
     <button id="logout-btn" onclick="location.href='${root}/member/logout'"><i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃</button>
+    <div class="menu" onclick="location.href='${root}/member/insert'">사원생성</div>
     <div class="menu" onclick="location.href='${root}/member/edit'">사원정보수정</div>
     <div class="menu" onclick="location.href='${root}/member/myboards'">내가쓴게시글</div>
     <div class="menu" onclick="location.href='${root}/member/myfiles'">개인자료실</div>

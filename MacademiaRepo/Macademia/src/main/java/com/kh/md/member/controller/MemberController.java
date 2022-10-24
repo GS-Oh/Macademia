@@ -1,5 +1,13 @@
 package com.kh.md.member.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +27,8 @@ public class MemberController {
 		return "home";
 	}
 	@GetMapping("/member/logout")
-	public String logout() {
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginMember");
 		return "member/login";
 	}
 	@GetMapping("/member/findpwd")
@@ -32,6 +41,16 @@ public class MemberController {
 		model.addAttribute("alertMsg","임시비밀번호를 발송하였습니다. 개인이메일을 확인해주세요.");
 		return "member/login";
 	}
+	
+	@GetMapping("/member/insert")
+	public String insert() {
+		return "member/insert";
+	}
+	@PostMapping("/member/insert")
+	public String insert(MemberVo vo){
+		return "member/insert";
+	}
+	
 	@GetMapping("/member/mypage")
 	public String myPage() {
 		return "member/mypage";

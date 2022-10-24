@@ -4,13 +4,12 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
     
     #myboards-content{
         height: 85vh;
-        width: 60vw;
+        width: 70vw;
         /* border: 1px solid black; */
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
     }
     h1{
         font-size: 35px;

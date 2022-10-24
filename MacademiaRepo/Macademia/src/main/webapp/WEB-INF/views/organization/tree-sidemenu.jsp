@@ -2,20 +2,18 @@
     pageEncoding="UTF-8"%>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
-
     #mypage-sidemenu{
-        width: 17vw;
+        width: 13vw;
         height: 90vh;
-        background-color: rgb(133, 133, 200);
-        font-size: 20px;
+        border-top-right-radius: 15px;
+        font-size: 16px;
         text-align: end;
-        font-family: 'Noto Sans KR', sans-serif;
-
+        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        background-color: #6667AB;
+        color: white;
     }
     #mypage-sidemenu > div{
-        border-top: 1px solid rgb(222, 222, 222);
-        color: white;
+        border-top: 1px solid #dedede;
         width: 100%;
         height: 80px;
         text-align: center;
@@ -23,7 +21,8 @@
     }
     .menu:hover{
         cursor: pointer; 
-        background-color: rgb(98, 92, 161);
+        background-color: white;
+        color: #6667AB;
         transition: 0.5s;
     }
 </style>

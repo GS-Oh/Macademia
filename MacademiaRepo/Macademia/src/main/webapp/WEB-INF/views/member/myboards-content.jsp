@@ -2,13 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
     #myboards-content{
         height: 90vh;
         width: 60vw;
         /* border: 1px solid black; */
         padding: 10px 0px;
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
     }
     select{
         width: 100px;
