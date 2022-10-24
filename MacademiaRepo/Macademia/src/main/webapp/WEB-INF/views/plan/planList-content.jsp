@@ -47,10 +47,12 @@ border:none;
 .fc-scrollgrid, .fc-scrollgrid-liquid{
 border:none;
 }
-.fc-day-today{
+.fc-unthemed td.fc-today{
 background-color:red;
 }
-
+ .fc-unthemed td.fc-today{
+        background-color: aquamarine;
+      }
 
 
 	
