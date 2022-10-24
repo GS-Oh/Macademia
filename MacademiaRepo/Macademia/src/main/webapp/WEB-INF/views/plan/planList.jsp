@@ -134,22 +134,22 @@ a{
   text-decoration: none;
 }
 .fc-day-mon a{
-color:#fff;
+color:#000;
 }
 .fc-day-tue a{
-color:#fff;
+color:#000;
 }
 .fc-day-wed a{
-color:#fff;
+color:#000;
 }
 .fc-day-thu a{
-color:#fff;
+color:#000;
 }
 .fc-day-fri a{
-color:#fff;
+color:#000;
 }
 .fc-day-sat a{
-color:#fff;
+color:#000;
 }
 .fc-daygrid-day-number{
 
