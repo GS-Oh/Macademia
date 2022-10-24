@@ -128,7 +128,7 @@
 
 	<script>
 	    // 파일 있는지 확인하기
-	    const fileInputTag = document.querySelector('input[name=attFile]');
+	    const fileInputTag = document.querySelector('input[name="attFile"]');
 		
 	    // 해당파일에 변화가 생기면 함수가 작동하도록 설정
 	    fileInputTag.onchange = function(){

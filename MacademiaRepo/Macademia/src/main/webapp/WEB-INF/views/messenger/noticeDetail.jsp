@@ -128,6 +128,7 @@
 
 
 			<!--  -->
+			<!--  -->
 			<div id="reply-area">
 
 				<span ><h3>댓글</h3></span>
@@ -142,10 +143,11 @@
 									<div><h6 style="color:gray">${repleVo.enrollDate}</h6></div>
 								</div>
 		
-		
+								<div>
 								<c:if test="${repleVo.msgNo eq noticeVo.msgNo }">
-									<div><a href="/md/messenger/notice/reple/delete/${repleVo.repleNo}/${noticeVo.noticeNo}" class="btn btn-lg">삭제하기</a></div>
+									<a href="/md/messenger/notice/reple/delete/${repleVo.repleNo}/${noticeVo.noticeNo}" class="btn btn-lg">삭제하기</a>
 								</c:if>
+								</div>
 						</c:forEach>
 					</div>
 

@@ -105,14 +105,14 @@
             
             
 			<!-- 개발부 -->
-			<div class="main-partition"><h2>개발부</h2><h5 style="color: gray;">(3명)</h5></div>
+			<div class="main-partition"><h2>행정팀</h2><h5 style="color: gray;">(3명)</h5></div>
 			
 			<!-- 개발부 직원 -- 얘로 감싸고 -->
 			<div class="main-content-wrap">
 			
 				<!-- 개발부 직원 수 만큼 반복 -->
 				<c:forEach items="${msgVoList}" var="msgTotalVo">
-					<c:if test="${msgTotalVo.dept eq '개발부'}">
+					<c:if test="${msgTotalVo.dept eq '행정팀'}">
 						<div class="messenger-main-content">
 							<div style="height: 100%; width: 100%; " >
 								<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" onclick="modalCall"><img alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
@@ -131,13 +131,13 @@
 
 
 			<!-- 인사부 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
-			<div class="main-partition"><h2>인사부</h2><h5 style="color: gray;">(3명)</h5></div>
+			<div class="main-partition"><h2>재정팀</h2><h5 style="color: gray;">(3명)</h5></div>
 			<!-- 인사부 직원 -- 얘로 감싸고 -->
 			<div class="main-content-wrap">
 			
 				<!-- 개발부 직원 수 만큼 반복 -->
 				<c:forEach items="${msgVoList}" var="msgTotalVo">
-					<c:if test="${msgTotalVo.dept eq '인사부'}">
+					<c:if test="${msgTotalVo.dept eq '재정팀'}">
 						<div class="messenger-main-content">
 							<div style="height: 100%; width: 100%; " >
 								<a data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
@@ -158,13 +158,13 @@
 			
 
 			<!-- 영업부 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
-			<div class="main-partition"><h2>영업부</h2><h5 style="color: gray;">(3명)</h5></div>
+			<div class="main-partition"><h2>시설지원팀</h2><h5 style="color: gray;">(3명)</h5></div>
 			<!-- 영업부 직원 -- 얘로 감싸고 -->
 			<div class="main-content-wrap">
 			
 				<!-- 영업부 직원 수 만큼 반복 -->
 				<c:forEach items="${msgVoList}" var="msgTotalVo">
-					<c:if test="${msgTotalVo.dept eq '영업부'}">
+					<c:if test="${msgTotalVo.dept eq '시설지원팀'}">
 						<div class="messenger-main-content">
 							<div style="height: 100%; width: 100%; " >
 								<a id="modal-call" data-bs-toggle="modal" data-bs-target="#myModal" href="" ><img alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>

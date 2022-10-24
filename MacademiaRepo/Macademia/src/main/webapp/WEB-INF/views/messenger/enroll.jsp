@@ -82,18 +82,18 @@
 						<img id="profile-img-thumb" src="" alt="" width="100%" height="90%" style="border:1px solid black">
 						<input type="file" name="profile" style="height: 10%; width: 100%;" >
 					</div>
-					<div>직원명</div>
+					<div>직원명${loginMember.name}</div>
 					<div>3-공백</div>
-					<div style="grid-row: span 2;"><textarea name="introduce" id="" rows="9" style="width:90%;">자기소개글</textarea></div>
+					<div style="grid-row: span 2;"><textarea name="introduce" id="" rows="9" style="width:90%;" placeholder="자기소개글을 작성해주세요"></textarea></div>
 					<div><input type="submit" name="content" class="btn btn-primary btn-lg" style="color: white; width: 50%;" value="등록하기"></div>
 					<div>6-공백</div>
 				</form>
 			</div>
 
 			<div id="profile-bottom-content">
-				<div class="badge bg-secondary"><h3>부서명-직책</h3></div>
-				<div class="badge bg-secondary"><h3>주소</h3></div>
-				<div class="badge bg-secondary"><h3>이메일주소</h3></div>
+				<div class="badge bg-secondary"><h3>부서명-직책 ${loginMember.dept}-${loginMember.position}</h3></div>
+				<div class="badge bg-secondary"><h3>주소-${loginMember.address}</h3></div>
+				<div class="badge bg-secondary"><h3>이메일주소-${loginMember.email}</h3></div>
 			</div>
 			
         </main>

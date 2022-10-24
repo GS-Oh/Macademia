@@ -252,7 +252,8 @@
 		    ,MSG_NO
 		    ,RECEIVE_NO
 		    ,TITLE
-		    ,CONTENT    
+		    ,CONTENT
+		    ,ORIGIN_NAME    
 		    ,FILE_NAME
 		)
 		VALUES
@@ -262,6 +263,7 @@
 		    ,#{receiveNo}
 		    ,#{title}
 		    ,#{content}
+		    ,#{originName}
 		    ,#{fileName}
 		)
 		
