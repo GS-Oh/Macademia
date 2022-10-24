@@ -23,4 +23,8 @@ public class MailController {
 	public String writeMail() {
 		return "mail/writemail";
 	}
+	@GetMapping("detail")
+	public String detailMail() {
+		return "mail/maildetail";
+	}
 }

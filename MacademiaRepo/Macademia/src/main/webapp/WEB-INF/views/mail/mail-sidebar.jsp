@@ -30,13 +30,16 @@
 				</div>
 				<ul class="mail-menu">
 					<li class="active">
-						<a href="#">받은 메일함 <span>89</span></a>
+						<a href="#">전체 메일함 <span>89</span></a>
 					</li>
 					<li>
-						<a href="#">보낸 메일함</a>
+						<a href="#">받은 메일함</a><span>65</span>
 					</li>
 					<li>
-						<a href="#">휴지통 <span>24</span></a>
+						<a href="#">보낸 메일함 <span>24</span></a>
+					</li>
+					<li>
+						<a href="#">휴지통<span>0</span></a>
 					</li>
 				</ul>
 			</aside>

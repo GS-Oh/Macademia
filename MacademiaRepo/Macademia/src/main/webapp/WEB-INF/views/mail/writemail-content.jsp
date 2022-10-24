@@ -35,6 +35,10 @@
 								<textarea class="summernote" id="summernote"></textarea>
 							</div>
 						</div>
+						<div class="bt_wrap">
+			                <a href="/md/mail/main" class="on">등록</a>
+			                <a href="/md/mail/main">취소</a>
+		           		</div>
 					</div>
 				</section>
 				<aside class="search-aside">
