@@ -179,7 +179,7 @@
                         <li class="sc-bqiRlB jsjMks"><a href="">직원추가</a></li>
                         <li class="sc-bqiRlB jsjMks"><a href="${root}/notice/main">공지사항</a></li>
                         <li class="sc-bqiRlB jsjMks"><a href="${root}/meetingRoom/main">회의실 관리</a></li>
-                        <li class="sc-bqiRlB jsjMks">증명서</li>
+                        <li class="sc-bqiRlB jsjMks"><a href="${root}/addr/list">주소록</a></li>
                         <li class="sc-bqiRlB jsjMks">기능 사용 설정</li>
                         <li class="sc-bqiRlB jsjMks">기타 설정</li>
                     </ul>
