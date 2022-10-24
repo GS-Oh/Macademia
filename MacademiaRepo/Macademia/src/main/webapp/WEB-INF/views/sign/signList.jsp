@@ -18,16 +18,17 @@
     src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
 }
 
-ul, li{
 
-list-style:none;
-}
 #content{
 width:100vw;
 height:80vh;
 
 display: flex;
 
+}
+ul, li{
+
+list-style:none;
 }
 #side_menu{
 width:13vw;
