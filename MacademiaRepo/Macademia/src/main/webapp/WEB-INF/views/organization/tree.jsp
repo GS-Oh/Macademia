@@ -3,19 +3,9 @@
 <html>
 <head>
 	<title>myPage</title>
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
 	<%@include file="/resources/css/common/common.css" %>
-
-	<style>
-
-		#sidemenu{
-			width: 17vw;
-			height: 80vh;
-			position: fixed;
-			top:10vh;
-			right: 0;
-		}
-	</style>
 	
 </head>
 <body>
@@ -25,13 +15,12 @@
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		<aside>
+			<%@include file="/WEB-INF/views/organization/tree-sidemenu.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/home-content.jsp" %>
+			<%@include file="/WEB-INF/views/organization/tree-content.jsp" %>
+			<!-- <%@include file="/WEB-INF/views/home-content.jsp" %> -->
 		</main>
-		<div id="sidemenu">
-			<%@include file="/WEB-INF/views/member/mypage-sidemenu.jsp" %>
-		</div>
 	</div>
 
 
