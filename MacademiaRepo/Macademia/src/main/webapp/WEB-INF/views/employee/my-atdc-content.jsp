@@ -13,15 +13,12 @@
         font-size: 12px;
     }
 
-    #main-content-wrap>div{
-        /* border: 1px solid rebeccapurple; */
-    }
     #main-content-wrap{
         width: 60vw;
         /* border: 3px solid black; */
         padding: 2vw;
         display: grid;
-        grid-template-rows: 10vh 30vh 10vh 50px;
+        grid-template-rows: 10vh 40vh 10vh 50px;
         row-gap: 10px;
     }
     #main-content-wrap>div:nth-child(1){
@@ -32,43 +29,122 @@
 
     /*  */
     #main-content-wrap>div:nth-child(2){
-        border: 1px solid blue;
+        border: 1px solid #6667AB;
+        border-radius: 10px;
+        box-shadow: 100px;
         display: grid;
-        justify-items: center;
+        grid-template-rows: 2fr 1fr;
+        /* justify-items: flex-end; */
         align-items: center;
+        margin-bottom: 50px;
     }
     #main-content-wrap>div:nth-child(2)>div:nth-child(1){
         display: grid;
-        grid-template-columns: 100px 100px;
-        /* column-gap: 20px; */
-        grid-template-rows: 10vh;
-        margin-bottom: 50px;
-        justify-items: center;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        justify-content: flex-end;
         align-items: center;
+        margin-right: 6vw;
+        margin-left: 6vw;
     }
+
+    #off-duty-detail{
+        background-color: #6667AB;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    #off-duty-detail>div{
+        height: 100%;
+        display: grid;
+        width: 100%;
+        align-content: center;
+        color: white;
+        padding-left: 0.2vw;
+        font-size: 16px;
+        text-align: center;
+        letter-spacing: 1em;
+    }
+    #off-duty-detail>div:hover{
+        cursor: pointer;
+        border: 1px solid #6667AB;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: white;
+        color: #6667AB;
+    }
+
     #main-content-wrap>div:nth-child(2)>div:nth-child(1)>div{
         width: 100%;
         height: 100%;
     }
-    #main-content-wrap>div:nth-child(2)>div:nth-child(1)>div>div:nth-child(1){
-        border: 1px solid green;
-        justify-items: center;
-    }
-    #main-content-wrap>div:nth-child(2)>div:nth-child(1)>div:nth-child(2){
-        border-left: 1px solid blue;
-    }
     #main-content-wrap>div:nth-child(2)>div{
-        border: 1px solid red;
+        height: 100px;
     }
-    #main-content-wrap>div:nth-child(2) div:nth-child(1)>div:nth-child(2){
-        /* margin-left: 10px; */
-    }
-    #total-work-area{
+    #btn-area div>a{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 40px;
+        justify-items: center;
+        width: 100%;
+    }
+    #btn-area div>a:hover{
+        scale: 1.1;
+        /* transition: 0.5s; */
+    }
+    #btn-area div i{
+        color: white;
+    }
+    .btn-border{
+        background-color: #6667AB;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .time-check-text{
+        color: #6667AB;
+        font-size: 14px;
+    }
+    #main-content-wrap>div:nth-child(2)>div>div{
+        display: grid;
+        justify-items: center;
     }
     
 
+    #total-work-area{
+        display: grid;
+        grid-template-columns: 150px 150px;
+        justify-content: center;
+        column-gap: 50px;
+    }
+    #total-work-area>div{
+        color: #6667AB;
+        /* border: 1px solid red; */
+        align-items: center;
+    }
+    .total-work-area-underbar{
+        border-bottom: 1px solid blue;
+        width: 100%;
+        height: 100%;
+        display: grid;        
+        justify-items: center;
+        align-content: center;
+        font-weight: bolder;
+        color: black;
+    }
+    .total-hr{
+        color:#6667AB;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+    
+    /*  */
     #main-content-wrap>div:nth-child(3){
         display: flex;
         justify-content: flex-start;
@@ -125,27 +201,49 @@
 <script>
     $(function(){
 
-        const dateObj = new Date();
-        let year = dateObj.getFullYear();
-        let month = dateObj.getMonth()+1;  
-        let date = dateObj.getDate(); 
-        let day = dateObj.getDay();
+        //퇴근 상세버튼 보여주기
+        $('#off-duty-detail').attr('style', 'visibility:hidden')
+
+        $('#off-duty-btn').click(function(){
+            if($('#off-duty-detail').css('visibility') == 'hidden'){
+                $('#off-duty-detail').attr('style', 'visibility:visible')
+                $('#off-duty-detail').attr('style', 'transition:1s')
+            }else {
+                $('#off-duty-detail').attr('style', 'visibility:hidden')
+            }
+        });
+
+
+        /* 캘린더 관련 */ 
+        let date = new Date()
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let today = date.getDate();
+        let day = date.getDay();
 
         //월요일~일요일 구하기
-        let startDate = date - day + (day == 0 ? -6 : 1);
-        let endDate = date - day + (day == 0 ? -6 : 7);
-                         
+        let startDate = today - day + (day == 0 ? -6 : 1);
+        let endDate = today - day + (day == 0 ? 0 : 7);
+
         // 검색하려는 시작일자와 마지막일자 출력
-        $('#start-date').append(year+'-'+month+'-'+startDate)
-        $('#end-date').append(year+'-'+month+'-'+endDate)
+        $('#start-date').append(year+'.'+month+'.'+startDate)
+        $('#end-date').append(year+'.'+month+'.'+endDate)
+
+        //매월 마지막 일자 구하기
+        let lastDate = new Date(year, month, 0).getDate()
 
         //오른쪽 버튼 클릭 이벤트
         $('#next-week').on('click', function(){
-
+            if(today > lastDate){
+                new Date(year, month + 1, 1)
+                date = 1
+                month += 1
+            }
+            
             startDate += 7
             endDate += 7
             $('#selected-date').replaceWith
-            ('<div id="selected-date"><span id="start-date">'+year+'-'+month+'-'+startDate+'</span> ~ <span id="end-date">'+year+'-'+month+'-'+endDate+'</span></div>')
+            ('<div id="selected-date"><span id="start-date">'+year+'.'+month+'.'+startDate+'</span> ~ <span id="end-date">'+year+'.'+month+'.'+endDate+'</span></div>')
         
         });
 
@@ -154,8 +252,8 @@
            
             startDate -= 7
             endDate -= 7
-            // $('#start-date').text(year+'-'+month+'-'+parseInt(startDate-7))
-            // $('#end-date').text(year+'-'+month+'-'+parseInt(endDate-7))
+            $('#start-date').text(year+'-'+month+'-'+parseInt(startDate-7))
+            $('#end-date').text(year+'-'+month+'-'+parseInt(endDate-7))
         });
     });
 </script>
@@ -167,33 +265,39 @@
 
     <div>
         <div id="btn-area">
+            <div></div>
             <div>
-                <div><a href=""><i class="fa-solid fa-arrow-right-to-bracket"><br>출근하기</i></a></div>
+                <div><a href=""><div class="btn-border"><i class="fa-solid fa-arrow-right-to-bracket fa-2xl"></i></div><br><b class="time-check-text">출근하기</b></a></div>
                 <div>08:57:34</div>
             </div>
 
             <div>
-                <div><a href=""><i class="fa-solid fa-arrow-right-from-bracket"><br>퇴근하기</i></a></div>
+                <div id="off-duty-btn"><a><div class="btn-border"><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></div><br><b class="time-check-text">퇴근하기</b></a></div>
                 <div>18:37:14</div>
+            </div>
+            <div id="off-duty-detail">
+                <div class="off-duty-detail-btn">퇴근</div>
+                <div class="off-duty-detail-btn">반차</div>
+                <div class="off-duty-detail-btn">외근</div>
             </div>
         </div>
         
         <div id="total-work-area">
             <div>
-                <div>
-                    <h4>이번달 총 근무일</h4>
+                <div class="total-work-area-underbar">
+                    <span>이번 주 누적근무</span>
                 </div>
                 <div>
-                    <h4>19D</h4>
+                    <span class="total-hr">45h 30m 89s</span>
                 </div>
             </div>
             
             <div>
-                <div>
-                    <h4>이번달 총 근무시간</h4>
+                <div class="total-work-area-underbar">
+                    <span>이번 달 누적근무</span>
                 </div>
                 <div>
-                    <h4>72h 30m 89s</h4>
+                    <span class="total-hr">172h 30m 89s</span>
                 </div>
             </div>
             
