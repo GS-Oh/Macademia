@@ -32,7 +32,7 @@
     }
 /* 헤더 로고부분 */
     #logo-area{
-        width: 19vw;
+        width: 15vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -42,7 +42,7 @@
         width: 60vw;
         padding: 0vw 6vw;
         display: grid;
-        grid-template-columns: repeat(11, 4vw);
+        grid-template-columns: repeat(12, 4vw);
         justify-content: center;
     }
     #nav-area a, #alert-area a{
@@ -74,7 +74,7 @@
 <div id="header-wrap">
     <div id="logo-area">
         <a href="${root}/member/login">
-            <img src="" alt="로고">
+            <img src="${root}/resources/img/logo/logo_temp.png" width="100%" alt="로고">
         </a>
     </div>
     <div id="nav-area">
@@ -91,13 +91,13 @@
             </a>
         </div>
         <div id="nav-menu3">
-            <a href="${root}/student/main">
+            <a href="${root}/student/roll">
                 <i class="fa-solid fa-chalkboard-user fa-2x"></i><br>
                 <label for="">학사</label>
             </a>
         </div>
         <div id="nav-menu4">
-            <a href="">
+            <a href="${root}/organization/tree">
             	<i class="fa-solid fa-sitemap fa-2x"></i><br>
                 <label for="">조직도</label>
             </a>
@@ -139,6 +139,12 @@
             </a>
         </div>
         <div id="nav-menu11">
+            <a href="${root}/mail/main">
+                <i class="fa-solid fa-envelope fa-2x"></i><br>
+                <label for="">메일</label>
+            </a>
+        </div>
+        <div id="nav-menu12">
             <a href="${root}/admin/main">
                 <i class="fa-solid fa-user-gear fa-2x"></i><br>
                 <label for="">관리자</label>

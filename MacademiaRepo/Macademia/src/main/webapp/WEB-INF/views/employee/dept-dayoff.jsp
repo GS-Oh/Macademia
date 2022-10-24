@@ -6,16 +6,6 @@
 	
 	<%@include file="/resources/css/common/common.css" %>
 	
-	<style>
-		#right-side{
-        width: 20vw;
-        height: 80vh;
-        position: fixed;
-		right: 0vw;
-        top:10vh;
-    }
-	
-	</style>
 </head>
 <body>
 	
