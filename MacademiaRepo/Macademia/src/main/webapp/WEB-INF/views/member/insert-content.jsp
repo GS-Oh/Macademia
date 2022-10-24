@@ -48,12 +48,12 @@
 </style>
 
 <div id="edit-content">
-    <h1>사원정보수정</h1>
+    <h1>사원생성</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <label for="name">이름</label>
-        <input type="text" id="name" name="name" value="아이유" disabled> 
+        <input type="text" id="name" name="name"> 
         <label for="email">사내이메일</label>
-        <input type="text" id="email" name="email" value="iu2022@md.com" disabled> 
+        <input type="text" id="email" name="email"> 
         <label for="pwd">비밀번호</label>
         <input type="text" id="pwd" name="pwd"> 
         <label for="pwd2">비밀번호확인</label>
@@ -65,9 +65,43 @@
         <label for="address2">상세주소</label>
         <input type="text" id="address2" name="address2"> 
         <label for="phone">전화번호</label>
-        <input type="text" id="phone" name="phone" placeholder="'-'없이 입력"> 
+        <input type="text" id="phone" name="phone" placeholder="'-'없이 입력">
+        <label for="phone">부서번호</label>
+        <select name="bank" id="dept" name="bank">
+            <option value="none">===선택===</option>
+            <option>대표이사</option>
+            <option>부원장</option>
+            <option>운영기획부</option>
+            <option>교육훈련부</option>
+            <option>취업지원부</option>
+            <option>마케팅부</option>
+            <option>행정팀</option>
+            <option>총무팀</option>
+            <option>시설지원팀</option>
+            <option>교육1팀</option>
+            <option>교육2팀</option>
+            <option>교재지원팀</option>
+            <option>취업팀</option>
+            <option>상담팀</option>
+            <option>홍보팀</option>
+            <option>대외협력팀</option>
+        </select>
+        <label for="phone">직급</label>
+        <select name="bank" id="position" name="bank">
+            <option value="none">===선택===</option>
+            <option>대표이사</option>
+            <option>부원장</option>
+            <option>임원</option>
+            <option>부장</option>
+            <option>팀장</option>
+            <option>주임</option>
+            <option>대리</option>
+            <option>사원</option>
+            <option>인턴</option>
+
+        </select>
         <label for="bank">은행</label>
-        <select name="bank" id="bank" name="bank">
+        <select name="bank">
             <option value="none">===선택===</option>
             <option>국민은행</option>
             <option>농협</option>
@@ -79,7 +113,7 @@
         <input type="text" id="account" name="account" placeholder="'-'없이 입력"> 
         <label for="email">프로필사진</label>
         <input type="file" id="profile" name="profile"> 
-        <input type="submit" id="submit-btn" value="수정완료">
+        <input type="submit" id="submit-btn" value="사원생성">
     </form>
     
 </div>

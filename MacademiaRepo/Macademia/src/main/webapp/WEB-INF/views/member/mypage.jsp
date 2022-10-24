@@ -9,7 +9,7 @@
 	<style>
 
 		#sidemenu{
-			width: 17vw;
+			width: 13vw;
 			height: 80vh;
 			position: fixed;
 			top:10vh;
