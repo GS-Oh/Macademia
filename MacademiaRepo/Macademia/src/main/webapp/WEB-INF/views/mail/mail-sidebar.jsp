@@ -22,21 +22,20 @@
     }
 </style>
 
-
 <aside class="mail-aside">
 				<div class="mail-btn-group">
-					<a href="#" class="mail-btn">메일쓰기</a>
-					<a href="#" class="mail-btn">내게쓰기</a>
+					<a href="/md/mail/write" class="mail-btn">메일쓰기</a>
+					<a href="/md/mail/write" class="mail-btn">내게쓰기</a>
 				</div>
 				<ul class="mail-menu">
 					<li class="active">
-						<a href="#">전체 메일함 <span>89</span></a>
+						<a href="/md/mail/main">전체 메일함 <span>89</span></a>
 					</li>
 					<li>
-						<a href="#">받은 메일함</a><span>65</span>
+						<a href="/md/mail/receive">받은 메일함</a><span>65</span>
 					</li>
 					<li>
-						<a href="#">보낸 메일함 <span>24</span></a>
+						<a href="/md/mail/send">보낸 메일함 <span>24</span></a>
 					</li>
 					<li>
 						<a href="#">휴지통<span>0</span></a>

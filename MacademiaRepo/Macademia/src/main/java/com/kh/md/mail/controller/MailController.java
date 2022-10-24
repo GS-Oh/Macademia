@@ -13,18 +13,18 @@ public class MailController {
 	}
 	@GetMapping("send")
 	public String sendMail() {
-		return "mail/sendmail";
+		return "mail/send";
 	}
 	@GetMapping("receive")
 	public String receiveMail() {
-		return "mail/receivemail";
+		return "mail/receive";
 	}
 	@GetMapping("write")
 	public String writeMail() {
-		return "mail/writemail";
+		return "mail/write";
 	}
 	@GetMapping("detail")
 	public String detailMail() {
-		return "mail/maildetail";
+		return "mail/detail";
 	}
 }
