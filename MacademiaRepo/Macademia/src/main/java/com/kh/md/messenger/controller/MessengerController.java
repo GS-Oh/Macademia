@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.md.member.vo.MemberVo;
 import com.kh.md.messenger.common.FileUploader;
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.common.Pagination;
@@ -40,10 +41,11 @@ public class MessengerController {
 	
 	//메신저 등록확인 및 메인페이지 이동
 	@GetMapping("main")
-	public String main(HttpSession session) {
+	public String main(HttpSession session, Model model) {
 		
 		//TODO 세션에서 멤버넘버 가져오기
-		String memberNo = "3";
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		String memberNo = "4";
 		
 		//메신저 등록되어있는지 체크
 		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
@@ -68,7 +70,7 @@ public class MessengerController {
 	public String enroll(MessengerVo msgVo, HttpSession session, HttpServletRequest req) {
 		
 		//TODO 세션에서 멤버넘버 가져오기
-		String memberNo = "3";
+		String memberNo = "4";
 		msgVo.setNo(memberNo);
 		
 		if(msgVo.getProfile() != null && !msgVo.getProfile().isEmpty()) {
@@ -191,6 +193,7 @@ public class MessengerController {
 		return "messenger/noteWrite";
 	}
 	
+	
 	//쪽지 보내기 [ 처리 ]
 	@PostMapping("note/write/{receiveNo}")
 	public String noteWrite(MsgNoteVo mnVo ,HttpSession session, HttpServletRequest req, @PathVariable String receiveNo, String reveiceName22) {
@@ -202,9 +205,11 @@ public class MessengerController {
 		mnVo.setReceiveNo(receiveNo);
 		
 		if(mnVo.getAttFile() != null && !mnVo.getAttFile().isEmpty()) {
+			String originName = mnVo.getAttFile().getOriginalFilename();
 			String savePath = req.getServletContext().getRealPath("resources/upload/messenger/");
 			String changeName = FileUploader.fileUploadNote(mnVo.getAttFile(), savePath);
 			mnVo.setFileName(changeName);
+			mnVo.setOriginName(originName);
 		}
 		
 		int result = ms.insertNoteOne(mnVo);
@@ -273,7 +278,6 @@ public class MessengerController {
 	public String deptMember(String deptName, Model model) {
 		
 		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(deptName);
-		
 		if(deptMemberList != null) {
 			model.addAttribute("deptMemberList",deptMemberList);
 			return "messenger/noteRecipient";
@@ -297,53 +301,53 @@ public class MessengerController {
 	
 	
 	//메신저 나의 프로필 페이지
-		@GetMapping("profile")
-		public String profile() {
+	@GetMapping("profile")
+	public String profile() {
+		return "messenger/profile";
+	}
+	
+	
+	
+	//메신저 프로필 수정 화면
+	@GetMapping("profile/edit")
+	public String profileEdit() {
+		return "messenger/profileEdit";
+	}
+	
+	
+	//메신저 프로필 수정 처리
+	@PostMapping("profile/edit")
+	public String profileEdit(MessengerVo vo ,HttpServletRequest req, HttpSession session) {
+		
+		//기존 파일 삭제
+		String savePath = req.getServletContext().getRealPath("/resources/upload/messenger/"); //req로 기존 파일 경로 가져오고
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); // 세션에 msgVo 통해서 파일 이름 가져오고
+		String fileName = msgVo.getFileName();
+		File f= new File(savePath + fileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		
+		
+		//신규로 받은 파일 업로드, 저장된 파일명 얻기
+		if(!vo.getProfile().isEmpty()) {
+			String changeName = FileUploader.fileUpload(vo.getProfile(), savePath);
+			vo.setFileName(changeName);
+		}
+		
+		//회원번호 세션에서 얻어와서 - 세팅 마무리 해준 vo로 - db에 업데이트
+		vo.setNo(msgVo.getNo());
+		MessengerVo updateMember = ms.updateMsgOne(vo);
+		
+		if(updateMember != null) {
+			session.setAttribute("msgVo", updateMember);
 			return "messenger/profile";
+		}else {
+			return "";
 		}
 		
-		
-		
-		//메신저 프로필 수정 화면
-		@GetMapping("profile/edit")
-		public String profileEdit() {
-			return "messenger/profileEdit";
-		}
-		
-		
-		//메신저 프로필 수정 처리
-		@PostMapping("profile/edit")
-		public String profileEdit(MessengerVo vo ,HttpServletRequest req, HttpSession session) {
-			
-			//기존 파일 삭제
-			String savePath = req.getServletContext().getRealPath("/resources/upload/messenger/"); //req로 기존 파일 경로 가져오고
-			MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); // 세션에 msgVo 통해서 파일 이름 가져오고
-			String fileName = msgVo.getFileName();
-			File f= new File(savePath + fileName);
-			
-			if(f.exists()) {
-				f.delete();
-			}
-			
-			
-			//신규로 받은 파일 업로드, 저장된 파일명 얻기
-			if(!vo.getProfile().isEmpty()) {
-				String changeName = FileUploader.fileUpload(vo.getProfile(), savePath);
-				vo.setFileName(changeName);
-			}
-			
-			//회원번호 세션에서 얻어와서 - 세팅 마무리 해준 vo로 - db에 업데이트
-			vo.setNo(msgVo.getNo());
-			MessengerVo updateMember = ms.updateMsgOne(vo);
-			
-			if(updateMember != null) {
-				session.setAttribute("msgVo", updateMember);
-				return "messenger/profile";
-			}else {
-				return "";
-			}
-			
-		}
+	}
 	
 	
 	//파일보관함 메인 페이지 ( 이미지 파일들 보여주기 )
@@ -383,17 +387,33 @@ public class MessengerController {
 	
 	
 	//파일보관함 ( 이미지 파일 등록하기 )
-	@PostMapping("imgFileBox/Enroll")
-	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, Model model) {
+	@GetMapping("imgFileBox/Enroll/{fileName}")
+	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName,HttpSession session, Model model) {
 		
-			
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		msgFileVo.setMsgNo(msgVo.getMsgNo());
+		msgFileVo.setFileName(fileName);
 		
-		return "";
+		int result = ms.insertImgFilebox(msgFileVo);
+		
+		if(result == 1) {
+			return "redirect:/messenger/download/"+ fileName;
+		}else {
+			return "";
+		}
+		
+		
 	}
 	
 	
-	
-	
+	//파일보관함 ( 파일 상세화면 )
+	@GetMapping("download/{fileName}")
+	public String download(@PathVariable String fileName, Model model) {
+		
+		model.addAttribute("fileName", fileName);
+		
+		return "messenger/download";
+	}
 	
 	
 	
@@ -417,7 +437,7 @@ public class MessengerController {
 		return "messenger/notice";
 	}
 
-	
+	//공지 게시글 ( 입력 화면 )
 	@GetMapping("notice/write")
 	public String noticeWrite() {
 		return "messenger/noticeWrite";
@@ -425,10 +445,10 @@ public class MessengerController {
 	
 	//공지 게시글 ( 입력 처리 )
 	@PostMapping("notice/write")
-	public String noticeWrite(MsgNoticeVo noticeVo) {
+	public String noticeWrite(MsgNoticeVo noticeVo, HttpSession session) {
 		
-		//TODO 세션이나 다른곳 저장되어있는 MsgNo로 바꾸기
-		noticeVo.setMsgNo("1");
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		noticeVo.setMsgNo(msgVo.getMsgNo());
 		
 		int result = ms.insertNotice(noticeVo);
 		

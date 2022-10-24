@@ -122,9 +122,10 @@
 
 		/*  */
 		#note-detail-area{
+			height: 500px;
 			display: grid;
 			grid-template-columns: 2fr 8fr;
-			grid-template-rows: repeat(5,1fr) 2fr;
+			grid-template-rows: repeat(4,1fr) 2fr 2fr;
 			margin-top: 15px;
 			border: 3px solid #6667AB;
 			border-radius: 10px;
@@ -248,8 +249,8 @@
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
 							<div class="msg-content">${mnVo.content}</div>
 							<c:if test="${not empty mnVo.fileName }">
-								<div>파일있음</div>
-								<div class="msg-fileName" style="display: none;">${mnVo.fileName}</div>
+								<div><a href="/md/messenger/download/${mnVo.fileName}" target='_blank'>파일있음</a></div>
+								<div class="msg-fileName" style="display: none;">${root}/resources/upload/messenger/${mnVo.fileName}</div>
 							</c:if>
 						</div>
 					</c:if>
@@ -261,6 +262,7 @@
 			
 			<!--  -->
 			<div id="note-detail-area">
+
 				<div class="detail-area-title">보낸 사람</div>
 				<div class="detail-area-content" id="detail-sender"></div>
 				<div class="detail-area-title">받은 사람</div>
@@ -269,10 +271,13 @@
 				<div class="detail-area-content" id="detail-title"></div>
 				<div class="detail-area-title">보낸 날짜</div>
 				<div class="detail-area-content" id="detail-sendDate"></div>
-				<div class="detail-area-title">첨부파일</div>
-				<div class="detail-area-content" id="detail-file"></div>
+
+
+
 				<div class="detail-area-title">내용</div>
 				<div class="detail-area-content" id="detail-content"></div>
+				<div class="detail-area-title">첨부파일</div>
+				<div class="detail-area-content" ><img src="" alt="" id="detail-file" height="90%" width="30%" data-bs-toggle="modal" data-bs-target="#myModal"></div>
 				
 			</div>
 			
@@ -282,11 +287,41 @@
 			<!-- <div class="detail-area-title">받은 날짜</div>
 			<div class="detail-area-content" id="detail-receiveDate">1</div> -->
 
+
         </main>
 
 
     </div>
     
+
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+	
+			<!-- Modal Header -->
+			<div class="modal-header">
+			<h4 class="modal-title">Modal Heading</h4>
+			<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+	
+			<!-- Modal body -->
+			<div class="modal-body">
+				<img src="" alt="" height="300px" width="300px" style="padding-left: 80px;">
+			</div>
+	
+			<!-- Modal footer -->
+			<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">저장하기</button>
+			</div>
+	
+		</div>
+		</div>
+	</div>
+
+
+
+
     <!-- 검색 값 유지 -->
 	<c:if test="${not empty menu}">
 	
@@ -336,8 +371,8 @@
 				detailReceive.innerText = msgReceive[i].innerText;
 				detailTitle.innerText = msgTitle[i].innerText;
 				detailSendDate.innerText = msgSendDate[i].innerText;
-				detailFile.innerText = msgFile[i].innerText;
 				detailContent.innerText = msgContent[i].innerText;
+				detailFile.src =  msgFile[i].innerText;
 				
 				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
 				deleteHref.href = "/md/messenger/note/deleteReceive/"+ msgNoteNo[i].innerText;
@@ -347,6 +382,7 @@
 
 	</script>
 	
+
 
 	
 

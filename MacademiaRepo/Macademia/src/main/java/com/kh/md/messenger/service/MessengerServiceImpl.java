@@ -121,7 +121,6 @@ public class MessengerServiceImpl implements MessengerService{
 	public MessengerVo updateMsgOne(MessengerVo vo) {
 		
 		int result = dao.updateMsgOne(sst, vo);
-		System.out.println(result);
 		//업데이트된 메신저 멤버로 세션에 다시 넣어주기
 		
 		MessengerVo updateMsgVo = null;

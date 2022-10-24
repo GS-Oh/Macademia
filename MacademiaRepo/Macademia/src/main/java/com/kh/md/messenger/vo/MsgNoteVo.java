@@ -18,6 +18,7 @@ public class MsgNoteVo {
 	private String content;
 	private String sendDate;
 	private String receiveDate;
+	private String originName;
 	private String fileName;
 	private MultipartFile attFile;
 	private String checkDelete;
