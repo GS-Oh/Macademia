@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <style>
-    @font-face {
+    /* @font-face {
 	    font-family: 'AppleSDGothicNeo';
 	    src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
-	}
+	} */
     body{
         padding: 0px;
         margin: 0px;
@@ -18,92 +18,94 @@
         /* border: 3px solid black; */
         padding: 2vw;
         display: grid;
-        grid-template-rows: 10vh 40vh 10vh 50px;
+        grid-template-rows: 10vh 10vh 40vh 10vh 50px;
         row-gap: 10px;
     }
-    #main-content-wrap>div:nth-child(1), #main-content-wrap>div:nth-child(3){
+    #main-content-wrap>div:nth-child(1), #main-content-wrap>div:nth-child(4){
         display: flex;
         justify-content: flex-start;
         align-items: center;
     }
 
-    /* 2번째 */
-    #my-do-info-area{
-        border: 1px solid #6667AB;
-        border-radius: 10px;
-        padding: 10px;
+    /* 검색부분 */
+    #dept-search-area{
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        margin-bottom: 50px;
-    }
-    #my-do-emp-info{
-        grid-row: span 2;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    #my-do-emp-info-profile{
-        display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
     }
-    #my-do-emp-info-detail{
-        display: grid;
-        grid-template-rows: repeat(5, 1fr);
-        padding-right: 20px;
+    #dept-search-area select, #dept-search-area input{
+        height: 30px;
     }
-    #emp-info-name{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #emp-info-name>div:nth-child(1){
-        font-size: 18px;
-        font-weight: bolder;
-    }
-    #emp-info-name>div:nth-child(2){
-        padding: 4px;
-        border-radius: 50px;
+    #dept-search-area input[type='submit']{
+        width: 70px;
+        border: none;
         background-color: #6667AB;
         color: white;
     }
-    #emp-info-lvl{
-        display: flex;
-        justify-content: space-evenly;
-    }
-    #emp-info-ent-date{
-        display: grid;
-        justify-items: center;
-    }
-
-    .do-cnt{
-        padding: 10px;
-        border-left: 1px solid lightgray;
+    #dept-search-area input[type='submit']:hover{
         font-weight: bolder;
     }
-    .do-cnt-border-top{
-        border-top: 1px solid lightgray;
+
+    /* 이번 달 휴가 부분 */
+    #dept-dayoff-table-this-month{
+        overflow-y: scroll;
     }
-    .do-cnt-head{
-        height: 40%;
+    #dept-dayoff-table-this-month>div{
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(7, 1fr);
+    }
+    #dept-dayoff-table-this-month-head{
+        height: 50px;
         justify-items: center;
         align-items: center;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        font-size: 13px;
     }
-    .do-cnt-body{
-        height: 60%;
-        display: flex;
+    #dept-dayoff-table-this-month-head-name{
+        width: 210px;
+        padding-left: 20px;
+        text-align: center;
+    }
+    .dept-dayoff-table-this-month-body{
+        padding-top: 10px;
+        row-gap: 10px;
+    }
+    .dept-dayoff-table-this-month-body{ 
+        padding-bottom: 10px;
+        border-bottom: 1px solid lightgray;
+    }
+    .dept-emp-info{
+        width: 210px;
+        padding-left: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        column-gap: 15px;
+        row-gap: 5px;
+        justify-items: flex-start;
+        align-items: center;
+    }
+    .dept-emp-info>div:nth-child(1){
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+        grid-row: span 3;
+    }
+    .dept-dayoff-table-this-month-body>div:nth-child(1)>div:nth-child(1)>img{
+        width: 100%;
+        height: 100%;
+    }
+    .dept-emp-name{
+        font-size: 13px;
+        font-weight: bolder;
+        color: black;
+    }
+    .dept-dayoff-table-this-month-content{
+        display: grid;
         justify-content: center;
         align-items: center;
-        font-size: 18px;
     }
-    .do-cnt-gvn{
-        color: gray;
-    }
-    .do-cnt-tot{
-        color: #6667AB;
-    }
-    
+
     /* date피커 */
     #date-select-area{
         display: grid;
@@ -129,19 +131,6 @@
         font-size: 16px;
     }
 
-    /* 이번달 휴가 테이블 */
-    #dept-dayoff-table>div{
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        border-bottom: 1px solid lightgray;
-        justify-items: center;
-        align-items: center;
-        column-gap: 20px;
-        grid-template-rows: 40px;
-    }
-    #dept-dayoff-title{
-        border-top: 1px solid gray;
-    }
 
     /* 휴가사용내역 테이블 */
     #my-dayoff-table>div{
@@ -203,25 +192,63 @@
         <h4>이번 달 휴가</h4>
     </div>
 
+    <div id="dept-search-area">
+        <form action="">
+            <select name="" id="">
+                <option value="">전체</option>
+                <option value="">홍보/마케팅</option>
+                <option value="">전체</option>
+                <option value="">전체</option>
+                <option value="">전체</option>
+            </select>
+            <input type="text" placeholder="부서를 검색하세요">
+            <input type="submit" value="검색">
+        </form>
+    </div>
 
-    <div id="dept-dayoff-table">
-        <div id="dept-dayoff-title">
+
+    <div id="dept-dayoff-table-this-month">
+        <div id="dept-dayoff-table-this-month-head">
+            <div id="dept-dayoff-table-this-month-head-name"><b>이름</b></div>
+           
             <div><b>신청일자</b></div>
             <div><b>연차시작</b></div>
             <div><b>연차종료</b></div>
             <div><b>연차기간</b></div>
             <div><b>종류</b></div>
-            <div><b>처리</b></div>
+            <div><b>처리현황</b></div>
+        </div>
+        
+        <div class="dept-dayoff-table-this-month-body">
+            <div class="dept-emp-info">
+                <div><img src="" alt="직원프사"></div>
+                <div class="dept-emp-name">고니</div>
+                <div>대리</div>
+                <div>홍보부</div>
+            </div>
+            <div class="dept-dayoff-table-this-month-content">2022.10.24</div>
+            <div class="dept-dayoff-table-this-month-content">2022.11.24</div>
+            <div class="dept-dayoff-table-this-month-content">2022.11.26</div>
+            <div class="dept-dayoff-table-this-month-content">3</div>
+            <div class="dept-dayoff-table-this-month-content">기본연차</div>
+            <div class="dept-dayoff-table-this-month-content">완료</div>
         </div>
 
-        <div class="dept-dayoff-body">
-            <div>2022-10-24</div>
-            <div>2022-11-24</div>
-            <div>2022-11-26</div>
-            <div>3</div>
-            <div>기본연차</div>
-            <div>처리중</div>
+        <div class="dept-dayoff-table-this-month-body">
+            <div class="dept-emp-info">
+                <div><img src="" alt="직원프사"></div>
+                <div class="dept-emp-name">고니</div>
+                <div>대리</div>
+                <div>홍보부</div>
+            </div>
+            <div class="dept-dayoff-table-this-month-content">2022.10.24</div>
+            <div class="dept-dayoff-table-this-month-content">2022.11.24</div>
+            <div class="dept-dayoff-table-this-month-content">2022.11.26</div>
+            <div class="dept-dayoff-table-this-month-content">3</div>
+            <div class="dept-dayoff-table-this-month-content">기본연차</div>
+            <div class="dept-dayoff-table-this-month-content">완료</div>
         </div>
+        
     </div>
 
     <div>

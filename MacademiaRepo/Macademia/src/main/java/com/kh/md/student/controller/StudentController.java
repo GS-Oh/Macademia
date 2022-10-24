@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("student")
 public class StudentController {
 
-	@GetMapping("main")
-	public String main() {
-		return "student/main";
-	}
-	
 	@GetMapping("roll")
 	public String roll() {
 		return "student/roll";
