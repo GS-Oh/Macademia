@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>메일읽기</title>
+	<title>보낸메일함</title>
 	<%@include file="/resources/css/common/common.css" %>
 		<%@include file="/resources/css/mail/mail.css" %>
 </head>
@@ -16,7 +16,7 @@
 			<%@include file="/WEB-INF/views/mail/mail-sidebar.jsp" %>
 		</aside>
 		<main>	
-			<%@include file="/WEB-INF/views/mail/maildetail-content.jsp" %>
+			<%@include file="/WEB-INF/views/mail/send-content.jsp" %>
 		</main>
 	</div>
 

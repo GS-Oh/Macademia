@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../resources/summernote/summernote-lite.css">
  		   <div class="board_wrap">
 	        <div class="board_title">
@@ -39,9 +40,9 @@
 	
 	<script>
 	var setting = {
-            height : 400,
-            minHeight : null,
-            maxHeight : null,
+            height : 250,
+            minHeight : 250,
+            maxHeight : 250,
             focus : true,
             lang : 'ko-KR',
             toolbar: [
@@ -68,7 +69,7 @@
     		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
     		 // 추가한 폰트사이즈
     		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-            //콜백 함수
+    		//콜백 함수
             callbacks : { 
             	onImageUpload : function(files, editor, welEditable) {
             // 파일 업로드(다중업로드를 위해 반복문 사용)
@@ -78,21 +79,21 @@
             		}
             	}
             }
-         };
-        $('#summernote').summernote(setting);
+         }; $('#summernote').summernote(setting);
+      
      
-        function uploadSummernoteImageFile(file, el) {
-			data = new FormData();
-			data.append("file", file);
-			$.ajax({
-				data : data,
-				type : "POST",
-				url : "/uploadSummernoteImageFile",
-				contentType : false,
-				enctype : 'multipart/form-data',
-				processData : false,
-				success : function(data) {
-					$(el).summernote('editor.insertImage', data.url);
+      function uploadSummernoteImageFile(file, el) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/uploadSummernoteImageFile",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(data) {
+				$(el).summernote('editor.insertImage', data.url);
 				}
 			});
 		}
