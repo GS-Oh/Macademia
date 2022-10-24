@@ -73,6 +73,17 @@
 			margin-left: 10px;
 		}
 
+		.dept-result-area{
+			grid-column: span 4; 
+			display: grid; 
+			grid-template-columns: 0.5fr 1fr 1fr 1fr; 
+			width: 100%;
+			align-items: center;
+			justify-items: center;
+
+		}
+
+
 		.select-header{
 			background-color: #6667AB;
 			width: 90%;
@@ -128,28 +139,26 @@
 			<div id="recipient-search-area">
 
 				<ul>
-					<h2>개발부(대분류)</h2>
+				
+				
+					<h2>운영기획부</h2>
+						
 					<ul class="search-header">
-						<li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li>
-						<li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li><li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li><li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">행정팀</a></li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">재정팀</a></li>
+						<li>시설지원팀</li>
 					</ul>
+					
+					
+					
+					<h2>교육훈련부</h2>
+					<ul class="search-header">
+						<li>교육1팀</li>
+						<li>교육2팀</li>
+						<li>교재지원팀</li>
+					</ul>
+					
+					
 			
 					<h2>개발부(대분류)</h2>
 					<ul class="search-header">
@@ -158,6 +167,13 @@
 								<li><button>html(소부서)</button></li>
 							</ul>
 						</li>
+						<li>프론트(중분류)
+							<ul>
+								<li><button>html(소부서)</button></li>
+							</ul>
+						</li>
+						
+						
 					</ul>
 
 
@@ -173,19 +189,31 @@
 				<div class="select-header">직책</div>
 				<div class="select-header">부서</div>	
 
-				<div class="select-content"> <input type="checkbox"> </div>
-				<div class="select-content"><span> 성명</span></div>
-				<div class="select-content"><span> 직책</span></div>
-				<div class="select-content"><span> 부서</span></div>	
+				<!-- 해당 부서 인원 수 만큼 반복 -->
+				
+				<c:forEach items="${deptMemberList}" var="deptMember">
+				
+					<div class="dept-result-area" >
+						<div class="select-content"> <input type="checkbox" class="result-checkBox"> </div>
+						<div class="select-content" style="display:none;"><span class="choice-receiveNo">${deptMember.get("MSG_NO")}</span> </div>
+						<div class="select-content"><span class="choice-receiveName">${deptMember.get("NAME")}</span></div>
+						<div class="select-content"><span>${deptMember.get("POSITION")}</span></div>
+						<div class="select-content"><span>${deptMember.get("DEPT")}</span></div>	
+					</div>
+				
+				</c:forEach>
+				
+
 
 			</div>
 
 
 			<!--  -->
 			<div id="recipient-submit-area" style="grid-column: span 2;">
-				<form action="">
-					<div class="submit-select " ><h2><span class="badge bg-secondary"> 받는이 </span></h2><input type="text" name="" ></div>
-					<div class="submit-select" ><h2><span class="badge bg-secondary"> 참조인</span></h2><input  type="text" name="" ></div>
+				<form id="form-take-no" action="/md/messenger/note/write" method="get">
+					<div style="display:none;"><input type="text" name="receiveNo" id="receive-no"></div>
+					<div class="submit-select"><h2><span  class="badge bg-secondary"> 받는이 </span></h2><input type="text" name="receiveName" id="receive-name"></div>
+					<div class="submit-select" ><h2><span class="badge bg-secondary" >참조인</span></h2><input  type="text" name="" ></div>
 					<div></div>
 					<div style="text-align: right; padding-right: 20%;">
 						<input type="submit" name="" value="확인" class="btn btn-outline-info btn-lg text-dark">
@@ -200,5 +228,55 @@
 
 
     </div>
+
+	<script>
+
+		const searchContent = document.querySelectorAll(".search-content");
+
+		const deptResult = document.querySelectorAll(".dept-result");
+
+
+		for(let i=0; i<searchContent.length; ++i){
+			
+			searchContent[i].addEventListener('click',function(){
+				searchContent[i].href = "/md/messenger/DeptMember?deptName=" +  searchContent[i].innerText;
+			});
+		}
+
+
+	</script>
+
+
+	<script>
+
+		const choiceMember = document.querySelectorAll(".dept-result-area");
+		const choiceCheckBox = document.querySelectorAll(".result-checkBox");
+		const choiceReceiveNo = document.querySelectorAll(".choice-receiveNo");
+		const choiceReceiveName = document.querySelectorAll(".choice-receiveName");
+
+
+		const receiveNo = document.querySelector("#receive-no");
+		const receiveName = document.querySelector("#receive-name");
+		const formTakeNo = document.querySelector("#form-take-no");
+
+		for(let i=0; i<choiceMember.length; ++i){
+
+			choiceMember[i].addEventListener('click',function(){
+				
+				choiceCheckBox[i].checked = true;
+
+				receiveNo.value = choiceReceiveNo[i].innerText;
+				receiveName.value = choiceReceiveName[i].innerText;
+
+			});
+
+		}
+
+
+
+	</script>
+
+
+
 
 </html>

@@ -1,5 +1,6 @@
 package com.kh.md.messenger.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -58,16 +60,31 @@ public interface MessengerDao {
 	//메신저 ( 프로필 변경하기 )
 	int updateMsgOne(SqlSessionTemplate sst, MessengerVo vo);
 
-	//메신저 ( 쪽지 보내기 )
+	//쪽지 ( 보내기 )
 	int insertNoteOne(SqlSessionTemplate sst, MsgNoteVo mnVo);
 
-	//메신저 ( 쪽지 내역 불러오기 )
+	//쪽지 ( 내역 불러오기 )
 	List<MsgNoteVo> selectNoteListByNo(SqlSessionTemplate sst, String msgNo);
 
-	//메신저 ( 검색 값으로 쪽지 내역 불러오기 )
+	//쪽지 ( 검색 값으로 내역 불러오기 )
 	List<MsgNoteVo> selectNoteKeyword(SqlSessionTemplate sst, Map<String, String> map);
 
-	
+	//쪽지 ( 번호로 쪽지 1개 가져오기 )
+	MsgNoteVo selectNoteByNo(SqlSessionTemplate sst, String repleNoteNo);
+
+	//쪽지 ( 번호로 쪽지 삭제 )
+	int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo);
+
+	//쪽지 ( 부서명으로 멤버 가져오기 )
+	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName);
+
+	//파일보관함 - 이미지 파일 전부 가져오기
+	List<MsgFileboxVo> selectAllFileImgByNo(SqlSessionTemplate sst, String msgNo);
+
+	//파일보관함 - 예외 파일 전부 가져오기
+	List<MsgFileboxVo> selectAllEtcFileByNo(SqlSessionTemplate sst, String msgNo);
+
+	int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo fileVo);
 	
 	
 	

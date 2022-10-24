@@ -22,6 +22,7 @@ import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.common.Pagination;
 import com.kh.md.messenger.service.MessengerService;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -42,7 +43,7 @@ public class MessengerController {
 	public String main(HttpSession session) {
 		
 		//TODO 세션에서 멤버넘버 가져오기
-		String memberNo = "5";
+		String memberNo = "3";
 		
 		//메신저 등록되어있는지 체크
 		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
@@ -67,7 +68,7 @@ public class MessengerController {
 	public String enroll(MessengerVo msgVo, HttpSession session, HttpServletRequest req) {
 		
 		//TODO 세션에서 멤버넘버 가져오기
-		String memberNo = "5";
+		String memberNo = "3";
 		msgVo.setNo(memberNo);
 		
 		if(msgVo.getProfile() != null && !msgVo.getProfile().isEmpty()) {
@@ -91,13 +92,27 @@ public class MessengerController {
 	
 	
 	
+	//쪽지 받은쪽지함 페이지
+	@GetMapping("noteReceiveBox")
+	public String noteReceiveBox(HttpSession session, Model model) {
+		
+		//메시지 넘버 세팅
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		
+		List<MsgNoteVo> mnVoList = ms.selectNoteListByNo(msgVo.getMsgNo());
+		
+		if(mnVoList != null) {
+			model.addAttribute("mnVoList", mnVoList);
+			return "messenger/noteReceiveMain";
+		}else {
+			return "";
+		}
+		
+	}
 	
 	
-	
-	
-	
-	//쪽지 메인 페이지
-	@GetMapping("note")
+	//쪽지 보낸쪽지함 페이지
+	@GetMapping("noteSendBox")
 	public String note(HttpSession session, Model model) {
 		
 		//메시지 넘버 세팅
@@ -107,16 +122,18 @@ public class MessengerController {
 		
 		if(mnVoList != null) {
 			model.addAttribute("mnVoList", mnVoList);
-			return "messenger/note";
+			return "messenger/noteSendMain";
 		}else {
 			return "";
 		}
 		
 	}
 	
-	//쪽지 검색하기
-	@PostMapping("note/search")
-	public String noteSearch(HttpSession session, Model model, String menu, String keyword) {
+	
+	
+	//쪽지 받은쪽지함 - 검색하기
+	@PostMapping("note/searchReceive")
+	public String noteSearchReceive(HttpSession session, Model model, String menu, String keyword) {
 		
 		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
 	
@@ -131,29 +148,57 @@ public class MessengerController {
 			model.addAttribute("mnVoList", mnVoList);
 			model.addAttribute("menu", menu);
 			model.addAttribute("keyword", keyword);
-			return "messenger/note";
+			return "messenger/noteReceiveMain";
 		}else {
 			return "";
 		}
-		
-		
 	}
+	
+	
+	//쪽지 보낸쪽지함 - 검색하기
+	@PostMapping("note/searchSend")
+	public String noteSearchSend(HttpSession session, Model model, String menu, String keyword) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+	
+		//데이터 뭉치기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("msgNo", msgVo.getMsgNo());
+		map.put("keyword", keyword);
+		map.put("menu", menu);
+		
+		List<MsgNoteVo> mnVoList = ms.selectNoteKeyword(map);
+		if(mnVoList != null) {
+			model.addAttribute("mnVoList", mnVoList);
+			model.addAttribute("menu", menu);
+			model.addAttribute("keyword", keyword);
+			return "messenger/noteSendMain";
+		}else {
+			return "";
+		}
+	}
+	
+	
+	
 	
 	//쪽지 보내기 [ 화면 ] 
 	@GetMapping("note/write")
-	public String noteWrite() {
+	public String noteWrite(String receiveNo, String receiveName, Model model) {
+		
+		model.addAttribute("receiveNo",receiveNo);
+		model.addAttribute("receiveName",receiveName);
+		
 		return "messenger/noteWrite";
 	}
 	
 	//쪽지 보내기 [ 처리 ]
-	@PostMapping("note/write")
-	public String noteWrite(MsgNoteVo mnVo ,HttpSession session, HttpServletRequest req, String receiveNo22, String reveiceName22) {
+	@PostMapping("note/write/{receiveNo}")
+	public String noteWrite(MsgNoteVo mnVo ,HttpSession session, HttpServletRequest req, @PathVariable String receiveNo, String reveiceName22) {
 		
 		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
 		mnVo.setMsgNo(msgVo.getMsgNo());
 		
 		//TODO 검색페이지에서 넘겨받은 값으로 세팅하기
-		String receiveNo = "3";
 		mnVo.setReceiveNo(receiveNo);
 		
 		if(mnVo.getAttFile() != null && !mnVo.getAttFile().isEmpty()) {
@@ -165,13 +210,91 @@ public class MessengerController {
 		int result = ms.insertNoteOne(mnVo);
 		
 		if(result == 1) {
-			return "redirect:/messenger/note";
+			return "redirect:/messenger/noteSendBox";
 		}else {
 			return "";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	// 쪽지 - 답장하기 [ 화면 ] 처리는 이동된 화면에서 다른 쪽으로 요청해서 처리
+	@GetMapping("note/reple/{repleNoteNo}")
+	public String noteReply(@PathVariable String repleNoteNo, Model model) {
+		
+		MsgNoteVo noteRepleVo = ms.selectNoteByNo(repleNoteNo);
+		
+		if(noteRepleVo != null) {
+			model.addAttribute("noteRepleVo",noteRepleVo);
+			return "messenger/noteReple";
+		}else {
+			return "";
+		}
+	}
+	
+	//쪽지 - 받은쪽지함에서 삭제하기 [ 처리 ]
+	@GetMapping("note/deleteReceive/{deleteNoteNo}")
+	public String noteDeleteReceive(@PathVariable String deleteNoteNo) {
+		
+		int result = ms.updateNoteDelete(deleteNoteNo);
+		
+		if(result == 1) {
+			return "redirect:/messenger/noteReceiveBox";
+		}else {
+			return ""; 
+		}
+		
+	}
+	
+	//쪽지 - 보낸쪽지함에서 삭제하기 [ 처리 ]
+		@GetMapping("note/deleteSend/{deleteNoteNo}")
+		public String noteDeleteSend(@PathVariable String deleteNoteNo) {
+			
+			int result = ms.updateNoteDelete(deleteNoteNo);
+			
+			if(result == 1) {
+				return "redirect:/messenger/noteSendBox";
+			}else {
+				return ""; 
+			}
+			
+		}
+	
+	@GetMapping("note/recipient")
+	public String noteRecipient() {
+		return "messenger/noteRecipient";
+	} 
+	
+	//쪽지 - 해당 부서명 멤버 가져오기
+	@GetMapping("DeptMember")
+	public String deptMember(String deptName, Model model) {
+		
+		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(deptName);
+		
+		if(deptMemberList != null) {
+			model.addAttribute("deptMemberList",deptMemberList);
+			return "messenger/noteRecipient";
+		}else {
+			return "";
+			
 		}
 		
 		
 	}
+	
+	
+	@PostMapping("note/reple/number")
+	@ResponseBody
+	public String noteRepleNumber(String repleNo) {
+		return repleNo;
+	}
+	
+	
+	
+	
 	
 	//메신저 나의 프로필 페이지
 		@GetMapping("profile")
@@ -222,25 +345,59 @@ public class MessengerController {
 			
 		}
 	
-	@GetMapping("note/reply")
-	public String noteReply() {
-		return "messenger/noteReply";
+	
+	//파일보관함 메인 페이지 ( 이미지 파일들 보여주기 )
+	@GetMapping("imgFileBox")
+	public String fileBox(MsgFileboxVo msgFileVo ,HttpSession session, Model model) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		msgFileVo.setMsgNo(msgVo.getMsgNo());
+		
+		List<MsgFileboxVo> ImgFileVoList = ms.selectAllFileImgByNo(msgFileVo.getMsgNo());
+		
+		if(ImgFileVoList != null) {
+			model.addAttribute("ImgFileVoList", ImgFileVoList);
+			return "messenger/fileBox";
+		}else {
+			return "";
+		}
+		
 	}
 	
-	@GetMapping("note/recipient")
-	public String noteRecipient() {
-		return "messenger/noteRecipient";
+	//파일보관함 메인 페이지 ( 이미지 외 파일들 보여주기 )
+	@GetMapping("etcFileBox")
+	public String fileBoxEtc(MsgFileboxVo msgFileVo ,HttpSession session, Model model) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		msgFileVo.setMsgNo(msgVo.getMsgNo());
+		
+		List<MsgFileboxVo> FileVoList = ms.selectAllEtcFileByNo(msgFileVo.getMsgNo());
+		
+		if(FileVoList != null) {
+			model.addAttribute("FileVoList", FileVoList);
+			return "messenger/fileBoxEtc";
+		}else {
+			return "";
+		}
 	} 
 	
-	@GetMapping("fileBox")
-	public String fileBox() {
-		return "messenger/fileBox";
+	
+	//파일보관함 ( 이미지 파일 등록하기 )
+	@PostMapping("imgFileBox/Enroll")
+	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, Model model) {
+		
+			
+		
+		return "";
 	}
 	
-	@GetMapping("fileBox/etc")
-	public String fileBoxEtc() {
-		return "messenger/fileBoxEtc";
-	} 
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//공지 게시글 ( 메인 화면 )

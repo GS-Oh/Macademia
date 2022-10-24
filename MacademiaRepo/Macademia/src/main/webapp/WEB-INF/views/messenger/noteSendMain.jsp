@@ -159,7 +159,6 @@
 </head>
 <body>
 
-
     <div id="wrap">
 
 		<header>
@@ -181,24 +180,24 @@
 					</div>
 				</a>
 
-				<a href="/md/messenger/note/reply?">
+				<a href="" id="note-reple-area">
 					<div class="header-area-content">
 						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
-						<h5>회신</h5>
+						<h5>답장하기</h5>
 					</div>
 				</a>
 				
-				<a href="">
+				<a href="/md/messenger/note">
 					<div class="header-area-content">
 						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
 						<h5>새로고침</h5>
 					</div>
 				</a>
 
-				<a href="/md/messenger/note/delete?">
+				<a href="" id="note-delete-area">
 					<div class="header-area-content">
 						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
-						<h5>삭제</h5>
+						<h5>삭제하기</h5>
 					</div>
 				</a>
 
@@ -206,7 +205,7 @@
 
 			<!--  -->
 			<div id="note-search-area">
-				<form action="/md/messenger/note/search" method="post">
+				<form action="/md/messenger/note/searchSend" method="post">
 					<div style="width: 60%;">
 						<select name="menu" id="" >
 							<option value="msgNo">보낸사람</option>
@@ -236,22 +235,24 @@
 				<div class="info-header">날짜</div>
 
 
-
 				<!-- 쪽지 수 만큼 여기 반복 -->
 				<c:forEach items="${mnVoList}" var="mnVo">
 				
-					<div class="info-content">
-						<div><input type="checkbox" class="msg-checkBox"></div>
-						<div class="msg-sender">${mnVo.msgNo}</div>
-						<div class="msg-receive">${mnVo.receiveNo}</div>
-						<div class="msg-title">${mnVo.title}</div>
-						<div class="msg-content">${mnVo.content}</div>
-						<div class="msg-sendDate">${mnVo.sendDate}</div>
-					</div>
+					<c:if test="${msgVo.msgNo eq mnVo.msgNo}">
+						
+						<div class="msg-noteNo" style="display:none;">${mnVo.noteNo}</div>
+						<div class="info-content">
+							<div><input type="checkbox" class="msg-checkBox"></div>
+							<div class="msg-sender">${mnVo.sendName}</div>
+							<div class="msg-receive">${mnVo.receiveName}</div>
+							<div class="msg-title">${mnVo.title}</div>
+							<div class="msg-content">${mnVo.content}</div>
+							<div class="msg-sendDate">${mnVo.sendDate}</div>
+						</div>
+						
+					</c:if>
 					
 				</c:forEach>
-				
-				
 				
 				
 			</div>
@@ -259,17 +260,17 @@
 			<!--  -->
 			<div id="note-detail-area">
 				<div class="detail-area-title">보낸 사람</div>
-				<div class="detail-area-content" id="detail-sender">2</div>
+				<div class="detail-area-content" id="detail-sender"></div>
 				<div class="detail-area-title">받은 사람</div>
-				<div class="detail-area-content" id="detail-receive">4</div>
+				<div class="detail-area-content" id="detail-receive"></div>
 				<div class="detail-area-title">제목</div>
-				<div class="detail-area-content" id="detail-title">6</div>
+				<div class="detail-area-content" id="detail-title"></div>
 				<div class="detail-area-title">보낸 날짜</div>
-				<div class="detail-area-content" id="detail-sendDate">8</div>
+				<div class="detail-area-content" id="detail-sendDate"></div>
 				<div class="detail-area-title">첨부파일</div>
-				<div class="detail-area-content" id="detail-file">3</div>
+				<div class="detail-area-content" id="detail-file"></div>
 				<div class="detail-area-title">내용</div>
-				<div class="detail-area-content" id="detail-content">3</div>
+				<div class="detail-area-content" id="detail-content"></div>
 				
 			</div>
 			
@@ -286,13 +287,16 @@
     
     <!-- 검색 값 유지 -->
 	<c:if test="${not empty menu}">
+	
 		<script>
 			window.onload = function(){
 				document.querySelector('option[value=${menu}').selected = true;
 			}
 		</script>
+		
 	</c:if>
 
+	<!-- 쪽지 세부 내용 표시 -->
 	<script>
 		const content = document.querySelectorAll('.info-content');
 
@@ -303,33 +307,45 @@
 		const msgContent = document.querySelectorAll('.msg-content');
 		const msgSendDate = document.querySelectorAll('.msg-sendDate');
 
-		
+
 		const detailSender = document.querySelector('#detail-sender');
 		const detailReceive = document.querySelector('#detail-receive');
 		const detailTitle = document.querySelector('#detail-title');
 		const detailSendDate = document.querySelector('#detail-sendDate');
 		const detailFile = document.querySelector('#detail-file');
 		const detailContent = document.querySelector('#detail-content');
-
+		
+		const msgNoteNo = document.querySelectorAll('.msg-noteNo');
+		const repleHref = document.querySelector('#note-reple-area');
+		const deleteHref = document.querySelector('#note-delete-area');
 
 		for(let i=0; i<content.length; ++i){
 
 			content[i].addEventListener('click', function(){
-
-				msgCheckBox[i].checked = true;
+				
+				if(msgCheckBox[i].checked){
+					msgCheckBox[i].checked = false;
+				}else{
+					msgCheckBox[i].checked = true;
+				}
+				
 				detailSender.innerText = msgSender[i].innerText;
 				detailReceive.innerText = msgReceive[i].innerText;
 				detailTitle.innerText = msgTitle[i].innerText;
 				detailSendDate.innerText = msgSendDate[i].innerText;
 				detailFile.innerText = msgSender[i].innerText;
 				detailContent.innerText = msgContent[i].innerText;
-
+				
+				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
+				deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
 			});	
 		};
 	
 
 	</script>
+	
 
+	
 
 
 </html>

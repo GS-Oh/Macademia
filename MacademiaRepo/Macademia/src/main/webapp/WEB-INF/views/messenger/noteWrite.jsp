@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -80,17 +80,17 @@
 
 			<div id="write-title"><h1>쪽지 보내기</h1></div>
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/md/messenger/note/write/${receiveNo}" method="post" enctype="multipart/form-data">
 				<!--  -->
 				<div class="write-header-area" >
 					<span class="input-group-text">받는사람</span>
-					<input type="text" class="form-control" name="receiveNo" value="${receiveName}" readonly>
+					<input type="text" class="form-control" name="receiveNo" value="${receiveName}" readonly placeholder="검색하기 버튼으로 선택해주세요">
 					<a href="/md/messenger/note/recipient" class="badge bg-secondary"><h5>검색하기</h5></a>
 				</div>
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">참조인</span>
-					<input type="text" class="form-control" name="referNo" readonly>
+					<input type="text" class="form-control" name="referNo" readonly placeholder="검색하기 버튼으로 선택해주세요">
 					<a href="/md/messenger/note/recipient" class="badge bg-secondary"><h5>검색하기</h5></a>
 				</div>
 				<!--  -->

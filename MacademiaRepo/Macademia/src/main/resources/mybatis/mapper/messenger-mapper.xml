@@ -273,46 +273,11 @@
 	<select id="selectNoteListByNo" resultType="com.kh.md.messenger.vo.MsgNoteVo">
 	
 		SELECT
-         T.NOTE_NO
-        ,T.MSG_NO
-        ,B.NAME RECEIVE_NO
-        ,T.TITLE
-        ,T.CONTENT
-        ,T.SEND_DATE
-        ,T.RECEIVE_DATE
-        ,T.FILE_NAME
-		FROM 
-		(
-		    SELECT 
-		         M.NOTE_NO
-		        ,B.NAME MSG_NO
-		        ,M.RECEIVE_NO
-		        ,M.TITLE
-		        ,M.CONTENT
-		        ,M.SEND_DATE
-		        ,M.RECEIVE_DATE
-		        ,M.FILE_NAME
-		    FROM MSG_NOTE M
-		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
-		    JOIN MEMBER B ON G.NO = B.NO
-		    WHERE M.MSG_NO = #{msgNo}
-		    OR M.RECEIVE_NO = #{msgNo}
-		    AND M.CHECK_DELETE = 'O'
-		    ORDER BY M.NOTE_NO DESC
-		) T
-		JOIN MEMBER B ON T.RECEIVE_NO = B.NO
-		
-	
-	</select>
-
-
-	<!-- 검색 값으로 쪽지 가져오기 -->
-	<select id="selectNoteKeyword" resultType="com.kh.md.messenger.vo.MsgNoteVo">
-	
-		 SELECT
 	         T.NOTE_NO
 	        ,T.MSG_NO
-	        ,B.NAME RECEIVE_NO
+	        ,T.SEND_NAME
+	        ,T.RECEIVE_NO
+	        ,B.NAME RECEIVE_NAME
 	        ,T.TITLE
 	        ,T.CONTENT
 	        ,T.SEND_DATE
@@ -322,29 +287,71 @@
 		(
 		    SELECT 
 		         M.NOTE_NO
-		        ,B.NAME MSG_NO
-		        ,M.RECEIVE_NO
-		        ,M.TITLE
-		        ,M.CONTENT
-		        ,M.SEND_DATE
-		        ,M.RECEIVE_DATE
-		        ,M.FILE_NAME
+                ,M.MSG_NO
+                ,M.RECEIVE_NO
+                ,B.NAME SEND_NAME
+                ,M.TITLE
+                ,M.CONTENT
+                ,M.SEND_DATE
+                ,M.RECEIVE_DATE
+                ,M.FILE_NAME
 		    FROM MSG_NOTE M
 		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
 		    JOIN MEMBER B ON G.NO = B.NO
-		    WHERE M.MSG_NO = #{msgNo}
-		    OR M.RECEIVE_NO = #{msgNo}
-		    AND M.CHECK_DELETE = 'O'
+		    WHERE M.MSG_NO = #{msgNo} AND M.CHECK_DELETE = 'O'
+		    OR M.RECEIVE_NO = #{msgNo} AND M.CHECK_DELETE = 'O'
+		    
 		    ORDER BY M.NOTE_NO DESC
 		) T
 		JOIN MEMBER B ON T.RECEIVE_NO = B.NO
-		
-		<if test="menu == 'msgNo'">
-			WHERE MSG_NO LIKE '%'||#{keyword}||'%'
+	
+	</select>
+
+
+	<!-- 검색 값으로 쪽지 가져오기 -->
+	<select id="selectNoteKeyword" resultType="com.kh.md.messenger.vo.MsgNoteVo">
+		SELECT Y.*
+		FROM(
+			 SELECT
+		         T.NOTE_NO
+		        ,T.MSG_NO
+		        ,T.SEND_NAME
+		        ,B.NAME RECEIVE_NAME
+		        ,T.RECEIVE_NO
+		        ,T.TITLE
+		        ,T.CONTENT
+		        ,T.SEND_DATE
+		        ,T.RECEIVE_DATE
+		        ,T.FILE_NAME
+			FROM 
+			(
+			    SELECT 
+			         M.NOTE_NO
+	                ,M.MSG_NO
+	                ,M.RECEIVE_NO
+	                ,B.NAME SEND_NAME
+	                ,M.TITLE
+	                ,M.CONTENT
+	                ,M.SEND_DATE
+	                ,M.RECEIVE_DATE
+	                ,M.FILE_NAME
+			    FROM MSG_NOTE M
+			    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
+			    JOIN MEMBER B ON G.NO = B.NO
+			    WHERE M.MSG_NO = #{msgNo} AND M.CHECK_DELETE = 'O'
+			    OR M.RECEIVE_NO = #{msgNo} AND M.CHECK_DELETE = 'O'
+			    
+			    ORDER BY M.NOTE_NO DESC
+			) T
+			JOIN MEMBER B ON T.RECEIVE_NO = B.NO
+	    ) Y
+	        
+		<if test="menu == 'sendName'">
+			WHERE SEND_NAME LIKE '%'||#{keyword}||'%'
 		</if>
 		
-		<if test="menu == 'receiveNo'">
-			WHERE RECEIVE_NO LIKE '%'||#{keyword}||'%'
+		<if test="menu == 'receiveName'">
+			WHERE RECEIVE_NAME LIKE '%'||#{keyword}||'%'
 		</if>
 		
 		<if test="menu == 'title'">
@@ -358,5 +365,132 @@
 		
 	</select>	
 
+
+	<!-- 쪽지 - 쪽지번호로 쪽지 1개 가져오기 -->
+	<select id="selectNoteByNo" resultType="com.kh.md.messenger.vo.MsgNoteVo">
+		
+		SELECT
+	         T.NOTE_NO
+	        ,T.MSG_NO
+            ,T.SEND_NAME
+            ,T.RECEIVE_NO
+	        ,B.NAME RECEIVE_NAME
+	        ,T.TITLE
+	        ,T.CONTENT
+	        ,T.SEND_DATE
+	        ,T.RECEIVE_DATE
+	        ,T.FILE_NAME
+		FROM 
+		(
+		    SELECT 
+		         M.NOTE_NO
+                ,M.MSG_NO 
+		        ,B.NAME SEND_NAME
+		        ,M.RECEIVE_NO
+		        ,M.TITLE
+		        ,M.CONTENT
+		        ,M.SEND_DATE
+		        ,M.RECEIVE_DATE
+		        ,M.FILE_NAME
+		    FROM MSG_NOTE M
+		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
+		    JOIN MEMBER B ON G.NO = B.NO
+		    WHERE M.NOTE_NO = #{repleNoteNo} AND M.CHECK_DELETE = 'O'
+		    ORDER BY M.NOTE_NO DESC
+		) T
+		JOIN MEMBER B ON T.RECEIVE_NO = B.NO
+	</select>
+
+	<!-- 쪽지 - 쪽지번호로 쪽지 삭제 -->
+	<update id="updateNoteDelete">
+		UPDATE MSG_NOTE
+		    SET CHECK_DELETE = 'X'
+		WHERE NOTE_NO = #{deleteNoteNo}
+	</update>
+
+
+
+	<!-- 쪽지- 부서명에 맞는 멤버 가져오기 -->
+	<select id="selectDeptMember" resultType="hashmap">
+		
+		SELECT
+		     M.MSG_NO
+		    ,B.NAME
+		    ,B.DEPT
+		    ,B.POSITION
+		FROM MESSENGER M
+		JOIN MEMBER B ON M.NO = B.NO
+		WHERE DEPT= #{deptName}
+		
+	</select>
+	
+	<!-- 파일보관함 - 이미지 파일 전부 가져오기 -->
+	<select id="selectAllFileImgByNo" resultType="com.kh.md.messenger.vo.MsgFileboxVo">
+		
+		SELECT
+		     FILE_NO
+		    ,MSG_NO
+		    ,ORIGIN_NAME
+		    ,FILE_NAME
+		    ,ENROLL_DATE
+		FROM IMG_FILEBOX
+		WHERE MSG_NO = #{msgNo}
+			AND CHECK_DELETE = 'O'
+		ORDER BY FILE_NO
+	
+	</select>
+	
+	
+	<!-- 파일보관함 - 예외 파일 전부 가져오기 -->
+	<select id="selectAllEtcFileByNo" resultType="com.kh.md.messenger.vo.MsgFileboxVo">
+		
+		SELECT
+		     FILE_NO
+		    ,MSG_NO
+		    ,ORIGIN_NAME
+		    ,FILE_NAME
+		    ,ENROLL_DATE
+		FROM FILEBOX
+		WHERE MSG_NO = #{msgNo}
+			AND CHECK_DELETE = 'O'
+		ORDER BY FILE_NO
+	
+	</select>
+	
+	
+	<insert id="insertImgFilebox">
+	
+		INSERT INTO IMG_FILEBOX
+		(
+		    FILE_NO
+		    ,MSG_NO
+		    ,ORIGIN_NAME
+		    ,FILE_NAME
+		)
+		VALUES
+		(
+		    SEQ_IMG_FILEBOX_NO.NEXTVAL
+		    ,#{msgNo}
+		    ,#{originName}
+		    ,#{fileName}
+		)
+	
+	
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

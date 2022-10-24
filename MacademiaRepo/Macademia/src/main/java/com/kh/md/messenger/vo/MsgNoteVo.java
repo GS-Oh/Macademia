@@ -10,6 +10,10 @@ public class MsgNoteVo {
 	private String noteNo;
 	private String msgNo;
 	private String receiveNo;
+	
+	private String sendName;
+	private String receiveName;
+	
 	private String title;
 	private String content;
 	private String sendDate;

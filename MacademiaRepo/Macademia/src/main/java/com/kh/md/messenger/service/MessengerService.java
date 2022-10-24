@@ -1,10 +1,12 @@
 package com.kh.md.messenger.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -57,16 +59,36 @@ public interface MessengerService {
 	//메신저 ( 메신저 프로필 변경하기 )
 	MessengerVo updateMsgOne(MessengerVo vo);
 
-	//메신저 ( 쪽지 보내기 )
+	
+	//쪽지 ( 보내기 )
 	int insertNoteOne(MsgNoteVo mnVo);
 
-	//메신저 ( 쪽지 내역 불러오기 )
+	//쪽지 ( 내역 불러오기 )
 	List<MsgNoteVo> selectNoteListByNo(String msgNo);
 
 	
-	//메신저 ( 검색 값으로 쪽지 불러오기 )
+	//쪽지 ( 검색 값으로 쪽지 불러오기 )
 	List<MsgNoteVo> selectNoteKeyword(Map<String, String> map);
-	
+
+
+	//쪽지 ( 쪽지 번호로 쪽지 1개 가져오기 )
+	MsgNoteVo selectNoteByNo(String repleNoteNo);
+
+	//쪽지 ( 쪽지 번호로 삭제 )
+	int updateNoteDelete(String deleteNoteNo);
+
+
+	//쪽지 ( 보낸사람검색 )
+	List<HashMap<String, String>> selectDeptMember(String deptName);
+
+	//파일보관함 ( 이미지 파일 전부 가져오기 )
+	List<MsgFileboxVo> selectAllFileImgByNo(String msgNo);
+
+	//파일보관함 ( 예외 파일 전부 가져오기 )
+	List<MsgFileboxVo> selectAllEtcFileByNo(String msgNo);
+
+	//파일보관함 ( 이미지 파일 입력 )
+	int insertImgFilebox(MsgFileboxVo fileVo);
 
 	
 }//class

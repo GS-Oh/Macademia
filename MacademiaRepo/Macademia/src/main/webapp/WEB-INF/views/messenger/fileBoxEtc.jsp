@@ -92,8 +92,8 @@
             
 			<div id="fileBox-header">
 				<!-- a링크 버튼 클릭 ajax활용해서 바꿔서 fileBox-Content 내용 바꿔주기 -->
-				<button id="fileBox-header-image"><a href="/md/messenger/fileBox">이미지</a></button> 
-				<button id="fileBox-header-etc"> <a href="/md/messenger/fileBox/etc">기타</a> </button>
+				<button id="fileBox-header-image"><a href="/md/messenger/imgFileBox">이미지</a></button> 
+				<button id="fileBox-header-etc"> <a href="/md/messenger/etcFileBox">기타</a> </button>
 			</div>
 			
 			<div id="fileBox-etc-content">

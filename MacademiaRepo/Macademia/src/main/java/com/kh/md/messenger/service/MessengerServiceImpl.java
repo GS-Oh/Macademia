@@ -1,5 +1,6 @@
 package com.kh.md.messenger.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.dao.MessengerDao;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
@@ -130,26 +132,61 @@ public class MessengerServiceImpl implements MessengerService{
 		return  updateMsgVo;
 	}
 
-	//메신저 쪽지 보내기
+	
+	//쪽지 - 보내기
 	@Override
 	public int insertNoteOne(MsgNoteVo mnVo) {
 		return dao.insertNoteOne(sst, mnVo);
 	}
 	
-	//메신저 쪽지 내역 불러오기
+	//쪽지 - 내역 불러오기
 	@Override
 	public List<MsgNoteVo> selectNoteListByNo(String msgNo) {
 		return dao.selectNoteListByNo(sst, msgNo);
 	}
 
 	
-	//메신저 검색값으로 쪽지 내역 불러오기
+	//쪽지 - 검색값으로 쪽지 내역 불러오기
 	@Override
 	public List<MsgNoteVo> selectNoteKeyword(Map<String, String> map) {
 		return dao.selectNoteKeyword(sst, map);
 	}
+
+	//쪽지 - 쪽지넘버로 쪽지 1개 가져오기
+	@Override
+	public MsgNoteVo selectNoteByNo(String repleNoteNo) {
+		return dao.selectNoteByNo(sst, repleNoteNo);
+	}
+
+	//쪽지 - 쪽지넘버로 쪽지 삭제
+	@Override
+	public int updateNoteDelete(String deleteNoteNo) {
+		return dao.updateNoteDelete(sst, deleteNoteNo);
+	}
 	
+	//쪽지 - 해당 부서 멤버 가져오기
+	@Override
+	public List<HashMap<String, String>> selectDeptMember(String deptName) {
+		return dao.selectDeptMember(sst, deptName);
+	}
+
+	//파일보관함 - 이미지 파일 전부 가져오기
+	@Override
+	public List<MsgFileboxVo> selectAllFileImgByNo(String msgNo) {
+		return dao.selectAllFileImgByNo(sst, msgNo);
+	}
 	
+	//파일보관함 - 예외 파일 전부 가져오기
+	@Override
+	public List<MsgFileboxVo> selectAllEtcFileByNo(String msgNo) {
+		return dao.selectAllEtcFileByNo(sst, msgNo);
+	}
+
+	//파일보관함 - 이미지 파일 입력
+	@Override
+	public int insertImgFilebox(MsgFileboxVo fileVo) {
+		return dao.insertImgFilebox(sst, fileVo);
+	}
 
 	
 	
