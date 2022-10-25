@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+@Controller
 public class UploadController {
 	@RequestMapping(value="uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 	@ResponseBody
@@ -30,7 +31,7 @@ public class UploadController {
 		
 		// 내부경로로 저장
 		String contextRoot = request.getServletContext().getRealPath("/");
-		String fileRoot = contextRoot+"resources/upload/board/";
+		String fileRoot = contextRoot+"/resources/fileupload/";
 		
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
@@ -40,7 +41,7 @@ public class UploadController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "resources/upload/board/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", contextRoot+"/resources/upload/board/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 				
 		} catch (IOException e) {
