@@ -174,8 +174,8 @@
 
 			fileBox[i].addEventListener('click',function(){
 				
-				modalFileName.href = '/md/messenger/note/write?originName=' + originFileName[i].innerText + '&fileName=' + changeFileName[i].innerText;
-				modalDelete.href = '/md/messenger/fileBox/delete/'+ originFileName[i].innerText;
+				modalFileName.href = '/md/messenger/fileSend/' + originFileName[i].innerText + '/' + changeFileName[i].innerText;
+				modalDelete.href = '/md/messenger/fileBox/delete/'+ changeFileName[i].innerText;
 
 			})
 

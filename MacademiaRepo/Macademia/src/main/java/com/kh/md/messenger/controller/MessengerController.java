@@ -430,7 +430,7 @@ public class MessengerController {
 	
 	
 	//파일보관함 ( 파일 보내기 )
-	@GetMapping("fileSend/{orginName}/{fileName}")
+	@GetMapping("fileSend/{originName}/{fileName}")
 	public String fileSend(@PathVariable String originName, @PathVariable String fileName, Model model) {
 		
 		model.addAttribute("originName",originName);
@@ -440,6 +440,22 @@ public class MessengerController {
 	}
 	
 	
+	//파일보관함 ( 파일 삭제하기 )
+	@GetMapping("fileBox/delete/{fileName}")
+	public String fileBoxDelete(@PathVariable String fileName) {
+		System.out.println(fileName);
+		int result = ms.fileBoxDeleteByName(fileName);
+		
+		if(result == 1) {
+			//jpg / etc 구분해서 보내주기
+			return "redirect:/messenger/imgFileBox";
+			
+		}else {
+			return "";
+		}
+		
+		
+	}
 	
 	
 	//공지 게시글 ( 메인 화면 )

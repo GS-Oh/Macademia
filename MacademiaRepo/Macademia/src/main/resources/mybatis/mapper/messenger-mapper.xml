@@ -522,8 +522,14 @@
 	</insert>
 	
 	
+	<!-- 파일보관함 - 파일 삭제 -->
+	<update id="fileBoxDeleteByName">
 	
+		UPDATE FILEBOX
+		    SET CHECK_DELETE = 'X'
+		WHERE FILE_NAME = #{fileName}
 	
+	</update>
 	
 	
 	

@@ -197,6 +197,12 @@ public class MessengerServiceImpl implements MessengerService{
 		return dao.insertFilebox(sst, msgFileVo);
 	}
 
+	//파일보관함 - 파일 삭제
+	@Override
+	public int fileBoxDeleteByName(String fileName) {
+		return dao.fileBoxDeleteByName(sst, fileName);
+	}
+
 	
 	
 	

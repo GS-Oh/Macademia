@@ -93,5 +93,8 @@ public interface MessengerService {
 	//파일보관함 ( etc 파일 입력 )
 	int insertFilebox(MsgFileboxVo msgFileVo);
 
+	//파일보관함 ( etc 파일 삭제 )
+	int fileBoxDeleteByName(String fileName);
+
 	
 }//class

@@ -103,7 +103,8 @@
 					
 					<div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
 	                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-	                    <div> <span>${fileVo.originName}</span></div> 
+	                    <div style="display: none;" class="fileBox-fileName">${fileVo.fileName}</div>
+	                    <div> <span class="fileBox-originName">${fileVo.originName}</span></div> 
 	                </div>
 				
 				</c:forEach>
@@ -125,10 +126,10 @@
             <div class="modal-content">
     
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href="/md/messenger/note/write?originName=${fileVo.originName}&fileName=${fileVo.fileName}"><h3>보내기</h3></a>
+                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
                 </div>
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
+                    <a id="modal-delete" class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
                 </div>
      
              </div>
@@ -137,6 +138,36 @@
     </div>
 
 
+
+	<script>
+	
+			const fileBox = document.querySelectorAll('.etc-content-file');
+	
+			const changeFileName = document.querySelectorAll('.fileBox-fileName');
+			const originFileName = document.querySelectorAll('.fileBox-originName');
+			
+			const modalFileName = document.querySelector('#modal-fileName');
+			const modalDelete = document.querySelector('#modal-delete');
+			
+	
+	
+	
+			for(let i=0; i<fileBox.length; ++i){
+	
+				fileBox[i].addEventListener('click',function(){
+					
+					modalFileName.href = '/md/messenger/fileSend/' + originFileName[i].innerText + '/' + changeFileName[i].innerText;
+					modalDelete.href = '/md/messenger/fileBox/delete/'+ changeFileName[i].innerText;
+	
+				})
+	
+	
+	
+			}
+
+
+
+	</script>
 
 
 </html>

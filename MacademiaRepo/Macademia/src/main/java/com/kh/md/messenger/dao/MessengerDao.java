@@ -90,6 +90,9 @@ public interface MessengerDao {
 
 	//파일보관함 - etc 파일 추가하기
 	int insertFilebox(SqlSessionTemplate sst, MsgFileboxVo msgFileVo);
+
+	//파일보관함 - 파일 삭제하기
+	int fileBoxDeleteByName(SqlSessionTemplate sst, String fileName);
 	
 	
 	
