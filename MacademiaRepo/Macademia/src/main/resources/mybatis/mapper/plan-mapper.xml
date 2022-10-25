@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "planMapper">
+	
+	<insert id="insertPlan">
+	
+	INSERT INTO PLAN
+	(P_NO
+	,M_NO
+	,P_TYPE_NO
+	,P_TITLE
+	,P_CONTENT
+	,P_END_DATE	
+	)
+	VALUES
+	(
+		SEQ_PLAN_NO.NEXTVAL
+		,#{mNo}
+		,#{pTypeNo}
+		,#{pTitle}
+		,#{pContent}
+		,#{pEndDate}
+	)
+	
+	
+	
+	</insert>
+</mapper>
