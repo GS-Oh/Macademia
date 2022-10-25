@@ -44,7 +44,7 @@
                                             <tr>
                                                 <th>
                                                 <div class="media-left">
-                                            		<a href="#"><img src="/codeus/resources/assets/images/empty-profile.png" class="img-fluid rounded-circle" alt="" style="width: 150px"></a>
+                                            		<a href="#"><img src="/webapp/resources/assets/images/empty-profile.png" class="img-fluid rounded-circle" alt="" style="width: 150px"></a>
                                         		</div>
                                         		</th>
                                             </tr>
