@@ -58,7 +58,6 @@
     <div class="menu" onclick="location.href='${root}/member/edit'">사원정보수정</div>
     <div class="menu" onclick="location.href='${root}/member/myboards'">내가쓴게시글</div>
     <div class="menu" onclick="location.href='${root}/member/myfiles'">개인자료실</div>
-    <div class="menu" onclick="location.href='${root}/organization/tree'">조직도</div>
     <div></div>
 
 </div>

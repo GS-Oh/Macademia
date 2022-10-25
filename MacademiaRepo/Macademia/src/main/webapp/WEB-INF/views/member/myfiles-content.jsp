@@ -7,7 +7,7 @@
     
     #myboards-content{
         height: 85vh;
-        width: 70vw;
+        width: 60vw;
         /* border: 1px solid black; */
         font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
     }
@@ -66,7 +66,7 @@
         transition: 0.3s;
         text-align: center;
         position: relative;
-        transform: perspective(300px) rotateY(-15deg);
+        
     }
     .file-slot:hover{
         width: 120px;
@@ -89,6 +89,8 @@
     .file-slot span{
         width: 100%;
         display: inline-block;
+        color: black;
+        font-weight: 700;
     }
     #x-btn{
         font-size: 20px;
