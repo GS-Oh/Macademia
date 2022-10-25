@@ -13,6 +13,11 @@ public class AdminController {
 		return "admin/main";
 	}
 	
+	@GetMapping("main2")
+	public String adminMain() {
+		return "admin";
+	}
+	
 	@GetMapping("settingMemberProfile")
 	public String memberProfile(){
 		return "admin/settingMemberProfile";

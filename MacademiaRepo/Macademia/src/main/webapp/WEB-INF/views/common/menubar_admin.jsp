@@ -9,11 +9,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Insert title here</title>
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="${contextPath}/admin/assets/resources/images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${contextPath}/assets/resources/images/favicon.png">
 <!-- Custom Stylesheet -->
-<link href="${contextPath}/resources/admin/assets/css/style.css" rel="stylesheet">
+<link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
+<!-- Google fonts - Noto Sans Korean -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
 <style>
 	 body, h1, h2, h3, h4, h5, h6, p, span {
    	 	font-family: 'Noto Sans KR', sans-serif;
@@ -38,12 +41,14 @@
         Preloader end
     ********************--> 
 
-
+        <!--**********************************
+            Nav header start
+        ***********************************-->
         <div class="nav-header">
             <a href="${contextPath}/admin/mlist.ad" class="brand-logo" style="background: #2b2d35;">
                 <img class="logo-abbr" src="${contextPath}/resources/assets/images/logo.png" alt="" style="border-radius: 100%; width: 170px; height: 32px;">
-               	<b class="logo-compact" style="font-size: x-large;">MacademiA</b>
-               	<b class="brand-title" style="font-size: x-large;">MacademiA</b>
+               	<b class="logo-compact" style="font-size: x-large;">CODEUS</b>
+               	<b class="brand-title" style="font-size: x-large;">CODEUS</b>
             </a>
 
             <div class="nav-control">
@@ -52,7 +57,13 @@
                 </div>
             </div>
         </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
 
+        <!--**********************************
+            Header start
+        ***********************************-->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -109,11 +120,18 @@
                 </ul>
             </div>
         </div>
-       
+        <!--**********************************
+            Sidebar end
+        ***********************************-->   
+ 
+	
+	    <!--**********************************
+	        Scripts
+	    ***********************************-->
 	    <!-- Required vendors -->
-	    <script src="${contextPath}/resources/admin/assets/vendor/global/global.min.js"></script>
-	    <script src="${contextPath}/resources/admin/assets/js/quixnav-init.js"></script>
-	    <script src="${contextPath}/resources/admin/assets/js/custom.min.js"></script>      
+	    <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
+	    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
+	    <script src="${contextPath}/resources/assets/js/custom.min.js"></script>      
 	    
 	    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
