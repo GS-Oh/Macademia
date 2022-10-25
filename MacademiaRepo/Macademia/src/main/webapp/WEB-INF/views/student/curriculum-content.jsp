@@ -18,6 +18,12 @@
         justify-content: flex-start;
         align-items: center;
     }
+
+    #search-create-curriculum{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     #class-list-search-area{
         display: flex;
         justify-content: flex-start;
@@ -44,6 +50,23 @@
     }
     #class-list-search-area>input[type='submit']:hover{
         font-weight: bolder;
+    }
+    #create-new-curriculum{
+        width: 130px;
+        height: 40px;
+        background-color: #6667AB;
+    }
+    #create-new-curriculum>a{
+        width: 100%;
+        height: 100%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #create-new-curriculum:hover{
+        font-weight: bolder;
+        cursor: pointer;
     }
     
     /* 테이블 */
@@ -101,22 +124,29 @@
     $(function(){
         $('.select-one-class').click(function(){
             console.log(this);
-            location.href="/md/student/roll/detail";
+            location.href="/md/student/curriculum/detail";
         });
     });
 </script>
 
 <div id="roll-content-wrap">
-    <div><h4>강의 선택</h4></div>
+    <div><h4>커리큘럼 조회</h4></div>
 
-    <div id="class-list-search-area">
-        <select name="" id="">
-            <option value="">카테고리 전체</option>
-            <option value="">디지털 컨버전스</option>
-            <option value="">정보시스템 구축</option>
-        </select>
-        <input type="text" placeholder="강의명을 입력해주세요">
-        <input type="submit" value="강의 검색">
+    <div id="search-create-curriculum">
+        <div id="class-list-search-area">
+            <select name="" id="">
+                <option value="">카테고리 전체</option>
+                <option value="">디지털 컨버전스</option>
+                <option value="">정보시스템 구축</option>
+            </select>
+            <input type="text" placeholder="강의명을 입력해주세요">
+            <input type="submit" value="강의 검색">
+        </div>
+        <div id="create-new-curriculum-area">
+            <div id="create-new-curriculum">
+                <a href="">커리큘럼 추가하기</a>
+            </div>
+        </div>
     </div>
     
     <div id="class-list">

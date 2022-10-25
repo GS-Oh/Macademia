@@ -44,4 +44,9 @@ public class StudentController {
 		return "student/search-detail-edit";
 	}
 	
+	@GetMapping("curriculum")
+	public String curriculum() {
+		return "student/curriculum";
+	}
+	
 }

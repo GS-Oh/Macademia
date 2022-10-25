@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <style>
-    #search-detail-content-wrap>div{
-        /* border: 1px solid red; */
+    body{
+        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        font-size: 12px;
     }
     #search-detail-content-wrap{
         width: 60vw;

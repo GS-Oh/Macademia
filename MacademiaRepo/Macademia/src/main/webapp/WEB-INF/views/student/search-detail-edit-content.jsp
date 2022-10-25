@@ -6,8 +6,9 @@
 <script type="text/javascript" src="${root}/resources/js/search-address/search-address.js"></script> 
 
 <style>
-    #search-detail-edit-content-wrap div{
-        /* border: 1px solid red; */
+    body{
+        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        font-size: 12px;
     }
     #search-detail-edit-content-wrap>form{
         width: 60vw;

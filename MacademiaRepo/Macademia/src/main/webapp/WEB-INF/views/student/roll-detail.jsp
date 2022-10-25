@@ -5,7 +5,11 @@
 	<title>Home</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
-	
+	<style>
+		main{
+			width: 80vw;
+		}
+	</style>
 </head>
 <body>
 	

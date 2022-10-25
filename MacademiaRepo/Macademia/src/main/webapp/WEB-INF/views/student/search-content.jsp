@@ -2,15 +2,16 @@
     pageEncoding="UTF-8"%>
 
 <style>
-    #search-content-wrap>div{
-        /* border: 1px solid red; */
+    body{
+        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        font-size: 12px;
     }
     #search-content-wrap{
         width: 60vw;
         /* border: 3px solid black; */
         padding: 2vw;
         display: grid;
-        grid-template-rows: 10vh;
+        grid-template-rows: 10vh 10vh;
         row-gap: 10px;
     }
     #search-content-wrap>div:nth-child(1){
@@ -20,15 +21,19 @@
     }
 
     /*  */
+    #search-area{
+        display: grid;
+        align-items: center;
+    }
     #search-area>form{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 6fr 1fr;
+        justify-items: flex-start;
     }
-    #search-area>form>div:nth-child(2){
+    #search-area>form>div:nth-child(1){
         display: grid;
-        grid-template-columns: 3fr 1fr 1fr;
-        justify-items: flex-end;
-        column-gap: 1px;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 5px;
     }
     #add-new-btn{
         background-color: #6667AB;
@@ -50,12 +55,12 @@
         font-weight: bolder;
     }
     #search-area select{
-        width: min-content;
+        width: 120px;
         height: 30px;
     }
     #search-area input[type='text']{
-        padding-left: 10px;
-        width: 150px;
+        padding-left: 5px;
+        width: 120px;
         height: 30px;
     }
     #search-area input[type='submit']{
@@ -69,27 +74,32 @@
         font-weight: bolder;
     }
 
-    /*  */
+    /* 테이블 */
     #student-list{
-        border-top: 1px solid gray;
-        width: 100%;
-        display: grid;
-        row-gap: 10px;
-        padding-top: 10px;
+        margin-bottom: 50px;
     }
-    #student-list>div:nth-child(1)>div{
-        font-size: 13px;
-    }
-    #student-list>div{
-        border-bottom: 1px solid gray;
-        padding-left: 20px;
-        padding-bottom: 10px;
+    #student-list-head{
         display: grid;
         grid-template-columns: 0.4fr 0.7fr 1fr 2fr 2fr 3fr;
-        grid-template-rows: 36px;
+        grid-template-rows: 50px;
+        justify-items: center;
         align-items: center;
-        column-gap: 1vw;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        font-size: 13px;
     }
+    .select-student-list{
+        display: grid;
+        grid-template-columns: 0.4fr 0.7fr 1fr 2fr 2fr 3fr;
+        grid-template-rows: 50px;
+        justify-items: center;
+        align-items: center;
+        border-bottom: 1px solid lightgray;
+    }
+    .select-student-list>div{
+        text-align: center;
+    }
+   
 
     /*  */
     #page-area{
@@ -133,23 +143,22 @@
         <form action="">
             <div>
                 <select name="" id="">
-                    <option value="">강의선택</option>
-                    <option value="">전체</option>
+                    <option value="">강의 전체</option>
                     <option value="">자바(JAVA)기반 클라우드 융합 개발자 양성과정A</option>
                     <option value="">Python 활용 빅데이터 기반 금융 솔루션 UI 개발자 양성과정</option>
                     <option value="">(스마트웹&콘텐츠개발)반응형 UI/UX 웹콘텐츠 개발자 양성과정A7</option>
                 </select>
-            </div>
-            <div>
                 <input type="text" placeholder="이름을 입력해주세요">
                 <input type="submit" value="조회">
+            </div>
+            <div>
                 <div id="add-new-btn"><a href="${root}/student/search/add"><i class="fa-solid fa-plus fa-1x"></i></a></div>
             </div>
         </form>
     </div>
 
     <div id="student-list">
-        <div>
+        <div id="student-list-head">
             <div><b>번호</b></div>
             <div><b>이름</b></div>
             <div><b>휴대폰</b></div>
