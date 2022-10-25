@@ -1,36 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <style>
-    #mypage-sidemenu{
-        width: 13vw;
-        height: 90vh;
-        border-top-right-radius: 15px;
-        font-size: 16px;
-        text-align: end;
-        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
-        background-color: #6667AB;
-        color: white;
+    @font-face {
+        font-family: 'GangwonEdu_OTFBoldA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
     }
-    #mypage-sidemenu > div{
-        border-top: 1px solid #dedede;
-        width: 100%;
-        height: 80px;
-        text-align: center;
-        
+    #side_menu > ul, #side_menu > li{
+        list-style:none;
     }
-    .menu:hover{
-        cursor: pointer; 
-        background-color: white;
-        color: #6667AB;
-        transition: 0.5s;
+    #side_menu{
+        width:13vw;
+        height:100vh;
+        border-radius:0 7px 7px 0 ;
+        background-color:#6667AB;
+    }
+    #menu-top{
+        height:8%;
+        display:flex;
+        color:#fff;
+        font-size:14px;
+        margin-left:-8px;
+    }
+    #menu-top li{
+        font-size:19px;
+        margin-top:15px;
+    }
+    #menu-top li:nth-child(2){
+        width:100%;
+        height:10%;
+        margin: 0 auto;
+        margin-top:5px;
+        margin-left:20px;
+        font-family: 'GangwonEdu_OTFBoldA';
+        margin-top:15px;
+    }
+    #menu-top li:nth-child(1){
+        font-size:13px;
+    }
+    #tree{
+        border-top: 1px solid rgb(187, 187, 187);
+		color:white;
+		position: fixed;
+		height: 90vh;
+		width: 250px;
+		font-size: 17px;
+        padding-top: 20px;
+    }
+    .jstree-default .jstree-clicked{
+        background-color:rgb(220, 217, 236) !important;
+
+        color: black !important;
+    }
+    .jstree-default .jstree-hovered{
+        background-color:white !important;
+        color: black !important;
     }
 </style>
 
+<div id="side_menu">
+
+    <ul id="menu-top">
+        <li><i class="fa-solid fa-sitemap fa-2x"></i></li>
+        <li class="">조직도</li>
+    </ul>
+    <div id="tree"></div>
+        
+</div>
+
 <div id="mypage-sidemenu">
-    <div></div>
-    <div class="menu" onclick="location.href='${root}/organization/tree'">조직도</div>
-    <div class="menu" onclick="location.href='${root}/organization/tree'">사원검색</div>
-    <div></div>
+    <div id="tree"></div>
 </div>
 

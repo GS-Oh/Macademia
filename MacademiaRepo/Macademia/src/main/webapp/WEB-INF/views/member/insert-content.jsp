@@ -66,7 +66,7 @@
         <input type="text" id="address2" name="address2"> 
         <label for="phone">전화번호</label>
         <input type="text" id="phone" name="phone" placeholder="'-'없이 입력">
-        <label for="phone">부서번호</label>
+        <label for="phone">부서</label>
         <select name="bank" id="dept" name="bank">
             <option value="none">===선택===</option>
             <option>대표이사</option>
