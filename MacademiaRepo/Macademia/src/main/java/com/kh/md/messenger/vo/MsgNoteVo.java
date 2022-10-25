@@ -8,10 +8,11 @@ import lombok.Data;
 public class MsgNoteVo {
 
 	private String noteNo;
-	private String msgNo;
-	private String receiveNo;
 	
+	private String msgNo;
 	private String sendName;
+	
+	private String receiveNo;
 	private String receiveName;
 	
 	private String title;

@@ -14,7 +14,7 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 15% 7% 44% 34%;
+			grid-template-rows: 15% 7% 45% 40%;
 		}
 
 
@@ -73,7 +73,7 @@
 		/*  */
 		#note-info-area{
 			display: grid;
-			grid-template-columns: 50px 1fr 1fr 1fr 2fr 1fr;
+			grid-template-columns: 50px 1fr 1fr 1fr 2fr 0.5fr;
 			grid-template-rows: repeat(8, 1fr);
 			place-items: center;
 
@@ -103,7 +103,7 @@
 		
 		.info-content{
 			display: grid;
-			grid-template-columns: 50px 1fr 1fr 1fr 2fr 1fr;
+			grid-template-columns: 50px 1fr 1fr 1fr 2fr 0.5fr;
 			grid-column: span 6;
 			place-items: center;
 			
@@ -124,7 +124,7 @@
 		#note-detail-area{
 			display: grid;
 			grid-template-columns: 2fr 8fr;
-			grid-template-rows: repeat(5,1fr) 2fr;
+			grid-template-rows: repeat(4,1fr) 2fr 2fr;
 			margin-top: 15px;
 			border: 3px solid #6667AB;
 			border-radius: 10px;
@@ -153,6 +153,13 @@
 
 			font-size: 1.5rem;
 		}
+
+
+		#detail-img-file {
+			height : 150px;
+			width : 150px;
+		}
+
 
 		/* #1315a6 #6667AB */
     </style>
@@ -205,11 +212,11 @@
 
 			<!--  -->
 			<div id="note-search-area">
-				<form action="/md/messenger/note/searchSend" method="post">
+				<form action="/md/messenger/note/searchReceive" method="post">
 					<div style="width: 60%;">
 						<select name="menu" id="" >
-							<option value="msgNo">보낸사람</option>
-							<option value="receiveNo">받은사람</option>
+							<option value="sendName">보낸사람</option>
+							<option value="receiveName">받은사람</option>
 							<option value="title">제목</option>
 							<option value="comment">내용</option>
 						</select>
@@ -228,28 +235,36 @@
 			<div id="note-info-area">
 
 				<div class="info-header"><input type="checkbox"></div>
-				<div class="info-header">보낸사람</div>
+				<div class="info-header" style="display: none;">보낸사람</div>
 				<div class="info-header">받은사람</div>
 				<div class="info-header">제목</div>
-				<div class="info-header">내용</div>
 				<div class="info-header">날짜</div>
-
+				<div class="info-header">내용</div>
+				<div class="info-header">첨부파일 유무</div>
 
 				<!-- 쪽지 수 만큼 여기 반복 -->
 				<c:forEach items="${mnVoList}" var="mnVo">
 				
-					<c:if test="${msgVo.msgNo eq mnVo.msgNo}">
-						
+					<c:if test="${msgVo.msgNo eq mnVo.msgNo}">			
 						<div class="msg-noteNo" style="display:none;">${mnVo.noteNo}</div>
+						<div class="msg-fileName" style="display: none;">/md/resources/upload/messenger/${mnVo.fileName}</div>
+						<div class="msg-originName" style="display: none;">${mnVo.originName}</div>
+
+
 						<div class="info-content">
 							<div><input type="checkbox" class="msg-checkBox"></div>
-							<div class="msg-sender">${mnVo.sendName}</div>
-							<div class="msg-receive">${mnVo.receiveName}</div>
+							<div class="msg-sender" style="display: none;">${mnVo.sendName}</div>
+							<div class="msg-receive" >${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
-							<div class="msg-content">${mnVo.content}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
+							<div class="msg-content">${mnVo.content}</div>
+							<div>
+							<c:if test="${not empty mnVo.fileName }">
+								<a href="/md/messenger/download/${mnVo.fileName}/${mnVo.originName}" target='_blank'>파일있음</a>
+							</c:if>
+							</div>
+							
 						</div>
-						
 					</c:if>
 					
 				</c:forEach>
@@ -259,6 +274,7 @@
 			
 			<!--  -->
 			<div id="note-detail-area">
+
 				<div class="detail-area-title">보낸 사람</div>
 				<div class="detail-area-content" id="detail-sender"></div>
 				<div class="detail-area-title">받은 사람</div>
@@ -267,10 +283,13 @@
 				<div class="detail-area-content" id="detail-title"></div>
 				<div class="detail-area-title">보낸 날짜</div>
 				<div class="detail-area-content" id="detail-sendDate"></div>
-				<div class="detail-area-title">첨부파일</div>
-				<div class="detail-area-content" id="detail-file"></div>
+
+
+
 				<div class="detail-area-title">내용</div>
 				<div class="detail-area-content" id="detail-content"></div>
+				<div class="detail-area-title">첨부파일</div>
+				<div class="detail-area-content" ><img src="" alt="" id="detail-img-file"><span  id="detail-etc-file"></span></div>
 				
 			</div>
 			
@@ -279,6 +298,7 @@
 			
 			<!-- <div class="detail-area-title">받은 날짜</div>
 			<div class="detail-area-content" id="detail-receiveDate">1</div> -->
+
 
         </main>
 
@@ -299,20 +319,23 @@
 	<!-- 쪽지 세부 내용 표시 -->
 	<script>
 		const content = document.querySelectorAll('.info-content');
-
 		const msgCheckBox = document.querySelectorAll('.msg-checkBox');
+
 		const msgSender = document.querySelectorAll('.msg-sender');
 		const msgReceive = document.querySelectorAll('.msg-receive');
 		const msgTitle = document.querySelectorAll('.msg-title');
-		const msgContent = document.querySelectorAll('.msg-content');
 		const msgSendDate = document.querySelectorAll('.msg-sendDate');
+		const msgFile = document.querySelectorAll('.msg-fileName');
+		const msgOriginFile = document.querySelectorAll('.msg-originName');
+		const msgContent = document.querySelectorAll('.msg-content');
 
 
 		const detailSender = document.querySelector('#detail-sender');
 		const detailReceive = document.querySelector('#detail-receive');
 		const detailTitle = document.querySelector('#detail-title');
 		const detailSendDate = document.querySelector('#detail-sendDate');
-		const detailFile = document.querySelector('#detail-file');
+		const detailImgFile = document.querySelector('#detail-img-file');
+		const detailEtcFile = document.querySelector('#detail-etc-file');
 		const detailContent = document.querySelector('#detail-content');
 		
 		const msgNoteNo = document.querySelectorAll('.msg-noteNo');
@@ -333,17 +356,42 @@
 				detailReceive.innerText = msgReceive[i].innerText;
 				detailTitle.innerText = msgTitle[i].innerText;
 				detailSendDate.innerText = msgSendDate[i].innerText;
-				detailFile.innerText = msgSender[i].innerText;
 				detailContent.innerText = msgContent[i].innerText;
 				
+				
+				let fileStr = msgFile[i].innerText;
+				let fileStrDot = fileStr.substring((fileStr.lastIndexOf('.')));
+				
+				if(fileStrDot == ".jpg" || fileStrDot == "png"){
+
+					detailEtcFile.innerText = "";
+					detailImgFile.src =  fileStr;
+
+				}else if(fileStr == '/md/resources/upload/messenger/'){
+					
+					detailEtcFile.innerText = "";
+					detailImgFile.src =  "";
+					
+				}else{
+
+					detailImgFile.src =  "";
+					detailEtcFile.innerText = msgOriginFile[i].innerText;
+
+				}
+				
+				
 				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
-				deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
+
+				deleteHref.href = "/md/messenger/note/deleteReceive/"+ msgNoteNo[i].innerText;
+
+
 			});	
 		};
 	
 
 	</script>
 	
+
 
 	
 

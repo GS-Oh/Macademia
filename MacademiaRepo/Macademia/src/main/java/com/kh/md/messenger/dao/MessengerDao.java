@@ -84,7 +84,15 @@ public interface MessengerDao {
 	//파일보관함 - 예외 파일 전부 가져오기
 	List<MsgFileboxVo> selectAllEtcFileByNo(SqlSessionTemplate sst, String msgNo);
 
-	int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo fileVo);
+	
+	//파일보관함 - 이미지 파일 추가하기
+	int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo msgFileVo);
+
+	//파일보관함 - etc 파일 추가하기
+	int insertFilebox(SqlSessionTemplate sst, MsgFileboxVo msgFileVo);
+
+	//파일보관함 - 파일 삭제하기
+	int fileBoxDeleteByName(SqlSessionTemplate sst, String fileName);
 	
 	
 	

@@ -17,7 +17,7 @@ public class FileUploader {
 			long now = System.currentTimeMillis();
 			int random = (int)(Math.random() * 90000 + 10000);
 			String changeName = "Msg_" + now + "_" + random + ext;
-			
+			ext.equals("jpg");
 			//2. 서버에 업로드
 			//파일 객체 준비
 			File target = new File(savePath + changeName);

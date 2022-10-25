@@ -133,7 +133,7 @@
 		    ,#{noticeNo}
 		    ,#{content}
 		)
-	
+		
 	</insert>	
 	
 	<!-- 공지톡 댓글 리스트 가져오기 -->
@@ -284,6 +284,7 @@
 	        ,T.CONTENT
 	        ,T.SEND_DATE
 	        ,T.RECEIVE_DATE
+	        ,T.ORIGIN_NAME
 	        ,T.FILE_NAME
 		FROM 
 		(
@@ -296,6 +297,7 @@
                 ,M.CONTENT
                 ,M.SEND_DATE
                 ,M.RECEIVE_DATE
+                ,M.ORIGIN_NAME
                 ,M.FILE_NAME
 		    FROM MSG_NOTE M
 		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
@@ -324,6 +326,7 @@
 		        ,T.CONTENT
 		        ,T.SEND_DATE
 		        ,T.RECEIVE_DATE
+		        ,T.ORIGIN_NAME
 		        ,T.FILE_NAME
 			FROM 
 			(
@@ -336,6 +339,7 @@
 	                ,M.CONTENT
 	                ,M.SEND_DATE
 	                ,M.RECEIVE_DATE
+	                ,M.ORIGIN_NAME
 	                ,M.FILE_NAME
 			    FROM MSG_NOTE M
 			    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
@@ -381,6 +385,7 @@
 	        ,T.CONTENT
 	        ,T.SEND_DATE
 	        ,T.RECEIVE_DATE
+	        ,T.ORIGIN_NAME
 	        ,T.FILE_NAME
 		FROM 
 		(
@@ -393,6 +398,7 @@
 		        ,M.CONTENT
 		        ,M.SEND_DATE
 		        ,M.RECEIVE_DATE
+		        ,M.ORIGIN_NAME
 		        ,M.FILE_NAME
 		    FROM MSG_NOTE M
 		    JOIN MESSENGER G ON M.MSG_NO = G.MSG_NO
@@ -429,16 +435,25 @@
 	<!-- 파일보관함 - 이미지 파일 전부 가져오기 -->
 	<select id="selectAllFileImgByNo" resultType="com.kh.md.messenger.vo.MsgFileboxVo">
 		
-		SELECT
-		     FILE_NO
-		    ,MSG_NO
-		    ,ORIGIN_NAME
-		    ,FILE_NAME
-		    ,ENROLL_DATE
-		FROM IMG_FILEBOX
-		WHERE MSG_NO = #{msgNo}
-			AND CHECK_DELETE = 'O'
-		ORDER BY FILE_NO
+		SELECT 
+		     F.FILE_NO
+		    ,F.MSG_NO
+		    ,F.FILE_NAME
+		    ,N.ORIGIN_NAME
+		    ,F.ENROLL_DATE
+		FROM
+		(
+		        SELECT
+				     FILE_NO
+				    ,MSG_NO
+				    ,FILE_NAME
+				    ,ENROLL_DATE
+				FROM IMG_FILEBOX
+				WHERE MSG_NO = 1
+					AND CHECK_DELETE = 'O'
+				ORDER BY FILE_NO
+		) F JOIN MSG_NOTE N ON F.FILE_NAME = N.FILE_NAME        
+
 	
 	</select>
 	
@@ -446,34 +461,40 @@
 	<!-- 파일보관함 - 예외 파일 전부 가져오기 -->
 	<select id="selectAllEtcFileByNo" resultType="com.kh.md.messenger.vo.MsgFileboxVo">
 		
-		SELECT
-		     FILE_NO
-		    ,MSG_NO
-		    ,ORIGIN_NAME
-		    ,FILE_NAME
-		    ,ENROLL_DATE
-		FROM FILEBOX
-		WHERE MSG_NO = #{msgNo}
-			AND CHECK_DELETE = 'O'
-		ORDER BY FILE_NO
+		SELECT 
+		     F.FILE_NO
+		    ,F.MSG_NO
+		    ,F.FILE_NAME
+		    ,N.ORIGIN_NAME
+		    ,F.ENROLL_DATE
+		FROM
+		(
+		        SELECT
+				     FILE_NO
+				    ,MSG_NO
+				    ,FILE_NAME
+				    ,ENROLL_DATE
+				FROM FILEBOX
+				WHERE MSG_NO = 1
+					AND CHECK_DELETE = 'O'
+				ORDER BY FILE_NO
+		) F JOIN MSG_NOTE N ON F.FILE_NAME = N.FILE_NAME 
 	
 	</select>
 	
-	
+	<!-- 파일보관함 - 이미지 파일 추가 -->
 	<insert id="insertImgFilebox">
 	
 		INSERT INTO IMG_FILEBOX
 		(
 		    FILE_NO
 		    ,MSG_NO
-		    ,ORIGIN_NAME
 		    ,FILE_NAME
 		)
 		VALUES
 		(
 		    SEQ_IMG_FILEBOX_NO.NEXTVAL
 		    ,#{msgNo}
-		    ,#{originName}
 		    ,#{fileName}
 		)
 	
@@ -481,14 +502,34 @@
 	</insert>
 	
 	
+	<!-- 파일보관함 - 이미지 파일 추가  -->
+	<insert id="insertFileBox">
+	
+		INSERT INTO FILEBOX
+		(
+		    FILE_NO
+		    ,MSG_NO
+		    ,FILE_NAME
+		)
+		VALUES
+		(
+		    SEQ_FILEBOX_NO.NEXTVAL
+		    ,#{msgNo}
+		    ,#{fileName}
+		)
 	
 	
+	</insert>
 	
 	
+	<!-- 파일보관함 - 파일 삭제 -->
+	<update id="fileBoxDeleteByName">
 	
+		UPDATE FILEBOX
+		    SET CHECK_DELETE = 'X'
+		WHERE FILE_NAME = #{fileName}
 	
-	
-	
+	</update>
 	
 	
 	

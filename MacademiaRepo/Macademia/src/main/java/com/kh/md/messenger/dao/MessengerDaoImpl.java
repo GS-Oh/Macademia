@@ -177,8 +177,22 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//파일보관함 - ( 이미지 파일 입력 )
 	@Override
-	public int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo fileVo) {
-		return sst.insert("messengerMapper.insertImgFilebox", fileVo);
+	public int insertImgFilebox(SqlSessionTemplate sst, MsgFileboxVo msgFileVo) {
+		return sst.insert("messengerMapper.insertImgFilebox", msgFileVo);
+	}
+
+
+	//파일보관함 - ( etc 파일 입력 )
+	@Override
+	public int insertFilebox(SqlSessionTemplate sst, MsgFileboxVo msgFileVo) {
+		return sst.insert("messengerMapper.insertFileBox", msgFileVo);
+	}
+
+
+	//파일보관함 - ( 파일 삭제하기 )
+	@Override
+	public int fileBoxDeleteByName(SqlSessionTemplate sst, String fileName) {
+		return sst.update("messengerMapper.fileBoxDeleteByName", fileName);
 	}
 
 	
