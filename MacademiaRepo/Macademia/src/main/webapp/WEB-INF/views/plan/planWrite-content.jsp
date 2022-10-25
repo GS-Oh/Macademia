@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     body{
      font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
@@ -128,14 +130,17 @@
     
     }
     </style>
-    
+<form action="/md/plan/write" method="post">
+
+
 <div id="center_menu">
+
 	<h3>일정 등록</h3>
 	<hr>
 	<div id="work_top">
 		<h5>일정 제목</h5> <input id="write" type="submit" value="일정 등록하기">
 		<br>
-		<input class="text"type="text" id="title"name="title">
+		<input class="text"type="text" id="title"name="pTitle">
 	</div>
 	<div id="work_middle">
 		<div id="work_left">
@@ -147,17 +152,17 @@
 		
 			<br>
 			<br>
-			<div class="line">
-			<h5>담당자</h5>
-			<h6><i class="fa-solid fa-plus"></i>  추가</h6>
-			
-			</div>
+		
 			
 			<br>
 			<br>
 			<div class="line">
-			<h5>첨부파일</h5>
-			<input type="file" name="file" id="file">
+			<h5 id="type">일정 종류</h5>
+			<select name="pTypeNo" id="select_work">
+				<option vlaue="1">회의</option>
+				<option vlaue="1">회의</option>
+				<option vlaue="1">회의</option>
+			</select>
 			</div>
 			
 		</div>
@@ -173,22 +178,15 @@
 			
 			<br>
 			<br>
-			<div class="line">
-			<h5 id="type">일정 종류</h5>
-			<select name="select_work" id="select_work">
-				<option vlaue="회의">회의</option>
-				<option vlaue="회의">회의</option>
-				<option vlaue="회의">회의</option>
-			</select>
-			</div>
+			
 			
 			
 			<br>
 			<br>
 			
 			<div class="line">
-			<h5>요청 기한</h5>
-			<input type="date" value="2022-10-20">
+			<h5>일정 기한</h5>
+			<input type="date" value="today" name="pEndDate">
 			
 			</div>
 			
@@ -197,14 +195,14 @@
 	</div>
 	<div id="work_bottom">
 		<h5>일정 내용</h5>
-		<textarea rows="5" cols="100"></textarea>
+		<textarea rows="5" cols="100" name="pContent"></textarea>
 		
 		</div>
 		</div>
-		
+		</form>    
 					
 		
 				
 				
 			
-			</div>
+			
