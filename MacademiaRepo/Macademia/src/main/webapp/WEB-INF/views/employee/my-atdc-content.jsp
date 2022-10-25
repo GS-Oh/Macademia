@@ -7,8 +7,6 @@
 	    src: url('/md/resources/font/apple/AppleSDGothicNeoUL.ttf') format('truetype');
 	}
     body{
-        padding: 0px;
-        margin: 0px;
         font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
         font-size: 12px;
     }
@@ -213,47 +211,88 @@
             }
         });
 
+        //이번주 월요일 , 일요일 날짜 구하기
+        // let startDate = today - day + (day == 0 ? -6 : 1);
+        // let endDate = today - day + (day == 0 ? 0 : 7);
+        // console.log(startDate)
+
+        // 검색하려는 월요일과 일요일 출력
+        // $('#start-date').append(year+'.'+month+'.'+startDate)
+        // $('#end-date').append(year+'.'+month+'.'+endDate)
 
         /* 캘린더 관련 */ 
-        let date = new Date()
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let today = date.getDate();
-        let day = date.getDay();
+        let date = new Date();
+        let yyyy = date.getFullYear();
+        let mm = date.getMonth() + 1;
+        let dd = date.getDate();
 
-        //월요일~일요일 구하기
-        let startDate = today - day + (day == 0 ? -6 : 1);
-        let endDate = today - day + (day == 0 ? 0 : 7);
+        console.log(new Date(2022,2,0));
 
-        // 검색하려는 시작일자와 마지막일자 출력
-        $('#start-date').append(year+'.'+month+'.'+startDate)
-        $('#end-date').append(year+'.'+month+'.'+endDate)
+        //이번주 월요일 날짜 구하기
+        // console.log(.getDay())
+
+        //이번주 일요일 날짜 구하기
 
         //매월 마지막 일자 구하기
-        let lastDate = new Date(year, month, 0).getDate()
-
+        
+        $('#selected-date').append(yyyy+'.'+mm+'.'+dd);
+        
         //오른쪽 버튼 클릭 이벤트
         $('#next-week').on('click', function(){
-            if(today > lastDate){
-                new Date(year, month + 1, 1)
-                date = 1
-                month += 1
-            }
+            let today = new Date();
+
+            //오늘부터 1주일 뒤
+            let wklater = today.getDate() + 7;
+            let lastDate = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
             
-            startDate += 7
-            endDate += 7
+            if(wklater > lastDate){
+                date = new Date(today.getFullYear(), today.getMonth() + 1);
+                month = date.getMonth();
+                today = date.getDate();
+                
+                today + (7 - (lastDate - today));
+                console.log(month);
+                console.log(lastDate);
+            } else if(wklater <= lastDate){
+                date = new Date(today.getFullYear(), today.getMonth());
+                month = date.getMonth();
+                today = date.getDate();
+                today += 7;
+                console.log(month);
+                console.log(lastDate);
+            }
+
             $('#selected-date').replaceWith
-            ('<div id="selected-date"><span id="start-date">'+year+'.'+month+'.'+startDate+'</span> ~ <span id="end-date">'+year+'.'+month+'.'+endDate+'</span></div>')
+            ('<div id="selected-date"><span id="end-date">'+year+'.'+month+'.'+today+'</span></div>')
         
         });
 
         //왼쪽 버튼 클릭 이벤트
         $('#prev-week').click(function(){
-           
-            startDate -= 7
-            endDate -= 7
-            $('#start-date').text(year+'-'+month+'-'+parseInt(startDate-7))
-            $('#end-date').text(year+'-'+month+'-'+parseInt(endDate-7))
+           //오늘부터 1주일 전
+        //    let wkbefore = today - 7;
+        //    let lastDate = new Date(year, month, 0).getDate();
+            
+        //     if(wkbefore < 1){
+        //         date = new Date(year, month, 0);
+        //         month = date.getMonth();
+        //         today = date.getDate();
+                
+        //         today + (7 - (lastDate - today));
+        //         console.log(month);
+        //         console.log(lastDate);
+        //     } else if(wkbefore <= lastDate){
+        //         date = new Date(year, month, today);
+        //         month = date.getMonth();
+        //         today = date.getDate();
+        //         today -= 7;
+        //         console.log(month);
+        //         console.log(lastDate);
+        //     }
+            
+
+        //     $('#selected-date').replaceWith
+        //     ('<div id="selected-date"><span id="end-date">'+year+'.'+month+'.'+today+'</span></div>')
         });
     });
 </script>
@@ -311,8 +350,8 @@
     <div id="date-select-area">
         <div id="prev-week"><i class="fa-solid fa-angle-left"></i></div>
         <div id="selected-date">
-            <span id="start-date"></span> ~ 
-            <span id="end-date"></span>
+            <!-- <span id="start-date"></span> ~ 
+            <span id="end-date"></span> -->
         </div>
         <div id="next-week"><i class="fa-solid fa-angle-right"></i></div>
     </div>

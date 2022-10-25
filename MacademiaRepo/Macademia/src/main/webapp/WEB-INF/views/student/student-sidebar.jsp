@@ -87,7 +87,7 @@
 <div id="side_menu">
 
     <ul id="menu-top">
-        <li><i class="fa-light fa-screen-users fa-2x"></i></li>
+        <li><i class="fa-solid fa-users fa-2x"></i></li>
         <li class="">수강생 관리</li>
     </ul>
 
@@ -97,12 +97,12 @@
     </ul>
 
     <ul id="menu-top">
-        <li> <i class="fa-regular fa-calendar-days fa-2x"></i></li>
+        <li><i class="fa-solid fa-book-open fa-2x"></i></i></li>
         <li class="">학사 관리</li>
     </ul>
 
     <ul id="menu">
-        <a href=""><li>커리큘럼 조회</li></a>
+        <a href="${root}/student/curriculum"><li>커리큘럼 조회</li></a>
         <a href=""><li>수강생 평가</li></a>
     </ul>
         
