@@ -96,55 +96,18 @@
 				<button id="fileBox-header-etc"> <a href="/md/messenger/etcFileBox">기타</a> </button>
 			</div>
 			
+			
 			<div id="fileBox-etc-content">
 
-				<div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-                <div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <div> <img src="" alt="" width="40px" height="40px"></div> 
-                    <div> <span>파일명</span></div> 
-                </div>
-
-             
+				<c:forEach items="${FileVoList}" var="fileVo">
+					
+					<div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
+	                    <div> <img src="" alt="" width="40px" height="40px"></div> 
+	                    <div> <span>${fileVo.originName}</span></div> 
+	                </div>
 				
+				</c:forEach>
+             
 			</div>
 
 		
@@ -162,7 +125,7 @@
             <div class="modal-content">
     
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
+                    <a class="btn btn-outline-dark" href="/md/messenger/note/write?originName=${fileVo.originName}&fileName=${fileVo.fileName}"><h3>보내기</h3></a>
                 </div>
                 <div class="modal-content">
                     <a class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>

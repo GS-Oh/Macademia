@@ -77,7 +77,6 @@
 		</aside>       
 
         <main>
-
 			<div id="write-title"><h1>쪽지 보내기</h1></div>
 
             <form action="/md/messenger/note/write/${receiveNo}" method="post" enctype="multipart/form-data">

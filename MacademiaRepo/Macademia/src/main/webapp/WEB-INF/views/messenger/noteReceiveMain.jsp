@@ -14,7 +14,7 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 15% 7% 44% 34%;
+			grid-template-rows: 15% 7% 45% 40%;
 		}
 
 
@@ -122,7 +122,6 @@
 
 		/*  */
 		#note-detail-area{
-			height: 500px;
 			display: grid;
 			grid-template-columns: 2fr 8fr;
 			grid-template-rows: repeat(4,1fr) 2fr 2fr;
@@ -248,10 +247,12 @@
 							<div class="msg-title">${mnVo.title}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
 							<div class="msg-content">${mnVo.content}</div>
+							<div>
 							<c:if test="${not empty mnVo.fileName }">
-								<div><a href="/md/messenger/download/${mnVo.fileName}" target='_blank'>파일있음</a></div>
-								<div class="msg-fileName" style="display: none;">${root}/resources/upload/messenger/${mnVo.fileName}</div>
+								<a href="/md/messenger/download/${mnVo.fileName}" target='_blank'>파일있음</a>
 							</c:if>
+							</div>
+							<div class="msg-fileName" style="display: none;">/md/resources/upload/messenger/${mnVo.fileName}</div>
 						</div>
 					</c:if>
 					
@@ -277,7 +278,7 @@
 				<div class="detail-area-title">내용</div>
 				<div class="detail-area-content" id="detail-content"></div>
 				<div class="detail-area-title">첨부파일</div>
-				<div class="detail-area-content" ><img src="" alt="" id="detail-file" height="90%" width="30%" data-bs-toggle="modal" data-bs-target="#myModal"></div>
+				<div class="detail-area-content" id="detail-etc-file"><img src="" alt="" id="detail-img-file" height="150px" width="150px"></div>
 				
 			</div>
 			
@@ -293,35 +294,6 @@
 
     </div>
     
-
-	<!-- The Modal -->
-	<div class="modal" id="myModal">
-		<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-	
-			<!-- Modal Header -->
-			<div class="modal-header">
-			<h4 class="modal-title">Modal Heading</h4>
-			<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-			</div>
-	
-			<!-- Modal body -->
-			<div class="modal-body">
-				<img src="" alt="" height="300px" width="300px" style="padding-left: 80px;">
-			</div>
-	
-			<!-- Modal footer -->
-			<div class="modal-footer">
-			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">저장하기</button>
-			</div>
-	
-		</div>
-		</div>
-	</div>
-
-
-
-
     <!-- 검색 값 유지 -->
 	<c:if test="${not empty menu}">
 	
@@ -350,7 +322,8 @@
 		const detailReceive = document.querySelector('#detail-receive');
 		const detailTitle = document.querySelector('#detail-title');
 		const detailSendDate = document.querySelector('#detail-sendDate');
-		const detailFile = document.querySelector('#detail-file');
+		const detailImgFile = document.querySelector('#detail-img-file');
+		const detailEtcFile = document.querySelector('#detail-etc-file');
 		const detailContent = document.querySelector('#detail-content');
 		
 		const msgNoteNo = document.querySelectorAll('.msg-noteNo');
@@ -372,7 +345,21 @@
 				detailTitle.innerText = msgTitle[i].innerText;
 				detailSendDate.innerText = msgSendDate[i].innerText;
 				detailContent.innerText = msgContent[i].innerText;
-				detailFile.src =  msgFile[i].innerText;
+				
+				
+				let fileStr = msgFile[i].innerText;
+							
+				let fileStrDot = fileStr.substring((fileStr.lastindexOf('.')));
+				
+				if(fileStrDot.equals('jpg')){
+					
+					detailImgFile.src =  msgFile[i].innerText;
+				}else {
+					
+					detailEtcFile.innerText = msgFile[i].innerText;
+				}
+				
+				
 				
 				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
 				deleteHref.href = "/md/messenger/note/deleteReceive/"+ msgNoteNo[i].innerText;

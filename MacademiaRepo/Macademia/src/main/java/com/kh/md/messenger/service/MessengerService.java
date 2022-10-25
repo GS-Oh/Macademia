@@ -88,7 +88,10 @@ public interface MessengerService {
 	List<MsgFileboxVo> selectAllEtcFileByNo(String msgNo);
 
 	//파일보관함 ( 이미지 파일 입력 )
-	int insertImgFilebox(MsgFileboxVo fileVo);
+	int insertImgFilebox(MsgFileboxVo msgFileVo);
+
+	//파일보관함 ( etc 파일 입력 )
+	int insertFilebox(MsgFileboxVo msgFileVo);
 
 	
 }//class

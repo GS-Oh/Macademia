@@ -112,35 +112,15 @@
 					<c:forEach items="${ImgFileVoList}" var="imgFileVo">
 					
 						<div class="fileBox-tumb" data-bs-toggle="modal" data-bs-target="#myModal">
-							<div> <img src="" alt="" width="140px" height="140px"> </div>
-							<div> <h4>originName-${imgFileVo.originName}</h4> </div>
-							<div> <h4>2022-10-03-${imgFileVo.enrollDate}</h4> </div>
+							<div > <img src="${root}/resources/upload/messenger/${imgFileVo.fileName}" alt="" width="140px" height="140px"> </div>
+							<div style="display: none;" class="fileBox-fileName">${imgFileVo.fileName}</div>
+							<div> <h4 class="fileBox-originName">${imgFileVo.originName}</h4> </div>
+							<div> <h4 >${imgFileVo.enrollDate}</h4> </div>
 						</div>
 					
 					</c:forEach>
 
 
-					<div class="fileBox-tumb" data-bs-toggle="modal" data-bs-target="#myModal">
-						<div> <img src="" alt="" width="160px" height="160px"> </div>
-						<div> <h4>originName</h4> </div>
-						<div> <h4>2022-10-03</h4> </div>
-					</div><div class="fileBox-tumb">
-						<div> <img src="" alt="" width="160px" height="160px"> </div>
-						<div> <h4>originName</h4> </div>
-						<div> <h4>2022-10-03</h4> </div>
-					</div><div class="fileBox-tumb">
-						<div> <img src="" alt="" width="160px" height="160px"> </div>
-						<div> <h4>originName</h4> </div>
-						<div> <h4>2022-10-03</h4> </div>
-					</div><div class="fileBox-tumb">
-						<div> <img src="" alt="" width="160px" height="160px"> </div>
-						<div> <h4>originName</h4> </div>
-						<div> <h4>2022-10-03</h4> </div>
-					</div><div class="fileBox-tumb">
-						<div> <img src="" alt="" width="160px" height="160px"> </div>
-						<div> <h4>originName</h4> </div>
-						<div> <h4>2022-10-03</h4> </div>
-					</div>
 
 
 				</div>
@@ -165,10 +145,10 @@
             <div class="modal-content">
     
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
+                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
                 </div>
                 <div class="modal-content">
-                    <a class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
+                    <a id="modal-delete" class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
                 </div>
      
              </div>
@@ -177,7 +157,35 @@
     </div>
 
 
+	<script>
 
+		const fileBox = document.querySelectorAll('.fileBox-tumb');
+
+		const changeFileName = document.querySelectorAll('.fileBox-fileName');
+		const originFileName = document.querySelectorAll('.fileBox-originName');
+		
+		const modalFileName = document.querySelector('#modal-fileName');
+		const modalDelete = document.querySelector('#modal-delete');
+		
+
+
+
+		for(let i=0; i<fileBox.length; ++i){
+
+			fileBox[i].addEventListener('click',function(){
+				
+				modalFileName.href = '/md/messenger/note/write?originName=' + originFileName[i].innerText + '&fileName=' + changeFileName[i].innerText;
+				modalDelete.href = '/md/messenger/fileBox/delete/'+ originFileName[i].innerText;
+
+			})
+
+
+
+		}
+
+
+
+	</script>
 
 
 </html>

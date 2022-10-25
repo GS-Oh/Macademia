@@ -85,6 +85,7 @@ public class MessengerServiceImpl implements MessengerService{
 		return dao.insertReple(sst, repleVo);
 	}
 
+	
 	//공지톡 댓글 리스트 가져오기
 	@Override
 	public List<MsgRepleVo> selectRepleList(String no) {
@@ -94,7 +95,9 @@ public class MessengerServiceImpl implements MessengerService{
 	//공지톡 댓글 삭제
 	@Override
 	public int updateRepleDelete(String repleNo) {
-		return dao.updateRepleDelete(sst, repleNo);
+		
+		return dao.updateRepleDelete(sst, repleNo); 
+		
 	}
 
 	
@@ -183,8 +186,15 @@ public class MessengerServiceImpl implements MessengerService{
 
 	//파일보관함 - 이미지 파일 입력
 	@Override
-	public int insertImgFilebox(MsgFileboxVo fileVo) {
-		return dao.insertImgFilebox(sst, fileVo);
+	public int insertImgFilebox(MsgFileboxVo msgFileVo) {
+		
+		return dao.insertImgFilebox(sst, msgFileVo);
+	}
+
+	//파일보관함 -  etc 파일 입력
+	@Override
+	public int insertFilebox(MsgFileboxVo msgFileVo) {
+		return dao.insertFilebox(sst, msgFileVo);
 	}
 
 	

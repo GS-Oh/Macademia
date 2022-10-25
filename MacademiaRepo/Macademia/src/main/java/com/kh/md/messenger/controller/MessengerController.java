@@ -45,7 +45,7 @@ public class MessengerController {
 		
 		//TODO 세션에서 멤버넘버 가져오기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-		String memberNo = "4";
+		String memberNo = "1";
 		
 		//메신저 등록되어있는지 체크
 		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
@@ -70,7 +70,7 @@ public class MessengerController {
 	public String enroll(MessengerVo msgVo, HttpSession session, HttpServletRequest req) {
 		
 		//TODO 세션에서 멤버넘버 가져오기
-		String memberNo = "4";
+		String memberNo = "1";
 		msgVo.setNo(memberNo);
 		
 		if(msgVo.getProfile() != null && !msgVo.getProfile().isEmpty()) {
@@ -386,18 +386,30 @@ public class MessengerController {
 	} 
 	
 	
-	//파일보관함 ( 이미지 파일 등록하기 )
-	@GetMapping("imgFileBox/Enroll/{fileName}")
-	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName,HttpSession session, Model model) {
+	//파일보관함 ( 파일 등록하기 )
+	@GetMapping("allFileBox/Enroll/{fileName}/{originName}")
+	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName,@PathVariable String originName,HttpSession session, Model model) {
 		
 		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
 		msgFileVo.setMsgNo(msgVo.getMsgNo());
 		msgFileVo.setFileName(fileName);
 		
-		int result = ms.insertImgFilebox(msgFileVo);
+		//확장자가 jpg 면 img파일 테이블에 추가 아니면 etc파일 테이블에 추가
+		String dot = fileName.substring(fileName.lastIndexOf("."));
+		
+		int result = 0;
+		
+		if(dot.equals(".jpg")) {
+			result = ms.insertImgFilebox(msgFileVo);
+		}else {
+			result = ms.insertFilebox(msgFileVo);
+		}
+		
 		
 		if(result == 1) {
-			return "redirect:/messenger/download/"+ fileName;
+			model.addAttribute("fileName", fileName);
+			model.addAttribute("originName", originName);
+			return "messenger/download"; 
 		}else {
 			return "";
 		}
@@ -406,16 +418,26 @@ public class MessengerController {
 	}
 	
 	
-	//파일보관함 ( 파일 상세화면 )
-	@GetMapping("download/{fileName}")
-	public String download(@PathVariable String fileName, Model model) {
+	//파일보관함 ( 파일 다운로드 페이지로 이동 )
+	@GetMapping("download/{fileName}/{originName}")
+	public String download(@PathVariable String fileName, @PathVariable String originName, Model model) {
 		
 		model.addAttribute("fileName", fileName);
+		model.addAttribute("originName", originName);
 		
 		return "messenger/download";
 	}
 	
 	
+	//파일보관함 ( 파일 보내기 )
+	@GetMapping("fileSend/{orginName}/{fileName}")
+	public String fileSend(@PathVariable String originName, @PathVariable String fileName, Model model) {
+		
+		model.addAttribute("originName",originName);
+		model.addAttribute("fileName",fileName);
+		
+		return "messenger/fileSend";
+	}
 	
 	
 	
@@ -522,10 +544,10 @@ public class MessengerController {
 	//공지 게시글 ( 댓글 입력 )
 	@PostMapping("notice/reple/write")
 	@ResponseBody
-	public String noticeRepleWrite(MsgRepleVo repleVo) {
+	public String noticeRepleWrite(MsgRepleVo repleVo, HttpSession session) {
 		
-		//TODO 세션이나 다른곳 저장되어있는 MsgNo로 바꾸기
-		repleVo.setMsgNo("1");
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		repleVo.setMsgNo(msgVo.getMsgNo());
 		
 		int result = ms.insertReple(repleVo);
 		
