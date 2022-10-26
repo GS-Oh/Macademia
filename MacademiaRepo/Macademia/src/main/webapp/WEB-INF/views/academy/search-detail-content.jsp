@@ -177,8 +177,8 @@
     </div>
 
     <div id="edit-btn-area">
-        <button><a href="${root}/student/search">뒤로가기</a></button>
-        <button><a href="${root}/student/search/detail/edit">정보수정</a></button>
+        <button><a href="${root}/academy/search">뒤로가기</a></button>
+        <button><a href="${root}/academy/search/detail/edit">정보수정</a></button>
     </div>
 
 </div>

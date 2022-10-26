@@ -6,8 +6,9 @@
 <script type="text/javascript" src="${root}/resources/js/search-address/search-address.js"></script>    
 
 <style>
-    #search-detail-edit-content-wrap div{
-        /* border: 1px solid red; */
+    body{
+        font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        font-size: 12px;
     }
     #search-detail-edit-content-wrap>form{
         width: 60vw;
@@ -216,7 +217,7 @@
         </div>
 
         <div id="edit-btn-area">
-            <button><a href="${root}/student/search">뒤로가기</a></button>
+            <button><a href="${root}/academy/search">뒤로가기</a></button>
             <input type="submit" value="입력하기">
         </div>
 

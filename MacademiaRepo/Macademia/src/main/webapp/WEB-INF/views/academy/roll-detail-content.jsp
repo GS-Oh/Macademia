@@ -93,10 +93,10 @@
     }
     .table-right-border{
         display: grid;
-        grid-template-columns: 0.5fr 0.5fr 1fr;
+        grid-template-columns: 1fr 1fr;
         justify-items: center;
         align-items: center;
-        width: 120px;
+        width: 100px;
         border-right: 1px solid gray;
     }
     .st-table-head{
@@ -136,7 +136,7 @@
         justify-content: center;
         align-items: center;
     }
-    #edit-btn-area>button, #edit-btn-area>input[type='submit']{
+    #edit-btn-area>button{
         width: 100px;
         height: 30px;
         background-color: #6667AB;
@@ -254,7 +254,6 @@
 
         <div id="student-atdc-table-head">
             <div class="table-right-border st-table-head">
-                <input type="checkbox">
                 <div>번호</div>
                 <div>이름</div>
             </div>
@@ -296,7 +295,6 @@
 
         <div class="student-atdc-table-body">
             <div class="table-right-border body-underbar">
-                <input type="checkbox">
                 <div>1</div>
                 <div>최형배</div>
             </div>
@@ -338,7 +336,6 @@
 
         <div class="student-atdc-table-body">
             <div class="table-right-border body-underbar">
-                <input type="checkbox">
                 <div>2</div>
                 <div>최익현</div>
             </div>
@@ -380,12 +377,10 @@
 
     </div>
 
-    <form action="">
-        <div id="edit-btn-area">
-            <button><a href="${root}/student/roll//detail">뒤로가기</a></button>
-            <input type="submit" value="저장하기">
-        </div>
-    </form>
+    <div id="edit-btn-area">
+        <button><a href="${root}/academy/roll">뒤로가기</a></button>
+        <button><a href="${root}/academy/roll/detail/edit">수정하기</a></button>
+    </div>
 
 </div>
 

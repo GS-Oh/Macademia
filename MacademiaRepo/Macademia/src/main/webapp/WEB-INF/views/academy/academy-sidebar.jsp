@@ -92,8 +92,8 @@
     </ul>
 
     <ul id="menu">
-        <a href="${root}/student/roll"><li>수강생 출결관리</li></a>
-        <a href="${root}/student/search"><li>수강생 정보조회</li></a>
+        <a href="${root}/academy/roll"><li>수강생 출결관리</li></a>
+        <a href="${root}/academy/search"><li>수강생 정보조회</li></a>
     </ul>
 
     <ul id="menu-top">
@@ -102,7 +102,7 @@
     </ul>
 
     <ul id="menu">
-        <a href="${root}/student/curriculum"><li>커리큘럼 조회</li></a>
+        <a href="${root}/academy/curriculum"><li>커리큘럼 조회</li></a>
         <a href=""><li>수강생 평가</li></a>
     </ul>
         

@@ -192,7 +192,7 @@
         </div>
 
         <div id="edit-btn-area">
-            <button><a href="${root}/student/search/detail">뒤로가기</a></button>
+            <button><a href="${root}/academy/search/detail">뒤로가기</a></button>
             <input type="submit" value="수정하기">
         </div>
 
