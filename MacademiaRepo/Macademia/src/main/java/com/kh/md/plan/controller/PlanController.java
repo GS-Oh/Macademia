@@ -1,5 +1,7 @@
 package com.kh.md.plan.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,9 @@ public class PlanController {
 	private PlanService service;
 	
 	@GetMapping("list")
-	public String planList() {
+	public String planList(HttpServletRequest req) {
+		List<PlanVo> planList = service.getPlan();
+		req.setAttribute("planList", planList);
 		
 		return "/plan/planList";
 	}
@@ -31,10 +35,13 @@ public class PlanController {
 	@PostMapping("write")
 	public String planWrite(HttpServletRequest req, PlanVo vo) {
 		String no = "1";
+		
+		
 		vo.setMNo(no);
+		System.out.println(vo);
 		int result = service.write(vo);
 		if(result == 1) {
-			return "redirect:/plat/planList";
+			return "redirect:/plan/list";
 		}else {
 			return "error/errorPage";
 		}

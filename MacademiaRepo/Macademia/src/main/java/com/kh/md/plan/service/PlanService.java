@@ -1,5 +1,7 @@
 package com.kh.md.plan.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,10 @@ public class PlanService {
 	public int write(PlanVo vo) {
 		// TODO Auto-generated method stub
 		return dao.insertPlan(sst, vo);
+	}
+	public List<PlanVo> getPlan() {
+		// TODO Auto-generated method stub
+		return dao.getPlan(sst);
 	}
 
 }

@@ -159,9 +159,9 @@
 			<div class="line">
 			<h5 id="type">일정 종류</h5>
 			<select name="pTypeNo" id="select_work">
-				<option vlaue="1">회의</option>
-				<option vlaue="1">회의</option>
-				<option vlaue="1">회의</option>
+				<option vlaue="1">1</option>
+				<option vlaue="1">2</option>
+				<option vlaue="1">3</option>
 			</select>
 			</div>
 			

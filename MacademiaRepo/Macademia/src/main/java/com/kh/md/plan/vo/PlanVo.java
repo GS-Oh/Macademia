@@ -1,5 +1,8 @@
 package com.kh.md.plan.vo;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
@@ -13,4 +16,6 @@ public class PlanVo {
 	private String pStratDate;
 	private String pEndDate;
 
+	
+	
 }

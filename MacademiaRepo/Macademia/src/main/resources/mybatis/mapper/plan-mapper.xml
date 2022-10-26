@@ -25,4 +25,7 @@
 	
 	
 	</insert>
+	<select id="planList" resultType="com.kh.md.plan.vo.PlanVo">
+		SELECT * FROM PLAN
+	</select>
 </mapper>

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@page import="java.util.List"%>
+<%@page import="com.kh.md.plan.vo.planVo"%> 
+    
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -158,9 +161,7 @@ color:#000;
 .fc-day-sat a{
 color:#000;
 }
-.fc-daygrid-day-number{
 
-}
 
 
 /* 토요일 날짜 파란색 */
@@ -168,6 +169,9 @@ color:#000;
 .fc-col-header-cell{
  background-color:#6667AB;
  color:#fff;
+}
+.fc-button-primary{
+background-color:#6667AB;
 }
 
 
@@ -207,8 +211,29 @@ color:#000;
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-       		height:430,
+        	 initialView: 'dayGridMonth',
+          header: {  
+        	  left: 'prev,next,today'
+        	  ,center: 'title',
+        		  right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+        	  },editable: true, // 수정 가능
+        	  resourceAreaHeaderContent: 'Rooms',
+        	  events : [
+        		  <%List<PlanVo> planList =(List<PlanVo>)request.getAttribute("planList");%>
+        		  <%if (planList != null) {%>
+        		  <%for(PlanVo vo : planList){%>
+        		  {
+        			title : '<%=vo.getpTitle()'%>  
+        		  	start : '<%=vo.getpStratDate()%>'
+        		  	end : '<%=vo.getpEndDate()%>'
+        		  }
+        		 <% }%>
+        		  <%}%>
+        	  ]
+        	  
+        
+        	 
+         
        		
         });
         calendar.render();

@@ -47,13 +47,20 @@ border:none;
 .fc-scrollgrid, .fc-scrollgrid-liquid{
 border:none;
 }
-.fc-unthemed td.fc-today{
+.fc-unthemed .fc-today{
 background-color:red;
 }
- .fc-unthemed td.fc-today{
-        background-color: aquamarine;
-      }
+.fc-button-group{
+width:50px;
+height:50px;
+background-color:red;
+color:#fff;
 
+}
+.fc-button{
+background-color:red;
+color:#fff;
+}
 
 	
 </style>

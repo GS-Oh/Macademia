@@ -1,5 +1,7 @@
 package com.kh.md.plan.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +14,12 @@ public class PlanDao {
 		// TODO Auto-generated method stub
 		return sst.insert("planMapper.insertPlan", vo);
 	}
+
+	public List<PlanVo> getPlan(SqlSessionTemplate sst) {
+		// TODO Auto-generated method stub
+		return sst.selectList("planMapper.planList");
+	}
+	
+	
 
 }
