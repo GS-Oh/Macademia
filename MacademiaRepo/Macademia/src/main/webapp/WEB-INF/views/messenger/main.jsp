@@ -14,12 +14,26 @@
 	
 		.main-partition{
 			padding-top : 30px;
-			border-top: 3px dashed black;
+			border-top: 1px dashed black;
 			margin-bottom : 20px;
 			display: flex;
 			text-align : bottom;
 		}
 
+		.msg-main-title-wrap{
+		 	border:5px solid #6667AB; 
+			padding:20px; 
+			border-radius: 15px;
+			margin-bottom: 20px;
+		}
+
+		.msg-main-title{
+			border-left: 10px solid #6667AB;
+			padding-left: 10px;
+			font-size: 10rem;
+			font-weight: 900;
+			margin: 30px 0px 30px 0px;
+		}
 
 		.main-content-wrap{
 			width: 80%;
@@ -118,51 +132,363 @@
         <main>
             
             
-            
-			<!-- 행정팀 -->
-			<div class="main-partition"><h2>행정팀</h2><h5 style="color: gray;">(3명)</h5></div>
+            <div class="msg-main-title-wrap">
+				<!-- 운영기획부 -->
+				<div class="msg-main-title"><h1>운영기획부</h1><h5 style="color: gray;"></h5></div>
+				
+				<!-- 행정팀(운영기획부) -->
+				<div class="main-partition"><h2>행정팀</h2><h5 style="color: gray;">(3명)</h5></div>
+
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap" style="width: 100%;">
+
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+						<!-- 운영기획부인 회원 기준 -->										
+						<!-- 행정팀 직원 수 만큼 반복 -->
+						<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '행정팀'}">
+	
+							<div class="messenger-main-content  detail-target">
+								<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+									<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+								</div>
+								<div class="content-detail">
+									<div class="detail-name">${msgTotalVo.name}</div>
+									<div class="detail-dept">${msgTotalVo.part}</div>
+									<div class="detail-position">${msgTotalVo.position}</div>
+									<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+									<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+								</div>
+							</div>
+							
+						</c:if>
+					</c:forEach>		
+
+				</div>		
+							
+							
+				<!-- 재정팀(운영기획부) -->
+				<div class="main-partition"><h2>재정팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				
+				
+				
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+						<!-- 운영기획부인 회원 기준 -->										
+						<!-- 행정팀 직원 수 만큼 반복 -->
+						<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '재정팀'}">
+	
+							<div class="messenger-main-content  detail-target">
+								<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+									<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+								</div>
+								<div class="content-detail">
+									<div class="detail-name">${msgTotalVo.name}</div>
+									<div class="detail-dept">${msgTotalVo.part}</div>
+									<div class="detail-position">${msgTotalVo.position}</div>
+									<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+									<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+								</div>
+							</div>
+							
+						</c:if>
+					</c:forEach>		
+
+				</div>		
+							
+
+
+				<!-- 시설지원팀(운영기획부) -->
+				<div class="main-partition"><h2>시설지원팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '시설지원팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+						</c:forEach>	
+
+				</div>		
+						
+						
+			</div>
 			
-			<!-- 행정팀 직원 -- 얘로 감싸고 -->
-			<div class="main-content-wrap">
-			
-				<!-- 행정팀 직원 수 만큼 반복 -->
+					
+			<div class="msg-main-title-wrap">
+				<!-- 교육훈련부 -->
+				<div class="msg-main-title"><h1>교육훈련부</h1><h5 style="color: gray;"></h5></div>
+				
+				<!-- 교육1팀(교육훈련부) -->
+				<div class="main-partition"><h2>교육1팀</h2><h5 style="color: gray;">(3명)</h5></div>
+
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+					
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교육1팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+					</c:forEach>			
+
+				</div>		
+							
+							
+							
+				<!-- 교육2팀(교육훈련부) -->
+				<div class="main-partition"><h2>교육2팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				
 				<c:forEach items="${msgVoList}" var="msgTotalVo">
 
-					<c:if test="${msgTotalVo.dept eq '행정팀'}">
-						<div class="messenger-main-content  detail-target">
-							<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-								<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
-							</div>
-							<div class="content-detail">
-								<div class="detail-name">${msgTotalVo.name}</div>
-								<div class="detail-dept">${msgTotalVo.dept}</div>
-								<div class="detail-position">${msgTotalVo.position}</div>
-								<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
-								<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
-							</div>
-						</div>
-					</c:if>
+					<!-- 부서 보여주는 부분 얘로 감싸고 -->
+					<div class="main-content-wrap">
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교육2팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+					</div>		
+					
+				</c:forEach>				
+							
+							
+				<!-- 교재지원팀(교육훈련부) -->
+				<div class="main-partition"><h2>교재지원팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교재지원팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+					</c:forEach>							
+
+				</div>		
+			
+			</div>
+				
+
+
+			<div class="msg-main-title-wrap">
+				<!-- 취업지원부 -->
+				<div class="msg-main-title"><h1>취업지원부</h1><h5 style="color: gray;"></h5></div>
+				
+				<!-- 취업팀(취업지원부) -->
+				<div class="main-partition"><h2>취업팀</h2><h5 style="color: gray;">(3명)</h5></div>
+
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+				
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '취업지원부' && msgTotalVo.part eq '취업팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+					</c:forEach>			
+
+				</div>		
+							
+							
+							
+				<!-- 상담팀(취업지원부) -->
+				<div class="main-partition"><h2>상담팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+					
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '취업지원부' && msgTotalVo.part eq '상담팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+					</c:forEach>				
+
+				</div>		
+
+			</div>
 						
 					
+			
 
-				</c:forEach>
+			<div class="msg-main-title-wrap">			
+				<!-- 마케팅부 -->
+				<div class="msg-main-title"><h1>마케팅부</h1><h5 style="color: gray;"></h5></div>
+				
+				<!-- 홍보팀(마케팅부) -->
+				<div class="main-partition"><h2>홍보팀</h2><h5 style="color: gray;">(3명)</h5></div>
+
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '마케팅부' && msgTotalVo.part eq '홍보팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+							
+					</c:forEach>		
+
+				</div>		
+							
+							
+							
+				<!-- 대외협력팀(마케팅부) -->
+				<div class="main-partition"><h2>대외협력팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				
+				<!-- 부서 보여주는 부분 얘로 감싸고 -->
+				<div class="main-content-wrap">
+
+					<c:forEach items="${msgVoList}" var="msgTotalVo">
+
+							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 행정팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '마케팅부' && msgTotalVo.part eq '대외협력팀'}">
+		
+								<div class="messenger-main-content  detail-target">
+									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									</div>
+									<div class="content-detail">
+										<div class="detail-name">${msgTotalVo.name}</div>
+										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-position">${msgTotalVo.position}</div>
+										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
+										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
+									</div>
+								</div>
+								
+							</c:if>
+					</c:forEach>		
+
+				</div>		
 				
 			</div>
-
-
-
-			<!-- 재정팀 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
-			<div class="main-partition"><h2>재정팀</h2><h5 style="color: gray;">(3명)</h5></div>
 			
 			
 			
 			
 			
-
-			<!-- 영업부 -- 부서 수 만큼 div 추가하기 (5개라고 생각하고 작성)-->
-			<div class="main-partition"><h2>시설지원팀</h2><h5 style="color: gray;">(3명)</h5></div>
 			
-
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 
         </main>

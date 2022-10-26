@@ -137,8 +137,8 @@
 						<c:forEach items="${repleVoList}" var="repleVo">				
 							<!-- 리스트 만큼 이거 반복 -->
 								<div class="reply-list">
-									<div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
-									<div><span>${repleVo.msgNo}</span></div>
+									<div class="reply-img-wrap" ><img id="reple-img-area" src="${root}/resources/upload/messenger/${repleVo.fileName}" alt="" width="90%" height="100%" style="border : 1px solid black;"></div>
+									<div><span>${repleVo.name}</span></div>
 									<div><h4>${repleVo.content}</h4></div>
 									<div><h6 style="color:gray">${repleVo.enrollDate}</h6></div>
 								</div>
@@ -155,7 +155,7 @@
 				<div id="reply-insert">
 
 					<div style="margin-left: 10px;">
-						<label for="content"><h3><span  class="badge bg-secondary" >${noticeVo.msgNo}</span></h3></label>
+						<label for="content"><h3><span  class="badge bg-secondary" >${noticeVo.name}</span></h3></label>
 					</div>
 					<div style="margin: 10px;">
 						<textarea id="reple-content" class="form-control" rows="4" id="content" name="text"></textarea>
@@ -179,7 +179,8 @@
 		
 		repleBtn.addEventListener('click', function(){
 			
-			const repleWriterNick = '${noticeVo.msgNo}';
+			const repleWriterNick = '${noticeVo.name}';
+			const repleProfile = '${noticeVo.fileName}';
 			const repleContent = document.querySelector('#reple-content').value;
 			const now = new Date();
 			
@@ -194,7 +195,7 @@
 				success : function(result){
 					if(result == 'ok'){
 						const target = document.querySelector('#reple-list-ps');
-						$(target).prepend('<div class="reply-list"><div class="reply-img-wrap" ><img src="" alt="" width="90%" height="100%" style="border : 1px solid black;"></div><div><span>'
+						$(target).prepend('<div class="reply-list"><div class="reply-img-wrap" ><img src="/md/resources/upload/messenger/'+ repleProfile +'" alt="" width="90%" height="100%" style="border : 1px solid black;"></div><div><span>'
 												+ repleWriterNick +'</span></div><div><h4>'+repleContent+'</h4></div><div><h6 style="color:gray">'
 												+ now.getFullYear()+"-"+now.getMonth()+"-"+now.getDay()+'</h6></div></div><div></div>');
 						

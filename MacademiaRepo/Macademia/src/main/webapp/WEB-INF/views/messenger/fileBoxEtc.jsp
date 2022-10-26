@@ -59,7 +59,7 @@
         .etc-content-file{
             
             display: grid;
-            grid-template-columns: 50px auto;
+            grid-template-columns: 50px auto auto;
             align-items: center;
         }
 
@@ -103,10 +103,13 @@
 					
 					<div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
 	                    <div> <img src="" alt="" width="40px" height="40px"></div> 
+	                    <div style="display: none;" class="fileBox-fileNo">${fileVo.fileNo}</div>
 	                    <div style="display: none;" class="fileBox-fileName">${fileVo.fileName}</div>
 	                    <div> <span class="fileBox-originName">${fileVo.originName}</span></div> 
+	                    <div style="text-align:right;"> <span class="" >${fileVo.enrollDate}</span></div> 
 	                </div>
-				
+	                
+					
 				</c:forEach>
              
 			</div>
@@ -143,6 +146,7 @@
 	
 			const fileBox = document.querySelectorAll('.etc-content-file');
 	
+			const fileNo = document.querySelectorAll('.fileBox-fileNo');
 			const changeFileName = document.querySelectorAll('.fileBox-fileName');
 			const originFileName = document.querySelectorAll('.fileBox-originName');
 			
@@ -157,7 +161,7 @@
 				fileBox[i].addEventListener('click',function(){
 					
 					modalFileName.href = '/md/messenger/fileSend/' + originFileName[i].innerText + '/' + changeFileName[i].innerText;
-					modalDelete.href = '/md/messenger/fileBox/delete/'+ changeFileName[i].innerText;
+					modalDelete.href = '/md/messenger/fileBox/delete/'+ fileNo[i].innerText +'/'+ changeFileName[i].innerText;
 	
 				})
 	

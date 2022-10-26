@@ -111,7 +111,7 @@
 				
 					<div class="list-content"><span  class="badge bg-info" >공지</span></div>
 					<div class="list-content" style="text-align: left; "><a href="${root}/messenger/notice/detail/${noticeVoList.noticeNo}">${noticeVoList.title}</a></div>
-					<div class="list-content">${noticeVoList.msgNo}</div>
+					<div class="list-content">${noticeVoList.name}</div>
 					<div class="list-content">${noticeVoList.enrollDate}</div>
 					<div class="list-content">${noticeVoList.count}</div>
 				

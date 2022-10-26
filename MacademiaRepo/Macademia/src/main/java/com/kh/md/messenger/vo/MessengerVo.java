@@ -20,6 +20,7 @@ public class MessengerVo {
 	private String address;
 	private String account;
 	private String dept;
+	private String part;
 	private String position;
 	
 	

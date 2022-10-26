@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.dao.MessengerDao;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileCopyVo;
 import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
@@ -43,12 +44,12 @@ public class MessengerServiceImpl implements MessengerService{
 	
 	//공지톡 상세 화면
 	@Override
-	public MsgNoticeVo selectOneByNo(String no) {
+	public MsgNoticeVo selectOneByNo(String noticeNo) {
 		
-		int result = dao.increaseHit(sst, no);
+		int result = dao.increaseHit(sst, noticeNo);
 		
 		if(result == 1) {
-			return dao.selectOneByNo(sst, no);
+			return dao.selectOneByNo(sst, noticeNo);
 		}else {
 			return null;
 		}
@@ -57,8 +58,8 @@ public class MessengerServiceImpl implements MessengerService{
 	
 	//공지톡 수정 화면
 	@Override
-	public MsgNoticeVo selectEditByNo(String no) {
-		return dao.selectEditByNo(sst, no);
+	public MsgNoticeVo selectEditByNo(String noticeNo) {
+		return dao.selectEditByNo(sst, noticeNo);
 	}
 
 	//공지톡 수정 처리
@@ -69,8 +70,8 @@ public class MessengerServiceImpl implements MessengerService{
 
 	//공지톡 삭제 처리
 	@Override
-	public int updateDelete(String no) {
-		return dao.updateDelete(sst, no);
+	public int updateDelete(String noticeNo) {
+		return dao.updateDelete(sst, noticeNo);
 	}
 	
 	//공지톡 총 게시글 수
@@ -88,8 +89,8 @@ public class MessengerServiceImpl implements MessengerService{
 	
 	//공지톡 댓글 리스트 가져오기
 	@Override
-	public List<MsgRepleVo> selectRepleList(String no) {
-		return dao.selectRepleList(sst, no);
+	public List<MsgRepleVo> selectRepleList(String noticeNo) {
+		return dao.selectRepleList(sst, noticeNo);
 	}
 
 	//공지톡 댓글 삭제
@@ -186,21 +187,37 @@ public class MessengerServiceImpl implements MessengerService{
 
 	//파일보관함 - 이미지 파일 입력
 	@Override
-	public int insertImgFilebox(MsgFileboxVo msgFileVo) {
+	public int insertImgFilebox(MsgFileboxVo msgFileVo, MsgFileCopyVo copyVo) {
 		
-		return dao.insertImgFilebox(sst, msgFileVo);
+		//파일보관함에 파일 추가되면 / 카피 파일 오리진 네임 테이블에 인서트해주기
+		int result = dao.insertImgFilebox(sst, msgFileVo);
+		
+		if(result == 1) {
+			return dao.insertCopyFileName(sst, copyVo);
+		}else {
+			return 0;
+		}
 	}
 
 	//파일보관함 -  etc 파일 입력
 	@Override
-	public int insertFilebox(MsgFileboxVo msgFileVo) {
-		return dao.insertFilebox(sst, msgFileVo);
+	public int insertFilebox(MsgFileboxVo msgFileVo, MsgFileCopyVo copyVo) {
+		int result = dao.insertFilebox(sst, msgFileVo);
+
+		//파일보관함에 파일 추가되면 / 카피 파일 오리진 네임 테이블에 인서트해주기
+		if(result == 1) {
+			return dao.insertCopyFileName(sst, copyVo);
+		}else {
+			return 0;
+		}
 	}
+
 
 	//파일보관함 - 파일 삭제
 	@Override
-	public int fileBoxDeleteByName(String fileName) {
-		return dao.fileBoxDeleteByName(sst, fileName);
+	public int fileBoxDelete(Map<String, String> deleteMap) {
+		// TODO Auto-generated method stub
+		return dao.fileBoxDelete(sst, deleteMap);
 	}
 
 	
