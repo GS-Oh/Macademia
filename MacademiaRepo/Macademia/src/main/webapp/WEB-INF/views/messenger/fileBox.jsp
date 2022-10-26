@@ -110,10 +110,10 @@
 
 					<!-- 파일 수 만큼 이부분 반복 -->
 					<c:forEach items="${ImgFileVoList}" var="imgFileVo">
-					
 						<div class="fileBox-tumb" data-bs-toggle="modal" data-bs-target="#myModal">
 							<div > <img src="${root}/resources/upload/messenger/${imgFileVo.fileName}" alt="" width="140px" height="140px"> </div>
 							<div style="display: none;" class="fileBox-fileName">${imgFileVo.fileName}</div>
+							<div style="display: none;" class="fileBox-fileNo">${imgFileVo.fileNo}</div>
 							<div> <h4 class="fileBox-originName">${imgFileVo.originName}</h4> </div>
 							<div> <h4 >${imgFileVo.enrollDate}</h4> </div>
 						</div>
@@ -135,21 +135,24 @@
 
 
     </div>
-
+				
 
 
 	 <!-- The Modal -->
 	 <div class="modal" id="myModal">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-dialog modal-sm modal-dialog-centered  modal-lg">
         
             <div class="modal-content">
     
-                <div class="modal-content">
-                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
-                </div>
-                <div class="modal-content">
-                    <a id="modal-delete" class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
-                </div>
+    
+    		  <div class="modal-content">
+    
+	                <div class="modal-content">
+	                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
+	                </div>
+	                <div class="modal-content">
+	                    <a id="modal-delete" class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
+	                </div>
      
              </div>
              
@@ -160,7 +163,8 @@
 	<script>
 
 		const fileBox = document.querySelectorAll('.fileBox-tumb');
-
+		
+		const fileNo = document.querySelectorAll('.fileBox-fileNo');
 		const changeFileName = document.querySelectorAll('.fileBox-fileName');
 		const originFileName = document.querySelectorAll('.fileBox-originName');
 		
@@ -175,7 +179,7 @@
 			fileBox[i].addEventListener('click',function(){
 				
 				modalFileName.href = '/md/messenger/fileSend/' + originFileName[i].innerText + '/' + changeFileName[i].innerText;
-				modalDelete.href = '/md/messenger/fileBox/delete/'+ changeFileName[i].innerText;
+				modalDelete.href = '/md/messenger/fileBox/delete/'+ fileNo[i].innerText +'/'+ changeFileName[i].innerText;
 
 			})
 

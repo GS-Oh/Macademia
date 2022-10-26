@@ -215,7 +215,7 @@
 				<form action="/md/messenger/note/searchReceive" method="post">
 					<div style="width: 60%;">
 						<select name="menu" id="" >
-							<option value="sendName">보낸사람</option>
+							<!-- <option value="sendName">보낸사람</option> -->
 							<option value="receiveName">받은사람</option>
 							<option value="title">제목</option>
 							<option value="comment">내용</option>

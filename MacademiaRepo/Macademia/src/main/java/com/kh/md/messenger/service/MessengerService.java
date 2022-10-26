@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileCopyVo;
 import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
@@ -22,17 +23,17 @@ public interface MessengerService {
 	int insertNotice(MsgNoticeVo noticeVo);
 
 	//공지 게시글 ( 상세 화면 )
-	MsgNoticeVo selectOneByNo(String no);
+	MsgNoticeVo selectOneByNo(String noticeNo);
 
 	//공지 게시글 ( 수정 화면 )
-	MsgNoticeVo selectEditByNo(String no);
+	MsgNoticeVo selectEditByNo(String noticeNo);
 
 	//공지 게시글 ( 수정 처리 )
 	int updateEdit(MsgNoticeVo noticeVo);
 
 
 	//공지 게시글 ( 삭제 처리 )
-	int updateDelete(String no);
+	int updateDelete(String noticeNo);
 
 	//공지 게시글 ( 총 게시글 수 )
 	int selectTotalCnt();
@@ -41,7 +42,7 @@ public interface MessengerService {
 	int insertReple(MsgRepleVo repleVo);
 
 	//공지 게시글 ( 댓글 목록 가져오기 )
-	List<MsgRepleVo> selectRepleList(String no);
+	List<MsgRepleVo> selectRepleList(String noticeNo);
 
 	//공지 게시글 ( 댓글 삭제 )
 	int updateRepleDelete(String repleNo);
@@ -88,13 +89,13 @@ public interface MessengerService {
 	List<MsgFileboxVo> selectAllEtcFileByNo(String msgNo);
 
 	//파일보관함 ( 이미지 파일 입력 )
-	int insertImgFilebox(MsgFileboxVo msgFileVo);
+	int insertImgFilebox(MsgFileboxVo msgFileVo, MsgFileCopyVo copyVo);
 
 	//파일보관함 ( etc 파일 입력 )
-	int insertFilebox(MsgFileboxVo msgFileVo);
+	int insertFilebox(MsgFileboxVo msgFileVo, MsgFileCopyVo copyVo);
 
 	//파일보관함 ( etc 파일 삭제 )
-	int fileBoxDeleteByName(String fileName);
+	int fileBoxDelete(Map<String, String> deleteMap);
 
 	
 }//class

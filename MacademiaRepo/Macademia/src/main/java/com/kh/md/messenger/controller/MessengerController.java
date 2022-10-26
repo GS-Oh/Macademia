@@ -1,6 +1,8 @@
 package com.kh.md.messenger.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.messenger.common.FileUploader;
@@ -23,6 +26,7 @@ import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.common.Pagination;
 import com.kh.md.messenger.service.MessengerService;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileCopyVo;
 import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
@@ -138,7 +142,7 @@ public class MessengerController {
 	public String noteSearchReceive(HttpSession session, Model model, String menu, String keyword) {
 		
 		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
-	
+		
 		//데이터 뭉치기
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("msgNo", msgVo.getMsgNo());
@@ -146,11 +150,12 @@ public class MessengerController {
 		map.put("menu", menu);
 		
 		List<MsgNoteVo> mnVoList = ms.selectNoteKeyword(map);
+		
 		if(mnVoList != null) {
 			model.addAttribute("mnVoList", mnVoList);
 			model.addAttribute("menu", menu);
 			model.addAttribute("keyword", keyword);
-			return "messenger/noteReceiveMain";
+			return "messenger/noteSendMain";
 		}else {
 			return "";
 		}
@@ -174,7 +179,7 @@ public class MessengerController {
 			model.addAttribute("mnVoList", mnVoList);
 			model.addAttribute("menu", menu);
 			model.addAttribute("keyword", keyword);
-			return "messenger/noteSendMain";
+			return "messenger/noteReceiveMain";
 		}else {
 			return "";
 		}
@@ -268,12 +273,13 @@ public class MessengerController {
 			
 		}
 	
+	//쪽지 - 받는 사람 검색 ( 화면 )	
 	@GetMapping("note/recipient")
 	public String noteRecipient() {
 		return "messenger/noteRecipient";
 	} 
 	
-	//쪽지 - 해당 부서명 멤버 가져오기
+	//쪽지 - 받는 사람 검색 처리 ( 해당 부서명 멤버 가져오기 - script로 요청 )
 	@GetMapping("DeptMember")
 	public String deptMember(String deptName, Model model) {
 		
@@ -285,9 +291,22 @@ public class MessengerController {
 			return "";
 			
 		}
-		
-		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@PostMapping("note/reple/number")
@@ -388,11 +407,17 @@ public class MessengerController {
 	
 	//파일보관함 ( 파일 등록하기 )
 	@GetMapping("allFileBox/Enroll/{fileName}/{originName}")
-	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName,@PathVariable String originName,HttpSession session, Model model) {
+	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName,@PathVariable String originName, MsgFileCopyVo copyVo,HttpSession session, Model model) {
+		
+		int random = (int)(Math.random() * 90000 + 10000);
 		
 		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
 		msgFileVo.setMsgNo(msgVo.getMsgNo());
 		msgFileVo.setFileName(fileName);
+		msgFileVo.setCopyName(random+ fileName);
+		
+		copyVo.setOriginName(originName);
+		copyVo.setCopyName(random + fileName);
 		
 		//확장자가 jpg 면 img파일 테이블에 추가 아니면 etc파일 테이블에 추가
 		String dot = fileName.substring(fileName.lastIndexOf("."));
@@ -400,9 +425,9 @@ public class MessengerController {
 		int result = 0;
 		
 		if(dot.equals(".jpg")) {
-			result = ms.insertImgFilebox(msgFileVo);
+			result = ms.insertImgFilebox(msgFileVo,copyVo);
 		}else {
-			result = ms.insertFilebox(msgFileVo);
+			result = ms.insertFilebox(msgFileVo,copyVo);
 		}
 		
 		
@@ -414,6 +439,7 @@ public class MessengerController {
 			return "";
 		}
 		
+		//
 		
 	}
 	
@@ -428,8 +454,7 @@ public class MessengerController {
 		return "messenger/download";
 	}
 	
-	
-	//파일보관함 ( 파일 보내기 )
+	//파일보관함 ( 파일 보내기 - 화면)
 	@GetMapping("fileSend/{originName}/{fileName}")
 	public String fileSend(@PathVariable String originName, @PathVariable String fileName, Model model) {
 		
@@ -440,16 +465,68 @@ public class MessengerController {
 	}
 	
 	
-	//파일보관함 ( 파일 삭제하기 )
-	@GetMapping("fileBox/delete/{fileName}")
-	public String fileBoxDelete(@PathVariable String fileName) {
-		System.out.println(fileName);
-		int result = ms.fileBoxDeleteByName(fileName);
+	//파일보관함 ( 파일 보내기 - 처리 )
+	@PostMapping("fileSend")
+	public String fileSend(MsgNoteVo mnVo, Model model, HttpSession session) {
+		
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
+		mnVo.setMsgNo(msgVo.getMsgNo());
+		
+		
+		int result = ms.insertNoteOne(mnVo);
 		
 		if(result == 1) {
-			//jpg / etc 구분해서 보내주기
 			return "redirect:/messenger/imgFileBox";
+		}else {
+			return "";
+		}
+		
+	}
+	
+	
+	//파일보관함 - 받는 사람 검색 처리 ( 해당 부서명 멤버 가져오기 - script로 요청 )
+	@GetMapping("fileDeptMember/{originName}/{fileName}/{deptName}")
+	public String fileDeptMember(@PathVariable String originName, @PathVariable String fileName, @PathVariable String deptName, Model model) {
+		
+		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(deptName);
+		if(deptMemberList != null) {
+			model.addAttribute("deptMemberList",deptMemberList);
+			model.addAttribute("originName",originName);
+			model.addAttribute("fileName",fileName);
+			return "messenger/fileSend";
+		}else {
+			return "";
 			
+		}
+	}
+	
+	
+	
+	//파일보관함 ( 파일 삭제하기 )
+	@GetMapping("fileBox/delete/{fileNo}/{fileName}")
+	public String fileBoxDelete(@PathVariable String fileNo, @PathVariable String fileName) {
+
+		
+		//쿼리문에서 추가할 테이블 지정하기 위해 카테고리 지정
+		String fileCategory = "etc";
+		String ext = fileName.substring( (fileName.lastIndexOf('.')) );
+		if(ext.equals(".jpg")) {
+			fileCategory = "jpg";
+		}			
+		
+		
+		Map<String, String> deleteMap = new HashMap<String, String>();
+		deleteMap.put("fileCategory", fileCategory);
+		deleteMap.put("fileNo", fileNo);
+		deleteMap.put("fileName", fileName);
+		
+		int result = ms.fileBoxDelete(deleteMap);
+		
+		//jpg / etc 구분해서 보내주기
+		if(result == 1 && fileCategory.equals("jpg")) {
+			return "redirect:/messenger/imgFileBox";
+		}else if(result == 1 && fileCategory.equals("etc")) {
+			return "redirect:/messenger/etcFileBox";
 		}else {
 			return "";
 		}
@@ -475,11 +552,13 @@ public class MessengerController {
 		return "messenger/notice";
 	}
 
+	
 	//공지 게시글 ( 입력 화면 )
 	@GetMapping("notice/write")
 	public String noticeWrite() {
 		return "messenger/noticeWrite";
 	}
+	
 	
 	//공지 게시글 ( 입력 처리 )
 	@PostMapping("notice/write")
@@ -499,15 +578,16 @@ public class MessengerController {
 		
 	}
 	
+	
 	//공지 게시글 ( 상세 페이지 화면 )
-	@GetMapping("notice/detail/{no}")
-	public String noticeDetail(@PathVariable String no, Model model) {
+	@GetMapping("notice/detail/{noticeNo}")
+	public String noticeDetail(@PathVariable String noticeNo, Model model) {
 		
 		//상세페이지 글
-		MsgNoticeVo noticeVo = ms.selectOneByNo(no);
+		MsgNoticeVo noticeVo = ms.selectOneByNo(noticeNo);
 		
 		//댓글 리스트
-		List<MsgRepleVo> repleVoList = ms.selectRepleList(no);
+		List<MsgRepleVo> repleVoList = ms.selectRepleList(noticeNo);
 		
 		model.addAttribute("noticeVo" ,noticeVo);
 		model.addAttribute("repleVoList", repleVoList);
@@ -517,10 +597,10 @@ public class MessengerController {
 	
 	
 	//공지 게시글 ( 수정 페이지 화면 )
-	@GetMapping("notice/edit/{no}")
-	public String noticeEdit(@PathVariable String no, Model model) {
+	@GetMapping("notice/edit/{noticeNo}")
+	public String noticeEdit(@PathVariable String noticeNo, Model model) {
 		
-		MsgNoticeVo noticeVo = ms.selectEditByNo(no);
+		MsgNoticeVo noticeVo = ms.selectEditByNo(noticeNo);
 		
 		model.addAttribute("noticeVo", noticeVo);
 		
@@ -529,25 +609,25 @@ public class MessengerController {
 	
 	
 	//공지 게시글 ( 수정 처리 )
-	@PostMapping("notice/edit/{no}")
-	public String noticeEdit(@PathVariable String no, MsgNoticeVo noticeVo) {
+	@PostMapping("notice/edit/{noticeNo}")
+	public String noticeEdit(@PathVariable String noticeNo, MsgNoticeVo noticeVo) {
 		
-		noticeVo.setNoticeNo(no);
+		noticeVo.setNoticeNo(noticeNo);
 		
 		int result = ms.updateEdit(noticeVo);
 		
 		if(result == 1) {
-			return "redirect:/messenger/notice/detail/"+ no;
+			return "redirect:/messenger/notice/detail/"+ noticeNo;
 		}else {
 			return "redirect:/messenger/notice";
 		}
 	}
 
 	//공지 게시글 ( 삭제 처리 )
-	@GetMapping("notice/delete/{no}")
-	public String noticeDelete(@PathVariable String no) {
+	@GetMapping("notice/delete/{noticeNo}")
+	public String noticeDelete(@PathVariable String noticeNo) {
 		
-		int result = ms.updateDelete(no);
+		int result = ms.updateDelete(noticeNo);
 		if(result == 1) {
 			return "redirect:/messenger/notice/1";
 		}else {

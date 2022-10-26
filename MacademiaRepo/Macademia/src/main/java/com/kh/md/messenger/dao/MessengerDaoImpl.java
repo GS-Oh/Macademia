@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
+import com.kh.md.messenger.vo.MsgFileCopyVo;
 import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
@@ -38,21 +39,21 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//공지톡 게시글 ( 상세 화면 )
 	@Override
-	public MsgNoticeVo selectOneByNo(SqlSessionTemplate sst, String no) {
-		return sst.selectOne("messengerMapper.selectOneByNo",no);
+	public MsgNoticeVo selectOneByNo(SqlSessionTemplate sst, String noticeNo) {
+		return sst.selectOne("messengerMapper.selectOneByNo",noticeNo);
 	}
 
 	//공지톡 게시글 ( 조회 수 증가 )
 	@Override
-	public int increaseHit(SqlSessionTemplate sst, String no) {
-		return sst.update("messengerMapper.increaseHit", no);
+	public int increaseHit(SqlSessionTemplate sst, String noticeNo) {
+		return sst.update("messengerMapper.increaseHit", noticeNo);
 	}
 
 
 	//공지톡 게시글 ( 수정 화면 )
 	@Override
-	public MsgNoticeVo selectEditByNo(SqlSessionTemplate sst, String no) {
-		return sst.selectOne("messengerMapper.selectEditByNo", no);
+	public MsgNoticeVo selectEditByNo(SqlSessionTemplate sst, String noticeNo) {
+		return sst.selectOne("messengerMapper.selectEditByNo", noticeNo);
 	}
 
 	//공지톡 게시글 ( 수정 처리 )
@@ -64,8 +65,8 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//공지톡 게시글 ( 삭제 처리 )
 	@Override
-	public int updateDelete(SqlSessionTemplate sst, String no) {
-		return sst.update("messengerMapper.updateDelete", no);
+	public int updateDelete(SqlSessionTemplate sst, String noticeNo) {
+		return sst.update("messengerMapper.updateDelete", noticeNo);
 	}
 
 	//공지톡 게시글 ( 게시글 총 수 )
@@ -84,8 +85,8 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//공지톡 게시글 ( 댓글 리스트 가져오기 )
 	@Override
-	public List<MsgRepleVo> selectRepleList(SqlSessionTemplate sst, String no) {
-		return sst.selectList("messengerMapper.selectRepleList",no);
+	public List<MsgRepleVo> selectRepleList(SqlSessionTemplate sst, String noticeNo) {
+		return sst.selectList("messengerMapper.selectRepleList", noticeNo);
 	}
 
 
@@ -191,8 +192,14 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//파일보관함 - ( 파일 삭제하기 )
 	@Override
-	public int fileBoxDeleteByName(SqlSessionTemplate sst, String fileName) {
-		return sst.update("messengerMapper.fileBoxDeleteByName", fileName);
+	public int fileBoxDelete(SqlSessionTemplate sst, Map<String, String> deleteMap) {
+		return sst.update("messengerMapper.fileBoxDelete", deleteMap);
+	}
+
+	//파일보관함 - 복사하는 파일 - 원본파일명 저장
+	@Override
+	public int insertCopyFileName(SqlSessionTemplate sst,  MsgFileCopyVo copyVo) {
+		return sst.insert("messengerMapper.insertCopyFileName", copyVo);
 	}
 
 	

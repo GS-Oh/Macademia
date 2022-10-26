@@ -9,6 +9,7 @@ public class MsgFileboxVo {
 	private String msgNo;
 	private String originName;
 	private String fileName;
+	private String copyName;
 	private String enrollDate;
 	private String checkDelete;
 	
