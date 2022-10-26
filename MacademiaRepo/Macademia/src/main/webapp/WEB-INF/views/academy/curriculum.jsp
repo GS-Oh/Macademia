@@ -5,11 +5,6 @@
 	<title>Home</title>
 	
 	<%@include file="/resources/css/common/common.css" %>
-	<style>
-		main{
-			width: 80vw;
-		}
-	</style>
 	
 </head>
 <body>
@@ -19,10 +14,10 @@
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		<aside>
-			<%@include file="/WEB-INF/views/student/student-sidebar.jsp" %>
+			<%@include file="/WEB-INF/views/academy/academy-sidebar.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/student/roll-detail-edit-content.jsp" %>
+			<%@include file="/WEB-INF/views/academy/curriculum-content.jsp" %>
 		</main>
 		<!-- <aside></aside> -->
 	</div>

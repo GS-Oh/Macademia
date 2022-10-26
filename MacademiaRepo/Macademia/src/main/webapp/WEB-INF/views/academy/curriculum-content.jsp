@@ -76,7 +76,7 @@
     } 
     #class-list-head{
         display: grid;
-        grid-template-columns: 1fr 1.5fr 3fr 1fr 1fr 1fr 1.3fr 0.7fr;
+        grid-template-columns: 1fr 1.5fr 3fr 1fr 1fr 1fr 1.3fr 0.7fr 0.7fr;
         grid-template-rows: 50px;
         justify-items: center;
         align-items: center;
@@ -85,13 +85,17 @@
     }
     .select-one-class{
         display: grid;
-        grid-template-columns: 1fr 1.5fr 3fr 1fr 1fr 1fr 1.3fr 0.7fr;
+        grid-template-columns: 1fr 1.5fr 3fr 1fr 1fr 1fr 1.3fr 0.7fr 0.7fr;
         grid-template-rows: 50px;
         justify-items: center;
         align-items: center;
         border-bottom: 1px solid gray;
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+    #class-status{
+        border: none;
+        font-weight: bolder;
     }
         
     /* 페이징 */
@@ -144,7 +148,7 @@
         </div>
         <div id="create-new-curriculum-area">
             <div id="create-new-curriculum">
-                <a href="">커리큘럼 추가하기</a>
+                <a href="${root}/academy/addCurr">커리큘럼 추가하기</a>
             </div>
         </div>
     </div>
@@ -159,6 +163,14 @@
             <div><b>종강일자</b></div>
             <div><b>수업 시간</b></div>
             <div><b>인원</b></div>
+            <div>
+                <select name="" id="class-status">
+                    <option value="">상태</option>
+                    <option value="">개강</option>
+                    <option value="">예정</option>
+                    <option value="">종강</option>
+                </select>
+            </div>
         </div>
 
         <div class="select-one-class">
@@ -170,6 +182,7 @@
             <div>22.11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -181,6 +194,7 @@
             <div>22.11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>종강</div>
         </div>
 
         <div class="select-one-class">
@@ -192,6 +206,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>예정</div>
         </div>
 
         <div class="select-one-class">
@@ -203,6 +218,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -214,6 +230,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -225,6 +242,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -236,6 +254,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -247,6 +266,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -258,6 +278,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
 
         <div class="select-one-class">
@@ -269,6 +290,7 @@
             <div>11.24</div>
             <div>15:30 ~ 22:00</div>
             <div>30명</div>
+            <div>개강</div>
         </div>
         
     </div>

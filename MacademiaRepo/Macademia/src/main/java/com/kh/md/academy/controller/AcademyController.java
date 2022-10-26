@@ -1,4 +1,4 @@
-package com.kh.md.student.controller;
+package com.kh.md.academy.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,47 +6,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("student")
-public class StudentController {
+@RequestMapping("academy")
+public class AcademyController {
 
 	@GetMapping("roll")
 	public String roll() {
-		return "student/roll";
+		return "academy/roll";
 	}
 	
 	@GetMapping("roll/detail")
 	public String rollDetail() {
-		return "student/roll-detail";
+		return "academy/roll-detail";
 	}
 	
 	@GetMapping("roll/detail/edit")
 	public String rollDetailEdit() {
-		return "student/roll-detail-edit";
+		return "academy/roll-detail-edit";
 	}
 	
 	@GetMapping("search")
 	public String search() {
-		return "student/search";
-	}
-	
-	@GetMapping("search/add")
-	public String addStudent() {
-		return "student/search-add";
+		return "academy/search";
 	}
 	
 	@GetMapping("search/detail")
 	public String searchDetail() {
-		return "student/search-detail";
+		return "academy/search-detail";
 	}
 	
 	@GetMapping("search/detail/edit")
 	public String searchDetailEdit() {
-		return "student/search-detail-edit";
+		return "academy/search-detail-edit";
+	}
+	
+	@GetMapping("add")
+	public String addStudent() {
+		return "academy/add-student";
 	}
 	
 	@GetMapping("curriculum")
 	public String curriculum() {
-		return "student/curriculum";
+		return "academy/curriculum";
+	}
+	
+	@GetMapping("addCurr")
+	public String addCurriculum() {
+		return "academy/add-curriculum";
 	}
 	
 }

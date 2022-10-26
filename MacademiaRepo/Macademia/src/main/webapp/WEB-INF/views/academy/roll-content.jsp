@@ -10,18 +10,20 @@
         width: 60vw;
         padding: 2vw;
         display: grid;
-        grid-template-rows: 10vh 10vh;
+        /* grid-template-rows: 10vh 10vh; */
         row-gap: 10px;
     }
-    #roll-content-wrap>div:nth-child(1){
+    #choose-class-title, #my-class-title{
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        height: 10vh;
     }
     #class-list-search-area{
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        height: 10vh;
     }
     #class-list-search-area>select{
         height: 30px;
@@ -47,11 +49,11 @@
     }
     
     /* 테이블 */
-    #class-list{
+    #class-list, #my-class-list{
         border-top: 1px solid gray;
         margin-bottom: 50px;
     } 
-    #class-list-head{
+    #class-list-head, #my-class-list-head{
         display: grid;
         grid-template-columns: 1fr 1.5fr 3fr 1fr 1fr 1fr 1.3fr 0.7fr;
         grid-template-rows: 50px;
@@ -101,13 +103,40 @@
     $(function(){
         $('.select-one-class').click(function(){
             console.log(this);
-            location.href="/md/student/roll/detail";
+            location.href="/md/academy/roll/detail";
         });
     });
 </script>
 
 <div id="roll-content-wrap">
-    <div><h4>강의 선택</h4></div>
+    <div id="my-class-title"><h4>나의 강의</h4></div>
+
+    <div id="my-class-list">
+        <div id="my-class-list-head">
+            <div><b>개강일자</b></div>
+            <div><b>카테고리</b></div>
+            <div><b>강의명</b></div>
+            <div><b>담당강사</b></div>
+            <div><b>강의실</b></div>
+            <div><b>종강일자</b></div>
+            <div><b>수업 시간</b></div>
+            <div><b>인원</b></div>
+        </div>
+
+        <div class="select-one-class">
+            <div>22.10.17</div>
+            <div>디지털 컨버전스</div>
+            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
+            <div>심투용</div>
+            <div>20-D</div>
+            <div>22.11.24</div>
+            <div>15:30 ~ 22:00</div>
+            <div>30명</div>
+        </div>
+        
+    </div>
+
+    <div id="choose-class-title"><h4>강의 선택</h4></div>
 
     <div id="class-list-search-area">
         <select name="" id="">

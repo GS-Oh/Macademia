@@ -131,7 +131,7 @@
     $(function(){
         $('.select-student-list').click(function(){
             console.log(this);
-            location.href="/md/student/search/detail";
+            location.href="/md/academy/search/detail";
         });
     });
 </script>
@@ -152,7 +152,7 @@
                 <input type="submit" value="조회">
             </div>
             <div>
-                <div id="add-new-btn"><a href="${root}/student/search/add"><i class="fa-solid fa-plus fa-1x"></i></a></div>
+                <div id="add-new-btn"><a href="${root}/academy/add"><i class="fa-solid fa-plus fa-1x"></i></a></div>
             </div>
         </form>
     </div>

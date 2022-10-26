@@ -91,7 +91,7 @@
             </a>
         </div>
         <div id="nav-menu3">
-            <a href="${root}/student/roll">
+            <a href="${root}/academy/roll">
                 <i class="fa-solid fa-chalkboard-user fa-2x"></i><br>
                 <label for="">학사</label>
             </a>

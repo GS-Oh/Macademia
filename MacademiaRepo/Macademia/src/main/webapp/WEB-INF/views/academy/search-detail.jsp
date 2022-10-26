@@ -14,10 +14,10 @@
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		<aside>
-			<%@include file="/WEB-INF/views/student/student-sidebar.jsp" %>
+			<%@include file="/WEB-INF/views/academy/academy-sidebar.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/student/main-content.jsp" %>
+			<%@include file="/WEB-INF/views/academy/search-detail-content.jsp" %>
 		</main>
 		<!-- <aside></aside> -->
 	</div>
