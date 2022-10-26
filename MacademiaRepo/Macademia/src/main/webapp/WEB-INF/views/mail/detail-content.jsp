@@ -27,6 +27,5 @@
 					</div>
 				</section>
 				<aside class="search-aside">
-				</aside>
-			</article>
-		</script>
+			</aside>
+		</article>

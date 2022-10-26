@@ -20,7 +20,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th><input type="checkbox"></th>
+							<th><input type="checkbox" name="select" value='selectall' onclick='selectAll(this)'></th>
 							<th>보낸사람</th>
 							<th>제목</th>
 							<th>날짜</th>	
@@ -29,70 +29,70 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
 							<td>13.7KB</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
 							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
 							<td>2018-04-03</td>	
@@ -101,6 +101,19 @@
 					</tbody>
 				</table>
 			</div>
+			
+			<div class="board_page">
+                <a href="#" class="bt first"><<</a>
+                <a href="#" class="bt prev"><</a>
+                <a href="#" class="num on">1</a>
+           	     <a href="#" class="num">2</a>
+                <a href="#" class="num">3</a>
+                <a href="#" class="num">4</a>
+                <a href="#" class="num">5</a>
+                <a href="#" class="bt next">></a>
+                <a href="#" class="bt last">>></a>
+            </div>
+			
 		</section>
 		<aside class="search-aside">
 			<div class="form-group">
@@ -125,4 +138,13 @@
 			</div>
 		</aside>
 	</article>
+	
+	<script>
+		function selectAll(selectAll)  {
+		 const checkboxes = document.getElementsByName('select');
+		 checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked;
+		  })
+		}
+	</script>
 

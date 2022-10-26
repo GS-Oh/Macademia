@@ -28,7 +28,7 @@
 	}
 	
 	.bt_wrap {
-	    margin-top: 10px;
+	    margin-top: 40px;
 	    text-align: center;
 	    font-size: 0;
 	}
@@ -379,5 +379,27 @@ font-size:13px;
 .board_list > div > div a:hover{
 	color: #6667AB;
 	font-size: 1.4rem;
+}
+.Search-area {
+	margin: auto;
+	margin-top : 50px;
+	width : 20vw;
+}
+.Search-area-content {
+	display : flex;
+	justify-content: center;
+	
+	height: 30px;
+	
+}
+.Search-area-content input:nth-child(3) {
+	background-color: #6667AB;
+	color: white;
+	border-radius: 4px 4px 4px 4px;
+	
+}
+.Search-area-content input:hover {
+	transform:scale(1.2);
+	
 }
 </style>

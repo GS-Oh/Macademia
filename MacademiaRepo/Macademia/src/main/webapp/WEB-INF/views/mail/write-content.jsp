@@ -7,17 +7,7 @@
 				<section class="mail-section">
 					<div class="mail-content">
 						<div class="mail-title">메일쓰기</div>
-						<div class="mail-skill-btn-group">
-							<div class="btn-group">
-								<a class="btn btn-default">보내기</a>
-							</div>
-							<div class="btn-group">
-								<a class="btn btn-default">미리보기</a>
-							</div>
-							<div class="btn-group">
-								<a class="btn btn-default">임시저장</a>
-							</div>
-						</div>
+						
 						<div class="mail-write">
 							<div class="form-group input-group">
 								<label for="">받는 사람</label>
