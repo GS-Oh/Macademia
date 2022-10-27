@@ -80,6 +80,7 @@
 					<span class="input-group-text"><h4>받는사람</h4></span>
 					<div class="form-control"><h4>${noteRepleVo.receiveName}</h4></div>
 				</div>
+				
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text"><h4>참조인</h4></span>
@@ -89,20 +90,29 @@
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text"><h4>제목</h4></span>
-					<input type="text" class="form-control" name="title">
+					<input type="text" class="form-control" name="title" required>
 				</div>
-				<!--  -->
+				
+				<!-- 현재 보낼 쪽지 내용 -->
 				<div class="write-header-area">
 					<span class="input-group-text"><h4>내용</h4></span>
-					<textarea class="form-control" name="content" id="" cols="30" rows="10" >&#10;&#10;&#10;&#10;&#10;&#10;&#10;========================== 이전 내역 ==========================&#10;&#10;&#10;제목 : ${noteRepleVo.title}&#10;&#10;내용 : ${noteRepleVo.content}</textarea></h4>
+					<textarea class="form-control" name="content" id="" cols="30" rows="5" required></textarea></h4>
 				</div>
-			
+				
+				<!-- 이전 내용 보여주기 -->
+				<div class="write-header-area">
+					<span class="input-group-text"><h4>직전 내용</h4></span>
+					<textarea class="form-control" cols="30" rows="5" readonly>========================== 이전 내역 ==========================&#10;&#10;&#10;제목 : ${noteRepleVo.title}&#10;&#10;내용 : ${noteRepleVo.content}</textarea></h4>
+				</div>
+				
+				
+				
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">파일첨부</span>
 					<div id="profile-img-wrap" class="form-control">
 						<img id="profile-img-thumb" src="" width="60%" height="100%">
-						<input  type="file" name="attFile" style="font-size: 1.3rem;">
+						<input  type="file" name="attFile" accept=".jpg, .png" style="font-size: 1.3rem;">
 					</div>
 				</div>
 

@@ -47,7 +47,6 @@ public interface MessengerService {
 	//공지 게시글 ( 댓글 삭제 )
 	int updateRepleDelete(String repleNo);
 
-
 	//메신저 ( 등록 체크 )
 	MessengerVo selectCheckEnroll(String memberNo);
 
@@ -80,7 +79,7 @@ public interface MessengerService {
 
 
 	//쪽지 ( 보낸사람검색 )
-	List<HashMap<String, String>> selectDeptMember(String deptName);
+	List<HashMap<String, String>> selectDeptMember(String partName);
 
 	//파일보관함 ( 이미지 파일 전부 가져오기 )
 	List<MsgFileboxVo> selectAllFileImgByNo(String msgNo);
@@ -96,6 +95,8 @@ public interface MessengerService {
 
 	//파일보관함 ( etc 파일 삭제 )
 	int fileBoxDelete(Map<String, String> deleteMap);
+
+	
 
 	
 }//class

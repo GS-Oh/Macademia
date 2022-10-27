@@ -6,11 +6,9 @@
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- 부트스트랩 -->
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- 부트스트랩 -->
-	
 	
       
             <div id="nav-menu9" style="border-bottom:1px solid white; padding-bottom:40%;">

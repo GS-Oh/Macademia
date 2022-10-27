@@ -48,7 +48,7 @@ public interface MessengerDao {
 
 	//공지톡 ( 댓글 삭제하기 )
 	int updateRepleDelete(SqlSessionTemplate sst, String repleNo);
-
+	
 	//메신저 ( 등록 체크 )
 	MessengerVo selectCheckEnroll(SqlSessionTemplate sst, String memberNo);
 
@@ -77,7 +77,7 @@ public interface MessengerDao {
 	int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo);
 
 	//쪽지 ( 부서명으로 멤버 가져오기 )
-	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName);
+	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String partName);
 
 	//파일보관함 - 이미지 파일 전부 가져오기
 	List<MsgFileboxVo> selectAllFileImgByNo(SqlSessionTemplate sst, String msgNo);
@@ -97,6 +97,7 @@ public interface MessengerDao {
 
 	//파일보관함 - 복사하는 파일 - 원본파일명 저장
 	int insertCopyFileName(SqlSessionTemplate sst, MsgFileCopyVo copyVo);
+	
 	
 	
 	

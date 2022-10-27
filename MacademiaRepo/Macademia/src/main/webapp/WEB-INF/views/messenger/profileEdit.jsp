@@ -83,15 +83,15 @@
 						<input type="file" name="profile" style="height: 10%; width: 100%;" >
 					</div>
 					<div>${msgVo.name}</div>
-					<div>3-공백</div>
+					<div></div>
 					<div style="grid-row: span 2;"><textarea name="introduce" id="" rows="9" style="width:90%;">${msgVo.introduce}</textarea></div>
 					<div><input type="submit" class="btn btn-primary btn-lg" style="color: white; width: 30%;" value="수정하기"></div>
-					<div>6-공백</div>
+					<div></div>
 				</form>
 			</div>
 
 			<div id="profile-bottom-content">
-				<div class="badge bg-secondary"><h3>${msgVo.dept}-${msgVo.position}</h3></div>
+				<div class="badge bg-secondary"><h3>${msgVo.dept} / ${msgVo.part} / ${msgVo.position}</h3></div>
 				<div class="badge bg-secondary"><h3>${msgVo.address}</h3></div>
 				<div class="badge bg-secondary"><h3>${msgVo.email}</h3></div>
 			</div>
@@ -129,6 +129,14 @@
 	            imgTag.src = "";
 	        }
 	    }
+	    
+	    
+	    if(fileInputTag.files.length = 0){
+	    	
+	    	
+	    	
+	    }
+	    
 	</script>
 	
 	

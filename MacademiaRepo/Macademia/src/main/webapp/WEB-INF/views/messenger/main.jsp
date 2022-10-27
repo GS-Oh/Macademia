@@ -10,7 +10,9 @@
 	<style>
 		<%@ include file="/resources/css/messenger/commonAside.css" %>
 	
-
+		img {
+			border : 0px;
+		}
 	
 		.main-partition{
 			padding-top : 30px;
@@ -47,7 +49,7 @@
 
 		.messenger-main-content{
 			height: 150px;
-			width: 30%;
+			width: 350px;
 			margin: 10px;
 			margin-bottom: 3%;
 
@@ -148,8 +150,8 @@
 						<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '행정팀'}">
 	
 							<div class="messenger-main-content  detail-target">
-								<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-									<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+								<div style="height: 145px; width: 100%;"  >
+									<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 								</div>
 								<div class="content-detail">
 									<div class="detail-name">${msgTotalVo.name}</div>
@@ -180,8 +182,8 @@
 						<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '재정팀'}">
 	
 							<div class="messenger-main-content  detail-target">
-								<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-									<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+								<div style="height: 145px; width: 100%;"  >
+									<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 								</div>
 								<div class="content-detail">
 									<div class="detail-name">${msgTotalVo.name}</div>
@@ -211,8 +213,8 @@
 							<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '시설지원팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -249,8 +251,8 @@
 							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교육1팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -280,8 +282,8 @@
 							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교육2팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -310,8 +312,8 @@
 							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교재지원팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -347,8 +349,8 @@
 							<c:if test="${msgTotalVo.dept eq '취업지원부' && msgTotalVo.part eq '취업팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -379,8 +381,8 @@
 							<c:if test="${msgTotalVo.dept eq '취업지원부' && msgTotalVo.part eq '상담팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%;"  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -418,8 +420,8 @@
 							<c:if test="${msgTotalVo.dept eq '마케팅부' && msgTotalVo.part eq '홍보팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%; "  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
@@ -451,8 +453,8 @@
 							<c:if test="${msgTotalVo.dept eq '마케팅부' && msgTotalVo.part eq '대외협력팀'}">
 		
 								<div class="messenger-main-content  detail-target">
-									<div style="height: 145px; width: 100%; border: 1px solid black;"  >
-										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
+									<div style="height: 145px; width: 100%; "  >
+										<a data-bs-toggle="modal" data-bs-target="#myModal" href="javascript:void(0);" ><img class="detail-img rounded-circle" alt="" src="${root}/resources/upload/messenger/${msgTotalVo.fileName}"  width="90%" height="100%" style="border: 1px solid black;"></a>
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>

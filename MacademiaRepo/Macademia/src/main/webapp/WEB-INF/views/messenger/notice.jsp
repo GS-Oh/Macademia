@@ -64,22 +64,25 @@
 		#page-area{
             width: 30%;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-evenly;
-			align-items: center;
+            
+            display:grid;
+            grid-template-columns : 10% 80% 10%;
+			
+            justify-items : center;
+ 			align-items: center;
         }
 
-		#page-area > a{
+		#page-area > div > a{
 			text-decoration: none;
 			background-color:#6667AB;
 			border-radius: 5px;
 			color: white;
-			width: 30px;
-			height: 30px;
-			text-align: center;
 
-			display: grid;
-			align-items: center;
+			font-size : 1.8rem;
+			text-align: center;
+			
+			padding : 5px;
+
 		}
 
     </style>
@@ -124,19 +127,23 @@
 			
 			<div id="page-area" >
 				
+				<div>
+					<c:if test="${pvo.startPage ne 1}">
+						<a href="/md/messenger/notice/${pvo.startPage-1}"><</a>
+					</c:if>
+				</div>
 				
-				<c:if test="${pvo.startPage ne 1}">
-					<a href="/md/messenger/notice/${pvo.startPage-1}"><</a>
-				</c:if>
+				<div>
+					<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+						<a href="/md/messenger/notice/${i}">${i}</a>
+					</c:forEach>
+				</div>
 				
-				<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-					<a href="/md/messenger/notice/${i}">${i}</a>
-				</c:forEach>
-				
-				<c:if test="${pvo.endPage ne pv.maxPage}">
-					<a href="/md/messenger/notice/${pvo.endPage-1}">></a>
-				</c:if>				
-				
+				<div>
+					<c:if test="${pvo.endPage ne pvo.maxPage}">
+						<a href="/md/messenger/notice/${pvo.endPage+1}">></a>
+					</c:if>				
+				</div>
 			</div>
 
 

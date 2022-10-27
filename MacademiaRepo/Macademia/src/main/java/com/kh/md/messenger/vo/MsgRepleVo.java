@@ -14,6 +14,4 @@ public class MsgRepleVo {
 	private String checkDelete;
 	private String enrollDate;
 	
-	
-	
 }//class
