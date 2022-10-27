@@ -74,7 +74,7 @@
 <div id="header-wrap">
     <div id="logo-area">
         <a href="${root}/member/login">
-            <img src="${root}/resources/img/logo/logo_temp.png" width="100%" alt="로고">
+            <img src="${root}/resources/img/logo/logo_temp1.png" width="100%" alt="로고">
         </a>
     </div>
     <div id="nav-area">
