@@ -19,6 +19,16 @@ public class PlanDao {
 		// TODO Auto-generated method stub
 		return sst.selectList("planMapper.planList");
 	}
+
+	public PlanVo getPlanOne(SqlSessionTemplate sst, String pno) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("planMapper.planOne", pno);
+	}
+
+	public int planDelete(SqlSessionTemplate sst, String pno) {
+		// TODO Auto-generated method stub
+		return sst.delete("planMapper.planDelete", pno);
+	}
 	
 	
 
