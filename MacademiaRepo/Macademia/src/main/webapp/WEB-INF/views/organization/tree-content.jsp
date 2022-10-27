@@ -88,7 +88,7 @@
 <div id="myboards-content">
     <div id="tree-detail">
 		<div class="member" id="head">
-			<img src="/md/resources/upload/profile/아이유.jpg" alt="아이유">
+			<img src="/md/resources/upload/profile/iu12341234.jpg" alt="아이유">
 			<div class="detail">
 				<ul>
 					<li>이름 : 아이유</li>
@@ -102,7 +102,7 @@
 		</div>
 		<c:forEach begin="1" end="20">
 		<div class="member">
-			<img src="/md/resources/upload/profile/robot.jpg" alt="robot">
+			<img src="/md/resources/upload/profile/robot12341234.jpg" alt="robot">
 			<div class="detail">
 				<ul>
 					<li>이름 : 김철수</li>
