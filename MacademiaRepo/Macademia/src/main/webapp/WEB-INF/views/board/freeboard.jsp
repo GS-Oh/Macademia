@@ -2,14 +2,12 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>게시판</title>
-	
+	<title>자유게시판</title>
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
 	
 </head>
 <body>
-	
 	<div id="wrap">
 		<header>
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -18,7 +16,7 @@
 			<%@include file="/WEB-INF/views/board/board-sidebar.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/board/board-content.jsp" %>
+			<%@include file="/WEB-INF/views/board/freeboard-content.jsp" %>
 		</main>
 	</div>
 
