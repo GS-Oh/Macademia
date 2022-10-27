@@ -86,18 +86,25 @@
             <option>홍보팀</option>
             <option>대외협력팀</option>
         </select>
-        <label for="phone">직급</label>
+        <label for="phone">직책</label>
         <select name="bank" id="position" name="bank">
             <option value="none">===선택===</option>
             <option>대표이사</option>
             <option>부원장</option>
-            <option>임원</option>
-            <option>부장</option>
-            <option>팀장</option>
-            <option>주임</option>
-            <option>대리</option>
-            <option>사원</option>
-            <option>인턴</option>
+			<option>운영기획부장</option>
+            <option>교육훈련부장</option>
+            <option>취업지원부장</option>
+            <option>마케팅부장</option>
+            <option>행정팀장</option>
+            <option>총무팀장</option>
+            <option>시설지원팀장</option>
+            <option>교육1팀장</option>
+            <option>교육2팀장</option>
+            <option>교재지원팀장</option>
+            <option>취업팀장</option>
+            <option>상담팀장</option>
+            <option>홍보팀장</option>
+            <option>대외협력팀장</option>
 
         </select>
         <label for="bank">은행</label>
