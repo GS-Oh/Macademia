@@ -7,7 +7,12 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 
-
+	<typeAliases>
+		<typeAlias type="com.kh.md.academy.vo.CategoryVo" alias="CategoryVo"/>
+		<typeAlias type="com.kh.md.academy.vo.ClassVo" alias="ClassVo"/>
+		<typeAlias type="com.kh.md.academy.vo.CurriculumVo" alias="CurriculumVo"/>
+		<typeAlias type="com.kh.md.member.vo.MemberVo" alias="MemberVo"/>
+	</typeAliases>
 
 
 	

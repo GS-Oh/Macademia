@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "academyMapper">
+	
+	<select id="selectCategory" resultType="CategoryVo">
+		SELECT * 
+		FROM CLASS_CATEGORY
+	</select>
+	
+	<select id="selectInstructor" resultType="MemberVo">
+		SELECT * 
+		FROM MEMBER
+		WHERE POSITION_NO = 1
+	</select>
+	
+	<insert id="insertClass">
+		INSERT INTO CLASS(NO,CATEGORY_NO,NAME,DESCRIPTION,MAX,MEMBER_NO,FEE,CLASSROOM,BEGIN_DATE,END_DATE,START_TIME,FINISH_TIME) 
+    	VALUES(SEQ_CLASS_NO.NEXTVAL, 3, #{name}, #{description}, #{max}, 1, #{fee}, #{classroom}, #{beginDate}, #{endDate}, #{startTime}, #{finishTime})
+	</insert>
+	
+	<insert id="insertCurriculum">
+		
+	</insert>
+	
+
+</mapper>
