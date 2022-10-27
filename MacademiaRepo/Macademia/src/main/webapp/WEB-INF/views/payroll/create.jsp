@@ -96,27 +96,36 @@
 	                    <div>
 	                        <label for="year-select" class="form-label">발급년월</label>
 	                        <select name="" id="year-select" class="form-select" >
-	                            <option value="">2022-03</option>
-	                            <option value="">2022-04</option>
-	                            <option value="">2022-05</option>
-	                            <option value="">2022-06</option>
-	                            <option value="">2022-07</option>
-	                            <option value="">2022-08</option>
-	                            <option value="" selected>2022-09</option>
+	                            <option value="2022-03">2022-03</option>
+	                            <option value="2022-04">2022-04</option>
+	                            <option value="2022-05">2022-05</option>
+	                            <option value="2022-06">2022-06</option>
+	                            <option value="2022-07">2022-07</option>
+	                            <option value="2022-08">2022-08</option>
+	                            <option value="2022-09" selected>2022-09</option>
 	                        </select>
 	                    </div>
 	
 	                    <div>
-	                        <label for="depart-select" class="form-label">부서명</label>
-	                        <select name="" id="depart-select" class="form-select">
+	                        <label for="dept-select" class="form-label">부서명</label>
+	                        <select name="" id="dept-select" class="form-select" onchange="deptSelect()">
+	                            <option value="" selected>선택안함</option>
+	                            <option value="운영기획부">운영기획부</option>
+	                            <option value="교육훈련부">교육훈련부</option>
+	                            <option value="취업지원부" >취업지원부</option>
+	                            <option value="마케팅부" >마케팅부</option>
+	                        </select>
+	                    </div>
+	
+	                  	<div>
+	                        <label for="part-select" class="form-label">팀명</label>
+	                        <select name="" id="part-select" class="form-select">
 	                            <option value="" selected>선택안함</option>
 	                            <option value="">개발부</option>
 	                            <option value="">인사부</option>
 	                            <option value="" >재무부</option>
 	                        </select>
 	                    </div>
-	
-	                  
 	
 	                    <div>
 	                        <input type="submit" value="검색" style="background-color: #6667AB; color:white; width: 70%; height: 80%;">
@@ -153,9 +162,44 @@
 	            </div>
 	
 	
-	        </main>
+	        </main>	
 
 		</div>
+
+
+		<script>
+
+			
+
+			const partSelect = document.querySelector('#part-select').value;
+
+
+			function deptSelect(){
+				const yearSelect = document.querySelector('#year-select').value;
+				const deptSelect = document.querySelector('#dept-select').value;
+
+				$.ajax({
+					url : "/payroll/create/selectPart",
+					type : "get",
+					data : 
+						{ year : yearSelect,  dept : deptSelect},
+					success : function(){
+						alert("통신성공! ㅋㅋ");
+					},
+					error : function(){
+						alert("통신실패! ㅜㅜ");
+					}
+
+				});
+
+				alert(yearSelect + deptSelect);
+
+
+			}
+			
+
+
+		</script>
 
 
 

@@ -121,7 +121,7 @@
 
 
 	<!-- 공지톡 댓글 입력 -->
-	<insert id="insertReple">
+	<insert id="insertReple" >
 		INSERT INTO MSG_NOTICE_REPLE(
 		     REPLE_NO
 		    ,MSG_NO
@@ -165,6 +165,7 @@
 	</update>
 	
 	
+	
 	<!-- 메신저 등록 체크 -->
 	<select id="selectCheckEnroll" resultType="com.kh.md.messenger.vo.MessengerVo">
 		
@@ -188,7 +189,7 @@
 			        ,B.POSITION
 			    FROM MESSENGER M
 			    JOIN MEMBER B ON M.NO = B.NO
-			    ORDER BY MSG_NO DESC
+			    ORDER BY MSG_NO
 			) K
 		WHERE K.NO=#{memberNo}
 		
@@ -235,7 +236,7 @@
 		    ,B.POSITION
 		FROM MESSENGER M
 		JOIN MEMBER B ON M.NO = B.NO
-		ORDER BY MSG_NO DESC
+		ORDER BY MSG_NO 
 	
 	</select>
 
@@ -434,10 +435,11 @@
 		     M.MSG_NO
 		    ,B.NAME
 		    ,B.DEPT
+		    ,B.PART
 		    ,B.POSITION
 		FROM MESSENGER M
 		JOIN MEMBER B ON M.NO = B.NO
-		WHERE DEPT= #{deptName}
+		WHERE B.PART = #{partName}
 		
 	</select>
 	

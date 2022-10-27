@@ -83,10 +83,10 @@
 						<input type="file" name="profile" style="height: 10%; width: 100%;" >
 					</div>
 					<div>직원명${loginMember.name}</div>
-					<div>3-공백</div>
-					<div style="grid-row: span 2;"><textarea name="introduce" id="" rows="9" style="width:90%;" placeholder="자기소개글을 작성해주세요"></textarea></div>
+					<div></div>
+					<div style="grid-row: span 2;"><textarea name="introduce" id="" rows="9" style="width:90%;" required placeholder="자기소개글을 작성해주세요"></textarea></div>
 					<div><input type="submit" name="content" class="btn btn-primary btn-lg" style="color: white; width: 50%;" value="등록하기"></div>
-					<div>6-공백</div>
+					<div></div>
 				</form>
 			</div>
 

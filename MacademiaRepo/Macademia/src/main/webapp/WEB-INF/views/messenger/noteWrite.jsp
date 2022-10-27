@@ -83,7 +83,7 @@
 				<!--  -->
 				<div class="write-header-area" >
 					<span class="input-group-text">받는사람</span>
-					<input type="text" class="form-control" name="receiveNo" value="${receiveName}" readonly placeholder="검색하기 버튼으로 선택해주세요">
+					<input type="text" class="form-control" name="receiveNo" value="${receiveName}" readonly required placeholder="검색하기 버튼으로 선택해주세요">
 					<a href="/md/messenger/note/recipient" class="badge bg-secondary"><h5>검색하기</h5></a>
 				</div>
 				<!--  -->
@@ -95,12 +95,12 @@
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">제목</span>
-					<input type="text" class="form-control" name="title">
+					<input type="text" class="form-control" name="title" required>
 				</div>
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text">내용</span>
-					<input type="text" class="form-control" name="content">
+					<input type="text" class="form-control" name="content" required>
 				</div>
 			
 				<!--  -->
@@ -108,7 +108,7 @@
 					<span class="input-group-text">파일첨부</span>
 					<div id="attFile-img-wrap" class="form-control">
 						<img id="attFile-img-thumb" src="" width="50%" height="100%">
-						<input  type="file" name="attFile" style="font-size: 1.3rem;">
+						<input  type="file" name="attFile"  accept=".jpg, .png" style="font-size: 1.3rem;">
 					</div>
 				</div>
 

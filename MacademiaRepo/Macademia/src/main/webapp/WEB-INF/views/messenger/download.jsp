@@ -18,7 +18,6 @@
 <body>
 	
 	
-	<h1>${fileName}</h1>
 	<h1>${originName}</h1>
     <div id="download-img-area"><img src="/md/resources/upload/messenger/${fileName}" alt="" width="100%" height="100%"></div>
 

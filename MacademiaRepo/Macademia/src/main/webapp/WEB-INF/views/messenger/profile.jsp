@@ -81,18 +81,17 @@
 
 			<div id="profile-main-content">
 				<div id="main-content-img-wrap" >
-					<img src="${root}/resources/upload/messenger/${msgVo.fileName}" alt="" width="100%" height="90%" style="border:1px solid black">
-					<span style="height: 10%;">파일명</span>
+					<img src="${root}/resources/upload/messenger/${msgVo.fileName}" alt="" width="100%" height="100%" style="border:1px solid black">
 				</div>
 				<div>${msgVo.name}</div>
-				<div>3-공백</div>
+				<div></div>
 				<div style="grid-row: span 2;">${msgVo.introduce}</div>
 				<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white; width: 30%;"><h4>편집</h4></a></div>
-				<div>6-공백</div>
+				<div></div>
 			</div>
 
 			<div id="profile-bottom-content">
-				<div class="badge bg-secondary"><h3>${msgVo.dept}-${msgVo.position}</h3></div>
+				<div class="badge bg-secondary"><h3>${msgVo.dept} / ${msgVo.part} / ${msgVo.position}</h3></div>
 				<div class="badge bg-secondary"><h3>${msgVo.address}</h3></div>
 				<div class="badge bg-secondary"><h3>${msgVo.email}</h3></div>
 			</div>

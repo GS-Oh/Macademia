@@ -13,17 +13,30 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 10% 70% auto;
+			grid-template-rows: 20% 70% auto;
 			border-radius : 10px;
 		}
 
 
 		#detail-header{
 			display: grid;
-			grid-template-columns: 6% 74% 10% 10%;
+			grid-template-columns: 8% 74% 10% 10%;
+			grid-template-rows : 60% 40%;
 			align-items: center;
 			font-size: 1.5rem;
+			margin-bottom: 30px;
+
+			text-align: center;
 		}
+
+		.detail-title-nickname{
+
+			text-align: left;
+			padding-left:15px;
+
+		}
+		
+
 
 		#detail-content > a{
 			text-decoration: none;
@@ -111,21 +124,29 @@
             <!--  -->
 			<div id="detail-header">
 				<div><span  class="badge bg-info" >공지</span></div>
-				<div><h1>${noticeVo.title}</h1></div>
-				<div>조회 수 : ${noticeVo.count}</div>
-				<div>작성일자 : ${noticeVo.enrollDate}</div>
+				<div class="detail-title-nickname"><h1>${noticeVo.title}</h1></div>
+				<div >조회 수</div>
+				<div >작성일자</div>
+				
+				<div style="width: 100%; height: 100%; border: 1px solid black;"><img src="${root}/resources/upload/messenger/${noticeVo.fileName}" alt="" width="100%" height="100%"> </div>
+				<div class="detail-title-nickname">${noticeVo.name}</div>
+				<div>${noticeVo.count}</div>
+				<div>${noticeVo.enrollDate}</div>
+				
 			</div>
-
+	
+	
+	
 			<!--  -->
 			<div id="detail-content">
 
 				<textarea name="" id="" cols="30" rows="10" readonly>${noticeVo.content}</textarea>
-
-				<a href="/md/messenger/notice/delete/${noticeVo.noticeNo}" class="badge bg-warning"><h5>삭제하기</h5></a>
-				<a href="/md/messenger/notice/edit/${noticeVo.noticeNo}" class="badge bg-success"><h5>수정하기</h5></a>
+				<c:if test="${noticeVo.msgNo eq msgVo.msgNo}">
+					<a href="/md/messenger/notice/delete/${noticeVo.noticeNo}" class="badge bg-warning"><h5>삭제하기</h5></a>
+					<a href="/md/messenger/notice/edit/${noticeVo.noticeNo}" class="badge bg-success"><h5>수정하기</h5></a>
+				</c:if>
 			</div>
 			
-
 
 			<!--  -->
 			<!--  -->
@@ -144,7 +165,7 @@
 								</div>
 		
 								<div>
-								<c:if test="${repleVo.msgNo eq noticeVo.msgNo }">
+								<c:if test="${repleVo.msgNo eq msgVo.msgNo }">
 									<a href="/md/messenger/notice/reple/delete/${repleVo.repleNo}/${noticeVo.noticeNo}" class="btn btn-lg">삭제하기</a>
 								</c:if>
 								</div>
@@ -155,7 +176,7 @@
 				<div id="reply-insert">
 
 					<div style="margin-left: 10px;">
-						<label for="content"><h3><span  class="badge bg-secondary" >${noticeVo.name}</span></h3></label>
+						<label for="content"><h3><span  class="badge bg-secondary" >${sessionScope.msgVo.name}</span></h3></label>
 					</div>
 					<div style="margin: 10px;">
 						<textarea id="reple-content" class="form-control" rows="4" id="content" name="text"></textarea>
@@ -179,8 +200,8 @@
 		
 		repleBtn.addEventListener('click', function(){
 			
-			const repleWriterNick = '${noticeVo.name}';
-			const repleProfile = '${noticeVo.fileName}';
+			const repleWriterNick = '${msgVo.name}';
+			const repleProfile = '${msgVo.fileName}';
 			const repleContent = document.querySelector('#reple-content').value;
 			const now = new Date();
 			
@@ -206,7 +227,7 @@
 					}
 				},
 				error : function(){
-					alert("통신 에러 ...");
+					alert("댓글을 입력해주세요 ...");
 				}
 				
 				

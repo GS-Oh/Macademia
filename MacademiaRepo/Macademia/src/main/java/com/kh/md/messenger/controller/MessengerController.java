@@ -47,7 +47,7 @@ public class MessengerController {
 	@GetMapping("main")
 	public String main(HttpSession session, Model model) {
 		
-		//TODO 세션에서 멤버넘버 가져오기
+		//TODO 세션에서 멤버넘버 가져오기 //멤버넘버 5000으로 바꿔서 쪽지 보내기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		String memberNo = "1";
 		
@@ -280,10 +280,11 @@ public class MessengerController {
 	} 
 	
 	//쪽지 - 받는 사람 검색 처리 ( 해당 부서명 멤버 가져오기 - script로 요청 )
-	@GetMapping("DeptMember")
-	public String deptMember(String deptName, Model model) {
+	@GetMapping("partMember")
+	public String deptMember(String partName, Model model) {
 		
-		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(deptName);
+		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(partName);
+		
 		if(deptMemberList != null) {
 			model.addAttribute("deptMemberList",deptMemberList);
 			return "messenger/noteRecipient";
@@ -338,21 +339,26 @@ public class MessengerController {
 	@PostMapping("profile/edit")
 	public String profileEdit(MessengerVo vo ,HttpServletRequest req, HttpSession session) {
 		
-		//기존 파일 삭제
+		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); 
 		String savePath = req.getServletContext().getRealPath("/resources/upload/messenger/"); //req로 기존 파일 경로 가져오고
-		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo"); // 세션에 msgVo 통해서 파일 이름 가져오고
-		String fileName = msgVo.getFileName();
-		File f= new File(savePath + fileName);
 		
-		if(f.exists()) {
-			f.delete();
-		}
-		
-		
-		//신규로 받은 파일 업로드, 저장된 파일명 얻기
-		if(!vo.getProfile().isEmpty()) {
+		//신규로 받은 파일 업로드, 저장된 파일명 얻기 
+		if(!vo.getProfile().isEmpty()) { // ( 프로필사진까지 변경했으면 이 작업 진행 )
 			String changeName = FileUploader.fileUpload(vo.getProfile(), savePath);
 			vo.setFileName(changeName);
+			
+			//기존 파일 삭제
+			
+			// 세션에 msgVo 통해서 파일 이름 가져오고
+			String fileName = msgVo.getFileName();
+			File f= new File(savePath + fileName);
+			
+			if(f.exists()) {
+				f.delete();
+			}
+			
+		}else if(vo.getProfile().isEmpty()) { // ( 프로필사진까지 변경안했으면 이 작업 진행 )	
+			vo.setFileName(msgVo.getFileName());
 		}
 		
 		//회원번호 세션에서 얻어와서 - 세팅 마무리 해준 vo로 - db에 업데이트
@@ -541,7 +547,7 @@ public class MessengerController {
 		
 		//페이징 처리
 		int totalCount = ms.selectTotalCnt(); //전체게시글 수 구하기
-		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 3, 10);
 		
 		
 		List<MsgNoticeVo> noticeVoList = ms.selectNoticeAll(pvo);
@@ -669,6 +675,10 @@ public class MessengerController {
 		}
 		
 	}
+	
+	
+	
+	
 	
 	
 	

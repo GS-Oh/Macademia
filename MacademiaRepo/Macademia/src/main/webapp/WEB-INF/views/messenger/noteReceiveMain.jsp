@@ -22,6 +22,7 @@
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
 			justify-items: center;
+			align-items : center;
 		}
 
 		#note-header-area > a{
@@ -30,6 +31,7 @@
 			text-align: center;
 			text-decoration: none;
 			color: #6667AB;
+			padding-top : 5%;
 			margin-top: 5%;
 		}
 
@@ -167,7 +169,6 @@
 		<aside>		
 			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
 		</aside>        
-
         <main>
 
            <!--  -->
@@ -175,28 +176,28 @@
 				
 				<a href="/md/messenger/note/write">
 					<div class="header-area-content">
-						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
+						<i class="fas fa-edit" style="font-size : 60px;"></i>
 						<h5>쪽지</h5>
 					</div>
 				</a>
 
 				<a href="" id="note-reple-area">
 					<div class="header-area-content">
-						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
+						<i class="fas fa-share-square" style="font-size : 60px;"></i>
 						<h5>답장하기</h5>
 					</div>
 				</a>
 				
-				<a href="/md/messenger/note">
+				<a href="/md/messenger/noteReceiveBox">
 					<div class="header-area-content">
-						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
+						<i class="fas fa-sync-alt" style="font-size : 60px;"></i>
 						<h5>새로고침</h5>
 					</div>
 				</a>
 
 				<a href="" id="note-delete-area">
 					<div class="header-area-content">
-						<img src="" alt="" width="100%" height="100%" style="border: 1px solid black;">
+						<i class="fas fa-trash-alt" style="font-size : 60px;"></i>
 						<h5>삭제하기</h5>
 					</div>
 				</a>

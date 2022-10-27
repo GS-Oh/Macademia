@@ -31,7 +31,7 @@ public class MessengerDaoImpl implements MessengerDao{
 	public List<MsgNoticeVo> selectNoticeAll(SqlSessionTemplate sst, PageVo pvo) {
 		
 		//페이징 처리
-		int offset = pvo.getCurrentCount()-1 * pvo.getBoardLimit();
+		int offset = (pvo.getCurrentCount()-1) * pvo.getBoardLimit();
 		RowBounds rb = new RowBounds(offset, pvo.getBoardLimit());
 		
 		return sst.selectList("messengerMapper.selectNoticeAll",null,rb);
@@ -69,6 +69,7 @@ public class MessengerDaoImpl implements MessengerDao{
 		return sst.update("messengerMapper.updateDelete", noticeNo);
 	}
 
+	
 	//공지톡 게시글 ( 게시글 총 수 )
 	@Override
 	public int selectTotalCnt(SqlSessionTemplate sst) {
@@ -95,7 +96,8 @@ public class MessengerDaoImpl implements MessengerDao{
 	public int updateRepleDelete(SqlSessionTemplate sst, String repleNo) {
 		return sst.update("messengerMapper.updateRepleDelete", repleNo);
 	}
-
+	
+	
 	//메신저 ( 등록 체크 )
 	@Override
 	public MessengerVo selectCheckEnroll(SqlSessionTemplate sst, String memberNo) {
@@ -158,8 +160,8 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//쪽지 - ( 해당 부서 멤버 가져오기 )
 	@Override
-	public List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName) {
-		return sst.selectList("messengerMapper.selectDeptMember", deptName);
+	public List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String partName) {
+		return sst.selectList("messengerMapper.selectDeptMember", partName);
 	}
 
 
@@ -201,6 +203,7 @@ public class MessengerDaoImpl implements MessengerDao{
 	public int insertCopyFileName(SqlSessionTemplate sst,  MsgFileCopyVo copyVo) {
 		return sst.insert("messengerMapper.insertCopyFileName", copyVo);
 	}
+
 
 	
 	

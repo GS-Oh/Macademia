@@ -146,21 +146,41 @@
 					<ul class="search-header">
 						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">행정팀</a></li>
 						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">재정팀</a></li>
-						<li>시설지원팀</li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">시설지원팀</a></li>
 					</ul>
 					
 					
 					
 					<h2>교육훈련부</h2>
 					<ul class="search-header">
-						<li>교육1팀</li>
-						<li>교육2팀</li>
-						<li>교재지원팀</li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">교육1팀</a></li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">교육2팀</a></li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">교재지원팀</a></li>
 					</ul>
 					
 					
 			
-					<h2>개발부(대분류)</h2>
+
+					<h2>취업지원부</h2>
+					<ul class="search-header">
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">취업팀</a></li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">상담팀</a></li>
+					</ul>
+
+
+
+					<h2>교육훈련부</h2>
+					<ul class="search-header">
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">홍보팀</a></li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">대외협력팀</a></li>
+					</ul>
+
+
+
+
+
+
+					<h2>부서 하나더있으면 이걸로</h2>
 					<ul class="search-header">
 						<li>프론트(중분류)
 							<ul>
@@ -198,7 +218,7 @@
 						<div class="select-content" style="display:none;"><span class="choice-receiveNo">${deptMember.get("MSG_NO")}</span> </div>
 						<div class="select-content"><span class="choice-receiveName">${deptMember.get("NAME")}</span></div>
 						<div class="select-content"><span>${deptMember.get("POSITION")}</span></div>
-						<div class="select-content"><span>${deptMember.get("DEPT")}</span></div>	
+						<div class="select-content"><span>${deptMember.get("DEPT")} / ${deptMember.get("PART")}</span></div>	
 					</div>
 				
 				</c:forEach>
@@ -239,7 +259,7 @@
 		for(let i=0; i<searchContent.length; ++i){
 			
 			searchContent[i].addEventListener('click',function(){
-				searchContent[i].href = "/md/messenger/DeptMember?deptName=" +  searchContent[i].innerText;
+				searchContent[i].href = "/md/messenger/partMember?partName=" +  searchContent[i].innerText;
 			});
 		}
 

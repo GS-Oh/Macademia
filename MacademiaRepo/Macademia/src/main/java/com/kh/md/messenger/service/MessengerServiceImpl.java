@@ -102,6 +102,9 @@ public class MessengerServiceImpl implements MessengerService{
 	}
 
 	
+	
+	
+	
 	//메신저 등록 체크
 	@Override
 	public MessengerVo selectCheckEnroll(String memberNo) {
@@ -169,8 +172,8 @@ public class MessengerServiceImpl implements MessengerService{
 	
 	//쪽지 - 해당 부서 멤버 가져오기
 	@Override
-	public List<HashMap<String, String>> selectDeptMember(String deptName) {
-		return dao.selectDeptMember(sst, deptName);
+	public List<HashMap<String, String>> selectDeptMember(String partName) {
+		return dao.selectDeptMember(sst, partName);
 	}
 
 	//파일보관함 - 이미지 파일 전부 가져오기
@@ -219,6 +222,9 @@ public class MessengerServiceImpl implements MessengerService{
 		// TODO Auto-generated method stub
 		return dao.fileBoxDelete(sst, deleteMap);
 	}
+
+	
+	
 
 	
 	
