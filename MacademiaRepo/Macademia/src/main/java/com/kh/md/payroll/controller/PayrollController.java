@@ -39,6 +39,17 @@ public class PayrollController {
 		return "payroll/create";
 	}
 	
+	//선택 부서에 해당하는 팀 불러오기 
+	@GetMapping(value = "create/selectPart", produces = "application/json;")
+	public String createSelectPart() {
+		
+		
+		
+		
+		return "";
+	}
+	
+	
 	@GetMapping("create/detail")
 	public String createDetail() {
 		return "payroll/createDetail";
