@@ -6,9 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.md.plan.service.PlanService;
 import com.kh.md.plan.vo.PlanVo;
@@ -23,10 +25,26 @@ public class PlanController {
 	@GetMapping("list")
 	public String planList(HttpServletRequest req) {
 		List<PlanVo> planList = service.getPlan();
+		System.out.println(planList);
 		req.setAttribute("planList", planList);
 		
 		return "/plan/planList";
 	}
+	@ResponseBody
+	@GetMapping("listDetail")
+	public PlanVo planDetail(HttpServletRequest req, Model model, PlanVo vo) {
+		String pno = req.getParameter("pno");
+		
+		PlanVo plan = service.getPlanOne(pno);
+		
+		//model.addAttribute("plan", plan);
+		//System.out.println(plan);
+		
+		
+		return plan;
+		
+	}
+	
 	@GetMapping("write")
 	public String planWrite(){
 		
@@ -35,6 +53,7 @@ public class PlanController {
 	@PostMapping("write")
 	public String planWrite(HttpServletRequest req, PlanVo vo) {
 		String no = "1";
+		
 		
 		
 		vo.setMNo(no);
@@ -50,4 +69,24 @@ public class PlanController {
 		
 		
 	}
+	@PostMapping("delete")
+	@ResponseBody
+	public int planDelete(HttpServletRequest req) {
+		
+		String pno = req.getParameter("pno");
+		System.out.println(pno);
+		int result = service.planDelete(pno);
+		
+		return result;
+	
+		
+}
+	@GetMapping("modify")
+	public String planModify() {
+		
+		return "plan/planModify";
+	}
+	
+	
+	
 }

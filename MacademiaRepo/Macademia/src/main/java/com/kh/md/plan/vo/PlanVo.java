@@ -13,7 +13,7 @@ public class PlanVo {
 	private String pTypeNo;
 	private String pTitle;
 	private String pContent;
-	private String pStratDate;
+	private String pStartDate;
 	private String pEndDate;
 
 	

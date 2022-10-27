@@ -24,4 +24,14 @@ public class PlanService {
 		return dao.getPlan(sst);
 	}
 
+	public PlanVo getPlanOne(String pno) {
+		// TODO Auto-generated method stub
+		return dao.getPlanOne(sst, pno);
+		
+	}
+	public int planDelete(String pno) {
+		return dao.planDelete(sst, pno);
+		
+	}
+
 }

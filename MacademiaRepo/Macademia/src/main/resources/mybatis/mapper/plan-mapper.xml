@@ -26,6 +26,30 @@
 	
 	</insert>
 	<select id="planList" resultType="com.kh.md.plan.vo.PlanVo">
-		SELECT * FROM PLAN
+		SELECT 
+    P_NO
+    ,M_NO
+    ,P_TYPE_NO
+    ,P_TITLE
+    ,P_CONTENT
+    ,TO_CHAR(P_START_DATE, 'YYYY-MM-DD') AS  P_START_DATE
+    ,TO_CHAR(P_END_DATE, 'YYYY-MM-DD') AS P_END_DATE
+    FROM PLAN
 	</select>
+	<select id="planOne" resultType="com.kh.md.plan.vo.PlanVo">
+			SELECT 
+    P_NO
+    ,M_NO
+    ,P_TYPE_NO
+    ,P_TITLE
+    ,P_CONTENT
+    ,TO_CHAR(P_START_DATE, 'YYYY-MM-DD') AS  P_START_DATE
+    ,TO_CHAR(P_END_DATE, 'YYYY-MM-DD') AS P_END_DATE
+    FROM PLAN
+    WHERE P_NO= #{pNo}
+	</select>
+	<delete id="planDelete">
+	DELETE  FROM PLAN WHERE P_NO=#{pno}
+	
+	</delete>
 </mapper>
