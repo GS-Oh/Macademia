@@ -24,79 +24,79 @@
 							<th>보낸사람</th>
 							<th>제목</th>
 							<th>날짜</th>	
-							<th>크기</th>
+							<th>파일첨부</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>X</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>X</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>O</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>O</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>O</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>O</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>O</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>X</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>X</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="select"></td>
 							<td>유저1</td>
-							<td>유저1은 기능대회를 열심히 준비했습니다.</td>
-							<td>2018-04-03</td>	
-							<td>13.7KB</td>
+							<td>유저1의 제목 입니다.</td>
+							<td>2022-10-25</td>	
+							<td>X</td>
 						</tr>
 					</tbody>
 				</table>

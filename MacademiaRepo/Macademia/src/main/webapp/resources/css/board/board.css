@@ -6,7 +6,6 @@
 .board_wrap{
         width: 60vw;
         height : 100vh;
-        border: 1px solid #6667AB;
         padding: 2vw;
         display: grid;
         grid-template-rows: 10vh 10vh 10vh;

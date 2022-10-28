@@ -3,7 +3,7 @@
 
  <div class="board_wrap">
 	<div class="board_title">
-	    <strong>자료공유 게시판</strong>
+	    <strong>자료공유게시판</strong>
 	    <p>특정 게시판에 대한 간단한 설명~~</p>
 	</div>
 	<div class="board_list_wrap">
