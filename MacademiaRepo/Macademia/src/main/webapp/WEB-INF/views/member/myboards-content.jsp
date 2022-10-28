@@ -72,6 +72,7 @@
     </table>
     <form action="">
         <select name="board">
+            <option>===선택===</option>
             <option>자유게시판</option>
             <option>1게시판</option>
             <option>2게시판</option>

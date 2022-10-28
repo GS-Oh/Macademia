@@ -121,17 +121,16 @@
 
 <script>
 
-// let treeJson = ${tree}
-// treeJson[0].parent = "#";
-// treeJson[0].state = {'opened' : true};
-// treeJson[1].state = {'opened' : true};
-// console.log('${tree}');
-
+let treeData = ${tree}
+treeData[0].parent = "#";
+treeData[0].state = {'opened' : true};
+treeData[1].state = {'opened' : true};
 
 $(function () { 
     $('#tree').jstree({ 
 		'core' : {
-			'data' : [{"id":"1","text":"대표이사","parent":"#","state":{'opened' : true}},{"id":"2","parent":"1","text":"부원장","state":{'opened' : true}},{"id":"3","parent":"2","text":"운영기획부"},{"id":"4","parent":"2","text":"교육훈련부"},{"id":"5","parent":"2","text":"취업지원부"},{"id":"6","parent":"2","text":"마케팅부"},{"id":"7","parent":"3","text":"행정팀"},{"id":"8","parent":"3","text":"총무팀"},{"id":"9","parent":"3","text":"시설지원팀"},{"id":"10","parent":"4","text":"교육1팀"},{"id":"11","parent":"4","text":"교육2팀"},{"id":"12","parent":"4","text":"교재지원팀"},{"id":"13","parent":"5","text":"취업팀"},{"id":"14","parent":"5","text":"상담팀"},{"id":"15","parent":"6","text":"홍보팀"},{"id":"16","parent":"6","text":"대외협력팀"}]
+			// 'data' : [{"id":"1","text":"대표이사","parent":"#","state":{'opened' : true}},{"id":"2","parent":"1","text":"부원장","state":{'opened' : true}},{"id":"3","parent":"2","text":"운영기획부"},{"id":"4","parent":"2","text":"교육훈련부"},{"id":"5","parent":"2","text":"취업지원부"},{"id":"6","parent":"2","text":"마케팅부"},{"id":"7","parent":"3","text":"행정팀"},{"id":"8","parent":"3","text":"총무팀"},{"id":"9","parent":"3","text":"시설지원팀"},{"id":"10","parent":"4","text":"교육1팀"},{"id":"11","parent":"4","text":"교육2팀"},{"id":"12","parent":"4","text":"교재지원팀"},{"id":"13","parent":"5","text":"취업팀"},{"id":"14","parent":"5","text":"상담팀"},{"id":"15","parent":"6","text":"홍보팀"},{"id":"16","parent":"6","text":"대외협력팀"}]
+			'data' : treeData
 		}
    	});
 });

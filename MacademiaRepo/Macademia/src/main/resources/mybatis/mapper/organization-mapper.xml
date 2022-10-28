@@ -3,8 +3,8 @@
 <mapper namespace = "organizationMapper">
 	<select id="selectList" resultType="com.kh.md.organization.vo.OrganizationVo">
 
-		SELECT NO,NAME,UPPER_DEPT,LEV
-		FROM DEPT
+		SELECT *
+		FROM PRIVATE_FILE
 		
 	</select>
 </mapper>

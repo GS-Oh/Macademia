@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
@@ -136,12 +137,11 @@
         </button>
     </div>
     <div id="file-area">
-        <c:forEach begin="1" end="40">
+        <c:forEach var="file" items="${fileList }">
             <div class="file-slot">
-                <a href="" download>
-                    <img src="/md/resources/upload/private-files/netflix.jpg" alt="확장자" width="100%" height="100%">
-                    <!-- <img src="/md/resources/img/background/macadamiad.png" alt="......." width="100%" height="100%"> -->
-                    <span>파일명</span>
+                <a href="/md/resources/upload/private-files/${file.updateName }" download>
+                    <img src="/md/resources/upload/private-files/${file.updateName }" alt="${fn:substringAfter(file.updateName,'.')}" width="100%" height="100%">
+                    <span>${file.originName }</span>
                 </a>
                 <i id="x-btn" class="fa-regular fa-circle-xmark" onclick="deleteFile()"></i>
                 

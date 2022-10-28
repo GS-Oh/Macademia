@@ -140,13 +140,13 @@
 	<form action="${root}/member/login" method="post" id="login-form">
 
 	  <div class="input-group">
-	    <input id="id" type="text" class="form-control" required>
-        <label class="input-group-text" for="input-id">ID</label>
+	    <input id="email" type="text" class="form-control" name="email" required>
+        <label class="input-group-text" for="email">EMAIL</label>
 	  </div>
 	
 	  <div class="input-group">
-	    <input id="pwd" type="password" class="form-control" required>
-        <label class="input-group-text" for="input-pwd">PWD</label>
+	    <input id="pwd" type="password" class="form-control" name="pwd" required>
+        <label class="input-group-text" for="pwd">PWD</label>
 	  </div>
 	  <button type="submit" id="btn">로그인</button>
       <div id="find-pwd">
@@ -159,22 +159,22 @@
 <script>
     if('${alertMsg}'!= ''){
         Swal.fire({
-            title: '임시비밀번호 발급완료!',
-            text: '개인이메일을 확인해주세요.',
-            icon: 'success',
+            // title: '${alertMsg}',
+            text: '${alertMsg}',
+            icon: 'success'
         })
     }
 </script>
 
 <script>
     
-    const id = $('#id');
+    const id = $('#email');
     const pwd = $('#pwd');
     const btn = $('#btn');
 
     $(btn).on('click',function(){
-        if($(id).val()==""){
-            $(id).next('label').addClass('warning');
+        if($(email).val()==""){
+            $(email).next('label').addClass('warning');
             setTimeout(function(){
                 $('label').removeClass('warning')
             },1000);
