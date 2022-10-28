@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="payrollMapper">
+
+
+
+	<select id="selectPayrollOption" resultType="com.kh.md.payroll.vo.PayrollVo">
+	
+		SELECT *
+		FROM 
+		    (
+		    SELECT B.*,K.NAME AS RANK_NAME, T.NAME DEPT_NAME
+		    FROM
+		        (
+		        SELECT A.*, P.NAME AS POSITION, P.RANK_NO, P.DEPT_NO
+		        FROM
+		            (
+		            SELECT Z.*, M.NO, M.NAME, M.EMAIL, M.ADDRESS, M.PHONE, M.PROFILE_NAME, M.BANK_NO, M.ACCOUNT, M.ENROLL_DATE, M.QUIT_YN
+		            FROM SALARY_BOOK Z
+		            JOIN MEMBER M ON Z.TARGET_NO = M.NO
+		            WHERE Z.PAY_DATE = #{payDate}
+		            ) A
+		        JOIN POSITION P ON A.NO = P.NO
+		        WHERE A.QUIT_YN = 'N'
+		        ) B
+		    JOIN RANK K ON B.RANK_NO = K.NO
+		    JOIN DEPT T ON B.DEPT_NO = T.NO
+		    ) C
+		    
+		<if test="deptNo != 0">
+			WHERE C.DEPT_NO = #{deptNo}
+		</if>
+		 
+	    <if test="rankNo != 0">
+			AND C.RANK_NO = #{rankNo}
+	    </if>
+	    
+		
+	
+	
+	
+	
+	</select>
+
+	
+
+
+
+
+
+
+</mapper>
