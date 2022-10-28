@@ -27,9 +27,7 @@
 
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
-    <!--*******************
-        Preloader start
-    ********************--> 
+    <!-- Preloader start --> 
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
@@ -37,13 +35,9 @@
             <div class="sk-child sk-bounce3"></div>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************--> 
+    <!-- Preloader end --> 
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
+        <!-- Nav header start -->
         <div class="nav-header">
             <a href="${contextPath}/admin/mlist.ad" class="brand-logo" style="background: #2b2d35;">
                 <img class="logo-abbr" src="${contextPath}/resources/assets/images/logo.png" alt="" style="border-radius: 100%; width: 170px; height: 32px;">
@@ -57,13 +51,9 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
+        <!-- Nav header end -->
 
-        <!--**********************************
-            Header start
-        ***********************************-->
+        <!-- Header start -->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -91,13 +81,9 @@
                 </nav>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
+        <!-- Header end ti-comment-alt -->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
+        <!--Sidebar start -->
         <div class="quixnav" style="background: #292B30;">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
@@ -120,14 +106,10 @@
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->   
+        <!-- Sidebar end -->   
  
 	
-	    <!--**********************************
-	        Scripts
-	    ***********************************-->
+	    <!-- Scripts -->
 	    <!-- Required vendors -->
 	    <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
 	    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>

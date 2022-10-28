@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>admin page-dashboard</title>
+    <title>관리자 페이지2</title>
 </head>
 <link href="/resources/assets/vendor/fullcalendar/packages/core/main.css" rel='stylesheet' />
 <link href="/resources/assets/vendor/fullcalendar/packages/daygrid/main.css" rel='stylesheet' />

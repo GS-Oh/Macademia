@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-      <title>Focus - Bootstrap Admin Dashboard </title>
+      <title>주소록 검색</title>
     <!-- Datatable -->
-    <link href="${contextPath}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="${root}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     
     <style>
     main {
@@ -24,7 +24,7 @@
 
     <div id="main-wrapper">	
 
-		<%-- <%@ include file="/WEB-INF/views/common/menubar.jsp" %> --%>
+		<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
 
         <div class="content-body">
             <div class="container-fluid">
@@ -79,7 +79,7 @@
                     <div class="col-xl-9 col-lg-10 col-xxl-10 col-md-10">
                         <div class="card" style="height:500px;">
                             <div class="card-header">
-                            <form name="searchform" method="post" action="addr.research" style="width: 100%">
+                            <form name="searchform" method="post" action="=research" style="width: 100%">
                                 <table style="border: none; width: 100%">
 		                        	<tr>
 		                        		<td>

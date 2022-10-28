@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- Datatable -->
-    <link href="${contextPath}/resources/admin/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="${root}/resources/admin/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 
 <body>
