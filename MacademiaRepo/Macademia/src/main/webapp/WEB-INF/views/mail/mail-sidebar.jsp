@@ -28,7 +28,7 @@
 					<a href="/md/mail/write" class="mail-btn">내게쓰기</a>
 				</div>
 				<ul class="mail-menu">
-					<li class="active">
+					<li  class="active1">
 						<a href="/md/mail/main">전체 메일함 <span>89</span></a>
 					</li>
 					<li>

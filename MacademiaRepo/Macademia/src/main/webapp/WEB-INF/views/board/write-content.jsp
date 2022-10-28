@@ -19,6 +19,14 @@
 		                        <dt>카테고리</dt>
 		                        <dd><input type="text" placeholder="OO 게시판" ></dd>
 		                    </dl>
+		                    <dl>
+		                        <dt> 작성자</dt>
+		                        <dd><input type="text" placeholder="작성자 이름" readonly="readonly" ></dd>
+		                    </dl>
+		                    <dl>
+		                        <dt> 파일 첨부</dt>
+		                        <dd><input type="file"></dd>
+		                    </dl>
 		                </div>
 		                <div class="cont">
 						        <textarea id="summernote" class="summernote" ></textarea>

@@ -21,7 +21,6 @@ body {
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0;
-  padding: 1rem;
 }
 
 .main{
@@ -132,8 +131,8 @@ img {
 	      <div class="card">
 	        <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
 	        <div class="card_content">
-	          <h2 class="card_title">Card Grid Layout</h2>
-	          <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layou
+	          <h2 class="card_title">글 제목</h2>
+	          <p class="card_text">글 내용이 들어갈 부분
 	          </p>
       	      <button class="btn card_btn" onClick="location.href='/md/board/detail'">Read More</button>
 	        </div>
@@ -144,8 +143,8 @@ img {
 	      <div class="card">
 	        <div class="card_image"><img src="https://picsum.photos/500/300/?image=5"></div>
 	        <div class="card_content">
-	          <h2 class="card_title">Card Grid Layout</h2>
-	          <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+	          <h2 class="card_title">글 제목</h2>
+	          <p class="card_text">글 내용이 들어갈 부분</p>
 	          <button class="btn card_btn">Read More</button>
 	        </div>
 	      </div>
@@ -154,8 +153,8 @@ img {
 	      <div class="card">
 	        <div class="card_image"><img src="https://picsum.photos/500/300/?image=11"></div>
 	        <div class="card_content">
-	          <h2 class="card_title">Card Grid Layout</h2>
-	          <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+	          <h2 class="card_title">글 제목</h2>
+	          <p class="card_text">글 내용이 들어갈 부분</p>
 	          <button class="btn card_btn" onClick="location.href='/md/board/detail'">Read More</button>
 	        </div>
 	      </div>
@@ -165,8 +164,8 @@ img {
 	      <div class="card">
 	        <div class="card_image"><img src="https://picsum.photos/500/300/?image=14"></div>
 	        <div class="card_content">
-	          <h2 class="card_title">Card Grid Layout</h2>
-	          <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+	          <h2 class="card_title">글 제목</h2>
+	          <p class="card_text">글 내용이 들어갈 부분</p>
 	          	          <button class="btn card_btn" onClick="location.href='/md/board/detail'">Read More</button>
 	        </div>
 	      </div>
@@ -176,8 +175,8 @@ img {
 	      <div class="card">
 	        <div class="card_image"><img src="https://picsum.photos/500/300/?image=17"></div>
 	        <div class="card_content">
-	          <h2 class="card_title">Card Grid Layout</h2>
-	          <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+	          <h2 class="card_title">글 제목</h2>
+	          <p class="card_text">글 내용이 들어갈 부분</p>
 	          	          <button class="btn card_btn" onClick="location.href='/md/board/detail'">Read More</button>
 	        </div>
 	      </div>
@@ -187,13 +186,26 @@ img {
 	      <div class="card">
 	        <div class="card_image"><img src="https://picsum.photos/500/300/?image=2"></div>
 	        <div class="card_content">
-	          <h2 class="card_title">Card Grid Layout</h2>
-	          <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+	          <h2 class="card_title">글 제목</h2>
+	          <p class="card_text">글 내용이 들어갈 부분</p>
 	          	          <button class="btn card_btn" onClick="location.href='/md/board/detail'">Read More</button>
 	        </div>
 	      </div>
 	    </li>
 	  </ul>
+		
+		<div class="board_page">
+	        <a href="#" class="bt first"><<</a>
+	        <a href="#" class="bt prev"><</a>
+	        <a href="#" class="num on">1</a>
+	   	     <a href="#" class="num">2</a>
+	        <a href="#" class="num">3</a>
+	        <a href="#" class="num">4</a>
+	        <a href="#" class="num">5</a>
+	        <a href="#" class="bt next">></a>
+	        <a href="#" class="bt last">>></a>
+	    </div>
+		
 		<div class="Search-area">
 	       <div class="Search-area-content">
 	        <select>
