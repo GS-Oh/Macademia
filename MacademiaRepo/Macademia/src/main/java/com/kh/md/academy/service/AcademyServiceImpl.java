@@ -10,6 +10,7 @@ import com.kh.md.academy.dao.AcademyDao;
 import com.kh.md.academy.vo.CategoryVo;
 import com.kh.md.academy.vo.ClassVo;
 import com.kh.md.academy.vo.CurriculumVo;
+import com.kh.md.academy.vo.StudentVo;
 import com.kh.md.member.vo.MemberVo;
 
 @Service
@@ -38,14 +39,22 @@ public class AcademyServiceImpl implements AcademyService{
 
 	//새 강의 정보 인서트
 	@Override
-	public int insertClass(CategoryVo catVo, MemberVo mvo) {
-		return dao.insertClass(sst, catVo, mvo);
+	public int insertClass(ClassVo vo) {
+		return dao.insertClass(sst, vo);
 	}
 
 	//새 강의의 커리큘럼 인서트
 	@Override
-	public int insertCurriculum() {
-		return dao.insertCurriculum(sst);
+	public int insertCurriculum(CurriculumVo cvo) {
+		return dao.insertCurriculum(sst, cvo);
+	}
+
+	//수강생 인서트
+	@Override
+	public int insertStudent(StudentVo vo) {
+		System.out.println("dob:"+vo.getBirth());
+		System.out.println("gender:"+vo.getGender());
+		return dao.insertStudent(sst, vo);
 	}
 
 }

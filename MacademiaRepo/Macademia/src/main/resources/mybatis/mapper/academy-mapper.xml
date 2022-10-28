@@ -3,24 +3,30 @@
 <mapper namespace = "academyMapper">
 	
 	<select id="selectCategory" resultType="CategoryVo">
-		SELECT * 
+		SELECT NO, NAME
 		FROM CLASS_CATEGORY
 	</select>
 	
 	<select id="selectInstructor" resultType="MemberVo">
-		SELECT * 
+		SELECT NO, NAME
 		FROM MEMBER
-		WHERE POSITION_NO = 1
+		WHERE POSITION_NO = 44
+		OR POSITION_NO = 47
+		OR POSITION_NO = 48
 	</select>
 	
 	<insert id="insertClass">
 		INSERT INTO CLASS(NO,CATEGORY_NO,NAME,DESCRIPTION,MAX,MEMBER_NO,FEE,CLASSROOM,BEGIN_DATE,END_DATE,START_TIME,FINISH_TIME) 
-    	VALUES(SEQ_CLASS_NO.NEXTVAL, 3, #{name}, #{description}, #{max}, 1, #{fee}, #{classroom}, #{beginDate}, #{endDate}, #{startTime}, #{finishTime})
+    	VALUES(SEQ_CLASS_NO.NEXTVAL, #{categoryNo}, #{name}, #{description}, #{max}, #{memberNo}, #{fee}, #{classroom}, #{beginDate}, #{endDate}, #{startTime}, #{finishTime})
 	</insert>
 	
 	<insert id="insertCurriculum">
-		
+		INSERT INTO CURRICULUM(NO, CLASS_NO, CURRICULUM_NAME, CURRICULUM_CONTENT) 
+    	VALUES(SEQ_CLASS_NO.NEXTVAL, 1, #{curriculumName}, #{curriculumContent})
 	</insert>
 	
-
+	<insert id="insertStudent">
+		INSERT INTO STUDENT(NO,NAME,GENDER,PHONE,EMAIL,PROFILE,NEW_ADDRESS,OLD_ADDRESS,DETAIL_ADDRESS,BIRTH,FINAL_DEGREE,MAJOR,ENROLLED_CLASS,STD_COMMENT) 
+    	VALUES(SEQ_STUDENT_NO.NEXTVAL,#{name},#{gender},#{phone},#{email},#{profile},#{newAddress},#{oldAddress},#{detailAddress},#{birth},#{finalDegree},#{major},#{enrolledClass},#{stdComment})
+	</insert>
 </mapper>
