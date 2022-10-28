@@ -7,14 +7,12 @@
 <meta charset="UTF-8">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- Datatable -->
-    <link href="${contextPath}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="${root}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
+    <!-- Main wrapper start -->
     <div id="main-wrapper">	
 
 		<%@ include file="/WEB-INF/views/common/menubar.jsp" %>

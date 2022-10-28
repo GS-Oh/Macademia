@@ -15,24 +15,20 @@
 </head>
 <body>
 
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
+    <!-- Main wrapper start -->
     <div id="main-wrapper">	
 
 		<c:import url="../common/menubar_admin.jsp"/>
     
-        <!--**********************************
-            Content body start
-        ***********************************-->
+        <!-- Content body start -->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                         	<span style="color: black; margin-right: 100px;"><b>사원 수</b></span>
-                        	<span style="color: black; margin-right: 50px;"><b>${ memberCount[0] }</b>명(정상)</span>
-                        	<span style="color: black;"> 중지: <span> ${ memberCount[1] }</span>명</span>
+                        	<span style="color: black; margin-right: 50px;"><b>13</b>명(정상)</span>
+                        	<span style="color: black;"> 중지: <span>5</span>명</span>
                         </div>
                    	</div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -550,7 +546,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}/home.do" target="_blank">CODEUS</a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}/home.do" target="_blank">MacademiA</a> 2022</p>
             </div>
         </div>
         <!--**********************************

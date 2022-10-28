@@ -12,16 +12,12 @@
 
 <body>
 
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
+    <!-- Main wrapper start -->
     <div id="main-wrapper">	
 
 		<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
     
-        <!--**********************************
-            Content body start
-        ***********************************-->
+        <!-- Content body start -->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">

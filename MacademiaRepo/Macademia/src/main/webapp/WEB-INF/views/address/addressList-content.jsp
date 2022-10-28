@@ -114,7 +114,7 @@
                                     </table>
                                 </div>
                                 <div style="text-align: right;">
-                                	<button class="form-control input-default" style="background: #593bdb; color: white; display:inline-block; width: 150px;" onclick="location.href='addr/search'">주소록 검색</button>
+                                	<button class="form-control input-default" style="background: #593bdb; color: white; display:inline-block; width: 150px;" onclick="location.href='search'">주소록 검색</button>
                                 </div>
                             </div>
                         </div>
