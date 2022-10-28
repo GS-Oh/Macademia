@@ -147,7 +147,7 @@ margin-top:80px;
 		</aside>
 		
 		<main>
-			<%@include file="/WEB-INF/views/plan/planWrite-content.jsp" %>
+			<%@include file="/WEB-INF/views/plan/planModify-content.jsp" %>
 		</main>
 			
 		

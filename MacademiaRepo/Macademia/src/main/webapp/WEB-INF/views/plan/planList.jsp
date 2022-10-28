@@ -234,16 +234,19 @@ a {
 </body>
 
 <script>
-	  var deleteNo = null;
+
       document.addEventListener('DOMContentLoaded', function() {
     	  
         var calendarEl = document.getElementById('calendar');
+       
+       
+       
         var calendar = new FullCalendar.Calendar(calendarEl, {
         	 initialView: 'dayGridMonth',
         	 headerToolbar: {  
-        	  left: 'prev,next,today'
-        	  ,center: 'title',
-        		  right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+        	 
+        	 
+        		
         	  },editable: true, // 수정 가능
         	  
          	  events : [
@@ -254,31 +257,43 @@ a {
         		  	start : '<%=vo.getPStartDate()%>',
         		  	end : '<%=vo.getPEndDate()%>',
         		  	id : '<%=vo.getPNo()%>',
+        		  	
         		  	color: '#6667AB'
+        		  	
+        		  
+        		  	
   				},
         		 <% }
         		  }%>
         	  ],eventClick : function(info) {
+        		  $('.fc-event-main').attr('data-toggle','modal');
+					$('.fc-event-main').attr('data-target','#myModal');
         		  $.ajax({ 
         				url :'/md/plan/listDetail',
         			    type : 'get',
         			    dataType : 'json', 
         			    data : { pno : info.event.id, }, 
         			    success: function(data){ 
-        			    	console.log("성공"); 
-        			    	console.log(data)
+        			    	
         			    	
         			    	$("#modal-title").html("<span>"+ data.pTitle +"</span>")
         			    	$("#mContent").html("<textarea rows='5' cols='60' resize='none' readonly>"+data.pContent+"</textarea>")
-        			    	$("#mType").html("<span>" +data.pTypeNo+"</span>")
+        			    	$("#mType").html("<span>" +data.pType+"</span>")
         			    	$("#mDate").html("<span>"+data.pStartDate+" - "+ data.pEndDate+"</span")
-        			    	deleteNo = data.pNo
+        			    	$("#pDate").html("<span>"+data.pDate+"</span")
+        			    	
+        			    	
+        			    	
         			    } 
         			});
-        		  $("#deleteBtn").click(function(){
-        			 var result = confirm('일정을 삭제 하시겠습니까?');
+        		  
+        		 var deleteBtn = document.querySelector("#deleteBtn");
+        		  
+        		 deleteBtn.onclick=function(){
+        			 
+        			var result = confirm('일정을 삭제 하시겠습니까?');
         			  
-        			 if(result) {
+        			 if(result==1) {
         		    	  $.ajax({ 
           					url :'/md/plan/delete',
           				    type : 'post',
@@ -287,6 +302,7 @@ a {
           				    success: function(data){ 
           				    	console.log("성공"); 
           				    	console.log(data)
+          				    	alert("삭제가 완료 되었습니다")
           				    	 window.location.href = "/md/plan/list";
           				    	
           				    	
@@ -299,9 +315,23 @@ a {
         		        } else {
         		            //no
         		        }
-        	
-        	      })
-        		  
+        		  }
+        	      
+        		 var modifyBtn = document.querySelector("#modifyBtn");
+        		 modifyBtn.onclick = function(){
+        			 var result = confirm('일정을 수정 하시겠습니까?');
+      			   if(result==1) {
+   				 $(location).attr('href', '/md/plan/modify?no='+info.event.id);
+   				 
+   		        } 
+      			 
+        		 }
+        		 
+        	      
+        	      
+        	      
+        	      
+        	     
         		  console.log(info)
         		  console.log(info.event.id)
         		 /*  저 id로 db에서
@@ -324,10 +354,12 @@ a {
         });
         
         calendar.render();
-        $('.fc-event-title-container').attr('data-toggle','modal');
-        $('.fc-event-title-container').attr('data-target','#myModal');
+        $('.fc-event-main').attr('data-toggle','modal');
+		$('.fc-event-main').attr('data-target','#myModal');
+		
+      
    
-       console.log(calendar)
+       
        
       });
     

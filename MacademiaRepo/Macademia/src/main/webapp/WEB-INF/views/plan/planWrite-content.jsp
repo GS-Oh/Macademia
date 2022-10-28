@@ -140,7 +140,7 @@
 	<div id="work_top">
 		<h5>일정 제목</h5> <input id="write" type="submit" value="일정 등록하기">
 		<br>
-		<input class="text"type="text" id="title"name="pTitle">
+		<input class="text"type="text" id="title"name="pTitle" required>
 	</div>
 	<div id="work_middle">
 		<div id="work_left">
@@ -158,10 +158,10 @@
 			<br>
 			<div class="line">
 			<h5 id="type">일정 종류</h5>
-			<select name="pTypeNo" id="select_work">
-				<option vlaue="1">1</option>
-				<option vlaue="1">2</option>
-				<option vlaue="1">3</option>
+			<select name="pType" id="select_work" required>
+				<option>회의</option>
+				<option>경조사</option>
+				<option>출장</option>
 			</select>
 			</div>
 			
@@ -186,7 +186,7 @@
 			
 			<div class="line">
 			<h5>일정 기한</h5>
-			<input type="date" value="today" name="pEndDate">
+			<input type="date" value="today" name="pStartDate" required> ~ <input type="date" value="today" name="pEndDate" required>
 			
 			</div>
 			
@@ -195,14 +195,25 @@
 	</div>
 	<div id="work_bottom">
 		<h5>일정 내용</h5>
-		<textarea rows="5" cols="100" name="pContent"></textarea>
+		<textarea rows="5" cols="100" name="pContent" required></textarea>
 		
 		</div>
 		</div>
 		</form>    
 					
 		
-				
+				<script>
+				$('#write').click(function(){
+					var result = confirm("일정을 등록 하시겠습니까?")
+						if(result==true){
+							alert("일정이 등록되었습니다.")
+							return true;
+						}else{
+							alert("일정등록이 취소되었습니다.")
+							return false;
+						}
+				})
+				</script>
 				
 			
 			
