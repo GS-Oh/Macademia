@@ -14,6 +14,7 @@ import com.kh.md.academy.service.AcademyService;
 import com.kh.md.academy.vo.CategoryVo;
 import com.kh.md.academy.vo.ClassVo;
 import com.kh.md.academy.vo.CurriculumVo;
+import com.kh.md.academy.vo.StudentVo;
 import com.kh.md.member.vo.MemberVo;
 
 @Controller
@@ -58,7 +59,7 @@ public class AcademyController {
 		return "academy/search-detail-edit";
 	}
 	
-	@GetMapping("add")
+	@GetMapping("addStd")
 	public String addStudent() {
 		return "academy/add-student";
 	}
@@ -80,11 +81,30 @@ public class AcademyController {
 	}
 //--------------------------------------------------
 	
+	//수강생 추가(인서트) 하기
+ 	@PostMapping("addStd")
+ 	public String addStudent(Model model, StudentVo vo) {
+ 		
+ 		int result = service.insertStudent(vo);
+ 		
+ 		if(result == 1) {
+ 			model.addAttribute("msg", "수강생 정보가 입력되었습니다.");
+ 			return"academy/search";
+ 		}else {
+ 			return"error/errorPage";
+ 		}
+ 		
+ 	}
+	
+	//커리큘럼 추가(인서트) 하기
 	@PostMapping("addCurr")
-	public String addCurriculum(Model model, CategoryVo catVo, MemberVo mvo) {
+	public String addCurriculum(Model model, ClassVo vo, CurriculumVo cvo) {
 		
-		int classInsert = service.insertClass(catVo, mvo);
-		int curInsert = service.insertCurriculum();
+		int classInsert = service.insertClass(vo);
+		int curInsert = service.insertCurriculum(cvo);
+		
+		System.out.println(classInsert);
+		System.out.println(curInsert);
 		
 		if(classInsert * curInsert == 1) {
 			model.addAttribute("msg", "새로운 커리큘럼이 생성되었습니다.");

@@ -133,6 +133,14 @@
             console.log(this);
             location.href="/md/academy/search/detail";
         });
+        
+        <c:if test="${not empty msg}">
+	    	Swal.fire({
+	    		icon: 'success',
+	    		title: '${msg}'
+	    	});
+	   	</c:if>
+        
     });
 </script>
 
@@ -152,7 +160,7 @@
                 <input type="submit" value="조회">
             </div>
             <div>
-                <div id="add-new-btn"><a href="${root}/academy/add"><i class="fa-solid fa-plus fa-1x"></i></a></div>
+                <div id="add-new-btn"><a href="${root}/academy/addStd"><i class="fa-solid fa-plus fa-1x"></i></a></div>
             </div>
         </form>
     </div>

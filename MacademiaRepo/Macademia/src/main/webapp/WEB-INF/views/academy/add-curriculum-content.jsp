@@ -118,7 +118,7 @@
         border-bottom: 1px solid lightgray;
         padding: 0px 10px 0px 10px;
     }
-    .mid-body-area input{
+    .mid-body-area input, .mid-body-area select{
         padding-left: 10px;
         width: 100%;
         height: 30px;
@@ -227,7 +227,43 @@
         $('#delete-curriculum-btn').click(function(){
             $('#curriculum-addition-area').children("div:last").remove()
         })
+        
     })
+    
+    // $('#submit-btn').click(function(){
+    // alert('zzzz');
+
+        // let confirm_chk = 
+        // confirm('생성할거야?');
+
+        // if(!confirm_chk){
+        //     return false;
+        // }
+    // });
+    
+    // title: '새 강의를 생성하시겠습니까?',
+    // text: "입력하신 정보로 강의가 생성됩니다.",
+    // icon: 'question',
+    // showCancelButton: true,
+    // confirmButtonColor: '#3085d6',
+    // cancelButtonColor: '#d33',
+    // confirmButtonText: '예',
+    // cancelButtonText: '아니오'
+    // function confirm(){
+        
+        
+        // fire({
+        //     title: '새 강의를 생성하시겠습니까?',
+        //     text: "입력하신 정보로 강의가 생성됩니다.",
+        //     icon: 'question',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: '예',
+        //     cancelButtonText: '아니오'
+        // })
+    
+    
 </script>
 
 <form action="" method="post">
@@ -243,14 +279,14 @@
                 </div>
                 <div class="curriculum-body-area">
                     <div>
-                        <select name="" id="">
+                        <select id="categoryNo" name="categoryNo">
                         	<c:forEach items="${category}" var="c">
-                            	<option value="">${c.name}</option>
+                            	<option name="categoryNo" value="${c.no}">${c.name}</option>
                             </c:forEach>
                         </select>
                     </div>
-                    <div><input type="text"></div>
-                    <div><textarea name="" id="" cols="30" rows="10"></textarea></div>
+                    <div><input type="text" name="name"></div>
+                    <div><textarea name="description" placeholder="2000자까지 입력 가능합니다."></textarea></div>
                 </div>
                 <div id="curriculum-img-area">
                     <img src="" alt="강의이미지">
@@ -268,16 +304,16 @@
                 </div>
 
                 <div class="mid-body-area">
-                    <div><input type="number" min="0" max="100"></div>
+                    <div><input type="number" min="0" max="100" name="max"></div>
                     <div>
-						<select name="">
+						<select id="memberNo" name="memberNo">
 							<c:forEach items="${member}" var="m">
-                            	<option value="">${m.name}</option>
+                            	<option name="memberNo" value="${m.no}">${m.name}</option>
                             </c:forEach>
 						</select>
 					</div>
-                    <div><input type="date"></div>
-                    <div id="class-time-line"><input type="time"></div>
+                    <div><input type="date" name="beginDate"></div>
+                    <div id="class-time-line"><input type="time" name="startTime"></div>
                 </div>
 
                 <div class="mid-head-area">
@@ -288,10 +324,10 @@
                 </div>
 
                 <div class="mid-body-area">
-                    <div><input type="number"></div>
-                    <div><input type="text"></div>
-                    <div><input type="date"></div>
-                    <div><input type="time"></div>
+                    <div><input type="number" name="fee"></div>
+                    <div><input type="text" name="classroom"></div>
+                    <div><input type="date" name="endDate"></div>
+                    <div><input type="time" name="finishTime"></div>
                 </div>
                 
             </div>
@@ -307,10 +343,10 @@
 
                 <div class="add-curriculum-area-curriculum-body">
                     <div class="right-border">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="curriculumName" placeholder="단원명을 입력하세요"></textarea>
                     </div>
                     <div>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="curriculumContent" placeholder="단원의 내용을 입력하세요"></textarea>
                     </div>
                 </div>
                 <div id="curriculum-addition-area">
@@ -328,7 +364,7 @@
 
         <div id="create-btn-area">
             <div><a href="${root}/academy/curriculum">뒤로가기</a></div>
-            <input type="submit" value="입력하기">
+            <input type="submit" value="입력하기" id="submit-btn">
         </div>
     </div>
 </form>

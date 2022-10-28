@@ -130,8 +130,19 @@
             console.log(this);
             location.href="/md/student/curriculum/detail";
         });
+        
     });
+        	
+	<c:if test="${not empty msg}">
+    	Swal.fire({
+    		icon: 'success',
+    		title: '${msg}'
+    	});
+   	</c:if>
+   	
 </script>
+
+
 
 <div id="roll-content-wrap">
     <div><h4>커리큘럼 조회</h4></div>

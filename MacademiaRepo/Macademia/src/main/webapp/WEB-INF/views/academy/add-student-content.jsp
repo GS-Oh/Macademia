@@ -147,9 +147,14 @@
     }
 </style>
 
+<script>
+    var listVar = $('input[name=gender]');
+    console.log(listVar)
+</script>
+
 <div id="search-detail-edit-content-wrap">
 
-    <form action="">
+    <form action="" method="post">
 
         <div id="search-detail-edit-content-head"><h4>수강생 정보입력</h4></div>
 
@@ -161,37 +166,37 @@
             <div id="student-name">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
                 <h3>
-                    <input type="text" value="" required placeholder="이름을 입력해주세요.">
+                    <input type="text" name="name" required placeholder="이름을 입력해주세요.">
                 </h3>
             </div>
             <div id="student-phone">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
                 <i class="fa-solid fa-mobile-screen-button fa-2xl"></i>
-                <b><input type="text" value="" required placeholder="휴대폰 번호를 입력해주세요."></b>
+                <b><input type="text" name="phone" required placeholder="휴대폰 번호를 입력해주세요."></b>
             </div>
             <div id="student-email">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
                 <i class="fa-solid fa-envelope fa-xl"></i>
-                <b><input type="text" value="" required placeholder="이메일 주소를 입력해주세요."></b>
+                <b><input type="text" name="email" required placeholder="이메일 주소를 입력해주세요."></b>
             </div>
             <div class="info-title">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
                 <b>생년월일</b>
             </div>
             <div class="info-border-top" id="student-dob">
-                <input type="number" value="" min="1922" max="2022" required>
-                <input type="number" value="" min="01" max="12" required>
-                <input type="number" value="" min="01" max="31" required>
+                <input type="number" name="birth" min="1922" max="2022" required>
+                <input type="number" name="birth" min="01" max="12" required>
+                <input type="number" name="birth" min="01" max="31" required>
             </div>
             <div class="info-title">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
                 <b>성별</b>
             </div>
             <div class="info-border-top" id="student-gender">
-                <input type="radio" id="m" name="gender" required>
-                <label for="m">남</label>
-                <input type="radio" id="f" name="gender" required>
-                <label for="f">여</label>
+                <input type="radio" id="male" name="gender" value="M">
+                <label for="male">남</label>
+                <input type="radio" id="female" name="gender" value="F">
+                <label for="female">여</label>
             </div>
             <div class="info-title" id="student-addr-title">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
@@ -200,20 +205,20 @@
             <div class="info-border-top" id="student-addr">
                 <input type="text" id="sample4_postcode" placeholder="우편번호">
                 <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" id="sample4_roadAddress" name="" placeholder="도로명주소">
-                <input type="text" id="sample4_jibunAddress" name="" placeholder="지번주소">
-                <input type="text" id="sample4_detailAddress" name="" placeholder="상세주소">
+                <input type="text" id="sample4_roadAddress" name="newAddress" placeholder="도로명주소">
+                <input type="text" id="sample4_jibunAddress" name="oldAddress" placeholder="지번주소">
+                <input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
                 <span id="guide" style="color:#999;display:none"></span>
                 <input type="text" id="sample4_extraAddress" placeholder="참고항목">
             </div>
             <div class="info-title"><b>최종학력</b></div>
-            <div class="info-border-top" id="student-degree"><input type="text" value=""></div>
+            <div class="info-border-top" id="student-degree"><input type="text" name="finalDegree"></div>
             <div class="info-title"><b>전공</b></div>
-            <div class="info-border-top" id="student-major"><input type="text" value=""></div>
+            <div class="info-border-top" id="student-major"><input type="text" name="major"></div>
             <div class="info-title"><b>수강</b></div>
-            <div class="info-border-top" id="student-class"><input type="text" value=""></div>
+            <div class="info-border-top" id="student-class"><input type="text" name="enrolledClass"></div>
             <div class="info-title comment-area"><b>코멘트</b></div>
-            <div class="comment-area info-border-top"><textarea name="" id="" cols="110" rows="8"></textarea></div>
+            <div class="comment-area info-border-top"><textarea name="stdComment"></textarea></div>
         </div>
 
         <div id="edit-btn-area">
