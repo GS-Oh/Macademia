@@ -10,9 +10,10 @@ public class PlanVo {
 	
 	private String pNo;
 	private String mNo;
-	private String pTypeNo;
+	private String pType;
 	private String pTitle;
 	private String pContent;
+	private String pDate;
 	private String pStartDate;
 	private String pEndDate;
 

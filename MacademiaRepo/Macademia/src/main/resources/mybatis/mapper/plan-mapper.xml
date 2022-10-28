@@ -7,18 +7,20 @@
 	INSERT INTO PLAN
 	(P_NO
 	,M_NO
-	,P_TYPE_NO
+	,P_TYPE
 	,P_TITLE
 	,P_CONTENT
+	,P_START_DATE
 	,P_END_DATE	
 	)
 	VALUES
 	(
 		SEQ_PLAN_NO.NEXTVAL
 		,#{mNo}
-		,#{pTypeNo}
+		,#{pType}
 		,#{pTitle}
 		,#{pContent}
+		,#{pStartDate}
 		,#{pEndDate}
 	)
 	
@@ -29,9 +31,10 @@
 		SELECT 
     P_NO
     ,M_NO
-    ,P_TYPE_NO
+    ,P_TYPE
     ,P_TITLE
     ,P_CONTENT
+    ,TO_CHAR(P_DATE, 'YYYY-MM-DD') AS P_DATE
     ,TO_CHAR(P_START_DATE, 'YYYY-MM-DD') AS  P_START_DATE
     ,TO_CHAR(P_END_DATE, 'YYYY-MM-DD') AS P_END_DATE
     FROM PLAN
@@ -40,9 +43,10 @@
 			SELECT 
     P_NO
     ,M_NO
-    ,P_TYPE_NO
+    ,P_TYPE
     ,P_TITLE
     ,P_CONTENT
+    ,TO_CHAR(P_DATE, 'YYYY-MM-DD') AS P_DATE
     ,TO_CHAR(P_START_DATE, 'YYYY-MM-DD') AS  P_START_DATE
     ,TO_CHAR(P_END_DATE, 'YYYY-MM-DD') AS P_END_DATE
     FROM PLAN
@@ -52,4 +56,29 @@
 	DELETE  FROM PLAN WHERE P_NO=#{pno}
 	
 	</delete>
+	
+	<select id="planGetModify" resultType="com.kh.md.plan.vo.PlanVo">
+	SELECT
+	 P_NO
+    ,M_NO
+    ,P_TYPE
+    ,P_TITLE
+    ,P_CONTENT
+    ,TO_CHAR(P_DATE,'YYYY-MM-DD') AS P_DATE
+    ,TO_CHAR(P_START_DATE, 'YYYY-MM-DD') AS  P_START_DATE
+    ,TO_CHAR(P_END_DATE, 'YYYY-MM-DD') AS P_END_DATE
+    FROM PLAN
+    WHERE P_NO= #{pNo}
+	</select>
+	<update id="planModify">
+		UPDATE PLAN
+		SET 
+		P_TYPE=#{pType}
+		,P_TITLE=#{pTitle}
+		,P_CONTENT=#{pContent}
+		,P_START_DATE=#{pStartDate}
+		,P_END_DATE=#{pEndDate}
+		WHERE P_NO = #{pNo}
+		
+	</update>
 </mapper>

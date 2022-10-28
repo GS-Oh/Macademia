@@ -82,11 +82,28 @@ public class PlanController {
 		
 }
 	@GetMapping("modify")
-	public String planModify() {
+	public String planGetModify(HttpServletRequest req, String no, Model model) {
+		PlanVo vo = service.getModify(no);
+		System.out.println(vo);
+		model.addAttribute("vo", vo);
 		
-		return "plan/planModify";
+		
+		
+		
+		return "/plan/planModify";
 	}
-	
+	@PostMapping("modify")
+	public String planModify(PlanVo vo,String no) {
+		vo.setPNo(no);
+		
+		
+		int result = service.modify(vo);
+		System.out.println(result);
+		
+			return "redirect:/plan/list";
+		
+		
+	}
 	
 	
 }

@@ -142,7 +142,7 @@
 	<div id="work_top">
 		<h5>업무 요청 제목</h5> <input id="write" type="submit" value="업무요청하기">
 		<br>
-		<input class="text"type="text" id="title"name="title">
+		<input class="text"type="text" id="title"name="wTitle">
 	</div>
 	<div id="work_middle">
 		<div id="work_left">

@@ -33,5 +33,13 @@ public class PlanService {
 		return dao.planDelete(sst, pno);
 		
 	}
+	public PlanVo getModify(String no) {
+		return dao.getModify(sst, no);
+		
+	}
+	public int modify(PlanVo vo) {
+		// TODO Auto-generated method stub
+		return dao.modify(sst, vo);
+	}
 
 }

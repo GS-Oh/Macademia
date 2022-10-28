@@ -124,7 +124,7 @@ height:500px;
 			</div>
 			<div id="modal-right">
 			<h4>등록 일자</h4>
-			<span>2022-10-27</span>
+			<span id="pDate"></span>
 			<br>
 			<h4>일정 종류</h4>
 			<span id="mType"></span>

@@ -29,6 +29,18 @@ public class PlanDao {
 		// TODO Auto-generated method stub
 		return sst.delete("planMapper.planDelete", pno);
 	}
+
+	public PlanVo getModify(SqlSessionTemplate sst, String no) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("planMapper.planGetModify", no);
+	}
+
+	public int modify(SqlSessionTemplate sst, PlanVo vo) {
+		// TODO Auto-generated method stub
+		return sst.update("planMapper.planModify", vo);
+	}
+
+	
 	
 	
 
