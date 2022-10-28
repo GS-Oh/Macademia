@@ -110,35 +110,52 @@
 	                <form action="" method="">
 	
 	                    <div>
-	                        <label for="year-select" class="form-label"><h2>발급년월</h2></label>
-	                        <select name="" id="year-select" class="form-select">
-	                            <option value="">2022-03</option>
-	                            <option value="">2022-04</option>
-	                            <option value="">2022-05</option>
-	                            <option value="">2022-06</option>
-	                            <option value="">2022-07</option>
-	                            <option value="">2022-08</option>
-	                            <option value="" selected>2022-09</option>
+	                        <label for="year-select" class="form-label">발급년월</label>
+	                        <select name="" id="year-select" class="form-select" >
+	                            <option value="2022-03">2022-03</option>
+	                            <option value="2022-04">2022-04</option>
+	                            <option value="2022-05">2022-05</option>
+	                            <option value="2022-06">2022-06</option>
+	                            <option value="2022-07">2022-07</option>
+	                            <option value="2022-08">2022-08</option>
+	                            <option value="2022-09" selected>2022-09</option>
 	                        </select>
 	                    </div>
 	
 	                    <div>
-	                        <label for="depart-select" class="form-label"><h2>부서명</h2></label>
-	                        <select name="" id="depart-select" class="form-select">
+	                        <label for="dept-select" class="form-label">부서명</label>
+	                        <select name="" id="dept-select" class="form-select" onchange="deptSelect()">
 	                            <option value="" selected>선택안함</option>
-	                            <option value="">개발부</option>
-	                            <option value="">인사부</option>
-	                            <option value="" >재무부</option>
+	                            <option value="3">운영기획부</option>
+	                            <option value="4">교육훈련부</option>
+	                            <option value="5" >취업지원부</option>
+	                            <option value="6" >마케팅부</option>
+	                       	   <option value="7">운영기획부</option>
+	                            <option value="8">교육훈련부</option>
+	                            <option value="9" >취업지원부</option>
+	                            <option value="10" >마케팅부</option>
+	                               <option value="11">운영기획부</option>
+	                            <option value="12">교육훈련부</option>
+	                            <option value="13" >취업지원부</option>
+	                            <option value="15" >마케팅부</option>
+	                               <option value="15">운영기획부</option>
+	                            <option value="16">교육훈련부</option>
+	                       
+	                       
+							
 	                        </select>
 	                    </div>
 	
-	                    <div>
-	                        <label for="name-select" class="form-label"><h2>사원명</h2></label>
-	                        <select name="" id="name-select" class="form-select">
+	                  	<div>
+	                        <label for="part-select" class="form-label">직급명</label>
+	                        <select name="" id="part-select" class="form-select">
 	                            <option value="" selected>선택안함</option>
-	                            <option value="">오귀석</option>
-	                            <option value="">육귀석</option>
-	                            <option value="" >칠귀석</option>
+	                            <option value="1">인턴</option>
+	                            <option value="2">사원</option>
+	                            <option value="3" >대리</option>
+	                            <option value="4" >과장</option>
+	                            <option value="5" >팀장</option>
+	                            <option value="6" >부장</option>
 	                        </select>
 	                    </div>
 	
