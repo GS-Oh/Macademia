@@ -112,7 +112,7 @@
 					<span class="input-group-text">파일첨부</span>
 					<div id="profile-img-wrap" class="form-control">
 						<img id="profile-img-thumb" src="" width="60%" height="100%">
-						<input  type="file" name="attFile" accept=".jpg, .png" style="font-size: 1.3rem;">
+						<input  type="file" name="attFile" style="font-size: 1.3rem;">
 					</div>
 				</div>
 
