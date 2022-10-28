@@ -33,7 +33,7 @@ public class OrgnaizationController {
 	public String tree(Model model) {
 		List<OrganizationVo> list = orgService.getTree();
 		Gson gson = new Gson();
-		
+		System.out.println(list);
 		List<TreeVo> newList = new ArrayList<>();
 		for(OrganizationVo org : list) {
 			TreeVo vo = new TreeVo();
