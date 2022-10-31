@@ -32,10 +32,10 @@ import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
 
-@Controller
+@Controller 
 @RequestMapping("messenger")
 public class MessengerController {
-
+	
 	private final MessengerService ms;
 
 	@Autowired
@@ -49,11 +49,11 @@ public class MessengerController {
 		
 		//TODO 세션에서 멤버넘버 가져오기 //멤버넘버 5000으로 바꿔서 쪽지 보내기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-		String memberNo = "1";
+		String memberNo = loginMember.getNo();
 		
 		//메신저 등록되어있는지 체크
 		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
-		
+		System.out.println(msgVo);
 		if(msgVo != null) {
 			
 			session.setAttribute("msgVo", msgVo);
@@ -74,7 +74,9 @@ public class MessengerController {
 	public String enroll(MessengerVo msgVo, HttpSession session, HttpServletRequest req) {
 		
 		//TODO 세션에서 멤버넘버 가져오기
-		String memberNo = "1";
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		String memberNo = loginMember.getNo();
+		
 		msgVo.setNo(memberNo);
 		
 		if(msgVo.getProfile() != null && !msgVo.getProfile().isEmpty()) {
@@ -280,10 +282,10 @@ public class MessengerController {
 	} 
 	
 	//쪽지 - 받는 사람 검색 처리 ( 해당 부서명 멤버 가져오기 - script로 요청 )
-	@GetMapping("partMember")
-	public String deptMember(String partName, Model model) {
+	@GetMapping("deptMember")
+	public String deptMember(String deptName, Model model) {
 		
-		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(partName);
+		List<HashMap<String, String>> deptMemberList = ms.selectDeptMember(deptName);
 		
 		if(deptMemberList != null) {
 			model.addAttribute("deptMemberList",deptMemberList);
@@ -413,7 +415,7 @@ public class MessengerController {
 	
 	//파일보관함 ( 파일 등록하기 )
 	@GetMapping("allFileBox/Enroll/{fileName}/{originName}")
-	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName,@PathVariable String originName, MsgFileCopyVo copyVo,HttpSession session, Model model) {
+	public String imgFileBoxEnroll(MsgFileboxVo msgFileVo, @PathVariable String fileName, @PathVariable String originName, MsgFileCopyVo copyVo,HttpSession session, Model model) {
 		
 		int random = (int)(Math.random() * 90000 + 10000);
 		
@@ -430,7 +432,7 @@ public class MessengerController {
 		
 		int result = 0;
 		
-		if(dot.equals(".jpg")) {
+		if(dot.equals(".jpg") || dot.equals(".png")) {
 			result = ms.insertImgFilebox(msgFileVo,copyVo);
 		}else {
 			result = ms.insertFilebox(msgFileVo,copyVo);
@@ -440,6 +442,8 @@ public class MessengerController {
 		if(result == 1) {
 			model.addAttribute("fileName", fileName);
 			model.addAttribute("originName", originName);
+			model.addAttribute("checkDownload", "1");
+			model.addAttribute("dot", dot);
 			return "messenger/download"; 
 		}else {
 			return "";
@@ -457,8 +461,22 @@ public class MessengerController {
 		model.addAttribute("fileName", fileName);
 		model.addAttribute("originName", originName);
 		
+		//확장자가 jpg 면 img파일 테이블에 추가 아니면 etc파일 테이블에 추가
+		String dot = fileName.substring(fileName.lastIndexOf("."));
+		
+		String checkFileDot = "";
+		
+		if(dot.equals(".jpg")) {
+			checkFileDot = "jpg";
+		}else {
+			checkFileDot = "etc";
+		}
+		
+		model.addAttribute("checkFileDot", checkFileDot);
+		
 		return "messenger/download";
 	}
+	
 	
 	//파일보관함 ( 파일 보내기 - 화면)
 	@GetMapping("fileSend/{originName}/{fileName}")
@@ -570,6 +588,11 @@ public class MessengerController {
 	@PostMapping("notice/write")
 	public String noticeWrite(MsgNoticeVo noticeVo, HttpSession session) {
 		
+		//입력한 컨텐츠에서 html코드 제거하기 
+		String deleteHtmlTag = noticeVo.getContent();
+		deleteHtmlTag.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+		noticeVo.setContent(deleteHtmlTag);
+				
 		MessengerVo msgVo = (MessengerVo)session.getAttribute("msgVo");
 		noticeVo.setMsgNo(msgVo.getMsgNo());
 		

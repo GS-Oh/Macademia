@@ -81,13 +81,12 @@
 			display: grid;
 			grid-template-columns: 30% 70%;
 			
-			border: 3px solid #6667AB;
-			border-radius: 15px;
+			border-top: 3px solid #6667AB;
+			border-bottom: 3px solid #6667AB;
 			align-items: center;
 		}
 
 		.modal-header > div{
-			border-left: 5px solid #6667AB;
 			padding-left:15px;
 			padding-top:10px;
 		}
@@ -147,7 +146,7 @@
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 						<!-- 운영기획부인 회원 기준 -->										
 						<!-- 행정팀 직원 수 만큼 반복 -->
-						<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '행정팀'}">
+						<c:if test="${msgTotalVo.dept eq '행정팀'}">
 	
 							<div class="messenger-main-content  detail-target">
 								<div style="height: 145px; width: 100%;"  >
@@ -168,7 +167,7 @@
 				</div>		
 							
 							
-				<!-- 재정팀(운영기획부) -->
+				<!-- 총무팀(운영기획부) -->
 				<div class="main-partition"><h2>재정팀</h2><h5 style="color: gray;">(3명)</h5></div>
 				
 				
@@ -178,8 +177,8 @@
 
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 						<!-- 운영기획부인 회원 기준 -->										
-						<!-- 행정팀 직원 수 만큼 반복 -->
-						<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '재정팀'}">
+						<!-- 재정팀 직원 수 만큼 반복 -->
+						<c:if test="${msgTotalVo.dept eq '재정팀'}">
 	
 							<div class="messenger-main-content  detail-target">
 								<div style="height: 145px; width: 100%;"  >
@@ -209,8 +208,8 @@
 
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '운영기획부' && msgTotalVo.part eq '시설지원팀'}">
+							<!-- 시설지원팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '시설지원팀'}">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%;"  >
@@ -247,8 +246,8 @@
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 
 							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교육1팀'}">
+							<!-- 교육1팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '교육1팀' }">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%;"  >
@@ -278,8 +277,8 @@
 					<!-- 부서 보여주는 부분 얘로 감싸고 -->
 					<div class="main-content-wrap">
 							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교육2팀'}">
+							<!-- 교육2팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '교육2팀' }">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%;"  >
@@ -307,9 +306,9 @@
 				<div class="main-content-wrap">
 
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
-							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '교육훈련부' && msgTotalVo.part eq '교재지원팀'}">
+							<!-- 교재지원팀 회원 기준 -->										
+							<!-- 교재지원팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '교재지원팀'}">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%;"  >
@@ -344,9 +343,9 @@
 				<div class="main-content-wrap">
 				
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
-							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '취업지원부' && msgTotalVo.part eq '취업팀'}">
+							<!-- 취업지원부 회원 기준 -->										
+							<!-- 취업팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '취업팀' }">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%;"  >
@@ -377,8 +376,8 @@
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 
 							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '취업지원부' && msgTotalVo.part eq '상담팀'}">
+							<!-- 취업지원부 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '상담팀' }">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%;"  >
@@ -415,9 +414,9 @@
 
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 
-							<!-- 운영기획부인 회원 기준 -->										
+							<!-- 마케팅부 회원 기준 -->										
 							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '마케팅부' && msgTotalVo.part eq '홍보팀'}">
+							<c:if test="${msgTotalVo.dept eq '홍보팀' }">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%; "  >
@@ -448,9 +447,9 @@
 
 					<c:forEach items="${msgVoList}" var="msgTotalVo">
 
-							<!-- 운영기획부인 회원 기준 -->										
-							<!-- 행정팀 직원 수 만큼 반복 -->
-							<c:if test="${msgTotalVo.dept eq '마케팅부' && msgTotalVo.part eq '대외협력팀'}">
+							<!-- 마케팅부 회원 기준 -->										
+							<!-- 대외협력팀 직원 수 만큼 반복 -->
+							<c:if test="${msgTotalVo.dept eq '대외협력팀' }">
 		
 								<div class="messenger-main-content  detail-target">
 									<div style="height: 145px; width: 100%; "  >
@@ -473,48 +472,29 @@
 			</div>
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 
         </main>
 
 		<!-- The Modal -->
-		<div class="modal" id="myModal">
+		<div class="modal" id="myModal" >
 			<div class="modal-dialog modal-dialog-centered modal-lg" >
-			<div class="modal-content">
+			<div class="modal-content" >
 		
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<div style="display: flex;"><h3 class="modal-dept"></h3>-<h3 class="modal-position"></h3></div>
+					<div style="display: flex;"><h3><span class="modal-dept badge bg-secondary"></span></h3>-<h3><span class="modal-position badge bg-secondary"></span></h3></div>
 					
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 		
 				<!-- Modal body -->
-				<div id="profile-main-content" class="modal-body">
+				<div id="profile-main-content" class="modal-body" >
 					<div id="modal-content-img-wrap" >
-						<img class="modal-img" src="" alt="" width="150px" height="150px" style="border:1px solid black">
+						<img class="modal-img rounded" src="" alt="" width="150px" height="150px" style="border:1px solid black">
 					</div>
 					<div id="modal-content-wrap">
 						<h1 class="modal-title modal-name"></h1>
-						<div><h4><textarea class="modal-introduce" rows="5" cols="40"></textarea></h4></div>
+						<div><h4><textarea class="modal-introduce" rows="5" cols="40" readonly></textarea></h4></div>
 					</div>
 				</div>
 		
@@ -525,9 +505,9 @@
 		
 			</div>
 			</div>
-		</div>
+		</div> 
 	
-	
+
 	
 	
 		<script>
