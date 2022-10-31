@@ -62,6 +62,17 @@
         border: 3px solid #6667AB;
     }
 
+    #history-table-outer > form{
+        grid-column: span 10;
+
+        display: grid;
+        grid-template-columns: repeat(10, 10%);
+        align-content : center;
+        align-items: center;
+        justify-items: center;
+    }
+
+
     .history-table-header{
         font-size: 1.5rem;
 
@@ -76,6 +87,7 @@
         text-align: center;
         margin-bottom: 10px;
         padding-bottom: 10px;
+        border : none;
         border-bottom: 1px solid #6667AB;
     }
 
@@ -84,6 +96,9 @@
         color: #1315a6;
         font-weight: 600;
     }
+
+        
+
 
     /* 페이징처리 */
     #page-area{
@@ -125,14 +140,14 @@
                     <h3><label for="month-selector" class="form-label">발급년도</label></h3>
                 </div>
                 
-                <form action="" method="" id="history-selector-outer">
+                <form action="" method="post" id="history-selector-outer">
                     
                     <div id="history-header-selector">
-                        <select class="form-select form-select-lg" name="" id="month-selector">
-                            <option value="">2019</option>
-                            <option value="">2020</option>
-                            <option value="">2021</option>
-                            <option value="" selected>2022</option>
+                        <select class="form-select form-select-lg" name="payDate" id="month-selector">
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2011">2021</option>
+                            <option value="2022" selected>2022</option>
                         </select>
                         <input class="btn btn-outline-dark btn-lg" type="submit" value="조회">
                     </div>
@@ -145,6 +160,7 @@
             <div class="history-title" style="margin: 40px 0px;">
                 <h3>지급내역 목록 [ TOTAL 3 ] </h3>
             </div>
+                <h1>${prVoList}</h1>
 
             <!-- 3 -->
             <div id="history-table-outer">
@@ -161,38 +177,22 @@
                 <div class="history-table-header">실수령액</div>
 
 
-                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-07</a></div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-
-                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-08</a></div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-
-                <div class="history-table-content"><a href="/md/payroll/history/detail">2022-09</a></div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
-                <div class="history-table-content">123456789</div>
+				<c:forEach items="${prVoList}" var="prVo">
+					
+                    <form action="/md/payroll/history/detail" method="post">
+                        <input class="history-table-content btn btn-primary" type="submit" value="${prVo.payDate}" name="" style="height: 90%; width: 80%; background-color: #6667AB; font-size: 1.4rem; border: 1px solid black;">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                        <input class="history-table-content" type="text" value="${prVo.payDate}" name="">
+                    </form>
+				</c:forEach>
+                
                 
             </div>
             

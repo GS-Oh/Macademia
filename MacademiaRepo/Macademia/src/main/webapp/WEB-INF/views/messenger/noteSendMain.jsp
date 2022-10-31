@@ -160,6 +160,7 @@
 		#detail-img-file {
 			height : 150px;
 			width : 150px;
+			padding-bottom: 10px;
 		}
 
 
@@ -254,8 +255,8 @@
 
 
 						<div class="info-content">
-							<div><input type="checkbox" class="msg-checkBox"></div>
-							<div class="msg-sender" style="display: none;">${mnVo.sendName}</div>
+							<div><input type="checkbox" class="msg-checkBox" name="msg-checkBox"></div>
+							<div class="msg-sender" style="display: none;">${mnVo.sendName} (나)</div>
 							<div class="msg-receive" >${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
@@ -291,7 +292,7 @@
 				<div class="detail-area-title">내용</div>
 				<div class="detail-area-content" id="detail-content"></div>
 				<div class="detail-area-title">첨부파일</div>
-				<div class="detail-area-content" ><img src="" alt="" id="detail-img-file"><span  id="detail-etc-file"></span></div>
+				<div class="detail-area-content" ><img src="" alt="-" id="detail-img-file" ><span  id="detail-etc-file"></span></div>
 				
 			</div>
 			
@@ -344,6 +345,8 @@
 		const repleHref = document.querySelector('#note-reple-area');
 		const deleteHref = document.querySelector('#note-delete-area');
 
+		
+		
 		for(let i=0; i<content.length; ++i){
 
 			content[i].addEventListener('click', function(){
@@ -364,7 +367,7 @@
 				let fileStr = msgFile[i].innerText;
 				let fileStrDot = fileStr.substring((fileStr.lastIndexOf('.')));
 				
-				if(fileStrDot == ".jpg" || fileStrDot == "png"){
+				if(fileStrDot == ".jpg" || fileStrDot == ".png"){
 
 					detailEtcFile.innerText = "";
 					detailImgFile.src =  fileStr;
@@ -382,14 +385,30 @@
 				}
 				
 				
-				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
-
-				deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
-
+				if(msgCheckBox[i].checked){
+					repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
+					deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
+					alert(cntCheckbox);
+				}
 
 			});	
 		};
 	
+		//쪽지 1개만 선택했을때 답장 가능하도록 해주기
+		repleHref.addEventListener('click',function(){
+			const cntCheckbox = $("input[name=msg-checkBox]:checked").length;
+			
+			if(cntCheckbox > 1){
+				repleHref.href = "";
+				deleteHref.href = "";
+				alert('하나의 쪽지만 선택해 주세요 ^-^');
+			}
+		});
+
+
+
+
+
 
 	</script>
 	

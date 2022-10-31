@@ -5,7 +5,7 @@
 <mapper namespace="payrollMapper">
 
 
-
+	<!-- 급여대장 - 옵션 검색 -->
 	<select id="selectPayrollOption" resultType="com.kh.md.payroll.vo.PayrollVo">
 	
 		SELECT *
@@ -37,17 +37,90 @@
 			AND C.RANK_NO = #{rankNo}
 	    </if>
 	    
-		
-	
-	
-	
-	
 	</select>
 
+
+	<!-- 급여대장 - 작성하기 -->
+	<insert id="insertSalaryBook">
+		INSERT INTO SALARY_BOOK 
+		(
+			 SAL_NO
+			,WRITER_NO
+			,TARGET_NO
+			,PAY_DATE
+			,PAY
+			,TAXFREE
+			,ATTENDANCE
+			,ATTENDANCE_PLUS
+			,TECHNICAL
+			,SPECIALDUTY
+			,EMERGENCY
+			,LUNCH_FEE
+			,HOLIDAY
+			,SUBSIDY
+			,PUBLIC_ACTIVITY
+			,OTHER
+			,CONTRIBUTION
+			,LONGTERM_CARE
+			,MUTUAL_FEE
+			,SAFE_DEPOSIT
+			,INCOME_TAX
+			,LOCAL_TAX
+		)
+		VALUES
+		(
+			 SEQ_SALARY_BOOK_NO.NEXTVAL
+			,#{writerNo}
+			,#{targetNo}
+			,#{payDate}
+			,#{pay}
+			,#{taxfree}
+			,#{attendance}
+			,#{attendancePlus}
+			,#{technical}
+			,#{specialduty}
+			,#{emergency}
+			,#{lunchFee}
+			,#{holiday}
+			,#{subsidy}
+			,#{publicActivity}
+			,#{other}
+			,#{contribution}
+			,#{longtermCare}
+			,#{mutualFee}
+			,#{safeDeposit}
+			,#{incomeTax}
+			,#{localTax}
+		)
+		
 	
+	</insert>	
 
-
-
+	<!-- 급여지급내역 당사자꺼 가져오기 -->
+	<select id="selectPayRollList" resultType="com.kh.md.payroll.vo.PayrollVo">
+		SELECT *
+		FROM 
+		    (
+		    SELECT B.*,K.NAME AS RANK_NAME, T.NAME DEPT_NAME
+		    FROM
+		        (
+		        SELECT A.*, P.NAME AS POSITION, P.RANK_NO, P.DEPT_NO
+		        FROM
+		            (
+		            SELECT Z.*, M.NO, M.NAME, M.EMAIL, M.ADDRESS, M.PHONE, M.PROFILE_NAME, M.BANK_NO, M.ACCOUNT, M.ENROLL_DATE, M.QUIT_YN
+		            FROM SALARY_BOOK Z
+		            JOIN MEMBER M ON Z.TARGET_NO = M.NO
+		            WHERE Z.PAY_DATE LIKE #{payDate}||'%'
+		            AND Z.TARGET_NO = #{targetNo}
+		            ) A
+		        JOIN POSITION P ON A.NO = P.NO
+		        WHERE A.QUIT_YN = 'N'
+		        ) B
+		    JOIN RANK K ON B.RANK_NO = K.NO
+		    JOIN DEPT T ON B.DEPT_NO = T.NO
+		    ) 
+	
+	</select>
 
 
 

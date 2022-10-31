@@ -77,7 +77,7 @@ public interface MessengerDao {
 	int updateNoteDelete(SqlSessionTemplate sst, String deleteNoteNo);
 
 	//쪽지 ( 부서명으로 멤버 가져오기 )
-	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String partName);
+	List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName);
 
 	//파일보관함 - 이미지 파일 전부 가져오기
 	List<MsgFileboxVo> selectAllFileImgByNo(SqlSessionTemplate sst, String msgNo);

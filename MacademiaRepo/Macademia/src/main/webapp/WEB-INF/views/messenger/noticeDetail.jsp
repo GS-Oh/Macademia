@@ -25,7 +25,7 @@
 			align-items: center;
 			font-size: 1.5rem;
 			margin-bottom: 30px;
-
+			
 			text-align: center;
 		}
 
@@ -33,23 +33,32 @@
 
 			text-align: left;
 			padding-left:15px;
+			font-weight: 800;
+		}
 
+		#detail-content{
+			height: 100%;
+			width:100%;
 		}
 		
-
+		#main-text-area{
+			height: 95%;
+			width:100%;
+			border: 3px solid lightseagreen;
+			border-radius: 10px;
+			padding: 20px;
+			font-size : 2rem;
+			font-weight: 500;
+		}
 
 		#detail-content > a{
 			text-decoration: none;
 			float: right;
 			margin-right: 20px;
+			
 		}
 
-		#detail-content > textarea{
-			font-size: 2rem;
-			border: 3px solid lightseagreen;
-			width: 100%;
-			height: 90%;
-		}
+	
 
 		/* 댓글영역 */
 		#reply-area{
@@ -62,10 +71,10 @@
 			padding-bottom: 20px;
 		}
 		
-		#reply-area > span > h3{
-			border-left: 5px solid lightseagreen;
+		.content-subtitle{
+			border-left: 5px solid #6667AB;
 			padding-left: 10px;
-			margin-left: 10px;
+			margin: 20px 0px 20px 10px;
 		}
 
 
@@ -105,6 +114,11 @@
 			border-radius: 10px;
 		}
 
+		#empty-reple{
+			text-align: center;
+			color: gray;
+		}
+		
 		
     </style>
 </head>
@@ -120,13 +134,12 @@
 		</aside>        
 
         <main>
-			
             <!--  -->
 			<div id="detail-header">
 				<div><span  class="badge bg-info" >공지</span></div>
 				<div class="detail-title-nickname"><h1>${noticeVo.title}</h1></div>
-				<div >조회 수</div>
-				<div >작성일자</div>
+				<div ><h3><span class="badge bg-secondary">조회 수</span></h3></div>
+				<div ><h3><span class="badge bg-secondary">작성일자</span></h3></div>
 				
 				<div style="width: 100%; height: 100%; border: 1px solid black;"><img src="${root}/resources/upload/messenger/${noticeVo.fileName}" alt="" width="100%" height="100%"> </div>
 				<div class="detail-title-nickname">${noticeVo.name}</div>
@@ -136,11 +149,13 @@
 			</div>
 	
 	
-	
+			
 			<!--  -->
 			<div id="detail-content">
-
-				<textarea name="" id="" cols="30" rows="10" readonly>${noticeVo.content}</textarea>
+				
+				
+				<div id="main-text-area"><span ><h3 class="content-subtitle">내용</h3></span>${noticeVo.content}</div>
+				
 				<c:if test="${noticeVo.msgNo eq msgVo.msgNo}">
 					<a href="/md/messenger/notice/delete/${noticeVo.noticeNo}" class="badge bg-warning"><h5>삭제하기</h5></a>
 					<a href="/md/messenger/notice/edit/${noticeVo.noticeNo}" class="badge bg-success"><h5>수정하기</h5></a>
@@ -152,9 +167,15 @@
 			<!--  -->
 			<div id="reply-area">
 
-				<span ><h3>댓글</h3></span>
+				<span ><h3 class="content-subtitle">댓글</h3></span>
 				
 					<div id="reple-list-ps">
+					
+						<c:if test="${empty repleVoList}">
+							<div ><h3 id="empty-reple">댓글이 없습니다. 작성해주세요  :)</h3></div>
+						</c:if>
+					
+					
 						<c:forEach items="${repleVoList}" var="repleVo">				
 							<!-- 리스트 만큼 이거 반복 -->
 								<div class="reply-list">
@@ -203,6 +224,7 @@
 			const repleWriterNick = '${msgVo.name}';
 			const repleProfile = '${msgVo.fileName}';
 			const repleContent = document.querySelector('#reple-content').value;
+			const emptyReple = document.querySelector('#empty-reple');
 			const now = new Date();
 			
 			$.ajax({
@@ -222,6 +244,7 @@
 						
 						//기존에 입력한 내용 지우기
 						document.querySelector('#reple-content').value = "";
+						emptyReple.innerText = "";
 					}else{
 						alert("댓글 작성 실패 ....");
 					}
@@ -236,11 +259,26 @@
 		});
 		
 		
-	
+		
 	</script>
 
 
-
+	<script>
+		$('#summernote').summernote('disable');
+		
+		$(document).ready(function() {
+			//여기 아래 부분
+			$('#summernote').summernote({
+				  height: 500,                 // 에디터 높이
+				  minHeight: 500,             // 최소 높이
+				  maxHeight: 600,             // 최대 높이
+				  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+				  lang: "ko-KR"					// 한글 설정
+			});
+		});
+			
+	
+	</script>
 
 
 

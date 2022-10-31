@@ -207,7 +207,7 @@
 				<div class="select-header"> <input type="checkbox"> </div>
 				<div class="select-header">성명</div>
 				<div class="select-header">직책</div>
-				<div class="select-header">부서</div>	
+				<div class="select-header">부서 / 직급</div>	
 
 				<!-- 해당 부서 인원 수 만큼 반복 -->
 				
@@ -259,7 +259,7 @@
 		for(let i=0; i<searchContent.length; ++i){
 			
 			searchContent[i].addEventListener('click',function(){
-				searchContent[i].href = "/md/messenger/partMember?partName=" +  searchContent[i].innerText;
+				searchContent[i].href = "/md/messenger/deptMember?deptName=" +  searchContent[i].innerText;
 			});
 		}
 

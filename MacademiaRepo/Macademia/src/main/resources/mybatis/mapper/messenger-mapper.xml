@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace = "messengerMapper">
 	
 	
@@ -170,28 +171,32 @@
 	<select id="selectCheckEnroll" resultType="com.kh.md.messenger.vo.MessengerVo">
 		
 	
-		SELECT K.* 
-			FROM
-			(
-			    SELECT 
-			        M.MSG_NO
-			        ,M.NO
-			        ,M.FILE_NAME
-			        ,M.INTRODUCE
-			        ,M.ENROLL_DATE
-			        ,B.NAME
-			        ,B.EMAIL
-			        ,B.ADDRESS
-			        ,B.PHONE
-			        ,B.ACCOUNT
-			        ,B.DEPT
-			        ,B.PART
-			        ,B.POSITION
-			    FROM MESSENGER M
-			    JOIN MEMBER B ON M.NO = B.NO
-			    ORDER BY MSG_NO
-			) K
-		WHERE K.NO=#{memberNo}
+		SELECT B.*,K.NAME AS PART, T.NAME DEPT
+		FROM
+		    (
+		    SELECT A.*, P.NAME AS POSITION, P.RANK_NO, P.DEPT_NO 
+		        FROM
+		        (
+		            SELECT 
+		                 M.MSG_NO
+		                ,M.NO
+		                ,M.FILE_NAME
+		                ,M.INTRODUCE
+		                ,M.ENROLL_DATE
+		                ,B.NAME
+		                ,B.EMAIL
+		                ,B.ADDRESS
+		                ,B.PHONE
+		                ,B.ACCOUNT
+		                ,B.POSITION_NO
+		            FROM MESSENGER M
+		            JOIN MEMBER B ON M.NO = B.NO
+		        ) A
+		    JOIN POSITION P ON A.NO = P.NO 
+		    WHERE A.NO = #{memberNo}
+		    ) B
+		JOIN RANK K ON B.RANK_NO = K.NO
+		JOIN DEPT T ON B.DEPT_NO = T.NO 
 		
 	</select>
 	
@@ -201,7 +206,7 @@
 		
 		INSERT INTO MESSENGER
 		(
-		    MSG_NO
+		     MSG_NO
 		    ,NO
 		    ,FILE_NAME
 		    ,INTRODUCE
@@ -220,23 +225,32 @@
 	<!-- 메신저 등록 회원 가져오기 -->
 	<select id="selectAllMsg" resultType="com.kh.md.messenger.vo.MessengerVo">
 		
-		SELECT 
-		     M.MSG_NO
-		    ,M.NO
-		    ,M.FILE_NAME
-		    ,M.INTRODUCE
-		    ,M.ENROLL_DATE
-		    ,B.NAME
-		    ,B.EMAIL
-		    ,B.ADDRESS
-		    ,B.PHONE
-		    ,B.ACCOUNT
-		    ,B.DEPT
-		    ,B.PART
-		    ,B.POSITION
-		FROM MESSENGER M
-		JOIN MEMBER B ON M.NO = B.NO
-		ORDER BY MSG_NO 
+			SELECT B.*,K.NAME AS PART, T.NAME DEPT
+			FROM
+			    (
+			    SELECT A.*, P.NAME AS POSITION, P.RANK_NO, P.DEPT_NO 
+			        FROM
+			        (
+			            SELECT 
+			                 M.MSG_NO
+			                ,M.NO
+			                ,M.FILE_NAME
+			                ,M.INTRODUCE
+			                ,M.ENROLL_DATE
+			                ,B.NAME
+			                ,B.EMAIL
+			                ,B.ADDRESS
+			                ,B.PHONE
+			                ,B.ACCOUNT
+			                ,B.POSITION_NO
+			            FROM MESSENGER M
+			            JOIN MEMBER B ON M.NO = B.NO
+			            ORDER BY B.POSITION_NO
+			        ) A
+			    JOIN POSITION P ON A.NO = P.NO 
+			    ) B
+			JOIN RANK K ON B.RANK_NO = K.NO
+			JOIN DEPT T ON B.DEPT_NO = T.NO 
 	
 	</select>
 
@@ -431,15 +445,30 @@
 	<!-- 쪽지- 부서명에 맞는 멤버 가져오기 -->
 	<select id="selectDeptMember" resultType="hashmap">
 		
-		SELECT
-		     M.MSG_NO
-		    ,B.NAME
-		    ,B.DEPT
-		    ,B.PART
-		    ,B.POSITION
-		FROM MESSENGER M
-		JOIN MEMBER B ON M.NO = B.NO
-		WHERE B.PART = #{partName}
+		 SELECT C.*
+		 FROM
+		        (
+		        SELECT B.*,K.NAME AS PART, T.NAME DEPT
+				FROM
+				    (
+				    SELECT A.*, P.NAME AS POSITION, P.RANK_NO, P.DEPT_NO 
+				        FROM
+				        (
+				            SELECT 
+				                 M.MSG_NO
+		                        ,B.NO 
+				                ,B.NAME
+				                ,B.POSITION_NO
+				            FROM MESSENGER M
+				            JOIN MEMBER B ON M.NO = B.NO
+				        ) A
+				    JOIN POSITION P ON A.NO = P.NO 
+				    ) B
+				JOIN RANK K ON B.RANK_NO = K.NO
+				JOIN DEPT T ON B.DEPT_NO = T.NO 
+		        ) C
+		WHERE C.DEPT = #{deptName}
+		ORDER BY C.POSITION_NO
 		
 	</select>
 	
@@ -463,7 +492,7 @@
 		        FROM IMG_FILEBOX
 		        WHERE MSG_NO = #{msgNo}
 		            AND CHECK_DELETE = 'O'
-		        ORDER BY FILE_NO
+		        ORDER BY FILE_NO DESC
 		) F JOIN COPY_FILE_ORIGIN_NAME C ON F.COPY_NAME = C.COPY_NAME        
 
 	
@@ -488,9 +517,9 @@
 		            ,COPY_NAME
 		            ,ENROLL_DATE
 		        FROM FILEBOX
-		        WHERE MSG_NO = 1
+		        WHERE MSG_NO = #{msgNo}
 		            AND CHECK_DELETE = 'O'
-		        ORDER BY FILE_NO
+		        ORDER BY FILE_NO DESC
 		) F JOIN COPY_FILE_ORIGIN_NAME C ON F.COPY_NAME = C.COPY_NAME 
 	
 	</select>
@@ -517,7 +546,7 @@
 	</insert>
 	
 	
-	<!-- 파일보관함 - 이미지 파일 추가  -->
+	<!-- 파일보관함 - etc파일 추가  -->
 	<insert id="insertFileBox">
 	
 		INSERT INTO FILEBOX

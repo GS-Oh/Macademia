@@ -160,8 +160,8 @@ public class MessengerDaoImpl implements MessengerDao{
 
 	//쪽지 - ( 해당 부서 멤버 가져오기 )
 	@Override
-	public List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String partName) {
-		return sst.selectList("messengerMapper.selectDeptMember", partName);
+	public List<HashMap<String, String>> selectDeptMember(SqlSessionTemplate sst, String deptName) {
+		return sst.selectList("messengerMapper.selectDeptMember", deptName);
 	}
 
 

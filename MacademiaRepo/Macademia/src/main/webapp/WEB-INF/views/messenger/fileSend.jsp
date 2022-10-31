@@ -145,7 +145,7 @@
 						
 					<ul class="search-header">
 						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">행정팀</a></li>
-						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">재정팀</a></li>
+						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">총무팀</a></li>
 						<li><a href="" style="text-decoration : none; color:#6667AB" class="search-content">시설지원팀</a></li>
 					</ul>
 					
@@ -234,7 +234,7 @@
 			<div id="recipient-submit-area" style="grid-column: span 2;">
 				<form id="form-take-area" action="/md/messenger/fileSend" method="post">
 
-					<div style="grid-row: span 2;"><img src="${root}/resources/upload/messenger/${fileName}" alt="" width="95%" height="95%"></div>
+					<div style="grid-row: span 2;"><img src="${root}/resources/upload/messenger/${fileName}" alt="${originName}" width="95%" height="95%"></div>
 					<div style="display:none;"><input type="text" name="receiveNo" id="receive-no"></div>
 					<div class="submit-select"><h2><span  class="badge bg-secondary"> 받는이 </span></h2><input type="text" name="receiveName" id="receive-name"></div>
 					<div class="submit-select" ><h2><span class="badge bg-secondary" >제목</span></h2><input  type="text" name="title" id=""></div>

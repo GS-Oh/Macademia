@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.kh.md.messenger.common.PageVo;
 import com.kh.md.messenger.vo.MessengerVo;
 import com.kh.md.messenger.vo.MsgFileCopyVo;
@@ -11,7 +13,6 @@ import com.kh.md.messenger.vo.MsgFileboxVo;
 import com.kh.md.messenger.vo.MsgNoteVo;
 import com.kh.md.messenger.vo.MsgNoticeVo;
 import com.kh.md.messenger.vo.MsgRepleVo;
-
 
 public interface MessengerService {
 	
@@ -79,7 +80,7 @@ public interface MessengerService {
 
 
 	//쪽지 ( 보낸사람검색 )
-	List<HashMap<String, String>> selectDeptMember(String partName);
+	List<HashMap<String, String>> selectDeptMember(String deptName);
 
 	//파일보관함 ( 이미지 파일 전부 가져오기 )
 	List<MsgFileboxVo> selectAllFileImgByNo(String msgNo);
