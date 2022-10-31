@@ -13,7 +13,7 @@
 
 
 <style>
-
+	
   body{
      font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
     }
@@ -84,6 +84,63 @@ color:#fff
  }
  .td_bottom{
  height:30px;
+ }
+ .modal-content{
+ width:700px;
+ height:680px;
+ margin-left:-40px;
+ }
+ #m_title{
+ margin-left:-570px;
+ font-size:26px;
+ 	
+ }
+ .modal-header{
+	border-bottom: 1px solid #6667AB;
+ }
+ .modal-footer{
+	border-top: 1px solid #6667AB;
+ }
+ .btn-default{
+	background-color: #6667AB;
+	color:#fff
+ }
+ .signLine{
+ display: inline-block;
+ border: 1px solid black;
+ width: 200px;
+ height: 400px;
+ 
+ }
+ #modal-wrap{
+ border: 1px solid red;
+ height: 300px;
+ width:300px;
+ 
+ }
+ #select_box{
+ width:260px;
+ height:370px;
+ border: 3px solid #6667AB;
+ border-radius: 5px;
+ 
+ }
+ #select_top{
+ margin-left:-38px;
+ height: 28px;
+ border: 3px solid #6667AB;
+ border-radius: 5px;
+ }
+ a{
+	color:#6667AB;
+	cursor:pointer;
+ }
+ #select-right{
+	width:260px;
+	height:370px;
+	border: 3px solid #6667AB;
+ border-radius: 5px;
+ margin-top: 47px;
  }
 </style>
 
@@ -161,12 +218,62 @@ color:#fff
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4 class="modal-title">모달 창 타이틀</h4> <!-- 사용자 지정 부분② : 타이틀 -->
+          
+        <h6 id="m_title">결재선 지정</h4>
         </div>
-        <div class="modal-body">
-          <p>여기에 필요한 텍스트 메시지 넣기</p> <!-- 사용자 지정 부분③ : 텍스트 메시지 -->
+        <div class="modal-body w-100">
+
+			<div class="modal-wrap d-inline-flex w-100">
+				<div class="w-50">
+		          <select id="select_top">
+						<option >전체</option>
+						<option value="1">대표이사</option>
+						<option value="2">부원장</option>
+						<option value="3">운영기획부</option>
+						<option value="4">교육훈련부</option>
+						<option value="5">취업지원부</option>
+						<option value="6">마케팅부</option>
+						<option value="7">행정팀</option>
+						<option value="8">재정팀</option>
+						<option value="9">시설지원팀</option>
+						<option value="10">교육1팀</option>
+						<option value="11">교육2팀</option>
+						<option value="12">교육지원팀</option>
+						<option value="13">취업팀</option>
+						<option value="14">상담팀</option>
+						<option value="15">홍보팀</option>
+						<option value="16">대외협력팀</option>
+					</select> <!-- 사용자 지정 부분③ : 텍스트 메시지 -->
+					
+					<br>
+					<br> 
+					<select multiple id="select_box">
+						<c:forEach items="${memberList}" var="x">
+							<option>${x.name} (${x.deptName} - ${x.positionName})</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="w-25 d-flex flex-column justify-content-center align-items-center">
+					<a id="addUser" class="fe-arrow-right-square">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+						  </svg></a>
+						  <br>
+					<a id="deleteUser" class="bi bi-arrow-left-circle"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+					  </svg></a>
+				</div>
+				<div class="w-50">
+					<select multiple id="select-right">
+
+
+					</select>
+				</div>
+			</div>
+
         </div>
+
+
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -184,4 +291,71 @@ $(document).ready(function () {
         maxHeight: 400
     });
 });
+$('#select_top').on('change', function(){
+	let deptCode = $('#select_top option:selected').val();
+	
+	console.log(deptCode)
+	$.ajax({
+		url:"/md/sign/deptList",
+		mehod : "get",
+		data :{dept : deptCode },
+		dataType: 'json',
+		success: function(data){
+			console.log("성공")
+			console.log(data)
+			$('#select_box option').remove();
+			 let str;
+			$.each(data, function(i){
+				str += '<option value="' + data[i].no +'">' + data[i].name+' ('+data[i].deptName +' - ' + data[i].positionName + ')</option>'
+				 
+			}) 
+			$('#select_box').append(str);
+			
+		}
+		,error: function(data){
+		    	console.log("실패");
+		    	console.log(data)
+		    }
+	})
+
+	})
+$('#addUser').on('click', function(){
+	let userCode = $('#select_box option:selected').val();
+	let userOption = $('#select_box option[value=' + userCode + ']')[0].outerHTML;
+	let addTypeCode = $(this).attr('id');
+	let apprSelectBox = $('#select-right[id=' +addTypeCode + ']');
+	let selectedOption = apprSelectBox.find('option').val();
+
+	//중복체크
+	let selectedOptionVal = [];
+	$($('#select-right[id=' +addTypeCode+'] option')).each(function(){
+		var selected = $(this).val();
+		selectedOptionVal.push(selected);
+	})
+	if($.inArray(userCode, selectedOptionVal) != -1){
+		alert('해당 결재타입에 추가한 결재자는 중복추가 할수 없습니다');
+
+	}else{
+		apprSelectBox.append(userOption);
+	}
+})
 </script>
+
+<script>
+
+   /*  var langSelect = document.getElementById("select_top");
+     
+    // select element에서 선택된 option의 value가 저장된다.
+    var selectValue = langSelect.options[langSelect.selectedIndex].value;
+ 
+    // select element에서 선택된 option의 text가 저장된다.
+    var selectText = langSelect.options[langSelect.selectedIndex].text;
+} */
+
+
+
+
+
+
+</script>
+
