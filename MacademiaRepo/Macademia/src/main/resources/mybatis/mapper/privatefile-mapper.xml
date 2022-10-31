@@ -3,7 +3,15 @@
 <mapper namespace = "privatefileMapper">
 	<select id="selectList" resultType="com.kh.md.file.vo.FileVo">
 
-		SELECT * FROM PRIVATE_FILE WHERE MEMBER_NO = #{memberNo}
+		SELECT * FROM PRIVATE_FILE 
+		WHERE MEMBER_NO = #{memberNo}
+		
+	</select>
+	<select id="selectListBySearchName" resultType="com.kh.md.file.vo.FileVo">
+
+		SELECT * FROM PRIVATE_FILE 
+		WHERE MEMBER_NO = #{memberNo}
+		AND ORIGIN_NAME LIKE '%${searchName}%'
 		
 	</select>
 </mapper>

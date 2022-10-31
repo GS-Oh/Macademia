@@ -1,10 +1,15 @@
 package com.kh.md.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +23,9 @@ import com.kh.md.member.vo.MemberVo;
 public class MemberController {
 	
 	private final MemberService memberService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	public MemberController(MemberService memberService) {
@@ -51,10 +59,35 @@ public class MemberController {
 		return "member/findpwd";
 	}
 	@PostMapping("/member/findpwd")
-	public String findPwd(String Email, String privateEmail, Model model) {
+	public String findPwd(String email, String privateEmail, Model model) {
 		
-		model.addAttribute("alertMsg","임시비밀번호 발송완료.");
-		return "member/login";
+		Map<String,String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("privateEmail", privateEmail);
+		
+		String newPwd = memberService.findPwd(map);
+		
+		if(newPwd != null) {
+			try {
+				MimeMessage mimeMessage = mailSender.createMimeMessage();
+			    MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+	 
+			    messageHelper.setFrom("mdFindPwd@gmail.com"); 
+			    messageHelper.setTo(privateEmail); 
+			    messageHelper.setSubject("임시비밀번호가 발급되었습니다"); 
+			    messageHelper.setText("임시비밀번호 : "+newPwd); 
+	 
+			    mailSender.send(mimeMessage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("alertMsg","임시비밀번호 발송완료.");
+			return "member/login";
+		}else {
+			model.addAttribute("alertMsg","사내/개인이메일을 다시 확인해주세요.");
+			return "member/findpwd";
+		}
+
 	}
 	
 	@GetMapping("/member/insert")
@@ -75,15 +108,23 @@ public class MemberController {
 		return "member/edit";
 	}
 	@GetMapping("/member/myfiles")
-	public String myFiles(HttpSession session,Model model) {
+	public String myFiles(HttpSession session,Model model,String searchName) {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-		List<FileVo> fileList = memberService.getPrivatefileList(loginMember.getNo());
-		System.out.println(fileList);
-		if(fileList!=null) {
-			model.addAttribute("fileList", fileList);
+		List<FileVo> fileList;
+		if(searchName==null) {
+			fileList = memberService.getPrivatefileList(loginMember.getNo());
+		}else {
+			fileList = memberService.getFileListBySearchName(loginMember.getNo(),searchName);
 		}
-		return "member/myfiles";
+			System.out.println(fileList);
+			if(fileList!=null) {
+				model.addAttribute("fileList", fileList);
+			}
+			return "member/myfiles";
+
+		
 	}
+
 	@GetMapping("/member/myboards")
 	public String myBoards() {
 		return "member/myboards";

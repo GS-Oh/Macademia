@@ -136,6 +136,7 @@
             <i class="fa-solid fa-folder-plus"></i> 파일업로드
         </button>
     </div>
+    <hr>
     <div id="file-area">
         <c:forEach var="file" items="${fileList }">
             <div class="file-slot">
@@ -190,8 +191,8 @@
     </script>
 
     
-    <form action="">
-        <input type="text" name="search-query">
+    <form action="/md/member/myfiles" method="get">
+        <input type="text" name="searchName">
         <button id="search-btn" type="submit">검색</button>
     </form>
     <div id="pagination-area">
@@ -207,30 +208,30 @@
     </div>
 
     <form action="" method="post" enctype="multipart/form-data">
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">파일업로드</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">파일업로드</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <input id="file-btn" type="file" name="file">
-            </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <input id="file-btn" type="file" name="file">
+                </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">업로드</button>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">업로드</button>
+                </div>
+
             </div>
-            
+            </div>
         </div>
-        </div>
-    </div>
     </form>
 
 
