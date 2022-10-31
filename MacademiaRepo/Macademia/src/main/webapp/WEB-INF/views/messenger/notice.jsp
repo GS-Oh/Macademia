@@ -26,7 +26,7 @@
 
 		#notice-list{
 			display: grid;
-			grid-template-columns: 1fr 3fr 1fr 1.5fr 1fr;
+			grid-template-columns: 100px 1fr 3fr 1fr 1.5fr 1fr;
 			grid-template-rows: repeat(11, 1fr);
 			row-gap: 10px;
 			align-items: center;
@@ -103,6 +103,7 @@
 			<div id="notice-header"><h1> 메신저 공지글</h1></div>
             
 			<div id="notice-list">
+				<div class="list-header">글 번호</div>
 				<div class="list-header" style="grid-column: span 2;">제목</div>
 				<div class="list-header">작성자</div>
 				<div class="list-header">작성일</div>
@@ -112,6 +113,7 @@
 				
 				<c:forEach items="${noticeVoList}" var="noticeVoList">
 				
+					<div class="list-content">${noticeVoList.noticeNo}</div>
 					<div class="list-content"><span  class="badge bg-info" >공지</span></div>
 					<div class="list-content" style="text-align: left; "><a href="${root}/messenger/notice/detail/${noticeVoList.noticeNo}">${noticeVoList.title}</a></div>
 					<div class="list-content">${noticeVoList.name}</div>
