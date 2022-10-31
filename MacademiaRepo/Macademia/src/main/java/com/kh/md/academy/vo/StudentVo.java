@@ -1,5 +1,7 @@
 package com.kh.md.academy.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,6 +13,7 @@ public class StudentVo {
 	private String phone;
 	private String email;
 	private String profile;
+	private MultipartFile f;
 	private String newAddress;
 	private String oldAddress;
 	private String detailAddress;

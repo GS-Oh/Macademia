@@ -3,7 +3,10 @@
 
 <!-- 도로명주소 검색 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="${root}/resources/js/search-address/search-address.js"></script>    
+<script type="text/javascript" src="${root}/resources/js/search-address/search-address.js"></script>  
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
 <style>
     body{
@@ -31,6 +34,7 @@
         grid-auto-rows: 60px;
         align-content: center;
         border-top: 1px solid black;
+        margin-bottom: 50px;
     }
     #student-profile, .comment-area{
         grid-row: span 4;
@@ -59,6 +63,8 @@
         resize: none;
         padding-left: 10px;
         border-radius: 0px;
+        width: 90%;
+        height: 90%;
     }
     #student-info-area i{
         color: #6667AB;
@@ -128,7 +134,7 @@
         justify-content: center;
         align-items: center;
     }
-    #edit-btn-area>button{
+    #edit-btn-area>button, #edit-btn-area>input[type=submit]{
         width: 100px;
         height: 30px;
         background-color: #6667AB;
@@ -138,30 +144,180 @@
     }
     #edit-btn-area>button>a{
         color: white;
-        /* display: inline-block; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
     }
-    #edit-btn-area>button:hover{
+    #edit-btn-area>button:hover, #edit-btn-area>input[type=submit]:hover{
         font-weight: bolder;
     }
+
+    /* 페이징관련 */
+    #page-area{
+        height: 4vh;
+        display: grid;
+        grid-template-columns: repeat(9, 3vh);
+        grid-template-rows: 3vh;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+        column-gap: 5px;
+    }
+    #page-area>div{
+        border: 1px solid gray;
+        width: 100%;
+        height: 100%;
+    }
+    #page-area a{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: #6667AB;
+    }
+    #page-area a>i{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 모달관련 */
+    .addbgc{
+        background-color: #6667AB;
+        border: none;
+        color: white;
+    }
+    .addbgc:hover{
+        background-color: #6667AB;
+        border: none;
+        color: white;
+        font-weight: bolder;
+    }
+    #modal-table-area{
+        margin-bottom: 25px;
+    }
+    #modal-search-area{
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+    #modal-body-head{
+        background-color: #6667AB;
+        color: white;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: 1fr 2fr 8fr 2fr 2fr;
+        grid-template-rows: 30px;
+        font-weight: bolder;
+    }
+    .modal-body-class-list{
+        border-bottom: 1px solid lightgray;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: 1fr 2fr 8fr 2fr 2fr;
+        grid-template-rows: 40px;
+    }
+    /* #class-label{
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: 1fr 8fr 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+    } */
+    
 </style>
 
 <script>
-    var listVar = $('input[name=gender]');
-    console.log(listVar)
+    $(function(){
+        //이미지 썸네일 추가
+        const fileInputTag = document.querySelector('input[name="f"]');
+
+        fileInputTag.onchange = function(){
+            const imgTag = document.querySelector('#student-profile-img');
+            if(fileInputTag.files.length > 0){
+                //파일 선택됨
+                const fr = new FileReader();
+                fr.onload = function(data){
+                    imgTag.src = data.target.result;
+                }
+                fr.readAsDataURL(fileInputTag.files[0]);
+            }else{
+                imgTag.src="";
+            }
+        }
+
+        console.log($('#class-name').text())
+        // 선택한 강의 input에 넣기
+        $('#modal-choice-btn').click(function(){
+            let target = $('input[type=checkbox]:checked').val()
+            console.log('target값 : ' + target)
+            if(target == null){
+                Swal.fire({
+                    icon: 'warning',
+                    title: '강의를 선택해주세요'
+                });
+            }else{
+                let classNo = $('#enrolledClassNo').val()
+                let className = $('#enrolledClass').val()
+                classNo = target //hidden에 넘겨줄 값
+                className = $('#class-name').html() //화면에 표시해줄 강의명
+                $('input[type=checkbox]:checked').parent().siblings()
+                console.log('hidden값 : ' + classNo)
+            }
+
+            document.querySelector('#modal-close-btn').click();
+        });
+
+        // submit confirm창에 swal 적용
+        $('input[type=submit]').click(function(){
+            // if(!confirm('정보를 입력할까요?')){
+            //     return false;
+            // }
+
+            var confirm = function(msg, title) {
+                swal({
+                    title : title,
+                    text : msg,
+                    type : "warning",
+                    showCancelButton : true,
+                    confirmButtonClass : "btn-danger",
+                    confirmButtonText : "예",
+                    cancelButtonText : "아니오",
+                    // closeOnConfirm : true,
+                    closeOnCancel : true,
+                    clickConfirm: true
+                }, function(confirm) {
+                    if (confirm) {
+                        return true;
+                    }else{
+                        return false;
+                    }
+                });
+            }
+
+            confirm('새로운 수강생이 등록됩니다.','입력할까요?');
+            
+        });
+    });
 </script>
 
 <div id="search-detail-edit-content-wrap">
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
 
         <div id="search-detail-edit-content-head"><h4>수강생 정보입력</h4></div>
 
         <div id="student-info-area">
             <div id="student-profile">
-                <img src="" width="160px" height="180px" alt="수강생 프로필">
-                <input type="file">
+                <img id="student-profile-img" src="" width="140px" height="180px" alt="수강생 프로필">
+                <input type="file" name="f">
             </div>
             <div id="student-name">
                 <i class="fa-solid fa-star-of-life fa-2xs" style="color:red"></i>
@@ -216,7 +372,78 @@
             <div class="info-title"><b>전공</b></div>
             <div class="info-border-top" id="student-major"><input type="text" name="major"></div>
             <div class="info-title"><b>수강</b></div>
-            <div class="info-border-top" id="student-class"><input type="text" name="enrolledClass"></div>
+            <div class="info-border-top" id="student-class">
+                <input type="hidden" id="enrolledClassNo" value="0" name="enrolledClass">
+                <input type="text" id="enrolledClass" disabled>
+                <button type="button" id="class-search-btn" class="addbgc btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                    강의검색
+                </button>
+                <!-- The Modal -->
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                    
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                            <h4 class="modal-title">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                강의 검색</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                    
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div id="modal-search-area">
+                                    <input type="search" placeholder="강의 검색">
+                                    <input type="button" value="검색">
+                                </div>
+                                <div id="modal-table-area">
+                                    <div id="modal-body-head">
+                                        <div></div>
+                                        <div>강의실</div>
+                                        <div>강의명</div>
+                                        <div>강사명</div>
+                                        <div>개강일</div>
+                                    </div>
+
+									<c:forEach items="${classList}" var="l">
+	                                    <div class="modal-body-class-list">
+	                                        <div>
+                                                <input type="checkbox" value="${l.no}">
+                                            </div>
+                                            <div>${l.classroom}</div>
+                                            <div id="class-name">${l.name}</div>
+                                            <div>${l.memberNo}</div>
+                                            <div>${l.beginDate}</div>
+	                                    </div>
+                                    </c:forEach>
+                                    
+                                </div>
+                    
+                                <div id="page-area">
+                                    <div><a href=""><i class="fa-solid fa-angles-left"></i></a></div>
+                                    <div><a href=""><i class="fa-solid fa-angle-left"></i></a></div>
+                                    <div><a href="">1</a></div>
+                                    <div><a href="">2</a></div>
+                                    <div><a href="">3</a></div>
+                                    <div><a href="">4</a></div>
+                                    <div><a href="">5</a></div>
+                                    <div><a href=""><i class="fa-solid fa-angle-right"></i></a></div>
+                                    <div><a href=""><i class="fa-solid fa-angles-right"></i></a></div>
+                                </div>
+                            </div>
+                    
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                            <button type="button" id="modal-choice-btn" class="addbgc btn">선택</button>
+                            <button type="button" id="modal-close-btn" class="addbgc btn" data-bs-dismiss="modal">닫기</button>
+                            </div>
+                    
+                        </div>
+                        </div>
+                    </div>
+                <!-- ---- -->
+            </div>
             <div class="info-title comment-area"><b>코멘트</b></div>
             <div class="comment-area info-border-top"><textarea name="stdComment"></textarea></div>
         </div>

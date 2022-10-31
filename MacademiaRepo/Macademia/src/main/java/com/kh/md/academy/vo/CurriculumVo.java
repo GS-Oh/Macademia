@@ -1,5 +1,8 @@
 package com.kh.md.academy.vo;
 
+import lombok.Data;
+
+@Data
 public class CurriculumVo {
 
 	private String no;

@@ -34,6 +34,11 @@
     #student-name{
         grid-row: span 2;
         margin-top: 20px;
+        margin-left: 20px;
+    }
+    #student-phone, #student-email{
+        /* margin-top: 0px; */
+        margin-left: 20px;
     }
     .info-title{
         border-right: 1px solid lightgray;
@@ -118,7 +123,9 @@
     }
     #edit-btn-area>button>a{
         color: white;
-        /* display: inline-block; */
+        display: grid;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
     }
@@ -127,57 +134,85 @@
     }
 </style>
 
+<script>
+    $(function(){
+        let gender = '${svo.gender}'
+        if(gender === 'M'){
+            $('input[value="M"]').attr('checked', true)
+        }else{
+            $('input[value="F"]').attr('checked', true)
+        }
+
+        let ph = '${svo.phone}'
+        const pre = ph.substring(0,3)
+        const mid = ph.substring(3,7)
+        const last = ph.substring(7,11)
+        const phone = pre + '-' + mid + '-' +  last
+        $('#student-phone > b').text(phone)
+
+        let birth = '${svo.birth}'
+        const year = birth.substring(0,4)
+        const month = birth.substring(5,7)
+        const day = birth.substring(8,11)
+
+        $('input[id="year"]').attr('value', year)
+        $('input[id="month"]').attr('value', month)
+        $('input[id="day"]').attr('value', day)
+
+    })
+</script>
+
 <div id="search-detail-content-wrap">
     <div><h4>수강생 정보조회</h4></div>
 
     <div id="student-info-area">
         <div id="student-profile">
-            <img src="" width="160px" height="180px" alt="수강생 프로필">
+            <img src="${root}/resources/upload/profile/studentProfile/${svo.profile}" width="140px" height="180px" alt="수강생 프로필">
         </div>
-        <div id="student-name"><h3>김고니</h3></div>
-        <div>
+        <div id="student-name"><h3>${svo.name}</h3></div>
+        <div id="student-phone">
             <i class="fa-solid fa-mobile-screen-button fa-2xl"></i>
-            <b>010-9876-5432</b>
+            <b>${svo.phone}</b>
         </div>
-        <div>
+        <div id="student-email">
             <i class="fa-solid fa-envelope fa-xl"></i>
-            <b>hellohi@gmail.com</b>
+            <b>${svo.email}</b>
         </div>
         <div class="info-title"><b>생년월일</b></div>
         <div class="info-border-top" id="student-dob">
-            <input type="text" value="1990" readonly>
-            <input type="text" value="03" readonly>
-            <input type="text" value="14" readonly>
+            <input type="text" id="year" value="" readonly>
+            <input type="text" id="month" value="" readonly>
+            <input type="text" id="day" value="" readonly>
         </div>
         <div class="info-title"><b>성별</b></div>
         <div class="info-border-top" id="student-gender">
-            <input type="radio" id="m" name="gender" checked disabled>
+            <input type="radio" id="m" value="M" name="gender" disabled>
             <label for="m">남</label>
-            <input type="radio" id="f" name="gender" disabled>
+            <input type="radio" id="f" value="F" name="gender" disabled>
             <label for="f">여</label>
         </div>
         <div class="info-title" id="student-addr-title"><b>주소</b></div>
             <div class="info-border-top" id="student-addr">
-                <input type="text" id="sample4_postcode" value="" readonly>
-                <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" id="sample4_roadAddress" value="서울시 자양로1번길 3" readonly>
-                <input type="text" id="sample4_jibunAddress" value="자양동 993-1" readonly>
-                <input type="text" id="sample4_detailAddress" value="자양빌라 201호" readonly>
+                <!-- <input type="text" id="sample4_postcode" value="" readonly> -->
+                <!-- <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> -->
+                <input type="text" id="sample4_roadAddress" value="${svo.newAddress}" readonly>
+                <input type="text" id="sample4_jibunAddress" value="${svo.oldAddress}" readonly>
+                <input type="text" id="sample4_detailAddress" value="${svo.detailAddress}" readonly>
                 <span id="guide" style="color:#999;display:none"></span>
                 <input type="hidden" id="sample4_extraAddress" readonly>
             </div>
         <div class="info-title"><b>최종학력</b></div>
-        <div class="info-border-top" id="student-degree"><input type="text" value="서울대학교" readonly></div>
+        <div class="info-border-top" id="student-degree"><input type="text" value="${svo.finalDegree}" readonly></div>
         <div class="info-title"><b>전공</b></div>
-        <div class="info-border-top" id="student-major"><input type="text" value="경영학과" readonly></div>
+        <div class="info-border-top" id="student-major"><input type="text" value="${svo.major}" readonly></div>
         <div class="info-title"><b>수강</b></div>
-        <div class="info-border-top" id="student-class"><input type="text" value="자바(JAVA)기반 클라우드 융합 개발자 양성과정A" readonly></div>
+        <div class="info-border-top" id="student-class"><input type="text" value="${svo.enrolledClass}" readonly></div>
         <div class="info-title comment-area"><b>코멘트</b></div>
-        <div class="comment-area info-border-top"><textarea name="" id="" cols="110" rows="8" readonly>네이버 취업 희망</textarea></div>
+        <div class="comment-area info-border-top"><textarea name="" id="" cols="110" rows="8" readonly>${svo.stdComment}</textarea></div>
     </div>
 
     <div id="edit-btn-area">
-        <button><a href="${root}/academy/search">뒤로가기</a></button>
+        <button><a href="${root}/academy/search/1">뒤로가기</a></button>
         <button><a href="${root}/academy/search/detail/edit">정보수정</a></button>
     </div>
 

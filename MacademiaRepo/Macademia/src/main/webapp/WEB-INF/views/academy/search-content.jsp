@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
     body{
         font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
@@ -31,8 +31,7 @@
         justify-items: flex-start;
     }
     #search-area>form>div:nth-child(1){
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
         column-gap: 5px;
     }
     #add-new-btn{
@@ -55,12 +54,12 @@
         font-weight: bolder;
     }
     #search-area select{
-        width: 120px;
+        width: 80px;
         height: 30px;
     }
     #search-area input[type='text']{
         padding-left: 5px;
-        width: 120px;
+        width: 200px;
         height: 30px;
     }
     #search-area input[type='submit']{
@@ -104,9 +103,8 @@
     /*  */
     #page-area{
         height: 4vh;
-        display: grid;
-        grid-template-columns: repeat(9, 3vh);
-        grid-template-rows: 3vh;
+        display: flex;
+        flex-wrap: nowrap;
         justify-content: center;
         align-content: center;
         justify-items: center;
@@ -115,8 +113,8 @@
     }
     #page-area>div{
         border: 1px solid gray;
-        width: 100%;
-        height: 100%;
+        width: 3vh;
+        height: 3vh;
     }
     #page-area a{
         display: flex;
@@ -129,11 +127,7 @@
 
 <script>
     $(function(){
-        $('.select-student-list').click(function(){
-            console.log(this);
-            location.href="/md/academy/search/detail";
-        });
-        
+               
         <c:if test="${not empty msg}">
 	    	Swal.fire({
 	    		icon: 'success',
@@ -148,15 +142,13 @@
     <div><h4>수강생 정보조회</h4></div>
 
     <div id="search-area">
-        <form action="">
+        <form action="" method="post">
             <div>
                 <select name="" id="">
-                    <option value="">강의 전체</option>
-                    <option value="">자바(JAVA)기반 클라우드 융합 개발자 양성과정A</option>
-                    <option value="">Python 활용 빅데이터 기반 금융 솔루션 UI 개발자 양성과정</option>
-                    <option value="">(스마트웹&콘텐츠개발)반응형 UI/UX 웹콘텐츠 개발자 양성과정A7</option>
+                    <option value="">강의검색</option>
+                    <option value="">이름검색</option>
                 </select>
-                <input type="text" placeholder="이름을 입력해주세요">
+                <input type="text" value="" placeholder="검색어를 입력해주세요">
                 <input type="submit" value="조회">
             </div>
             <div>
@@ -175,40 +167,38 @@
             <div><b>수강내역</b></div>
         </div>
 
-        <div class="select-student-list">
-            <div>1</div>
-            <div>김길동</div>
-            <div>010-1234-5678</div>
-            <div>youcrazy@naver.com</div>
-            <div>서울시 광진구 자양동</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-        </div>
-        <div class="select-student-list">
-            <div>2</div>
-            <div>김길동</div>
-            <div>010-6666-2222</div>
-            <div>helloheloo@hanmai.net</div>
-            <div>서울시 송파구 문정동</div>
-            <div>(스마트웹&콘텐츠개발)반응형 UI/UX 웹콘텐츠 개발자 양성과정A7</div>
-        </div>
-
+		<c:forEach items="${stdList}" var="l">
+	        <div onclick="location.href='${root}/academy/search/detail/${l.no}'" class="select-student-list">
+	            <div>${l.no}</div>
+	            <div>${l.name}</div>
+	            <div>${l.phone}</div>
+	            <div>${l.email}</div>
+	            <div>${l.oldAddress}</div>
+	            <div>${l.enrolledClass}</div>
+	        </div>
+        </c:forEach>
         
     </div>
 
-
-
-    
-
     <div id="page-area">
-        <div><a href=""><i class="fa-solid fa-angles-left"></i></a></div>
-        <div><a href=""><i class="fa-solid fa-angle-left"></i></a></div>
-        <div><a href="">1</a></div>
-        <div><a href="">2</a></div>
-        <div><a href="">3</a></div>
-        <div><a href="">4</a></div>
-        <div><a href="">5</a></div>
-        <div><a href=""><i class="fa-solid fa-angle-right"></i></a></div>
-        <div><a href=""><i class="fa-solid fa-angles-right"></i></a></div>
+        <c:if test="${pvo.startPage gt 5}">
+        	<div><a href="${root}/academy/search/1"><i class="fa-solid fa-angles-left"></i></a></div>
+        </c:if>
+        
+        <c:if test="${pvo.startPage ne 1}">
+	        <div><a href="${root}/academy/search/${pvo.startPage-1}"><i class="fa-solid fa-angle-left"></i></a></div>
+        </c:if>
+        
+        <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+	        <div><a href="${root}/academy/search/${i}">${i}</a></div>
+        </c:forEach>
+        
+        <c:if test="${pvo.endPage ne pvo.maxPage}">
+        	<div><a href="${root}/academy/search/${pvo.endPage+1}"><i class="fa-solid fa-angle-right"></i></a></div>
+        </c:if>
+        <c:if test="${pvo.endPage ne pvo.maxPage}">
+        	<div><a href="${root}/academy/search/${pvo.maxPage}"><i class="fa-solid fa-angles-right"></i></a></div>
+        </c:if>	
     </div>
 
 </div>

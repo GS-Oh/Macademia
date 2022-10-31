@@ -22,11 +22,71 @@
 	
 	<insert id="insertCurriculum">
 		INSERT INTO CURRICULUM(NO, CLASS_NO, CURRICULUM_NAME, CURRICULUM_CONTENT) 
-    	VALUES(SEQ_CLASS_NO.NEXTVAL, 1, #{curriculumName}, #{curriculumContent})
+    	VALUES(SEQ_CURRICULUM_NO.NEXTVAL, SEQ_CLASS_NO.CURRVAL, #{curriculumName}, #{curriculumContent})
 	</insert>
 	
 	<insert id="insertStudent">
 		INSERT INTO STUDENT(NO,NAME,GENDER,PHONE,EMAIL,PROFILE,NEW_ADDRESS,OLD_ADDRESS,DETAIL_ADDRESS,BIRTH,FINAL_DEGREE,MAJOR,ENROLLED_CLASS,STD_COMMENT) 
     	VALUES(SEQ_STUDENT_NO.NEXTVAL,#{name},#{gender},#{phone},#{email},#{profile},#{newAddress},#{oldAddress},#{detailAddress},#{birth},#{finalDegree},#{major},#{enrolledClass},#{stdComment})
 	</insert>
+	
+	<select id="selectStdList" resultType="StudentVo">
+		SELECT 
+		    S.NO,
+		    S.NAME,
+		    S.GENDER,
+		    S.PHONE,
+		    S.EMAIL,
+		    S.PROFILE,
+		    S.NEW_ADDRESS,
+		    S.OLD_ADDRESS,
+		    S.DETAIL_ADDRESS,
+		    S.BIRTH,
+		    S.FINAL_DEGREE,
+		    S.MAJOR,
+		    C.NAME AS ENROLLED_CLASS,
+		    S.JOIN_DATE,
+		    S.STD_COMMENT,
+		    S.COMPLETE_DATE
+		FROM STUDENT S
+		JOIN CLASS C ON S.ENROLLED_CLASS = C.NO
+		WHERE S.COMPLETE_DATE IS NULL
+		ORDER BY S.NAME
+	</select>
+	
+	<select id="selectClassList" resultType="ClassVo">
+		SELECT C.NO,C.NAME,M.NAME AS MEMBER_NO,C.CLASSROOM,TO_CHAR(C.BEGIN_DATE, 'YYYY-MM-DD') AS BEGIN_DATE
+		FROM CLASS C
+		JOIN MEMBER M ON C.MEMBER_NO = M.NO
+		ORDER BY C.NAME
+	</select>
+	
+	<select id="selectOneStudent" resultType="StudentVo">
+		SELECT 
+		    S.NO,
+		    S.NAME,
+		    S.GENDER,
+		    S.PHONE,
+		    S.EMAIL,
+		    S.PROFILE,
+		    S.NEW_ADDRESS,
+		    S.OLD_ADDRESS,
+		    S.DETAIL_ADDRESS,
+		    TO_CHAR(S.BIRTH, 'YYYY-MM-DD') AS BIRTH,
+		    S.FINAL_DEGREE,
+		    S.MAJOR,
+		    C.NAME AS ENROLLED_CLASS,
+		    S.JOIN_DATE,
+		    S.STD_COMMENT,
+		    S.COMPLETE_DATE
+		FROM STUDENT S
+		JOIN CLASS C ON S.ENROLLED_CLASS = C.NO
+		WHERE S.NO = #{no}
+	</select>
+	
+	
+	<select id="selectTotalCount" resultType="int">
+		SELECT COUNT(NO) FROM STUDENT
+	</select>
+	
 </mapper>
