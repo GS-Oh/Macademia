@@ -27,12 +27,13 @@
         justify-content: space-between;
     }
     h1{
-        margin: 30px 0;
+        margin: 30px 0 10px;
         font-size: 35px;
         font-weight: 600;
         color: rgb(67, 67, 67);
     }
     table{
+        margin-top : 20px;
         width: 80%;
     }
     #signature-color{
@@ -47,6 +48,7 @@
 
 <div id="myboards-content">
     <h1>내가 쓴 게시글</h1>
+    <hr>
     <table class="table table-hover">
         <thead id="signature-color">
             <tr>

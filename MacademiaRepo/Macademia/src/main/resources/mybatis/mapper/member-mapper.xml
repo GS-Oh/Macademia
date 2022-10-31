@@ -3,7 +3,18 @@
 <mapper namespace = "memberMapper">
 	<select id="selectOne" resultType="com.kh.md.member.vo.MemberVo">
 
-	SELECT * FROM MEMBER WHERE EMAIL = #{email} AND PWD = #{pwd}
+		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND PWD = #{pwd}
+		
+	</select>
+	
+	<select id="selectOneByEmails" resultType="_int">
+
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email} AND PRIVATE_EMAIL = #{privateEmail}
+		
+	</select>
+	<select id="updatePwd">
+
+		UPDATE MEMBER SET PWD = #{newPwd} WHERE EMAIL = #{email}
 		
 	</select>
 </mapper>
