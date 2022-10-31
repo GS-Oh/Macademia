@@ -81,6 +81,25 @@
 		}
 
 
+		.modal-content-wrap{
+
+			width: 350px;
+			height: 500px;
+
+			align-items: center;
+			padding: 20px;
+		}
+
+
+		modal-content > a{
+
+		}
+
+		#modal-filename{
+			width: 150px;
+		}
+
+
     </style>
 </head>
 <body>
@@ -142,17 +161,16 @@
 	 <div class="modal" id="myModal">
         <div class="modal-dialog modal-sm modal-dialog-centered  modal-lg">
         
-            <div class="modal-content">
+			
+			
+			<div class="modal-content modal-content-wrap" style="border: 5px solid #6667AB;">
+
+		      <div style="margin: 50px;"> <img id="modal-imgName" class="img-thumbnail" src="" alt="" width="350px" height="350px"> </div>
     
+    		  <div class="modal-content" style="width: 200px;">
     
-    		  <div class="modal-content">
-    
-	                <div class="modal-content">
-	                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
-	                </div>
-	                <div class="modal-content">
+	                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>전달하기</h3></a>
 	                    <a id="modal-delete" class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
-	                </div>
      
              </div>
              
@@ -170,6 +188,7 @@
 		
 		const modalFileName = document.querySelector('#modal-fileName');
 		const modalDelete = document.querySelector('#modal-delete');
+		const modalImgName = document.querySelector('#modal-imgName');
 		
 
 
@@ -180,13 +199,12 @@
 				
 				modalFileName.href = '/md/messenger/fileSend/' + originFileName[i].innerText + '/' + changeFileName[i].innerText;
 				modalDelete.href = '/md/messenger/fileBox/delete/'+ fileNo[i].innerText +'/'+ changeFileName[i].innerText;
-
+				modalImgName.src = '/md/resources/upload/messenger/' + changeFileName[i].innerText;
 			})
 
 
 
 		}
-
 
 
 	</script>

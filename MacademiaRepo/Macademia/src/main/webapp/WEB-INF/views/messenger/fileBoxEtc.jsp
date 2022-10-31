@@ -102,7 +102,12 @@
 				<c:forEach items="${FileVoList}" var="fileVo">
 					
 					<div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
-	                    <div> <img src="" alt="" width="40px" height="40px"></div> 
+						
+	                    <!-- <div> <img src="" alt="" width="40px" height="40px"></div>  -->
+	                    
+	                    <i class="file-img-area" style="font-size:36px"></i>
+	                    
+	                    
 	                    <div style="display: none;" class="fileBox-fileNo">${fileVo.fileNo}</div>
 	                    <div style="display: none;" class="fileBox-fileName">${fileVo.fileName}</div>
 	                    <div> <span class="fileBox-originName">${fileVo.originName}</span></div> 
@@ -124,17 +129,17 @@
   
     <!-- The Modal -->
     <div class="modal" id="myModal">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
         
-            <div class="modal-content">
-    
-                <div class="modal-content">
-                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>보내기</h3></a>
-                </div>
-                <div class="modal-content">
+            <div class="modal-content" style="width: 500px; text-align: center; background-color: #6667AB; color: white; border: 5px solid #6667AB;">
+				
+				<div style="margin: 20px;"><h1 id="modal-origin-name">스크립트로 여기에 파일원본명 들어오게 해놓음</h1></div>
+				
+				
+                <div class="modal-content" style="padding: 30px;">
+                    <a id="modal-fileName" class="btn btn-outline-dark" href=""><h3>전달하기</h3></a>
                     <a id="modal-delete" class="btn btn-outline-dark" href=""><h3>삭제하기</h3></a>
                 </div>
-     
              </div>
              
         </div>
@@ -152,17 +157,34 @@
 			
 			const modalFileName = document.querySelector('#modal-fileName');
 			const modalDelete = document.querySelector('#modal-delete');
+			const modalOriginName = document.querySelector('#modal-origin-name');
 			
-	
+			const fileImgArea = document.querySelectorAll('.file-img-area')
 	
 	
 			for(let i=0; i<fileBox.length; ++i){
-	
+				
+				// 확장자 명에 따른 아이콘 보여주기
+				var checkEtc = (originFileName[i].innerText).slice(-3);
+				switch(checkEtc){
+					case 'pdf' : fileImgArea[i].className = "fa fa-file-pdf-o"; break;
+					case 'ptx' : fileImgArea[i].className = "fa fa-file-powerpoint-o"; break;
+					case 'hwp' : fileImgArea[i].className = "fa fa-file-word-o"; break;
+					case 'zip' : fileImgArea[i].className = "fa fa-file-zip-o"; break;
+					case 'lsx' : fileImgArea[i].className = "fa fa-file-excel-o"; break;
+					case 'ell' : fileImgArea[i].className = "fa fa-file-excel-o"; break;
+					default : fileImgArea[i].className = "fa fa-file-o"; 
+				}
+
+
 				fileBox[i].addEventListener('click',function(){
 					
 					modalFileName.href = '/md/messenger/fileSend/' + originFileName[i].innerText + '/' + changeFileName[i].innerText;
 					modalDelete.href = '/md/messenger/fileBox/delete/'+ fileNo[i].innerText +'/'+ changeFileName[i].innerText;
-	
+
+					modalOriginName.innerText = originFileName[i].innerText;
+
+
 				})
 	
 	
