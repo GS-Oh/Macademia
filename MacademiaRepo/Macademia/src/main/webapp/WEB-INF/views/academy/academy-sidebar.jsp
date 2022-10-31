@@ -93,7 +93,7 @@
 
     <ul id="menu">
         <a href="${root}/academy/roll"><li>수강생 출결관리</li></a>
-        <a href="${root}/academy/search"><li>수강생 정보조회</li></a>
+        <a href="${root}/academy/search/1"><li>수강생 정보조회</li></a>
     </ul>
 
     <ul id="menu-top">

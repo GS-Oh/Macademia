@@ -2,10 +2,13 @@ package com.kh.md.academy.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,9 @@ import com.kh.md.academy.vo.CategoryVo;
 import com.kh.md.academy.vo.ClassVo;
 import com.kh.md.academy.vo.CurriculumVo;
 import com.kh.md.academy.vo.StudentVo;
+import com.kh.md.common.FileUploader;
+import com.kh.md.common.PageVo;
+import com.kh.md.common.Pagination;
 import com.kh.md.member.vo.MemberVo;
 
 @Controller
@@ -44,13 +50,26 @@ public class AcademyController {
 		return "academy/roll-detail-edit";
 	}
 	
-	@GetMapping("search")
-	public String search() {
+	@GetMapping("search/{pno}")
+	public String search(Model model, @PathVariable int pno) {
+		
+		int totalCount = service.selectTotalStd();
+		
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		List<StudentVo> stdList = service.showStudentList(pvo);
+		
+		model.addAttribute("stdList", stdList);
+		model.addAttribute("pvo", pvo);
 		return "academy/search";
 	}
 	
-	@GetMapping("search/detail")
-	public String searchDetail() {
+	@GetMapping("search/detail/{no}")
+	public String searchDetail(@PathVariable String no, Model model) {
+		//디비가서 수강생 한명 조회(no)
+		StudentVo svo = service.selectOneStudent(no);
+		
+		model.addAttribute("svo", svo);
 		return "academy/search-detail";
 	}
 	
@@ -60,7 +79,11 @@ public class AcademyController {
 	}
 	
 	@GetMapping("addStd")
-	public String addStudent() {
+	public String addStudent(Model model) {
+ 		//모달창에 넘겨줄 모든 클래스 리스트 가져오기
+ 		List<ClassVo> classList = service.selectClassList();
+
+ 		model.addAttribute("classList", classList);
 		return "academy/add-student";
 	}
 	
@@ -78,15 +101,21 @@ public class AcademyController {
 		model.addAttribute("category", category);
 		model.addAttribute("member", member);
 		return "academy/add-curriculum";
-	}
+	} 	
 //--------------------------------------------------
 	
 	//수강생 추가(인서트) 하기
  	@PostMapping("addStd")
- 	public String addStudent(Model model, StudentVo vo) {
+ 	public String addStudent(Model model, StudentVo vo, ClassVo cvo, HttpServletRequest req) {
+ 		
+ 		if(vo.getF() != null && !vo.getF().isEmpty()) {
+ 			String savePath = req.getServletContext().getRealPath("/resources/upload/profile/studentProfile/");
+ 	 		String changeName = FileUploader.uploadFile(vo.getF(),savePath);
+ 	 		vo.setProfile(changeName);
+ 		}
+
  		
  		int result = service.insertStudent(vo);
- 		
  		if(result == 1) {
  			model.addAttribute("msg", "수강생 정보가 입력되었습니다.");
  			return"academy/search";
@@ -102,7 +131,7 @@ public class AcademyController {
 		
 		int classInsert = service.insertClass(vo);
 		int curInsert = service.insertCurriculum(cvo);
-		
+		System.out.println(cvo);
 		System.out.println(classInsert);
 		System.out.println(curInsert);
 		

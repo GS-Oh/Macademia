@@ -121,6 +121,7 @@
         height: 100%;
         justify-content: center;
         align-items: center;
+        color: #6667AB;
     }
 </style>
 

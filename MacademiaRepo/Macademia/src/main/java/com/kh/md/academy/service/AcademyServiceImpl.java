@@ -11,6 +11,7 @@ import com.kh.md.academy.vo.CategoryVo;
 import com.kh.md.academy.vo.ClassVo;
 import com.kh.md.academy.vo.CurriculumVo;
 import com.kh.md.academy.vo.StudentVo;
+import com.kh.md.common.PageVo;
 import com.kh.md.member.vo.MemberVo;
 
 @Service
@@ -52,9 +53,31 @@ public class AcademyServiceImpl implements AcademyService{
 	//수강생 인서트
 	@Override
 	public int insertStudent(StudentVo vo) {
-		System.out.println("dob:"+vo.getBirth());
-		System.out.println("gender:"+vo.getGender());
 		return dao.insertStudent(sst, vo);
+	}
+
+	//수강생 리스트 셀렉트
+	@Override
+	public List<StudentVo> showStudentList(PageVo pvo) {
+		return dao.selectStudentList(sst, pvo);
+	}
+
+	//모든 클래스 리스트 가져오기
+	@Override
+	public List<ClassVo> selectClassList() {
+		return dao.selectClassList(sst);
+	}
+
+	//수강생 한명 조회해오기
+	@Override
+	public StudentVo selectOneStudent(String no) {
+		return dao.selectOneStudent(sst, no);
+	}
+
+	//페이징>전체 수강생리스트 수 조회
+	@Override
+	public int selectTotalStd() {
+		return dao.selectTotalStd(sst);
 	}
 
 }
