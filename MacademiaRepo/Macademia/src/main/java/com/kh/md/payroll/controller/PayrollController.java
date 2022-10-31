@@ -6,10 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.md.member.vo.MemberVo;
 import com.kh.md.payroll.service.PayrollService;
 import com.kh.md.payroll.vo.PayrollVo;
 
@@ -31,15 +33,40 @@ public class PayrollController {
 		return "payroll/main";
 	}
 	
+	//급여지급내역 ( 메인 화면 )
 	@GetMapping("history")
 	public String history() {
 		return "payroll/history";
 	}
 	
-	@GetMapping("history/detail")
-	public String historyDetail() {
+	// 급여지급내역 ( 메인페이지 화면 )
+	@PostMapping("history")
+	public String history(PayrollVo prVo, HttpSession session, Model model) {
+		
+		//현재 로그인 한 멤버의 번호로 급여내역 조회하기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		prVo.setTargetNo(loginMember.getNo());
+		
+		List<PayrollVo> prVoList = ps.selectPayRollList(prVo);
+		
+		if(prVoList != null) {
+			model.addAttribute("prVoList",prVoList);
+			return "payroll/history";
+		}else {
+			return "";
+		}
+		
+	}
+	
+	
+	// 급여지급내역 ( 상세페이지 화면 )
+	@PostMapping("history/detail")
+	public String historyDetail(PayrollVo prVo, Model model) {
+		System.out.println(prVo);
+		model.addAttribute("prVo", prVo);
 		return "payroll/historyDetail";
 	}
+	
 	
 	@GetMapping("account")
 	public String account() {
@@ -51,7 +78,7 @@ public class PayrollController {
 		return "payroll/management";
 	}
 	
-	//급여대장 작성 ( 화면 )
+	//급여대장 작성 ( 메인화면 )
 	@GetMapping("create")
 	public String create() {
 		return "payroll/create";
@@ -59,16 +86,21 @@ public class PayrollController {
 	
 	//급여대장 작성 ( 선택 옵션에 해당하는 멤버 불러오기 ) 
 	@PostMapping("create")
-	public String createSelectPart(PayrollVo prVo, HttpSession session) {
+	public String createSelectPart(PayrollVo prVo, String checkType, Model model) {
 		
 		List<PayrollVo> prVoList = ps.selectPayrollOption(prVo);
 		
-		System.out.println(prVo.getPayDate());
-		System.out.println(prVo.getDeptNo());
-		System.out.println(prVo.getRankNo());
-		
 		if( prVoList != null) {
-			session.setAttribute("prVoList", prVoList);
+			model.addAttribute("prVoList", prVoList);
+			
+			model.addAttribute("yearValue", prVo.getPayDate());
+			model.addAttribute("deptValue", prVo.getDeptNo());
+			model.addAttribute("rankValue", prVo.getRankNo());
+			
+			if(checkType == "manage") {
+				return "payroll/management";
+			}
+			
 			return "payroll/create";
 			
 		} else {
@@ -78,10 +110,31 @@ public class PayrollController {
 		
 	}
 	
-	
+	//급여대장 작성 ( 작성하기 화면 )
 	@GetMapping("create/detail")
-	public String createDetail() {
+	public String createDetail(PayrollVo prVo, Model model) {
+		
+		model.addAttribute("prVo", prVo);
 		return "payroll/createDetail";
 	}
+	
+	
+	//급여대장 작성 ( 작성하기 처리 )
+	@PostMapping("create/detail")
+	public String createDetail(PayrollVo prVo) {
+		
+		int result = ps.insertSalaryBook(prVo);
+		
+		if(result == 1) {
+			return "redirect:/create/detail";
+		}else {
+			return "";
+		}
+		
+	}
+	
+	
+	
+	
 	
 }//class

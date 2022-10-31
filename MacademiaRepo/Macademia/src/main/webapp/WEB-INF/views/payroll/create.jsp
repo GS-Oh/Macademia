@@ -57,6 +57,12 @@
         align-items: center;
     }
 
+	.content-form{
+		grid-column: span 11;
+		display: grid;
+        grid-template-columns: repeat(8, 1fr) 1.5fr 1.5fr 1.5fr;
+	}
+
     .management-table-header{
 		margin-top: 15px;
 
@@ -69,12 +75,23 @@
     }
 
     .management-table-content{
-        font-size: 1.3rem;
+		height: 80%;
+
+        font-size: 1.5rem;
         text-align: center;
 
 		border-right: 1px dashed #6667AB;
     }
 
+	.management-table-content > input{
+		width: 100%;
+		height: 90%;
+		text-align: center;
+		padding-top: 5px;
+		font-weight: 400;
+		border: none;
+		align-items: center;
+	}
 </style>
 
 </head>
@@ -89,14 +106,13 @@
 			</aside>                
 
 	        <main>
-	
 	            <div id="management-select-area">
 	                <form action="" method="post">
 	
 	                    <div>
 	                        <label for="year-select" class="form-label">발급년월</label>
 	                        <select name="payDate" id="year-select" class="form-select" >
-	                            <option value="2022-03">2022-03</option>
+	                            <option value="2022/03">2022-03</option>
 	                            <option value="2022-04">2022-04</option>
 	                            <option value="2022-05">2022-05</option>
 	                            <option value="2022-06">2022-06</option>
@@ -110,7 +126,7 @@
 	
 	                    <div>
 	                        <label for="dept-select" class="form-label">부서명</label>
-	                        <select name="deptNo" id="dept-select" class="form-select" onchange="deptSelect()">
+	                        <select name="deptNo" id="dept-select" class="form-select" onchange="">
 	                            <option value="0" selected>선택안함</option>
 	                            <option value="3">운영기획부</option>
 	                            <option value="4">교육훈련부</option>
@@ -126,15 +142,15 @@
 	                            <option value="15" >상담팀</option>
 	                            <option value="16">홍보팀</option>
 	                            <option value="17">대외홍보팀</option>
-	                       
-	                       
 							
 	                        </select>
+							
 	                    </div>
-	
+
+						<!--  -->
 	                  	<div>
 	                        <label for="part-select" class="form-label">직급명</label>
-	                        <select name="rankNo" id="part-select" class="form-select">
+	                        <select name="rankNo" id="rank-select" class="form-select">
 	                            <option value="0" selected>선택안함</option>
 	                            <option value="1">인턴</option>
 	                            <option value="2">사원</option>
@@ -152,10 +168,12 @@
 	                </form>
 	            </div>
 	
+
+
 	            <!-- 조회 결과 -->
 	            <div id="management-select-result">
 	            
-	            <div class="management-table-header">발급번호</div>
+					<div class="management-table-header">발급번호</div>
 					<div class="management-table-header">발급년월</div>
 					<div class="management-table-header">부서명</div>
 					<div class="management-table-header">직급명</div>
@@ -174,23 +192,25 @@
 	            	
 	            		
 						<!-- 급여대장 작성 -->
-		                <div class="management-table-content">${prVo.salNo}</div>
-		                <div class="management-table-content">${prVo.payDate}</div>
-		                <div class="management-table-content">${prVo.deptName}</div>
-		                <div class="management-table-content">${prVo.rankName}</div>
-		                <div class="management-table-content">${prVo.name}</div>
-		                <div style="grid-column: span 5; color: red; text-align: center; ">
-		                    <a href="/md/payroll/create/detail" > 
-		                        <h2 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h2>
-		                    </a>    
-		                </div>
-	            	
+						<form class="content-form" action="/md/payroll/create/detail" method="get">
+							
+							<div class="management-table-content"><input type="text" value="${prVo.salNo}" name="salNo" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prVo.payDate}" name="payDate" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prVo.deptName}" name="deptName" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prVo.rankName}" name="rankName" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prVo.name}" name="name" style="width: 100%;" readonly></div>
+							<div style="grid-column: span 6; color: red; text-align: center; ">
+								
+									<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-secondary btn-lg" type="submit" value="급여 대장 작성하기" style="width:40%;"></h2>
+									
+							</div>
+						</form>
+						
 	            	
 	            	</c:forEach>
 						
 	
-
-					
+				
 	            </div>
 	
 	
@@ -199,37 +219,44 @@
 		</div>
 
 
+		<!--  -->
 		<script>
 
 			
+				const yearSelect = document.querySelector('#year-select');
+				const deptSelect = document.querySelector('#dept-select');
+				const rankSelect = document.querySelector('#rank-select');
 
-			const partSelect = document.querySelector('#part-select').value;
+				const yearValue = '${yearValue}';
+				const deptValue = '${deptValue}';
+				const rankValue = '${rankValue}';
+
+				console.log(yearValue);
+				
+				for (let i=0; i<yearSelect.options.length; i++){  
+					//select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+						if(yearSelect.options[i].value == yearValue){
+							yearSelect.options[i].selected = true;
+						};
+				};
+				
+				
+				for (let i=0; i<deptSelect.options.length; i++){  
+				//select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+					if(deptSelect.options[i].value == deptValue){
+						deptSelect.options[i].selected = true;
+					};
+				};
 
 
-			function deptSelect(){
-				const yearSelect = document.querySelector('#year-select').value;
-				const deptSelect = document.querySelector('#dept-select').value;
+				for (let i=0; i<rankSelect.options.length; i++){  
+					//select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+						if(rankSelect.options[i].value == rankValue){
+							rankSelect.options[i].selected = true;
+						};
+					};
 
-				$.ajax({
-					url : "/payroll/create/selectPart",
-					type : "get",
-					data : 
-						{ year : yearSelect,  dept : deptSelect},
-					success : function(){
-						alert("통신성공! ㅋㅋ");
-					},
-					error : function(){
-						alert("통신실패! ㅜㅜ");
-					}
-
-				});
-
-				alert(yearSelect + deptSelect);
-
-
-			}
-			
-
+				
 
 		</script>
 
