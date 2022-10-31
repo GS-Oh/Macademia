@@ -78,7 +78,6 @@
 
         <main>
 			<div id="write-title"><h1>쪽지 보내기</h1></div>
-
             <form action="/md/messenger/note/write/${receiveNo}" method="post" enctype="multipart/form-data">
 				<!--  -->
 				<div class="write-header-area" >
@@ -107,7 +106,7 @@
 				<div class="write-header-area">
 					<span class="input-group-text">파일첨부</span>
 					<div id="attFile-img-wrap" class="form-control">
-						<img id="attFile-img-thumb" src="" width="50%" height="100%">
+						<img id="attFile-img-thumb" src="" alt="쪽지첨부파일" width="200px" height="200px">
 						<input  type="file" name="attFile"  style="font-size: 1.3rem;">
 					</div>
 				</div>
@@ -115,8 +114,15 @@
 
 				<!--  -->
 				<div id="write-bottom-area">
-					<input  class="btn btn-primary btn-lg" type="submit" value="전송">
-					<button class="btn btn-light btn-lg" onclick="" >닫기</button>
+					<c:if test="${not empty receiveName}">
+						<input  class="btn btn-primary btn-lg" type="submit" value="전송">
+						<button class="btn btn-light btn-lg" onclick="" >닫기</button>
+					</c:if>
+					
+					<c:if test="${empty receiveName}">
+						<div class="btn btn-light btn-lg" onclick="" >받는사람을 선택해주세요</div>
+					</c:if>
+					
 				</div>
 
 			</form>
@@ -154,5 +160,8 @@
 	        }
 	    }
 	</script>
+
+
+
 
 </html>

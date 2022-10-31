@@ -242,7 +242,7 @@
 					<c:if test="${msgVo.msgNo eq mnVo.receiveNo}">			
 						<div class="msg-noteNo" style="display:none;">${mnVo.noteNo}</div>
 						<div class="info-content">
-							<div><input type="checkbox" class="msg-checkBox"></div>
+							<div><input type="checkbox" class="msg-checkBox" name="msg-checkBox"></div>
 							<div class="msg-sender">${mnVo.sendName}</div>
 							<div class="msg-receive" style="display: none;">${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
@@ -361,13 +361,25 @@
 				}
 				
 				
+				if(msgCheckBox[i].checked){
+					repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
+					deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
+				}
 				
-				repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
-				deleteHref.href = "/md/messenger/note/deleteReceive/"+ msgNoteNo[i].innerText;
+				
 			});	
 		};
 	
 
+		//쪽지 1개만 선택했을때 답장 가능하도록 해주기
+		repleHref.addEventListener('click',function(){
+			const cntCheckbox = $("input[name=msg-checkBox]:checked").length;
+			if(cntCheckbox > 1){
+				repleHref.href = "";
+				deleteHref.href = "";
+				alert('하나의 쪽지만 선택해 주세요 ^-^');
+			}
+		});
 	</script>
 	
 
