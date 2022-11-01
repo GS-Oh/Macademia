@@ -219,10 +219,10 @@
 </style>
 
 <script>
-
+    //커리큘럼 단원 칸 추가
     $(function(){
         $('#add-curriculum-btn').click(function(){
-            $('#curriculum-addition-area').append('<div class="add-curriculum-area-curriculum-body"><div class="right-border"><textarea name="" id="" cols="30" rows="10"></textarea></div><div><textarea name="" id="" cols="30" rows="10"></textarea></div></div>')
+            $('#curriculum-addition-area').append('<div class="add-curriculum-area-curriculum-body"><div class="right-border"><textarea name="curriculumName" placeholder="단원명을 입력하세요"></textarea></div><div><textarea name="curriculumContent" placeholder="단원의 내용을 입력하세요"></textarea></div></div>')
         })
 
         $('#delete-curriculum-btn').click(function(){
@@ -230,13 +230,6 @@
         })
         
     })
-    
-    
-        
-        
-        
-    
-    
 </script>
 
 <form action="" method="post" onsubmit="return f01();">
@@ -326,7 +319,6 @@
                     
                 </div>
                 
-
                 <div id="add-curriculum-btn-area">
                     <div id="add-curriculum-btn"><i class="fa-solid fa-plus fa-1x"></i></div>
                     <div id="delete-curriculum-btn"><i class="fa-solid fa-minus fa-1x"></i></div>
@@ -344,7 +336,7 @@
 
 
 <script>
-    //call back function , js Promise
+    //call-back function , js Promise
     function f01(){
         Swal.fire({
             title: '새 강의를 생성하시겠습니까?',
@@ -364,25 +356,4 @@
 
         return false;
     }
-
-    //$('#submit-btn').click(function(){
-        
-        // let confirm_chk = 
-        // confirm('생성할거야?');
-
-        // if(!confirm_chk){
-        //     return false;
-        // }
-    //});
-
-    // title: '새 강의를 생성하시겠습니까?',
-    // text: "입력하신 정보로 강의가 생성됩니다.",
-    // icon: 'question',
-    // showCancelButton: true,
-    // confirmButtonColor: '#3085d6',
-    // cancelButtonColor: '#d33',
-    // confirmButtonText: '예',
-    // cancelButtonText: '아니오'
-    // function swalConfirm(){
-
 </script>

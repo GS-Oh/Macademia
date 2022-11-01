@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -126,12 +127,20 @@ public class AcademyController {
  	}
 	
 	//커리큘럼 추가(인서트) 하기
+ 	@Transactional
 	@PostMapping("addCurr")
 	public String addCurriculum(Model model, ClassVo vo, CurriculumVo cvo) {
 		
+ 		System.out.println("cName : " + cvo.getCurriculumName()[0]);
+ 		System.out.println("cName : " + cvo.getCurriculumName()[1]);
+ 		System.out.println("cName : " + cvo.getCurriculumName()[2]);
+ 		System.out.println("cContent : " + cvo.getCurriculumContent()[0]);
+ 		System.out.println("cContent : " + cvo.getCurriculumContent()[1]);
+ 		System.out.println("cContent : " + cvo.getCurriculumContent()[2]);
+ 		System.out.println(cvo.getCurriculumName().length);
+ 		
 		int classInsert = service.insertClass(vo);
 		int curInsert = service.insertCurriculum(cvo);
-		System.out.println(cvo);
 		System.out.println(classInsert);
 		System.out.println(curInsert);
 		

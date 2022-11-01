@@ -1,6 +1,8 @@
 package com.kh.md.academy.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,6 +38,13 @@ public class AcademyDaoImpl implements AcademyDao{
 	//커리큘럼 인서트
 	@Override
 	public int insertCurriculum(SqlSessionTemplate sst, CurriculumVo cvo) {
+		System.out.println("=====================================");
+		System.out.println("cName : " + cvo.getCurriculumName()[0]);
+ 		System.out.println("cName : " + cvo.getCurriculumName()[1]);
+ 		System.out.println("cName : " + cvo.getCurriculumName()[2]);
+ 		System.out.println("cContent : " + cvo.getCurriculumContent()[0]);
+ 		System.out.println("cContent : " + cvo.getCurriculumContent()[1]);
+ 		System.out.println("cContent : " + cvo.getCurriculumContent()[2]);
 		return sst.insert("academyMapper.insertCurriculum", cvo);
 	}
 	

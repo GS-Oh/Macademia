@@ -253,64 +253,34 @@
             }
         }
 
-        console.log($('#class-name').text())
         // 선택한 강의 input에 넣기
         $('#modal-choice-btn').click(function(){
             let target = $('input[type=checkbox]:checked').val()
-            console.log('target값 : ' + target)
+            // console.log('target값 : ' + target)
             if(target == null){
                 Swal.fire({
                     icon: 'warning',
                     title: '강의를 선택해주세요'
                 });
             }else{
-                let classNo = $('#enrolledClassNo').val()
-                let className = $('#enrolledClass').val()
-                classNo = target //hidden에 넘겨줄 값
-                className = $('#class-name').html() //화면에 표시해줄 강의명
-                $('input[type=checkbox]:checked').parent().siblings()
-                console.log('hidden값 : ' + classNo)
+                let inputClassName = $('input[type=checkbox]:checked').parent().siblings('#class-name').text() //화면 input에 표시해줄 강의명
+                $('#enrolledClassNo').attr('value', target);   //hidden에 넘겨줄 값
+                $('#enrolledClass').attr('value', inputClassName);
+                console.log('강의명 넘어온 input값 : ' + $('#enrolledClass').val());
+                console.log('hidden값 : ' + $('#enrolledClassNo').val());
             }
 
             document.querySelector('#modal-close-btn').click();
         });
 
-        // submit confirm창에 swal 적용
-        $('input[type=submit]').click(function(){
-            // if(!confirm('정보를 입력할까요?')){
-            //     return false;
-            // }
-
-            var confirm = function(msg, title) {
-                swal({
-                    title : title,
-                    text : msg,
-                    type : "warning",
-                    showCancelButton : true,
-                    confirmButtonClass : "btn-danger",
-                    confirmButtonText : "예",
-                    cancelButtonText : "아니오",
-                    // closeOnConfirm : true,
-                    closeOnCancel : true,
-                    clickConfirm: true
-                }, function(confirm) {
-                    if (confirm) {
-                        return true;
-                    }else{
-                        return false;
-                    }
-                });
-            }
-
-            confirm('새로운 수강생이 등록됩니다.','입력할까요?');
-            
-        });
+       
+        
     });
 </script>
 
 <div id="search-detail-edit-content-wrap">
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="return submitForm()">
 
         <div id="search-detail-edit-content-head"><h4>수강생 정보입력</h4></div>
 
@@ -373,7 +343,7 @@
             <div class="info-border-top" id="student-major"><input type="text" name="major"></div>
             <div class="info-title"><b>수강</b></div>
             <div class="info-border-top" id="student-class">
-                <input type="hidden" id="enrolledClassNo" value="0" name="enrolledClass">
+                <input type="hidden" id="enrolledClassNo" name="enrolledClass">
                 <input type="text" id="enrolledClass" disabled>
                 <button type="button" id="class-search-btn" class="addbgc btn" data-bs-toggle="modal" data-bs-target="#myModal">
                     강의검색
@@ -395,7 +365,7 @@
                             <div class="modal-body">
                                 <div id="modal-search-area">
                                     <input type="search" placeholder="강의 검색">
-                                    <input type="button" value="검색">
+                                    <!-- <input type="button" value="검색"> -->
                                 </div>
                                 <div id="modal-table-area">
                                     <div id="modal-body-head">
@@ -449,10 +419,34 @@
         </div>
 
         <div id="edit-btn-area">
-            <button><a href="${root}/academy/search">뒤로가기</a></button>
+            <button><a href="${root}/academy/search/1">뒤로가기</a></button>
             <input type="submit" value="입력하기">
         </div>
 
     </form>
 
 </div>
+
+<script>
+     // submit confirm창에 swal 적용
+     function submitForm(){
+            console.log('hi');
+            Swal.fire({
+                title: '수강생 정보를 입력하시겠습니까?',
+                text: "입력하신 정보로 수강생이 추가됩니다.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '예',
+                cancelButtonText: '아니오'
+            }).then(function(x){
+                if(x.isConfirmed){
+                    //submit
+                    document.querySelector('form').submit();
+                }
+            });
+
+            return false;
+        }
+</script>
