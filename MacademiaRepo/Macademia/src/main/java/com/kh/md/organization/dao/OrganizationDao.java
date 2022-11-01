@@ -9,5 +9,6 @@ import com.kh.md.organization.vo.OrganizationVo;
 public interface OrganizationDao {
 
 	List<OrganizationVo> selectList(SqlSessionTemplate sst);
+
 	
 }

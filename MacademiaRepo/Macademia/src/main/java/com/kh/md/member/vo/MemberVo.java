@@ -22,6 +22,8 @@ public class MemberVo {
 	private String enrollDate;
 	private String updateDate;
 	private String quitYn;
+	
 	private String deptName;
 	private String positionName;
+	private String rankName;
 }

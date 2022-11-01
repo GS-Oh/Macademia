@@ -15,4 +15,6 @@ public class OrganizationDaoImpl implements OrganizationDao{
 		return sst.selectList("organizationMapper.selectList");
 	}
 
+
+
 }

@@ -2,19 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "memberMapper">
 	<select id="selectOne" resultType="com.kh.md.member.vo.MemberVo">
-
 		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND PWD = #{pwd}
-		
 	</select>
 	
 	<select id="selectOneByEmails" resultType="_int">
-
 		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email} AND PRIVATE_EMAIL = #{privateEmail}
-		
 	</select>
+	
 	<select id="updatePwd">
-
 		UPDATE MEMBER SET PWD = #{newPwd} WHERE EMAIL = #{email}
-		
+	</select>
+	
+	<select id="selectListByDeptNo" resultType="com.kh.md.member.vo.MemberVo">
+		SELECT M.NO, M.NAME, M.EMAIL, M.PHONE, M.PROFILE_NAME, 
+		       P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+		FROM MEMBER M
+		JOIN POSITION P 
+		ON M.POSITION_NO = P.NO
+		JOIN RANK R
+		ON P.RANK_NO = R.NO
+		JOIN DEPT D
+		ON P.DEPT_NO = D.NO
+		WHERE DEPT_NO = #{deptNo}
+		ORDER BY P.RANK_NO DESC, P.NO ASC
 	</select>
 </mapper>
