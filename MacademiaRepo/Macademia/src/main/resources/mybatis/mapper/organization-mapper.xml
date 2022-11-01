@@ -5,4 +5,5 @@
 		SELECT *
 		FROM DEPT
 	</select>
+
 </mapper>

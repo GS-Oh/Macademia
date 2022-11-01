@@ -1,5 +1,6 @@
 package com.kh.md.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,5 +14,7 @@ public interface MemberDao {
 	int updatePwd(SqlSessionTemplate sst, Map<String, String> map);
 
 	int selectOneByEmails(SqlSessionTemplate sst, Map<String, String> map);
+
+	List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo);
 
 }

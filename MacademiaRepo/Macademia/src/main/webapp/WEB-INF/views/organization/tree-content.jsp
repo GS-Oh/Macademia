@@ -91,7 +91,7 @@
 			<img src="/md/resources/upload/profile/iu12341234.jpg" alt="아이유">
 			<div class="detail">
 				<ul>
-					<li>이름 : 아이유</li>
+					<li>이름 : 아이유${result[0].deptNo}</li>
 					<li>부서 : 교육1팀</li>
 					<li>직급 : 팀장</li>
 					<li>직책 : 교육1팀장</li>
@@ -118,7 +118,6 @@
 	</div>
 </div>
 
-
 <script>
 
 let treeData = ${tree};
@@ -134,17 +133,15 @@ $(function () {
    	});
 });
 
-$('#tree')
-  // listen for event
-  .on('select_node.jstree', function (e,node) {
+$('#tree').on('select_node.jstree', function (e,node) {
 		$.ajax({
 			url:"/md/organization/tree/"+node.selected[0],
 			type:"post",
 			success:function(result){
-				
+				$('#tree-detail').replaceWith(result);
 			},
 			error:function(){
-				alert('통신에러')
+				alert('통신에러');
 			}
 		})
   })

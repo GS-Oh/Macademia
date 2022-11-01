@@ -1,5 +1,6 @@
 package com.kh.md.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,6 +24,13 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int updatePwd(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.update("memberMapper.updatePwd",map);
+	}
+	@Override
+	public List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo) {
+		List<MemberVo> list = sst.selectList("memberMapper.selectListByDeptNo",deptNo);
+		System.out.println("dao : " + list);
+		return list;
+				
 	}
 
 

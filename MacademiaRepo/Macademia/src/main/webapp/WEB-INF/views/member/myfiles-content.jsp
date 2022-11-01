@@ -207,7 +207,7 @@
         <a href="" class="btn btn-outline-secondary">&gt;&gt;</a>
     </div>
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="/md/member/myfiles/" method="post" enctype="multipart/form-data">
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
             <div class="modal-dialog modal-dialog-centered">

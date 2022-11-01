@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.md.member.vo.MemberVo;
 import com.kh.md.organization.service.OrganizationService;
 import com.kh.md.organization.vo.OrganizationVo;
 import com.kh.md.organization.vo.TreeVo;
@@ -33,7 +35,6 @@ public class OrgnaizationController {
 	public String tree(Model model) {
 		List<OrganizationVo> list = orgService.getTree();
 		Gson gson = new Gson();
-		System.out.println(list);
 		List<TreeVo> newList = new ArrayList<>();
 		for(OrganizationVo org : list) {
 			TreeVo vo = new TreeVo();
@@ -48,11 +49,13 @@ public class OrgnaizationController {
 		model.addAttribute("tree",tree);
 		return "organization/tree";
 	}
-	@PostMapping(value="/tree/{num}",produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String treeDetail(@PathVariable String num) {
-		
-		return "부서번호 : "+num;
+	
+	@GetMapping(value="/tree/{deptNo}")
+	public String treeDetail(@PathVariable String deptNo, Model model) {
+		List<MemberVo> memberList = orgService.getTreeDetail(deptNo);
+		System.out.println(memberList);
+		model.addAttribute("memberList" , memberList);
+		return "organization/tree-detail";
 	}
 	
 }
