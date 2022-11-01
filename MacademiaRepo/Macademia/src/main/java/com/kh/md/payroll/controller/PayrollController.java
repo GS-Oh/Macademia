@@ -99,9 +99,10 @@ public class PayrollController {
 			
 			if(checkType == "manage") {
 				return "payroll/management";
-			}
+			}			
 			
 			return "payroll/create";
+			
 			
 		} else {
 			return "";
@@ -111,7 +112,7 @@ public class PayrollController {
 	}
 	
 	//급여대장 작성 ( 작성하기 화면 )
-	@GetMapping("create/detail")
+	@PostMapping("create/detail")
 	public String createDetail(PayrollVo prVo, Model model) {
 		
 		model.addAttribute("prVo", prVo);
@@ -120,7 +121,7 @@ public class PayrollController {
 	
 	
 	//급여대장 작성 ( 작성하기 처리 )
-	@PostMapping("create/detail")
+	@PostMapping("create/detail/write")
 	public String createDetail(PayrollVo prVo) {
 		
 		int result = ps.insertSalaryBook(prVo);

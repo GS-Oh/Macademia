@@ -44,28 +44,24 @@
 	<insert id="insertSalaryBook">
 		INSERT INTO SALARY_BOOK 
 		(
-			 SAL_NO
-			,WRITER_NO
-			,TARGET_NO
-			,PAY_DATE
-			,PAY
-			,TAXFREE
-			,ATTENDANCE
-			,ATTENDANCE_PLUS
-			,TECHNICAL
-			,SPECIALDUTY
-			,EMERGENCY
-			,LUNCH_FEE
-			,HOLIDAY
-			,SUBSIDY
-			,PUBLIC_ACTIVITY
-			,OTHER
-			,CONTRIBUTION
-			,LONGTERM_CARE
-			,MUTUAL_FEE
-			,SAFE_DEPOSIT
-			,INCOME_TAX
-			,LOCAL_TAX
+		    SAL_NO      	
+			,WRITER_NO      	
+			,TARGET_NO   	
+			,PAY_DATE    	
+			,PAY	            
+			,ATTENDANCE	    
+			,ATTENDANCE_PLUS	
+			,TECHNICAL	    
+			,SPECIALDUTY	    
+			,EMERGENCY	    
+			,LUNCH_FEE	    
+			,HOLIDAY	        
+			,SUBSIDY	        
+			,PUBLIC_ACTIVITY	
+			,CONTRIBUTION	
+			,MUTUAL_FEE	    
+			,SAFE_DEPOSIT	
+		    ,OTHER	        
 		)
 		VALUES
 		(
@@ -74,23 +70,45 @@
 			,#{targetNo}
 			,#{payDate}
 			,#{pay}
-			,#{taxfree}
-			,#{attendance}
-			,#{attendancePlus}
-			,#{technical}
-			,#{specialduty}
-			,#{emergency}
-			,#{lunchFee}
-			,#{holiday}
-			,#{subsidy}
-			,#{publicActivity}
-			,#{other}
-			,#{contribution}
-			,#{longtermCare}
-			,#{mutualFee}
-			,#{safeDeposit}
-			,#{incomeTax}
-			,#{localTax}
+			<if test="attendance == null">,null</if>
+			<if test="attendance != null">,#{attendance}</if>
+			
+			<if test="attendancePlus == null">,null</if>
+			<if test="attendancePlus != null">,#{attendancePlus}</if>
+			
+			<if test="technical == null">,null</if>
+			<if test="technical != null">,#{technical}</if>
+			
+			<if test="specialduty == null">,null</if>
+			<if test="specialduty != null">,#{specialduty}</if>
+			
+			<if test="emergency == null">,null</if>
+			<if test="emergency != null">,#{emergency}</if>
+			
+			<if test="lunchFee == null">,null</if>
+			<if test="lunchFee != null">,#{lunchFee}</if>
+			
+			<if test="holiday == null">,null</if>
+			<if test="holiday != null">,#{holiday}</if>
+			
+			<if test="subsidy == null">,null</if>
+			<if test="subsidy != null">,#{subsidy}</if>
+			
+			<if test="publicActivity == null">,null</if>
+			<if test="publicActivity != null">,#{publicActivity}</if>
+			
+			<if test="contribution == null">,null</if>
+			<if test="contribution != null">,#{contribution}</if>
+			
+			<if test="mutualFee == null">,null</if>
+			<if test="mutualFee != null">,#{mutualFee}</if>
+			
+			<if test="safeDeposit == null">,null</if>
+			<if test="safeDeposit != null">,#{safeDeposit}</if>
+			
+			<if test="other == null">,null</if>
+			<if test="other != null">,#{other}</if>
+		
 		)
 		
 	
