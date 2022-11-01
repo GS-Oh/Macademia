@@ -1,6 +1,7 @@
 package com.kh.md.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardServiceImpl implements BoardService {
 	
 	private final BoardDao boardDao;
-
-	@Override
-	public List<BoardVo> get() {
-		System.out.println(boardDao.findAll());
-		return boardDao.findAll();
-	}
-	//게시글 작성
+		
+		//게시글 작성
 		@Override
 		public int insertBoard(BoardVo vo) {
 			int result = boardDao.insertBoard(vo);
@@ -69,5 +65,16 @@ public class BoardServiceImpl implements BoardService {
 		@Override
 		public int increaseHit(String no) {
 			return boardDao.increaseHit(no);
+		}
+		
+		//게시글 검색하기
+		@Override
+		public List<BoardVo> searchList(PageVo pv, Map<String, String> map) {
+			return boardDao.searchList(pv, map);
+		}
+
+		@Override
+		public int selectSearchCount(Map<String, String> map) {
+			return boardDao.selectSearchCount(map);
 		}
 }

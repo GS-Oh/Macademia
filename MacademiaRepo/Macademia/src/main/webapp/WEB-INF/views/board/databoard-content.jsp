@@ -3,8 +3,8 @@
 
  <div class="board_wrap">
 	<div class="board_title">
-	    <strong>자료공유게시판</strong>
-	    <p>특정 게시판에 대한 간단한 설명~~</p>
+	    <strong>자료공유 게시판</strong>
+	   
 	</div>
 	<div class="board_list_wrap">
 	    <div class="board_list">
@@ -16,65 +16,42 @@
 	            <div class="count">조회</div>
 	        </div>
 	        <div>
-	            <div class="num">5</div>
-	            <div class="title"><a href="/md/board/detail">글 제목이 들어갑니다.</a></div>
-	            <div class="writer">김이름</div>
-	            <div class="date">2022.10.13</div>
-	            <div class="count">33</div>
-	        </div>
-	        <div>
-	            <div class="num">4</div>
-	            <div class="title"><a href="/md/board/detail">글 제목이 들어갑니다.</a></div>
-	            <div class="writer">김이름</div>
-	             <div class="date">2022.10.13</div>
-	            <div class="count">33</div>
-	        </div>
-	        <div>
-	            <div class="num">3</div>
-	            <div class="title"><a href="/md/board/detail">글 제목이 들어갑니다.</a></div>
-	            <div class="writer">김이름</div>
-	             <div class="date">2022.10.13</div>
-	            <div class="count">33</div>
-	        </div>
-	        <div>
-	            <div class="num">2</div>
-	            <div class="title"><a href="/md/board/detail">글 제목이 들어갑니다.</a></div>
-	            <div class="writer">김이름</div>
-	             <div class="date">2022.10.13</div>
-	            <div class="count">33</div>
-	        </div>
-	        <div>
-	            <div class="num">1</div>
-	            <div class="title"><a href="/md/board/detail">글 제목이 들어갑니다.</a></div>
-	            <div class="writer">김이름</div>
-	             <div class="date">2022.10.13</div>
-	            <div class="count">33</div>
-	        </div>
+		        <c:forEach items="${voList}" var="x" >
+			    	<div class="num" >${x.no}</div>
+			    	<div class="title title-center" style="text-align: center;"><a href="${root}/board/detail/${x.no}">${x.title}</a></div>
+			    	<div class="writer">${x.userNo}</div>
+			    	<div class="date">${x.regdate}</div>
+			    	<div class="count">${x.hit}</div>
+			    </c:forEach>
+    		</div>
 	    </div>
 	    
 	    <div class="board_page">
-	        <a href="#" class="bt first"><<</a>
-	        <a href="#" class="bt prev"><</a>
-	        <a href="#" class="num on">1</a>
-	   	     <a href="#" class="num">2</a>
-	        <a href="#" class="num">3</a>
-	        <a href="#" class="num">4</a>
-	        <a href="#" class="num">5</a>
-	        <a href="#" class="bt next">></a>
-	        <a href="#" class="bt last">>></a>
+	       <c:if test="${pv.startPage ne 1}">
+	    	<a href="${root}/board/data/${pv.startPage - 1}" class="bt prev"><</a>    	
+    		</c:if>
+    	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" var="i">    		    		    	
+	    	<a href="${root}/board/data/${i}" class="num">${i}</a>
+    	</c:forEach>
+	    <c:if test="${pv.endPage ne pv.maxPage}">
+	    	<a href="${root}/board/data/${pv.endPage + 1}" class="bt next">></a>	    
+	    </c:if>	
+	       
 	    </div>
 	    
 	    <div class="Search-area">
 	        <div class="Search-area-content">
-		        <select>
-	        		<option value="">제목</option>
-		        	<option value="">내용</option>
-		        	<option value="">글쓴이</option>
+         	<form action="/md/board/search/${i}" method="get" >
+		        <select name="condition">
+	        		<option value="title">제목</option>
+		        	<option value="content">내용</option>
+		        	<option value="userNo">글쓴이</option>
 		        	<option value="" selected="selected">전체</option>		
-		        </select>
-		        <input type="text" name="keyword" placeholder="입력해 주세요">
-		        <input type="submit" value="검색하기">  	
-	        </div>
+		        </select >
+			        <input type="text" name="keyword" placeholder="입력해 주세요">
+			        <input type="submit" value="검색하기">  	
+       		</div>
+	        </form>
 	    </div>
 	   
 	    <div class="bt_wrap">

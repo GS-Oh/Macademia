@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>게시판</title>
+	<title>게시판 작성페이지</title>
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
 	<link rel="stylesheet" href="../resources/summernote/summernote-lite.css">
