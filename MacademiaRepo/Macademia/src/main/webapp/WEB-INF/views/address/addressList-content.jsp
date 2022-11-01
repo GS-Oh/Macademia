@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>주소록</title>
     
     <style>
     main {
