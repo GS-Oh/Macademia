@@ -3,42 +3,35 @@
 
  <div class="board_wrap">
         <div class="board_title">
-           <strong>게시판</strong>
-            <p>특정 게시판에 대한 간단한 설명~~</p>
+          <strong>${vo.categoryNo}의 ${vo.no}번 게시물</strong>
         </div>
         <div class="board_view_wrap">
            
             <div class="board_view">
+                
                 <div class="title">
-                    글 제목이 들어갑니다.
+                    ${vo.title}
                 </div>
                 <div class="info">
                     <dl>
                         <dt>번호</dt>
-                        <dd>1</dd>
+                        <dd>${vo.no}</dd>
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
-                        <dd>김이름</dd>
+                        <dd>${vo.userNo}</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>2022.10.13</dd>
+                        <dd>${vo.regdate}</dd>
                     </dl>
                     <dl>
                         <dt>조회</dt>
-                        <dd>33</dd>
+                        <dd>${vo.hit}</dd>
                     </dl>
                 </div>
                 <div class="cont">
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다<br>
-                    글 내용이 들어갑니다
+                    ${vo.content}
                 </div>
             </div>
             <div class="board_view">
@@ -65,7 +58,7 @@
              </div>   
             <div class="bt_wrap">
                 <a href="/md/board/main" class="on">목록</a>
-                <a href="/md/board/edit">수정</a>
+                <a href="${root}/board/edit/${vo.no}">수정</a>
             </div>
         </div>
     </div>

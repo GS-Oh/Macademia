@@ -5,6 +5,7 @@
 	<title>자유게시판</title>
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
+	<%@include file="/resources/css/board/freeboard.css" %>
 	
 </head>
 <body>
