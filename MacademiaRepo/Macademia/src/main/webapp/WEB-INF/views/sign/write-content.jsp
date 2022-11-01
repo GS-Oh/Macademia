@@ -135,7 +135,7 @@ color:#fff
 	color:#6667AB;
 	cursor:pointer;
  }
- #select-right{
+ #select_right{
 	width:260px;
 	height:370px;
 	border: 3px solid #6667AB;
@@ -264,7 +264,7 @@ color:#fff
 					  </svg></a>
 				</div>
 				<div class="w-50">
-					<select multiple id="select-right">
+					<select multiple id="select_right">
 
 
 					</select>
@@ -275,6 +275,7 @@ color:#fff
 
 
         <div class="modal-footer">
+		  <button type="button"  id="select_complete" data-dismiss="modal">선택완료</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -302,7 +303,7 @@ $('#select_top').on('change', function(){
 		dataType: 'json',
 		success: function(data){
 			console.log("성공")
-			console.log(data)
+			
 			$('#select_box option').remove();
 			 let str;
 			$.each(data, function(i){
@@ -321,28 +322,29 @@ $('#select_top').on('change', function(){
 	})
 $('#addUser').on('click', function(){
 	let userCode = $('#select_box option:selected').val();
-	let userOption = $('#select_box option[value=' + userCode + ']')[0].outerHTML;
-	let addTypeCode = $(this).attr('id');
-	let apprSelectBox = $('#select-right[id=' +addTypeCode + ']');
-	let selectedOption = apprSelectBox.find('option').val();
+	let userOption = $('#select_box option[value=' + userCode + ' ]')[0].outerHTML;
 
-	//중복체크
-	let selectedOptionVal = [];
-	$($('#select-right[id=' +addTypeCode+'] option')).each(function(){
-		var selected = $(this).val();
-		selectedOptionVal.push(selected);
-	})
-	if($.inArray(userCode, selectedOptionVal) != -1){
-		alert('해당 결재타입에 추가한 결재자는 중복추가 할수 없습니다');
-
-	}else{
-		apprSelectBox.append(userOption);
-	}
+	$('#select_right').append(userOption)
 })
-</script>
 
-<script>
+$("#deleteUser").on('click',function(){
+	let userCode = $('#select_right option:selected').val();
+	let userOption = $('#select_right option[value=' + userCode+']');
 
+	$('#select_right option[value='+userCode+']').remove();
+}
+
+)
+var i = 0
+$("#select_complete").on('click',function(){
+	var arr = new Array(4);
+	while(i<4){
+		arr[i] = $('select_right option')[0].outerHTML;
+		i++;
+		 
+	}
+	console.log(arr);
+	console.log($('#select_right').text());
    /*  var langSelect = document.getElementById("select_top");
      
     // select element에서 선택된 option의 value가 저장된다.
@@ -352,7 +354,7 @@ $('#addUser').on('click', function(){
     var selectText = langSelect.options[langSelect.selectedIndex].text;
 } */
 
-
+});
 
 
 
