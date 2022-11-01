@@ -7,7 +7,7 @@ public class CurriculumVo {
 
 	private String no;
 	private String classNo;
-	private String curriculumName;
-	private String curriculumContent;
+	private String[] curriculumName;
+	private String[] curriculumContent;
 	
 }
