@@ -31,6 +31,7 @@ public class PayrollServiceImpl implements PayrollService{
 		return dao.selectPayrollOption(sst, prVo);
 	}
 
+	
 	//급여대장 작성 ( 작성하기 처리 )
 	@Override
 	public int insertSalaryBook(PayrollVo prVo) {
@@ -38,12 +39,46 @@ public class PayrollServiceImpl implements PayrollService{
 	}
 
 
-
-
 	//급여지급내역 ( 메인페이지 )
 	@Override
 	public List<PayrollVo> selectPayRollList(PayrollVo prVo) {
-		return dao.selectPayRollList(sst, prVo);
+		
+		List<PayrollVo> payRollList = dao.selectPayRollList(sst, prVo);
+		
+		for (int i = 0; i < payRollList.size(); i++) {
+			
+			PayrollVo temp = payRollList.get(i);
+			
+			int taxFree = temp.getAttendance() + temp.getAttendancePlus() + temp.getTechnical() + temp.getSpecialduty() + temp.getEmergency() + temp.getLunchFee() + temp.getHoliday() + temp.getSubsidy() + temp.getPublicActivity();
+			temp.setTaxfree(taxFree);
+			
+			int baseMonthPay = temp.getPay() - taxFree;
+			int longTermcare = ((int)((baseMonthPay*0.03335)*0.5)/1000 )* 1000 + 1000;
+			int employmentpay = ((int)(baseMonthPay*0.045)/1000 )* 1000 + 1000;
+			int	nationalPension = ((int)(baseMonthPay*0.045)/1000 )* 1000 + 1000;
+			int healthPremium = ((int)(baseMonthPay*0.03335)/1000 )* 1000 + 1000;
+			int incomeTax = ((int)(temp.getPay()*0.043)/1000 )* 1000 + 1000;
+			int localTax = ((int)((temp.getPay()*0.043)*0.1)/1000 )* 1000 + 1000;
+			
+			temp.setBaseMonthPay(baseMonthPay);
+			temp.setNationalPension(nationalPension);
+			temp.setHealthPremium(healthPremium);
+			temp.setLongtermCare(longTermcare);
+			temp.setEmploymentPay(employmentpay);
+			temp.setIncomeTax(incomeTax);
+			temp.setLocalTax(localTax);
+			
+			//  공제총액 : 총지급액 : 실급여액
+			int totlaDeduction = temp.getContribution() + temp.getMutualFee() + temp.getSafeDeposit()+ temp.getOther() + longTermcare + employmentpay ;
+			temp.setTotalDeduction(totlaDeduction);
+			int totalPayment = temp.getPay() + taxFree;
+			temp.setTotalPayment(totalPayment);
+			int actualPayment =	totalPayment - totlaDeduction - nationalPension - healthPremium - incomeTax - localTax;	
+			temp.setActualPayment(actualPayment);
+			
+		}
+		
+		return payRollList; 
 	}
 
 	

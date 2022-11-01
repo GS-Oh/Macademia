@@ -192,7 +192,7 @@
 	            	
 	            		
 						<!-- 급여대장 작성 -->
-						<form class="content-form" action="/md/payroll/create/detail" method="get">
+						<form class="content-form" action="/md/payroll/create/detail" method="post">
 							
 							<div class="management-table-content"><input type="text" value="${prVo.salNo}" name="salNo" style="width: 100%;" readonly></div>
 							<div class="management-table-content"><input type="text" value="${prVo.payDate}" name="payDate" style="width: 100%;" readonly></div>
