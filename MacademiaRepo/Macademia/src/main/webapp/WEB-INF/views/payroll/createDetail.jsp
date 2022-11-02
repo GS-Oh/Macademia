@@ -149,53 +149,53 @@
                 <div class="main-table-grid">
                     <h4>보수</h4>
                     <div>보수계</div>
-                    <div><input class="" type="text" name="totalRepair"  style="width:100%; height:100%;"></div>
+                    <div><input class="" type="text" name="totalRepair"  style="width:100%; height:100%;" onfocus="this.oldvalue = this.value;"></div>
                     <div>월 급여액</div>
-                    <div><input class="repair-price-area" type="text"  value="${prVo.pay}" name="pay"></div>
+                    <div><input class="repair-price-area" type="text"  value="${prVo.pay}" name="pay" onfocus="this.oldvalue = this.value;"></div>
                     <div>정근수당</div>
-                    <div><input class="repair-price-area" type="text"  value="${prVo.attendance}" name="attendance"></div>
+                    <div><input class="repair-price-area" type="text"  value="${prVo.attendance}" name="attendance" onfocus="this.oldvalue = this.value;"></div>
                     <div>정근가산금</div>
-                    <div><input class="repair-price-area" type="text"  value="${prVo.attendancePlus}" name="attendancePlus"></div>
+                    <div><input class="repair-price-area" type="text"  value="${prVo.attendancePlus}" name="attendancePlus" onfocus="this.oldvalue = this.value;"></div>
                     <div>기술정보수당</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.technical}" name="technical"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.technical}" name="technical" onfocus="this.oldvalue = this.value;"></div>
                     <div>특수직무수당</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.specialduty}" name="specialduty"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.specialduty}" name="specialduty" onfocus="this.oldvalue = this.value;"></div>
                     <div>비상근무수당</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.emergency}" name="emergency"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.emergency}" name="emergency" onfocus="this.oldvalue = this.value;"></div>
                     <div>정액급식비</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.lunchFee}" name="lunchFee"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.lunchFee}" name="lunchFee" onfocus="this.oldvalue = this.value;"></div>
                     <div>명절휴가비</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.holiday}" name="holiday"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.holiday}" name="holiday" onfocus="this.oldvalue = this.value;"></div>
                     <div>직급보조비</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.subsidy}" name="subsidy"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.subsidy}" name="subsidy" onfocus="this.oldvalue = this.value;"></div>
                     <div>대민활동비</div>
-                    <div><input class="repair-price-area" type="text" value="${prVo.publicActivity}" name="publicActivity"></div>
+                    <div><input class="repair-price-area" type="text" value="${prVo.publicActivity}" name="publicActivity" onfocus="this.oldvalue = this.value;"></div>
                 </div>
 
                 <div class="main-table-grid">
                     <h4 >공제</h4>
                     <div>공제계</div>
-                    <div><input class="" type="number" name="totalDeduction" value="0" style="width:100%; height:100%;"></div>
+                    <div><input class="" type="text" name="totalDeduction" value="0" style="width:100%; height:100%;" onfocus="this.oldvalue = this.value;"></div>
                     <div>기여금</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.contribution}" name="contribution"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.contribution}" name="contribution" onfocus="this.oldvalue = this.value;"></div>
                     <div>대한공제회비</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.mutualFee}" name="mutualFee"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.mutualFee}" name="mutualFee" onfocus="this.oldvalue = this.value;"></div>
                     <div>직장금고회비</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.safeDeposit}" name="safeDeposit"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.safeDeposit}" name="safeDeposit" onfocus="this.oldvalue = this.value;"></div>
                     <div>기타공제</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.other}" name="other"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.other}" name="other" onfocus="this.oldvalue = this.value;"></div>
                     <div>국민연금</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.nationalPension}" name="nationalPension"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.nationalPension}" name="nationalPension" onfocus="this.oldvalue = this.value;"></div>
                     <div>건강보험료</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.healthPremium}" name="healthPremium"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.healthPremium}" name="healthPremium" onfocus="this.oldvalue = this.value;"></div>
                     <div>장기요양보험료</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.longtermCare}" name="longtermCare"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.longtermCare}" name="longtermCare" onfocus="this.oldvalue = this.value;"></div>
                     <div>고용보험료</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.employmentPay}" name="employmentPay"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.employmentPay}" name="employmentPay" onfocus="this.oldvalue = this.value;"></div>
                     <div>소득세</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.incomeTax}" name="incomeTax"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.incomeTax}" name="incomeTax" onfocus="this.oldvalue = this.value;"></div>
                     <div>지방소득세</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.localTax}" name="localTax"></div>
+                    <div><input class="deduction-price-area" type="text" value="${prVo.localTax}" name="localTax" onfocus="this.oldvalue = this.value;"></div>
                     
                    
                     
@@ -223,17 +223,21 @@
        
        const realPay = document.querySelector('#realAmount');
 
+       
+
         // 보수 합 + 실수령액 처리
        for(let i=0; i<repairPrice.length; i++){
 
     	   repairPrice[i].addEventListener('change',function(){
-                let totalValue = totalRepair.value;
-                let inputValue = repairPrice[i].value;
-                totalRepair.value = parseInt(totalValue) +  parseInt(inputValue);
+                //보수 합
+                let totalValue = (totalRepair.value).replace(/,/g, "");
+                let inputValue = (repairPrice[i].value).replace(/,/g, "");
+                let oldvalue = (repairPrice[i].oldvalue).replace(/,/g, "");
+                totalRepair.value = parseInt(totalValue) +  parseInt(inputValue) - parseInt(oldvalue);
 
                 //실수령액
-                let totalRepairValue = totalRepair.value;
-                let totalDeductionValue = totalDeduction.value;
+                let totalRepairValue = totalRepair.value.replace(/,/g, "");;
+                let totalDeductionValue = totalDeduction.value.replace(/,/g, "");;
                 realPay.innerText = parseInt(totalRepairValue) - parseInt(totalDeductionValue);
 
                 //콤마작업
@@ -243,20 +247,25 @@
                 num02 = num01.replace(/\D/g,""); 
                 num01 = setComma(num02);
                 repairPrice[i].value =  num01;
+
+                totalRepair.value = setComma((totalRepair.value).replace(/\D/g,""));
+                totalDeduction.value = setComma((totalDeduction.value).replace(/\D/g,""));
+                realPay.innerText = setComma((realPay.innerText).replace(/\D/g,""));
             })
         } 
 
         // 공제 합 + 실수령액 처리
-       for(let i=0; i<deductionPrice.length; i++){
-
-    	   deductionPrice[i].addEventListener('change',function(){
-                let totalValue = totalDeduction.value;
-                let inputValue = deductionPrice[i].value;
-                totalDeduction.value = parseInt(totalValue) +  parseInt(inputValue);
+        for(let i=0; i<deductionPrice.length; i++){
+            deductionPrice[i].addEventListener('change',function(){
+               //공제 합
+                let totalValue = (totalDeduction.value).replace(/,/g, "");
+                let inputValue = (deductionPrice[i].value).replace(/,/g, "");
+                let oldvalue = (deductionPrice[i].oldvalue).replace(/,/g, "");
+                totalDeduction.value = parseInt(totalValue) +  parseInt(inputValue) - parseInt(oldvalue);
 
                  //실수령액
-                let totalRepairValue = totalRepair.value;
-                let totalDeductionValue = totalDeduction.value;
+                let totalRepairValue = totalRepair.value.replace(/,/g, "");;
+                let totalDeductionValue = totalDeduction.value.replace(/,/g, "");;
                 realPay.innerText = parseInt(totalRepairValue) - parseInt(totalDeductionValue);
 
                 //콤마작업
@@ -266,8 +275,15 @@
                 num02 = num01.replace(/\D/g,""); 
                 num01 = setComma(num02);
                 deductionPrice[i].value =  num01;
+
+                totalRepair.value = setComma((totalRepair.value).replace(/\D/g,""));
+                totalDeduction.value = setComma((totalDeduction.value).replace(/\D/g,""));
+                realPay.innerText = setComma((realPay.innerText).replace(/\D/g,""));
             })
-       } 
+
+
+            
+        } 
 
 
        //콤마작업함수
@@ -300,27 +316,21 @@
 
     }
     
-    //콤마작업
-    let num01;
-    let num02;
-    num01 = monthPay.value;
-    num02 = num01.replace(/\D/g,""); 
-    num01 = setComma(num02);
-    monthPay.value =  num01;
+    // let num01;
+    // let num02;
+    // num01 = monthPay.value;
+    // num02 = num01.replace(/\D/g,""); 
+    // num01 = setComma(num02);
+    // monthPay.value =  num01;
+    
+    //콤마작업 - 위의 작업 한 줄로 만듬
+    monthPay.value = setComma((monthPay.value).replace(/\D/g,""));
+    totalRepair.value = setComma((totalRepair.value).replace(/\D/g,""));
+    totalDeduction.value = setComma((totalDeduction.value).replace(/\D/g,""));
+    realPay.innerText = setComma((realPay.innerText).replace(/\D/g,""));
+    
 
-    // let num03;
-    // let num04;
-    // num03 = totalRepair.value;
-    // num04 = num03.replace(/\D/g,""); 
-    // num03 = setComma(num04);
-    // totalRepair.innerText =  num03;
-
-    // let num05;
-    // let num06;
-    // num05 = realPay.innerText;
-    // num06 = num05.replace(/\D/g,""); 
-    // num05 = setComma(num06);
-    // realPay.innerText =  num05;
+    
 
 </script>
 
