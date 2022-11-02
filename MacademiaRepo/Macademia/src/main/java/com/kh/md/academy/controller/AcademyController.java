@@ -1,6 +1,8 @@
 package com.kh.md.academy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.md.academy.service.AcademyService;
 import com.kh.md.academy.vo.CategoryVo;
@@ -54,7 +57,7 @@ public class AcademyController {
 	@GetMapping("search/{pno}")
 	public String search(Model model, @PathVariable int pno) {
 		
-		int totalCount = service.selectTotalStd();
+		int totalCount = service.countTotalStd();
 		
 		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
@@ -74,23 +77,57 @@ public class AcademyController {
 		return "academy/search-detail";
 	}
 	
-	@GetMapping("search/detail/edit")
-	public String searchDetailEdit() {
+	@GetMapping("search/detail/edit/{no}")
+	public String searchDetailEdit(@PathVariable String no, Model model) {
+		//디비가서 수강생 한명 조회(no)
+		StudentVo svo = service.selectOneStudent(no);
+		
+		model.addAttribute("svo", svo);
 		return "academy/search-detail-edit";
 	}
 	
 	@GetMapping("addStd")
 	public String addStudent(Model model) {
  		//모달창에 넘겨줄 모든 클래스 리스트 가져오기
- 		List<ClassVo> classList = service.selectClassList();
-
- 		model.addAttribute("classList", classList);
+// 		List<ClassVo> classList = service.selectClassList();
+// 		model.addAttribute("classList", classList);
 		return "academy/add-student";
 	}
 	
-	@GetMapping("curriculum")
-	public String curriculum() {
+	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기
+	@GetMapping("curriculum/{pno}")
+	public String curriculum(Model model, @PathVariable int pno) {
+		//# of total class
+		int totalCount = service.countTotalClass();
+		
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		List<ClassVo> classList = service.selectClassList(pvo);
+		
+		model.addAttribute("classList", classList);
+		model.addAttribute("pvo", pvo);
+		
 		return "academy/curriculum";
+	}
+	
+	//ajax로 전체 클래스 리스트 보여주기
+	@GetMapping("classList/{pno}")
+	@ResponseBody
+	public Map showClasList(@PathVariable int pno) {
+		int totalCount = service.countTotalClass();
+		
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		List<ClassVo> classList = service.selectClassList(pvo);
+		
+		Map map = new HashMap<List<ClassVo>, PageVo>();
+		map.put("classList", classList);
+		map.put("pvo", pvo);
+		
+		System.out.println("classList : " + classList);
+		System.out.println("pvo : " + pvo);
+		
+		return map;
 	}
 	
 	@GetMapping("addCurr")
@@ -127,7 +164,6 @@ public class AcademyController {
  	}
 	
 	//커리큘럼 추가(인서트) 하기
- 	@Transactional
 	@PostMapping("addCurr")
 	public String addCurriculum(Model model, ClassVo vo, CurriculumVo cvo) {
 		
@@ -137,7 +173,7 @@ public class AcademyController {
  		System.out.println("cContent : " + cvo.getCurriculumContent()[0]);
  		System.out.println("cContent : " + cvo.getCurriculumContent()[1]);
  		System.out.println("cContent : " + cvo.getCurriculumContent()[2]);
- 		System.out.println(cvo.getCurriculumName().length);
+ 		System.out.println("length: " + cvo.getCurriculumName().length);
  		
 		int classInsert = service.insertClass(vo);
 		int curInsert = service.insertCurriculum(cvo);
@@ -151,6 +187,14 @@ public class AcademyController {
 			return "error/errorPage";
 		}
 		
+	}
+	
+	//수강생 정보 수정
+	@PostMapping("search/detail/edit/{no}")
+	public String searchDetailEdit(@PathVariable String no) {
+		
+		
+		return "search/detail";
 	}
 	
 	

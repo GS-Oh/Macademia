@@ -153,16 +153,15 @@
     .add-curriculum-area-curriculum-body>div{
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 70px;
         justify-content: center;
         align-items: center;
         border-bottom: 1px solid lightgray;
-        padding: 0vw 1vw 0vw 1vw;
+        padding: 1vw;
     }
     .add-curriculum-area-curriculum-body>div>textarea{
-        height: 50px;
+        /* height: 50px; */
         text-align: center;
-        resize: none;
+        /* resize: none; */
     }
     .right-border{
         border-right: 1px solid lightgray;
@@ -312,7 +311,7 @@
                         <textarea name="curriculumName" placeholder="단원명을 입력하세요"></textarea>
                     </div>
                     <div>
-                        <textarea name="curriculumContent" placeholder="단원의 내용을 입력하세요"></textarea>
+                        <textarea name="curriculumContent" placeholder="학습할 내용을 입력하세요"></textarea>
                     </div>
                 </div>
                 <div id="curriculum-addition-area">

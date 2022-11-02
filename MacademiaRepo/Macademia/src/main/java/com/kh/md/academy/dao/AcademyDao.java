@@ -31,13 +31,20 @@ public interface AcademyDao {
 	//수강생리스트 셀렉트
 	List<StudentVo> selectStudentList(SqlSessionTemplate sst, PageVo pvo);
 
-	//모든 클래스 리스트 가져오기
+	//모든 클래스 리스트 가져오기(그냥)
 	List<ClassVo> selectClassList(SqlSessionTemplate sst);
 
+	//모든 클래스 리스트 가져오기(pvo)
+	List<ClassVo> selectClassList(SqlSessionTemplate sst, PageVo pvo);
+	
 	//학생 한명 조회하기
 	StudentVo selectOneStudent(SqlSessionTemplate sst, String no);
 
 	//페이징> 학생 전체 수 조회
-	int selectTotalStd(SqlSessionTemplate sst);
+	int countTotalStd(SqlSessionTemplate sst);
+
+	//페이징>전체 클래스 리스트 수 조회
+	int countTotalClass(SqlSessionTemplate sst);
+
 	
 }

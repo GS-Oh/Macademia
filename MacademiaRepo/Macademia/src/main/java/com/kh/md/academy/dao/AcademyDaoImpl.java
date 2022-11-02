@@ -71,6 +71,17 @@ public class AcademyDaoImpl implements AcademyDao{
 		return sst.selectList("academyMapper.selectClassList", null);
 	}
 
+	//모든 클래스 리스트 가져오기(pvo)
+	@Override
+	public List<ClassVo> selectClassList(SqlSessionTemplate sst, PageVo pvo) {
+
+		int offset = (pvo.getCurrentPage() - 1) * pvo.getBoardLimit();
+		
+		RowBounds rb = new RowBounds(offset, pvo.getBoardLimit());
+		
+		return sst.selectList("academyMapper.selectClassList", null, rb);
+	}
+
 	//학생 한 명 조회
 	@Override
 	public StudentVo selectOneStudent(SqlSessionTemplate sst, String no) {
@@ -79,8 +90,14 @@ public class AcademyDaoImpl implements AcademyDao{
 
 	//페이징>학생 전체 리스트 수 조회
 	@Override
-	public int selectTotalStd(SqlSessionTemplate sst) {
+	public int countTotalStd(SqlSessionTemplate sst) {
 		return sst.selectOne("academyMapper.selectTotalCount");
+	}
+
+	//페이징>전체 학생 리스트 수 조회
+	@Override
+	public int countTotalClass(SqlSessionTemplate sst) {
+		return sst.selectOne("academyMapper.selectTotalClassCount");
 	}
 
 	

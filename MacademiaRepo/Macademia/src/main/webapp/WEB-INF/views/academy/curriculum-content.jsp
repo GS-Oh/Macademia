@@ -127,10 +127,10 @@
 
 <script>
     $(function(){
-        $('.select-one-class').click(function(){
-            console.log(this);
-            location.href="/md/student/curriculum/detail";
-        });
+        // $('.select-one-class').click(function(){
+        //     console.log(this);
+        //     location.href="/md/student/curriculum/detail";
+        // });
         
     });
         	
@@ -185,138 +185,50 @@
             </div>
         </div>
 
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>22.11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>22.11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>종강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>예정</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
-
-        <div class="select-one-class">
-            <div>22.10.17</div>
-            <div>디지털 컨버전스</div>
-            <div>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</div>
-            <div>심투용</div>
-            <div>20-D</div>
-            <div>11.24</div>
-            <div>15:30 ~ 22:00</div>
-            <div>30명</div>
-            <div>개강</div>
-        </div>
+        <c:forEach items="${classList}" var="l">
+            <div class="select-one-class">
+                <div>${l.beginDate}</div>
+                <div>${l.categoryNo}</div>
+                <div>${l.name}</div>
+                <div>${l.memberNo}</div>
+                <div>${l.classroom}</div>
+                <div>${l.endDate}</div>
+                <div>${l.startTime} ~ ${l.finishTime}</div>
+                <div>${l.max}명</div>
+                <c:if test="${l.status eq 'O'}">
+                    <div>예정</div>
+                </c:if>
+                <c:if test="${l.status eq 'P'}">
+                    <div>개강</div>
+                </c:if>
+                <c:if test="${l.status eq 'F'}">
+                    <div>종강</div>
+                </c:if>
+            </div>
+        </c:forEach>
+        
         
     </div>
 
     <div id="page-area">
-        <div><a href=""><i class="fa-solid fa-angles-left"></i></a></div>
-        <div><a href=""><i class="fa-solid fa-angle-left"></i></a></div>
-        <div><a href="">1</a></div>
-        <div><a href="">2</a></div>
-        <div><a href="">3</a></div>
-        <div><a href="">4</a></div>
-        <div><a href="">5</a></div>
-        <div><a href=""><i class="fa-solid fa-angle-right"></i></a></div>
-        <div><a href=""><i class="fa-solid fa-angles-right"></i></a></div>
+        <c:if test="${pvo.startPage gt 5}">
+        	<div><a href="${root}/academy/curriculum/1"><i class="fa-solid fa-angles-left"></i></a></div>
+        </c:if>
+        
+        <c:if test="${pvo.startPage ne 1}">
+	        <div><a href="${root}/academy/curriculum/${pvo.startPage-1}"><i class="fa-solid fa-angle-left"></i></a></div>
+        </c:if>
+        
+        <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+	        <div><a href="${root}/academy/curriculum/${i}">${i}</a></div>
+        </c:forEach>
+        
+        <c:if test="${pvo.endPage ne pvo.maxPage}">
+        	<div><a href="${root}/academy/curriculum/${pvo.endPage+1}"><i class="fa-solid fa-angle-right"></i></a></div>
+        </c:if>
+        <c:if test="${pvo.endPage ne pvo.maxPage}">
+        	<div><a href="${root}/academy/curriculum/${pvo.maxPage}"><i class="fa-solid fa-angles-right"></i></a></div>
+        </c:if>	
     </div>
 
 </div>
