@@ -2,15 +2,15 @@ package com.kh.md.board.service;
 
 import java.util.List;
 import java.util.Map;
-
 import com.kh.md.board.vo.BoardVo;
 import com.kh.md.board.vo.PageVo;
+import com.kh.md.board.vo.SearchCriteria;
 
 public interface BoardService {
 		//게시글 insert
 		int insertBoard(BoardVo vo);
 		//게시글 목록조회
-		List<BoardVo> selectList(PageVo pv);
+		List<BoardVo> selectList(SearchCriteria searchCriteria);
 		//게시글 상세조회
 		BoardVo selectOne(String no);
 		//게시글 수정
@@ -24,5 +24,5 @@ public interface BoardService {
 		//게시글 검색하기
 		List<BoardVo> searchList(PageVo pv, Map<String, String> map);
 		//검색한 게시글 개수
-		int selectSearchCount(Map<String, String> map);
+		int selectSearchCount(SearchCriteria searchCriteria);
 }
