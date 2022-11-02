@@ -122,12 +122,8 @@
         text-align: center;
         font-size: 20px;
     }
-
-
- 
-
-
 </style>
+
 
 <div id="myboards-content">
     <div id="upload-btn-area">
@@ -140,18 +136,17 @@
     <div id="file-area">
         <c:forEach var="file" items="${fileList }">
             <div class="file-slot">
-                <a href="/md/resources/upload/private-files/${file.updateName }" download>
-                    <img src="/md/resources/upload/private-files/${file.updateName }" alt="${fn:substringAfter(file.updateName,'.')}" width="100%" height="100%">
+                <a href="/md/resources/upload/myfile/${file.updateName }" download>
+                    <img src="/md/resources/upload/myfile/${file.updateName }" alt="${fn:substringAfter(file.updateName,'.')}" width="100%" height="100%">
                     <span>${file.originName }</span>
                 </a>
-                <i id="x-btn" class="fa-regular fa-circle-xmark" onclick="deleteFile()"></i>
-                
+                <i id="x-btn" class="fa-regular fa-circle-xmark" onclick="deleteFile(${file.no })"></i>
             </div>
         </c:forEach>
     </div>
 
     <script>
-        function deleteFile(){
+        function deleteFile(fileNo){
             Swal.fire({
                     title: '정말로 삭제하시겠습니까?',
                     text: '삭제된 파일은 복구불가입니다.',
@@ -165,9 +160,11 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/md",
-                        data: { 'asdf': 123},
+                        url: "/md/myfile/delete/",
+                        data: { 'fileNo' : fileNo},
                         success: function(response) {
+                            // document.location.reload(true);
+                            $('#file-area').replaceWith(response);
                             Swal.fire(
                             '삭제성공',
                             '삭제완료되었습니다~',
@@ -186,9 +183,8 @@
             });
             
         }
-
-
     </script>
+
 
     
     <form action="/md/member/myfiles" method="get">
@@ -218,22 +214,49 @@
                     <h4 class="modal-title">파일업로드</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+                <form id="uploadForm">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input type="file" id="file-btn" name="file">
+                    </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <input id="file-btn" type="file" name="file">
-                </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="uploadBtn" class="btn btn-danger" data-bs-dismiss="modal">업로드</button>
+                    </div>
+                </form>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">업로드</button>
-                </div>
 
             </div>
             </div>
         </div>
     </form>
-
-
-
 </div>
+
+<script>
+
+    $('#uploadBtn').click(function(){
+        var form = $('#uploadForm')[0];
+        var formData = new FormData(form);
+        console.log(form);
+        console.log(formData);
+        $.ajax({
+            type:'POST',
+            enctype:'multipart/form-data',
+            url:'/md/myfile/insert',
+            data:formData,
+            dataType:'json',
+            processData:false,
+            contentType:false,
+            cache:false,
+            success:function(result){
+                console.log("success : ", result);
+            },
+            error:function(e){
+                console.log("error : ", e);
+            }
+        });
+    });
+
+    
+</script>

@@ -3,9 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<!-- jQuery ui - 자동완성용 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- jsTree -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+
 <style>
 
     #myboards-content{
@@ -15,48 +20,17 @@
         padding: 10px 0px;
 		font-family:'AppleSDGothicNeo','Noto Sans KR', sans-serif;
         font-size: 20px;
-        /* display: grid;
-        grid-template-columns: 1fr 3fr; */
+		
     }
-
-	#tree-detail{
-		/* border: 1px solid black; */
-		width: 100%;
-		/* margin-left: 10%; */
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		font-size: 15px;
-		font-weight: bold;
-		row-gap: 20px;
-		padding-top: 20px;
-		justify-items: center;
-        align-items: center;
-	}
-
-	.member{
-		/* border: 1px solid black; */
-		width: 200px;
-		height: 300px;
-	}
-	.member > img{
-		width: 150px;
-		height: 150px;
-	}
-	#head{
-		grid-column: 1/6;
-		margin: auto;
-	}
 	#search-area{
 		font-weight: 900;
 		font-family:'AppleSDGothicNeo','Noto Sans KR', sans-serif;
 		display: flex;
-		/* border: 1px solid black; */
 		justify-content: space-between;
-		width: 100%;
-		align-items: center;
+		width: 70vw;
 		margin-top: 20px;
-		height: 25px;
-		
+		align-items: center;
+		height: 30px;
 	}
 	h3{
 		display: inline-block;
@@ -68,62 +42,56 @@
 	}
 
 	#search-area button{
-		background-color: #6666AB !important;
+		background-color: rgb(102, 102, 171) !important;
 		border: none !important;
 	}
 	#search-area button:hover{
 		background-color: #525285 !important;
 	}
+	#searchInput{
+		font-size: 15px;
+	}
+
+	.ui-menu-item div.ui-state-hover,
+	.ui-menu-item div.ui-state-active {
+		color: #ffffff;
+		background-color: #6666AB;
+		text-decoration: none;
+		border:none;
+
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		background-image: none;
+	}
 
 
 </style>
+
+
+
 <div id="search-area">
-	<h3>교육1팀</h3>
+	<h3>조직 구성</h3>
 	<div id="search" class="input-group mb-3">
-		<input type="text" class="form-control" placeholder="인물검색">
-		<button class="btn btn-primary" type="submit">검색</button>
+		<input type="text" id="searchInput" class="form-control" placeholder="인물검색">
+		<button type="submit" id="searchBtn" class="btn btn-primary" >검색</button>
 	</div>
 </div>
 <hr>
 <div id="myboards-content">
     <div id="tree-detail">
-		<div class="member" id="head">
-			<img src="/md/resources/upload/profile/iu12341234.jpg" alt="아이유">
-			<div class="detail">
-				<ul>
-					<li>이름 : 아이유${result[0].deptNo}</li>
-					<li>부서 : 교육1팀</li>
-					<li>직급 : 팀장</li>
-					<li>직책 : 교육1팀장</li>
-					<li>이메일 : kyoyuk@md.com</li>
-					<li>전화번호 : 01012341234</li>
-				</ul>
-			</div>
-		</div>
-		<c:forEach begin="1" end="20">
-		<div class="member">
-			<img src="/md/resources/upload/profile/robot12341234.jpg" alt="robot">
-			<div class="detail">
-				<ul>
-					<li>이름 : 김철수</li>
-					<li>부서 : 교육1팀</li>
-					<li>직급 : 대리</li>
-					<li>직책 : 강사</li>
-					<li>이메일 : kyoyuk13@md.com</li>
-					<li>전화번호 : 01056785678</li>
-				</ul>
-			</div>
-		</div>
-		</c:forEach>
+		<img src="/md/resources/img/tree.jpg" alt="조직도">
 	</div>
 </div>
 
+<!-- 조직도 트리구조 구현 -->
 <script>
 
 let treeData = ${tree};
 treeData[0].parent = "#";
-treeData[0].state = {'opened' : true};
-treeData[1].state = {'opened' : true};
+for(let i = 0 ; i<treeData.length ; i++){
+	treeData[i].state = {'opened' : true};
+}
 
 $(function () { 
     $('#tree').jstree({ 
@@ -132,13 +100,18 @@ $(function () {
 		}
    	});
 });
+</script>
 
+<!-- 부서 구성 -->
+<script>
 $('#tree').on('select_node.jstree', function (e,node) {
+
 		$.ajax({
 			url:"/md/organization/tree/"+node.selected[0],
-			type:"post",
+			type:"get",
 			success:function(result){
 				$('#tree-detail').replaceWith(result);
+
 			},
 			error:function(){
 				alert('통신에러');
@@ -146,4 +119,59 @@ $('#tree').on('select_node.jstree', function (e,node) {
 		})
   })
 </script>
+
+<!-- 사원검색 자동완성기능 -->
+<script>
+$(document).ready(function () {
+  $('#searchInput').autocomplete({
+    source: function (request, response) {
+        $.ajax({
+            url: "/md/organization/search/auto",
+            type: "GET",
+            dataType: "json",
+            data: { "search" : request.term},
+            success: function (data) {
+				console.log(data);
+                response(
+                    $.map(data, function (member) {
+                        return {
+                            label: member.name,
+                            value: member.name,
+                            idx: member.no,
+                        }
+                    })
+                )
+            }
+        })
+    },
+    focus: function (event, ui) {
+      return false;
+    },
+    select: function (event, ui) {},
+    minLength: 1,
+    delay: 100,
+    autoFocus: false,
+  });
+});
+</script>
+
+<!-- 사원검색 -->
+<script>
+$('#searchBtn').click(function () {
+	let search = $('#searchInput').val();
+	$.ajax({
+		url:"/md/organization/search/",
+		type:"GET",
+		data:{"search" : search},
+		success:function(result){
+			$('#tree-detail').replaceWith(result);
+		},
+		error:function(){
+			alert('통신에러');
+		}
+	})
+})
+</script>
+
+
 

@@ -13,11 +13,19 @@ public class FileDaoImpl implements FileDao{
 
 	@Override
 	public List<FileVo> selectList(SqlSessionTemplate sst, String memberNo) {
-		return sst.selectList("privatefileMapper.selectList",memberNo);
+		return sst.selectList("myfileMapper.selectList",memberNo);
 	}
 	@Override
 	public List<FileVo> selectListBySearchName(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.selectList("privatefileMapper.selectListBySearchName",map);
+		return sst.selectList("myfileMapper.selectListBySearchName",map);
+	}
+	@Override
+	public int deleteOne(SqlSessionTemplate sst, String fileNo) {
+		return sst.update("myfileMapper.deleteOne",fileNo);
+	}
+	@Override
+	public int insertOne(SqlSessionTemplate sst, FileVo vo) {
+		return sst.insert("myfileMapper.insertOne",vo);
 	}
 
 

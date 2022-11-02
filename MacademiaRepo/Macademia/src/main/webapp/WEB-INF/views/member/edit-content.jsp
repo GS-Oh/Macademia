@@ -67,25 +67,25 @@
         <img id="profile-img" src="/md/resources/upload/profile/${loginMember.profileName}" alt="프로필이미지">
         <div id="name">${loginMember.name}</div>
         <label for="dept">부서</label>
-        <input type="text" id="dept" name="dept" value="시설지원팀" disabled> 
+        <input type="text" id="dept" name="dept" value="${loginMember.deptName}" disabled> 
         <label for="position">직책</label>
-        <input type="text" id="position" name="position" value='DB관리' disabled > 
+        <input type="text" id="position" name="position" value="${loginMember.positionName}" disabled > 
         <label for="rank">직급</label>
-        <input type="text" id="rank" name="rank" value="대리" disabled> 
+        <input type="text" id="rank" name="rank" value="${loginMember.rankName}" disabled> 
         <label for="email">사내이메일</label>
-        <input type="text" id="email" name="email" value=${loginMember.email} disabled> 
+        <input type="text" id="email" name="email" value="${loginMember.email}" disabled> 
         <label for="pwd">비밀번호</label>
         <input type="text" id="pwd" name="pwd"> 
         <label for="pwd2">비밀번호확인</label>
         <input type="text" id="pwd2" name="pwd2"> 
         <label for="private-mail">개인이메일</label>
-        <input type="text" id="private-mail" name="privateEmail" value=${loginMember.privateEmail}> 
+        <input type="text" id="private-mail" name="privateEmail" value="${loginMember.privateEmail}"> 
         <label for="address">주소</label>
-        <input type="text" id="address" name="address" > 
+        <input type="text" id="address" name="address" value="${loginMember.address}"> 
         <label for="address2">상세주소</label>
         <input type="text" id="address2" name="address2" > 
         <label for="phone">전화번호</label>
-        <input type="text" id="phone" name="phone" value=${loginMember.phone}> 
+        <input type="text" id="phone" name="phone" value="${loginMember.phone}"> 
 
         <label for="bank">은행</label>
         <select name="bank" id="bank" name="bank" >
@@ -97,7 +97,7 @@
             <option value="5">하나은행</option>
         </select>
         <label for="email">계좌번호</label>
-        <input type="text" id="account" name="account" value=${loginMember.account}> 
+        <input type="text" id="account" name="account" value="${loginMember.account}"> 
         <label for="email">프로필사진</label>
         <input type="file" id="profile" name="profile"> 
         <input type="submit" id="submit-btn" value="수정완료">
@@ -108,6 +108,7 @@
 <!-- 주소찾기 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    console.log('${loginMember}');
 const width = 500;
 const height = 500;
 window.onload = function(){
