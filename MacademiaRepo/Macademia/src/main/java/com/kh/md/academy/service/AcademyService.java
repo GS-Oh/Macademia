@@ -26,16 +26,25 @@ public interface AcademyService {
 	//수강생 인서트
 	int insertStudent(StudentVo vo);
 
-	//수강생 리스트 보여주기
+	//전체 수강생 리스트 보여주기
 	List<StudentVo> showStudentList(PageVo pvo);
 
-	//모든 클래스 리스트 가져오기
+	//모든 클래스 리스트 가져오기(그냥)
 	List<ClassVo> selectClassList();
 
+	//모든 클래스 리스트 가져오기(pvo)
+	List<ClassVo> selectClassList(PageVo pvo);
+	
 	//수강생 한명 조회
 	StudentVo selectOneStudent(String no);
 
 	//페이징>전체 학생 리스트 수 조회
-	int selectTotalStd();
+	int countTotalStd();
+
+	//페이징>전체 클래스 리스트 수 조회
+	int countTotalClass();
+
+
+	
 	
 }

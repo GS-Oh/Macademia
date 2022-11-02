@@ -224,13 +224,13 @@
         grid-template-columns: 1fr 2fr 8fr 2fr 2fr;
         grid-template-rows: 40px;
     }
-    /* #class-label{
-        border: 1px solid black;
-        display: grid;
-        grid-template-columns: 1fr 8fr 1fr 1fr;
-        justify-items: center;
+    .modal-body-no-class-list{
+        display: flex;
+        flex-wrap: nowrap;
+        height: 40px;
+        justify-content: center;
         align-items: center;
-    } */
+    }
     
 </style>
 
@@ -256,7 +256,6 @@
         // 선택한 강의 input에 넣기
         $('#modal-choice-btn').click(function(){
             let target = $('input[type=checkbox]:checked').val()
-            // console.log('target값 : ' + target)
             if(target == null){
                 Swal.fire({
                     icon: 'warning',
@@ -268,12 +267,11 @@
                 $('#enrolledClass').attr('value', inputClassName);
                 console.log('강의명 넘어온 input값 : ' + $('#enrolledClass').val());
                 console.log('hidden값 : ' + $('#enrolledClassNo').val());
+
+                document.querySelector('#modal-close-btn').click();
             }
 
-            document.querySelector('#modal-close-btn').click();
         });
-
-       
         
     });
 </script>
@@ -365,7 +363,7 @@
                             <div class="modal-body">
                                 <div id="modal-search-area">
                                     <input type="search" placeholder="강의 검색">
-                                    <!-- <input type="button" value="검색"> -->
+                                    <input type="button" value="검색">
                                 </div>
                                 <div id="modal-table-area">
                                     <div id="modal-body-head">
@@ -376,7 +374,7 @@
                                         <div>개강일</div>
                                     </div>
 
-									<c:forEach items="${classList}" var="l">
+									<!-- <c:forEach items="${classList}" var="l">
 	                                    <div class="modal-body-class-list">
 	                                        <div>
                                                 <input type="checkbox" value="${l.no}">
@@ -386,20 +384,29 @@
                                             <div>${l.memberNo}</div>
                                             <div>${l.beginDate}</div>
 	                                    </div>
-                                    </c:forEach>
+                                    </c:forEach> -->
                                     
                                 </div>
                     
                                 <div id="page-area">
-                                    <div><a href=""><i class="fa-solid fa-angles-left"></i></a></div>
-                                    <div><a href=""><i class="fa-solid fa-angle-left"></i></a></div>
-                                    <div><a href="">1</a></div>
-                                    <div><a href="">2</a></div>
-                                    <div><a href="">3</a></div>
-                                    <div><a href="">4</a></div>
-                                    <div><a href="">5</a></div>
-                                    <div><a href=""><i class="fa-solid fa-angle-right"></i></a></div>
-                                    <div><a href=""><i class="fa-solid fa-angles-right"></i></a></div>
+                                    <!-- <c:if test="${pvo.startPage gt 5}">
+                                        <div><a href="${root}/academy/classList/1"><i class="fa-solid fa-angles-left"></i></a></div>
+                                    </c:if>
+                                    
+                                    <c:if test="${pvo.startPage ne 1}">
+                                        <div><a href="${root}/academy/classList/${pvo.startPage-1}"><i class="fa-solid fa-angle-left"></i></a></div>
+                                    </c:if>
+                                    
+                                    <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+                                        <div><a href="${root}/academy/classList/${i}">${i}</a></div>
+                                    </c:forEach>
+                                    
+                                    <c:if test="${pvo.endPage ne pvo.maxPage}">
+                                        <div><a href="${root}/academy/classList/${pvo.endPage+1}"><i class="fa-solid fa-angle-right"></i></a></div>
+                                    </c:if>
+                                    <c:if test="${pvo.endPage ne pvo.maxPage}">
+                                        <div><a href="${root}/academy/classList/${pvo.maxPage}"><i class="fa-solid fa-angles-right"></i></a></div>
+                                    </c:if> -->
                                 </div>
                             </div>
                     
@@ -426,6 +433,60 @@
     </form>
 
 </div>
+
+<!-- 페이징 -->
+<script>
+   $('#myModal').on('show.bs.modal', selectClassList(3));
+
+    function selectClassList(pnum){
+        
+        $.ajax({
+            type : 'GET',
+            url : '${root}/academy/classList/' + pnum,
+            success : function(map){
+                const list = map.classList.length
+                console.log(map.pvo.endPage);
+
+                if(map.classList.length > 0){
+                    for(let i = 0; i < list; i++){
+                        $('#modal-table-area').append('<div class="modal-body-class-list"> <div> <input type="checkbox" value="' + map.classList[i].no + '"> </div> <div>' + map.classList[i].classroom + '</div> <div id="class-name">' + map.classList[i].name + '</div> <div>' + map.classList[i].memberNo + '</div> <div>' + map.classList[i].beginDate + '</div> </div>');
+                    }
+                }else{
+                    $('#modal-table-area').append('<div class="modal-body-no-class-list"> 목록이 존재하지 않습니다 </div>');
+                }
+
+
+                if(map.pvo.startPage > 5){
+                    $('#page-area').append('<div><a><i class="fa-solid fa-angles-left"></i></a></div>');
+                }
+
+                if(map.pvo.startPage != 1){
+                    $('#page-area').append('<div><a><i class="fa-solid fa-angle-left"></i></a></div>');
+                }
+
+                for(let i = map.pvo.startPage; i <= map.pvo.endPage; i++){
+                    $('#page-area').append('<div><a>' + i + '</a></div>');
+                }
+                    
+                if(map.pvo.endPage != map.pvo.maxPage){
+                    $('#page-area').append('<div><a><i class="fa-solid fa-angle-right"></i></a></div>');
+                }
+
+                if(map.pvo.endPage != map.pvo.maxPage){
+                    $('#page-area').append('<div><a><i class="fa-solid fa-angles-right"></i></a></div>');
+                }
+
+                
+            },
+            error : function(x){
+                console.log('not good');
+            }
+        });
+    }
+
+ 
+</script>
+
 
 <script>
      // submit confirm창에 swal 적용

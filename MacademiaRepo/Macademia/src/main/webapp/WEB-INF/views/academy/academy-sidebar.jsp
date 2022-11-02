@@ -102,7 +102,7 @@
     </ul>
 
     <ul id="menu">
-        <a href="${root}/academy/curriculum"><li>커리큘럼 조회</li></a>
+        <a href="${root}/academy/curriculum/1"><li>커리큘럼 조회</li></a>
         <a href=""><li>수강생 평가</li></a>
     </ul>
         

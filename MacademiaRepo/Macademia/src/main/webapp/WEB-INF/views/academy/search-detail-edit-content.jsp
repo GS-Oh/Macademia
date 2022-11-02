@@ -138,31 +138,44 @@
     }
 </style>
 
+<script>
+    $(function(){
+        let birth = '${svo.birth}'
+        const year = birth.substring(0,4)
+        const month = birth.substring(5,7)
+        const date = birth.substring(8,11)
+
+        $('input[id="year"]').attr('value', year)
+        $('input[id="month"]').attr('value', month)
+        $('input[id="date"]').attr('value', date)
+    });
+</script>
+
 <div id="search-detail-edit-content-wrap">
 
-    <form action="">
+    <form action="" method="post" onsubmit="return submitFn();">
 
         <div id="search-detail-edit-content-head"><h4>수강생 정보수정</h4></div>
 
         <div id="student-info-area">
             <div id="student-profile">
-                <img src="" width="160px" height="180px" alt="수강생 프로필">
+                <img src="/${root}/resources/upload/profile/studentProfile/${svo.profile}" width="160px" height="180px" alt="수강생 프로필">
                 <input type="file">
             </div>
-            <div id="student-name"><h3>김곤</h3></div>
+            <div id="student-name"><h3>${svo.name}</h3></div>
             <div>
                 <i class="fa-solid fa-mobile-screen-button fa-2xl"></i>
-                <b><input type="text" value="010-9876-5432"></b>
+                <b><input type="text" value="${svo.phone}"></b>
             </div>
             <div>
                 <i class="fa-solid fa-envelope fa-xl"></i>
-                <b><input type="text" value="hellohi@gmail.com"></b>
+                <b><input type="text" value="${svo.email}"></b>
             </div>
             <div class="info-title"><b>생년월일</b></div>
             <div class="info-border-top" id="student-dob">
-                <input type="number" value="1990" min="1922" max="2022">
-                <input type="number" value="03" min="01" max="12">
-                <input type="number" value="14" min="01" max="31">
+                <input type="number" id="year" value="" min="1922" max="2022">
+                <input type="number" id="month" value="" min="01" max="12">
+                <input type="number" id="date" value="" min="01" max="31">
             </div>
             <div class="info-title"><b>성별</b></div>
             <div class="info-border-top" id="student-gender">
@@ -175,20 +188,20 @@
             <div class="info-border-top" id="student-addr">
                 <input type="text" id="sample4_postcode" value="" placeholder="우편번호">
                 <input type="button" id="addr-search-btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" id="sample4_roadAddress" name="" value="서울시 자양로1번길 3" placeholder="도로명주소">
-                <input type="text" id="sample4_jibunAddress" name="" value="자양동 993-1" placeholder="지번주소">
-                <input type="text" id="sample4_detailAddress" name="" value="자양빌라 201호" placeholder="상세주소">
+                <input type="text" id="sample4_roadAddress" name="" value="${svo.newAddress}" placeholder="도로명주소">
+                <input type="text" id="sample4_jibunAddress" name="" value="${svo.oldAddress}" placeholder="지번주소">
+                <input type="text" id="sample4_detailAddress" name="" value="${svo.detailAddress}" placeholder="상세주소">
                 <span id="guide" style="color:#999;display:none"></span>
                 <input type="text" id="sample4_extraAddress" placeholder="참고항목">
             </div>
             <div class="info-title"><b>최종학력</b></div>
-            <div class="info-border-top" id="student-degree"><input type="text" value="서울대학교"></div>
+            <div class="info-border-top" id="student-degree"><input type="text" value="${svo.finalDegree}"></div>
             <div class="info-title"><b>전공</b></div>
-            <div class="info-border-top" id="student-major"><input type="text" value="경영학과"></div>
+            <div class="info-border-top" id="student-major"><input type="text" value="${svo.major}"></div>
             <div class="info-title"><b>수강</b></div>
-            <div class="info-border-top" id="student-class"><input type="text" value="자바(JAVA)기반 클라우드 융합 개발자 양성과정A"></div>
+            <div class="info-border-top" id="student-class"><input type="text" value="${svo.enrolledClass}"></div>
             <div class="info-title comment-area"><b>코멘트</b></div>
-            <div class="comment-area info-border-top"><textarea name="" id="" cols="110" rows="8">네이버 취업 희망</textarea></div>
+            <div class="comment-area info-border-top"><textarea name="" id="" cols="110" rows="8">${svo.stdComment}</textarea></div>
         </div>
 
         <div id="edit-btn-area">

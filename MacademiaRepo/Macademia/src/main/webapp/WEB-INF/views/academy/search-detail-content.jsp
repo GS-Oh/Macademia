@@ -213,7 +213,7 @@
 
     <div id="edit-btn-area">
         <button><a href="${root}/academy/search/1">뒤로가기</a></button>
-        <button><a href="${root}/academy/search/detail/edit">정보수정</a></button>
+        <button><a href="${root}/academy/search/detail/edit/${svo.no}">정보수정</a></button>
     </div>
 
 </div>

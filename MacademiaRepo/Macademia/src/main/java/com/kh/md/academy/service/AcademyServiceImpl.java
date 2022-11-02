@@ -62,12 +62,18 @@ public class AcademyServiceImpl implements AcademyService{
 		return dao.selectStudentList(sst, pvo);
 	}
 
-	//모든 클래스 리스트 가져오기
+	//모든 클래스 리스트 가져오기(그냥)
 	@Override
 	public List<ClassVo> selectClassList() {
 		return dao.selectClassList(sst);
 	}
 
+	//모든 클래스 리스트 보여주기
+	@Override
+	public List<ClassVo> selectClassList(PageVo pvo) {
+		return dao.selectClassList(sst, pvo);
+	}
+	
 	//수강생 한명 조회해오기
 	@Override
 	public StudentVo selectOneStudent(String no) {
@@ -76,8 +82,15 @@ public class AcademyServiceImpl implements AcademyService{
 
 	//페이징>전체 수강생리스트 수 조회
 	@Override
-	public int selectTotalStd() {
-		return dao.selectTotalStd(sst);
+	public int countTotalStd() {
+		return dao.countTotalStd(sst);
 	}
+
+	//페이징>전체 클래스 리스트 수 조회
+	@Override
+	public int countTotalClass() {
+		return dao.countTotalClass(sst);
+	}
+
 
 }
