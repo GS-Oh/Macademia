@@ -3,6 +3,7 @@ package com.kh.md.sign.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,10 @@ public class SignController {
 		
 	}
 	@GetMapping("write")
-	public String signWrtie(Model model) {
+	public String signWrtie(Model model, HttpSession session) {
+		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		model.addAttribute("loginMember", loginMember);
+		System.out.println("로그인한" +loginMember);
 		List<MemberVo> memberList = service.getMemberAll();
 		System.out.println(memberList);
 		model.addAttribute("memberList", memberList);
@@ -48,7 +52,7 @@ public class SignController {
 	}
 	@GetMapping("deptList")
 	@ResponseBody
-	public List<MemberVo> deptList(HttpServletRequest req) {
+	public List<MemberVo> deptList(HttpServletRequest req ) {
 		String dept = req.getParameter("dept");
 		System.out.println("뎁트코드는" +dept);
 		List<MemberVo> list = service.getDeptMember(dept);

@@ -16,6 +16,7 @@ public class PlanVo {
 	private String pDate;
 	private String pStartDate;
 	private String pEndDate;
+	private String no;
 
 	
 	

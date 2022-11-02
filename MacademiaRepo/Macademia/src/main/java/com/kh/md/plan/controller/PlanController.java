@@ -3,6 +3,7 @@ package com.kh.md.plan.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.md.member.vo.MemberVo;
 import com.kh.md.plan.service.PlanService;
 import com.kh.md.plan.vo.PlanVo;
 
@@ -23,8 +25,13 @@ public class PlanController {
 	private PlanService service;
 	
 	@GetMapping("list")
-	public String planList(HttpServletRequest req) {
-		List<PlanVo> planList = service.getPlan();
+	public String planList(HttpServletRequest req, HttpSession session) {
+		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		String no = loginMember.getNo();
+		PlanVo vo = new PlanVo();
+		
+		
+		List<PlanVo> planList = service.getPlan(no);
 		System.out.println(planList);
 		req.setAttribute("planList", planList);
 		
@@ -46,16 +53,16 @@ public class PlanController {
 	}
 	
 	@GetMapping("write")
-	public String planWrite(){
-		
+	public String planWrite(HttpSession session , Model model){
+		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		model.addAttribute("loginMember",loginMember);
 		return "/plan/planWrite";
 	}
 	@PostMapping("write")
-	public String planWrite(HttpServletRequest req, PlanVo vo) {
-		String no = "1";
+	public String planWrite(HttpServletRequest req, PlanVo vo, HttpSession session) {
 		
-		
-		
+		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		String no = loginMember.getNo();
 		vo.setMNo(no);
 		System.out.println(vo);
 		int result = service.write(vo);
