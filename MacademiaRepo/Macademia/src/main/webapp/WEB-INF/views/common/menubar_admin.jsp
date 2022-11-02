@@ -40,7 +40,7 @@
         <!-- Nav header start -->
         <div class="nav-header">
             <a href="${contextPath}/admin/mlist.ad" class="brand-logo" style="background: #2b2d35;">
-                <img class="logo-abbr" src="${contextPath}/resources/assets/images/logo.png" alt="" style="border-radius: 100%; width: 170px; height: 32px;">
+                <img class="logo-abbr" src="${contextPath}/resources/img/logo/logo_temp1.png" alt="마카데미아" style="border-radius: 100%; width: 170px; height: 32px;">
                	<b class="logo-compact" style="font-size: x-large;">MacademiA</b>
                	<b class="brand-title" style="font-size: x-large;">MacademiA</b>
             </a>

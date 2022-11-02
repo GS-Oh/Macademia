@@ -39,8 +39,8 @@
 
         <!-- Nav header start -->
         <div class="nav-header">
-            <a href="${root}/admin/main" class="brand-logo">
-                <img class="logo-abbr" src="${contextPath}/resources/assets/images/logo.png" alt="" style="border-radius: 50%;">
+            <a href="${contextPath}/admin/main" class="brand-logo">
+                <img class="logo-abbr" src="${contextPath}/resources/img/logo/logo_temp1.png" alt="마카데미아" alt="" style="border-radius: 50%;">
                 <b class="logo-compact" style="font-size: x-large;">MacademiA</b>
                	<b class="brand-title" style="font-size: x-large;">MacademiA</b>
             </a>
