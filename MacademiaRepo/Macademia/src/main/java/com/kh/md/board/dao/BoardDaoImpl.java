@@ -10,9 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.md.board.vo.BoardVo;
 import com.kh.md.board.vo.PageVo;
+import com.kh.md.board.vo.SearchCriteria;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class BoardDaoImpl implements BoardDao {
@@ -25,11 +28,11 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVo> selectList(PageVo pv) {
-		int offset = (pv.getCurrentPage() -1) * pv.getBoardLimit();
-				
-		RowBounds rb = new RowBounds(offset ,pv.getBoardLimit());
-		return sst.selectList("boardMapper.selectList",null, rb);
+	public List<BoardVo> selectList(SearchCriteria searchCriteria) {
+		RowBounds rowBounds = new RowBounds(searchCriteria.getOffSet(), searchCriteria.getSize());
+		log.info(""+rowBounds.getOffset());
+		log.info(""+rowBounds.getLimit());
+		return sst.selectList("boardMapper.selectList", searchCriteria, rowBounds);
 	}
 
 	@Override
@@ -65,8 +68,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int selectSearchCount(Map<String, String> map) {
-		return sst.selectOne("boardMapper.selectSearchCount", map);
+	public int selectSearchCount(SearchCriteria searchCriteria) {
+		return sst.selectOne("boardMapper.selectSearchCount", searchCriteria);
 	}
 }
 

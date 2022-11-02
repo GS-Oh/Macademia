@@ -16,7 +16,7 @@
 	            <div class="count">조회</div>
 	        </div>
 	        <div>
-		        <c:forEach items="${voList}" var="x" >
+		        <c:forEach items="${boardList}" var="x" >
 			    	<div class="num" >${x.no}</div>
 			    	<div class="title title-center" style="text-align: center;"><a href="${root}/board/detail/${x.no}">${x.title}</a></div>
 			    	<div class="writer">${x.userNo}</div>
@@ -27,31 +27,31 @@
 	    </div>
 	    
 	    <div class="board_page">
-	       <c:if test="${pv.startPage ne 1}">
-	    	<a href="${root}/board/data/${pv.startPage - 1}" class="bt prev"><</a>    	
+	    <c:set var="URL" value="${pageContext.request.requestURL}" />
+	       <c:if test="${pageVo.startPage ne 1}">
+	    	<a href="/md/board?${queryString}page=${pageVo.startPage - 1}" class="bt prev"><</a>    	
     		</c:if>
-    	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" var="i">    		    		    	
-	    	<a href="${root}/board/data/${i}" class="num">${i}</a>
+    	<c:forEach begin="${pageVo.startPage}" end="${pageVo.endPage}" var="i">    		    		    	
+	    	<a href="/md/board?${queryString}page=${i}" class="num">${i}</a>
     	</c:forEach>
-	    <c:if test="${pv.endPage ne pv.maxPage}">
-	    	<a href="${root}/board/data/${pv.endPage + 1}" class="bt next">></a>	    
+	    <c:if test="${pageVo.endPage ne pageVo.maxPage}">
+	    	<a href="/md/board?${queryString}page=${pageVo.endPage + 1}" class="bt next">></a>	    
 	    </c:if>	
 	       
 	    </div>
 	    
 	    <div class="Search-area">
 	        <div class="Search-area-content">
-         	<form action="/md/board/search/${i}" method="get" >
-		        <select name="condition">
+         	<form id="searchForm" onsubmit="return false;">
+		        <select id="condition">
 	        		<option value="title">제목</option>
 		        	<option value="content">내용</option>
-		        	<option value="userNo">글쓴이</option>
-		        	<option value="" selected="selected">전체</option>		
+		        	<option value="writer">글쓴이</option>	
 		        </select >
-			        <input type="text" name="keyword" placeholder="입력해 주세요">
-			        <input type="submit" value="검색하기">  	
-       		</div>
+		        <input id="keyword" type="text" placeholder="입력해 주세요">
+		        <button id="send">검색하기</button>	
 	        </form>
+	        </div>
 	    </div>
 	   
 	    <div class="bt_wrap">
@@ -59,3 +59,15 @@
 	    </div>
 	</div>
 </div>
+
+<script>
+	const send = document.getElementById("send");
+	send.addEventListener("click", function () {
+		var condition  = document.getElementById("condition");
+		const conditionValue = (condition.options[condition.selectedIndex].value);
+		const keywordValue = document.getElementById('keyword').value;
+		alert(conditionValue);
+		alert(keywordValue);
+	 	location.href = "/md/board?" + conditionValue + "=" + keywordValue;
+    });
+</script>

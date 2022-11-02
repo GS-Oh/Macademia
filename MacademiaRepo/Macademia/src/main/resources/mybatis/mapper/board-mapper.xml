@@ -42,6 +42,15 @@
 			,REGDATE
 		FROM FREE_BOARD
 		WHERE STATUS = 'O'
+		<if test="title != null">
+			AND TITLE LIKE '%' || #{title} || '%'
+		</if> 
+		<if test="content != null">
+			AND CONTENT LIKE '%' || #{content} || '%'
+		</if>  
+		<if test="writer != null">
+			AND USER_NO LIKE '%' || #{writer} || '%'
+		</if> 	
 		ORDER BY NO DESC
 	</select>
 	
@@ -68,11 +77,10 @@
 	</update>
 	
 	<update id="updateOne">
-		UPDATE BOARD
+		UPDATE FREE_BOARD
 			SET
 				TITLE = #{title}
 				, CONTENT =#{content}
-				, MODIFY_DATE = SYSDATE
 		WHERE NO = #{no}
 	</update>
 	
@@ -92,15 +100,15 @@
 	<select id="selectSearchCount" resultType="int">
 		SELECT COUNT(*) FROM FREE_BOARD
 	  	WHERE STATUS = 'O'
-	  	<if test="condition == 'title'">
-	  		AND TITLE LIKE '%' || #{keyword}  || '%'
-	  	</if>
-	  	<if test="condition == 'content'">
-	  		AND CONTENT LIKE '%' || #{keyword} || '%'
-	  	</if>
-	  	<if test="condition == 'userNo'">
-	  		AND USER_NO LIKE '%' || #{keyword} || '%'
-	  	</if>
+	  	<if test="title != null">
+			AND TITLE LIKE '%' || #{title} || '%'
+		</if> 
+		<if test="content != null">
+			AND CONTENT LIKE '%' || #{content} || '%'
+		</if>  
+		<if test="writer != null">
+			AND USER_NO LIKE '%' || #{writer} || '%'
+		</if> 	
 	</select>
 	
 	<select id="searchList" resultMap="boardInfo">
@@ -113,14 +121,14 @@
 			,REGDATE
 		FROM FREE_BOARD
 		WHERE STATUS = 'O'
-		<if test="condition == 'title'">
-			AND TITLE LIKE '%' || #{keyword} || '%'
+		<if test="title != null">
+			AND TITLE LIKE '%' || #{title} || '%'
 		</if> 
-		<if test="condition == 'content'">
-			AND CONTENT LIKE '%' || #{keyword} || '%'
+		<if test="content != null">
+			AND CONTENT LIKE '%' || #{content} || '%'
 		</if>  
-		<if test="condition == 'userNo'">
-			AND USER_NO LIKE '%' || #{keyword} || '%'
+		<if test="writer != null">
+			AND USER_NO LIKE '%' || #{writer} || '%'
 		</if> 	
 		ORDER BY NO DESC
 	</select>

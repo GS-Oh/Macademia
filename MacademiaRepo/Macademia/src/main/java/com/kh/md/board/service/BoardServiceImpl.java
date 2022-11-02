@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.md.board.dao.BoardDao;
 import com.kh.md.board.vo.BoardVo;
 import com.kh.md.board.vo.PageVo;
+import com.kh.md.board.vo.SearchCriteria;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +29,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		//게시글 목록 조회
 		@Override
-		public List<BoardVo> selectList(PageVo pv) {
-			return boardDao.selectList(pv);
+		public List<BoardVo> selectList(SearchCriteria searchCriteria) {
+			return boardDao.selectList(searchCriteria);
 		}
 		
 		//게시글 상세 조회
@@ -74,7 +75,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 		@Override
-		public int selectSearchCount(Map<String, String> map) {
-			return boardDao.selectSearchCount(map);
+		public int selectSearchCount(SearchCriteria searchCriteria) {
+			return boardDao.selectSearchCount(searchCriteria);
 		}
 }
