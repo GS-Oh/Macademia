@@ -13,5 +13,9 @@ public interface FileDao {
 
 	List<FileVo> selectListBySearchName(SqlSessionTemplate sst, Map<String, String> map);
 
+	int deleteOne(SqlSessionTemplate sst, String fileNo);
+
+	int insertOne(SqlSessionTemplate sst, FileVo vo);
+
 
 }

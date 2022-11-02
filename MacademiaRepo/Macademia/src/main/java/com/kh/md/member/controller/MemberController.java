@@ -107,23 +107,7 @@ public class MemberController {
 	public String edit() {
 		return "member/edit";
 	}
-	@GetMapping("/member/myfiles")
-	public String myFiles(HttpSession session,Model model,String searchName) {
-		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-		List<FileVo> fileList;
-		if(searchName==null) {
-			fileList = memberService.getPrivatefileList(loginMember.getNo());
-		}else {
-			fileList = memberService.getFileListBySearchName(loginMember.getNo(),searchName);
-		}
-			System.out.println(fileList);
-			if(fileList!=null) {
-				model.addAttribute("fileList", fileList);
-			}
-			return "member/myfiles";
 
-		
-	}
 
 	@GetMapping("/member/myboards")
 	public String myBoards() {

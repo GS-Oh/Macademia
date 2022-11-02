@@ -17,4 +17,6 @@ public interface MemberDao {
 
 	List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo);
 
+	List<MemberVo> selectListBySearch(SqlSessionTemplate sst, String search);
+
 }

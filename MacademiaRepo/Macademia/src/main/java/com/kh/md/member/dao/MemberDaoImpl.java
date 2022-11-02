@@ -27,10 +27,12 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo) {
-		List<MemberVo> list = sst.selectList("memberMapper.selectListByDeptNo",deptNo);
-		System.out.println("dao : " + list);
-		return list;
-				
+		return sst.selectList("memberMapper.selectListByDeptNo",deptNo);
+	}
+
+	@Override
+	public List<MemberVo> selectListBySearch(SqlSessionTemplate sst, String search) {
+		return sst.selectList("memberMapper.selectListBySearch",search);
 	}
 
 

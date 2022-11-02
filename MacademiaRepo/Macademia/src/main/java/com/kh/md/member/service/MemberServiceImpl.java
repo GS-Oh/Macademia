@@ -1,6 +1,5 @@
 package com.kh.md.member.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -8,10 +7,8 @@ import java.util.UUID;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.md.file.dao.FileDao;
-import com.kh.md.file.vo.FileVo;
 import com.kh.md.member.dao.MemberDao;
 import com.kh.md.member.vo.MemberVo;
 
@@ -34,21 +31,6 @@ public class MemberServiceImpl implements MemberService{
 		MemberVo loginMember  = memberDao.selectOne(sst,vo);
 		return loginMember;
 	}
-
-	@Override
-	public List<FileVo> getPrivatefileList(String memberNo) {
-		List<FileVo> fileList = fileDao.selectList(sst,memberNo);
-		return fileList;
-	}
-
-	@Override
-	public List<FileVo> getFileListBySearchName(String memberNo, String searchName) {
-		Map<String,String> map = new HashMap<>();
-		map.put("memberNo",memberNo);
-		map.put("searchName",searchName);
-		List<FileVo> fileList = fileDao.selectListBySearchName(sst,map);
-		return fileList;
-	}
 	
 
 	@Override
@@ -64,7 +46,12 @@ public class MemberServiceImpl implements MemberService{
 			if(result2 == 1) return newPwd;
 			else return null;
 		}else return null;
+	}
 
+	@Override
+	public List<MemberVo> findListBySearch(String search) {
+		List<MemberVo> memberList  = memberDao.selectListBySearch(sst,search);
+		return memberList;
 	}
 
 
