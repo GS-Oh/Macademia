@@ -27,8 +27,6 @@ public class PayrollVo {
 	private int safeDeposit;//직장금고회비
 	private int other; //기타공제
 	
-	private String standingOrder; //자동이체여부
-	
 	// 계산해서 얻을 것들
  	private int taxfree; //비과세 근로소득 ( 정근수당 ~기타공제 까지  값들을 더해서 구함 ) = 수당총액
 	private int baseMonthPay; //기준소득월액 ( 월급여액 - 비과세근로소득 )

@@ -3,6 +3,8 @@ package com.kh.md.payroll.service;
 import java.util.List;
 
 import com.kh.md.payroll.vo.PayrollVo;
+import com.kh.md.payroll.vo.SoChangeVo;
+import com.kh.md.payroll.vo.StandOrderVo;
 
 public interface PayrollService {
 
@@ -17,6 +19,18 @@ public interface PayrollService {
 	
 	//급여지급내역 ( 메인 화면 )
 	List<PayrollVo> selectPayRollList(PayrollVo prVo);
+
+	//지급계좌관리 ( 자동이체 정보 조회 )
+	StandOrderVo selectStandingOrderByNo(String no);
+	
+	//지급 계좌 등록 ( 메인화면처리 )
+	int insertStandingOrderByNo(String no);
+	
+	//지급 계좌 관리 ( 변경이력추가 )
+	int insertChangeHistory(SoChangeVo soChangeVo);
+
+	//지급 계좌 관리 ( 변경이력가져오기 )
+	List<SoChangeVo> selectSoChangeHistory(String stNo);
 	
 	
 	

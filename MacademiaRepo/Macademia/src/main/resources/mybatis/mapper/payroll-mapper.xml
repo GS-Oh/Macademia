@@ -141,5 +141,84 @@
 	</select>
 
 
-
+	
+	<!-- 지급계좌관리 ( 자동이체 정보 조회 ) -->
+	<select id="selectStandingOrderByNo" resultType="com.kh.md.payroll.vo.StandOrderVo">
+		SELECT
+		     S.ST_NO
+		    ,S.NO
+		    ,S.MONTH_PAY
+		    ,S.BASIC_BONUS
+		    ,S.BONUS
+		    ,S.ENROLL_DATE
+		    ,M.NAME
+		    ,K.NAME BANK_NAME
+		    ,M.ACCOUNT
+		FROM STANDING_ORDER S
+		JOIN MEMBER M ON S.NO = M.NO 
+		JOIN BANK K ON M.BANK_NO = K.NO
+		WHERE S.NO = #{no}
+	</select>
+	
+	
+	<!-- 지급계좌관리 ( 자동이체 계좌등록 ) -->
+	<insert id="insertStandingOrderByNo">
+		INSERT INTO STANDING_ORDER(ST_NO, NO)
+		VALUES (SEQ_STANDING_ORDER_NO.NEXTVAL, #{no})
+	</insert>
+	
+	
+	<!-- 지급계좌관리 ( 자동이체 신청/취소 ) -->
+	<update id="updateStandingOrderPay">
+		UPDATE STANDING_ORDER 
+		SET
+			<if test="name == '월급여' and status == '신청'">MONTH_PAY = 'O', EDIT_DATE = SYSDATE</if>
+			<if test="name == '기본상여금' and status == '신청'">BASIC_BONUS = 'O', EDIT_DATE = SYSDATE</if>
+			<if test="name == '보너스' and status == '신청'">BONUS = 'O', EDIT_DATE = SYSDATE</if>
+		    
+		    <if test="name == '월급여' and status == '취소'">MONTH_PAY = 'X', EDIT_DATE = SYSDATE</if>
+			<if test="name == '기본상여금' and status == '취소'">BASIC_BONUS = 'X', EDIT_DATE = SYSDATE</if>
+			<if test="name == '보너스' and status == '취소'">BONUS = 'X', EDIT_DATE = SYSDATE</if>
+	</update>
+	
+	
+	<!-- 변경이력에 등록 -->
+	<insert id="insertChangeHistory">
+		INSERT INTO SO_CHANGE_HISTORY
+		(
+			 CH_NO
+			,ST_NO
+			,NAME
+			,STATUS
+		)	
+		VALUES
+		(
+			 SEQ_SO_CHANGE_HISTORY_NO.NEXTVAL
+			,#{stNo}
+			,#{name}
+			,#{status}
+		)
+	
+	</insert>
+	
+	
+	<!--  지급 계좌 관리 ( 변경이력가져오기 ) -->
+	<select id="selectSoChangeHistory" resultType="com.kh.md.payroll.vo.SoChangeVo">
+		
+		SELECT 
+		    CH_NO
+		    ,ST_NO
+		    ,NAME
+		    ,STATUS
+		    ,CHANGE_DATE
+		FROM SO_CHANGE_HISTORY
+		WHERE ST_NO = #{stNo}
+		ORDER BY CH_NO DESC
+		
+	
+	</select>
+	
+	
+	
+	
 </mapper>

@@ -269,9 +269,9 @@
 
         for(let i=0; i<historyContent.length; i++){
 
-            
             let number = historyContent[i].value.replace(/,/g, "");
             historyContent[i].value = number;
+            
         }
 
     }

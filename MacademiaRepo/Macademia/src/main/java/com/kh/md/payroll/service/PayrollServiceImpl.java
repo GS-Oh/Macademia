@@ -5,9 +5,12 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.md.payroll.dao.PayrollDao;
 import com.kh.md.payroll.vo.PayrollVo;
+import com.kh.md.payroll.vo.SoChangeVo;
+import com.kh.md.payroll.vo.StandOrderVo;
 
 @Service
 public class PayrollServiceImpl implements PayrollService{
@@ -79,6 +82,43 @@ public class PayrollServiceImpl implements PayrollService{
 		}
 		
 		return payRollList; 
+	}
+
+
+	//지급계좌관리 ( 자동이체 정보 조회 )
+	@Override
+	public StandOrderVo selectStandingOrderByNo(String no) {
+		return dao.selectStandingOrderByNo(sst, no);
+	}
+
+
+	//지급 계좌 등록 ( 메인화면처리 )
+	@Override
+	public int insertStandingOrderByNo(String no) {
+		return dao.insertStandingOrderByNo(sst, no);
+	}
+
+
+	//지급 계좌 관리 ( 변경이력추가 )
+	@Override
+	@Transactional
+	public int insertChangeHistory(SoChangeVo soChangeVo) {
+		
+		//계좌신청정보 변경
+		int result = dao.updateStandingOrderPay(sst, soChangeVo);
+		//성공하면 변경이력 추가
+		if(result == 1) {
+			return dao.insertChangeHistory(sst, soChangeVo);
+		}else {
+			return 0;
+		}
+	}
+
+
+	//지급 계좌 관리 ( 변경이력가져오기 )
+	@Override
+	public List<SoChangeVo> selectSoChangeHistory(String stNo) {
+		return dao.selectSoChangeHistory(sst, stNo);
 	}
 
 	

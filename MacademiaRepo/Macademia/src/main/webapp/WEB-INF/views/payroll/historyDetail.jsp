@@ -248,8 +248,6 @@
        totalDeduction.value = setComma((totalDeduction.value).replace(/\D/g,""))
        realPay.innerText = setComma((realPay.innerText).replace(/\D/g,""))
 
-       
-
 
 
        //콤마작업함수

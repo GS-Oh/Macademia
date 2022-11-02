@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
 import com.kh.md.payroll.vo.PayrollVo;
+import com.kh.md.payroll.vo.SoChangeVo;
+import com.kh.md.payroll.vo.StandOrderVo;
 
 public interface PayrollDao {
 
@@ -17,6 +19,21 @@ public interface PayrollDao {
 	
 	//급여지급내역 ( 메인페이지 )
 	List<PayrollVo> selectPayRollList(SqlSessionTemplate sst, PayrollVo prVo);
+	
+	//지급계좌관리 ( 자동이체 정보 조회 )
+	StandOrderVo selectStandingOrderByNo(SqlSessionTemplate sst, String no);
+	
+	//지급 계좌 등록 ( 메인화면처리 )
+	int insertStandingOrderByNo(SqlSessionTemplate sst, String no);
+	
+	//지급 계좌 관리 ( 자동이체신청내역 수정 )
+	int updateStandingOrderPay(SqlSessionTemplate sst, SoChangeVo soChangeVo);
+	
+	//지급 계좌 관리 ( 자동이체 변경내역 추가 )
+	int insertChangeHistory(SqlSessionTemplate sst, SoChangeVo soChangeVo);
+
+	//지급 계좌 관리 ( 변경이력가져오기 )
+	List<SoChangeVo> selectSoChangeHistory(SqlSessionTemplate sst, String stNo);
 
 	
 }//class
