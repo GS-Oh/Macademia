@@ -10,10 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.payroll.service.PayrollService;
 import com.kh.md.payroll.vo.PayrollVo;
+import com.kh.md.payroll.vo.SoChangeVo;
+import com.kh.md.payroll.vo.StandOrderVo;
 
 @Controller
 @RequestMapping("payroll")
@@ -67,11 +70,53 @@ public class PayrollController {
 		return "payroll/historyDetail";
 	}
 	
-	
+	//지급 계좌 관리 ( 메인화면 )
 	@GetMapping("account")
-	public String account() {
+	public String account(HttpSession session, Model model) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
+		StandOrderVo soVo = ps.selectStandingOrderByNo(loginMember.getNo());
+		
+		List<SoChangeVo> soChangeVoList = ps.selectSoChangeHistory(soVo.getStNo());
+		
+		model.addAttribute("soVo", soVo);
+		model.addAttribute("soChangeVoList",soChangeVoList);
+		
 		return "payroll/account";
+		
 	}
+	
+	//지급 계좌 등록 ( 메인화면처리 )
+	@GetMapping("account/enroll")
+	public String accountEnroll(HttpSession session, Model model) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		int result = ps.insertStandingOrderByNo(loginMember.getNo());
+		
+		if(result == 1) {
+			return "redirect:/payroll/account";
+		}else {
+			return "";
+		}
+	}
+	
+	
+	//지급 계좌 관리 ( 내역변경하기 )
+	@PostMapping("account/change")
+	@ResponseBody
+	public String accountChange(SoChangeVo soChangeVo) {
+		
+			//신청작업
+		int result = ps.insertChangeHistory(soChangeVo);
+		
+		if( result == 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	
 	@GetMapping("management")
 	public String management() {

@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.md.payroll.vo.PayrollVo;
+import com.kh.md.payroll.vo.SoChangeVo;
+import com.kh.md.payroll.vo.StandOrderVo;
 
 @Repository
 public class PayrollDaoImpl implements PayrollDao{
@@ -28,6 +30,38 @@ public class PayrollDaoImpl implements PayrollDao{
 	@Override
 	public List<PayrollVo> selectPayRollList(SqlSessionTemplate sst, PayrollVo prVo) {
 		return sst.selectList("payrollMapper.selectPayRollList", prVo);
+	}
+	
+	//지급계좌관리 ( 자동이체 정보 조회 )
+	@Override
+	public StandOrderVo selectStandingOrderByNo(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("payrollMapper.selectStandingOrderByNo", no);
+	}
+	
+	//지급 계좌 등록 ( 메인화면처리 )
+	@Override
+	public int insertStandingOrderByNo(SqlSessionTemplate sst, String no) {
+		return sst.insert("payrollMapper.insertStandingOrderByNo", no);
+		
+	}
+	
+	//지급 계좌 관리 ( 자동이체신청내역 수정 )
+	@Override
+	public int updateStandingOrderPay(SqlSessionTemplate sst, SoChangeVo soChangeVo) {
+		return sst.update("payrollMapper.updateStandingOrderPay", soChangeVo);
+	}
+
+	
+	//지급 계좌 관리 ( 자동이체 변경내역 추가 )
+	@Override
+	public int insertChangeHistory(SqlSessionTemplate sst, SoChangeVo soChangeVo) {
+		return sst.insert("payrollMapper.insertChangeHistory", soChangeVo);
+	}
+
+	//지급 계좌 관리 ( 변경이력가져오기 )
+	@Override
+	public List<SoChangeVo> selectSoChangeHistory(SqlSessionTemplate sst, String stNo) {
+		return sst.selectList("payrollMapper.selectSoChangeHistory",stNo);
 	}
 
 	

@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 스위트 알랏 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <%@ include file="/resources/css/common/common.css" %>
 
@@ -75,22 +77,27 @@
 
     #account-edit-area{
         height: 400px;
-
-        margin: 20px;
-        padding: 10px;
+        width: 800px;
 
         display: grid;
-        grid-template-columns: 10% 10% 20% 30% 30%;
-        grid-template-rows: repeat(5, 1fr);
+        grid-template-columns: 10% 15% 15% 15% 25% 20%;
+        grid-template-rows: repeat(6, 1fr);
         align-items: center;
         justify-items: center;
-
-
+	
+		overflow-y : scroll;
         border: 2px solid #1315a6;
         border-radius: 30px;
     }
 
-    
+    #aJax-target{
+        grid-column: span 6;
+        width: 800px;
+        display: grid;
+        grid-template-columns: 13% 10% 20% 13% 25% 20%;
+        align-items: center;
+        justify-items: center;
+    }
 
 
 </style>
@@ -115,39 +122,38 @@
                 <h1 class="account-title-name">계좌번호정보</h1>
                 <div id="account-table-outer">
 
-                    <div class="account-table-header">No.</div>
+                    <div class="account-table-header">등록번호</div>
                     <div class="account-table-header">구분</div>
                     <div class="account-table-header">예금주명</div>
                     <div class="account-table-header">은행명</div>
                     <div class="account-table-header">계좌번호</div>
                     <div class="account-table-header">계좌상태</div>
-                    <div class="account-table-header">예외구분</div>
+                    <div class="account-table-header">신청여부</div>
 
 
-                    <div class="account-table-content">1</div>
-                    <div class="account-table-content">월급여</div>
-                    <div class="account-table-content">오귀석</div>
-                    <div class="account-table-content">농협은행</div>
-                    <div class="account-table-content">000-1234-1234-00</div>
-                    <div class="account-table-content">계좌등록승인</div>
-                    <div class="account-table-content">예외없음</div>
-
-                    <div class="account-table-content">2</div>
-                    <div class="account-table-content">기본상여금</div>
-                    <div class="account-table-content">오귀석</div>
-                    <div class="account-table-content">농협은행</div>
-                    <div class="account-table-content">000-1234-1234-00</div>
-                    <div class="account-table-content">계좌등록승인</div>
-                    <div class="account-table-content">예외없음</div>
+                    <div class="account-table-content">${soVo.stNo}</div>
+                    <div class="account-table-content account-part">월급여</div>
+                    <div class="account-table-content">${soVo.name}</div>
+                    <div class="account-table-content">${soVo.bankName}</div>
+                    <div class="account-table-content">${soVo.account}</div>
+                    <div class="account-table-content">계좌등록완료</div>
+                    <div class="account-table-content statusOX">${soVo.monthPay}</div>
                     
-                    <div class="account-table-content">3</div>
-                    <div class="account-table-content">보너스</div>
-                    <div class="account-table-content">오귀석</div>
-                    <div class="account-table-content">농협은행</div>
-                    <div class="account-table-content">000-1234-1234-00</div>
-                    <div class="account-table-content">계좌등록승인</div>
-                    <div class="account-table-content">예외없음</div>
-
+                    <div class="account-table-content">${soVo.stNo}</div>
+                    <div class="account-table-content account-part" >기본상여금</div>
+                    <div class="account-table-content">${soVo.name}</div>
+                    <div class="account-table-content">${soVo.bankName}</div>
+                    <div class="account-table-content">${soVo.account}</div>
+                    <div class="account-table-content">계좌등록완료</div>
+                    <div class="account-table-content statusOX">${soVo.basicBonus}</div>
+                    
+                    <div class="account-table-content">${soVo.stNo}</div>
+                    <div class="account-table-content account-part" >보너스</div>
+                    <div class="account-table-content">${soVo.name}</div>
+                    <div class="account-table-content">${soVo.bankName}</div>
+                    <div class="account-table-content">${soVo.account}</div>
+                    <div class="account-table-content">계좌등록완료</div>
+                    <div class="account-table-content statusOX" >${soVo.bonus}</div>
 
 
                 </div>
@@ -156,25 +162,25 @@
             </div>    
 
             <div >
-                <h3 class="account-title-name">계좌번호 정보</h3>
+                <h3 class="account-title-name">자동이체 변경하기</h3>
                 <div id="account-info-area" >
                     <div >
                         <h4>급여구분  :   
-                        <select name="" id="" >
+                        <select name="" id="changeName-select" >
                             <option value="월급여">월급여</option>
                             <option value="기본상여금">기본상여금</option>
                             <option value="보너스">보너스</option>
                         </select>
                         </h4>
                     </div>
-                    <div><h4>예금주명  :   오귀석</h4></div>
-                    <div><h4>은 행 명  :   농협은행</h4></div>
-                    <div><h4>계좌번호  :   000-1234-1234-00</h4></div>
+                    <div><h4>예금주명  :   ${soVo.name}</h4></div>
+                    <div><h4>은 행 명  :   ${soVo.bankName}</h4></div>
+                    <div><h4>계좌번호  :   ${soVo.account}</h4></div>
                     <div id="account-direct">
                         <h4>자동이체  :   </h4>
                         <div>
-                            <input type="button" value="신청하기" style="background-color: #6667AB; color:white"> 
-                            <input type="button" value="취소하기">
+                            <input id="changeSuccess" type="button" value="신청하기" style="background-color: #6667AB; color:white"> 
+                            <input id="changeCancle" type="button" value="취소하기">
                         </div>
                     </div>
                 </div>
@@ -185,24 +191,34 @@
                 <h3 class="account-title-name" >자동이체 변경 이력</h3>
                 <div id="account-edit-area">
 
-                    <div class="account-table-header">구분</div>
+                    <div class="account-table-header">요청</div>
+                    <div class="account-table-header">급여구분</div>
                     <div class="account-table-header">예금주명</div>
                     <div class="account-table-header">은 행 명</div>
                     <div class="account-table-header">계좌번호</div>
-                    <div class="account-table-header">일시</div>
-
-                    <div class="badge bg-danger">취소</div>
-                    <div>오귀석</div>
-                    <div>농협은행</div>
-                    <div>000-1234-1234-00</div>
-                    <div>2022-10-10</div>
-
-                    <div class="badge bg-primary">신청</div>
-                    <div>오귀석</div>
-                    <div>농협은행</div>
-                    <div>000-1234-1234-00</div>
-                    <div>2022-10-10</div>
-
+                    <div class="account-table-header" >요청일시</div>
+					
+                    <div id="aJax-target">
+                        <c:forEach items="#{soChangeVoList}" var="soChangeVo">
+                            
+                            <c:if test="${soChangeVo.status eq '취소'}">
+                                <div class="badge bg-danger">${soChangeVo.status}</div>
+                            </c:if>
+                            
+                            <c:if test="${soChangeVo.status  eq '신청'}">
+                                <div class="badge bg-primary">${soChangeVo.status}</div>
+                            </c:if>
+                            
+                            <div>${soChangeVo.name}</div>
+                            <div>${soVo.name}</div>
+                            <div>${soVo.bankName}</div>
+                            <div>${soVo.account}</div>
+                            <div>${soChangeVo.changeDate}</div>
+                            
+                        </c:forEach>
+					
+                    </div>
+                 
 
                 </div>
 
@@ -210,14 +226,139 @@
 
 
 
-
-
-
-
-
         </main>
 
 
     </div>
+    
+    	<c:if test="${empty soVo}">
+	    	<script>
+				Swal.fire({
+				title: "${loginMember.name} --- ${loginMember.account}",
+				text: "자동이체 계좌등록을 하시겠습니까?",
+				icon: "question",
+				showConfirmButton: false,
+				footer: '<h3><a href="/md/payroll/account/enroll" style="background-color: #6667AB; color:white; text-decoration:none;">계좌 등록하기</a></h3>'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+						  Swal.fire('등록성공!', '', 'success');
+					  }
+				})
+			</script>
+    	</c:if>
+    
+        <script>
+
+            const changeSuccess = document.querySelector('#changeSuccess');
+            const changeCancle = document.querySelector('#changeCancle');
+
+            const changeName = document.querySelector('#changeName-select');
+
+            const accountPart = document.querySelectorAll('.account-part');
+            const statusOX = document.querySelectorAll('.statusOX');
+            
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+            let day = ('0' + today.getDate()).slice(-2);
+            const dateString = year + '-' + month  + '-' + day;
+            
+
+            changeSuccess.addEventListener('click',function(){
+				
+            	for(let i=0; i<accountPart.length; i++){
+            		
+            		if( changeName.value == accountPart[i].innerText && statusOX[i].innerText == 'X'){
+            		
+		                $.ajax({
+		
+		                    url: "${root}/payroll/account/change",
+		                    type : "post",
+		                    data : {
+		                          stNo : '${soVo.stNo}',
+		                          name :  changeName.value,
+		                          status :  '신청'
+		                    },
+		                    success : function(result){
+		                        if(result == 'success'){
+		                            let editArea = document.querySelector('#aJax-target');
+									
+		                            statusOX[i].innerText = 'O';
+		                            
+		                            $(editArea).prepend('<div class="badge bg-primary">신청</div>'
+		            	                    +'<div>' + changeName.value + '</div>'
+		            	                    + '<div>${soVo.name}</div>'
+		            	                    + '<div>${soVo.bankName}</div>'
+		            	                    + '<div>${soVo.account}</div>'
+		            	                    + '<div>'+ dateString + '</div>')
+		                        }else{
+		                            alert('수정 실패 ...');
+		                            console.log(result);
+		                        }
+		
+		                    },
+		                    error: function(){
+		                        alert('통신 실패 ...');
+		                    }
+		
+		                });
+		                
+            		}
+            		
+            		
+            	}
+
+            });
+
+
+            changeCancle.addEventListener('click',function(){
+				
+
+            	for(let i=0; i<accountPart.length; i++){
+            		
+            		if( changeName.value == accountPart[i].innerText && statusOX[i].innerText == 'O'){
+            		
+		                $.ajax({
+		
+		                    url: "${root}/payroll/account/change",
+		                    type : "post",
+		                    data : {
+		                          stNo : '${soVo.stNo}',
+		                          name :  changeName.value,
+		                          status :  '취소'
+		                    },
+		                    success : function(result){
+		                        if(result == 'success'){
+		                            let editArea = document.querySelector('#aJax-target');
+									
+		                            statusOX[i].innerText = 'X';
+		                            
+		                            $(editArea).prepend('<div class="badge bg-danger">취소</div>'
+		            	                    +'<div>' + changeName.value + '</div>'
+		            	                    + '<div>${soVo.name}</div>'
+		            	                    + '<div>${soVo.bankName}</div>'
+		            	                    + '<div>${soVo.account}</div>'
+		            	                    + '<div>'+ dateString + '</div>')
+		                        }else{
+		                            alert('댓글 작성 실패 ...');
+		                        }
+		
+		                    },
+		                    error: function(){
+		                        alert('통신 실패 ...');
+		                    }
+		
+		                });
+		                
+            		}
+            		
+            		
+            	}
+
+            });
+
+        </script>
+
+
 </body>
 </html>
