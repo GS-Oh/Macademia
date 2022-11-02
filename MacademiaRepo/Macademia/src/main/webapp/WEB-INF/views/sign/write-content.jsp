@@ -61,9 +61,13 @@
     }	 	
     
 #m_main{
-width:120px;
+width:130px;
+height: 178px;
+text-align: center;
 background-color:#6667AB;
-color:#fff
+color:#fff;
+line-height: 178px;
+font-size: 20px;;
 
  }
  hr{
@@ -105,13 +109,7 @@ color:#fff
 	background-color: #6667AB;
 	color:#fff
  }
- .signLine{
- display: inline-block;
- border: 1px solid black;
- width: 200px;
- height: 400px;
- 
- }
+
  #modal-wrap{
  border: 1px solid red;
  height: 300px;
@@ -142,6 +140,13 @@ color:#fff
  border-radius: 5px;
  margin-top: 47px;
  }
+ #wrap2{
+	display:flex;
+	width:1000px;
+	height:170px;
+color:#fff
+
+ }
 </style>
 
 <div id="center_menu">
@@ -151,12 +156,12 @@ color:#fff
 		<tr>
 			<td>문서 종류</td>
 			<td><select>
-				<option>종류</option>
-				<option>종류</option>
-				<option>종류</option>
+				<option value="1">종류</option>
+				<option value="2">종류2</option>
+				<option value="3">종류3</option>
 			</select></td>
 			<td>작성자</td>
-			<td>심원용</td>
+			<td class="writer" id="${loginMember.positionName}">${loginMember.name}</td>
 			
 		
 		</tr>
@@ -167,37 +172,13 @@ color:#fff
 	<br>
 	<h5>결재선 지정</h5>
 	<hr>
+	<div id="wrap2">
+		<div id="m_main"><a id="plus" data-toggle="modal" href="#myModal"> 결재 <i class="fa-solid fa-plus"></i></a></div>
 	<table id="sign_middle">
-		<tr>
-			<td id="m_main" rowspan="4"><a id="plus" data-toggle="modal" href="#myModal"> 결재 <i class="fa-solid fa-plus"></i></a></td>
-			
-			
-		</tr>
-		<tr>
-			<td class="td_top">아잉</td>
-			<td class="td_top">아잉3</td>
-			<td class="td_top">아잉4</td>
-			<td class="td_top">아잉5</td>
-			<td class="td_top">아잉6</td>
-		</tr>
-		<tr>
-			<td >아잉2</td>
-				<td>아잉3</td>
-				<td>아잉4</td>
-				<td>아잉5</td>
-				<td>아잉6</td>
-		</tr>
-		<tr>
-			<td class="td_bottom">아잉2</td>
-				<td class="td_bottom">아잉3</td>
-				<td class="td_bottom">아잉4</td>
-				<td class="td_bottom">아잉5</td>
-				<td class="td_bottom">아잉6</td>
-		</tr>
-		
-		
-	
 	</table>
+
+	</div>
+	
 	
 	<br>
 	
@@ -320,6 +301,11 @@ $('#select_top').on('change', function(){
 	})
 
 	})
+
+$('#plus').on('click', function(){
+	$('#select_right *').remove();
+})
+
 $('#addUser').on('click', function(){
 	let userCode = $('#select_box option:selected').val();
 	let userOption = $('#select_box option[value=' + userCode + ' ]')[0].outerHTML;
@@ -332,29 +318,150 @@ $("#deleteUser").on('click',function(){
 	let userOption = $('#select_right option[value=' + userCode+']');
 
 	$('#select_right option[value='+userCode+']').remove();
-}
 
-)
+
+})
 var i = 0
 $("#select_complete").on('click',function(){
-	var arr = new Array(4);
-	while(i<4){
-		arr[i] = $('select_right option')[0].outerHTML;
-		i++;
-		 
-	}
-	console.log(arr);
-	console.log($('#select_right').text());
-   /*  var langSelect = document.getElementById("select_top");
-     
-    // select element에서 선택된 option의 value가 저장된다.
-    var selectValue = langSelect.options[langSelect.selectedIndex].value;
- 
-    // select element에서 선택된 option의 text가 저장된다.
-    var selectText = langSelect.options[langSelect.selectedIndex].text;
-} */
+   let userCode = $('#select_right option').val();
 
-});
+   $('#sign_middle *').remove();
+   let apprTableHtml;
+   let rankHtml;
+    let nameHtml;
+    let markHtml;
+   let seq = 1;
+   let approverVal = [];
+        $('#select_right option').each(function () {
+          var selected = $(this).val();
+          approverVal.push(selected);
+		
+        })
+      $.each(approverVal, function (j) {
+		 console.log(j);
+		 console.log(approverVal)
+          let approverEmp = $('#select_right option[value=' + approverVal[j] + ']').attr('approverSeq', seq+=1)[0].innerHTML;
+          let empInfo = approverEmp.split(' ');
+          let empName = empInfo[0];
+          let empRankName = empInfo[3].replace(')', '');
+          let writer = $('.writer')[0].innerHTML;
+          let writerCode = $('.writer').attr('id');
+          //첫번째 결재자를 작성자로 박아두기
+          if(i == 0 && j == 0){
+           
+            rankHtml += '<td style="width : 100px" class="td_top">기안자</td>';
+            markHtml += '<td></td>';
+            nameHtml += '<td>' + writer + writerCode + '</td>';
+          }
+
+          //html 담아두기
+          rankHtml += '<td style="width : 100px" class="td_top">' + empRankName + '</td>';
+          markHtml += '<td></td>';
+          nameHtml += '<td>' + empName + '</td>';
+          
+
+ 
+	})   
+	
+	let blankTd;
+        if(approverVal.length < 7 && i == 0) {
+          let blankCount = (7-approverVal.length);
+          for(let i=0; i<blankCount; i++){
+            blankTd += '<td ></td>';
+          }
+        } else {
+          let blankCount = (5-approverVal.length);
+          for(let i=0; i<blankCount; i++){
+            blankTd += '<td></td>';
+          }
+        }
+        if(approverVal.length != 0){
+          apprTableHtml += '<tr class="appr-table-color">'  + rankHtml + blankTd + '</tr> <tr style="height: 100px;">' + markHtml + blankTd + '</tr> <tr class="approver-emp">' + nameHtml + blankTd + '</tr>';
+        }
+
+      
+
+
+      $('#sign_middle').append(apprTableHtml);
+	});
+//결재라인 설정 완료하기
+$('#approver-submit').on('click', function () {
+      //선택한 결재자 번호 가져오기
+      let userCode = $('.approver-select-box option').val();
+      
+      //결재라인 지워주기
+      $('#approval-table *').remove();
+      
+      //결재타입 가져오기
+      let checkedVal = [];
+      $('#modal-appr-type input[type=checkbox]:checked').each(function () {
+        var checked = $(this).val();
+        checkedVal.push(checked); 
+      })
+      
+      let apprTableHtml;
+
+      let seq = 1;
+      //선택한 결재타입 갯수만큼 반복문
+      $.each(checkedVal, function(i){
+        
+        let typeName = $('#type-content[apprTypeCode='+ checkedVal[i] +']>span')[0].outerText;
+        let approverVal = [];
+        $('.approver-select-box[id='+ checkedVal[i] +'] option').each(function () {
+          var selected = $(this).val();
+          approverVal.push(selected);
+        })
+        
+        let rankHtml;
+        let nameHtml;
+        let markHtml;
+        //선택한 결재자 수만큼 반복문
+        $.each(approverVal, function (j) {
+          let approverEmp = $('.approver-select-box[id='+ checkedVal[i] +'] option[value=' + approverVal[j] + ']').attr('approverSeq', seq += 1)[0].innerHTML;
+          let empInfo = approverEmp.split(' ');
+          let empName = empInfo[0];
+          let empRankName = empInfo[3].replace(')', '');
+          let writer = $('.writer-name')[0].innerHTML;
+          let writerCode = $('.writer-name').attr('id');
+          //첫번째 결재자를 작성자로 박아두기
+          if(i == 0 && j == 0){
+           
+            rankHtml += '<td style="width : 80px"></td>';
+            markHtml += '<td></td>';
+            nameHtml += '<td>' + writer + writerCode + '</td>';
+          }
+
+          //html 담아두기
+          rankHtml += '<td style="width : 80px">' + empRankName + '</td>';
+          markHtml += '<td></td>';
+          nameHtml += '<td>' + empName + '</td>';
+		  
+          
+
+
+        })
+        //이건 무시하셔도 돼용
+        let blankTd;
+        if(approverVal.length < 9 && i == 0) {
+          let blankCount = (7-approverVal.length);
+          for(let i=0; i<blankCount; i++){
+            blankTd += '<td></td>';
+          }
+        } else {
+          let blankCount = (8-approverVal.length);
+          for(let i=0; i<blankCount; i++){
+            blankTd += '<td></td>';
+          }
+        }
+        if(approverVal.length != 0){
+          apprTableHtml += '<tr class="appr-table-color"> <td  rowspan="3" style="width: 100px;">' + typeName + 
+            '</td>' + rankHtml + blankTd + '</tr> <tr style="height: 100px;">' + markHtml + blankTd + '</tr> <tr class="approver-emp">' + nameHtml + blankTd + '</tr>';
+        }
+        
+        
+      })
+        $('#approval-table').append(apprTableHtml);
+    });
 
 
 

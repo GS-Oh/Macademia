@@ -15,9 +15,9 @@ public class PlanDao {
 		return sst.insert("planMapper.insertPlan", vo);
 	}
 
-	public List<PlanVo> getPlan(SqlSessionTemplate sst) {
+	public List<PlanVo> getPlan(SqlSessionTemplate sst, String no) {
 		// TODO Auto-generated method stub
-		return sst.selectList("planMapper.planList");
+		return sst.selectList("planMapper.planList", no);
 	}
 
 	public PlanVo getPlanOne(SqlSessionTemplate sst, String pno) {

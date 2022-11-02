@@ -19,9 +19,9 @@ public class PlanService {
 		// TODO Auto-generated method stub
 		return dao.insertPlan(sst, vo);
 	}
-	public List<PlanVo> getPlan() {
+	public List<PlanVo> getPlan(String no) {
 		// TODO Auto-generated method stub
-		return dao.getPlan(sst);
+		return dao.getPlan(sst, no);
 	}
 
 	public PlanVo getPlanOne(String pno) {
