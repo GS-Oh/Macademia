@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.payroll.service.PayrollService;
+import com.kh.md.payroll.vo.PayrollOptionMemberVo;
 import com.kh.md.payroll.vo.PayrollVo;
 import com.kh.md.payroll.vo.SoChangeVo;
 import com.kh.md.payroll.vo.StandOrderVo;
@@ -77,11 +78,10 @@ public class PayrollController {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		
 		StandOrderVo soVo = ps.selectStandingOrderByNo(loginMember.getNo());
+		List<SoChangeVo> soChangeVoList = ps.selectSoChangeHistory(loginMember.getNo());
 		
-		List<SoChangeVo> soChangeVoList = ps.selectSoChangeHistory(soVo.getStNo());
-		
-		model.addAttribute("soVo", soVo);
 		model.addAttribute("soChangeVoList",soChangeVoList);
+		model.addAttribute("soVo", soVo);
 		
 		return "payroll/account";
 		
@@ -118,35 +118,65 @@ public class PayrollController {
 	}
 	
 	
+	
+	
+	//급여대장 작성 ( 메인화면 )
+	@GetMapping("create")
+	public String create(String yearValue, String deptValue, Model model) {
+		//검색값유지
+		model.addAttribute("yearValue", yearValue);
+		model.addAttribute("deptValue", deptValue);
+		
+		return "payroll/create";
+	}
+	
+	//급여대장 작성
+	@PostMapping("create")
+	public String createSelectPart(PayrollVo prVo, Model model) {
+		
+		List<PayrollOptionMemberVo> prMemberList = ps.selectPayrollOptionMember(prVo);
+		
+		if( prMemberList != null) {
+			model.addAttribute("prMemberList", prMemberList);
+			
+			//검색값유지
+			model.addAttribute("yearValue", prVo.getPayDate());
+			model.addAttribute("deptValue", prVo.getDeptNo());
+			model.addAttribute("rankValue", prVo.getRankNo());
+			
+			
+			return "payroll/create";
+			
+			
+		} else {
+			return "";
+		}
+		
+		
+	}
+	
+	//급여대장 관리 ( 메인화면 ) 
 	@GetMapping("management")
 	public String management() {
 		return "payroll/management";
 	}
 	
-	//급여대장 작성 ( 메인화면 )
-	@GetMapping("create")
-	public String create() {
-		return "payroll/create";
-	}
 	
-	//급여대장 작성 ( 선택 옵션에 해당하는 멤버 불러오기 ) 
-	@PostMapping("create")
-	public String createSelectPart(PayrollVo prVo, String checkType, Model model) {
+	//급여대장 관리 ( 선택 옵션에 해당하는 멤버 불러오기 ) 
+	@PostMapping("management")
+	public String management(PayrollVo prVo, Model model) {
 		
 		List<PayrollVo> prVoList = ps.selectPayrollOption(prVo);
 		
 		if( prVoList != null) {
 			model.addAttribute("prVoList", prVoList);
 			
+			//검색값유지
 			model.addAttribute("yearValue", prVo.getPayDate());
 			model.addAttribute("deptValue", prVo.getDeptNo());
 			model.addAttribute("rankValue", prVo.getRankNo());
 			
-			if(checkType == "manage") {
-				return "payroll/management";
-			}			
-			
-			return "payroll/create";
+			return "payroll/management";
 			
 			
 		} else {
@@ -167,12 +197,15 @@ public class PayrollController {
 	
 	//급여대장 작성 ( 작성하기 처리 )
 	@PostMapping("create/detail/write")
-	public String createDetail(PayrollVo prVo) {
+	public String createDetail(PayrollVo prVo, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		prVo.setWriterNo(loginMember.getNo());
 		
 		int result = ps.insertSalaryBook(prVo);
 		
 		if(result == 1) {
-			return "redirect:/create/detail";
+			return "redirect:/payroll/create?yearValue="+ prVo.getPayDate() +"&deptValue=" + prVo.getDeptNo();
 		}else {
 			return "";
 		}

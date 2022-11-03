@@ -80,8 +80,8 @@
         width: 800px;
 
         display: grid;
-        grid-template-columns: 10% 15% 15% 15% 25% 20%;
-        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: 10% 15% 15% 15% 23% 18%;
+        grid-template-rows: repeat(5, 1fr);
         align-items: center;
         justify-items: center;
 	
@@ -94,9 +94,11 @@
         grid-column: span 6;
         width: 800px;
         display: grid;
-        grid-template-columns: 13% 10% 20% 13% 25% 20%;
+        grid-template-columns: 13% 10% 20% 13% 22% 18%;
         align-items: center;
         justify-items: center;
+        row-gap : 10px;
+        margin-left : 3%;
     }
 
 
@@ -276,6 +278,7 @@
 		                    type : "post",
 		                    data : {
 		                          stNo : '${soVo.stNo}',
+		                          no : '${soVo.no}',
 		                          name :  changeName.value,
 		                          status :  '신청'
 		                    },
@@ -291,19 +294,40 @@
 		            	                    + '<div>${soVo.bankName}</div>'
 		            	                    + '<div>${soVo.account}</div>'
 		            	                    + '<div>'+ dateString + '</div>')
+		            	                    
+		            	                    Swal.fire(
+	          								  '자동이체 [ 신청 ] 요청',
+	          								  '변경 요청 성공',
+	          								  'success'
+	          							     )   
+	          							     
 		                        }else{
-		                            alert('수정 실패 ...');
-		                            console.log(result);
+		                        	
+		                        	Swal.fire({
+		                    		  icon: 'warning',
+		                    		  title: '통신실패',
+		                    		  text: 'Something went wrong!',
+		                    		})
+			                    		
 		                        }
+		                        
 		
 		                    },
 		                    error: function(){
-		                        alert('통신 실패 ...');
+		                    	
+		                    	Swal.fire({
+	                    		  icon: 'error',
+	                    		  title: '통신실패',
+	                    		  text: 'Something went wrong!',
+	                    		})
+	                    		
 		                    }
 		
 		                });
 		                
-            		}
+            		}else{
+                        Swal.fire('이미 신청 상태입니다.')
+                    }
             		
             		
             	}
@@ -324,6 +348,7 @@
 		                    type : "post",
 		                    data : {
 		                          stNo : '${soVo.stNo}',
+		                          no : '${soVo.no}',
 		                          name :  changeName.value,
 		                          status :  '취소'
 		                    },
@@ -339,18 +364,41 @@
 		            	                    + '<div>${soVo.bankName}</div>'
 		            	                    + '<div>${soVo.account}</div>'
 		            	                    + '<div>'+ dateString + '</div>')
+		            	                    
+		            	             Swal.fire(
+									  '자동이체 [ 취소 ] 요청',
+									  '변경 요청 성공',
+									  'success'
+								     )       
+								     
+								     
 		                        }else{
-		                            alert('댓글 작성 실패 ...');
+		                        	
+		                        	Swal.fire({
+		                    		  icon: 'warning',
+		                    		  title: '통신실패',
+		                    		  text: 'Something went wrong!',
+		                    		})
+		                    		
 		                        }
 		
 		                    },
 		                    error: function(){
-		                        alert('통신 실패 ...');
+		                    	
+		                    	Swal.fire({
+	                    		  icon: 'error',
+	                    		  title: '통신실패',
+	                    		  text: 'Something went wrong!',
+	                    		})
+	                    		
+	                    		
 		                    }
 		
 		                });
 		                
-            		}
+            		}else{
+                        Swal.fire('이미 취소 상태입니다.')
+                    }
             		
             		
             	}

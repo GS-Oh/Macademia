@@ -12,13 +12,20 @@
 
     main{
         display: grid;
-        grid-template-rows: 1fr 8fr;
+        grid-template-rows: 0.5fr 1fr 8fr;
     }
 
+   	#management-title{
+		border-left: 5px solid #6667AB;
+		margin: 30px 0px 30px 10px;
+		padding-left: 20px;
+	}
+	
     #management-select-area{
         border-bottom: 2px solid #6667AB;
         
     }
+    
 
 	#management-select-area{
 		display: grid;
@@ -106,13 +113,16 @@
 			</aside>                
 
 	        <main>
+	        	
+	        	<h1 id="management-title">급여대장 작성</h1>
+	        	
 	            <div id="management-select-area">
 	                <form action="" method="post">
 	
 	                    <div>
 	                        <label for="year-select" class="form-label">발급년월</label>
 	                        <select name="payDate" id="year-select" class="form-select" >
-	                            <option value="2022/03">2022-03</option>
+	                            <option value="2022-03">2022-03</option>
 	                            <option value="2022-04">2022-04</option>
 	                            <option value="2022-05">2022-05</option>
 	                            <option value="2022-06">2022-06</option>
@@ -173,11 +183,11 @@
 	            <!-- 조회 결과 -->
 	            <div id="management-select-result">
 	            
-					<div class="management-table-header">발급번호</div>
-					<div class="management-table-header">발급년월</div>
+					<div class="management-table-header">회원번호</div>
+					<div class="management-table-header">이름</div>
 					<div class="management-table-header">부서명</div>
 					<div class="management-table-header">직급명</div>
-					<div class="management-table-header">이름</div>
+					<div class="management-table-header">직책</div>
 					<div class="management-table-header">본봉</div>
 					<div class="management-table-header">수당</div>
 					<div class="management-table-header">과세</div>
@@ -188,17 +198,20 @@
 	            
 					
 	            
-	            	<c:forEach items="${prVoList}" var="prVo">
+	            	<c:forEach items="${prMemberList}" var="prMember">
 	            	
 	            		
 						<!-- 급여대장 작성 -->
 						<form class="content-form" action="/md/payroll/create/detail" method="post">
 							
-							<div class="management-table-content"><input type="text" value="${prVo.salNo}" name="salNo" style="width: 100%;" readonly></div>
-							<div class="management-table-content"><input type="text" value="${prVo.payDate}" name="payDate" style="width: 100%;" readonly></div>
-							<div class="management-table-content"><input type="text" value="${prVo.deptName}" name="deptName" style="width: 100%;" readonly></div>
-							<div class="management-table-content"><input type="text" value="${prVo.rankName}" name="rankName" style="width: 100%;" readonly></div>
-							<div class="management-table-content"><input type="text" value="${prVo.name}" name="name" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prMember.no}" name="no" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prMember.name}" name="name" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prMember.deptName}" name="deptName" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prMember.positionName}" name="positionName" style="width: 100%;" readonly></div>
+							<div class="management-table-content"><input type="text" value="${prMember.rankName}" name="rankName" style="width: 100%;" readonly></div>
+							<input type="hidden" name="payDate" >
+							<input type="hidden" name="deptNo" value="${prMember.deptNo}" >
+							<input type="hidden" name="rankNo" value="${prMember.rankNo}" >
 							<div style="grid-column: span 6; color: red; text-align: center; ">
 								
 									<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-secondary btn-lg" type="submit" value="급여 대장 작성하기" style="width:40%;"></h2>
@@ -261,7 +274,14 @@
 		</script>
 
 
+		<script>
+			const memberPayDate = document.querySelectorAll('input[name=payDate]');
+	
+			for(let i=0; i<memberPayDate.length; i++){
+				memberPayDate[i].value = yearSelect.value;
+			}	
 
+		</script>
 
 
 </body>

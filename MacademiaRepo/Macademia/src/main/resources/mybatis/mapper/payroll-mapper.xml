@@ -5,6 +5,37 @@
 <mapper namespace="payrollMapper">
 
 
+	<!-- 급여대장 ( 검색 ( 옵션에 따른 작성대상 멤버 리스트 가져오기 ) -->
+	<select id="selectPayrollOptionMember" resultType="com.kh.md.payroll.vo.PayrollOptionMemberVo">
+			SELECT B.*
+			FROM 
+			(
+			        SELECT A.NO, A.NAME, A.POSITION_NAME ,D.NAME AS DEPT_NAME , R.NAME AS RANK_NAME, D.NO AS DEPT_NO, R.NO AS RANK_NO
+			        FROM
+			        (
+			            SELECT M.NO, M.NAME, P.NAME AS POSITION_NAME, P.RANK_NO, P.DEPT_NO
+			            FROM MEMBER M
+			            JOIN POSITION P ON M.POSITION_NO = P.NO
+			        ) A
+			        JOIN DEPT D ON D.NO = A.DEPT_NO
+			        JOIN RANK R ON R.NO = A.RANK_NO
+			) B
+			LEFT OUTER JOIN SALARY_BOOK S ON B.NO = S.TARGET_NO
+			WHERE S.PAY IS NULL
+			<if test="deptNo != 0">
+				AND B.DEPT_NO = #{deptNo}
+			</if>
+			 
+		    <if test="rankNo != 0">
+				AND B.RANK_NO = #{rankNo}
+		    </if>
+		    ORDER BY B.RANK_NAME DESC
+	
+	</select>
+
+
+
+
 	<!-- 급여대장 - 옵션 검색 -->
 	<select id="selectPayrollOption" resultType="com.kh.md.payroll.vo.PayrollVo">
 	
@@ -188,6 +219,7 @@
 		(
 			 CH_NO
 			,ST_NO
+			,NO
 			,NAME
 			,STATUS
 		)	
@@ -195,6 +227,7 @@
 		(
 			 SEQ_SO_CHANGE_HISTORY_NO.NEXTVAL
 			,#{stNo}
+			,#{no}
 			,#{name}
 			,#{status}
 		)
@@ -206,13 +239,14 @@
 	<select id="selectSoChangeHistory" resultType="com.kh.md.payroll.vo.SoChangeVo">
 		
 		SELECT 
-		    CH_NO
+		     CH_NO
 		    ,ST_NO
+		    ,NO
 		    ,NAME
 		    ,STATUS
 		    ,CHANGE_DATE
 		FROM SO_CHANGE_HISTORY
-		WHERE ST_NO = #{stNo}
+		WHERE NO = #{no}
 		ORDER BY CH_NO DESC
 		
 	
