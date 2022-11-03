@@ -1,6 +1,7 @@
 package com.kh.md.academy.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -45,6 +46,12 @@ public interface AcademyDao {
 
 	//페이징>전체 클래스 리스트 수 조회
 	int countTotalClass(SqlSessionTemplate sst);
+
+	//수강생 정보 수정
+	int updateStudent(SqlSessionTemplate sst, StudentVo vo);
+
+	//검색결과 클래스 리스트 수 조회
+	int countTotalClassSearch(SqlSessionTemplate sst, Map map);
 
 	
 }

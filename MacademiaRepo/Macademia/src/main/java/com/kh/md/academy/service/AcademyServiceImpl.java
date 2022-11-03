@@ -1,6 +1,7 @@
 package com.kh.md.academy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,18 @@ public class AcademyServiceImpl implements AcademyService{
 	@Override
 	public int countTotalClass() {
 		return dao.countTotalClass(sst);
+	}
+
+	//수강생 정보 수정
+	@Override
+	public int updateStudent(StudentVo vo) {
+		return dao.updateStudent(sst, vo);
+	}
+
+	//검색결과 클래스 리스트 수 조회
+	@Override
+	public int countTotalClass(Map map) {
+		return dao.countTotalClassSearch(sst, map);
 	}
 
 

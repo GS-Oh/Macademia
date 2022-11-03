@@ -1,6 +1,7 @@
 package com.kh.md.academy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.md.academy.vo.CategoryVo;
 import com.kh.md.academy.vo.ClassVo;
@@ -43,6 +44,12 @@ public interface AcademyService {
 
 	//페이징>전체 클래스 리스트 수 조회
 	int countTotalClass();
+
+	//수강생 정보 수정
+	int updateStudent(StudentVo vo);
+
+	//검색결과 클래스 리스트
+	int countTotalClass(Map map);
 
 
 	

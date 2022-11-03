@@ -22,9 +22,9 @@
 	
 	<insert id="insertCurriculum">
 		BEGIN
-			<foreach collection="cvo" item="curriculumName">
+			<foreach collection="mapList" item="m">
 		    INSERT INTO CURRICULUM(NO, CLASS_NO, CURRICULUM_NAME, CURRICULUM_CONTENT) 
-		    VALUES (SEQ_CURRICULUM_NO.NEXTVAL, SEQ_CLASS_NO.CURRVAL, #{curriculumName}, #{curriculumContent});
+		    VALUES (SEQ_CURRICULUM_NO.NEXTVAL, SEQ_CLASS_NO.CURRVAL, #{m.name}, #{m.content});
 		    </foreach>
 		END;
 	</insert>
@@ -65,4 +65,27 @@
 	<select id="selectTotalClassCount" resultType="int">
 		SELECT COUNT(NO) FROM CLASS
 	</select>
+	
+	<update id="updateOne">
+		UPDATE STUDENT
+		SET PHONE = '010111111', EMAIL = #{email}, PROFILE = #{profile}, BIRTH = #{birth}, NEW_ADDRESS = #{newAddress}, OLD_ADDRESS = #{oldAddress}, DETAIL_ADDRESS = #{detailAddress}, FINAL_DEGREE = #{finalDegree}, MAJOR = #{major}, ENROLLED_CLASS = #{enrolledClass}, STD_COMMENT = #{stdComment}
+		WHERE NO = #{no}
+	</update>
+	
+	<select id="selectTotalClassSearchCount" resultType="int">
+		SELECT COUNT(NO) FROM CLASS
+		WHERE STATUS = 'O'
+		<choose>
+			<when test="keyword != null">
+			AND NAME LIKE '%${keyword}%'
+			</when>
+		
+			<when test="search > 0">
+			AND CATEGORY_NO = #{no}
+			</when>
+		</choose>
+		
+	</select>
+	
+	
 </mapper>

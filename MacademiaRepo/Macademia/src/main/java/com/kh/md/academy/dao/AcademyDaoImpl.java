@@ -38,13 +38,6 @@ public class AcademyDaoImpl implements AcademyDao{
 	//커리큘럼 인서트
 	@Override
 	public int insertCurriculum(SqlSessionTemplate sst, CurriculumVo cvo) {
-		System.out.println("=====================================");
-		System.out.println("cName : " + cvo.getCurriculumName()[0]);
- 		System.out.println("cName : " + cvo.getCurriculumName()[1]);
- 		System.out.println("cName : " + cvo.getCurriculumName()[2]);
- 		System.out.println("cContent : " + cvo.getCurriculumContent()[0]);
- 		System.out.println("cContent : " + cvo.getCurriculumContent()[1]);
- 		System.out.println("cContent : " + cvo.getCurriculumContent()[2]);
 		return sst.insert("academyMapper.insertCurriculum", cvo);
 	}
 	
@@ -98,6 +91,21 @@ public class AcademyDaoImpl implements AcademyDao{
 	@Override
 	public int countTotalClass(SqlSessionTemplate sst) {
 		return sst.selectOne("academyMapper.selectTotalClassCount");
+	}
+
+	//수강생 정보 수정
+	@Override
+	public int updateStudent(SqlSessionTemplate sst, StudentVo vo) {
+		System.out.println(vo);
+		return sst.update("academyMapper.updateOne", vo);
+	}
+
+	//검색결과 클래스 리스트 수 조회
+	@Override
+	public int countTotalClassSearch(SqlSessionTemplate sst, Map map) {
+		System.out.println("daoNo:" + map.get("no"));
+		System.out.println("daoKW:" + map.get("keyword"));
+		return sst.selectOne("academyMapper.selectTotalClassSearchCount", map);
 	}
 
 	

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,7 +95,14 @@ public class AcademyController {
 	
 	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기
 	@GetMapping("curriculum/{pno}")
-	public String curriculum(Model model, @PathVariable int pno) {
+	public String curriculum(Model model, @PathVariable int pno, @RequestParam("search",required=false) int cNo, @RequestParam("keyword",required=false) String keyword) {
+		//검색창의 카테고리 조회해오기
+		List<CategoryVo> categoryList = service.showCategory();
+
+		Map map = new HashMap<Integer, String>();
+		map.put("no", cNo);
+		map.put("keyword", keyword);
+		
 		//# of total class
 		int totalCount = service.countTotalClass();
 		
@@ -104,8 +110,27 @@ public class AcademyController {
 		
 		List<ClassVo> classList = service.selectClassList(pvo);
 		
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("classList", classList);
 		model.addAttribute("pvo", pvo);
+		
+		return "academy/curriculum";
+	}
+	
+	//커리큘럼>검색
+	@PostMapping("curriculum/{pno}")
+	public String searchCurriculum(@PathVariable int pno, @RequestParam("search") int cNo, @RequestParam("keyword") String keyword) {
+		
+		Map map = new HashMap<Integer, String>();
+		map.put("no", cNo);
+		map.put("keyword", keyword);
+		
+		int totalCount = service.countTotalClass(map);
+		System.out.println("결과수 :" + totalCount);
+		
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		List<ClassVo> classList = service.selectClassList(pvo);
 		
 		return "academy/curriculum";
 	}
@@ -123,9 +148,6 @@ public class AcademyController {
 		Map map = new HashMap<List<ClassVo>, PageVo>();
 		map.put("classList", classList);
 		map.put("pvo", pvo);
-		
-		System.out.println("classList : " + classList);
-		System.out.println("pvo : " + pvo);
 		
 		return map;
 	}
@@ -167,20 +189,15 @@ public class AcademyController {
 	@PostMapping("addCurr")
 	public String addCurriculum(Model model, ClassVo vo, CurriculumVo cvo) {
 		
- 		System.out.println("cName : " + cvo.getCurriculumName()[0]);
- 		System.out.println("cName : " + cvo.getCurriculumName()[1]);
- 		System.out.println("cName : " + cvo.getCurriculumName()[2]);
- 		System.out.println("cContent : " + cvo.getCurriculumContent()[0]);
- 		System.out.println("cContent : " + cvo.getCurriculumContent()[1]);
- 		System.out.println("cContent : " + cvo.getCurriculumContent()[2]);
- 		System.out.println("length: " + cvo.getCurriculumName().length);
- 		
 		int classInsert = service.insertClass(vo);
+ 		
+		cvo.convertToList();
 		int curInsert = service.insertCurriculum(cvo);
-		System.out.println(classInsert);
-		System.out.println(curInsert);
 		
-		if(classInsert * curInsert == 1) {
+		System.out.println("클래스 인서트 결과:"+classInsert);
+		System.out.println("커리큘럼 인서트 결과:"+curInsert);
+		
+		if(classInsert * curInsert == -1) {
 			model.addAttribute("msg", "새로운 커리큘럼이 생성되었습니다.");
 			return "academy/curriculum";
 		}else {
@@ -191,8 +208,9 @@ public class AcademyController {
 	
 	//수강생 정보 수정
 	@PostMapping("search/detail/edit/{no}")
-	public String searchDetailEdit(@PathVariable String no) {
+	public String searchDetailEdit(StudentVo vo) {
 		
+		int result = service.updateStudent(vo);
 		
 		return "search/detail";
 	}

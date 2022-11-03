@@ -157,9 +157,8 @@
     /* 페이징관련 */
     #page-area{
         height: 4vh;
-        display: grid;
-        grid-template-columns: repeat(9, 3vh);
-        grid-template-rows: 3vh;
+        display: flex;
+        flex-wrap: nowrap;
         justify-content: center;
         align-content: center;
         justify-items: center;
@@ -167,9 +166,8 @@
         column-gap: 5px;
     }
     #page-area>div{
-        border: 1px solid gray;
-        width: 100%;
-        height: 100%;
+        width: 3vh;
+        height: 3vh;
     }
     #page-area a{
         display: flex;
@@ -178,6 +176,12 @@
         justify-content: center;
         align-items: center;
         color: #6667AB;
+    }
+    #page-area a:hover, #page-area a:hover>i{
+        cursor: pointer;
+        background-color: #6667AB;
+        color: white;
+        font-weight: bolder;
     }
     #page-area a>i{
         display: flex;
@@ -365,15 +369,14 @@
                                     <input type="search" placeholder="강의 검색">
                                     <input type="button" value="검색">
                                 </div>
+                                <div id="modal-body-head">
+                                    <div></div>
+                                    <div>강의실</div>
+                                    <div>강의명</div>
+                                    <div>강사명</div>
+                                    <div>개강일</div>
+                                </div>
                                 <div id="modal-table-area">
-                                    <div id="modal-body-head">
-                                        <div></div>
-                                        <div>강의실</div>
-                                        <div>강의명</div>
-                                        <div>강사명</div>
-                                        <div>개강일</div>
-                                    </div>
-
 									<!-- <c:forEach items="${classList}" var="l">
 	                                    <div class="modal-body-class-list">
 	                                        <div>
@@ -385,7 +388,6 @@
                                             <div>${l.beginDate}</div>
 	                                    </div>
                                     </c:forEach> -->
-                                    
                                 </div>
                     
                                 <div id="page-area">
@@ -434,18 +436,16 @@
 
 </div>
 
-<!-- 페이징 -->
+<!-- 모달 페이징 -->
 <script>
-   $('#myModal').on('show.bs.modal', selectClassList(3));
-
+    $('#myModal').on('show.bs.modal', selectClassList(1));
+   
     function selectClassList(pnum){
-        
         $.ajax({
             type : 'GET',
             url : '${root}/academy/classList/' + pnum,
             success : function(map){
                 const list = map.classList.length
-                console.log(map.pvo.endPage);
 
                 if(map.classList.length > 0){
                     for(let i = 0; i < list; i++){
@@ -457,31 +457,37 @@
 
 
                 if(map.pvo.startPage > 5){
-                    $('#page-area').append('<div><a><i class="fa-solid fa-angles-left"></i></a></div>');
+                    $('#page-area').append('<div><a onclick="f01(1);"><i class="fa-solid fa-angles-left"></i></a></div>');
                 }
 
                 if(map.pvo.startPage != 1){
-                    $('#page-area').append('<div><a><i class="fa-solid fa-angle-left"></i></a></div>');
+                    $('#page-area').append('<div><a onclick="f01(' + (map.pvo.startPage-1) + ');"><i class="fa-solid fa-angle-left"></i></a></div>');
                 }
 
                 for(let i = map.pvo.startPage; i <= map.pvo.endPage; i++){
-                    $('#page-area').append('<div><a>' + i + '</a></div>');
+                    // $('#page-area').append('<div><a onclick="selectClassList(' + i + ')">' + i + '</a></div>');
+                    $('#page-area').append('<div><a onclick="f01(' + i + ');">' + i + '</a></div>');
                 }
                     
                 if(map.pvo.endPage != map.pvo.maxPage){
-                    $('#page-area').append('<div><a><i class="fa-solid fa-angle-right"></i></a></div>');
+                    $('#page-area').append('<div><a onclick="f01(' + (map.pvo.endPage+1) + ');"><i class="fa-solid fa-angle-right"></i></a></div>');
                 }
 
                 if(map.pvo.endPage != map.pvo.maxPage){
-                    $('#page-area').append('<div><a><i class="fa-solid fa-angles-right"></i></a></div>');
+                    $('#page-area').append('<div><a onclick="f01(' + map.pvo.maxPage + ');"><i class="fa-solid fa-angles-right"></i></a></div>');
                 }
-
-                
             },
             error : function(x){
                 console.log('not good');
             }
         });
+    }
+
+    function f01(pnum){
+        $('#modal-table-area').html('');
+        $('#page-area').html('');
+
+        selectClassList(pnum);
     }
 
  
@@ -491,7 +497,6 @@
 <script>
      // submit confirm창에 swal 적용
      function submitForm(){
-            console.log('hi');
             Swal.fire({
                 title: '수강생 정보를 입력하시겠습니까?',
                 text: "입력하신 정보로 수강생이 추가됩니다.",
