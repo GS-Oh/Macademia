@@ -95,13 +95,13 @@ public class AcademyController {
 	
 	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기
 	@GetMapping("curriculum/{pno}")
-	public String curriculum(Model model, @PathVariable int pno, @RequestParam("search",required=false) int cNo, @RequestParam("keyword",required=false) String keyword) {
+	public String curriculum(Model model, @PathVariable int pno) {
 		//검색창의 카테고리 조회해오기
 		List<CategoryVo> categoryList = service.showCategory();
 
-		Map map = new HashMap<Integer, String>();
-		map.put("no", cNo);
-		map.put("keyword", keyword);
+//		Map map = new HashMap<Integer, String>();
+//		map.put("no", cNo);
+//		map.put("keyword", keyword);
 		
 		//# of total class
 		int totalCount = service.countTotalClass();
