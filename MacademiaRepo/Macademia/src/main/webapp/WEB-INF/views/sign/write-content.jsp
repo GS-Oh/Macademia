@@ -62,11 +62,11 @@
     
 #m_main{
 width:130px;
-height: 178px;
+height: 170px;
 text-align: center;
 background-color:#6667AB;
 color:#fff;
-line-height: 178px;
+line-height: 170px;
 font-size: 20px;;
 
  }
@@ -147,15 +147,35 @@ font-size: 20px;;
 color:#fff
 
  }
+ #writeComplete{
+  display: inline-block;
+  width: 70px;
+  color:wheat;
+  border-radius: 5px;
+  height: 20px;
+  background-color: #6667AB;
+  cursor: pointer;
+
+ }
+
+ #s_title{
+
+  width:800px;
+  height:35px;
+  border: 3px solid #6667AB;
+  border-radius: 5px;
+ }
 </style>
 
 <div id="center_menu">
-	<h2>기안서 작성</h2>
+	<h2>기안서 작성</h2><span id="writeComplete">작성 완료</span>
 	<hr>
+  <br>
+  
 	<table id="sign_top" >
 		<tr>
 			<td>문서 종류</td>
-			<td><select>
+			<td><select id="doc_type">
 				<option value="1">종류</option>
 				<option value="2">종류2</option>
 				<option value="3">종류3</option>
@@ -166,9 +186,13 @@ color:#fff
 		
 		</tr>
 	</table>
+	<h5>결재 제목</h5> 
+
+	<hr>
+  
+  <input type="text" name="s_title" id="s_title">
 	
-	
-	
+	<br>
 	<br>
 	<h5>결재선 지정</h5>
 	<hr>
@@ -265,7 +289,7 @@ color:#fff
 
 
 <script>
-
+  let approverVal = [];
 $(document).ready(function () {
     $('#summernote').summernote({
         placeholder: '내용을 작성하세요',
@@ -275,6 +299,7 @@ $(document).ready(function () {
 });
 $('#select_top').on('change', function(){
 	let deptCode = $('#select_top option:selected').val();
+  
 	
 	console.log(deptCode)
 	$.ajax({
@@ -284,7 +309,6 @@ $('#select_top').on('change', function(){
 		dataType: 'json',
 		success: function(data){
 			console.log("성공")
-			
 			$('#select_box option').remove();
 			 let str;
 			$.each(data, function(i){
@@ -331,7 +355,7 @@ $("#select_complete").on('click',function(){
     let nameHtml;
     let markHtml;
    let seq = 1;
-   let approverVal = [];
+  
         $('#select_right option').each(function () {
           var selected = $(this).val();
           approverVal.push(selected);
@@ -349,13 +373,13 @@ $("#select_complete").on('click',function(){
           //첫번째 결재자를 작성자로 박아두기
           if(i == 0 && j == 0){
            
-            rankHtml += '<td style="width : 100px" class="td_top">기안자</td>';
+            rankHtml += '<td style="width : 140px" class="td_top">기안자</td>';
             markHtml += '<td></td>';
-            nameHtml += '<td>' + writer + writerCode + '</td>';
+            nameHtml += '<td>' + writer + "("+writerCode+")" + '</td>';
           }
 
           //html 담아두기
-          rankHtml += '<td style="width : 100px" class="td_top">' + empRankName + '</td>';
+          rankHtml += '<td style="width : 110px" class="td_top">' + empRankName + '</td>';
           markHtml += '<td></td>';
           nameHtml += '<td>' + empName + '</td>';
           
@@ -462,6 +486,45 @@ $('#approver-submit').on('click', function () {
       })
         $('#approval-table').append(apprTableHtml);
     });
+    $('#writeComplete').on('click',function(){
+
+      if(approverVal.length==0){
+        alert("결재선을 지정해주세요");
+        var content = $('#summernote').summernote('code');
+        console.log(content); 
+      }else{
+        var result = confirm("기안서를 작성 하시겠습니까?");
+        if(result==1){
+          var title = $('#s_title').val();
+        var type = $('#doc_type option:selected').val();
+        var content = $('#summernote').summernote('code');
+        $.ajax({
+          url :'/md/sign/signWrite',
+        			    type : 'post',
+        			    dataType : 'json', 
+        			    data : { title:title,
+                           type:type,
+                           content:content
+                  }, 
+        			    success: function(){ 
+                    console.log("ajax성공");
+                  }
+        })
+
+        $.ajax({
+          url: '/md/sign/signLine',
+          type: 'post',
+          dataType: 'json',
+          data : { line: JSON.stringify(approverVal)},
+          success:function(){
+            console.log("ajax성공");
+            console.log(approverVal);
+          }
+        })
+        }
+      
+      }
+    })
 
 
 
