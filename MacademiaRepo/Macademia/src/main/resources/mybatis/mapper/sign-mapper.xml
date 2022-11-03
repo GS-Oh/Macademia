@@ -29,4 +29,21 @@
     JOIN MEMBER M ON M.POSITION_NO = P.NO
     WHERE D.NO = #{deptNo}
 	</select>
+	
+	<insert id="signWrite">
+	INSERT INTO SIGN
+	(S_NO
+	, E_NO
+	, S_TYPE_NO
+	,S_TITLE
+	,S_CONTENT)
+	
+	VALUES(SEQ_SIGN_NO.NEXTVAL
+			,#{eNo}
+			,#{sTypeNo}
+			,#{sTitle}
+			,#{sContent}
+	)
+	
+	</insert>
 </mapper>

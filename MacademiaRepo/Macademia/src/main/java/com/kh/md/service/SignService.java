@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.sign.dao.SignDao;
+import com.kh.md.sign.vo.SignVo;
 
 @Service
 public class SignService {
@@ -27,6 +28,15 @@ public class SignService {
 	public List<MemberVo> getDeptMember(String deptCode) {
 		// TODO Auto-generated method stub
 		return dao.getDeptMember(sst,deptCode);
+	}
+
+
+
+
+
+	public int signWrite(SignVo vo) {
+		// TODO Auto-generated method stub
+		return dao.signWrite(sst, vo);
 	}
 
 }

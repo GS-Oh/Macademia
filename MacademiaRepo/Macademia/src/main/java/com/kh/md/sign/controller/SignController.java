@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.service.SignService;
+import com.kh.md.sign.vo.SignVo;
 
 @Controller
 @RequestMapping("sign")
@@ -59,6 +60,39 @@ public class SignController {
 		System.out.println(list);
 		
 		return list;
+		
+	}
+	@PostMapping("signWrite")
+	@ResponseBody
+	public int signWrite(HttpServletRequest req,HttpSession session) {
+		String  title= req.getParameter("title");
+		String  type= req.getParameter("type");
+		String  content= req.getParameter("content");
+		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		String no = loginMember.getNo();
+		SignVo vo = new SignVo();
+		vo.setSTitle(title);
+		vo.setSTypeNo(type);
+		vo.setSContent(content);
+		vo.setENo(no);
+		
+		
+		int result = service.signWrite(vo);
+		
+		
+		
+		return 1;
+		
+	}
+	@PostMapping("signLine")
+	@ResponseBody
+	public int signLine(HttpServletRequest req, HttpSession session) {
+		String[] signLine = req.getParameterValues("line");
+		System.out.println("이것은signLine"+signLine);
+				
+				return 1;
+		
+		
 		
 	}
 }
