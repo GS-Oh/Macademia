@@ -2,28 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "myfileMapper">
 	<select id="selectList" resultType="com.kh.md.file.vo.FileVo">
-
 		SELECT * FROM MYFILE
 		WHERE MEMBER_NO = #{memberNo} 
 		AND DELETE_YN = 'N'
 		ORDER BY NO DESC
-		
 	</select>
+	
 	<select id="selectListBySearchName" resultType="com.kh.md.file.vo.FileVo">
-
 		SELECT * FROM MYFILE
 		WHERE MEMBER_NO = #{memberNo}
 		AND ORIGIN_NAME LIKE '%${searchName}%'
 		AND DELETE_YN = 'N'
-		ORDER BY NO DESC
-		
+		ORDER BY NO DESC	
 	</select>
+	
 	<update id="deleteOne">
 		UPDATE MYFILE SET DELETE_YN = 'Y' WHERE NO = #{fileNo}
 	</update>
+	
 	<insert id="insertOne">
 		INSERT INTO MYFILE NO, MEMEBER_NO, ORIGIN_NAME, UPDATE_NAME
 		VALUES(SEQ_MYFILE_NO.NEXTVAL,#{memberNo},#{originName},#{updateName})
 	</insert>
+	
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MYFILE
+		WHERE DELETE_YN = 'N'
+	</select>
 	
 </mapper>

@@ -22,7 +22,6 @@
 		width: 200px;
 		height: 400px;
 		/* border-radius: 5px; */
-
 	}
 	.member > img{
 		width: 100%;
@@ -34,6 +33,7 @@
 	}
 	table{
 		width: 100%;
+		height: 200px;
 		color :  black;
 	}
 	th{
@@ -76,7 +76,7 @@
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td>${member.email}</td>
+							<td class="email-wrap"><a class="email" href="/md/mail/write">${member.email} <i id="asdf" class="fa-solid fa-paper-plane"></i></a></td>
 						</tr>
 						<tr>
 							<th>전화번호</th>
@@ -109,7 +109,7 @@
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td>${member.email}</td>
+							<td class="email-wrap"><a class="email" href="/md/mail/write">${member.email} <i class="fa-solid fa-paper-plane"></i></a></td>
 						</tr>
 						<tr>
 							<th>전화번호</th>
@@ -121,6 +121,7 @@
 		</c:if>
 	</c:forEach>
 </div>
+
 
 
 

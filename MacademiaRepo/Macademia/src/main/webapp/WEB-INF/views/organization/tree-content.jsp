@@ -20,6 +20,8 @@
         padding: 10px 0px;
 		font-family:'AppleSDGothicNeo','Noto Sans KR', sans-serif;
         font-size: 20px;
+		padding-bottom: 50px;
+		height: fit-content;
 		
     }
 	#search-area{
@@ -37,13 +39,14 @@
 		font-weight: 900;
 	}
 	h3, #search{
-		width: 20vw;
+		width: 10vw;
 		/* border: 1px solid black; */
 	}
 
 	#search-area button{
 		background-color: rgb(102, 102, 171) !important;
 		border: none !important;
+		font-size: 15px;
 	}
 	#search-area button:hover{
 		background-color: #525285 !important;
@@ -64,6 +67,36 @@
 		-moz-border-radius: 0px;
 		background-image: none;
 	}
+
+	.email{
+		display: inline-block;
+	}
+	.email > i{
+		display: none;
+		color: rgb(86, 166, 88);
+	}
+	.email:hover > i{
+		display: inline;
+		color: white;
+	}
+	.email-wrap{
+		position: relative;
+	}
+	.email:hover{
+		color: white;
+        transform: scale(1.2);
+		background-color: rgb(86, 166, 88);
+		border-radius: 5px;
+		transition: 0.3s;
+		padding: 0 5px 0px 5px;
+		position: absolute;
+		top: 5px;
+		width: max-content;
+		box-shadow: 5px 5px 5px rgb(149, 149, 149);
+	}
+
+
+
 
 
 </style>
@@ -172,6 +205,8 @@ $('#searchBtn').click(function () {
 	})
 })
 </script>
+
+
 
 
 
