@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.md.common.PageVo;
 import com.kh.md.file.dao.FileDao;
 import com.kh.md.file.vo.FileVo;
 
@@ -24,17 +25,17 @@ public class FileServiceImpl implements FileService{
 	 }
 	
 	@Override
-	public List<FileVo> getMyfileList(String memberNo) {
-		List<FileVo> fileList = fileDao.selectList(sst,memberNo);
+	public List<FileVo> getMyfileList(String memberNo, PageVo pv) {
+		List<FileVo> fileList = fileDao.selectList(sst,memberNo,pv);
 		return fileList;
 	}
 
 	@Override
-	public List<FileVo> getMyfileListBySearchName(String memberNo, String searchName) {
+	public List<FileVo> getMyfileListBySearchName(String memberNo, String searchName, PageVo pv) {
 		Map<String,String> map = new HashMap<>();
 		map.put("memberNo",memberNo);
 		map.put("searchName",searchName);
-		List<FileVo> fileList = fileDao.selectListBySearchName(sst,map);
+		List<FileVo> fileList = fileDao.selectListBySearchName(sst,map,pv);
 		return fileList;
 	}
 
@@ -49,4 +50,12 @@ public class FileServiceImpl implements FileService{
 		int result = fileDao.insertOne(sst,vo);
 		return result;
 	}
+
+	@Override
+	public int getTotalCount() {
+		int result = fileDao.selectTotalCount(sst);
+		return result;
+	}
+
+
 }

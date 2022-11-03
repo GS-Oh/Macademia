@@ -75,7 +75,7 @@
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td>${member.email}</td>
+						<td class="email-wrap"><a class="email" href="/md/mail/write">${member.email} <i class="fa-solid fa-paper-plane"></i></a></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
