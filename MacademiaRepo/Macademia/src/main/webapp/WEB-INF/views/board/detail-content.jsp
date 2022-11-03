@@ -43,12 +43,14 @@
 				</div>
              	
              	<div class="cont">
-             		<div>
-             			댓글1
-             		</div>
-             		<div>
-             			댓글2
-             		</div>
+           		<c:forEach items="${replyVo}" var="x" >
+                    <dl>
+                        <dd>${x.name}</dd>
+                        <dd>${x.content}</dd>
+                        <dd>${x.regdate}</dd>
+                    </dl>
+                   
+                     </c:forEach>
              	</div>
              </div>   
             <div class="bt_wrap">
@@ -63,30 +65,28 @@
 		replyBtn.addEventListener('click', function() {
 			const replyContent = document.querySelector('#reply-content').value;
 			const boardNo = ${vo.no};
-			const replyWriterNick = '${sessionScope.loginMember.nick}'; 
+			console.log(boardNo);
+			const name = '${sessionScope.loginMember.name}'; 
 			$.ajax({
-				url : "${root}/reply/write",
+				url : "/md/reply/write",
 				type : "POST",
-				data : {"content" : replyContent,
-						"bno" : boardNo	
+                data : {"content" : replyContent,
+						"boardNo" : boardNo,
+						"name" : name 
 				},
-				success : function(result){
-					if(result == "ok") {
+				success : function(data){
+					
 						alert("댓글 작성 성공 !!!");	
 						const target = document.querySelector('#reply-list')
-						$(target).prepend('<div id="reply-bot"><div>' + replyContent + '</div><span>' + replyWriterNick + '</span></div>');
 						//기존에 입력한 내용 지우기
 						document.querySelector('#reply-content').value = '';
-						
-					}else {
-						alert("댓글 작성 실패 ...");	
-					}
+						//다시 불러오기
+						location.reload();
+					},
 					
-				},
-				error : function() {
-					alert("통신에러...");	
-				}
-			});
-		});
+				})
+				
+			
+		})
 		
 	</script>
