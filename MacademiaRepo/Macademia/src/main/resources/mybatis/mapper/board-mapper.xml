@@ -132,4 +132,41 @@
 		</if> 	
 		ORDER BY NO DESC
 	</select>
+	
+	<!--댓글  -->
+	<resultMap type="com.kh.md.boardreply.vo.BoardReply" id="reply">
+		<id column="REPLY_NO" property="replyNo" />
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="CONTENT" property="content" />
+		<result column="NAME" property="name" />
+		<result column="REGDATE" property="regdate" />
+	</resultMap>
+	
+	
+	<select id="replyList" resultMap="reply">
+	SELECT 
+			CONTENT 
+			,NAME
+			,REGDATE
+		FROM FREE_BOARD_REPLY
+		WHERE BOARD_NO = #{no}
+		ORDER BY REGDATE DESC
+	</select>
+	
+	<insert id="writeReply">
+		INSERT INTO FREE_BOARD_REPLY
+			(
+				REPLY_NO
+				,BOARD_NO
+				,CONTENT
+				,NAME
+			)	
+		VALUES
+			(
+				SEQ_FREE_BOARD_REPLY_NO.NEXTVAL
+				,#{boardNo}
+				,#{content}
+				,#{name}
+			)
+	</insert>
 </mapper>

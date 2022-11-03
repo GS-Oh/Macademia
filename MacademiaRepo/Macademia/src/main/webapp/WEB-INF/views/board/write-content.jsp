@@ -26,7 +26,7 @@
                  </dl>
                  <dl>
                      <dt> 작성자</dt>
-                     <dd><input name="userNo" type="text" placeholder="작성자 이름" readonly="readonly" value="1" ></dd>
+                     <dd><input name="userNo" type="text" placeholder="작성자 이름" readonly="readonly" value="${loginMember.name}" ></dd>
                  </dl>
                  <dl>
                      <dt> 파일 첨부</dt>
