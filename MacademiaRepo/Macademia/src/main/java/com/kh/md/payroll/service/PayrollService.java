@@ -2,6 +2,7 @@ package com.kh.md.payroll.service;
 
 import java.util.List;
 
+import com.kh.md.payroll.vo.PayrollOptionMemberVo;
 import com.kh.md.payroll.vo.PayrollVo;
 import com.kh.md.payroll.vo.SoChangeVo;
 import com.kh.md.payroll.vo.StandOrderVo;
@@ -9,7 +10,8 @@ import com.kh.md.payroll.vo.StandOrderVo;
 public interface PayrollService {
 
 	
-	
+	//급여대장 ( 검색 ( 옵션에 따른 작성대상 멤버 리스트 가져오기 )
+	List<PayrollOptionMemberVo> selectPayrollOptionMember(PayrollVo prVo);
 	
 	//급여대장 ( 검색 ( 옵션에 따른 급여대장 리스트 가져오기 )
 	List<PayrollVo> selectPayrollOption(PayrollVo prVo);
@@ -30,7 +32,8 @@ public interface PayrollService {
 	int insertChangeHistory(SoChangeVo soChangeVo);
 
 	//지급 계좌 관리 ( 변경이력가져오기 )
-	List<SoChangeVo> selectSoChangeHistory(String stNo);
+	List<SoChangeVo> selectSoChangeHistory(String no);
+	
 	
 	
 	

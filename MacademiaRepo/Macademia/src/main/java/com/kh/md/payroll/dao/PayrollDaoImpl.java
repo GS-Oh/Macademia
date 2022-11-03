@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.md.payroll.vo.PayrollOptionMemberVo;
 import com.kh.md.payroll.vo.PayrollVo;
 import com.kh.md.payroll.vo.SoChangeVo;
 import com.kh.md.payroll.vo.StandOrderVo;
@@ -60,11 +61,16 @@ public class PayrollDaoImpl implements PayrollDao{
 
 	//지급 계좌 관리 ( 변경이력가져오기 )
 	@Override
-	public List<SoChangeVo> selectSoChangeHistory(SqlSessionTemplate sst, String stNo) {
-		return sst.selectList("payrollMapper.selectSoChangeHistory",stNo);
+	public List<SoChangeVo> selectSoChangeHistory(SqlSessionTemplate sst, String no) {
+		return sst.selectList("payrollMapper.selectSoChangeHistory", no);
 	}
 
-	
+	//급여대장 ( 검색 ( 옵션에 따른 작성대상 멤버 리스트 가져오기 )
+	@Override
+	public List<PayrollOptionMemberVo> selectPayrollOptionMember(SqlSessionTemplate sst, PayrollVo prVo) {
+		return sst.selectList("payrollMapper.selectPayrollOptionMember",prVo);
+	}
+
 	
 	
 	

@@ -12,9 +12,16 @@
 
     main{
         display: grid;
-        grid-template-rows: 1fr 8fr;
+        grid-template-rows: 0.5fr 1fr 8fr;
     }
-
+	
+	#management-title{
+		border-left: 5px solid #6667AB;
+		margin: 30px 0px 30px 10px;
+		padding-left: 20px;
+	}
+	
+	
     #management-select-area{
         border-bottom: 2px solid #6667AB;
         
@@ -50,12 +57,23 @@
 
     #management-select-result{
         display: grid;
-        grid-template-columns: repeat(8, 1fr) 1.5fr 1.5fr 1.5fr;
+        grid-template-columns: repeat(7, 1fr) 1.5fr 1.5fr 1.5fr;
         grid-template-rows: repeat(11, 1fr);
         row-gap: 10px;
         align-content : center;
         align-items: center;
     }
+
+	.result-area{
+		grid-column: span 10;
+		display: grid;
+		grid-template-columns: repeat(7, 1fr) 1.5fr 1.5fr 1.5fr;
+		row-gap: 10px;
+        align-content : center;
+        align-items: center;
+	}
+
+
 
     .management-table-header{
 		margin-top: 15px;
@@ -89,13 +107,17 @@
 			</aside>                
 
 	        <main>
+	        
+	        	<h1 id="management-title">급여대장 관리</h1>
+	        	
+	        	
 	            <div id="management-select-area">
-	                <form action="/md/payroll/create?checkType='manage'" method="post">
+	                <form action="/md/payroll/management" method="post">
 	
 	                    <div>
 	                        <label for="year-select" class="form-label">발급년월</label>
 	                        <select name="payDate" id="year-select" class="form-select" >
-	                            <option value="2022/03">2022-03</option>
+	                            <option value="2022-03">2022-03</option>
 	                            <option value="2022-04">2022-04</option>
 	                            <option value="2022-05">2022-05</option>
 	                            <option value="2022-06">2022-06</option>
@@ -147,7 +169,6 @@
 	                    <div>
 	                        <input type="submit" value="검색" style="background-color: #6667AB; color:white; width: 70%; height: 80%;">
 	                    </div>
-						<h1>${prVoList}</h1>
 	                </form>
 	            </div>
 	
@@ -161,34 +182,33 @@
 				<div class="management-table-header">부서명</div>
 				<div class="management-table-header">직급명</div>
 				<div class="management-table-header">이름</div>
-				<div class="management-table-header">본봉</div>
+				<div class="management-table-header">월급여액</div>
 				<div class="management-table-header">수당</div>
-				<div class="management-table-header">과세</div>
-				<div class="management-table-header">비과세</div>
 				<div class="management-table-header">지급총액</div>
+				<div class="management-table-header">공제</div>
 				<div class="management-table-header">실수령액</div>
 
 	            
 					<c:forEach items="${prVoList}" var="prVo">
 	            
-	            	<c:if test="${not empty prVo.pay}">
 							<!-- 해당 월 내역 있으면 이거  -->
 							<div class="result-area">
-								<div class="management-table-content">개발부</div>
-								<div class="management-table-content">오귀석</div>
-								<div class="management-table-content">2022-09</div>
-								<div class="management-table-content">3,000,000</div>
-								<div class="management-table-content">3,000,000</div>
-								<div class="management-table-content">3,000,000</div>
-								<div class="management-table-content">150,000</div>
-								<div class="management-table-content">3,000,000</div>
-								<div class="management-table-content">3,000,000</div>
+								<div class="management-table-content">${prVo.salNo}</div>
+								<div class="management-table-content">${prVo.payDate}</div>
+								<div class="management-table-content">${prVo.deptName}</div>
+								<div class="management-table-content">${prVo.rankName}</div>
+								<div class="management-table-content">${prVo.name}</div>
+								<div class="management-table-content">${prVo.pay}</div>
+								<div class="management-table-content">${prVo.taxfree}</div>
+								<div class="management-table-content">${prVo.totalPayment}</div>
+								<div class="management-table-content">${prVo.totalDeduction}</div>
+								<div class="management-table-content">${prVo.actualPayment}</div>
+								
 							</div>	
-						</c:if>
 
-						<c:if test="${empty prVo.pay}">
+						<%-- <c:if test="${empty prVo.pay}">
 							<!-- 해당 월 내역 없으면 이거 -->
-			                <div class="management-table-content">${prVo.salNo}</div>
+			            <div class="management-table-content">${prVo.salNo}</div>
 		                <div class="management-table-content">${prVo.payDate}</div>
 		                <div class="management-table-content">${prVo.deptName}</div>
 		                <div class="management-table-content">${prVo.rankName}</div>
@@ -198,11 +218,9 @@
 		                        <h2 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h2>
 		                    </a>    
 		                </div>
-		                </c:if>
+		                </c:if> --%>
 		                
 					</c:forEach>
-						
-	
 
 					
 	            </div>

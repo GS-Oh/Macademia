@@ -59,6 +59,7 @@ public class PayrollVo {
 	private String position;
 	private String rankNo;
 	private String deptNo;
+	private String positionName;
 	private String rankName;
 	private String deptName;
 	
