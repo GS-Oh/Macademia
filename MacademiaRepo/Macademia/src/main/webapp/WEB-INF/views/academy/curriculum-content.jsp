@@ -24,16 +24,16 @@
         justify-content: space-between;
         align-items: center;
     }
-    #class-list-search-area{
+    /* #class-list-search-area{
         display: flex;
         justify-content: flex-start;
         align-items: center;
-    }
-    #class-list-search-area>select{
+    } */
+    #class-list-search-area select{
         height: 30px;
         margin-right: 5px;
     }
-    #class-list-search-area>input[type='text']{
+    #class-list-search-area input[type='text']{
         width: 200px;
         height: 30px;
         border: none;
@@ -41,14 +41,14 @@
         margin-right: 5px;
         padding-left: 10px;
     }
-    #class-list-search-area>input[type='submit']{
+    #class-list-search-area input[type='submit']{
         width: 70px;
         height: 30px;
         border: none;
         background-color: #6667AB;
         color: white;
     }
-    #class-list-search-area>input[type='submit']:hover{
+    #class-list-search-area input[type='submit']:hover{
         font-weight: bolder;
     }
     #create-new-curriculum{
@@ -101,9 +101,8 @@
     /* 페이징 */
     #page-area{
         height: 4vh;
-        display: grid;
-        grid-template-columns: repeat(9, 3vh);
-        grid-template-rows: 3vh;
+        display: flex;
+        flex-wrap: nowrap;
         justify-content: center;
         align-content: center;
         justify-items: center;
@@ -111,9 +110,8 @@
         column-gap: 5px;
     }
     #page-area>div{
-        border: 1px solid gray;
-        width: 100%;
-        height: 100%;
+        width: 3vh;
+        height: 3vh;
     }
     #page-area a{
         display: flex;
@@ -123,6 +121,19 @@
         align-items: center;
         color: #6667AB;
     }
+    #page-area a:hover, #page-area a:hover>i{
+        cursor: pointer;
+        background-color: #6667AB;
+        color: white;
+        font-weight: bolder;
+    }
+    #page-area a>i{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    } 
 </style>
 
 <script>
@@ -149,15 +160,20 @@
     <div><h4>커리큘럼 조회</h4></div>
 
     <div id="search-create-curriculum">
+
         <div id="class-list-search-area">
-            <select name="" id="">
-                <option value="">카테고리 전체</option>
-                <option value="">디지털 컨버전스</option>
-                <option value="">정보시스템 구축</option>
-            </select>
-            <input type="text" placeholder="강의명을 입력해주세요">
-            <input type="submit" value="강의 검색">
+            <form action="" method="get">
+                <select name="search">
+                    <option value="0">카테고리 전체</option>
+                    <c:forEach items="${categoryList}" var="c">
+                        <option value="${c.no}">${c.name}</option>
+                    </c:forEach>
+                </select>
+                <input type="text" name="keyword" placeholder="강의명을 입력해주세요">
+                <input type="submit" value="강의 검색">
+            </form>
         </div>
+
         <div id="create-new-curriculum-area">
             <div id="create-new-curriculum">
                 <a href="${root}/academy/addCurr">커리큘럼 추가하기</a>
