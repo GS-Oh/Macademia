@@ -39,6 +39,10 @@ public class FileDaoImpl implements FileDao{
 	public int selectTotalCount(SqlSessionTemplate sst) {
 		return sst.selectOne("myfileMapper.selectTotalCount");
 	}
+	@Override
+	public int selectTotalCount(SqlSessionTemplate sst, String searchName) {
+		return sst.selectOne("myfileMapper.selectTotalCountBySearchName",searchName);
+	}
 
 
 }

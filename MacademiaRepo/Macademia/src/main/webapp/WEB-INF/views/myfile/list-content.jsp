@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
     
-    #myboards-content{
+    #myfile-content{
         height: 85vh;
         width: 60vw;
         /* border: 1px solid black; */
@@ -37,7 +37,9 @@
     }
     #search-input{
         width: 150px;
-        font-size: 12px;
+        height: 30px;
+        font-size: 15px;
+        /* font-weight: 700; */
     }
     #search-btn{
         width: 70px;
@@ -50,7 +52,7 @@
 	#search-btn:hover{
 		background-color: rgb(71, 71, 125);
 	}
-    form, #pagination-area{
+    #search-erea, #pagination-area{
         width: 450px;
         margin:20px auto;
         text-align: center;
@@ -124,6 +126,14 @@
         color: black;
         font-weight: 700;
     }
+    .new-file{
+        
+        animation : new 1s;
+        animation-iteration-count: 3;
+    }
+    @keyframes new{
+        50% {transform: scale(1.1); box-shadow: 10px 10px 20px red;}
+    }
     #x-btn{
         font-size: 20px;
         color: rgb(181, 0, 0);
@@ -155,8 +165,7 @@
     }
 </style>
 
-
-<div id="myboards-content">
+<div id="myfile-content">
     <div id="upload-btn-area">
         <h1>개인자료실</h1>
         <button id="upload-btn" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -176,68 +185,22 @@
         </c:forEach>
     </div>
 
-    <script>
-        function deleteFile(fileNo){
-            let pno = '${pv.currentPage}'
-            Swal.fire({
-                    title: '정말로 삭제하시겠습니까?',
-                    text: '삭제된 파일은 복구불가입니다.',
-                    icon: 'warning',
-                    confirmButtonText: '삭제',
-                    confirmButtonColor: 'red',
-                    showCancelButton: true,
-                    cancelButtonText: '취소',
-                    
-            }).then((result)=>{
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/md/myfile/delete/",
-                        data: {
-                            'fileNo' : fileNo,
-                            'pno' : pno
-                        },
-                        success: function(response) {
-                            // document.location.reload(true);
-                            $('#file-area').replaceWith(response);
-                            Swal.fire(
-                            '삭제성공',
-                            '삭제완료되었습니다~',
-                            'success'
-                            )
-                        },
-                        error: function (response) {
-                            Swal.fire(
-                            '통신에러',
-                            '서버와의 통신에 문제가 있네요',
-                            'warning'
-                            )
-                        }
-                    });
-                }
-            });
-            
-        }
-    </script>
+    <div id="search-erea" class="input-group mb-3">
+        <input type="text" id="search-input" class="form-control" name="searchName" value="${searchName}" placeholder="파일명을 입력해주세요">
+        <button onclick="page(1)" type="submit" id="search-btn" class="btn btn-primary" >검색</button>
+    </div>
 
-
-    <form action="/md/myfile/list/1" method="get">
-        <div id="search" class="input-group mb-3">
-            <input type="text" id="search-input" class="form-control" name="searchName" placeholder="파일명을 입력해주세요">
-            <button type="submit" id="search-btn" class="btn btn-primary" >검색</button>
-        </div>
-    </form>
     <div id="pagination-area">
     	<c:if test="${pv.startPage > 1 }">
-	        <a href="/md/myfile/list/1" class="btn btn-outline-secondary">&lt;&lt;</a>
-	        <a href="/md/myfile/list/${pv.startPage-1 }" class="btn btn-outline-secondary">&lt;</a>
+	        <a class="btn btn-outline-secondary" onclick="page(1)">&lt;&lt;</a>
+	        <a class="btn btn-outline-secondary" onclick="page('${pv.startPage-1 }')">&lt;</a>
         </c:if>
         <c:forEach begin="${pv.startPage }" end="${pv.endPage}" varStatus="status">
-        	<a href="/md/myfile/list/${status.index }" class="btn btn-outline-secondary">${status.index }</a>
+        	<a  class="btn btn-outline-secondary" onclick="page('${status.index }')">${status.index }</a>
         </c:forEach>
         <c:if test="${pv.endPage < pv.maxPage }">
-        	<a href="/md/myfile/list/${pv.endPage+1 }" class="btn btn-outline-secondary">&gt;</a>
-        	<a href="/md/myfile/list/${pv.maxPage }" class="btn btn-outline-secondary">&gt;&gt;</a>
+        	<a class="btn btn-outline-secondary" onclick="page('${pv.endPage+1 }')">&gt;</a>
+        	<a class="btn btn-outline-secondary" onclick="page('${pv.maxPage}')">&gt;&gt;</a>
         </c:if>
     </div>
 
@@ -251,32 +214,36 @@
                 <h4 class="modal-title">파일업로드</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form id="uploadForm" action="/md/myfile/insert" method="POST" enctype="multipart/form-data" >
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <input type="file" id="file-btn" name="file">
-                </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="file" id="file-input" name="file">
+            </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" id="uploadBtn" class="btn btn-danger" data-bs-dismiss="modal">업로드</button>
-                </div>
-            </form>
-
-
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" id="real-upload-btn" class="btn btn-danger" data-bs-dismiss="modal">업로드</button>
+            </div>
+            
         </div>
         </div>
     </div>
 </div>
 
+
+<!-- 파일 업로드 -->
 <script>
 
-    $('#uploadBtn').click(function(){
-        
-        var form = $('#uploadForm')[0];  	          
-        var formData = new FormData(form); 
-        console.log(form);
-        console.log(formData);
+    // 동적으로 생성된 태그에 이벤트를 설정하기 위해서는 
+    // 1. 태그에 onclick달아줘서 실행
+    // 2. jquery를 사용하는 경우 아래와 같이 작성
+
+    $(document).on('click','#real-upload-btn' ,function asdf(){
+        console.log('upload진입');
+        let form = $('#file-input')[0].files[0];
+        let formData = new FormData();
+        formData.append('file', form);
+        console.log(formData);  
         $.ajax({
             type:'POST',
             enctype:'multipart/form-data',
@@ -286,26 +253,125 @@
             contentType:false,
             cache:false,
             success:function(result){
-                console.log(result);
-                $('#file-area').replaceWith(result);
+                $('#myfile-content').replaceWith(result);
+                pageBtnColor(1);
+                document.querySelector('#file-area').children[0].classList.add('new-file')
+
+                Swal.fire(
+                        '업로드성공',
+                        '파일업로드가 완료되었습니다.',
+                        'success'
+                        )
             },
             error:function(e){
-                console.log("error : "+ e);
+                Swal.fire(
+                        '통신에러',
+                        '서버와의 통신에 문제가 있네요',
+                        'warning'
+                        )
             }
         });
     });
+</script>   
 
-    
+
+<!-- 파일 삭제 -->
+<script>
+
+    function deleteFile(fileNo){
+        let searchName = document.querySelector('#search-input').value
+        console.log('delete진입');
+        let pno = currentPage;
+        console.log("pno : "+ pno);
+        Swal.fire({
+                title: '정말로 삭제하시겠습니까?',
+                text: '삭제된 파일은 복구불가입니다.',
+                icon: 'warning',
+                confirmButtonText: '삭제',
+                confirmButtonColor: 'red',
+                showCancelButton: true,
+                cancelButtonText: '취소',
+                
+        }).then((result)=>{
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "/md/myfile/delete/",
+                    data: {
+                        'fileNo' : fileNo,
+                        'searchName' : searchName,
+                        'pno' : pno
+                    },
+                    success: function(response) {
+                        $('#myfile-content').replaceWith(response);
+                        pageBtnColor(pno);
+                        Swal.fire(
+                        '삭제성공',
+                        '삭제완료되었습니다~',
+                        'success'
+                        )
+                    },
+                    error: function (response) {
+                        Swal.fire(
+                        '통신에러',
+                        '서버와의 통신에 문제가 있네요',
+                        'warning'
+                        )
+                    }
+                });
+            }
+        });
+        
+    }
+</script>
+
+<!-- 현재페이지 번호 -->
+
+<script>
+    let currentPage = '${pv.currentPage}';
+</script>
+
+<!-- 페이지버튼 클릭시 리스트 보여주기(ajax) -->
+<script>
+    function page(pno){
+        currentPage = pno;
+        let searchName = document.querySelector('#search-input').value
+        $.ajax({
+            type: "post",
+            url: "/md/myfile/list/"+pno,
+            data:{
+                'searchName' : searchName
+            },
+            success: function(response) {
+                $('#myfile-content').replaceWith(response);
+                pageBtnColor(pno);
+            },
+            error: function (response) {
+                Swal.fire(
+                '통신에러',
+                '서버와의 통신에 문제가 있네요',
+                'warning'
+                )
+            }
+        });
+    };
 </script>
 
 <!-- 현재 페이지버튼에 색상추가 -->
 <script>
-    let pageBtns = $('#pagination-area > a');
-    let currentPage = '${pv.currentPage}';
-    for(let i = 0 ; i<pageBtns.length ; i++){
-        if(pageBtns[i].innerText==currentPage){
-            $(pageBtns[i]).addClass('active');
+    $(window).ready(pageBtnColor('${pv.currentPage}'));
+
+    function pageBtnColor(pno){
+        let pageBtns = $('#pagination-area > a');
+        for(let i = 0 ; i<pageBtns.length ; i++){
+            if(pageBtns[i].innerText==pno){
+                $(pageBtns[i]).addClass('active');
+            }
         }
     }
 </script>
+
+
+
+
 
