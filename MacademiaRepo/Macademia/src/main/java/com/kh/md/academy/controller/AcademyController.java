@@ -93,22 +93,29 @@ public class AcademyController {
 		return "academy/add-student";
 	}
 	
-	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기
+	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기 + 검색
 	@GetMapping("curriculum/{pno}")
-	public String curriculum(Model model, @PathVariable int pno) {
+
+	public String curriculum(Model model, @PathVariable int pno, @RequestParam(value="search",required=false) String cNo, 
+																	@RequestParam(value="keyword",required=false) String keyword) {
 		//검색창의 카테고리 조회해오기
 		List<CategoryVo> categoryList = service.showCategory();
 
-//		Map map = new HashMap<Integer, String>();
-//		map.put("no", cNo);
-//		map.put("keyword", keyword);
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("no", cNo);
+		map.put("keyword", keyword);
+
 		
 		//# of total class
-		int totalCount = service.countTotalClass();
+		int totalCount = service.countTotalClass(map);
+//		System.out.println("Controller > total 게시물 Count : " + totalCount);
+//		System.out.println(" ");
 		
 		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
-		List<ClassVo> classList = service.selectClassList(pvo);
+		List<ClassVo> classList = service.selectClassList(pvo, map);
+//		System.out.println("페이지 게시물 총 갯수 : " + classList.size());
+//		System.out.println("-----------------");
 		
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("classList", classList);
@@ -117,39 +124,26 @@ public class AcademyController {
 		return "academy/curriculum";
 	}
 	
-	//커리큘럼>검색
-	@PostMapping("curriculum/{pno}")
-	public String searchCurriculum(@PathVariable int pno, @RequestParam("search") int cNo, @RequestParam("keyword") String keyword) {
-		
+	
+	//ajax로 전체 클래스 리스트 보여주기
+	@GetMapping("classList/{pno}")
+	@ResponseBody
+	public Map showClasList(@PathVariable int pno, @RequestParam(value="search",required=false) String cNo, @RequestParam(value="keyword",required=false) String keyword) {
 		Map map = new HashMap<Integer, String>();
 		map.put("no", cNo);
 		map.put("keyword", keyword);
 		
 		int totalCount = service.countTotalClass(map);
-		System.out.println("결과수 :" + totalCount);
 		
 		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
-		List<ClassVo> classList = service.selectClassList(pvo);
+		List<ClassVo> classList = service.selectClassList(pvo, map);
 		
-		return "academy/curriculum";
-	}
-	
-	//ajax로 전체 클래스 리스트 보여주기
-	@GetMapping("classList/{pno}")
-	@ResponseBody
-	public Map showClasList(@PathVariable int pno) {
-		int totalCount = service.countTotalClass();
+		Map voMap = new HashMap<List<ClassVo>, PageVo>();
+		voMap.put("classList", classList);
+		voMap.put("pvo", pvo);
 		
-		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
-		
-		List<ClassVo> classList = service.selectClassList(pvo);
-		
-		Map map = new HashMap<List<ClassVo>, PageVo>();
-		map.put("classList", classList);
-		map.put("pvo", pvo);
-		
-		return map;
+		return voMap;
 	}
 	
 	@GetMapping("addCurr")
@@ -161,12 +155,30 @@ public class AcademyController {
 		model.addAttribute("category", category);
 		model.addAttribute("member", member);
 		return "academy/add-curriculum";
-	} 	
+	}
+	
+	@GetMapping("curriculum/detail/{cno}")
+	public String curriculumDetail(Model model, @PathVariable int cno) {
+		//클래스 커리큘럼 및 학생 조회하기(cno)
+		ClassVo cvo = service.selectOneClass(cno);
+		List<CurriculumVo> curVo = service.selectCurriculumList(cno);
+		List<StudentVo> svo = service.selectEnrolledStudent(cno);
+		
+		if(curVo != null) {
+			model.addAttribute("cvo", cvo);
+			model.addAttribute("curVo", curVo);
+			model.addAttribute("svo", svo);
+			return "academy/curriculum-detail";
+		}else {
+			return "error/error-page";
+		}
+		
+	}
 //--------------------------------------------------
 	
 	//수강생 추가(인서트) 하기
  	@PostMapping("addStd")
- 	public String addStudent(Model model, StudentVo vo, ClassVo cvo, HttpServletRequest req) {
+ 	public String addStudent(Model model, StudentVo vo, HttpServletRequest req) {
  		
  		if(vo.getF() != null && !vo.getF().isEmpty()) {
  			String savePath = req.getServletContext().getRealPath("/resources/upload/profile/studentProfile/");
@@ -181,6 +193,28 @@ public class AcademyController {
  			return"academy/search";
  		}else {
  			return"error/errorPage";
+ 		}
+ 		
+ 	}
+ 	
+ 	//수강생 정보 수정
+ 	@PostMapping("search/detail/edit/{no}")
+ 	public String searchDetailEdit(Model model, StudentVo vo, HttpServletRequest req) {
+ 		
+ 		if(vo.getF() != null && !vo.getF().isEmpty()) {
+ 			String savePath = req.getServletContext().getRealPath("/resources/upload/profile/studentProfile/");
+ 			String changeName = FileUploader.uploadFile(vo.getF(),savePath);
+ 			vo.setProfile(changeName);
+ 		}
+ 		
+ 		int result = service.updateStudent(vo);
+ 		System.out.println("업데이트 결과 : " + result);
+ 		
+ 		if(result == 1) {
+ 			model.addAttribute("msg", "수강생 정보가 업데이트 되었습니다.");
+ 			return "redirect:/academy/search/detail/{no}";
+ 		}else {
+ 			return "error/errorPage";
  		}
  		
  	}
@@ -204,15 +238,6 @@ public class AcademyController {
 			return "error/errorPage";
 		}
 		
-	}
-	
-	//수강생 정보 수정
-	@PostMapping("search/detail/edit/{no}")
-	public String searchDetailEdit(StudentVo vo) {
-		
-		int result = service.updateStudent(vo);
-		
-		return "search/detail";
 	}
 	
 	

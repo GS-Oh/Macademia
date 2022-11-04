@@ -162,6 +162,19 @@
     })
 </script>
 
+<script>
+    $(function(){
+               
+        <c:if test="${not empty msg}">
+	    	Swal.fire({
+	    		icon: 'success',
+	    		title: '${msg}'
+	    	});
+	   	</c:if>
+        
+    });
+</script>
+
 <div id="search-detail-content-wrap">
     <div><h4>수강생 정보조회</h4></div>
 
@@ -206,7 +219,7 @@
         <div class="info-title"><b>전공</b></div>
         <div class="info-border-top" id="student-major"><input type="text" value="${svo.major}" readonly></div>
         <div class="info-title"><b>수강</b></div>
-        <div class="info-border-top" id="student-class"><input type="text" value="${svo.enrolledClass}" readonly></div>
+        <div class="info-border-top" id="student-class">${svo.enrolledClassName}</div>
         <div class="info-title comment-area"><b>코멘트</b></div>
         <div class="comment-area info-border-top"><textarea name="" id="" cols="110" rows="8" readonly>${svo.stdComment}</textarea></div>
     </div>

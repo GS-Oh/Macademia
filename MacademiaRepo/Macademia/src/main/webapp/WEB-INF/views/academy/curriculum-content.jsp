@@ -164,7 +164,7 @@
         <div id="class-list-search-area">
             <form action="" method="get">
                 <select name="search">
-                    <option value="0">카테고리 전체</option>
+                    <option value="">카테고리 전체</option>
                     <c:forEach items="${categoryList}" var="c">
                         <option value="${c.no}">${c.name}</option>
                     </c:forEach>
@@ -202,7 +202,7 @@
         </div>
 
         <c:forEach items="${classList}" var="l">
-            <div class="select-one-class">
+            <div class="select-one-class" onclick="location.href='${root}/academy/curriculum/detail/${l.no}'">
                 <div>${l.beginDate}</div>
                 <div>${l.categoryNo}</div>
                 <div>${l.name}</div>
