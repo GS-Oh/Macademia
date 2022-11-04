@@ -64,7 +64,7 @@ public class PlanController {
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
 		String no = loginMember.getNo();
 		vo.setMNo(no);
-		System.out.println(vo);
+		
 		int result = service.write(vo);
 		if(result == 1) {
 			return "redirect:/plan/list";
@@ -81,7 +81,7 @@ public class PlanController {
 	public int planDelete(HttpServletRequest req) {
 		
 		String pno = req.getParameter("pno");
-		System.out.println(pno);
+		
 		int result = service.planDelete(pno);
 		
 		return result;
@@ -91,7 +91,6 @@ public class PlanController {
 	@GetMapping("modify")
 	public String planGetModify(HttpServletRequest req, String no, Model model) {
 		PlanVo vo = service.getModify(no);
-		System.out.println(vo);
 		model.addAttribute("vo", vo);
 		
 		

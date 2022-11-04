@@ -1,5 +1,7 @@
 package com.kh.md.sign.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,11 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.service.SignService;
+import com.kh.md.sign.vo.SignLineVo;
 import com.kh.md.sign.vo.SignVo;
 
 @Controller
@@ -86,13 +94,43 @@ public class SignController {
 	}
 	@PostMapping("signLine")
 	@ResponseBody
-	public int signLine(HttpServletRequest req, HttpSession session) {
-		String[] signLine = req.getParameterValues("line");
-		System.out.println("이것은signLine"+signLine);
+	public String signLine(HttpServletRequest req, String line,HttpSession session){
+		//String[] line = req.getParameterValues("line");
+		MemberVo loginMember=(MemberVo) session.getAttribute("loginMember");
+		SignLineVo slVo = new SignLineVo();
+		
+		String memberNo = loginMember.getNo();
+		String signFirst = "1";
+		
+		slVo.setENo(memberNo);
+		slVo.setSLevel(signFirst);
+		
+		int result =service.insertSignline(slVo);
+		
+		System.out.println("이것은signLine"+line);
+		Gson gson = new Gson();
+		ArrayList al = gson.fromJson(line, ArrayList.class);
+		System.out.println(al);
+		
+			for (int i = 0; i < al.size(); i++) {
 				
-				return 1;
+				System.out.println(al.get(i));
+			}
+		
+		
+				
+				return "" ;
 		
 		
 		
 	}
+	/*
+	 * @PostMapping("signFirst")
+	 * 
+	 * @ResponseBody public int signFirst(HttpSession session) {
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.work.dao.WorkDao;
+import com.kh.md.work.vo.WorkVo;
 
 @Service
 public class WorkService {
@@ -26,6 +27,11 @@ public class WorkService {
 	public List<MemberVo> getDeptMember(String dept) {
 		// TODO Auto-generated method stub
 		return dao.getDeptMember(sst, dept);
+	}
+
+	public int workWrite(WorkVo vo) {
+		// TODO Auto-generated method stub
+		return dao.workWrite(sst, vo);
 	}
 
 }
