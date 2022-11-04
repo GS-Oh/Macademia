@@ -243,7 +243,7 @@
         let num = 1;
         let l = $('.number').length
         
-        for(num = 0; num < l; num++){
+        for(num = 1; num <= l; num++){
             $('.number').append(num);
         }
     })
