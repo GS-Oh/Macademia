@@ -46,4 +46,11 @@
 	)
 	
 	</insert>
+	<insert id="insertSignLine">
+	INSERT INTO SIGN_LINE
+	()
+	
+	</insert>
+	
+	
 </mapper>

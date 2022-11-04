@@ -57,5 +57,11 @@ public class FileServiceImpl implements FileService{
 		return result;
 	}
 
+	@Override
+	public int getTotalCount(String searchName) {
+		int result = fileDao.selectTotalCount(sst,searchName);
+		return result;
+	}
+
 
 }

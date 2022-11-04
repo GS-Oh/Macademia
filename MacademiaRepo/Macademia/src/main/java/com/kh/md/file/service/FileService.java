@@ -17,5 +17,7 @@ public interface FileService {
 
 	int getTotalCount();
 
+	int getTotalCount(String searchName);
+
 
 }

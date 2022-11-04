@@ -145,7 +145,8 @@
 	
 	<select id="replyList" resultMap="reply">
 	SELECT 
-			CONTENT 
+			REPLY_NO
+			,CONTENT 
 			,NAME
 			,REGDATE
 		FROM FREE_BOARD_REPLY
@@ -169,4 +170,12 @@
 				,#{name}
 			)
 	</insert>
+	
+	<delete id="removerReply">
+		DELETE 
+		FROM FREE_BOARD_REPLY
+		WHERE REPLY_NO = #{replyNo}
+		AND BOARD_NO = #{boardNo}
+		AND NAME = #{name}
+	</delete>
 </mapper>

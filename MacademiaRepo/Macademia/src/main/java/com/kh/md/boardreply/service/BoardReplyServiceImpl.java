@@ -17,15 +17,18 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	
 	private final BoardReplyDao dao;
 	
+	//댓글 목록
 	public List<BoardReply> selectList(String no) {
 		return dao.selectList(no);
 	}
-
+	//댓글 작성
 	@Override
-	public int replyWrite(BoardReply vo) {
-		
+	public int replyWrite(BoardReply vo) {		
 		return dao.insertOne(vo);
 	}
-	
-	
+	//댓글 삭제
+	@Override
+	public int removeReply(BoardReply replyNo) {
+		return dao.deleteOne(replyNo);
+	}
 }

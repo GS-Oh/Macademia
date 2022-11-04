@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/resources/css/common/common.css" %>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 	<%@ include file="/resources/css/payroll/commonAside.css" %>
 
@@ -57,17 +58,18 @@
 
     #management-select-result{
         display: grid;
-        grid-template-columns: repeat(7, 1fr) 1.5fr 1.5fr 1.5fr;
+        grid-template-columns: repeat(7, 1fr) 1.5fr 1.5fr 1.5fr 1fr 1fr;
         grid-template-rows: repeat(11, 1fr);
+		grid-auto-rows: 1fr;
         row-gap: 10px;
         align-content : center;
         align-items: center;
     }
 
 	.result-area{
-		grid-column: span 10;
+		grid-column: span 11;
 		display: grid;
-		grid-template-columns: repeat(7, 1fr) 1.5fr 1.5fr 1.5fr;
+		grid-template-columns: repeat(7, 1fr) 1.5fr 1.5fr 1.5fr 1fr ;
 		row-gap: 10px;
         align-content : center;
         align-items: center;
@@ -89,7 +91,8 @@
     .management-table-content{
         font-size: 1.3rem;
         text-align: center;
-
+		width : 100%;
+		border : none;
 		border-right: 1px dashed #6667AB;
     }
 
@@ -177,49 +180,79 @@
 	            <!-- 조회 결과 -->
 	            <div id="management-select-result">
 	            
-	            <div class="management-table-header">발급번호</div>
-				<div class="management-table-header">발급년월</div>
-				<div class="management-table-header">부서명</div>
-				<div class="management-table-header">직급명</div>
-				<div class="management-table-header">이름</div>
-				<div class="management-table-header">월급여액</div>
-				<div class="management-table-header">수당</div>
-				<div class="management-table-header">지급총액</div>
-				<div class="management-table-header">공제</div>
-				<div class="management-table-header">실수령액</div>
+		            <div class="management-table-header">발급번호</div>
+					<div class="management-table-header">발급년월</div>
+					<div class="management-table-header">부서명</div>
+					<div class="management-table-header">직급명</div>
+					<div class="management-table-header">이름</div>
+					<div class="management-table-header">월급여액</div>
+					<div class="management-table-header">수당</div>
+					<div class="management-table-header">지급총액</div>
+					<div class="management-table-header">공제</div>
+					<div class="management-table-header">실수령액</div>
+					<div class="management-table-header">보기</div>
+					<div class="management-table-header">상태</div>
 
 	            
 					<c:forEach items="${prVoList}" var="prVo">
-	            
-							<!-- 해당 월 내역 있으면 이거  -->
-							<div class="result-area">
-								<div class="management-table-content">${prVo.salNo}</div>
-								<div class="management-table-content">${prVo.payDate}</div>
-								<div class="management-table-content">${prVo.deptName}</div>
-								<div class="management-table-content">${prVo.rankName}</div>
-								<div class="management-table-content">${prVo.name}</div>
-								<div class="management-table-content">${prVo.pay}</div>
-								<div class="management-table-content">${prVo.taxfree}</div>
-								<div class="management-table-content">${prVo.totalPayment}</div>
-								<div class="management-table-content">${prVo.totalDeduction}</div>
-								<div class="management-table-content">${prVo.actualPayment}</div>
-								
-							</div>	
+	            		
+						<!-- 해당 월 내역 있으면 이거  -->
+						<form action="/md/payroll/history/detail" method="post" class="result-area">
+							<input type="text" class="management-table-content" value="${prVo.salNo}" name="salNo" readonly>
+							<input type="text" class="management-table-content" value="${prVo.payDate}" name="payDate" readonly>
+							<input type="text" class="management-table-content" value="${prVo.deptName}" name="deptName" readonly>
+							<input type="text" class="management-table-content" value="${prVo.rankName}" name="rankName" readonly>
+							<input type="text" class="management-table-content" value="${prVo.name}" name="name" readonly>
+							<input type="text" class="management-table-content" value="${prVo.pay}" name="pay" readonly>
+							<input type="text" class="management-table-content" value="${prVo.taxfree}" name="taxfree" readonly>
+							<input type="text" class="management-table-content" value="${prVo.totalPayment}" name="totalPayment" readonly>
+							<input type="text" class="management-table-content" value="${prVo.totalDeduction + prVo.nationalPension + prVo.healthPremium + prVo.incomeTax + prVo.localTax}" name="totalDeduction" readonly>
+							<input type="text" class="management-table-content " value="${prVo.actualPayment}" name="actualPayment" readonly >
+							<input type="submit" class="management-table-content submit-Btn" value="자세히보기" style="font-size:1.2rem;" >
+							
+							
+							
+							<!-- 보수쪽 -->
+	                        <input type="hidden" value="${prVo.attendance}" name="attendance">
+	                        <input type="hidden" value="${prVo.attendancePlus}" name="attendancePlus">
+	                        <input type="hidden" value="${prVo.technical}" name="technical">
+	                        <input type="hidden" value="${prVo.specialduty}" name="specialduty">
+	                        <input type="hidden" value="${prVo.emergency}" name="emergency">
+	                        <input type="hidden" value="${prVo.lunchFee}" name="lunchFee">
+	                        <input type="hidden" value="${prVo.holiday}" name="holiday">
+	                        <input type="hidden" value="${prVo.subsidy}" name="subsidy">
+	                        <input type="hidden" value="${prVo.publicActivity}" name="publicActivity">
+	                        
+	                        <!-- 공제쪽 -->
+	                        <input type="hidden" value="${prVo.contribution}" name="contribution">
+	                        <input type="hidden" value="${prVo.mutualFee}" name="mutualFee">
+	                        <input type="hidden" value="${prVo.safeDeposit}" name="safeDeposit">
+	                        <input type="hidden" value="${prVo.other}" name="other">
+	                        <input type="hidden" value="${prVo.longtermCare}" name="longtermCare">
+	                        <input type="hidden" value="${prVo.employmentPay}" name="employmentPay">
+	                        
+	                        <!-- 인적사항 -->
+	                        <input type="hidden" value="${prVo.position}" name="position">
+	                        <input type="hidden" value="${prVo.nationalPension}" name="nationalPension">
+	                        <input type="hidden" value="${prVo.healthPremium}" name="healthPremium">
+	                        <input type="hidden" value="${prVo.position}" name="position">
+	                        <input type="hidden" value="${prVo.incomeTax}" name="incomeTax">
+	                        <input type="hidden" value="${prVo.localTax}" name="localTax">
+	                        <input type="hidden" value="${prVo.baseMonthPay}" name="baseMonthPay">
+	                        
+						</form>	
 
-						<%-- <c:if test="${empty prVo.pay}">
-							<!-- 해당 월 내역 없으면 이거 -->
-			            <div class="management-table-content">${prVo.salNo}</div>
-		                <div class="management-table-content">${prVo.payDate}</div>
-		                <div class="management-table-content">${prVo.deptName}</div>
-		                <div class="management-table-content">${prVo.rankName}</div>
-		                <div class="management-table-content">${prVo.name}</div>
-		                <div style="grid-column: span 5; color: red; text-align: center; ">
-		                    <a href="/md/payroll/create/detail" > 
-		                        <h2 style="width:100%; height: 100%; "><span class="badge bg-secondary" >[ 급여 대장 작성하기 ]</span></h2>
-		                    </a>    
-		                </div>
-		                </c:if> --%>
-		                
+						<form action="" method="post" id="statuc-form">
+							<c:if test="${empty prVo.checkStatus}">
+								<input type="button" class="management-table-content status-choice btn btn-outline-dark" style="width: 100%; margin-left: 5%;" value="대기"></input>
+							</c:if>
+							<c:if test="${prVo.checkStatus eq 'confirm'}">
+								<div class="management-table-content">확정</div>
+							</c:if>
+							<c:if test="${prVo.checkStatus eq 'return'}">
+								<div class="management-table-content">반려</div>
+							</c:if>
+						</form>	
 					</c:forEach>
 
 					
@@ -272,7 +305,63 @@
 
 		</script>
 
+		<!-- 공제계 값 돌려놓고 넘겨주기 -->
+		<script>
+			const submitBtn = document.querySelectorAll('.submit-Btn');
+			const totalDeduction = document.querySelectorAll('input[name="totalDeduction"]');
+			const healthPremium = document.querySelectorAll('input[name="healthPremium"]');
+			const incomeTax = document.querySelectorAll('input[name="incomeTax"]');
+			const localTax = document.querySelectorAll('input[name="localTax"]');
+			const nationalPension = document.querySelectorAll('input[name="nationalPension"]');
 
+			for(let i=0; i<submitBtn.length; i++){
+				submitBtn[i].addEventListener('click',function(){
+					totalDeduction[i].value = totalDeduction[i].value - healthPremium[i].value - incomeTax[i].value - localTax[i].value - nationalPension[i].value;
+					console.log(totalDeduction[i].value);
+				});
+			}
+			
+
+		</script>
+
+
+
+<!-- 상태 체크 -->
+<script>
+		const statusChoice = document.querySelectorAll('.status-choice');
+		const salNo = document.querySelectorAll('input[name=salNo]')
+		const statucForm = document.querySelector('#statuc-form');
+
+		for(let i=0; i<statusChoice.length; i++){
+
+			statusChoice[i].addEventListener('click',function(){
+				if(statusChoice[i].value == '대기'){
+					let checkSalNo = salNo[i].value;
+					Swal.fire({
+						title: '상태를 선택해 주세요',
+						showDenyButton: true,
+						showCancelButton: true,
+						confirmButtonText: '확정',
+						denyButtonText: '반려'
+						}).then((result) => {
+						/* Read more about isConfirmed, isDenied below */
+						if (result.isConfirmed) {
+							statusChoice[i].type= "submit";
+							statucForm.action = "/md/payroll/checkStatus/CONFIRM/"+salNo[i].value;
+							Swal.fire('최종 확정 해주세요.', '', 'success')
+							statusChoice[i].value = "최종확정하기";
+						} else if (result.isDenied) {
+							statucForm.action = "/md/payroll/checkStatus/RETURN/"+salNo[i].value;
+							Swal.fire('최종 반려 해주세요.', '', 'info')
+							statusChoice[i].value = "최종반려하기";
+						}
+					})
+				}
+
+			});
+		}
+
+		</script>
 
 
 </body>

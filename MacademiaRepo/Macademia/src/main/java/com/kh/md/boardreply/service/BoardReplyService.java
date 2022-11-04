@@ -9,5 +9,6 @@ public interface BoardReplyService {
 	List<BoardReply> selectList(String no);
 
 	int replyWrite(BoardReply vo);
-
+	
+	int removeReply(BoardReply replyVo);
 }

@@ -95,6 +95,7 @@ public class AcademyController {
 	
 	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기 + 검색
 	@GetMapping("curriculum/{pno}")
+
 	public String curriculum(Model model, @PathVariable int pno, @RequestParam(value="search",required=false) String cNo, 
 																	@RequestParam(value="keyword",required=false) String keyword) {
 		//검색창의 카테고리 조회해오기
@@ -103,6 +104,7 @@ public class AcademyController {
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("no", cNo);
 		map.put("keyword", keyword);
+
 		
 		//# of total class
 		int totalCount = service.countTotalClass(map);

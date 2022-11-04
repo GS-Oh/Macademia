@@ -25,7 +25,9 @@ public class WorkController {
 	private WorkService service;
 	
 	@GetMapping("list")
-	public String workList() {
+	public String workList(Model model, HttpSession session) {
+		MemberVo loginMember =(MemberVo) session.getAttribute("loginMember");
+		
 		
 		return "/work/workList";
 	}
@@ -62,11 +64,44 @@ public class WorkController {
 	@ResponseBody
 	public List<MemberVo> deptList(HttpServletRequest req ) {
 		String dept = req.getParameter("dept");
-		System.out.println("뎁트코드는" +dept);
+	
 		List<MemberVo> list = service.getDeptMember(dept);
 		System.out.println(list);
 		
 		return list;
+		
+	}
+	@PostMapping("workWrite")
+	@ResponseBody
+	public int workWrite(HttpServletRequest req, HttpSession session) {
+		String wNo =req.getParameter("wNo");
+		String selectWork =req.getParameter("select");
+		String title =req.getParameter("title");
+		String content =req.getParameter("content");
+		String deadLine =req.getParameter("deadLine");
+		
+		System.out.println(wNo);
+		System.out.println(selectWork);
+		System.out.println(title);
+		System.out.println(content);
+		System.out.println(deadLine);
+		
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		String mNo = loginMember.getNo();
+		WorkVo vo = new WorkVo();
+		vo.setWSlaveNo(wNo);
+		vo.setWBossNo(mNo);
+		vo.setWContent(content);
+		vo.setWType(selectWork);
+		vo.setWTitle(title);
+		vo.setWDeadLine(deadLine);
+		System.out.println(vo);
+		int result = service.workWrite(vo);
+		
+		
+		return result;
+		
 		
 	}
 	

@@ -67,7 +67,7 @@
 	    <if test="rankNo != 0">
 			AND C.RANK_NO = #{rankNo}
 	    </if>
-	    
+	    ORDER BY C.SAL_NO DESC
 	</select>
 
 
@@ -252,6 +252,16 @@
 	
 	</select>
 	
+	
+	<!-- 급여대장 상태변경 -->
+	<update id="updateCheckStatus">
+	
+		UPDATE SALARY_BOOK
+			<if test="checkSt == 'CONFIRM'">SET CHECK_STATUS = 'CONFIRM'</if>
+		    <if test="checkSt == 'RETURN'">SET CHECK_STATUS = 'RETURN'</if>
+		WHERE SAL_NO = #{salNo}
+	
+	</update>
 	
 	
 	

@@ -4,6 +4,7 @@
 	<select id="selectList" resultType="com.kh.md.file.vo.FileVo">
 		SELECT * FROM MYFILE
 		WHERE MEMBER_NO = #{memberNo} 
+		AND UPLOAD_PATH = '/resources/upload/myfile/'
 		AND DELETE_YN = 'N'
 		ORDER BY NO DESC
 	</select>
@@ -11,6 +12,7 @@
 	<select id="selectListBySearchName" resultType="com.kh.md.file.vo.FileVo">
 		SELECT * FROM MYFILE
 		WHERE MEMBER_NO = #{memberNo}
+		AND UPLOAD_PATH = '/resources/upload/myfile/'
 		AND ORIGIN_NAME LIKE '%${searchName}%'
 		AND DELETE_YN = 'N'
 		ORDER BY NO DESC	
@@ -21,14 +23,22 @@
 	</update>
 	
 	<insert id="insertOne">
-		INSERT INTO MYFILE NO, MEMEBER_NO, ORIGIN_NAME, UPDATE_NAME
-		VALUES(SEQ_MYFILE_NO.NEXTVAL,#{memberNo},#{originName},#{updateName})
+		INSERT INTO MYFILE (NO, MEMBER_NO, ORIGIN_NAME, UPDATE_NAME, UPLOAD_PATH)
+		VALUES(SEQ_MYFILE_NO.NEXTVAL,#{memberNo},#{originName},#{updateName},#{uploadPath})
 	</insert>
 	
 	<select id="selectTotalCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM MYFILE
 		WHERE DELETE_YN = 'N'
+		AND UPLOAD_PATH = '/resources/upload/myfile/'
+	</select>
+	<select id="selectTotalCountBySearchName" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MYFILE
+		WHERE ORIGIN_NAME LIKE '%${searchName}%'
+		AND DELETE_YN = 'N'
+		AND UPLOAD_PATH = '/resources/upload/myfile/'
 	</select>
 	
 </mapper>

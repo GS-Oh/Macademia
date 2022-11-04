@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.sign.dao.SignDao;
+import com.kh.md.sign.vo.SignLineVo;
 import com.kh.md.sign.vo.SignVo;
 
 @Service
@@ -37,6 +38,12 @@ public class SignService {
 	public int signWrite(SignVo vo) {
 		// TODO Auto-generated method stub
 		return dao.signWrite(sst, vo);
+	}
+
+
+	public int insertSignline(SignLineVo slVo) {
+		return dao.insertSignline(sst, slVo);
+		
 	}
 
 }

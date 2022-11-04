@@ -247,7 +247,7 @@
 			
 			<div class="line">
 			<h5>요청 기한</h5>
-			<input type="date" value="2022-10-20">
+			<input type="date"  id="dead_line">
 			
 			</div>
 			
@@ -256,7 +256,7 @@
 	</div>
 	<div id="work_bottom">
 		<h5>업무 내용</h5>
-		<textarea rows="5" cols="100"></textarea>
+		<textarea rows="5" cols="100" id="content"></textarea>
 		
 		</div>
 		</div>
@@ -348,7 +348,7 @@
 				console.log(deptCode)
 				$.ajax({
 					url:"/md/work/deptList",
-					mehod : "get",
+					mehod : "post",
 					data :{dept : deptCode },
 					dataType: 'json',
 					success: function(data){
@@ -385,6 +385,42 @@ $("#deleteUser").on('click',function(){
 
 	$('#select_right option[value='+userCode+']').remove();
 
+
+})
+$('#write').on('click',function(){
+	let workUserCode = $('#select_right option').val();
+	let selectWork = $('#select_work').val();
+	let title = $('#title').val();
+	let deadLine= $('#dead_line').val();
+	let content = $('#content').val();
+	
+	result = confirm("업무를 요청 하시겠습니까?")
+	if(result==1){
+		$.ajax({
+					url:"/md/work/workWrite",
+					method : "post",
+					data :{wNo : workUserCode,
+							select: selectWork,
+							title : title,
+							deadLine :deadLine,
+							content : content
+					},
+					dataType: 'json',
+					success: function(data){
+						console.log("성공")
+						console.log(data)
+						
+						
+						
+						
+						
+					}
+					,error: function(data){
+					    	console.log("실패");
+					    	console.log(data)
+					    }
+				})
+	}
 
 })
 			</script>
