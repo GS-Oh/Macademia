@@ -1,7 +1,6 @@
 package com.kh.md.member.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.kh.md.file.vo.FileVo;
 import com.kh.md.member.service.MemberService;
 import com.kh.md.member.vo.MemberVo;
 
@@ -76,7 +74,7 @@ public class MemberController {
 			    messageHelper.setTo(privateEmail); 
 			    messageHelper.setSubject("임시비밀번호가 발급되었습니다"); 
 			    messageHelper.setText("임시비밀번호 : "+newPwd); 
-	 
+			   
 			    mailSender.send(mimeMessage);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -20,6 +20,8 @@ public interface FileDao {
 
 	int selectTotalCount(SqlSessionTemplate sst);
 
+	int selectTotalCount(SqlSessionTemplate sst, String searchName);
+
 
 
 }
