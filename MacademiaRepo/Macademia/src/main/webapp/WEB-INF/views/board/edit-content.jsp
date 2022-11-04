@@ -1,28 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+		  
 		  <div class="board_wrap">
 		        <div class="board_title">
 		            <strong>게시판 수정</strong>
 		        </div>
+		        
 		        <div class="board_write_wrap">
+	               <form id="frm" action="" method="post" enctype="multipart/form-data">
 		            <div class="board_write">
-		                <form action="${root}/board/edit/${vo.no}" method="post" >
-		                <div class="title">
-		                    <dl>
-		                        <dt>제목</dt>
-		                        <dd><input name="title" type="text" placeholder="제목 입력" value="${vo.title}"></dd>
-		                    </dl>
-		                      <div class="info">
+			                <div class="title">
+			                    <dl>
+			                        <dt>제목</dt>
+			                        <dd><input name="title" type="text" placeholder="제목 입력" value="${vo.title}"></dd>
+			                    </dl>
+		                    </div>
+		                    <div class="info">
 			                    <dl>
 			                        <dt>카테고리</dt>
-			                        <dd><input type="text" placeholder="OO게시판" value="${vo.categoryNo}" readonly="readonly"></dd>
+			                        <c:if test="${vo.categoryNo eq 1}">
+			                        <dd><input type="text" placeholder="OO게시판" value="자유게시판" readonly="readonly"></dd>
+			                        </c:if>
+			                        <c:if test="${vo.categoryNo eq 2}">
+			                        <dd><input type="text" placeholder="OO게시판" value="자료공유게시판" readonly="readonly"></dd>
+			                        </c:if>
 			                    </dl>
 			                    <dl>
-		                     <dl>
-		                        <dt>첨부파일</dt>
-		                        <dd><input type="file" placeholder="첨부파일" name="file"></dd>
-		                    </dl>
-		                </div>
+			                        <dt>첨부파일</dt>
+			                        <dd><input type="file" placeholder="첨부파일" name="file"></dd>
+		                    	</dl>
+		                	</div>
 		                <div class="info">
 		                   
 		                </div>
@@ -31,11 +38,19 @@
 		                </div>
 		            </div>
 		            <div class="bt_wrap">
-		                <input type="submit" value="수정">
-	                </form>
+		                <a class="on" href="#" onclick="return chk_form()" >수정</a> 
 		                <a href="${root}/board/delete/${vo.no}" class="on2">삭제</a>
 		                <a href="${root}/board/">취소</a>
 		            </div>
+	                </form>
 		        </div>
 		    </div>
-	    </div>
+		    
+		    <script>
+			function chk_form() {
+			document.getElementById('frm').submit();
+			}
+			</script>
+    
+		    
+	

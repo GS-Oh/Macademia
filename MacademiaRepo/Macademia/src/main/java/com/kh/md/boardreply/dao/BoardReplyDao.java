@@ -11,4 +11,6 @@ public interface BoardReplyDao {
 
 	int insertOne(BoardReply vo);
 	
+	int deleteOne (BoardReply replyNo);
+	
 }

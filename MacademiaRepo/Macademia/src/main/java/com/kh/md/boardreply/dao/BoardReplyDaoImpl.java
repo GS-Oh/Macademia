@@ -25,7 +25,7 @@ public class BoardReplyDaoImpl implements BoardReplyDao {
 		return sst.insert("boardMapper.writeReply", vo);
 	}
 	
-	public int deleteReply (String no) {
-		return sst.update("boardMapper.removerReply", no);
+	public int deleteOne (BoardReply replyVo) {
+		return sst.update("boardMapper.removerReply", replyVo);
 	}
 }
