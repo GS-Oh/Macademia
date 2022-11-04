@@ -1,6 +1,7 @@
 package com.kh.md.payroll.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.md.payroll.vo.PayrollOptionMemberVo;
 import com.kh.md.payroll.vo.PayrollVo;
@@ -33,6 +34,9 @@ public interface PayrollService {
 
 	//지급 계좌 관리 ( 변경이력가져오기 )
 	List<SoChangeVo> selectSoChangeHistory(String no);
+	
+	//급여대장 ( 상태 변경하기 )
+	int updateCheckStatus(Map<String, String> checkStatus);
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.kh.md.payroll.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -183,7 +186,6 @@ public class PayrollController {
 			return "";
 		}
 		
-		
 	}
 	
 	//급여대장 작성 ( 작성하기 화면 )
@@ -213,7 +215,26 @@ public class PayrollController {
 	}
 	
 	
-	
+	//급여대장 관리 ( 상태 변경하기 )
+	@PostMapping("checkStatus/{checkSt}/{salNo}")
+	public String checkStatus( @PathVariable String checkSt, @PathVariable String salNo) {
+		
+		System.out.println(salNo);
+		System.out.println(checkSt);
+		
+		Map<String, String> checkStatus = new HashMap<String, String>();
+		checkStatus.put("checkSt", checkSt);
+		checkStatus.put("salNo", salNo);
+		
+		int result = ps.updateCheckStatus(checkStatus);
+		
+		if(result == 1) {
+			return "redirect:/payroll/management";
+		}else{
+			return "";
+		}
+		
+	}
 	
 	
 }//class

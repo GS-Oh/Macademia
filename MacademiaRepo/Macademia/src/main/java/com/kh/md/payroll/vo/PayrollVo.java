@@ -10,6 +10,8 @@ public class PayrollVo {
 	private String writerNo;
 	private String targetNo;
 	private String payDate;
+	private String checkStatus;
+	
 	private int pay; //월 급여액
 	
 	private int attendance; //정근수당
