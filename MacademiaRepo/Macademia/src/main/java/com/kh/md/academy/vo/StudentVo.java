@@ -21,6 +21,7 @@ public class StudentVo {
 	private String finalDegree;
 	private String major;
 	private String enrolledClass;
+	private String enrolledClassName;
 	private String joinDate;
 	private String stdComment;
 	private String completeDate;

@@ -47,11 +47,19 @@
 		FROM CLASS C
 		JOIN MEMBER M ON C.MEMBER_NO = M.NO
 		JOIN CLASS_CATEGORY T ON C.CATEGORY_NO = T.NO
+		WHERE STATUS = 'O'
+			<if test="no != null">
+				AND CATEGORY_NO LIKE '%${no}%'
+			</if>
+			
+			<if test="keyword != null">
+				AND C.NAME LIKE '%${keyword}%'
+			</if>
 		ORDER BY C.BEGIN_DATE
 	</select>
 	
 	<select id="selectOneStudent" resultType="StudentVo">
-		SELECT S.NO, S.NAME, S.GENDER, S.PHONE, S.EMAIL, S.PROFILE, S.NEW_ADDRESS, S.OLD_ADDRESS, S.DETAIL_ADDRESS, TO_CHAR(S.BIRTH, 'YYYY-MM-DD') AS BIRTH, S.FINAL_DEGREE, S.MAJOR, C.NAME AS ENROLLED_CLASS, S.JOIN_DATE, S.STD_COMMENT, S.COMPLETE_DATE
+		SELECT S.NO, S.NAME, S.GENDER, S.PHONE, S.EMAIL, S.PROFILE, S.NEW_ADDRESS, S.OLD_ADDRESS, S.DETAIL_ADDRESS, TO_CHAR(S.BIRTH, 'YYYY-MM-DD') AS BIRTH, S.FINAL_DEGREE, S.MAJOR, S.ENROLLED_CLASS, C.NAME AS ENROLLED_CLASS_NAME, S.JOIN_DATE, S.STD_COMMENT, S.COMPLETE_DATE
 		FROM STUDENT S
 		JOIN CLASS C ON S.ENROLLED_CLASS = C.NO
 		WHERE S.NO = #{no}
@@ -60,32 +68,44 @@
 	
 	<select id="selectTotalCount" resultType="int">
 		SELECT COUNT(NO) FROM STUDENT
+		
 	</select>
 	
 	<select id="selectTotalClassCount" resultType="int">
 		SELECT COUNT(NO) FROM CLASS
+		WHERE STATUS = 'O'
+			<if test="no != null">
+				AND CATEGORY_NO LIKE '%${no}%'
+			</if>
+			
+			<if test="keyword != null">
+				AND NAME LIKE '%${keyword}%'
+			</if>
 	</select>
 	
 	<update id="updateOne">
 		UPDATE STUDENT
-		SET PHONE = '010111111', EMAIL = #{email}, PROFILE = #{profile}, BIRTH = #{birth}, NEW_ADDRESS = #{newAddress}, OLD_ADDRESS = #{oldAddress}, DETAIL_ADDRESS = #{detailAddress}, FINAL_DEGREE = #{finalDegree}, MAJOR = #{major}, ENROLLED_CLASS = #{enrolledClass}, STD_COMMENT = #{stdComment}
+		SET PHONE = #{phone}, EMAIL = #{email}, PROFILE = #{profile}, BIRTH = #{birth}, NEW_ADDRESS = #{newAddress}, OLD_ADDRESS = #{oldAddress}, DETAIL_ADDRESS = #{detailAddress}, FINAL_DEGREE = #{finalDegree}, MAJOR = #{major}, ENROLLED_CLASS = #{enrolledClass}, STD_COMMENT = #{stdComment}
 		WHERE NO = #{no}
 	</update>
 	
-	<select id="selectTotalClassSearchCount" resultType="int">
-		SELECT COUNT(NO) FROM CLASS
-		WHERE STATUS = 'O'
-		<choose>
-			<when test="keyword != null">
-			AND NAME LIKE '%${keyword}%'
-			</when>
-		
-			<when test="search > 0">
-			AND CATEGORY_NO = #{no}
-			</when>
-		</choose>
-		
+	<select id="selectOneClass" resultType="ClassVo">
+		SELECT T.NAME AS CATEGORY_NO, C.NAME, C.DESCRIPTION, C.MAX, M.NAME AS MEMBER_NO, TO_CHAR(C.BEGIN_DATE, 'YY-MM-DD') AS BEGIN_DATE, C.START_TIME, C.FEE, C.CLASSROOM, TO_CHAR(C.END_DATE, 'YY-MM-DD') AS END_DATE, C.FINISH_TIME
+		FROM CLASS C
+		JOIN CLASS_CATEGORY T ON C.CATEGORY_NO = T.NO
+		JOIN MEMBER M ON C.MEMBER_NO = M.NO
+		WHERE C.NO = #{cno}
 	</select>
 	
+	<select id="selectCurriculumList" resultType="CurriculumVo">
+		SELECT NO, CLASS_NO, CURRICULUM_NAME AS NAME, CURRICULUM_CONTENT AS CONTENT
+		FROM CURRICULUM
+		WHERE CLASS_NO = #{cno}
+	</select>
+	
+	<select id="selectEnrolledStudents" resultType="StudentVo">
+		SELECT NAME, TO_CHAR(JOIN_DATE, 'YY-MM-DD')AS JOIN_DATE FROM STUDENT
+		WHERE ENROLLED_CLASS = #{cno}
+	</select>
 	
 </mapper>

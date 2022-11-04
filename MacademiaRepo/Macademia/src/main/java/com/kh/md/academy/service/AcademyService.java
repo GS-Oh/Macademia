@@ -34,7 +34,7 @@ public interface AcademyService {
 	List<ClassVo> selectClassList();
 
 	//모든 클래스 리스트 가져오기(pvo)
-	List<ClassVo> selectClassList(PageVo pvo);
+	List<ClassVo> selectClassList(PageVo pvo, Map map);
 	
 	//수강생 한명 조회
 	StudentVo selectOneStudent(String no);
@@ -43,14 +43,23 @@ public interface AcademyService {
 	int countTotalStd();
 
 	//페이징>전체 클래스 리스트 수 조회
-	int countTotalClass();
+	int countTotalClass(Map map);
 
 	//수강생 정보 수정
 	int updateStudent(StudentVo vo);
 
-	//검색결과 클래스 리스트
-	int countTotalClass(Map map);
+	//class하나 조회하기
+	ClassVo selectOneClass(int cno);
 
+	//curriculum 조회하기
+	List<CurriculumVo> selectCurriculumList(int cno);
+
+	//class>수강생 조회하기
+	List<StudentVo> selectEnrolledStudent(int cno);
+
+
+
+	
 
 	
 	

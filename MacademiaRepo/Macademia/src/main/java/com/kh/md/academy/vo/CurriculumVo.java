@@ -14,6 +14,8 @@ public class CurriculumVo {
 	private String classNo;
 	private String[] curriculumName;
 	private String[] curriculumContent;
+	private String name;
+	private String content;
 	
 	private List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
 	

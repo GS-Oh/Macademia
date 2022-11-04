@@ -66,13 +66,16 @@ public class AcademyDaoImpl implements AcademyDao{
 
 	//모든 클래스 리스트 가져오기(pvo)
 	@Override
-	public List<ClassVo> selectClassList(SqlSessionTemplate sst, PageVo pvo) {
+	public List<ClassVo> selectClassList(SqlSessionTemplate sst, PageVo pvo, Map map) {
 
 		int offset = (pvo.getCurrentPage() - 1) * pvo.getBoardLimit();
 		
 		RowBounds rb = new RowBounds(offset, pvo.getBoardLimit());
 		
-		return sst.selectList("academyMapper.selectClassList", null, rb);
+//		System.out.println("======================");
+//		System.out.println(map);
+		
+		return sst.selectList("academyMapper.selectClassList", map, rb);
 	}
 
 	//학생 한 명 조회
@@ -87,10 +90,14 @@ public class AcademyDaoImpl implements AcademyDao{
 		return sst.selectOne("academyMapper.selectTotalCount");
 	}
 
-	//페이징>전체 학생 리스트 수 조회
+	//페이징>전체 클래스 리스트 수 조회
 	@Override
-	public int countTotalClass(SqlSessionTemplate sst) {
-		return sst.selectOne("academyMapper.selectTotalClassCount");
+	public int countTotalClass(SqlSessionTemplate sst, Map map) {
+//		System.out.println("==============");
+//		System.out.println("DAO에서 map : " + map);
+		int result = sst.selectOne("academyMapper.selectTotalClassCount" , map);
+//		System.out.println(result);
+		return result;
 	}
 
 	//수강생 정보 수정
@@ -100,13 +107,26 @@ public class AcademyDaoImpl implements AcademyDao{
 		return sst.update("academyMapper.updateOne", vo);
 	}
 
-	//검색결과 클래스 리스트 수 조회
+	//class하나 조회하기
 	@Override
-	public int countTotalClassSearch(SqlSessionTemplate sst, Map map) {
-		System.out.println("daoNo:" + map.get("no"));
-		System.out.println("daoKW:" + map.get("keyword"));
-		return sst.selectOne("academyMapper.selectTotalClassSearchCount", map);
+	public ClassVo selectOneClass(SqlSessionTemplate sst, int cno) {
+		return sst.selectOne("academyMapper.selectOneClass", cno);
 	}
+
+	//curriculum 조회하기
+	@Override
+	public List<CurriculumVo> selectCurriculumList(SqlSessionTemplate sst, int cno) {
+//		System.out.println("dao넘어온 cno : " + cno);
+		return sst.selectList("academyMapper.selectCurriculumList", cno);
+	}
+
+	//class>수강생 조회하기
+	@Override
+	public List<StudentVo> selectEnrolledStudents(SqlSessionTemplate sst, int cno) {
+		return sst.selectList("academyMapper.selectEnrolledStudents", cno);
+	}
+
+
 
 	
 	

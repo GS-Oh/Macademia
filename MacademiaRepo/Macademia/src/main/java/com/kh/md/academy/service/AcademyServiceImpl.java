@@ -71,8 +71,8 @@ public class AcademyServiceImpl implements AcademyService{
 
 	//모든 클래스 리스트 보여주기
 	@Override
-	public List<ClassVo> selectClassList(PageVo pvo) {
-		return dao.selectClassList(sst, pvo);
+	public List<ClassVo> selectClassList(PageVo pvo, Map map) {
+		return dao.selectClassList(sst, pvo, map);
 	}
 	
 	//수강생 한명 조회해오기
@@ -89,8 +89,8 @@ public class AcademyServiceImpl implements AcademyService{
 
 	//페이징>전체 클래스 리스트 수 조회
 	@Override
-	public int countTotalClass() {
-		return dao.countTotalClass(sst);
+	public int countTotalClass(Map map) {
+		return dao.countTotalClass(sst, map);
 	}
 
 	//수강생 정보 수정
@@ -99,11 +99,25 @@ public class AcademyServiceImpl implements AcademyService{
 		return dao.updateStudent(sst, vo);
 	}
 
-	//검색결과 클래스 리스트 수 조회
+	//class하나 조회하기
 	@Override
-	public int countTotalClass(Map map) {
-		return dao.countTotalClassSearch(sst, map);
+	public ClassVo selectOneClass(int cno) {
+		return dao.selectOneClass(sst, cno);
+	}
+
+	//curriculum 조회하기
+	@Override
+	public List<CurriculumVo> selectCurriculumList(int cno) {
+		return dao.selectCurriculumList(sst, cno);
+	}
+
+	//class>수강생 조회하기
+	@Override
+	public List<StudentVo> selectEnrolledStudent(int cno) {
+		return dao.selectEnrolledStudents(sst, cno);
 	}
 
 
+
+	
 }
