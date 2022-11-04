@@ -514,11 +514,12 @@ $('#approver-submit').on('click', function () {
         $.ajax({
           url: '/md/sign/signLine',
           type: 'post',
-          dataType: 'json',
-          data : { line: JSON.stringify(approverVal)},
-          success:function(){
+        //  dataType: 'text',
+        //  contentType: "application/json; charset=utf-8",
+          data : {"line": JSON.stringify(approverVal)},
+          success:function(data){
             console.log("ajax성공");
-            console.log(approverVal);
+            console.log(data);
           }
         })
         }

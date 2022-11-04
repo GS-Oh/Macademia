@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.md.member.vo.MemberVo;
+import com.kh.md.sign.vo.SignLineVo;
 import com.kh.md.sign.vo.SignVo;
 
 @Repository
@@ -24,6 +25,11 @@ public class SignDao {
 	public int signWrite(SqlSessionTemplate sst, SignVo vo) {
 		// TODO Auto-generated method stub
 		return sst.insert("signMapper.signWrite", vo);
+	}
+
+	public int insertSignline(SqlSessionTemplate sst, SignLineVo slVo) {
+		// TODO Auto-generated method stub
+		return sst.insert("signMapper.insertSignLine",slVo);
 	}
 
 }

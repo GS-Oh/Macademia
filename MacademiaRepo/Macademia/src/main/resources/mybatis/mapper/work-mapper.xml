@@ -32,5 +32,29 @@
     JOIN MEMBER M ON M.POSITION_NO = P.NO
     WHERE D.NO = #{deptNo}
 </select>
+
+<insert id="workWrite">
+INSERT INTO WORKORDER
+(
+	W_NO
+	,W_BOSS_NO
+	,W_SLAVE_NO
+	,W_TITLE
+	,W_CONTENT
+	,W_DEADLINE
+	,W_TYPE
+	
+)VALUES(
+		SEQ_WORKORDER_NO.NEXTVAL
+		,#{wBossNo}
+		,#{wSlaveNo},
+		#{wTitle},
+		#{wContent},
+		#{wDeadLine},
+		#{wType}
+)
+
+
+</insert>
 	
 </mapper>
