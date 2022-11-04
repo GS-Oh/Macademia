@@ -1,6 +1,7 @@
 package com.kh.md.payroll.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,9 @@ public interface PayrollDao {
 
 	//지급 계좌 관리 ( 변경이력가져오기 )
 	List<SoChangeVo> selectSoChangeHistory(SqlSessionTemplate sst, String no);
+	
+	//급여대장 ( 상태 변경하기 )
+	int updateCheckStatus(SqlSessionTemplate sst, Map<String, String> checkStatus);
 	
 
 	

@@ -215,6 +215,7 @@
                         <input type="hidden" value="${prVo.deptName}" name="deptName">
                         <input type="hidden" value="${prVo.rankName}" name="rankName">
                         <input type="hidden" value="${prVo.position}" name="position">
+                        <input type="hidden" value="${prVo.baseMonthPay}" name="baseMonthPay">
                     </form>
 				</c:forEach>
                 

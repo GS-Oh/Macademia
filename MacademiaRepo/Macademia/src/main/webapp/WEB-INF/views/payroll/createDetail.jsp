@@ -144,9 +144,10 @@
             </div>
             <div class="main-table-span" id="detail-price"><h3>세전 총 지급액 : </h3><h3 id="realAmount"></h3></div>
 
-            <form action="${root}/payroll/create/detail/write" method="post" id="detail-form-area">
+            <form  action="/md/payroll/create/detail/write" method="post" id="detail-form-area">
             	<input type="hidden" name="targetNo" value="${prVo.no}">
             	<input type="hidden" name="payDate" value="${prVo.payDate}">
+            	<input type="hidden" name="deptNo" value="${prVo.deptNo}">
                 <div class="main-table-grid">
                     <h4>보수</h4>
                     <div>보수계</div>
@@ -171,12 +172,14 @@
                     <div><input class="repair-price-area" type="text" value="0" name="subsidy" onfocus="this.oldvalue = this.value;"></div>
                     <div>대민활동비</div>
                     <div><input class="repair-price-area" type="text" value="0" name="publicActivity" onfocus="this.oldvalue = this.value;"></div>
+
+                   
                 </div>
 
                 <div class="main-table-grid">
                     <h4 >공제</h4>
                     <div>공제계</div>
-                    <div><input class="" type="text" value="0" name="totalDeduction" style="width:100%; height:100%;" onfocus="this.oldvalue = this.value;"></div>
+                    <div><input class="deduction-price-area" type="text" value="0" name="totalDeduction" style="width:100%; height:100%;" onfocus="this.oldvalue = this.value;"></div>
                     <div>기여금</div>
                     <div><input class="deduction-price-area" type="text" value="0" name="contribution" onfocus="this.oldvalue = this.value;"></div>
                     <div>대한공제회비</div>
@@ -185,29 +188,13 @@
                     <div><input class="deduction-price-area" type="text" value="0" name="safeDeposit" onfocus="this.oldvalue = this.value;"></div>
                     <div>기타공제</div>
                     <div><input class="deduction-price-area" type="text" value="0" name="other" onfocus="this.oldvalue = this.value;"></div>
-                    <div>국민연금</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.nationalPension}" name="nationalPension"; readonly></div>
-                    <div>건강보험료</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.healthPremium}" name="healthPremium"; readonly></div>
-                    <div>장기요양보험료</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.longtermCare}" name="longtermCare"; readonly></div>
-                    <div>고용보험료</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.employmentPay}" name="employmentPay"; readonly></div>
-                    <div>소득세</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.incomeTax}" name="incomeTax"; readonly></div>
-                    <div>지방소득세</div>
-                    <div><input class="deduction-price-area" type="text" value="${prVo.localTax}" name="localTax"; readonly></div>
-                    <input type="hidden" class="deduction-price-area" name="taxfree" value="0">
-                    <input type="hidden" class="deduction-price-area" name="baseMonthPay" value="0">
-                    <input type="hidden" class="deduction-price-area" name="accidentPay" value="0">
-                    <input type="hidden" class="deduction-price-area" name="totalPayment" value="0">
-                    <input type="hidden" class="deduction-price-area" name="actualPayment" value="0">
-                    <input type="hidden" class="deduction-price-area" name="totalDeduction" value="0">
+                    
+                   
                 </div>
 
                 <div style="grid-column: span 2; align-items: center; width: 100%; height: 100%;">
-                    <input type="submit"  value="작성하기" class="btn btn-light btn-lg" style="background-color: #1315a6 ; color:white;">
-                    <input type="button" id="please" value="취소하기" class="btn btn-light btn-lg">
+                    <input type="submit"  id="please" value="작성하기" class="btn btn-light btn-lg" style="background-color: #1315a6 ; color:white;">
+                    <input type="button"   value="취소하기" class="btn btn-light btn-lg">
                 </div>
             </form>
         </main>
@@ -222,21 +209,25 @@
     const please = document.querySelector('#please');
     
     please.addEventListener('click',function(){
-        let repairPrice = document.querySelectorAll('.repair-price-area');
-        let deductionPrice = document.querySelectorAll('.deduction-price-area');
-       
+        
         for(let i=0; i<repairPrice.length; i++){
+            
             var temp = (repairPrice[i].value).replace(/,/g, "");
+            if(isNaN(temp)==true){
+                temp = 1;
+            }
             repairPrice[i].type = "number";
             repairPrice[i].value = parseInt(temp);
-            console.log(temp);
         }
         
         for(let i=0; i<deductionPrice.length; i++){
+            
             var temp = (deductionPrice[i].value).replace(/,/g, "");
+            if(isNaN(temp)==true){
+                temp = 1;
+            }
             deductionPrice[i].type = "number";
             deductionPrice[i].value = parseInt(temp);
-            console.log(temp);
         }
         
         
@@ -293,6 +284,7 @@
 
         // 공제 합 + 실수령액 처리
         for(let i=0; i<deductionPrice.length; i++){
+
             deductionPrice[i].addEventListener('change',function(){
                //공제 합
                 let totalValue = (totalDeduction.value).replace(/,/g, "");
@@ -358,7 +350,6 @@
     //콤마작업 - 
     monthPay.value = setComma((monthPay.value).replace(/\D/g,""));
     totalRepair.value = setComma((totalRepair.value).replace(/\D/g,""));
-    totalDeduction.value = setComma((totalDeduction.value).replace(/\D/g,""));
     realPay.innerText = setComma((realPay.innerText).replace(/\D/g,""));
     
 

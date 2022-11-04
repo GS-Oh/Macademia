@@ -1,6 +1,7 @@
 package com.kh.md.payroll.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,9 @@ public class PayrollServiceImpl implements PayrollService{
 			temp.setLocalTax(localTax);
 			
 			//  공제총액 : 총지급액 : 실급여액
-			int totlaDeduction = temp.getContribution() + temp.getMutualFee() + temp.getSafeDeposit()+ temp.getOther() + longTermcare + employmentpay + nationalPension + healthPremium + incomeTax + localTax;
+			int totlaDeduction = ((temp.getContribution()/1000) * 1000 + 1000) + ((temp.getMutualFee()/1000) * 1000 + 1000) + ((temp.getSafeDeposit()/1000) * 1000 + 1000)+ temp.getOther() + longTermcare + employmentpay ;
 			int totalPayment = temp.getPay() + taxFree;
-			int actualPayment =	totalPayment - totlaDeduction;	
+			int actualPayment =	totalPayment - totlaDeduction - nationalPension - healthPremium - incomeTax - localTax;	
 			
 			temp.setTotalDeduction(totlaDeduction);
 			temp.setTotalPayment(totalPayment);
@@ -79,6 +80,22 @@ public class PayrollServiceImpl implements PayrollService{
 	//급여대장 작성 ( 작성하기 처리 )
 	@Override
 	public int insertSalaryBook(PayrollVo prVo) {
+		
+		if(prVo.getAttendance() != 0){ prVo.setAttendance(((prVo.getAttendance()/1000) *1000) + 1000); } 
+		if(prVo.getAttendancePlus() != 0){ prVo.setAttendancePlus(((prVo.getAttendancePlus()/1000) * 1000) +1000); } 
+		if(prVo.getTechnical() != 0){ prVo.setTechnical(((prVo.getTechnical()/1000) * 1000) +1000); } 
+		if(prVo.getSpecialduty() != 0){ prVo.setSpecialduty(((prVo.getSpecialduty()/1000) * 1000) +1000); }
+		if(prVo.getEmergency() != 0){ prVo.setEmergency(((prVo.getEmergency()/1000) * 1000) +1000); }
+		if(prVo.getLunchFee() != 0){ prVo.setLunchFee(((prVo.getLunchFee()/1000) * 1000) +1000); }
+		if(prVo.getHoliday() != 0){ prVo.setHoliday(((prVo.getHoliday()/1000) * 1000) +1000); } 
+		if(prVo.getSubsidy() != 0){ prVo.setSubsidy(((prVo.getAttendancePlus()/1000) * 1000) +1000); } 
+		if(prVo.getPublicActivity() != 0){ prVo.setPublicActivity(((prVo.getPublicActivity()/1000) * 1000) +1000); } 
+		if(prVo.getContribution() != 0){ prVo.setContribution(((prVo.getContribution()/1000) * 1000) +1000); } 
+		if(prVo.getMutualFee() != 0){ prVo.setMutualFee(((prVo.getMutualFee()/1000) * 1000) +1000); } 
+		if(prVo.getSafeDeposit() != 0){ prVo.setSafeDeposit(((prVo.getSafeDeposit()/1000) * 1000) +1000); } 
+		if(prVo.getOther() != 0){ prVo.setOther(((prVo.getOther()/1000) * 1000) +1000); } 
+		
+		
 		return dao.insertSalaryBook(sst, prVo);
 	}
 
@@ -172,8 +189,14 @@ public class PayrollServiceImpl implements PayrollService{
 		return dao.selectPayrollOptionMember(sst, prVo);
 	}
 
-	
-	
-	
-	
-}//class
+
+	//급여대장 ( 상태 변경하기 )
+	@Override
+	public int updateCheckStatus(Map<String, String> checkStatus) {
+		return dao.updateCheckStatus(sst, checkStatus);
+	}}//class
+
+
+
+
+

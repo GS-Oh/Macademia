@@ -1,6 +1,7 @@
 package com.kh.md.payroll.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -69,6 +70,12 @@ public class PayrollDaoImpl implements PayrollDao{
 	@Override
 	public List<PayrollOptionMemberVo> selectPayrollOptionMember(SqlSessionTemplate sst, PayrollVo prVo) {
 		return sst.selectList("payrollMapper.selectPayrollOptionMember",prVo);
+	}
+	
+	//급여대장 ( 상태 변경하기 )
+	@Override
+	public int updateCheckStatus(SqlSessionTemplate sst, Map<String, String> checkStatus) {
+		return sst.update("payrollMapper.updateCheckStatus",checkStatus);
 	}
 
 	
