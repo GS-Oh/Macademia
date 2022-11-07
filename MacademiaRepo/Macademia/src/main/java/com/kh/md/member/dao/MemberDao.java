@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.md.bank.vo.BankVo;
 import com.kh.md.member.vo.MemberVo;
 
 public interface MemberDao {
@@ -18,5 +19,9 @@ public interface MemberDao {
 	List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo);
 
 	List<MemberVo> selectListBySearch(SqlSessionTemplate sst, String search);
+
+	List<BankVo> selectBankList(SqlSessionTemplate sst);
+
+	int updateOne(SqlSessionTemplate sst, MemberVo memberVo);
 
 }

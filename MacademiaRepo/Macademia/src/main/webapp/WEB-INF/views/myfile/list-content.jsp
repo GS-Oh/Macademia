@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- sweetAlert2 -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
     
@@ -72,7 +74,7 @@
         font-weight: 700;
     }
     #pagination-area a:hover{
-        background-color: rgb(102, 102, 171);
+        background-color: rgb(176, 171, 216);
         transition: 0.3s;
     }
     .page-btn{
@@ -84,7 +86,7 @@
 
     #file-area{
         /* border: 1px solid black; */
-        height: 67vh;
+        height: 65vh;
         display: grid;
         grid-template-columns: repeat(8,1fr);
         grid-template-rows: repeat(5,1fr);
@@ -103,11 +105,9 @@
         
     }
     .file-slot:hover{
-        width: 120px;
-        height: 120px;
         box-shadow: 10px 10px 20px rgb(80, 80, 80);
         transition: 0.3s;
-        transform: none;
+        transform: scale(1.2);
     }
     .file-slot:active{
         box-shadow: 10px 10px 20px rgb(205, 0, 0);
@@ -178,7 +178,7 @@
             <div class="file-slot">
                 <a href="/md/resources/upload/myfile/${file.updateName }" download>
                     <img src="/md/resources/upload/myfile/${file.updateName }" alt="${fn:substringAfter(file.updateName,'.')}" width="100%" height="100%">
-                    <span>${file.originName }</span>
+                    <span class="file-name">${file.originName }</span> 
                 </a>
                 <i id="x-btn" class="fa-regular fa-circle-xmark" onclick="deleteFile(${file.no})"></i>
             </div>
@@ -186,7 +186,7 @@
     </div>
 
     <div id="search-erea" class="input-group mb-3">
-        <input type="text" id="search-input" class="form-control" name="searchName" value="${searchName}" placeholder="파일명을 입력해주세요">
+        <input type="text" id="search-input" class="form-control"  name="searchName" value="${searchName}" onkeyup="if(window.event.keyCode==13){page(1)}" placeholder="파일명을 입력해주세요">
         <button onclick="page(1)" type="submit" id="search-btn" class="btn btn-primary" >검색</button>
     </div>
 
@@ -254,6 +254,7 @@
             cache:false,
             success:function(result){
                 $('#myfile-content').replaceWith(result);
+                makeShortName();
                 pageBtnColor(1);
                 document.querySelector('#file-area').children[0].classList.add('new-file')
 
@@ -296,7 +297,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "/md/myfile/delete/",
+                    url: "/md/myfile/delete",
                     data: {
                         'fileNo' : fileNo,
                         'searchName' : searchName,
@@ -304,6 +305,7 @@
                     },
                     success: function(response) {
                         $('#myfile-content').replaceWith(response);
+                        makeShortName();
                         pageBtnColor(pno);
                         Swal.fire(
                         '삭제성공',
@@ -325,11 +327,12 @@
     }
 </script>
 
-<!-- 현재페이지 번호 -->
 
+<!-- 현재페이지 번호 -->
 <script>
     let currentPage = '${pv.currentPage}';
 </script>
+
 
 <!-- 페이지버튼 클릭시 리스트 보여주기(ajax) -->
 <script>
@@ -344,6 +347,7 @@
             },
             success: function(response) {
                 $('#myfile-content').replaceWith(response);
+                makeShortName();
                 pageBtnColor(pno);
             },
             error: function (response) {
@@ -357,6 +361,7 @@
     };
 </script>
 
+
 <!-- 현재 페이지버튼에 색상추가 -->
 <script>
     $(window).ready(pageBtnColor('${pv.currentPage}'));
@@ -366,6 +371,24 @@
         for(let i = 0 ; i<pageBtns.length ; i++){
             if(pageBtns[i].innerText==pno){
                 $(pageBtns[i]).addClass('active');
+            }
+        }
+    }
+</script>
+
+
+<!-- 파일명 단축 변경 -->
+<script>
+    $(window).ready(makeShortName());
+
+    function makeShortName(){
+        let fileNameList = $('.file-name');
+        for(let i = 0 ; i<fileNameList.length ; i++){
+            let text = fileNameList[i].innerText;
+            if(text.length>15){
+                let newText = text.substr(0,5)+'...'+text.substr(text.indexOf('.')-3);
+                fileNameList[i].innerText = newText;
+                console.log(fileNameList[i].innerText);
             }
         }
     }

@@ -3,6 +3,7 @@ package com.kh.md.member.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.md.bank.vo.BankVo;
 import com.kh.md.file.vo.FileVo;
 import com.kh.md.member.vo.MemberVo;
 
@@ -13,6 +14,10 @@ public interface MemberService {
 	String findPwd(Map<String, String> map);
 
 	List<MemberVo> findListBySearch(String search);
+
+	List<BankVo> getBankList();
+
+	int editOne(MemberVo memberVo);
 
 
 }

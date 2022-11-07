@@ -94,7 +94,7 @@
         height: 50px;   
         border-radius: 25px;
         border: none;
-        margin-top: 30px;
+        margin: 30px 0;
         background-color: #634fad;
         color: white;
         font-size: 20px;
@@ -103,11 +103,6 @@
         background-color: rgb(70, 44, 148);
         cursor: pointer;
         transition:0.3s ease;
-    }
-    #find-pwd{
-        text-align: center;
-        margin-top: 20px;
-           
     }
     a{
         text-decoration: none;
@@ -130,6 +125,22 @@
         50% {transform: translateX(-5px);}
         75% {transform: translateX(5px);}
     }
+    #etc{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 20px 0;
+    }
+    #save-email > input{
+        transform : scale(1.5);
+    }
+    #find-pwd{
+        text-align: end;
+    }
+    #etc label{
+        color: #44347f;
+    }
+
+
     
 </style>
 </head>
@@ -140,7 +151,7 @@
 	<form action="${root}/member/login" method="post" id="login-form">
 
 	  <div class="input-group">
-	    <input id="email" type="text" class="form-control" name="email" required>
+	    <input id="email" type="text" class="form-control" name="email" value="${cookie.rid.value}" required>
         <label class="input-group-text" for="email">EMAIL</label>
 	  </div>
 	
@@ -148,10 +159,21 @@
 	    <input id="pwd" type="password" class="form-control" name="pwd" required>
         <label class="input-group-text" for="pwd">PWD</label>
 	  </div>
-	  <button type="submit" id="btn">로그인</button>
-      <div id="find-pwd">
-        <a href="${root}/member/findpwd">비밀번호를 잊으셨나요?</a>
+
+      <button type="submit" id="btn">로그인</button>
+
+      <div id="etc">
+        <div id="save-email">
+            <input type="checkbox" name="saveEmail" id="save-email-check">
+            <label for="save-id-check">이메일저장</label>
+        </div>
+        <div id="find-pwd">
+            <a href="${root}/member/findpwd">비밀번호를 잊으셨나요?</a>
+        </div>
       </div>
+
+
+      
 
 	</form>
 </div>

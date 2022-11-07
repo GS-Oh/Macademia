@@ -7,7 +7,9 @@ import java.util.UUID;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.kh.md.bank.vo.BankVo;
 import com.kh.md.file.dao.FileDao;
 import com.kh.md.member.dao.MemberDao;
 import com.kh.md.member.vo.MemberVo;
@@ -52,6 +54,18 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVo> findListBySearch(String search) {
 		List<MemberVo> memberList  = memberDao.selectListBySearch(sst,search);
 		return memberList;
+	}
+
+	@Override
+	public List<BankVo> getBankList() {
+		List<BankVo> bankList  = memberDao.selectBankList(sst);
+		return bankList;
+	}
+
+	@Override
+	public int editOne(MemberVo memberVo) {
+		int result = memberDao.updateOne(sst,memberVo);
+		return result;
 	}
 
 
