@@ -88,5 +88,83 @@ public class BoardDaoImpl implements BoardDao {
 	public int updateAttachment(MultipartFile[] file) {
 		return sst.update("boardMapper.updateAttachment", file);
 	}
+
+	//여기서부터 자유게시판 영역
+	@Override
+	public int insertFreeBoard(BoardVo vo) {
+		return sst.insert("boardMapper.insertFreeBoard", vo);
+	}
+
+	@Override
+	public List<BoardVo> selectListFreeBoard(SearchCriteria searchCriteria) {
+		RowBounds rowBounds = new RowBounds(searchCriteria.getOffSet(), searchCriteria.getSize());
+		log.info(""+rowBounds.getOffset());
+		log.info(""+rowBounds.getLimit());
+		return sst.selectList("boardMapper.selectListFreeBoard", searchCriteria, rowBounds);
+	
+	}
+
+	@Override
+	public BoardVo selectOneFreeBoard(String no) {
+		return sst.selectOne("boardMapper.selectOneFreeBoard", no);
+	}
+
+	@Override
+	public int increaseHitFreeBoard(String no) {
+		return sst.update("boardMapper.increaseHitFreeBoard", no);
+	}
+
+	@Override
+	public int updateOneFreeBoard(BoardVo vo) {
+		return sst.update("boardMapper.updateOneFreeBoard", vo);
+	}
+
+	@Override
+	public int selectCountAllFreeBoard() {
+		return sst.selectOne("boardMapper.selectCountAllFreeBoard");
+		
+	}
+
+	@Override
+	public int deleteFreeBoard(String no) {
+		return sst.update("boardMapper.deleteFreeBoard", no);
+	}
+
+	@Override
+	public List<BoardVo> searchListFreeBoard(PageVo pv, Map<String, String> map) {
+		int offset = (pv.getCurrentPage() -1) * pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset ,pv.getBoardLimit());
+		return sst.selectList("boardMapper.searchListFreeBoard" ,map, rb);
+	}
+
+	@Override
+	public int selectSearchCountFreeBoard(SearchCriteria searchCriteria) {
+		return sst.selectOne("boardMapper.selectSearchCountFreeBoard", searchCriteria);
+	}
+
+	@Override
+	public int insertFileFreeBoard(BoardAttachment attachment) {
+		return sst.insert("boardMapper.insertFileFreeBoard", attachment);
+	}
+
+	@Override
+	public List<BoardAttachment> attachmentListFreeBoard(String no) {
+		return sst.selectList("boardMapper.attachmentListFreeBoard", no);
+	}
+
+	@Override
+	public int updateAttachmentFreeBoard(MultipartFile[] file) {
+		return sst.update("boardMapper.updateAttachmentFreeBoard", file);
+	}
+
+	@Override
+	public List<BoardAttachment> selectThumbnailList() {
+		return sst.selectList("boardMapper.thumbnailList");
+	}
+
+	@Override
+	public int saveThumbnail(BoardVo vo) {
+		return sst.update("boardMapper.saveThumbnailList", vo);
+	}
 }
 

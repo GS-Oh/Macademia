@@ -5,9 +5,9 @@
 	<title>게시판 작성페이지</title>
 	<%@include file="/resources/css/common/common.css" %>
 	<%@include file="/resources/css/board/board.css" %>
-	<link rel="stylesheet" href="../resources/summernote/summernote-lite.css">
-	<script src="../resources/summernote/summernote-lite.js"></script>
-	<script src="../resources/summernote/summernote-ko-KR.js"></script>	
+	<link rel="stylesheet" href="/md/resources/summernote/summernote-lite.css">
+	<script src="/md/resources/summernote/summernote-lite.js"></script>
+	<script src="/md/resources/summernote/summernote-ko-KR.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -25,6 +25,7 @@
 	<script>
 	 $(document).ready(function () {
          //여기 아래 부분
+         $('#board_content').val("${board_data.BOARD_CONTENT}");
          $('#summernote').summernote({
              height: 400,                     // 에디터 높이
               minHeight: null,                      // 최소 높이

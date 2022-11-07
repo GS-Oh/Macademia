@@ -31,4 +31,16 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	public int removeReply(BoardReply replyNo) {
 		return dao.deleteOne(replyNo);
 	}
+	@Override
+	public List<BoardReply> selectListFreeBoard(String no) {
+		return dao.selectListFreeBoard(no);
+	}
+	@Override
+	public int replyWriteFreeBoard(BoardReply vo) {
+		return dao.insertOneFreeBoard(vo);
+	}
+	@Override
+	public int removeReplyFreeBoard(BoardReply replyNo) {
+		return dao.deleteOneFreeBoard(replyNo);
+	}
 }

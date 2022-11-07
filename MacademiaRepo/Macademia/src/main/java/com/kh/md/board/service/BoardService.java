@@ -37,4 +37,32 @@ public interface BoardService {
 		int updateattachment(MultipartFile[] file);
 		//게시글의 파일 삭제
 		void deleteFile(BoardAttachment attachment);
+		
+		//자유게시판 영역
+		int insertFreeBoard(BoardVo vo, HttpServletRequest req);
+		
+		List<BoardVo> selectListFreeBoard(SearchCriteria searchCriteria);
+		
+		BoardVo selectOneFreeBoard(String no);
+		
+		int updateOneFreeBoard(BoardVo vo, HttpServletRequest req);
+		
+		int selectCountAllFreeBoard();
+		
+		int deleteFreeBoard(String no);
+		
+		int increaseHitFreeBoard(String no);
+		
+		List<BoardVo> searchListFreeBoard(PageVo pv, Map<String, String> map);
+		
+		int selectSearchCountFreeBoard(SearchCriteria searchCriteria);
+		
+		List<BoardAttachment> attachmentListFreeBoard(String no);
+		
+		int updateattachmentFreeBoard(MultipartFile[] file);
+		
+		void deleteFileFreeBoard(BoardAttachment attachment);
+		
+		//썸네일
+		List<BoardAttachment> thumbnailList();
 }

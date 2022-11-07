@@ -3,7 +3,7 @@
  
 	 <div class="board_wrap">
 	    <div class="board_title">
-	        <strong>게시판 글 작성</strong> 
+	        <strong>자료공유게시판 글 작성</strong> 
 	    </div>
 	    
 	    <div class="board_write_wrap">
@@ -20,8 +20,7 @@
 	                     <dt>카테고리</dt>
 	                     <dd>
 	                     	<select name="categoryNo">
-	                     		<option value="1" selected="selected">자유게시판</option>
-	                     		<option value="2">자료공유게시판</option>
+	                     		<option value="2" selected="selected">자료공유게시판</option>
 	                     	</select>
 	                     </dd>
 	                 </dl>

@@ -3,7 +3,6 @@
 
  <div class="board_wrap">
         <div class="board_title">
-          <c:if test="${vo.categoryNo eq 1}"><strong>자유게시판의 ${vo.no}번 게시물</strong></c:if>
           <c:if test="${vo.categoryNo eq 2}"><strong>자료공유게시판의 ${vo.no}번 게시물</strong></c:if>
         </div>
           
@@ -35,7 +34,7 @@
                         <dt>첨부파일</dt>
                         <c:if test="${!empty attachments}">
                         <c:forEach var="x" items="${attachments}">
-                        <dd> <a href="/md/resources/upload/board/${x.fileName}">${x.originName}</a> </dd>
+                        <dd> <a href="/md/resources/upload/board/data/${x.fileName}">${x.originName}</a> </dd>
                         </c:forEach>
                         </c:if>
                     </dl>
@@ -72,7 +71,7 @@
                         <!-- 로그인한 사람과 현재 보는 글 보는 사람이 같으면 삭제 버튼 보이도록 해주기  -->
 							
 							<c:if test="${loginMember.name eq x.name}">
-								<a href="/md/reply/delete?replyNo=${x.replyNo}&boardNo=${vo.no}&name=${loginMember.name}"  class="btn btn-outline-danger">삭제하기</a>
+								<a href="/md/reply/data/delete?replyNo=${x.replyNo}&boardNo=${vo.no}&name=${loginMember.name}"  class="btn btn-outline-danger">삭제하기</a>
 							</c:if>
                         </dd>
                      <dl>
@@ -88,7 +87,7 @@
                 <a href="/md/board/main" class="on">목록</a>
                
                <c:if test="${loginMember.no eq vo.userNo}">				
-                <a href="${root}/board/edit/${vo.no}">수정</a>
+                <a href="${root}/board/data/edit/${vo.no}">수정</a>
 				</c:if> 
             </div>
             <!--게시판 테두리  -->
@@ -105,7 +104,7 @@
 			console.log(boardNo);
 			const name = '${sessionScope.loginMember.name}'; 
 			$.ajax({
-				url : "/md/reply/write",
+				url : "/md/reply/data/write",
 				type : "POST",
                 data : {"content" : replyContent,
 						"boardNo" : boardNo,
