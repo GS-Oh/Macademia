@@ -28,4 +28,19 @@ public class BoardReplyDaoImpl implements BoardReplyDao {
 	public int deleteOne (BoardReply replyVo) {
 		return sst.update("boardMapper.removerReply", replyVo);
 	}
+
+	@Override
+	public List<BoardReply> selectListFreeBoard(String no) {
+		return sst.selectList("boardMapper.replyListFreeBoard", no);
+	}
+
+	@Override
+	public int insertOneFreeBoard(BoardReply vo) {
+		return sst.insert("boardMapper.writeReplyFreeBoard", vo);
+	}
+
+	@Override
+	public int deleteOneFreeBoard(BoardReply replyNo) {
+		return sst.update("boardMapper.removerReplyFreeBoard", replyNo);
+	}
 }

@@ -12,5 +12,11 @@ public interface BoardReplyDao {
 	int insertOne(BoardReply vo);
 	
 	int deleteOne (BoardReply replyNo);
+
+	List<BoardReply> selectListFreeBoard(String no);
+
+	int insertOneFreeBoard(BoardReply vo);
+
+	int deleteOneFreeBoard(BoardReply replyNo);
 	
 }

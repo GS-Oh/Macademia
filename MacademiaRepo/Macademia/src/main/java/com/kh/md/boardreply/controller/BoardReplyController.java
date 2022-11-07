@@ -21,22 +21,41 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardReplyController {
 	
 	private final BoardReplyService boardReplyService;
-	
-	@PostMapping("write")
+	//자료공유게시판
+	@PostMapping("data/write")
 	@ResponseBody
 	public int replyWrite(BoardReply vo) {
 		int result = boardReplyService.replyWrite(vo);
 		return result;
 	}
 	
-	@GetMapping("delete")
+	@GetMapping("/data/delete")
 	public String replyRemove(BoardReply replyVo) {
 		log.info(replyVo.toString());
 		String boardNo = replyVo.getBoardNo();
 		int result = boardReplyService.removeReply(replyVo);
 		if(result == 1) {
-			return "redirect:/board/detail/"+ boardNo;
+			return "redirect:/board/data/detail/"+ boardNo;
 		}
-		return "redirect:/board/detail/"+ boardNo;
+		return "redirect:/board/data/detail/"+ boardNo;
+	}
+	
+	//자유게시판
+	@PostMapping("free/write")
+	@ResponseBody
+	public int replyWriteFreeBoard(BoardReply vo) {
+		int result = boardReplyService.replyWriteFreeBoard(vo);
+		return result;
+	}
+	
+	@GetMapping("/free/delete")
+	public String replyRemoveFreeBoard(BoardReply replyVo) {
+		log.info(replyVo.toString());
+		String boardNo = replyVo.getBoardNo();
+		int result = boardReplyService.removeReplyFreeBoard(replyVo);
+		if(result == 1) {
+			return "redirect:/board/free/detail/"+ boardNo;
+		}
+		return "redirect:/board/free/detail/"+ boardNo;
 	}
 }

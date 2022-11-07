@@ -14,4 +14,5 @@ public class BoardVo {
 	private String regdate;
 	private String deleteYn;
 	private MultipartFile[] file;
+	private String thumbnail;
 }

@@ -1,12 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+ 
+	 <div class="board_wrap">
+	    <div class="board_title">
+	        <strong>자유게시판 글 작성</strong> 
+	    </div>
+	    
+	    <div class="board_write_wrap">
+	       <form action="" method="post" enctype="multipart/form-data">
+	         <div class="board_write">
+	             <div class="title">
+	                 <dl>
+	                     <dt>제목</dt>
+	                     <dd><input type="text" placeholder="제목을 입력해 주세요" required="required" name="title"></dd>
+	                 </dl>
+	             </div>
+	             <div class="info">
+	                 <dl>
+	                     <dt>카테고리</dt>
+	                     <dd>
+	                     	<select name="categoryNo">
+	                     		<option value="1" selected="selected">자유게시판</option>
+	                     	</select>
+	                     </dd>
+	                 </dl>
+	                 <dl>
+	                     <dt> 작성자</dt>
+	                     <dd><input name="userNo" type="text" placeholder="작성자 이름" readonly="readonly" value="${loginMember.name}" ></dd>
+	                 </dl>
+	                 <dl>
+	                     <dt>썸네일</dt>
+	                     <dd><input type="file" multiple="multiple" name="file"></dd>
+	                 </dl>
+	             </div>
+	             <div class="cont">
+		        <textarea id="summernote" class="summernote" required="required"  name="content"></textarea>
+	                 
+	             </div>
+	         </div>
+	         <div class="bt_wrap">
+	             <input class="submit-button" type="submit" value="작성"> 
+	             <a href="javascript:history.back();">취소</a>
+	         </div>
+	        </form>
+	    </div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+        
+        
 
-</body>
-</html>
+	

@@ -18,7 +18,7 @@
 	        <div>
 		        <c:forEach items="${boardList}" var="x" >
 			    	<div class="num" >${x.no}</div>
-			    	<div class="title title-center" style="text-align: center;"><a href="${root}/board/detail/${x.no}">${x.title}</a></div>
+			    	<div class="title title-center" style="text-align: center;"><a href="${root}/board/data/detail/${x.no}">${x.title}</a></div>
 			    	<div class="writer">${x.userNo}</div>
 			    	<div class="date">${x.regdate}</div>
 			    	<div class="count">${x.hit}</div>
@@ -29,13 +29,13 @@
 	    <div class="board_page">
 	    <c:set var="URL" value="${pageContext.request.requestURL}" />
 	       <c:if test="${pageVo.startPage ne 1}">
-	    	<a href="/md/board?${queryString}page=${pageVo.startPage - 1}" class="bt prev"><</a>    	
+	    	<a href="/md/board/data?${queryString}page=${pageVo.startPage - 1}" class="bt prev"><</a>    	
     		</c:if>
     	<c:forEach begin="${pageVo.startPage}" end="${pageVo.endPage}" var="i">    		    		    	
-	    	<a href="/md/board?${queryString}page=${i}" class="num">${i}</a>
+	    	<a href="/md/board/data?${queryString}page=${i}" class="num">${i}</a>
     	</c:forEach>
 	    <c:if test="${pageVo.endPage ne pageVo.maxPage}">
-	    	<a href="/md/board?${queryString}page=${pageVo.endPage + 1}" class="bt next">></a>	    
+	    	<a href="/md/board/data?${queryString}page=${pageVo.endPage + 1}" class="bt next">></a>	    
 	    </c:if>	
 	       
 	    </div>
@@ -56,7 +56,7 @@
 	   
 	    <div class="bt_wrap">
 	        <c:if test="${!empty loginMember}">
-	        <a href="/md/board/write" class="on">등록</a>
+	        <a href="/md/board/data/write" class="on">등록</a>
 	        </c:if>
 	    </div>
 	</div>
@@ -70,6 +70,6 @@
 		const keywordValue = document.getElementById('keyword').value;
 		alert(conditionValue);
 		alert(keywordValue);
-	 	location.href = "/md/board?" + conditionValue + "=" + keywordValue;
+	 	location.href = "/md/board/data?" + conditionValue + "=" + keywordValue;
     });
 </script>

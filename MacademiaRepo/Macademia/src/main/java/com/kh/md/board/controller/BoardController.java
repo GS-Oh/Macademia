@@ -50,7 +50,7 @@ public class BoardController {
 	}
 	
 	//자료공유 게시판 화면
-	@GetMapping("")
+	@GetMapping("data")
 	public String dataList(Model model, SearchCriteria searchCriteria) {
 		log.info(searchCriteria.toString());
 		List<BoardVo> boardList = service.selectList(searchCriteria);
@@ -84,7 +84,7 @@ public class BoardController {
 		return sb.toString();
 	}
 	//게시글 상세 조회 화면
-	@GetMapping("detail/{no}")
+	@GetMapping("/data/detail/{no}")
 	public String detail(@PathVariable(required = false) String no, Model model) {
 		BoardVo vo = service.selectOne(no);
 		List<BoardReply> replyVo = replyService.selectList(no);
@@ -96,13 +96,13 @@ public class BoardController {
 	}
 	
 	//게시판 작성 화면
-	@GetMapping("write")
+	@GetMapping("/data/write")
 	public String boardWrite(HttpSession session) {
 		return "board/write";
 	}
 	
 	//게시글 작성
-	@PostMapping("write")
+	@PostMapping("data/write")
 	public String wirte(BoardVo vo, Model model, HttpSession session, HttpServletRequest req) {
 		
 		  MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); 
@@ -115,7 +115,7 @@ public class BoardController {
 		
 		//화면 선택
 		if(result == 1) {
-			return "redirect:/board/";
+			return "redirect:/board/data/";
 		}else {
 			return "error/errorPage";
 		}
@@ -124,7 +124,7 @@ public class BoardController {
 	
 	
 	//게시글 수정 화면
-	@GetMapping("edit/{no}")
+	@GetMapping("/data/edit/{no}")
 	public String edit(@PathVariable String no, Model model) {
 		BoardVo vo = service.selectOne(no);
 		List<BoardAttachment> attachments =  service.attachmentList(no); 
@@ -134,13 +134,13 @@ public class BoardController {
 	}
 		
 		//게시글 수정 로직
-	@PostMapping("edit/{no}")
+	@PostMapping("/data/edit/{no}")
 	public String edit(@PathVariable int no, BoardVo vo, HttpServletRequest req) {
 		vo.setNo(no);
 		int result = service.updateOne(vo, req);
 				
 		if(result == 1) {
-			return "redirect:/board/detail/" + no;			
+			return "redirect:/board/data/detail/" + no;			
 		}else {
 			return "redirect:/";
 		}
@@ -148,12 +148,12 @@ public class BoardController {
 	
 		//게시판 삭제
 		
-	@GetMapping("delete/{no}")
+	@GetMapping("/data/delete/{no}")
 	public String delete(@PathVariable String no, HttpSession session, Model model) {
 		int result = service.delete(no);
 		if(result == 1 ) {
 			//성공 => 알람, 리스트
-			return "redirect:/board/";
+			return "redirect:/board/data/";
 		}else {
 			//실패 => 메세지, 알람페이지
 			return "common/errorPage";
@@ -191,8 +191,7 @@ public class BoardController {
         return jsonObject;
     }
 	//게시글의 업로드 파일 삭제
-	
-	@PostMapping("board/deleteFile")
+	@PostMapping("/data/board/deleteFile")
 	public String deleteFile(BoardAttachment attachment) {
 		service.deleteFile(attachment);
 		return "";
@@ -203,35 +202,37 @@ public class BoardController {
 		public String freeboardList(Model model, SearchCriteria searchCriteria) {
 			log.info(searchCriteria.toString());
 			searchCriteria.setSize(6);
-			List<BoardVo> boardList = service.selectList(searchCriteria);
-			int count = service.selectSearchCount(searchCriteria);
+			List<BoardVo> boardList = service.selectListFreeBoard(searchCriteria);
+			List<BoardAttachment> attachments = service.thumbnailList();
+			int count = service.selectSearchCountFreeBoard(searchCriteria);
 			PageVo pageVo = Pagination.calculate(
 					searchCriteria.getPage(), 
 					searchCriteria.getSize(), 
 					(long)count);
 			log.info(pageVo.toString());
 			model.addAttribute("boardList", boardList);
+			model.addAttribute("attachments", attachments);
 			model.addAttribute("pageVo", pageVo);
 			model.addAttribute("queryString", getQueryString(searchCriteria));
-			return "board/databoard";
+			return "board/freeboard";
 		}
 		
 		//자유게시판 게시글 상세 조회 화면
 		@GetMapping("free/detail/{no}")
 		public String freeboardDetail(@PathVariable(required = false) String no, Model model) {
-			BoardVo vo = service.selectOne(no);
-			List<BoardReply> replyVo = replyService.selectList(no);
-			List<BoardAttachment> attachments =  service.attachmentList(no); 
+			BoardVo vo = service.selectOneFreeBoard(no);
+			List<BoardReply> replyVo = replyService.selectListFreeBoard(no);
+			List<BoardAttachment> attachments =  service.attachmentListFreeBoard(no); 
 			model.addAttribute("vo", vo);
 			model.addAttribute("replyVo", replyVo);
 			model.addAttribute("attachments", attachments);
-			return "board/detail";
+			return "board/freeDetail";
 		}
 		
 		//자유게시판 작성 화면
 		@GetMapping("free/write")
 		public String freeboardWrite(HttpSession session) {
-			return "board/write";
+			return "board/freeWrite";
 		}
 		
 		//자유게시글 작성
@@ -243,12 +244,12 @@ public class BoardController {
 			  vo.setUserNo(no);
 			 
 			//비즈니스 로직
-			int result = service.insertBoard(vo, req);
+			int result = service.insertFreeBoard(vo, req);
 
 			
 			//화면 선택
 			if(result == 1) {
-				return "redirect:/board/";
+				return "redirect:/board/free/";
 			}else {
 				return "error/errorPage";
 			}
@@ -257,23 +258,23 @@ public class BoardController {
 		
 		
 		//자유게시판 게시글 수정 화면
-		@GetMapping("frr/edit/{no}")
+		@GetMapping("free/edit/{no}")
 		public String freeboardEdit(@PathVariable String no, Model model) {
-			BoardVo vo = service.selectOne(no);
-			List<BoardAttachment> attachments =  service.attachmentList(no); 
+			BoardVo vo = service.selectOneFreeBoard(no);
+			List<BoardAttachment> attachments =  service.attachmentListFreeBoard(no); 
 			model.addAttribute("vo", vo);
 			model.addAttribute("attachments", attachments);
-			return "board/edit";
+			return "board/freeEdit";
 		}
 			
 		//자유게시판 게시글 수정 로직
 		@PostMapping("free/edit/{no}")
 		public String freeboardEdit(@PathVariable int no, BoardVo vo, HttpServletRequest req) {
 			vo.setNo(no);
-			int result = service.updateOne(vo, req);
+			int result = service.updateOneFreeBoard(vo, req);
 					
 			if(result == 1) {
-				return "redirect:/board/detail/" + no;			
+				return "redirect:/board/free/detail/" + no;			
 			}else {
 				return "redirect:/";
 			}
@@ -282,10 +283,10 @@ public class BoardController {
 		//자유게시판 삭제		
 		@GetMapping("free/delete/{no}")
 		public String freeboardDelete(@PathVariable String no, HttpSession session, Model model) {
-			int result = service.delete(no);
+			int result = service.deleteFreeBoard(no);
 			if(result == 1 ) {
 				//성공 => 알람, 리스트
-				return "redirect:/board/";
+				return "redirect:/board/free/";
 			}else {
 				//실패 => 메세지, 알람페이지
 				return "common/errorPage";

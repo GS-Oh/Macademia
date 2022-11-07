@@ -52,7 +52,7 @@
 		           
 		            <div class="bt_wrap">
 		                <a class="on" href="#" onclick="return chk_form()" >수정</a> 
-		                <a href="${root}/board/delete/${vo.no}" class="on2">삭제</a>
+		                <a href="${root}/board/data/delete/${vo.no}" class="on2">삭제</a>
 		                <a href="${root}/board/">취소</a>
 		            </div>
 	                </form>
