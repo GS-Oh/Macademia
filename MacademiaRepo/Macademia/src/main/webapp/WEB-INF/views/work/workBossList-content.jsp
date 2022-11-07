@@ -14,13 +14,12 @@
     border:1px solid #6667AB;
     margin-top:30px;
     }
-    
-    #my_work{
+     #my_work2{
     	width:100%;
     	
     	
     }
-    #my_work2{
+    #my_work{
     	width:100%;
     	
     	
@@ -57,10 +56,10 @@
     </style>
     
 <div id="center_menu">
-	<h3>처리한 업무</h3>
+	<h3>내가 요청한 업무</h3>
 	<hr>
 	<div id="work">
-				<table id="my_work">
+					<table id="my_work">
 					
 						<tr>
 							<th>번호</th>
@@ -72,31 +71,30 @@
 						</tr>
 						</table>
 						<table id="my_work2" >
-					 <c:forEach items="${wList}" var="x">
+						 <c:forEach items="${wList}" var="x">
 						    <tr>
 							<td>${x.WNo}</td>
-						 	<td><a href="/md/work/completeDatail/${x.WNo}">${x.WTitle}</td>
+						 	<td><a href="/md/work/bossDetail/${x.WNo}">${x.WTitle}</td>
 							<td>${x.WDate}</td>
 							<td>${x.WDeadLine}</td>
-						 
+						
 						</tr>
    						 </c:forEach>
-					
 				
 				</table>
 				
 				<div id="page-area">
 					<ul id="page">
 						<c:if test="${pv.startPage ne 1}">
-		<li><a href="/md/work/complate/${pv.startPage - 1}" >이전</a></li>
+		<li><a href="/md/work/bossList/${pv.startPage - 1}" >이전</a></li>
 	</c:if>
 	
 	<c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" var="i">
-	  <li> <a href="/md/work/complate/${i}">${i}</a></li> 
+	  <li> <a href="/md/work/bossList/${i}">${i}</a></li> 
 	</c:forEach>
 	
 	<c:if test="${pv.endPage ne pv.maxPage }">
-		<a href="/md/work/complat/${pv.endPage + 1}">다음</a>
+		<a href="/md/work/bossList/${pv.endPage + 1}">다음</a>
 	</c:if>	
 					</ul>
 				</div>

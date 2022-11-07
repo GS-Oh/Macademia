@@ -133,7 +133,7 @@
 	<h3>나의 업무</h3>
 	<hr>
 	<div id="work_top">
-		<h5>업무 요청 제목</h5> <input id="write" type="submit" value="업무완료">
+		<h5>업무 요청 제목</h5>
 		<br>
 		<div class="text"type="text" id="title"name="title">${vo.WTitle}</div>
 	</div>
@@ -204,37 +204,4 @@
 				
 			
 			</div>
-			<script>
-				$('#write').on('click',function(){
-					var result =confirm("업무를 완료 하셨나요?")
-					if(result==1){
-						$.ajax({
-						url:"/md/work/workComplete/${vo.WNo}",
-						data: {data: "data"},
-						method : "POST",
-						success: function(data){
-							console.log("성공")
-							console.log(data)
-							alert("업무가 성공적으로 완료 되었습니다")
-	 				    	 window.location.href = "/md/work/list/1";
-							
-							
-							
-							
-							
-						}
-						,error: function(data){
-						    	console.log("실패");
-						    	console.log(data)
-						    }
-					})
-						
-						
-						
-						
-						
-					}
-				
-				})
-			
-			</script>
+		

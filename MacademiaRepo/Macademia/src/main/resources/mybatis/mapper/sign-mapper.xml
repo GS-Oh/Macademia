@@ -31,6 +31,7 @@
 	</select>
 	
 	<insert id="signWrite">
+	
 	INSERT INTO SIGN
 	(S_NO
 	, E_NO
@@ -44,11 +45,24 @@
 			,#{sTitle}
 			,#{sContent}
 	)
+	<selectKey keyProperty="sign" resultType="string" order="AFTER">
+		SELECT SEQ_SIGN_NO.CURRVAL FROM DUAL
+	</selectKey>
 	
 	</insert>
 	<insert id="insertSignLine">
+	
 	INSERT INTO SIGN_LINE
-	()
+	(SL_NO
+	,E_NO
+	,S_NO
+	,S_LEVEL)
+	VALUES
+	(SEQ_SIGN_LINE_NO.NEXTVAL
+	,#{mNo}
+	,#{sign}
+	,#{sLevel}
+	)
 	
 	</insert>
 	

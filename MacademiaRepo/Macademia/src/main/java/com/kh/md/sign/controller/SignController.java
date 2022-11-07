@@ -105,7 +105,9 @@ public class SignController {
 		slVo.setENo(memberNo);
 		slVo.setSLevel(signFirst);
 		
+		
 		int result =service.insertSignline(slVo);
+		System.out.println();
 		
 		System.out.println("이것은signLine"+line);
 		Gson gson = new Gson();

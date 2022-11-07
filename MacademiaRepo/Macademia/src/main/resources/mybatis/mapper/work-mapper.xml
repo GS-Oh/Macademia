@@ -56,5 +56,169 @@ INSERT INTO WORKORDER
 
 
 </insert>
+
+<select id="getSlaveList" resultType="com.kh.md.work.vo.WorkVo">
+	SELECT 
+	W.W_NO
+	,W.W_BOSS_NO
+	,W.W_SLAVE_NO
+	,W.W_TITLE
+	,W.W_CONTENT
+	,TO_CHAR(W.W_DATE, 'YYYY-MM-DD') AS W_DATE
+	,TO_CHAR(W.W_DEADLINE, 'YYYY-MM-DD') AS W_DEADLINE
+	,W.W_YN
+	,W.W_TYPE
 	
+	,M.NO
+	,M.NAME AS MEMBER_NAME
+	FROM WORKORDER W
+	JOIN MEMBER M ON M.NO= W.W_SLAVE_NO
+	WHERE W.W_SLAVE_NO = #{wSlaveNo} AND W.W_YN='N'
+	ORDER BY W.W_NO DESC 
+	
+
+
+</select>
+
+
+
+
+
+<select id="getBossList" resultType="com.kh.md.work.vo.WorkVo">
+	SELECT 
+	W.W_NO
+	,W.W_BOSS_NO
+	,W.W_SLAVE_NO
+	,W.W_TITLE
+	,W.W_CONTENT
+	,TO_CHAR(W.W_DATE, 'YYYY-MM-DD') AS W_DATE
+	,TO_CHAR(W.W_DEADLINE, 'YYYY-MM-DD') AS W_DEADLINE
+	,W.W_TYPE
+	,W.W_YN
+	,M.NAME AS MEMBER_NAME
+	FROM WORKORDER W
+	JOIN MEMBER M ON M.NO= W.W_BOSS_NO
+	WHERE M.NO = #{memberNo} AND W.W_YN='N'
+	ORDER BY W.W_NO DESC 
+	</select>
+	
+	<select id="slaveOne" resultType="com.kh.md.work.vo.WorkVo">
+		    SELECT 
+	W.W_NO
+	,W.W_BOSS_NO
+	,W.W_SLAVE_NO
+	,W.W_TITLE
+	,W.W_CONTENT
+	,TO_CHAR(W.W_DATE, 'YYYY-MM-DD') AS W_DATE
+	,TO_CHAR(W.W_DEADLINE, 'YYYY-MM-DD') AS W_DEADLINE
+	,W.W_TYPE
+	,M.NO
+	,M.NAME AS SLAVE_NAME
+    ,M2.NAME AS BOSS_NAME
+	FROM WORKORDER W
+	JOIN MEMBER M ON M.NO= W.W_SLAVE_NO
+    JOIN MEMBER M2 ON M2.NO=W.W_BOSS_NO
+	WHERE W.W_NO = #{no}
+	
+	</select>
+	
+	<select id="bossOne" resultType="com.kh.md.work.vo.WorkVo">
+		    SELECT 
+	W.W_NO
+	,W.W_BOSS_NO
+	,W.W_SLAVE_NO
+	,W.W_TITLE
+	,W.W_CONTENT
+	,TO_CHAR(W.W_DATE, 'YYYY-MM-DD') AS W_DATE
+	,TO_CHAR(W.W_DEADLINE, 'YYYY-MM-DD') AS W_DEADLINE
+	,W.W_TYPE
+	,M.NO
+	,M.NAME AS SLAVE_NAME
+    ,M2.NAME AS BOSS_NAME
+	FROM WORKORDER W
+	JOIN MEMBER M ON M.NO= W.W_SLAVE_NO
+    JOIN MEMBER M2 ON M2.NO=W.W_BOSS_NO
+	WHERE W.W_NO = #{no}
+	
+	</select>
+	<update id="workComplete">
+	UPDATE WORKORDER
+			SET
+				W_YN = 'Y'
+			WHERE W_NO = #{no}
+	
+	</update>
+	<delete id="workDelete">
+	DELETE FROM WORKORDER
+	WHERE W_NO = #{no}
+	</delete>
+	<select id="getModify" resultType="com.kh.md.work.vo.WorkVo">
+		   SELECT 
+	W.W_NO
+	,W.W_BOSS_NO
+	,W.W_SLAVE_NO
+	,W.W_TITLE
+	,W.W_CONTENT
+	,TO_CHAR(W.W_DATE, 'YYYY-MM-DD') AS W_DATE
+	,TO_CHAR(W.W_DEADLINE, 'YYYY-MM-DD') AS W_DEADLINE
+	,W.W_TYPE
+	,M.NO
+	,M.NAME AS SLAVE_NAME
+    ,M2.NAME AS BOSS_NAME
+	FROM WORKORDER W
+	JOIN MEMBER M ON M.NO= W.W_SLAVE_NO
+    JOIN MEMBER M2 ON M2.NO=W.W_BOSS_NO
+	WHERE W.W_NO = #{no}
+	
+	</select>
+	<update id="setModify">
+		UPDATE WORKORDER
+			SET
+			W_TITLE = #{wTitle}
+			,W_CONTENT = #{wContent}
+			,W_TYPE = #{wType}
+			,W_DEADLINE = #{wDeadLine}
+			
+			WHERE W_NO = #{wNo}
+	</update>
+
+	<select id="getComplete" resultType="com.kh.md.work.vo.WorkVo">
+		SELECT 
+	W.W_NO
+	,W.W_BOSS_NO
+	,W.W_SLAVE_NO
+	,W.W_TITLE
+	,W.W_CONTENT
+	,TO_CHAR(W.W_DATE, 'YYYY-MM-DD') AS W_DATE
+	,TO_CHAR(W.W_DEADLINE, 'YYYY-MM-DD') AS W_DEADLINE
+	,W.W_YN
+	,W.W_TYPE
+	
+	,M.NO
+	,M.NAME AS MEMBER_NAME
+	FROM WORKORDER W
+	JOIN MEMBER M ON M.NO= W.W_SLAVE_NO
+	WHERE M.NO = #{wSlaveNo} AND W.W_YN='Y'
+	ORDER BY W.W_NO DESC 
+	
+	
+	</select>
+	
+	<select id="selectCountAll" resultType="int">
+		SELECT COUNT(W_NO)
+		FROM WORKORDER
+		WHERE W_YN = 'N' AND W_SLAVE_NO=#{wSlaveNo}
+	</select>
+	
+	<select id="selectBossCountAll" resultType="int">
+		SELECT COUNT(W_NO)
+		FROM WORKORDER
+		WHERE W_BOSS_NO=#{memberNo}
+	</select>
+	
+	<select id="selectCompleteCountAll" resultType="int">
+		SELECT COUNT(W_NO)
+		FROM WORKORDER
+		WHERE W_YN = 'Y' AND W_SLAVE_NO=#{wSlaveNo}
+	</select>
 </mapper>

@@ -8,9 +8,10 @@
 			<ul id="menu">
 				
 			
-			<a href="/md/work/list"><li>나의 업무</li></a>
+			<a href="/md/work/list/1"><li>나의 업무</li></a>
 			<a href="/md/work/write"><li>업무 요청</li></a>
-			<a href="/md/work/complate"><li>처리한 업무</li></a>
+			<a href="/md/work/bossList/1"><li>내가 요청한 업무</li></a>
+			<a href="/md/work/complate/1"><li>처리한 업무</li></a>
 			</ul>
 				
 			</div>
