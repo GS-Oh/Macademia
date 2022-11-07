@@ -1,14 +1,17 @@
 package com.kh.md.payroll.controller;
 
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +51,7 @@ public class PayrollController {
 	
 	// 급여지급내역 ( 메인페이지 화면 )
 	@PostMapping("history")
-	public String history(PayrollVo prVo, HttpSession session, Model model) {
+	public String history(PayrollVo prVo, String payDate,HttpSession session, Model model) {
 		
 		//현재 로그인 한 멤버의 번호로 급여내역 조회하기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
@@ -57,6 +60,7 @@ public class PayrollController {
 		List<PayrollVo> prVoList = ps.selectPayRollList(prVo);
 		
 		if(prVoList != null) {
+			model.addAttribute("payDate", payDate);
 			model.addAttribute("prVoList",prVoList);
 			return "payroll/history";
 		}else {
@@ -125,10 +129,11 @@ public class PayrollController {
 	
 	//급여대장 작성 ( 메인화면 )
 	@GetMapping("create")
-	public String create(String yearValue, String deptValue, Model model) {
+	public String create(String yearValue, String deptValue, String rankValue, Model model) {
 		//검색값유지
 		model.addAttribute("yearValue", yearValue);
 		model.addAttribute("deptValue", deptValue);
+		model.addAttribute("rankValue", rankValue);
 		
 		return "payroll/create";
 	}
@@ -166,9 +171,10 @@ public class PayrollController {
 	
 	
 	//급여대장 관리 ( 선택 옵션에 해당하는 멤버 불러오기 ) 
-	@PostMapping("management")
+	@PostMapping("management" )
 	public String management(PayrollVo prVo, Model model) {
 		
+				
 		List<PayrollVo> prVoList = ps.selectPayrollOption(prVo);
 		
 		if( prVoList != null) {
@@ -178,7 +184,6 @@ public class PayrollController {
 			model.addAttribute("yearValue", prVo.getPayDate());
 			model.addAttribute("deptValue", prVo.getDeptNo());
 			model.addAttribute("rankValue", prVo.getRankNo());
-			
 			return "payroll/management";
 			
 			
@@ -207,7 +212,7 @@ public class PayrollController {
 		int result = ps.insertSalaryBook(prVo);
 		
 		if(result == 1) {
-			return "redirect:/payroll/create?yearValue="+ prVo.getPayDate() +"&deptValue=" + prVo.getDeptNo();
+			return "redirect:/payroll/create?yearValue="+ prVo.getPayDate() +"&deptValue=" + prVo.getDeptNo()+"&rankValue=" + prVo.getRankNo();
 		}else {
 			return "";
 		}
@@ -215,12 +220,9 @@ public class PayrollController {
 	}
 	
 	
-	//급여대장 관리 ( 상태 변경하기 )
+	//급여대장 관리 ( 상태 변경하기-ALERT으로 요청 )
 	@PostMapping("checkStatus/{checkSt}/{salNo}")
-	public String checkStatus( @PathVariable String checkSt, @PathVariable String salNo) {
-		
-		System.out.println(salNo);
-		System.out.println(checkSt);
+	public String checkStatus( @PathVariable String checkSt, @PathVariable String salNo, String stFormDate ,String stDeptName, Model model) {
 		
 		Map<String, String> checkStatus = new HashMap<String, String>();
 		checkStatus.put("checkSt", checkSt);
@@ -229,7 +231,10 @@ public class PayrollController {
 		int result = ps.updateCheckStatus(checkStatus);
 		
 		if(result == 1) {
-			return "redirect:/payroll/management";
+			//검색값유지
+			model.addAttribute("yearValue", stFormDate);
+			model.addAttribute("deptValue", stDeptName);
+			return "payroll/management";
 		}else{
 			return "";
 		}

@@ -22,7 +22,7 @@
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
 			justify-items: center;
-			align-items : center;
+			align-items: center;
 		}
 
 		#note-header-area > a{
@@ -156,6 +156,14 @@
 			font-size: 1.5rem;
 		}
 
+
+		#detail-img-file {
+			height : 150px;
+			width : 150px;
+			padding-bottom: 10px;
+		}
+
+
 		/* #1315a6 #6667AB */
     </style>
 </head>
@@ -169,6 +177,7 @@
 		<aside>		
 			<%@ include file="/WEB-INF/views/messenger/commonAside.jsp" %>
 		</aside>        
+
         <main>
 
            <!--  -->
@@ -188,7 +197,7 @@
 					</div>
 				</a>
 				
-				<a href="/md/messenger/noteReceiveBox">
+				<a href="/md/messenger/noteSendBox">
 					<div class="header-area-content">
 						<i class="fas fa-sync-alt" style="font-size : 60px;"></i>
 						<h5>새로고침</h5>
@@ -210,7 +219,7 @@
 					<div style="width: 60%;">
 						<select name="menu" id="" >
 							<option value="sendName">보낸사람</option>
-							<option value="receiveName">받은사람</option>
+							<!-- <option value="receiveName">받은사람</option> -->
 							<option value="title">제목</option>
 							<option value="comment">내용</option>
 						</select>
@@ -229,7 +238,7 @@
 			<div id="note-info-area">
 
 				<div class="info-header"><input type="checkbox"></div>
-				<div class="info-header">보낸사람</div>
+				<div class="info-header" >보낸사람</div>
 				<div class="info-header" style="display: none;">받은사람</div>
 				<div class="info-header">제목</div>
 				<div class="info-header">날짜</div>
@@ -239,21 +248,25 @@
 				<!-- 쪽지 수 만큼 여기 반복 -->
 				<c:forEach items="${mnVoList}" var="mnVo">
 				
-					<c:if test="${msgVo.msgNo eq mnVo.receiveNo}">			
+					<c:if test="${msgVo.msgNo eq mnVo.receiveNo}">		
 						<div class="msg-noteNo" style="display:none;">${mnVo.noteNo}</div>
+						<div class="msg-fileName" style="display: none;">/md/resources/upload/messenger/${mnVo.fileName}</div>
+						<div class="msg-originName" style="display: none;">${mnVo.originName}</div>
+
+
 						<div class="info-content">
 							<div><input type="checkbox" class="msg-checkBox" name="msg-checkBox"></div>
-							<div class="msg-sender">${mnVo.sendName}</div>
-							<div class="msg-receive" style="display: none;">${mnVo.receiveName}</div>
+							<div class="msg-sender" style="display: none;">${mnVo.sendName}</div>
+							<div class="msg-receive" >${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
 							<div class="msg-content">${mnVo.content}</div>
 							<div>
-							<c:if test="${not empty mnVo.fileName }">
-								<a href="/md/messenger/download/${mnVo.fileName}" target='_blank'>파일있음</a>
+							<c:if test="${not empty mnVo.fileName}">
+								<a href="/md/messenger/download/${mnVo.fileName}/${mnVo.originName}" target='_blank'>파일있음</a>
 							</c:if>
 							</div>
-							<div class="msg-fileName" style="display: none;">/md/resources/upload/messenger/${mnVo.fileName}</div>
+							
 						</div>
 					</c:if>
 					
@@ -267,7 +280,7 @@
 
 				<div class="detail-area-title">보낸 사람</div>
 				<div class="detail-area-content" id="detail-sender"></div>
-				<div class="detail-area-title">받은 사람</div>
+				<div class="detail-area-title">받은 사람(나)</div>
 				<div class="detail-area-content" id="detail-receive"></div>
 				<div class="detail-area-title">제목</div>
 				<div class="detail-area-content" id="detail-title"></div>
@@ -279,15 +292,12 @@
 				<div class="detail-area-title">내용</div>
 				<div class="detail-area-content" id="detail-content"></div>
 				<div class="detail-area-title">첨부파일</div>
-				<div class="detail-area-content" id="detail-etc-file"><img src="" alt="" id="detail-img-file" height="150px" width="150px"></div>
+				<div class="detail-area-content" ><img src="" alt="-" id="detail-img-file" ><span  id="detail-etc-file"></span></div>
 				
 			</div>
 			
 			
-			<!-- <div class="msg-fileName">${mnVo.fileName}</div> -->
 			
-			<!-- <div class="detail-area-title">받은 날짜</div>
-			<div class="detail-area-content" id="detail-receiveDate">1</div> -->
 
 
         </main>
@@ -316,6 +326,7 @@
 		const msgTitle = document.querySelectorAll('.msg-title');
 		const msgSendDate = document.querySelectorAll('.msg-sendDate');
 		const msgFile = document.querySelectorAll('.msg-fileName');
+		const msgOriginFile = document.querySelectorAll('.msg-originName');
 		const msgContent = document.querySelectorAll('.msg-content');
 
 
@@ -331,6 +342,8 @@
 		const repleHref = document.querySelector('#note-reple-area');
 		const deleteHref = document.querySelector('#note-delete-area');
 
+		
+		
 		for(let i=0; i<content.length; ++i){
 
 			content[i].addEventListener('click', function(){
@@ -349,37 +362,51 @@
 				
 				
 				let fileStr = msgFile[i].innerText;
-							
-				let fileStrDot = fileStr.substring((fileStr.lastindexOf('.')));
+				let fileStrDot = fileStr.substring((fileStr.lastIndexOf('.')));
 				
-				if(fileStrDot.equals('jpg')){
+				if(fileStrDot == ".jpg" || fileStrDot == ".png"){
+
+					detailEtcFile.innerText = "";
+					detailImgFile.src =  fileStr;
+
+				}else if(fileStr == '/md/resources/upload/messenger/'){
 					
-					detailImgFile.src =  msgFile[i].innerText;
-				}else {
+					detailEtcFile.innerText = "";
+					detailImgFile.src =  "";
 					
-					detailEtcFile.innerText = msgFile[i].innerText;
+				}else{
+
+					detailImgFile.src =  "";
+					detailEtcFile.innerText = msgOriginFile[i].innerText;
+
 				}
 				
 				
 				if(msgCheckBox[i].checked){
 					repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
 					deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
+					alert(cntCheckbox);
 				}
-				
-				
+
 			});	
 		};
 	
-
 		//쪽지 1개만 선택했을때 답장 가능하도록 해주기
 		repleHref.addEventListener('click',function(){
 			const cntCheckbox = $("input[name=msg-checkBox]:checked").length;
+			
 			if(cntCheckbox > 1){
 				repleHref.href = "";
 				deleteHref.href = "";
 				alert('하나의 쪽지만 선택해 주세요 ^-^');
 			}
 		});
+
+
+
+
+
+
 	</script>
 	
 

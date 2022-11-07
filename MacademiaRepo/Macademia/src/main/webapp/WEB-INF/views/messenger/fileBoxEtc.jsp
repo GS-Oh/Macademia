@@ -103,7 +103,6 @@
 					
 					<div  class="etc-content-file" data-bs-toggle="modal" data-bs-target="#myModal">
 						
-	                    <!-- <div> <img src="" alt="" width="40px" height="40px"></div>  -->
 	                    
 	                    <i class="file-img-area" style="font-size:36px"></i>
 	                    

@@ -146,7 +146,7 @@
                         <select class="form-select form-select-lg" name="payDate" id="month-selector">
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
-                            <option value="2011">2021</option>
+                            <option value="2021">2021</option>
                             <option value="2022" selected>2022</option>
                         </select>
                         <input class="btn btn-outline-dark btn-lg" type="submit" value="조회">
@@ -231,10 +231,23 @@
 
 
 
-
-
-
 </body>
+
+<!-- 검색 값 유지 -->
+<script>
+
+	const monthSelector = document.querySelector('#month-selector');
+	const payValue = '${payDate}';
+	
+	for (let i=0; i<monthSelector.options.length; i++){  
+			if(monthSelector.options[i].value == payValue){
+				monthSelector.options[i].selected = true;
+			};
+	};
+	
+	
+</script>
+
 
 <script>
 

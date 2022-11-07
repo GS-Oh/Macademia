@@ -61,6 +61,7 @@
 
 	<c:if test="${checkDownload eq 1}">
 		<script>
+			
 			swal({
 			title: "파일저장완료!",
 			text: "Click button to close the window.",
@@ -68,10 +69,11 @@
 			button: "쪽지함으로 돌아가기",
 			})
 			.then((willDelete) => {
-			if (willDelete) {
-				window.close();
-			} 
+				if (willDelete) {
+					window.close();
+				} 
 			});
+			
 		</script>
 		
 	</c:if>
@@ -83,14 +85,15 @@
 		<div class="card-header"><h1>파일 다운로드 받기</h1></div>
 		
 		
-		<c:if test="${checkFileDot eq 'jpg' || dot eq '.jpg' || dot eq '.png'}">
+		<c:if test="${checkFileDot eq 'imgFile' || dot eq '.jpg' || dot eq '.png'}">
 			<div class="card-body"><div id="download-img-area"><img id="dot-image-area" src="/md/resources/upload/messenger/${fileName}" alt="" width="100%" height="100%"></div></div>
 		</c:if>
 		
 		
-		<c:if test="${checkFileDot eq 'etc'|| ( not empty dot && (dot ne '.jpg' || dot ne '.png')) }">
-			<div class="card-body"><div id="download-img-area"><img src="/md/resources/upload/messenger/download.jpg" alt="" width="100%" height="100%"></div></div>
+		<c:if test="${checkFileDot eq 'etc' && ( not empty dot && (dot ne '.jpg' || dot ne '.png')) }">
+			<div class="card-body"><div id="download-img-area"><img src="/md/resources/upload/messenger/download.jpg" alt="파일저장완료" width="100%" height="100%"></div></div>
 		</c:if>
+		
 		
 		
 		<div><h5>${originName}</h5></div>	

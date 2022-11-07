@@ -148,6 +148,7 @@
             	<input type="hidden" name="targetNo" value="${prVo.no}">
             	<input type="hidden" name="payDate" value="${prVo.payDate}">
             	<input type="hidden" name="deptNo" value="${prVo.deptNo}">
+            	<input type="hidden" name="rankNo" value="${prVo.rankNo}">
                 <div class="main-table-grid">
                     <h4>보수</h4>
                     <div>보수계</div>

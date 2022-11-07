@@ -215,7 +215,7 @@
 
 			<!--  -->
 			<div id="note-search-area">
-				<form action="/md/messenger/note/searchReceive" method="post">
+				<form action="/md/messenger/note/searchSend" method="post">
 					<div style="width: 60%;">
 						<select name="menu" id="" >
 							<!-- <option value="sendName">보낸사람</option> -->
@@ -248,7 +248,7 @@
 				<!-- 쪽지 수 만큼 여기 반복 -->
 				<c:forEach items="${mnVoList}" var="mnVo">
 				
-					<c:if test="${msgVo.msgNo eq mnVo.msgNo}">			
+					<c:if test="${msgVo.msgNo eq mnVo.msgNo}">		
 						<div class="msg-noteNo" style="display:none;">${mnVo.noteNo}</div>
 						<div class="msg-fileName" style="display: none;">/md/resources/upload/messenger/${mnVo.fileName}</div>
 						<div class="msg-originName" style="display: none;">${mnVo.originName}</div>
@@ -256,13 +256,13 @@
 
 						<div class="info-content">
 							<div><input type="checkbox" class="msg-checkBox" name="msg-checkBox"></div>
-							<div class="msg-sender" style="display: none;">${mnVo.sendName} (나)</div>
+							<div class="msg-sender" style="display: none;">${mnVo.sendName}</div>
 							<div class="msg-receive" >${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
 							<div class="msg-content">${mnVo.content}</div>
 							<div>
-							<c:if test="${not empty mnVo.fileName }">
+							<c:if test="${not empty mnVo.fileName}">
 								<a href="/md/messenger/download/${mnVo.fileName}/${mnVo.originName}" target='_blank'>파일있음</a>
 							</c:if>
 							</div>
@@ -278,7 +278,7 @@
 			<!--  -->
 			<div id="note-detail-area">
 
-				<div class="detail-area-title">보낸 사람</div>
+				<div class="detail-area-title">보낸 사람(나)</div>
 				<div class="detail-area-content" id="detail-sender"></div>
 				<div class="detail-area-title">받은 사람</div>
 				<div class="detail-area-content" id="detail-receive"></div>
@@ -297,10 +297,7 @@
 			</div>
 			
 			
-			<!-- <div class="msg-fileName">${mnVo.fileName}</div> -->
 			
-			<!-- <div class="detail-area-title">받은 날짜</div>
-			<div class="detail-area-content" id="detail-receiveDate">1</div> -->
 
 
         </main>
