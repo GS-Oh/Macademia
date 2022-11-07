@@ -66,6 +66,12 @@
 				FROM DUAL
 			</foreach>) A
 	</insert>
+	<update id="signFirst">
+		UPDATE SIGN_LINE
+		SET 
+		S_STEP = 'Y'
+		WHERE E_NO = #{no}
+	</update>
 
 
 </mapper>

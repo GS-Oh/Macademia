@@ -8,7 +8,7 @@ public class SignLineVo {
 	private String eNo;
 	private String sNo; 
 	private String sStep;
-	private String sLevel;
+	private int sLevel;
 
 
 }

@@ -42,9 +42,7 @@ public class SignController {
 	public String signWrtie(Model model, HttpSession session) {
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
-		System.out.println("로그인한" +loginMember);
 		List<MemberVo> memberList = service.getMemberAll();
-		System.out.println(memberList);
 		model.addAttribute("memberList", memberList);
 		
 		return "/sign/write";
@@ -63,23 +61,26 @@ public class SignController {
 	@ResponseBody
 	public List<MemberVo> deptList(HttpServletRequest req ) {
 		String dept = req.getParameter("dept");
-		System.out.println("뎁트코드는" +dept);
 		List<MemberVo> list = service.getDeptMember(dept);
-		System.out.println(list);
 		
 		return list;
 		
 	}
 	@PostMapping("signWrite")
 	@ResponseBody
-	public int signWrite(HttpServletRequest req,HttpSession session) {
+	public int signWrite(HttpServletRequest req,HttpSession session,String line) {
 		String  title= req.getParameter("title");
 		String  type= req.getParameter("type");
 		String  content= req.getParameter("content");
 		String  sTypeNo= req.getParameter("sTypeNo");
-		String[] line = req.getParameterValues("line");
-		System.out.println(line);
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		String loginMemberNo = loginMember.getNo();
+		ArrayList<String> al = new ArrayList<String>();
+		al.add(loginMemberNo);
+		
+		Gson gson = new Gson();
+		ArrayList<String> a2 = gson.fromJson(line, ArrayList.class);
+		/* String[] line = req.getParameterValues("line"); */
 		String no = loginMember.getNo();
 		
 		SignVo vo = new SignVo();
@@ -87,17 +88,14 @@ public class SignController {
 		vo.setSTypeNo(type);
 		vo.setSContent(content);
 		vo.setENo(no);
-		vo.setSTypeNo("1");
-	
-		int result = service.signWrite(vo, line);
-		System.out.println(result);
-		
+		vo.setSTypeNo(sTypeNo);
+		al.addAll(a2);
+		int result = service.signWrite(vo, al);
 		SignVo sVo = new SignVo();
 		String sNo = sVo.getSign();
 		SignLineVo slVo = new SignLineVo();
 		slVo.setSNo(sNo);
-		System.out.println(slVo.getSNo()+"이게 가져온 값입니다..");
-		
+		int result2 = service.signFirst(loginMemberNo);
 		
 		return 1;
 		

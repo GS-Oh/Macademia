@@ -34,6 +34,11 @@ public class SignDao {
 		return sst.insert("signMapper.insertSignLine",lineList);
 	}
 
+	public int signFirst(SqlSessionTemplate sst, String loginMemberNo) {
+		// TODO Auto-generated method stub
+		return sst.update("signMapper.signFirst", loginMemberNo);
+	}
+
 	
 
 }

@@ -354,7 +354,7 @@ $("#select_complete").on('click',function(){
    let rankHtml;
     let nameHtml;
     let markHtml;
-   let seq = 1;
+   var seq = 1;
   
         $('#select_right option').each(function () {
           var selected = $(this).val();
@@ -504,7 +504,7 @@ $('#approver-submit').on('click', function () {
             type:type,
             content:content,
             sTypeNo : "1",
-            line: approverVal
+            line: JSON.stringify(approverVal)
         };
         console.log(param);
         $.ajax({

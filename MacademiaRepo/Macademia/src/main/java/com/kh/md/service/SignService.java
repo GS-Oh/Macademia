@@ -35,30 +35,40 @@ public class SignService {
 	}
 
 
-//tqanjdla뭐임ㅅㅂㅈㄴ어이없 아아...!!!!
+
 	
-	public int signWrite(SignVo vo, String[] line) {
+	public int signWrite(SignVo vo, ArrayList al) {
 		//문서 작성함
+		int slNo = 0;
 		int result = dao.signWrite(sst,vo);
+		int level = 1;
 		System.out.println(vo.getSNo());
 		
 		List<SignLineVo> lineList = new ArrayList<SignLineVo>();
-		
-		if(line != null) {
-			for(int i=0; i<line.length; i++) {
+		if(al != null) {
+			for(int i=0; i<al.size(); i++) {
+				
 				SignLineVo slVo = new SignLineVo();
 				slVo.setSNo(vo.getSNo());
-				slVo.setENo(line[i]);
-				slVo.setSLevel("1");
+				slVo.setENo((String) al.get(i));
+				slVo.setSLevel(level);
+				level+=1;
 				
 				lineList.add(slVo);
 			}
 			System.out.println(lineList);
-			int slNo = dao.insertSignline(sst, lineList);
+		 slNo = dao.insertSignline(sst, lineList);
+		 
 		}
 //		System.out.println(slVo.getSNo()); 
 //		System.out.println(slNo);
 		return 1; 
+	}
+
+
+	public int signFirst(String loginMemberNo) {
+		// TODO Auto-generated method stub
+		return dao.signFirst(sst,loginMemberNo);
 	}
 
 
