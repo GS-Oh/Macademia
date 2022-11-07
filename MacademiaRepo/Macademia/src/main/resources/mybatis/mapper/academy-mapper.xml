@@ -137,4 +137,15 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<insert id="insertCheckin">
+		BEGIN
+		<foreach collection="inputMap" item="m">
+			INSERT INTO STUDENT_ROLL (NO, STUDENT_NO, CLASS_NO, CHECK_IN)
+			VALUES(SEQ_STUDENT_ROLL_NO.NEXTVAL, #{m.studentNo}, #{m.classNo}, SYSDATE)
+		</foreach>
+		END;
+	</insert>
+	
+	
+	
 </mapper>

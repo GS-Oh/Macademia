@@ -132,6 +132,12 @@ public class AcademyDaoImpl implements AcademyDao{
 		return sst.selectList("academyMapper.selectListByMemNo", memberNo);
 	}
 
+	//수강생 입실시간 인서트
+	@Override
+	public int insertTime(SqlSessionTemplate sst, Map<String[], String> inputMap) {
+		return sst.insert("academyMapper.insertCheckin", inputMap);
+	}
+
 
 
 	

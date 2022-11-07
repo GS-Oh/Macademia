@@ -284,7 +284,7 @@
 	                                            <div><label for="student">김철수</label></div>
 	                                        </div> -->
 	                                    </div>
-                                        <div class="student-list-bot"><button class="time-input-btn">시간입력</button></div>
+                                        <div class="student-list-bot"><button class="time-input-btn">입실체크</button></div>
 	                                </div>
 	                                <div></div>
 	                                <div></div>
@@ -421,24 +421,40 @@
 
 <script>
     $('.time-input-btn').on('click', function(){
-        let checkedStudents = $('input:checkbox[class=checkEach]:checked').val();
 
-            console.log($('input:checkbox[class=checkEach]:checked').val());
-            console.log($('input:checkbox[class=checkEach]:checked').length);
+        let classNo = $('input:hidden').val();
+        console.log('classNo : ' + $('input:hidden').val());
 
-        $.ajax({
-            method : 'get',
-            url : '${root}/academy/time',
-            data : {
-                checkedStudents : JSON.stringify(checkedStudents)
-            },
-            success : function(){
-                console.log('success!');
-            },
-            error : function(){
-                console.log('time-input failed!');
-            }
+        let checkedStudents = [];
+
+        $('input:checkbox[class=checkEach]:checked').each(function(i){
+            checkedStudents.push($(this).val());
         });
+
+            console.log(checkedStudents);
+
+        if(checkedStudents.length != 0){
+            $.ajax({
+                method : 'post',
+                url : '${root}/academy/time',
+                data : {
+                    "studentNo" : JSON.stringify(checkedStudents),
+                    "classNo" : classNo
+                },
+                success : function(x){
+                    console.log('success!');
+                    console.log(x);
+                },
+                error : function(){
+                    console.log('time-input failed!');
+                }
+            });
+        }else{
+            Swal.fire({
+                icon: 'warning',
+                title: '수강생을 선택해주세요!'
+            });
+        }
     });
    
 </script>
