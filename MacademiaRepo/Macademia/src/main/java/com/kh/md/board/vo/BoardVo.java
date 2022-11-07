@@ -1,17 +1,17 @@
 package com.kh.md.board.vo;
-
-import java.time.LocalDate;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
 @Data
 public class BoardVo {
-	public int no;
-	public String userNo;
-	public String categoryNo;
-	public String title;
-	public String content;
-	public String hit;
-	public String regdate;
-	public String status;
+	private int no;
+	private String userNo;
+	private String categoryNo;
+	private String title;
+	private String content;
+	private String hit;
+	private String regdate;
+	private String deleteYn;
+	private MultipartFile[] file;
 }

@@ -25,18 +25,31 @@
 			                        <dd><input type="text" placeholder="OO게시판" value="자료공유게시판" readonly="readonly"></dd>
 			                        </c:if>
 			                    </dl>
-			                    <dl>
-			                        <dt>첨부파일</dt>
+			                    <dl>  
+			                        <dt>첨부파일</dt>         
+			                        <!--첨부파일 없을 시  -->
 			                        <dd><input type="file" placeholder="첨부파일" name="file"></dd>
+			                       	
 		                    	</dl>
 		                	</div>
-		                <div class="info">
-		                   
-		                </div>
+			                        
+		                
 		                <div class="cont">
 		                    <textarea placeholder="내용 입력" id="summernote" class="summernote" name="content">${vo.content }</textarea>
 		                </div>
 		            </div>
+		           
+		            <!--첨부파일 있다면  -->
+                      <div class="title">
+                      	<strong>첨부파일</strong>
+                      	<c:if test="${!empty attachments}">
+                      		<c:forEach var="x" items="${attachments}">
+                      		<a class="" href="/md/resources/upload/board/${x.fileName}">${x.originName}</a>
+                      		<a style="color: red" href="/md/board/delete/?fileName=${x.fileName}&boardNo=${x.boardNo}">삭제</a>
+                      		</c:forEach>
+                       </c:if>
+                      </div>
+		           
 		            <div class="bt_wrap">
 		                <a class="on" href="#" onclick="return chk_form()" >수정</a> 
 		                <a href="${root}/board/delete/${vo.no}" class="on2">삭제</a>
@@ -46,9 +59,11 @@
 		        </div>
 		    </div>
 		    
+		    
+		    
 		    <script>
 			function chk_form() {
-			document.getElementById('frm').submit();
+				document.getElementById('frm').submit();
 			}
 			</script>
     

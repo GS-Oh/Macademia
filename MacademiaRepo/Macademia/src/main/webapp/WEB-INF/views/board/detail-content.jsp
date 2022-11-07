@@ -31,6 +31,14 @@
                         <dt>조회</dt>
                         <dd>${vo.hit}</dd>
                     </dl>
+                     <dl>
+                        <dt>첨부파일</dt>
+                        <c:if test="${!empty attachments}">
+                        <c:forEach var="x" items="${attachments}">
+                        <dd> <a href="/md/resources/upload/board/${x.fileName}">${x.originName}</a> </dd>
+                        </c:forEach>
+                        </c:if>
+                    </dl>
                 </div>
                 <div class="cont" style="height: 1000px ">
                     ${vo.content}
@@ -39,36 +47,38 @@
             
             <!--댓글 작성 화면  -->
             <div class="board_view">
-             	<div>
-				<textarea style="width:100%;" id="reply-content" name="content"></textarea>
-					<p style="text-align: right;">
-						<button id="reply-btn" class="reply"  >댓글작성</button>
-					</p>
-				</div>
+             	<c:if test="${!empty loginMember}">
+	             	<div>
+					<textarea style="width:100%;" id="reply-content" name="content"></textarea>
+						<p style="text-align: right;">
+							<button id="reply-btn" class="reply"  >댓글작성</button>
+						</p>
+					</div>
+             	</c:if>
              	<!--댓글 목록 화면  -->
              	<div class="cont">
            		<c:if test="${empty replyVo }">
-					<h2 id="reple-empty-text">현재 댓글이 없습니다. 댓글을 입력해 주세요</h2>
+					<h2 align="center" id="reple-empty-text">현재 댓글이 없습니다. 댓글을 입력해 주세요</h2>
 				</c:if>
            		
            		
            		<c:forEach items="${replyVo}" var="x" >
+                    <div class="info">
                     <dl>
                         <input type="hidden" value="${x.replyNo}" id="${x.replyNo}">
-                        <dd>${x.name} 
-                        
+                        <dt>${x.name}</td>
+                        <dd> ${x.regdate} 
+                      </dl>  
                         <!-- 로그인한 사람과 현재 보는 글 보는 사람이 같으면 삭제 버튼 보이도록 해주기  -->
 							
 							<c:if test="${loginMember.name eq x.name}">
 								<a href="/md/reply/delete?replyNo=${x.replyNo}&boardNo=${vo.no}&name=${loginMember.name}"  class="btn btn-outline-danger">삭제하기</a>
 							</c:if>
-                        
-                        
                         </dd>
-                        <dd>${x.content}</dd>
-                        <dd>${x.regdate}</dd>
+                     <dl>
+                     	<dt>${x.content}</dd>
                     </dl>
-                   
+                   </div>
                      </c:forEach>
              	</div>
              </div>   

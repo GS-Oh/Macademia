@@ -10,6 +10,8 @@ public class SearchCriteria {
 	private String writer;
 	private String content;
 	
+	
+	
 	public int getPage() {
 		return this.page <= 1 ? 1 : page;
 	}
