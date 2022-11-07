@@ -21,7 +21,8 @@
 			        JOIN RANK R ON R.NO = A.RANK_NO
 			) B
 			LEFT OUTER JOIN SALARY_BOOK S ON B.NO = S.TARGET_NO
-			WHERE S.PAY IS NULL
+			WHERE (S.PAY_DATE IS NULL OR NOT S.PAY_DATE = #{payDate})
+			
 			<if test="deptNo != 0">
 				AND B.DEPT_NO = #{deptNo}
 			</if>
