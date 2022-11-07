@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,13 +39,75 @@ public class AcademyController {
 	}
 
 //화면 보여주기-----------------------------------------
-	@GetMapping("roll")
-	public String roll() {
+	@GetMapping("roll/{pno}")
+	public String roll(Model model, HttpSession session, @PathVariable int pno, @RequestParam(value="categoryNo", required=false) String categoryNo, 
+															@RequestParam(value="keyword", required=false) String keyword) {
+		
+		//로그인한 멤버가 강사의 강의 조회
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
+		if(loginMember != null) {
+			String memberNo = loginMember.getNo();
+			
+			List<ClassVo> classByInstructor = service.selectClassByInstructor(memberNo);
+			
+			if(classByInstructor != null) {
+				
+				model.addAttribute("classByInstructor", classByInstructor);
+			}else {
+				System.out.println("classByInstructor == null!");
+			}
+		}else {
+			System.out.println("로그인멤버 null!");
+		}
+					
+		//검색창의 카테고리 조회해오기
+		List<CategoryVo> categoryList = service.showCategory();
+
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("no", categoryNo);
+		map.put("keyword", keyword);
+		
+		//# of total class
+		int totalCount = service.countTotalClass(map);
+		
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		List<ClassVo> classList = service.selectClassList(pvo, map);
+		
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("classList", classList);
+		model.addAttribute("pvo", pvo);
+		model.addAttribute("keyword", keyword);
+		
 		return "academy/roll";
 	}
 	
-	@GetMapping("roll/detail")
-	public String rollDetail() {
+	//ajax용 - 수강생 가져오기
+	@GetMapping("my/{cno}")
+	@ResponseBody
+	public List<StudentVo> getMyEnrolledStudents(@PathVariable int cno) {
+		
+		System.out.println("ajax요청받음!");
+		List<StudentVo> svo = service.selectEnrolledStudent(cno);
+		return svo;
+	}
+	//ajax용 - 수강생 가져오기
+//	@GetMapping("time")
+//	public String inputTime() {
+//		
+//		service.insertTime()
+//		return "";
+//	}
+	
+	@GetMapping("roll/detail/{cno}")
+	public String rollDetail(Model model, @PathVariable int cno) {
+		
+		List<StudentVo> svo = service.selectEnrolledStudent(cno);
+		ClassVo cvo = service.selectOneClass(cno);
+		
+		model.addAttribute("svo", svo);
+		model.addAttribute("cvo", cvo);
 		return "academy/roll-detail";
 	}
 	
@@ -54,16 +117,23 @@ public class AcademyController {
 	}
 	
 	@GetMapping("search/{pno}")
-	public String search(Model model, @PathVariable int pno) {
+	public String search(Model model, @PathVariable int pno, @RequestParam(value="searchBy", required=false) String search, 
+																@RequestParam(value="keyword", required=false) String keyword) {
 		
-		int totalCount = service.countTotalStd();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("search", search);
+		map.put("keyword", keyword);
+		
+		int totalCount = service.countTotalStd(map);
 		
 		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
-		List<StudentVo> stdList = service.showStudentList(pvo);
+		List<StudentVo> stdList = service.showStudentList(pvo, map);
 		
 		model.addAttribute("stdList", stdList);
 		model.addAttribute("pvo", pvo);
+		model.addAttribute("search", search);
+		model.addAttribute("keyword", keyword);
 		return "academy/search";
 	}
 	
@@ -95,7 +165,6 @@ public class AcademyController {
 	
 	//커리큘럼 조회(전체 클래스 리스트) 페이지 보여주기 + 검색
 	@GetMapping("curriculum/{pno}")
-
 	public String curriculum(Model model, @PathVariable int pno, @RequestParam(value="search",required=false) String cNo, 
 																	@RequestParam(value="keyword",required=false) String keyword) {
 		//검색창의 카테고리 조회해오기
@@ -108,18 +177,15 @@ public class AcademyController {
 		
 		//# of total class
 		int totalCount = service.countTotalClass(map);
-//		System.out.println("Controller > total 게시물 Count : " + totalCount);
-//		System.out.println(" ");
 		
 		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
 		List<ClassVo> classList = service.selectClassList(pvo, map);
-//		System.out.println("페이지 게시물 총 갯수 : " + classList.size());
-//		System.out.println("-----------------");
 		
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("classList", classList);
 		model.addAttribute("pvo", pvo);
+		model.addAttribute("keyword", keyword);
 		
 		return "academy/curriculum";
 	}
@@ -159,7 +225,7 @@ public class AcademyController {
 	
 	@GetMapping("curriculum/detail/{cno}")
 	public String curriculumDetail(Model model, @PathVariable int cno) {
-		//클래스 커리큘럼 및 학생 조회하기(cno)
+		//클래스, 커리큘럼 및 학생 조회하기(cno)
 		ClassVo cvo = service.selectOneClass(cno);
 		List<CurriculumVo> curVo = service.selectCurriculumList(cno);
 		List<StudentVo> svo = service.selectEnrolledStudent(cno);
@@ -221,7 +287,13 @@ public class AcademyController {
 	
 	//커리큘럼 추가(인서트) 하기
 	@PostMapping("addCurr")
-	public String addCurriculum(Model model, ClassVo vo, CurriculumVo cvo) {
+	public String addCurriculum(Model model, HttpServletRequest req, ClassVo vo, CurriculumVo cvo) {
+		
+		if(vo.getF() != null && !vo.getF().isEmpty()) {
+ 			String savePath = req.getServletContext().getRealPath("/resources/upload/profile/classProfile/");
+ 	 		String changeName = FileUploader.uploadFile(vo.getF(),savePath);
+ 	 		vo.setFileName(changeName);
+ 		}
 		
 		int classInsert = service.insertClass(vo);
  		

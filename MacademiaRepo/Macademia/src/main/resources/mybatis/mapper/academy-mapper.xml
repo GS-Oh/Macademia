@@ -16,8 +16,8 @@
 	</select>
 	
 	<insert id="insertClass">
-		INSERT INTO CLASS(NO,CATEGORY_NO,NAME,DESCRIPTION,MAX,MEMBER_NO,FEE,CLASSROOM,BEGIN_DATE,END_DATE,START_TIME,FINISH_TIME) 
-    	VALUES(SEQ_CLASS_NO.NEXTVAL, #{categoryNo}, #{name}, #{description}, #{max}, #{memberNo}, #{fee}, #{classroom}, #{beginDate}, #{endDate}, #{startTime}, #{finishTime})
+		INSERT INTO CLASS(NO,CATEGORY_NO,NAME,DESCRIPTION,FILE_NAME,MAX,MEMBER_NO,FEE,CLASSROOM,BEGIN_DATE,END_DATE,START_TIME,FINISH_TIME) 
+    	VALUES(SEQ_CLASS_NO.NEXTVAL, #{categoryNo}, #{name}, #{description}, #{fileName}, #{max}, #{memberNo}, #{fee}, #{classroom}, #{beginDate}, #{endDate}, #{startTime}, #{finishTime})
 	</insert>
 	
 	<insert id="insertCurriculum">
@@ -39,6 +39,14 @@
 		FROM STUDENT S
 		JOIN CLASS C ON S.ENROLLED_CLASS = C.NO
 		WHERE S.COMPLETE_DATE IS NULL
+		<choose>
+			<when test="search == 'searchByName'">
+				AND S.NAME LIKE '%${keyword}%'
+			</when>
+			<otherwise>
+				AND C.NAME LIKE '%${keyword}%'
+			</otherwise>
+		</choose>	
 		ORDER BY S.NAME
 	</select>
 	
@@ -67,7 +75,20 @@
 	
 	
 	<select id="selectTotalCount" resultType="int">
-		SELECT COUNT(NO) FROM STUDENT
+		SELECT COUNT(S.NO)
+		FROM STUDENT S
+		JOIN CLASS C ON S.ENROLLED_CLASS = C.NO
+		WHERE S.COMPLETE_DATE IS NULL
+		<choose>
+			<when test="search == 'searchByName'">
+				AND S.NAME LIKE
+			</when>
+			<otherwise>
+				AND C.NAME LIKE
+			</otherwise>
+		</choose>
+		'%${keyword}%'
+		ORDER BY S.NAME
 		
 	</select>
 	
@@ -90,7 +111,7 @@
 	</update>
 	
 	<select id="selectOneClass" resultType="ClassVo">
-		SELECT T.NAME AS CATEGORY_NO, C.NAME, C.DESCRIPTION, C.MAX, M.NAME AS MEMBER_NO, TO_CHAR(C.BEGIN_DATE, 'YY-MM-DD') AS BEGIN_DATE, C.START_TIME, C.FEE, C.CLASSROOM, TO_CHAR(C.END_DATE, 'YY-MM-DD') AS END_DATE, C.FINISH_TIME
+		SELECT T.NAME AS CATEGORY_NO, C.NAME, C.DESCRIPTION, C.FILE_NAME, C.MAX, M.NAME AS MEMBER_NO, TO_CHAR(C.BEGIN_DATE, 'YY-MM-DD') AS BEGIN_DATE, C.START_TIME, C.FEE, C.CLASSROOM, TO_CHAR(C.END_DATE, 'YY-MM-DD') AS END_DATE, C.FINISH_TIME
 		FROM CLASS C
 		JOIN CLASS_CATEGORY T ON C.CATEGORY_NO = T.NO
 		JOIN MEMBER M ON C.MEMBER_NO = M.NO
@@ -104,8 +125,16 @@
 	</select>
 	
 	<select id="selectEnrolledStudents" resultType="StudentVo">
-		SELECT NAME, TO_CHAR(JOIN_DATE, 'YY-MM-DD')AS JOIN_DATE FROM STUDENT
+		SELECT NO, NAME, TO_CHAR(JOIN_DATE, 'YY-MM-DD')AS JOIN_DATE FROM STUDENT
 		WHERE ENROLLED_CLASS = #{cno}
+	</select>
+	
+	<select id="selectListByMemNo" resultType="ClassVo">
+		SELECT C.NO, T.NAME AS CATEGORY_NO, C.NAME, C.DESCRIPTION, C.FILE_NAME, C.MAX, M.NAME AS MEMBER_NO, TO_CHAR(C.BEGIN_DATE, 'YY-MM-DD') AS BEGIN_DATE, C.START_TIME, C.FEE, C.CLASSROOM, TO_CHAR(C.END_DATE, 'YY-MM-DD') AS END_DATE, C.FINISH_TIME
+		FROM CLASS C
+		JOIN CLASS_CATEGORY T ON C.CATEGORY_NO = T.NO
+		JOIN MEMBER M ON C.MEMBER_NO = M.NO
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 </mapper>

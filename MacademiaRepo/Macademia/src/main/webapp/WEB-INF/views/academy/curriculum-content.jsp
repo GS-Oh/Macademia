@@ -169,7 +169,7 @@
                         <option value="${c.no}">${c.name}</option>
                     </c:forEach>
                 </select>
-                <input type="text" name="keyword" placeholder="강의명을 입력해주세요">
+                <input type="text" name="keyword" value="${keyword}" placeholder="강의명을 입력해주세요">
                 <input type="submit" value="강의 검색">
             </form>
         </div>

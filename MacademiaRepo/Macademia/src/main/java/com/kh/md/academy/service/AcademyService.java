@@ -28,7 +28,7 @@ public interface AcademyService {
 	int insertStudent(StudentVo vo);
 
 	//전체 수강생 리스트 보여주기
-	List<StudentVo> showStudentList(PageVo pvo);
+	List<StudentVo> showStudentList(PageVo pvo, Map<String, String> map);
 
 	//모든 클래스 리스트 가져오기(그냥)
 	List<ClassVo> selectClassList();
@@ -40,7 +40,7 @@ public interface AcademyService {
 	StudentVo selectOneStudent(String no);
 
 	//페이징>전체 학생 리스트 수 조회
-	int countTotalStd();
+	int countTotalStd(Map<String, String> map);
 
 	//페이징>전체 클래스 리스트 수 조회
 	int countTotalClass(Map map);
@@ -56,6 +56,9 @@ public interface AcademyService {
 
 	//class>수강생 조회하기
 	List<StudentVo> selectEnrolledStudent(int cno);
+
+	//강사의 class조회
+	List<ClassVo> selectClassByInstructor(String memberNo);
 
 
 

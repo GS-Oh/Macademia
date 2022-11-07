@@ -218,8 +218,25 @@
 </style>
 
 <script>
-    //커리큘럼 단원 칸 추가
     $(function(){
+        //이미지 썸네일 추가
+        const fileInputTag = document.querySelector('input[name="f"]');
+        
+        fileInputTag.onchange = function(){
+            const imgTag = document.querySelector('#class-profile-img');
+            if(fileInputTag.files.length > 0){
+                //파일 선택됨
+                const fr = new FileReader();
+                fr.onload = function(data){
+                    imgTag.src = data.target.result;
+                }
+                fr.readAsDataURL(fileInputTag.files[0]);
+            }else{
+                imgTag.src="";
+            }
+        }
+
+        //커리큘럼 단원 칸 추가
         $('#add-curriculum-btn').click(function(){
             $('#curriculum-addition-area').append('<div class="add-curriculum-area-curriculum-body"><div class="right-border"><textarea name="curriculumName" placeholder="단원명을 입력하세요"></textarea></div><div><textarea name="curriculumContent" placeholder="단원의 내용을 입력하세요"></textarea></div></div>')
         })
@@ -231,7 +248,7 @@
     })
 </script>
 
-<form action="" method="post" onsubmit="return f01();">
+<form action="" method="post" enctype="multipart/form-data" onsubmit="return f01();">
     <div id="add-curriculum-content-wrap">
         <div id="add-curriculum-content-wrap-head"><h4>커리큘럼 정보입력</h4></div>
 
@@ -254,8 +271,8 @@
                     <div><textarea name="description" placeholder="2000자까지 입력 가능합니다."></textarea></div>
                 </div>
                 <div id="curriculum-img-area">
-                    <img src="" alt="강의이미지">
-                    <input type="file">
+                    <img src="" alt="강의이미지" id="class-profile-img">
+                    <input type="file" name="f">
                 </div>
                 
             </div>

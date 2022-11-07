@@ -30,7 +30,7 @@ public interface AcademyDao {
 	int insertStudent(SqlSessionTemplate sst, StudentVo vo);
 
 	//수강생리스트 셀렉트
-	List<StudentVo> selectStudentList(SqlSessionTemplate sst, PageVo pvo);
+	List<StudentVo> selectStudentList(SqlSessionTemplate sst, PageVo pvo, Map<String, String> map);
 
 	//모든 클래스 리스트 가져오기(그냥)
 	List<ClassVo> selectClassList(SqlSessionTemplate sst);
@@ -42,7 +42,7 @@ public interface AcademyDao {
 	StudentVo selectOneStudent(SqlSessionTemplate sst, String no);
 
 	//페이징> 학생 전체 수 조회
-	int countTotalStd(SqlSessionTemplate sst);
+	int countTotalStd(SqlSessionTemplate sst, Map<String, String> map);
 
 	//페이징>전체 클래스 리스트 수 조회
 	int countTotalClass(SqlSessionTemplate sst, Map map);
@@ -58,6 +58,9 @@ public interface AcademyDao {
 
 	//class>수강생 조회하기
 	List<StudentVo> selectEnrolledStudents(SqlSessionTemplate sst, int cno);
+
+	//강사의 class조회
+	List<ClassVo> selectListByMemNo(SqlSessionTemplate sst, String memberNo);
 
 
 
