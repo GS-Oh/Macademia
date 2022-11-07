@@ -91,7 +91,7 @@
             </a>
         </div>
         <div id="nav-menu3">
-            <a href="${root}/academy/roll">
+            <a href="${root}/academy/roll/1">
                 <i class="fa-solid fa-chalkboard-user fa-2x"></i><br>
                 <label for="">학사</label>
             </a>
@@ -109,7 +109,7 @@
             </a>
         </div>
         <div id="nav-menu6">
-            <a href="${root}/work/list">
+            <a href="${root}/work/list/1">
                 <i class="fa-solid fa-list-check fa-2x"></i><br>
                 <label for="">업무</label>
             </a>

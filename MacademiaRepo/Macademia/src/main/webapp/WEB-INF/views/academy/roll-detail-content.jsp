@@ -231,14 +231,14 @@
 <div id="roll-detail-content-wrap-total">
 <div id="roll-detail-content-wrap">
     
-    <div><h4>자바(JAVA)기반 클라우드 융합 개발자 양성과정A</h4></div>
+    <div><h4>${cvo.name}</h4></div>
 
     <div id="class-info-month-select">
         <div id="class-info">
             <div>강사님</div>
-            <div><b>심삼용</b></div>
+            <div><b>${cvo.memberNo}</b></div>
             <div>강의실</div>
-            <div><b>201-D</b></div>
+            <div><b>${cvo.classroom}</b></div>
         </div>
         <div id="month-select">
             <div id="prev-month" class="go-prev"><i class="fa-solid fa-angle-left"></i></div>
@@ -293,12 +293,14 @@
             </div>
         </div>
 
-        <div class="student-atdc-table-body">
-            <div class="table-right-border body-underbar">
-                <div>1</div>
-                <div>최형배</div>
-            </div>
+        <c:forEach items="${svo}" var="s">
+            <div class="student-atdc-table-body">
+                <div class="table-right-border body-underbar">
+                    <div>1</div>
+                    <div>${s.name}</div>
+                </div>
             
+
             <div class="student-atdc-check-table body-underbar">
                 <div class="roll-check-box">FP</div>
                 <div class="roll-check-box">NP</div>
@@ -331,54 +333,16 @@
                 <div class="roll-check-box">FP</div>
                 <div class="roll-check-box">FP</div>
                 <div class="roll-check-box">FP</div>
+                </div>
             </div>
-        </div>
+        </c:forEach>
 
-        <div class="student-atdc-table-body">
-            <div class="table-right-border body-underbar">
-                <div>2</div>
-                <div>최익현</div>
-            </div>
-            
-            <div class="student-atdc-check-table body-underbar">
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">NP</div>
-                <div class="roll-check-box">FL</div>
-                <div class="roll-check-box">FT</div>
-                <div class="roll-check-box">NP</div>
-                <div class="roll-check-box">NP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">NT</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">DO</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">DO</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">FP</div>
-                <div class="roll-check-box">NA</div>
-                <div class="roll-check-box">FP</div>
-            </div>
-        </div>
+        
 
     </div>
 
     <div id="edit-btn-area">
-        <button><a href="${root}/academy/roll">뒤로가기</a></button>
+        <button><a href="${root}/academy/roll/1">뒤로가기</a></button>
         <button><a href="${root}/academy/roll/detail/edit">수정하기</a></button>
     </div>
 

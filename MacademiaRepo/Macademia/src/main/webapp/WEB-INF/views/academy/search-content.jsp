@@ -112,11 +112,24 @@
         column-gap: 5px;
     }
     #page-area>div{
-        border: 1px solid gray;
         width: 3vh;
         height: 3vh;
     }
     #page-area a{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: #6667AB;
+    }
+    #page-area a:hover, #page-area a:hover>i{
+        cursor: pointer;
+        background-color: #6667AB;
+        color: white;
+        font-weight: bolder;
+    }
+    #page-area a>i{
         display: flex;
         width: 100%;
         height: 100%;
@@ -142,13 +155,13 @@
     <div><h4>수강생 정보조회</h4></div>
 
     <div id="search-area">
-        <form action="" method="post">
+        <form action="" method="get">
             <div>
-                <select name="" id="">
-                    <option value="">강의검색</option>
-                    <option value="">이름검색</option>
+                <select name="searchBy">
+                    <option value="searchByClass">강의검색</option>
+                    <option value="searchByName">이름검색</option>
                 </select>
-                <input type="text" value="" placeholder="검색어를 입력해주세요">
+                <input type="text" name="keyword" value="${keyword}" placeholder="검색어를 입력해주세요">
                 <input type="submit" value="조회">
             </div>
             <div>

@@ -1,5 +1,7 @@
 package com.kh.md.academy.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +12,7 @@ public class ClassVo {
 	private String name;
 	private String description;
 	private String fileName;
+	private MultipartFile f;
 	private String max;
 	private String memberNo;
 	private String fee;
