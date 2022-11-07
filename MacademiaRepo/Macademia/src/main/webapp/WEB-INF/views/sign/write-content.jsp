@@ -492,26 +492,32 @@ $('#approver-submit').on('click', function () {
         alert("결재선을 지정해주세요");
         var content = $('#summernote').summernote('code');
         console.log(content); 
-      }else{
+      }else{ 
         var result = confirm("기안서를 작성 하시겠습니까?");
         if(result==1){
           var title = $('#s_title').val();
         var type = $('#doc_type option:selected').val();
         var content = $('#summernote').summernote('code');
+        
+        let param = {
+        	title:title, 
+            type:type,
+            content:content,
+            sTypeNo : "1",
+            line: approverVal
+        };
+        console.log(param);
         $.ajax({
           url :'/md/sign/signWrite',
         			    type : 'post',
         			    dataType : 'json', 
-        			    data : { title:title,
-                           type:type,
-                           content:content
-                  }, 
+        			    data : param,
         			    success: function(){ 
                     console.log("ajax성공");
                   }
         })
 
-        $.ajax({
+       /*  $.ajax({
           url: '/md/sign/signLine',
           type: 'post',
         //  dataType: 'text',
@@ -520,8 +526,9 @@ $('#approver-submit').on('click', function () {
           success:function(data){
             console.log("ajax성공");
             console.log(data);
+            
           }
-        })
+        }) */
         }
       
       }
