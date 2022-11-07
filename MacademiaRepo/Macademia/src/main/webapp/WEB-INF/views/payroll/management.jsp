@@ -147,9 +147,9 @@
 	                             <option value="11">교육2팀</option>
 	                            <option value="12">교육지원팀</option>
 	                            <option value="13" >취업팀</option>
-	                            <option value="15" >상담팀</option>
-	                            <option value="16">홍보팀</option>
-	                            <option value="17">대외홍보팀</option>
+	                            <option value="14" >상담팀</option>
+	                            <option value="15">홍보팀</option>
+	                            <option value="16">대외홍보팀</option>
 							
 	                        </select>
 							
@@ -241,16 +241,19 @@
 	                        <input type="hidden" value="${prVo.baseMonthPay}" name="baseMonthPay">
 	                        
 						</form>	
-
+						
+						<!-- action값은 alert으로 정해주었음 -->
 						<form action="" method="post" id="statuc-form">
 							<c:if test="${empty prVo.checkStatus}">
 								<input type="button" class="management-table-content status-choice btn btn-outline-dark" style="width: 100%; margin-left: 5%;" value="대기"></input>
+								<input type="hidden" id="stFormDate">
+								<input type="hidden" id="stDeptName">
 							</c:if>
-							<c:if test="${prVo.checkStatus eq 'confirm'}">
-								<div class="management-table-content">확정</div>
+							<c:if test="${prVo.checkStatus eq 'CONFIRM'}">
+								<div class="management-table-content badge bg-primary" style="width:80%; margin-left:10%;">확정</div>
 							</c:if>
-							<c:if test="${prVo.checkStatus eq 'return'}">
-								<div class="management-table-content">반려</div>
+							<c:if test="${prVo.checkStatus eq 'RETURN'}">
+								<div class="management-table-content badge bg-warning" style="width:80%; margin-left:10%;">반려</div>
 							</c:if>
 						</form>	
 					</c:forEach>
@@ -337,6 +340,9 @@
 			statusChoice[i].addEventListener('click',function(){
 				if(statusChoice[i].value == '대기'){
 					let checkSalNo = salNo[i].value;
+					let stFormDate = document.querySelector('#stFormDate');
+					let stDeptName = document.querySelector('#stDeptName');
+					let deptSelect = document.querySelector('#dept-select');
 					Swal.fire({
 						title: '상태를 선택해 주세요',
 						showDenyButton: true,
@@ -348,10 +354,22 @@
 						if (result.isConfirmed) {
 							statusChoice[i].type= "submit";
 							statucForm.action = "/md/payroll/checkStatus/CONFIRM/"+salNo[i].value;
-							Swal.fire('최종 확정 해주세요.', '', 'success')
+
+							stFormDate.value = yearSelect.value;
+							stDeptName.value = deptSelect.value;
+							console.log(stFormDate);							
+							console.log(stDeptName);							
+							Swal.fire('최종 확정 해주세요.', '', 'success');
+								
 							statusChoice[i].value = "최종확정하기";
+
 						} else if (result.isDenied) {
+							statusChoice[i].type= "submit";
 							statucForm.action = "/md/payroll/checkStatus/RETURN/"+salNo[i].value;
+
+							stFormDate.value = yearSelect.value;
+							stDeptName.value = deptSelect.value;
+
 							Swal.fire('최종 반려 해주세요.', '', 'info')
 							statusChoice[i].value = "최종반려하기";
 						}

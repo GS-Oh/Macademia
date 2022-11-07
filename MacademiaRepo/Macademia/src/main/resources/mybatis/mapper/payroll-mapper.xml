@@ -164,6 +164,7 @@
 		            ) A
 		        JOIN POSITION P ON A.NO = P.NO
 		        WHERE A.QUIT_YN = 'N'
+		        AND	  A.CHECK_STATUS = 'CONFIRM'
 		        ) B
 		    JOIN RANK K ON B.RANK_NO = K.NO
 		    JOIN DEPT T ON B.DEPT_NO = T.NO

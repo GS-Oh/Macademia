@@ -149,9 +149,9 @@
 	                             <option value="11">교육2팀</option>
 	                            <option value="12">교육지원팀</option>
 	                            <option value="13" >취업팀</option>
-	                            <option value="15" >상담팀</option>
-	                            <option value="16">홍보팀</option>
-	                            <option value="17">대외홍보팀</option>
+	                            <option value="14" >상담팀</option>
+	                            <option value="15">홍보팀</option>
+	                            <option value="16">대외홍보팀</option>
 							
 	                        </select>
 							
@@ -188,12 +188,10 @@
 					<div class="management-table-header">부서명</div>
 					<div class="management-table-header">직급명</div>
 					<div class="management-table-header">직책</div>
-					<div class="management-table-header">본봉</div>
-					<div class="management-table-header">수당</div>
-					<div class="management-table-header">과세</div>
-					<div class="management-table-header">비과세</div>
-					<div class="management-table-header">지급총액</div>
-					<div class="management-table-header">실수령액</div>
+					
+					
+					<div class="management-table-header" style="grid-column: span 6;text-align: center; ">작성하기</div>
+
 
 	            
 					
@@ -212,7 +210,7 @@
 							<input type="hidden" name="payDate" >
 							<input type="hidden" name="deptNo" value="${prMember.deptNo}" >
 							<input type="hidden" name="rankNo" value="${prMember.rankNo}" >
-							<div style="grid-column: span 6; color: red; text-align: center; ">
+							<div style="grid-column: span 6;  text-align: center; ">
 								
 									<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-secondary btn-lg" type="submit" value="급여 대장 작성하기" style="width:40%;"></h2>
 									
