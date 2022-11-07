@@ -11,10 +11,14 @@ import com.kh.md.member.vo.MemberVo;
 public interface MemberDao {
 
 	MemberVo selectOne(SqlSessionTemplate sst, MemberVo vo);
+	
+	MemberVo selectOneByNo(SqlSessionTemplate sst, String no);
 
 	int updatePwd(SqlSessionTemplate sst, Map<String, String> map);
 
-	int selectOneByEmails(SqlSessionTemplate sst, Map<String, String> map);
+	int selectCountByEmail(SqlSessionTemplate sst, Map<String, String> map);
+	
+	int selectCountByPwd(SqlSessionTemplate sst, MemberVo vo);
 
 	List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo);
 
@@ -23,5 +27,11 @@ public interface MemberDao {
 	List<BankVo> selectBankList(SqlSessionTemplate sst);
 
 	int updateOne(SqlSessionTemplate sst, MemberVo memberVo);
+
+	int updatePwd(SqlSessionTemplate sst, MemberVo memberVo);
+
+
+
+
 
 }

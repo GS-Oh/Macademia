@@ -18,8 +18,18 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override
-	public int selectOneByEmails(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.selectOne("memberMapper.selectOneByEmails",map);
+	public MemberVo selectOneByNo(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("memberMapper.selectOneByNo",no);
+	}
+	
+	@Override
+	public int selectCountByEmail(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("memberMapper.selectCountByEmails",map);
+	}
+	
+	@Override
+	public int selectCountByPwd(SqlSessionTemplate sst,  MemberVo vo) {
+		return sst.selectOne("memberMapper.selectCountByPwd",vo);
 	}
 
 	@Override
@@ -45,6 +55,13 @@ public class MemberDaoImpl implements MemberDao{
 	public int updateOne(SqlSessionTemplate sst, MemberVo memberVo) {
 		return sst.update("memberMapper.updateOne",memberVo);
 	}
+
+	@Override
+	public int updatePwd(SqlSessionTemplate sst, MemberVo memberVo) {
+		return sst.update("memberMapper.updatePwd",memberVo);
+	}
+
+
 
 
 	

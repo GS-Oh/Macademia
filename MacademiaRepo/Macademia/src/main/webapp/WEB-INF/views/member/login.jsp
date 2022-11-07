@@ -158,7 +158,7 @@
 	  <div class="input-group">
 	    <input id="pwd" type="password" class="form-control" name="pwd" required>
         <label class="input-group-text" for="pwd">PWD</label>
-	  </div>
+	  </div>    
 
       <button type="submit" id="btn">로그인</button>
 
@@ -197,9 +197,6 @@
     $(btn).on('click',function(){
         if($(email).val()==""){
             $(email).next('label').addClass('warning');
-            setTimeout(function(){
-                $('label').removeClass('warning')
-            },1000);
         }else if($(pwd).val()==""){
             $(pwd).next('label').addClass('warning');
             setTimeout(function(){
