@@ -157,7 +157,7 @@ public class MessengerController {
 			model.addAttribute("mnVoList", mnVoList);
 			model.addAttribute("menu", menu);
 			model.addAttribute("keyword", keyword);
-			return "messenger/noteSendMain";
+			return "messenger/noteReceiveMain";
 		}else {
 			return "";
 		}
@@ -181,7 +181,7 @@ public class MessengerController {
 			model.addAttribute("mnVoList", mnVoList);
 			model.addAttribute("menu", menu);
 			model.addAttribute("keyword", keyword);
-			return "messenger/noteReceiveMain";
+			return "messenger/noteSendMain";
 		}else {
 			return "";
 		}
@@ -434,6 +434,7 @@ public class MessengerController {
 		
 		if(dot.equals(".jpg") || dot.equals(".png")) {
 			result = ms.insertImgFilebox(msgFileVo,copyVo);
+			
 		}else {
 			result = ms.insertFilebox(msgFileVo,copyVo);
 		}
@@ -466,13 +467,14 @@ public class MessengerController {
 		
 		String checkFileDot = "";
 		
-		if(dot.equals(".jpg")) {
-			checkFileDot = "jpg";
+		if(dot.equals(".jpg") || dot.equals(".png")) {
+			checkFileDot = "imgFile";
 		}else {
 			checkFileDot = "etc";
 		}
 		
 		model.addAttribute("checkFileDot", checkFileDot);
+		
 		
 		return "messenger/download";
 	}
@@ -497,10 +499,20 @@ public class MessengerController {
 		mnVo.setMsgNo(msgVo.getMsgNo());
 		
 		
+		//어디서 보낸건지 구분해서 리턴 페이지 정해주도록해주기 위함
+		String fileCategory = "etc";
+		String dot = mnVo.getFileName().substring( (mnVo.getFileName().lastIndexOf('.')) );
+		if(dot.equals(".jpg")) {
+			fileCategory = "jpg";
+		}			
+		
+		
 		int result = ms.insertNoteOne(mnVo);
 		
-		if(result == 1) {
+		if(result == 1 && fileCategory.equals("jpg")) {
 			return "redirect:/messenger/imgFileBox";
+		}else if(result == 1 && fileCategory.equals("etc")) {
+			return "redirect:/messenger/etcFileBox";
 		}else {
 			return "";
 		}

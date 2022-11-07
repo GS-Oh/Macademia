@@ -177,27 +177,6 @@
 
 
 
-
-
-
-					<h2>부서 하나더있으면 이걸로</h2>
-					<ul class="search-header">
-						<li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li>
-						<li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li>
-						
-						
-					</ul>
-
-
-
 				</ul>
 			</div>
 
@@ -236,7 +215,7 @@
 
 					<div style="grid-row: span 2;"><img src="${root}/resources/upload/messenger/${fileName}" alt="${originName}" width="95%" height="95%"></div>
 					<div style="display:none;"><input type="text" name="receiveNo" id="receive-no"></div>
-					<div class="submit-select"><h2><span  class="badge bg-secondary"> 받는이 </span></h2><input type="text" name="receiveName" id="receive-name"></div>
+					<div class="submit-select"><h2><span  class="badge bg-secondary"> 받는이 </span></h2><input type="text" name="receiveName" id="receive-name" readonly placeholder="선택해주세요"></div>
 					<div class="submit-select" ><h2><span class="badge bg-secondary" >제목</span></h2><input  type="text" name="title" id=""></div>
 					<div><input type="hidden" name="fileName" value="${fileName}"><input type="hidden" name="originName" value="${originName}"></div>
 					<div class="submit-select" ><h2><span class="badge bg-secondary" >내용</span></h2><input  type="text" name="content" id=""></div>
