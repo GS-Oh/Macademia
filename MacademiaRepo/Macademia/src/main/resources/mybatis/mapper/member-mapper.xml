@@ -2,7 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "memberMapper">
 	<select id="selectOne" resultType="com.kh.md.member.vo.MemberVo">
-		SELECT M.*,P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+		SELECT 
+		M.NO
+		,M.NAME
+		,M.EMAIL
+		,M.PWD
+		,M.PRIVATE_EMAIL
+		,M.GRADE
+		,M.ADDRESS
+		,M.ADDRESS2
+		,M.PHONE
+		,M.PROFILE_NAME
+		,M.POSITION_NO
+		,M.BANK_NO
+		,M.ACCOUNT
+		,TO_CHAR(M.ENROLL_DATE,'YYYY-MM-DD')AS ENROLL_DATE
+		,TO_CHAR(M.UPDATE_DATE,'YYYY-MM-DD')AS UPDATE_DATE
+		,TO_CHAR(M.START_DATE,'YYYY-MM-DD')AS START_DATE
+		,TO_CHAR(M.QUIT_DATE,'YYYY-MM-DD')AS QUIT_DATE
+		,M.QUIT_YN
+		,P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
 		FROM MEMBER M
 		JOIN POSITION P 
 		ON M.POSITION_NO = P.NO
@@ -14,16 +33,42 @@
 		AND PWD = #{pwd} 
 		AND QUIT_YN = 'N'
 	</select>
+	<select id="selectOneByNo" resultType="com.kh.md.member.vo.MemberVo">
+		SELECT 
+		M.NO
+		,M.NAME
+		,M.EMAIL
+		,M.PWD
+		,M.PRIVATE_EMAIL
+		,M.GRADE
+		,M.ADDRESS
+		,M.ADDRESS2
+		,M.PHONE
+		,M.PROFILE_NAME
+		,M.POSITION_NO
+		,M.BANK_NO
+		,M.ACCOUNT
+		,TO_CHAR(M.ENROLL_DATE,'YYYY-MM-DD')AS ENROLL_DATE
+		,TO_CHAR(M.UPDATE_DATE,'YYYY-MM-DD')AS UPDATE_DATE
+		,TO_CHAR(M.START_DATE,'YYYY-MM-DD')AS START_DATE
+		,TO_CHAR(M.QUIT_DATE,'YYYY-MM-DD')AS QUIT_DATE
+		,M.QUIT_YN
+		,P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+		FROM MEMBER M
+		JOIN POSITION P 
+		ON M.POSITION_NO = P.NO
+		JOIN RANK R
+		ON P.RANK_NO = R.NO
+		JOIN DEPT D
+		ON P.DEPT_NO = D.NO
+		WHERE NO = #{no}  
+	</select>
 	
 	<select id="selectOneByEmails" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
 		WHERE EMAIL = #{email} 
 		AND PRIVATE_EMAIL = #{privateEmail}
 		AND QUIT_YN = 'N'
-	</select>
-	
-	<select id="updatePwd">
-		UPDATE MEMBER SET PWD = #{newPwd} WHERE EMAIL = #{email}
 	</select>
 	
 	<select id="selectListByDeptNo" resultType="com.kh.md.member.vo.MemberVo">
@@ -55,4 +100,35 @@
 		AND M.QUIT_YN = 'N'
 		ORDER BY P.NO ASC
 	</select>
+	
+	<update id="updateOne">
+		UPDATE MEMBER SET 
+		NAME = #{name}
+		,EMAIL = #{email}
+		,PRIVATE_EMAIL = #{privateEmail}
+		,GRADE = #{grade}
+		,ADDRESS = #{address}
+		,ADDRESS2 = #{address2}
+		,PHONE = #{phone}
+		,PROFILE_NAME = #{profileName}
+		,POSITION_NO = #{positionNo}
+		,BANK_NO = #{bankNo}
+		,ACCOUNT = #{account}
+		,UPDATE_DATE = SYSDATE
+		WHERE NO = #{no}
+	</update>
+	
+	<update id="updatePwd">
+		UPDATE MEMBER SET 
+		PWD = #{pwd}
+		WHERE NO = #{no}
+	</update>
+	
+	<update id="deleteOne">
+		UPDATE MEMBER SET 
+		QUIT_DATE = #{quitDate}
+		, QUIT_YN = 'Y'
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>

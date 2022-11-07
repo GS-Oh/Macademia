@@ -51,7 +51,7 @@
 	#search-area button:hover{
 		background-color: #525285 !important;
 	}
-	#searchInput{
+	#search-input{
 		font-size: 15px;
 	}
 
@@ -94,28 +94,36 @@
 		width: max-content;
 		box-shadow: 5px 5px 5px rgb(149, 149, 149);
 	}
-
+	#up{
+		position: fixed;
+		bottom: 30px;
+		right: 50px;
+		font-size: 40px;
+		color: grey;
+		cursor: pointer;
+	}
 
 
 
 
 </style>
 
-
-
 <div id="search-area">
 	<h3>조직 구성</h3>
 	<div id="search" class="input-group mb-3">
-		<input type="text" id="searchInput" class="form-control" placeholder="인물검색">
-		<button type="submit" id="searchBtn" class="btn btn-primary" >검색</button>
+		<input type="text" id="search-input" class="form-control" placeholder="인물검색">
+		<button type="submit" id="search-btn" class="btn btn-primary" >검색</button>
 	</div>
 </div>
+
 <hr>
+
 <div id="myboards-content">
     <div id="tree-detail">
 		<img src="/md/resources/img/tree.jpg" alt="조직도">
 	</div>
 </div>
+
 
 <!-- 조직도 트리구조 구현 -->
 <script>
@@ -144,7 +152,6 @@ $('#tree').on('select_node.jstree', function (e,node) {
 			type:"get",
 			success:function(result){
 				$('#tree-detail').replaceWith(result);
-
 			},
 			error:function(){
 				alert('통신에러');
@@ -156,7 +163,7 @@ $('#tree').on('select_node.jstree', function (e,node) {
 <!-- 사원검색 자동완성기능 -->
 <script>
 $(document).ready(function () {
-  $('#searchInput').autocomplete({
+  $('#search-input').autocomplete({
     source: function (request, response) {
         $.ajax({
             url: "/md/organization/search/auto",
@@ -190,8 +197,9 @@ $(document).ready(function () {
 
 <!-- 사원검색 -->
 <script>
-$('#searchBtn').click(function () {
-	let search = $('#searchInput').val();
+	
+$('#search-btn').click(function() {
+	let search = $('#search-input').val();
 	$.ajax({
 		url:"/md/organization/search/",
 		type:"GET",
@@ -203,7 +211,9 @@ $('#searchBtn').click(function () {
 			alert('통신에러');
 		}
 	})
-})
+});
+
+
 </script>
 
 

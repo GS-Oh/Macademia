@@ -62,12 +62,24 @@
 
 </div>
 
+<!-- 경고메세지 출력 -->
 <script>
-    let msg = '${alertMsg}';
-    if(msg!=''){
+    let alertMsg = '${alertMsg}';
+    if(alertMsg!=''){
         Swal.fire({
-            title : msg,
+            title : alertMsg,
             icon : 'warning'
+        })
+    }
+</script>
+
+<!-- 성공메세지 출력 -->
+<script>
+    let successMsg = '${successMsg}';
+    if(successMsg!=''){
+        Swal.fire({
+            title : successMsg,
+            icon : 'success'
         })
     }
 </script>

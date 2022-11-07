@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.md.bank.vo.BankVo;
 import com.kh.md.member.vo.MemberVo;
 
 @Repository
@@ -33,6 +34,16 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public List<MemberVo> selectListBySearch(SqlSessionTemplate sst, String search) {
 		return sst.selectList("memberMapper.selectListBySearch",search);
+	}
+
+	@Override
+	public List<BankVo> selectBankList(SqlSessionTemplate sst) {
+		return sst.selectList("bankMapper.selectList");
+	}
+
+	@Override
+	public int updateOne(SqlSessionTemplate sst, MemberVo memberVo) {
+		return sst.update("memberMapper.updateOne",memberVo);
 	}
 
 

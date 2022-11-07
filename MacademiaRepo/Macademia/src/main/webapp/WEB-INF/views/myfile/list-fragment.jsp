@@ -16,7 +16,7 @@
             <div class="file-slot">
                 <a href="/md/resources/upload/myfile/${file.updateName }" download>
                     <img src="/md/resources/upload/myfile/${file.updateName }" alt="${fn:substringAfter(file.updateName,'.')}" width="100%" height="100%">
-                    <span>${file.originName }</span>
+                    <span class="file-name">${file.originName }</span>
                 </a>
                 <i id="x-btn" class="fa-regular fa-circle-xmark" onclick="deleteFile(${file.no})"></i>
             </div>
@@ -24,7 +24,7 @@
     </div>
 
     <div id="search-erea" class="input-group mb-3">
-        <input type="text" id="search-input" class="form-control" name="searchName" value="${searchName}" placeholder="파일명을 입력해주세요">
+        <input type="text" id="search-input" class="form-control" name="searchName" value="${searchName}" onkeyup="if(window.event.keyCode==13){page(1)}" placeholder="파일명을 입력해주세요">
         <button onclick="page(1)" type="submit" id="search-btn" class="btn btn-primary" >검색</button>
     </div>
 
