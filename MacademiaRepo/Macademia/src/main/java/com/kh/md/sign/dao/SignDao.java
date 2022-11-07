@@ -3,6 +3,7 @@ package com.kh.md.sign.dao;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.md.member.vo.MemberVo;
@@ -11,6 +12,7 @@ import com.kh.md.sign.vo.SignVo;
 
 @Repository
 public class SignDao {
+	
 
 	public List<MemberVo> getMemberAll(SqlSessionTemplate sst) {
 		// TODO Auto-generated method stub
@@ -23,13 +25,15 @@ public class SignDao {
 	}
 
 	public int signWrite(SqlSessionTemplate sst, SignVo vo) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 임자 일단 시간
 		return sst.insert("signMapper.signWrite", vo);
 	}
 
-	public int insertSignline(SqlSessionTemplate sst, SignLineVo slVo) {
+	public int insertSignline(SqlSessionTemplate sst, List<SignLineVo> lineList) {
 		// TODO Auto-generated method stub
-		return sst.insert("signMapper.insertSignLine",slVo);
+		return sst.insert("signMapper.insertSignLine",lineList);
 	}
+
+	
 
 }

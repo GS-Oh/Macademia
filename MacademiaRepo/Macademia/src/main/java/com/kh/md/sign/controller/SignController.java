@@ -76,56 +76,66 @@ public class SignController {
 		String  title= req.getParameter("title");
 		String  type= req.getParameter("type");
 		String  content= req.getParameter("content");
+		String  sTypeNo= req.getParameter("sTypeNo");
+		String[] line = req.getParameterValues("line");
+		System.out.println(line);
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
 		String no = loginMember.getNo();
+		
 		SignVo vo = new SignVo();
 		vo.setSTitle(title);
 		vo.setSTypeNo(type);
 		vo.setSContent(content);
 		vo.setENo(no);
+		vo.setSTypeNo("1");
+	
+		int result = service.signWrite(vo, line);
+		System.out.println(result);
 		
-		
-		int result = service.signWrite(vo);
-		
+		SignVo sVo = new SignVo();
+		String sNo = sVo.getSign();
+		SignLineVo slVo = new SignLineVo();
+		slVo.setSNo(sNo);
+		System.out.println(slVo.getSNo()+"이게 가져온 값입니다..");
 		
 		
 		return 1;
 		
 	}
-	@PostMapping("signLine")
-	@ResponseBody
-	public String signLine(HttpServletRequest req, String line,HttpSession session){
-		//String[] line = req.getParameterValues("line");
-		MemberVo loginMember=(MemberVo) session.getAttribute("loginMember");
-		SignLineVo slVo = new SignLineVo();
-		
-		String memberNo = loginMember.getNo();
-		String signFirst = "1";
-		
-		slVo.setENo(memberNo);
-		slVo.setSLevel(signFirst);
-		
-		
-		int result =service.insertSignline(slVo);
-		System.out.println();
-		
-		System.out.println("이것은signLine"+line);
-		Gson gson = new Gson();
-		ArrayList al = gson.fromJson(line, ArrayList.class);
-		System.out.println(al);
-		
-			for (int i = 0; i < al.size(); i++) {
-				
-				System.out.println(al.get(i));
-			}
-		
-		
-				
-				return "" ;
-		
-		
-		
-	}
+//	@PostMapping("signLine")
+//	@ResponseBody
+//	public String signLine(HttpServletRequest req, String line,HttpSession session){
+//		//String[] line = req.getParameterValues("line");
+//		MemberVo loginMember=(MemberVo) session.getAttribute("loginMember");
+//		SignLineVo slVo = new SignLineVo();
+//		
+//		String memberNo = loginMember.getNo();
+//		String signFirst = "1";
+//		
+//		slVo.setENo(memberNo);
+//		slVo.setSLevel(signFirst);
+//		
+//		
+//		int result =service.insertSignline(slVo);
+//		System.out.println();
+//		
+//		System.out.println("이것은signLine"+line);
+//		Gson gson = new Gson();
+//		ArrayList al = gson.fromJson(line, ArrayList.class);
+//		System.out.println(al); 
+//		
+//			for (int i = 0; i < al.size(); i++) {
+//		 		
+//				System.out.println(al.get(i));
+//			}
+//		
+//		
+//				
+//				return "" ;
+//		
+//		
+//		
+//	}
 	/*
 	 * @PostMapping("signFirst")
 	 * 
