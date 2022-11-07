@@ -60,6 +60,9 @@ public interface AcademyService {
 	//강사의 class조회
 	List<ClassVo> selectClassByInstructor(String memberNo);
 
+	//수강생 입실시간 인서트
+	int insertTime(Map<String[], String> inputMap);
+
 
 
 	

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.md.academy.service.AcademyService;
 import com.kh.md.academy.vo.CategoryVo;
 import com.kh.md.academy.vo.ClassVo;
@@ -83,7 +84,7 @@ public class AcademyController {
 		return "academy/roll";
 	}
 	
-	//ajax용 - 수강생 가져오기
+	//ajax - 수강생 가져오기
 	@GetMapping("my/{cno}")
 	@ResponseBody
 	public List<StudentVo> getMyEnrolledStudents(@PathVariable int cno) {
@@ -92,13 +93,32 @@ public class AcademyController {
 		List<StudentVo> svo = service.selectEnrolledStudent(cno);
 		return svo;
 	}
-	//ajax용 - 수강생 가져오기
-//	@GetMapping("time")
-//	public String inputTime() {
+	//ajax - 수강생 입실시각 입력하기
+	@PostMapping("time")
+	@ResponseBody
+	public String inputTime(String studentNo , String classNo /* @RequestParam Map<String, String> inputMap */) {
+		Gson gson = new Gson();
+		
+		System.out.println("두번째 ajax요청받음!");
+		System.out.println("ajax에서 받은 studentNo: " + studentNo);
+		
+		int[] studentNoArr = gson.fromJson(studentNo, int[].class);
+		
+		for (int i = 0; i < studentNoArr.length; i++) {
+			System.out.print(studentNoArr[i] + " / ");
+		}
+		
+		System.out.println("ajax에서 받은 classNo: " + classNo);
+		
+//		Map<Integer[], String> inputMap = new HashMap<Integer[], String>();
+//		inputMap.put
+//		inputMap.put("classNo", classNo);
 //		
-//		service.insertTime()
-//		return "";
-//	}
+//		int result = service.insertTime(inputMap);
+//		System.out.println(result);
+		
+		return "checkedStudents";
+	}
 	
 	@GetMapping("roll/detail/{cno}")
 	public String rollDetail(Model model, @PathVariable int cno) {

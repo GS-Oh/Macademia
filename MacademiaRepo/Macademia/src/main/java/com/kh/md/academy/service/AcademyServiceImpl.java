@@ -123,6 +123,12 @@ public class AcademyServiceImpl implements AcademyService{
 		return dao.selectListByMemNo(sst, memberNo);
 	}
 
+	//수강생 입실시간 인서트
+	@Override
+	public int insertTime(Map<String[], String> inputMap) {
+		return dao.insertTime(sst, inputMap);
+	}
+
 
 
 	
