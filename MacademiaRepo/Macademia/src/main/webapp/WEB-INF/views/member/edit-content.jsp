@@ -123,13 +123,30 @@
         background-color: rgb(197, 49, 49);
         transition: 0.5s;
     }
-
+    #pwd, #pwd2{
+        /* background-color: #cecee3; */
+    }
+    .modal-content{
+        font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+        font-size: 20px;
+    }
+    .modal-body{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 10px;
+        column-gap: 10px;
+        font-size: 20px;
+    }
+    .modal-body label{
+        text-align: right;
+    }
 
 
 </style>
-<script>
-    console.log('${loginMember}')
-</script>
+
+
+
 <div id="edit-content">
     <h1>사원정보수정</h1>
     <hr>
@@ -173,9 +190,9 @@
             <input type="text" id="rank" name="rank" value="${loginMember.rankName}" readonly> 
             <label for="email">계좌번호</label>
             <input type="text" id="account" name="account" value="${loginMember.account}"> 
-            <label for="pwd">비밀번호</label>
+            <label id="pwd-label" for="pwd">비밀번호</label>
             <input type="password" id="pwd" name="pwd"> 
-            <label for="pwd2">비밀번호확인</label>
+            <label id="pwd2-label" for="pwd2">비밀번호확인</label>
             <input type="password" id="pwd2" name="pwd2"> 
 
 
@@ -195,12 +212,47 @@
             
         </div>
         <div id="btn-wrap">
-            <input type="button" id="pwd-change-btn" value="비밀번호변경">
+            <input type="button" id="pwd-change-btn" value="비밀번호변경" >
             <input type="button" id="submit-btn" value="수정완료">
         </div>
-        
+        <!-- data-bs-toggle="modal" data-bs-target="#myModal" -->
     </form>
 </div>
+  
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">비밀번호 변경</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form action="">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label id="" for="pwd">신규비밀번호</label>
+                <input type="password" id="modal-pwd" name="pwd" placeholder="4자리 이상으로 입력해주세요"> 
+                <label id="" for="pwd2">비밀번호확인</label>
+                <input type="password" id="modal-pwd2" name="pwd2">   
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">변경</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+
+<!-- 로그인정보 출력 -->
+<script>
+    console.log('${loginMember}')
+</script>
 
 <!-- 주소찾기 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -267,57 +319,121 @@ window.onload = function(){
     }
 </script>
 
-<!-- 비밀번호 체크 -->
+<!-- 비밀번호 유효성 검사 -->
 <script>
-    $('#submit-btn').on('click',function(){
-        const pwd = $('#pwd');
-        const pwd2 = $('#pwd2');
-        if($(pwd).val()=="" || $(pwd2).val()==""){
+    function pwdCheck(pwd,pwd2){
+        if(pwd=="" || pwd2==""){
             Swal.fire({
                 title : "비밀번호를 모두 입력하셨나요?",
                 icon : 'question'
             })
             return false;
         }
-        else if($(pwd).val() != $(pwd2).val()){
+        else if(pwd != pwd2){
             Swal.fire({
-                title : "비밀번호가 일치하지 않습니다",
-                icon : 'error'
+                title : "비밀번호/확인을 체크해주세요",
+                icon : 'warning'
             })
             return false;
         }
-        document.getElementById('member-form').submit();
+        else if(pwd.length < 4 || pwd2.length < 4){
+            Swal.fire({
+                title : "비밀번호 길이가 짧습니다",
+                text : "비밀번호는 최소 4자리이상으로 설정해주세요",
+                icon : 'warning'
+            })
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<!--사원정보수정 시 비밀번호 체크 후 제출 -->
+<script>
+    $('#submit-btn').on('click',function(){
+        const pwd = $('#pwd').val();
+        const pwd2 = $('#pwd2').val();
+        if(pwdCheck(pwd,pwd2)){
+           document.getElementById('member-form').submit(); 
+        } 
     });
 
 </script>
 
+<!--비밀번호수정 시 유효한 비밀번호인지 체크 후 제출 -->
+<script>
+    $('#pwd-change-btn').on('click',function(){
+        const no = $('#no').val();
+        const pwd = $('#pwd').val();
+        const pwd2 = $('#pwd2').val();
+        if(pwdCheck(pwd,pwd2)){
+            $.ajax({
+                url : "/md/member/checkpwd",
+                type : "post",
+                data : {
+                    "no" : no,
+                    "pwd" : pwd
+                },
+                success : function(response){
+                    if(response==0) Swal.fire({title : "비밀번호 불일치", icon : 'error'});
+                    else{
+                        changePwd();
+                    }
+                },
+                error : function(e){
+                    Swal.fire({title : "통신장애", icon : 'warning'})
+                }
+            })
+        }
+    });
 
-
-<template id="my-template">
-    <swal-title>
-      Save changes to "Untitled 1" before closing?
-    </swal-title>
-    <swal-icon type="warning" color="red"></swal-icon>
-    <swal-button type="confirm">
-      Save As
-    </swal-button>
-    <swal-button type="cancel">
-      Cancel
-    </swal-button>
-    <swal-button type="deny">
-      Close without Saving
-    </swal-button>
-    <swal-param name="allowEscapeKey" value="false" />
-    <swal-param
-      name="customClass"
-      value='{ "popup": "my-popup" }' />
-    <swal-function-param
-      name="didOpen"
-      value="popup => console.log(popup)" />
-  </template>
+</script>
 
 <script>
-    // Swal.fire({
-    // template: '#my-template'
-    // })
+    function changePwd(){
+        (async () => {
+            const { value: formValues } = await Swal.fire({
+                title: '신규비밀번호 설정',
+                html:
+                    '<input type="password" id="swal-input1" class="swal2-input" placeholder="신규비밀번호">' +
+                    '<input type="password" id="swal-input2" class="swal2-input" placeholder="신규비밀번호 확인">',
+                focusConfirm: false,
+                preConfirm: () => {
+                    return {
+                        no : document.getElementById('no').value,
+                        pwd : document.getElementById('swal-input1').value,
+                        pwd2 : document.getElementById('swal-input2').value
+                    }
+                }
+            })
+            if (formValues) {
+                if(pwdCheck(formValues.pwd,formValues.pwd2)){
+                    $.ajax({
+                        url : "/md/member/changepwd",
+                        type : "post",
+                        data : formValues,
+                        success : function(response){
+                            if(response==0) Swal.fire({title : "비밀번호 불일치", icon : 'error'});
+                            else{
+                                Swal.fire({title : "비밀번호 변경 성공!", icon : 'success'});
+                                document.getElementById('pwd').value = "";
+                                document.getElementById('pwd2').value = "";
+                                
+                            } 
+                        },
+                        error : function(e){
+                            Swal.fire({title : "통신장애", icon : 'warning'})
+                        }
+                    })
+                } 
+            }
+        })()
+    }
 </script>
+
+
+
+
+
+
+

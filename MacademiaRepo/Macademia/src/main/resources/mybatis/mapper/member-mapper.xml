@@ -61,13 +61,20 @@
 		ON P.RANK_NO = R.NO
 		JOIN DEPT D
 		ON P.DEPT_NO = D.NO
-		WHERE NO = #{no}  
+		WHERE M.NO = #{no}  
 	</select>
 	
-	<select id="selectOneByEmails" resultType="_int">
+	<select id="selectCountByEmail" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
 		WHERE EMAIL = #{email} 
 		AND PRIVATE_EMAIL = #{privateEmail}
+		AND QUIT_YN = 'N'
+	</select>
+	
+	<select id="selectCountByPwd" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE NO = #{no} 
+		AND PWD = #{pwd}
 		AND QUIT_YN = 'N'
 	</select>
 	
@@ -130,5 +137,6 @@
 		, QUIT_YN = 'Y'
 		WHERE NO = #{no}
 	</update>
+	
 	
 </mapper>

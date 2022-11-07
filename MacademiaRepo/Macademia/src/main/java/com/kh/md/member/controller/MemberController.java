@@ -18,12 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.md.bank.vo.BankVo;
-import com.kh.md.common.FileUploader;
 import com.kh.md.file.service.FileService;
-import com.kh.md.file.vo.FileVo;
 import com.kh.md.member.service.MemberService;
 import com.kh.md.member.vo.MemberVo;
 
@@ -48,8 +45,8 @@ public class MemberController {
 	@PostMapping("/member/login")
 	public String login(MemberVo vo, HttpSession session,Model model,
 			boolean saveEmail,HttpServletResponse resp) {
+		
 		MemberVo loginMember = memberService.login(vo);
-
 
 		if(saveEmail) {
 			Cookie c = new Cookie("rid",vo.getEmail());
@@ -136,38 +133,40 @@ public class MemberController {
 	public String edit(MemberVo memberVo, Model model,HttpServletRequest req, HttpSession session) {
 		System.out.println(memberVo);
 		
-		
-		
-		//프로필 업로드
-		MultipartFile profile = memberVo.getProfile();
-		if(!profile.isEmpty()) {
-			System.out.println("========진입========");
-			String savePath = req.getServletContext().getRealPath("/resources/upload/profile/");
-			String updateName = FileUploader.uploadFile(profile, savePath);
-			String originName = profile.getOriginalFilename();
-			
-			//파일테이블에 반영
-			FileVo vo = new FileVo();
-			vo.setMemberNo(memberVo.getNo());
-			vo.setOriginName(originName);
-			vo.setUpdateName(updateName);
-			vo.setUploadPath("/resources/upload/profile/");
-			
-			int result = fileService.insertMyfile(vo);
-			
-			memberVo.setProfileName(updateName);
+		//비밀번호 체크
+		int result1 = memberService.checkPwd(memberVo);
+		if(result1==0) {
+			model.addAttribute("alertMsg","잘못된 비밀번호입니다.");
+			return "member/edit";
 		}
 		
-		int result = memberService.editOne(memberVo);
-		if(result==1) {
+		//사원정보 수정
+		int result2 = memberService.editOne(memberVo, req);
+		if(result2==1) {
+			MemberVo updateMember = memberService.findOneByNo(memberVo.getNo());
 			model.addAttribute("successMsg","사원정보 수정완료!");
-			MemberVo updateMember = memberService.login(memberVo);
 			session.setAttribute("loginMember", updateMember);
 		}else {
 			model.addAttribute("alertMsg","사원정보 수정실패...");
 		}
 		return "member/edit";
 		
+	}
+	@PostMapping("/member/checkpwd")
+	@ResponseBody
+	public int checkPwd(MemberVo memberVo) {
+		int result = memberService.checkPwd(memberVo);
+		return result;
+	}
+	@PostMapping("/member/changepwd")
+	@ResponseBody
+	public int changePwd(MemberVo memberVo, HttpSession session) {
+		int result = memberService.changePwd(memberVo);
+		if(result==1) {
+			MemberVo updateMember= memberService.findOneByNo(memberVo.getNo());
+			session.setAttribute("loginMember", updateMember);
+		}
+		return result;
 	}
 	@GetMapping("/member/myboards")
 	public String myBoards() {
