@@ -127,13 +127,22 @@
     margin-top: -23px;
     
     }
+    #delete{
+    float:right;
+    color:#fff;
+    background-color:#c10909;
+    border:none;
+    border-radius:5px;
+    margin-right: 280px;
+    margin-top: -23px;
+    }
     </style>
     
 <div id="center_menu">
-	<h3>나의 업무</h3>
+	<h3>내가 요청한 업무</h3>
 	<hr>
 	<div id="work_top">
-		<h5>업무 요청 제목</h5> <input id="write" type="submit" value="업무완료">
+		<h5>업무 요청 제목</h5><input id="delete" type="submit" value="업무요청 삭제하기"> <input id="write" type="submit" value="업무요청 수정하기"> 
 		<br>
 		<div class="text"type="text" id="title"name="title">${vo.WTitle}</div>
 	</div>
@@ -141,7 +150,7 @@
 		<div id="work_left">
 		<div class="line">
 			<h5>등록자</h5>
-			<br>
+			
 			<span  class="text" id="userName"name="userName"><h6>${vo.bossName}</h6></span>
 		</div>
 		
@@ -205,18 +214,18 @@
 			
 			</div>
 			<script>
-				$('#write').on('click',function(){
-					var result =confirm("업무를 완료 하셨나요?")
-					if(result==1){
-						$.ajax({
-						url:"/md/work/workComplete/${vo.WNo}",
+			$('#delete').on('click',function(){
+				var result = confirm("요청을 삭제 하시겠습니까?")
+				if(result == 1){
+					$.ajax({
+						url:"/md/work/workDelete/${vo.WNo}",
 						data: {data: "data"},
 						method : "POST",
 						success: function(data){
 							console.log("성공")
 							console.log(data)
-							alert("업무가 성공적으로 완료 되었습니다")
-	 				    	 window.location.href = "/md/work/list/1";
+							alert("업무가 성공적으로 삭제 되었습니다")
+	 				    	 window.location.href = "/md/work/bossList/1";
 							
 							
 							
@@ -228,13 +237,16 @@
 						    	console.log(data)
 						    }
 					})
-						
-						
-						
-						
-						
-					}
+				}
 				
-				})
+			})
+			
+			$('#write').on('click', function(){
+				var result = confirm("요청을 수정하시겠습니까?")
+				if(result==1){
+					window.location.href = '/md/work/workModify/${vo.WNo}';
+				}
+			})
+			
 			
 			</script>

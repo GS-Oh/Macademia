@@ -13,5 +13,8 @@ public class WorkVo {
 	private String wDeadLine;
 	private String wYn;
 	private String wType;
+	private String memberNo;
+	private String slaveName;
+	private String bossName;
 	
 }
