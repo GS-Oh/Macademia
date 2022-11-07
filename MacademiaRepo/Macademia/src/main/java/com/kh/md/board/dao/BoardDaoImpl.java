@@ -7,7 +7,9 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.md.board.vo.BoardAttachment;
 import com.kh.md.board.vo.BoardVo;
 import com.kh.md.board.vo.PageVo;
 import com.kh.md.board.vo.SearchCriteria;
@@ -70,6 +72,21 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int selectSearchCount(SearchCriteria searchCriteria) {
 		return sst.selectOne("boardMapper.selectSearchCount", searchCriteria);
+	}
+
+	@Override
+	public int insertFile(BoardAttachment attachment) {
+		return sst.insert("boardMapper.insertFile", attachment);
+	}
+
+	@Override
+	public List<BoardAttachment> attachmentList(String no) {
+		return sst.selectList("boardMapper.attachmentList", no);
+	}
+
+	@Override
+	public int updateAttachment(MultipartFile[] file) {
+		return sst.update("boardMapper.updateAttachment", file);
 	}
 }
 

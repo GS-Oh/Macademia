@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.JsonObject;
 import com.kh.md.board.service.BoardService;
 import com.kh.md.board.util.Pagination;
+import com.kh.md.board.vo.BoardAttachment;
 import com.kh.md.board.vo.BoardVo;
 import com.kh.md.board.vo.PageVo;
 import com.kh.md.board.vo.SearchCriteria;
@@ -46,6 +48,7 @@ public class BoardController {
 	public String freeBoard() {
 		return "board/freeboard";
 	}
+	
 	//자료공유 게시판 화면
 	@GetMapping("")
 	public String dataList(Model model, SearchCriteria searchCriteria) {
@@ -85,8 +88,10 @@ public class BoardController {
 	public String detail(@PathVariable(required = false) String no, Model model) {
 		BoardVo vo = service.selectOne(no);
 		List<BoardReply> replyVo = replyService.selectList(no);
+		List<BoardAttachment> attachments =  service.attachmentList(no); 
 		model.addAttribute("vo", vo);
 		model.addAttribute("replyVo", replyVo);
+		model.addAttribute("attachments", attachments);
 		return "board/detail";
 	}
 	
@@ -97,94 +102,203 @@ public class BoardController {
 	}
 	
 	//게시글 작성
-		@PostMapping("write")
-		public String wirte(BoardVo vo, Model model, HttpSession session) {
+	@PostMapping("write")
+	public String wirte(BoardVo vo, Model model, HttpSession session, HttpServletRequest req) {
+		
+		  MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); 
+		  String no = loginMember.getNo();
+		  vo.setUserNo(no);
+		 
+		//비즈니스 로직
+		int result = service.insertBoard(vo, req);
+
+		
+		//화면 선택
+		if(result == 1) {
+			return "redirect:/board/";
+		}else {
+			return "error/errorPage";
+		}
+	}
+	
+	
+	
+	//게시글 수정 화면
+	@GetMapping("edit/{no}")
+	public String edit(@PathVariable String no, Model model) {
+		BoardVo vo = service.selectOne(no);
+		List<BoardAttachment> attachments =  service.attachmentList(no); 
+		model.addAttribute("vo", vo);
+		model.addAttribute("attachments", attachments);
+		return "board/edit";
+	}
+		
+		//게시글 수정 로직
+	@PostMapping("edit/{no}")
+	public String edit(@PathVariable int no, BoardVo vo, HttpServletRequest req) {
+		vo.setNo(no);
+		int result = service.updateOne(vo, req);
+				
+		if(result == 1) {
+			return "redirect:/board/detail/" + no;			
+		}else {
+			return "redirect:/";
+		}
+	}
+	
+		//게시판 삭제
+		
+	@GetMapping("delete/{no}")
+	public String delete(@PathVariable String no, HttpSession session, Model model) {
+		int result = service.delete(no);
+		if(result == 1 ) {
+			//성공 => 알람, 리스트
+			return "redirect:/board/";
+		}else {
+			//실패 => 메세지, 알람페이지
+			return "common/errorPage";
+		}
+	}
+		
+		
+	//파일 등록하기
+	@PostMapping(value="uploadSummernoteImageFile", produces = "application/json")
+    @ResponseBody
+    public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+
+        JsonObject jsonObject = new JsonObject();
+
+        String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
+        String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+
+        String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+
+        File targetFile = new File(fileRoot + savedFileName);
+
+        try {
+            InputStream fileStream = multipartFile.getInputStream();
+            FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+            jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+            jsonObject.addProperty("responseCode", "success");
+
+        } catch (IOException e) {
+            FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+            jsonObject.addProperty("responseCode", "error");
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+    }
+	//게시글의 업로드 파일 삭제
+	
+	@PostMapping("board/deleteFile")
+	public String deleteFile(BoardAttachment attachment) {
+		service.deleteFile(attachment);
+		return "";
+	}
+	
+	//자유 게시판 화면
+		@GetMapping("free")
+		public String freeboardList(Model model, SearchCriteria searchCriteria) {
+			log.info(searchCriteria.toString());
+			searchCriteria.setSize(6);
+			List<BoardVo> boardList = service.selectList(searchCriteria);
+			int count = service.selectSearchCount(searchCriteria);
+			PageVo pageVo = Pagination.calculate(
+					searchCriteria.getPage(), 
+					searchCriteria.getSize(), 
+					(long)count);
+			log.info(pageVo.toString());
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("pageVo", pageVo);
+			model.addAttribute("queryString", getQueryString(searchCriteria));
+			return "board/databoard";
+		}
+		
+		//자유게시판 게시글 상세 조회 화면
+		@GetMapping("free/detail/{no}")
+		public String freeboardDetail(@PathVariable(required = false) String no, Model model) {
+			BoardVo vo = service.selectOne(no);
+			List<BoardReply> replyVo = replyService.selectList(no);
+			List<BoardAttachment> attachments =  service.attachmentList(no); 
+			model.addAttribute("vo", vo);
+			model.addAttribute("replyVo", replyVo);
+			model.addAttribute("attachments", attachments);
+			return "board/detail";
+		}
+		
+		//자유게시판 작성 화면
+		@GetMapping("free/write")
+		public String freeboardWrite(HttpSession session) {
+			return "board/write";
+		}
+		
+		//자유게시글 작성
+		@PostMapping("free/write")
+		public String freeboardWirte(BoardVo vo, Model model, HttpSession session, HttpServletRequest req) {
 			
 			  MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); 
 			  String no = loginMember.getNo();
 			  vo.setUserNo(no);
 			 
 			//비즈니스 로직
-			int result = service.insertBoard(vo);
+			int result = service.insertBoard(vo, req);
+
+			
 			//화면 선택
 			if(result == 1) {
-				session.setAttribute("alertMsg", "게시글 작성 성공!");
 				return "redirect:/board/";
 			}else {
-				model.addAttribute("msg", "게시글 작성 실패,,,");
 				return "error/errorPage";
 			}
 		}
-	
-	
-	
-	//게시글 수정 화면
-		@GetMapping("edit/{no}")
-		public String edit(@PathVariable String no, Model model) {
+		
+		
+		
+		//자유게시판 게시글 수정 화면
+		@GetMapping("frr/edit/{no}")
+		public String freeboardEdit(@PathVariable String no, Model model) {
 			BoardVo vo = service.selectOne(no);
+			List<BoardAttachment> attachments =  service.attachmentList(no); 
 			model.addAttribute("vo", vo);
+			model.addAttribute("attachments", attachments);
 			return "board/edit";
 		}
-		
-		//게시글 수정 로직
-		@PostMapping("edit/{no}")
-		public String edit(@PathVariable int no, BoardVo vo, HttpSession session) {
-			//DB
+			
+		//자유게시판 게시글 수정 로직
+		@PostMapping("free/edit/{no}")
+		public String freeboardEdit(@PathVariable int no, BoardVo vo, HttpServletRequest req) {
 			vo.setNo(no);
-			int result = service.updateOne(vo);
-			//결과
+			int result = service.updateOne(vo, req);
+					
 			if(result == 1) {
-				session.setAttribute("alertMsg", "게시글 수정 성공!!!");
 				return "redirect:/board/detail/" + no;			
 			}else {
-				session.setAttribute("alertMsg", "게시글 수정 실패...");
 				return "redirect:/";
 			}
 		}
-	
-		//게시판 삭제
 		
-		@GetMapping("delete/{no}")
-		public String delete(@PathVariable String no, HttpSession session, Model model) {
+		//자유게시판 삭제		
+		@GetMapping("free/delete/{no}")
+		public String freeboardDelete(@PathVariable String no, HttpSession session, Model model) {
 			int result = service.delete(no);
 			if(result == 1 ) {
 				//성공 => 알람, 리스트
-				session.setAttribute("alertMsg", "게시글 삭제 성공!!!");
 				return "redirect:/board/";
 			}else {
 				//실패 => 메세지, 알람페이지
-				model.addAttribute("msg", "게시글 삭제 실패...");
 				return "common/errorPage";
 			}
 		}
+				
+		//게시글의 업로드 파일 삭제
 		
-		//파일 등록하기
-		@PostMapping(value="uploadSummernoteImageFile", produces = "application/json")
-	    @ResponseBody
-	    public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
-
-	        JsonObject jsonObject = new JsonObject();
-
-	        String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
-	        String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-	        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-
-	        String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-
-	        File targetFile = new File(fileRoot + savedFileName);
-
-	        try {
-	            InputStream fileStream = multipartFile.getInputStream();
-	            FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-	            jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
-	            jsonObject.addProperty("responseCode", "success");
-
-	        } catch (IOException e) {
-	            FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-	            jsonObject.addProperty("responseCode", "error");
-	            e.printStackTrace();
-	        }
-
-	        return jsonObject;
-	    }
+		@PostMapping("free/board/deleteFile")
+		public String freeboardDeleteFile(BoardAttachment attachment) {
+			service.deleteFile(attachment);
+			return "";
+		}
+	
+	
 }

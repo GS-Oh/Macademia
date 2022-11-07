@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kh.md.board.vo.BoardAttachment;
 import com.kh.md.board.vo.BoardVo;
 import com.kh.md.board.vo.PageVo;
 import com.kh.md.board.vo.SearchCriteria;
@@ -38,4 +41,12 @@ public interface BoardDao {
 	
 	//검색한 게시글 개수
 	int selectSearchCount(SearchCriteria searchCriteria);
+	
+	//파일 업로드
+	int insertFile(BoardAttachment attachment);
+	
+	//게시글의 파일업로드 리스트 
+	List<BoardAttachment> attachmentList(String no);
+	//게시글의 파일 업데이트
+	int updateAttachment(MultipartFile[] file); 
 }

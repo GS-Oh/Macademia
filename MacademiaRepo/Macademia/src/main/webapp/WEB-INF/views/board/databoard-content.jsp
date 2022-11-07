@@ -3,7 +3,7 @@
 
  <div class="board_wrap">
 	<div class="board_title">
-	    <strong>자료공유 게시판</strong>
+	    <strong>자료공유게시판</strong>
 	   
 	</div>
 	<div class="board_list_wrap">
@@ -49,13 +49,15 @@
 		        	<option value="writer">글쓴이</option>	
 		        </select >
 		        <input id="keyword" type="text" placeholder="입력해 주세요">
-		        <button id="send">검색하기</button>	
+		        <button id="send" style="background-color: #6667AB; color: white; border-radius: 4px 4px 4px 4px">검색하기</button>	
 	        </form>
 	        </div>
 	    </div>
 	   
 	    <div class="bt_wrap">
+	        <c:if test="${!empty loginMember}">
 	        <a href="/md/board/write" class="on">등록</a>
+	        </c:if>
 	    </div>
 	</div>
 </div>

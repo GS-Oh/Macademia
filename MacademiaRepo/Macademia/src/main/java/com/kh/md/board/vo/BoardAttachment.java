@@ -4,10 +4,11 @@ import lombok.Data;
 
 @Data
 public class BoardAttachment {
-	public String no;
-	public String fNo;
-	public String fileName;
-	public String filePath;
-	public String uploadDate;
-	public String status;
+	private String no;
+	private String boardNo;
+	private String originName;
+	private String fileName;
+	private String filePath;
+	private String uploadDate;
+	private String deleteYn;
 }

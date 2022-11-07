@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class BoardComment {
-	public String cNo;
-	public String fNo;
-	public String content;
-	public String name;
-	public String regdate;
+	private String cNo;
+	private String fNo;
+	private String content;
+	private String name;
+	private String regdate;
 }

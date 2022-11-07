@@ -31,7 +31,7 @@
 	                 </dl>
 	                 <dl>
 	                     <dt> 파일 첨부</dt>
-	                     <dd><input type="file"></dd>
+	                     <dd><input type="file" multiple="multiple" name="file"></dd>
 	                 </dl>
 	             </div>
 	             <div class="cont">
