@@ -64,7 +64,7 @@ public class PlanController {
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
 		String no = loginMember.getNo();
 		vo.setMNo(no);
-		
+		System.out.println(vo);
 		int result = service.write(vo);
 		if(result == 1) {
 			return "redirect:/plan/list";
