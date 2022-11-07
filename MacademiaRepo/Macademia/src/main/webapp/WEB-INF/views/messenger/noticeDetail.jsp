@@ -121,6 +121,7 @@
 		
 		
     </style>
+	
 </head>
 <body>
 
@@ -213,7 +214,7 @@
         </main>
 
 
-    </div>
+	</div>
 
 	<script>
 	
@@ -263,24 +264,32 @@
 	</script>
 
 
+
+
 	<script>
-		$('#summernote').summernote('disable');
-		
-		$(document).ready(function() {
-			//여기 아래 부분
-			$('#summernote').summernote({
-				  height: 500,                 // 에디터 높이
-				  minHeight: 500,             // 최소 높이
-				  maxHeight: 600,             // 최대 높이
-				  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-				  lang: "ko-KR"					// 한글 설정
-			});
-		});
-			
-	
+		const gwiseok = document.querySelector('#gwiseok');
+		const noticeNo2 = ${noticeVo.noticeNo};
+
+		gwiseok.addEventListener('click', function(){
+			Swal.fire('Any fool can use a computer')
+			Swal.fire({
+				title: '정말 삭제하시겠습니까?',
+				showDenyButton: true,
+				showCancelButton: true,
+				confirmButtonText: '삭제하기',
+				}).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					gwiseok.href = "/md/messenger/notice/delete/"+noticeNo2;
+				} else if (result.isDenied) {
+					gwiseok.href = "";
+				}
+				});
+
+			})
+
+
 	</script>
-
-
 
 
 </html>

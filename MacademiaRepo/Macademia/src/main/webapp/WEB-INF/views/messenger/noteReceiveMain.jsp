@@ -256,8 +256,8 @@
 
 						<div class="info-content">
 							<div><input type="checkbox" class="msg-checkBox" name="msg-checkBox"></div>
-							<div class="msg-sender" style="display: none;">${mnVo.sendName}</div>
-							<div class="msg-receive" >${mnVo.receiveName}</div>
+							<div class="msg-sender" >${mnVo.sendName}</div>
+							<div class="msg-receive" style="display: none;" >${mnVo.receiveName}</div>
 							<div class="msg-title">${mnVo.title}</div>
 							<div class="msg-sendDate">${mnVo.sendDate}</div>
 							<div class="msg-content">${mnVo.content}</div>
