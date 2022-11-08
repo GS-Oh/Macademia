@@ -125,8 +125,8 @@ public class AcademyServiceImpl implements AcademyService{
 
 	//수강생 입실시간 인서트
 	@Override
-	public int insertTime(Map<String[], String> inputMap) {
-		return dao.insertTime(sst, inputMap);
+	public int insertTime(List<Map<String, String>> list) {
+		return dao.insertTime(sst, list);
 	}
 
 

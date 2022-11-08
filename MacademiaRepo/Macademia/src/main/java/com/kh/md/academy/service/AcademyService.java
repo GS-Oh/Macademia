@@ -61,7 +61,7 @@ public interface AcademyService {
 	List<ClassVo> selectClassByInstructor(String memberNo);
 
 	//수강생 입실시간 인서트
-	int insertTime(Map<String[], String> inputMap);
+	int insertTime(List<Map<String, String>> list);
 
 
 

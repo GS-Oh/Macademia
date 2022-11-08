@@ -1,5 +1,6 @@
 package com.kh.md.academy.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,25 +100,36 @@ public class AcademyController {
 	public String inputTime(String studentNo , String classNo /* @RequestParam Map<String, String> inputMap */) {
 		Gson gson = new Gson();
 		
-		System.out.println("두번째 ajax요청받음!");
-		System.out.println("ajax에서 받은 studentNo: " + studentNo);
+			System.out.println("두번째 ajax요청받음!");
 		
-		int[] studentNoArr = gson.fromJson(studentNo, int[].class);
+		String[] studentNoArr = gson.fromJson(studentNo, String[].class);
 		
-		for (int i = 0; i < studentNoArr.length; i++) {
-			System.out.print(studentNoArr[i] + " / ");
+			for (int i = 0; i < studentNoArr.length; i++) {
+				System.out.println(i + "번째 인덱스값 : " + studentNoArr[i]);
+			}
+		
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		
+		for(int i = 0; i < studentNoArr.length; i++) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("studentNo", studentNoArr[i]);
+			map.put("classNo", classNo);
+			list.add(map);
 		}
 		
-		System.out.println("ajax에서 받은 classNo: " + classNo);
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println("리스트 내용 : " + list.get(i));
+		}
 		
-//		Map<Integer[], String> inputMap = new HashMap<Integer[], String>();
-//		inputMap.put
-//		inputMap.put("classNo", classNo);
-//		
-//		int result = service.insertTime(inputMap);
-//		System.out.println(result);
+		int result = service.insertTime(list);
+			System.out.println(result);
 		
-		return "checkedStudents";
+		if(result == -1) {
+			return "checkedStudents";
+		}else{
+			return "0";
+		}
+		
 	}
 	
 	@GetMapping("roll/detail/{cno}")

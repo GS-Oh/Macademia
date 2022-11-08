@@ -139,9 +139,9 @@
 	
 	<insert id="insertCheckin">
 		BEGIN
-		<foreach collection="inputMap" item="m">
+		<foreach collection="list" item="l">
 			INSERT INTO STUDENT_ROLL (NO, STUDENT_NO, CLASS_NO, CHECK_IN)
-			VALUES(SEQ_STUDENT_ROLL_NO.NEXTVAL, #{m.studentNo}, #{m.classNo}, SYSDATE)
+			VALUES(SEQ_STUDENT_ROLL_NO.NEXTVAL, #{l.studentNo}, #{l.classNo}, SYSDATE);
 		</foreach>
 		END;
 	</insert>

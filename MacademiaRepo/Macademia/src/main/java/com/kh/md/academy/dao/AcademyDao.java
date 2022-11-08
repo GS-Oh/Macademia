@@ -63,7 +63,7 @@ public interface AcademyDao {
 	List<ClassVo> selectListByMemNo(SqlSessionTemplate sst, String memberNo);
 
 	//수강생 입실시간 인서트
-	int insertTime(SqlSessionTemplate sst, Map<String[], String> inputMap);
+	int insertTime(SqlSessionTemplate sst, List<Map<String, String>> list);
 
 
 
