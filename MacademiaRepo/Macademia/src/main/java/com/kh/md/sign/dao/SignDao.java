@@ -47,7 +47,12 @@ public class SignDao {
 
 	public SignListVo selectSignOne(SqlSessionTemplate sst, String no) {
 		// TODO Auto-generated method stub
-		return null;
+		return sst.selectOne("signMapper.selectSignOne", no);
+	}
+
+	public int selectTotalCnt(SqlSessionTemplate sst, String no) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("signMapper.selectTotalCnt", no);
 	}
 
 	

@@ -94,5 +94,16 @@
 	 
     
 	</select>
+	
+	<select id="selectTotalCnt" resultType="int">
+		SELECT COUNT(S.S_NO)
+		FROM SIGN S
+        JOIN SIGN_LINE SL ON S.S_NO = SL.S_NO 
+		WHERE SL.S_STEP ='N' AND SL.E_NO = #{no}
+	</select>
+	
+	<select id="selectSignOne" resultType="com.kh.md.sign.vo.SignVo">
+		
+	</select>
 
 </mapper>

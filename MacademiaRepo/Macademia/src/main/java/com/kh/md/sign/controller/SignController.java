@@ -27,6 +27,9 @@ import com.kh.md.service.SignService;
 import com.kh.md.sign.vo.SignLineVo;
 import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
+import com.kh.md.work.common.PageVo;
+import com.kh.md.work.common.Pagination;
+import com.kh.md.work.vo.WorkVo;
 
 @Controller
 @RequestMapping("sign")
@@ -35,15 +38,21 @@ public class SignController {
 	@Autowired
 	private SignService service;
 
-	@GetMapping("list")
-	public String signList(HttpSession session, Model model) {
+	@GetMapping("list/{pno}")
+	public String signList(HttpSession session, Model model,@PathVariable int pno) {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		String no = loginMember.getNo();
 		
 		  Map map = new HashMap(); map.put("no", no);
-		 
+		
+
+			int totalCount = service.selectTotalCnt(no);
+			
+			PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
+		  
 		List<SignListVo> slVo = service.selectSignList(map);
 		System.out.println(slVo);
+		model.addAttribute("pv", pv);
 		model.addAttribute("slVo", slVo);
 		
 		

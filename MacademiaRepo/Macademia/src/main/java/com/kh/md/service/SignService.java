@@ -85,6 +85,12 @@ public class SignService {
 	}
 
 
+	public int selectTotalCnt(String no) {
+		// TODO Auto-generated method stub
+		return dao.selectTotalCnt(sst, no);
+	}
+
+
 //	public int insertSignline(SignLineVo slVo) {
 //		
 //		int slNo = dao.insertSignline(sst, slVo);
