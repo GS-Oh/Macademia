@@ -23,9 +23,10 @@
         </c:forEach>
     </div>
 
-    <div id="search-erea" class="input-group mb-3">
+    <div id="search-area" class="input-group mb-3">
         <input type="text" id="search-input" class="form-control" name="searchName" value="${searchName}" onkeyup="if(window.event.keyCode==13){page(1)}" placeholder="파일명을 입력해주세요">
         <button onclick="page(1)" type="submit" id="search-btn" class="btn btn-primary" >검색</button>
+        <i id="x-mark" class="fa-solid fa-xmark"></i>
     </div>
 
     <div id="pagination-area">

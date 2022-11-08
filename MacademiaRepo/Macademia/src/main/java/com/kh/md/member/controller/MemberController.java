@@ -107,6 +107,7 @@ public class MemberController {
 	public String insert() {
 		return "member/insert";
 	}
+	
 	@PostMapping("/member/insert")
 	public String insert(MemberVo vo){
 		return "member/insert";
@@ -116,19 +117,20 @@ public class MemberController {
 	public String myPage() {
 		return "member/mypage";
 	}
+
+	@GetMapping("/member/bank/list")
+	@ResponseBody
+	public List<BankVo> bankList() {
+		List<BankVo> bankList = memberService.getBankList();
+		
+		return bankList;
+	}
 	
 	@GetMapping("/member/edit")
 	public String edit(Model model) {
 		return "member/edit";
 	}
 	
-	@GetMapping("/member/bank/list")
-	@ResponseBody
-	public List<BankVo> edit() {
-		List<BankVo> bankList = memberService.getBankList();
-		
-		return bankList;
-	}
 	@PostMapping("/member/edit")
 	public String edit(MemberVo memberVo, Model model,HttpServletRequest req, HttpSession session) {
 		System.out.println(memberVo);

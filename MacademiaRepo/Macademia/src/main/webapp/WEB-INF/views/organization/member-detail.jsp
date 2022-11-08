@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	#member-detail{
+	#detail{
 		/* border: 1px solid black; */
 		width: 100%;
 		/* margin-left: 10%; */
@@ -50,7 +50,7 @@
 	}
 </style>
 
-<div id="member-detail">
+<div id="detail">
 
 	<c:forEach var="member" items="${memberList }" varStatus="status">
 		<div class="member">

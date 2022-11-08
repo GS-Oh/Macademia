@@ -37,10 +37,23 @@
         width: 100px;
         height: 30px;
     }
+    #search-area{
+        position: relative;
+    }
+    #search-area #x-mark{
+        position: absolute;
+        top: 7px;
+        right: 80px;
+        font-size: 15px;
+        /* display: none; */
+        color: rgb(161, 161, 161);
+        cursor: pointer;
+    }
     #search-input{
         width: 150px;
         height: 30px;
         font-size: 15px;
+        z-index: 0;
         /* font-weight: 700; */
     }
     #search-btn{
@@ -54,13 +67,14 @@
 	#search-btn:hover{
 		background-color: rgb(71, 71, 125);
 	}
-    #search-erea, #pagination-area{
+    #search-area, #pagination-area{
         width: 450px;
         margin:20px auto;
         text-align: center;
         
         /* border: 1px solid black; */
     }
+
     .active{
         background-color: rgb(102, 102, 171) !important;
     }
@@ -163,6 +177,7 @@
         text-align: center;
         font-size: 20px;
     }
+
 </style>
 
 <div id="myfile-content">
@@ -185,9 +200,10 @@
         </c:forEach>
     </div>
 
-    <div id="search-erea" class="input-group mb-3">
+    <div id="search-area" class="input-group mb-3">
         <input type="text" id="search-input" class="form-control"  name="searchName" value="${searchName}" onkeyup="if(window.event.keyCode==13){page(1)}" placeholder="파일명을 입력해주세요">
         <button onclick="page(1)" type="submit" id="search-btn" class="btn btn-primary" >검색</button>
+        <i id="x-mark" class="fa-solid fa-xmark"></i>
     </div>
 
     <div id="pagination-area">
@@ -327,6 +343,13 @@
     }
 </script>
 
+<!-- 검색어 지우기 -->
+<script>
+    $(document).on('click','#x-mark',function(){ 
+        $('#search-input')[0].value = "";
+    })
+</script>
+
 
 <!-- 현재페이지 번호 -->
 <script>
@@ -338,7 +361,7 @@
 <script>
     function page(pno){
         currentPage = pno;
-        let searchName = document.querySelector('#search-input').value
+        let searchName = document.querySelector('#search-input').value.trim();
         $.ajax({
             type: "post",
             url: "/md/myfile/list/"+pno,
@@ -349,6 +372,7 @@
                 $('#myfile-content').replaceWith(response);
                 makeShortName();
                 pageBtnColor(pno);
+                $('#search-input').focus();
             },
             error: function (response) {
                 Swal.fire(

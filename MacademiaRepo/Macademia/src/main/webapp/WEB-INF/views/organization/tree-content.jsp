@@ -111,15 +111,15 @@
 <div id="search-area">
 	<h3>조직 구성</h3>
 	<div id="search" class="input-group mb-3">
-		<input type="text" id="search-input" class="form-control" placeholder="인물검색">
-		<button type="submit" id="search-btn" class="btn btn-primary" >검색</button>
+		<input type="text" id="search-input" class="form-control" placeholder="인물검색" onkeyup="if(window.event.keyCode==13){search()}">
+		<button type="submit" id="search-btn" class="btn btn-primary">검색</button>
 	</div>
 </div>
 
 <hr>
 
 <div id="myboards-content">
-    <div id="tree-detail">
+    <div id="detail">
 		<img src="/md/resources/img/tree.jpg" alt="조직도">
 	</div>
 </div>
@@ -128,92 +128,103 @@
 <!-- 조직도 트리구조 구현 -->
 <script>
 
-let treeData = ${tree};
-treeData[0].parent = "#";
-for(let i = 0 ; i<treeData.length ; i++){
-	treeData[i].state = {'opened' : true};
-}
+	let treeData = ${tree};
+	treeData[0].parent = "#";
+	for(let i = 0 ; i<treeData.length ; i++){
+		treeData[i].state = {'opened' : true};
+	}
 
-$(function () { 
-    $('#tree').jstree({ 
-		'core' : {
-			'data' : treeData
-		}
-   	});
-});
+	$(function () { 
+		$('#tree').jstree({ 
+			'core' : {
+				'data' : treeData
+			}
+		});
+	});
+	</script>
+
+	<!-- 부서 구성 -->
+	<script>
+	$('#tree').on('select_node.jstree', function (e,node) {
+			$.ajax({
+				url:"/md/organization/tree/"+node.selected[0],
+				type:"get",
+				success:function(result){
+					$('#detail').replaceWith(result);
+				
+				},
+				error:function(){
+					alert('통신에러');
+				}
+			})
+	})
+	</script>
+
+	<!-- 사원검색 자동완성기능 -->
+	<script>
+	$(document).ready(function () {
+		$('#search-input').autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/md/organization/search/auto",
+					type: "GET",
+					dataType: "json",
+					data: { "search" : request.term},
+					success: function (data) {
+						response(
+							$.map(data, function (member) {
+								return {
+									label: member.name,
+									value: member.name,
+									idx: member.no,
+								}
+							})
+						)
+					}
+				})
+			},
+			focus: function (event, ui) {
+			return false;
+			},
+			select: function (event, ui) {},
+			minLength: 1,
+			delay: 100,
+			autoFocus: false,
+		});
+	});
 </script>
 
-<!-- 부서 구성 -->
+<!-- 사원검색 -->
 <script>
-$('#tree').on('select_node.jstree', function (e,node) {
-
+	function search() {
+		let search = $('#search-input').val();
 		$.ajax({
-			url:"/md/organization/tree/"+node.selected[0],
-			type:"get",
+			url:"/md/organization/search/",
+			type:"GET",
+			data:{"search" : search},
 			success:function(result){
-				$('#tree-detail').replaceWith(result);
+				$('#detail').replaceWith(result);
 			},
 			error:function(){
 				alert('통신에러');
 			}
 		})
-  })
-</script>
+	};
 
-<!-- 사원검색 자동완성기능 -->
-<script>
-$(document).ready(function () {
-  $('#search-input').autocomplete({
-    source: function (request, response) {
-        $.ajax({
-            url: "/md/organization/search/auto",
-            type: "GET",
-            dataType: "json",
-            data: { "search" : request.term},
-            success: function (data) {
-				console.log(data);
-                response(
-                    $.map(data, function (member) {
-                        return {
-                            label: member.name,
-                            value: member.name,
-                            idx: member.no,
-                        }
-                    })
-                )
-            }
-        })
-    },
-    focus: function (event, ui) {
-      return false;
-    },
-    select: function (event, ui) {},
-    minLength: 1,
-    delay: 100,
-    autoFocus: false,
-  });
-});
-</script>
-
-<!-- 사원검색 -->
-<script>
-	
-$('#search-btn').click(function() {
-	let search = $('#search-input').val();
-	$.ajax({
-		url:"/md/organization/search/",
-		type:"GET",
-		data:{"search" : search},
-		success:function(result){
-			$('#tree-detail').replaceWith(result);
-		},
-		error:function(){
-			alert('통신에러');
-		}
-	})
-});
-
-
+	$('#search-btn').click(function() {
+		let search = $('#search-input').val();
+		$.ajax({
+			url:"/md/organization/search/",
+			type:"GET",
+			data:{"search" : search},
+			success:function(result){
+				$('#detail').replaceWith(result);
+			},
+			error:function(){
+				alert('통신에러');
+			}
+		})
+	});
 </script>
 
 
