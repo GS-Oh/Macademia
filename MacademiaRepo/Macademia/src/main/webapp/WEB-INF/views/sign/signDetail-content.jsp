@@ -231,7 +231,7 @@ color:#fff
 			<div class="modal-wrap d-inline-flex w-100">
 				<div class="w-50">
 		          <select id="select_top">
-						<option value="0">전체</option>
+						<option >전체</option>
 						<option value="1">대표이사</option>
 						<option value="2">부원장</option>
 						<option value="3">운영기획부</option>
@@ -254,7 +254,7 @@ color:#fff
 					<br> 
 					<select multiple id="select_box">
 						<c:forEach items="${memberList}" var="x">
-							<option value="${x.no }">${x.name} (${x.deptName} - ${x.positionName})</option>
+							<option>${x.name} (${x.deptName} - ${x.positionName})</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -302,30 +302,27 @@ $('#select_top').on('change', function(){
   
 	
 	console.log(deptCode)
-	
-		$.ajax({
-			url:"/md/sign/deptList",
-			mehod : "get",
-			data :{dept : deptCode },
-			dataType: 'json',
-			success: function(data){
-				console.log("성공")
-				$('#select_box option').remove();
-				 let str;
-				$.each(data, function(i){
-					str += '<option value="' + data[i].no +'">' + data[i].name+' ('+data[i].deptName +' - ' + data[i].positionName + ')</option>'
-					 
-				}) 
-				$('#select_box').append(str);
-				
-			}
-			,error: function(data){
-			    	console.log("실패");
-			    	console.log(data)
-			    }
-		})
-	
-	
+	$.ajax({
+		url:"/md/sign/deptList",
+		mehod : "get",
+		data :{dept : deptCode },
+		dataType: 'json',
+		success: function(data){
+			console.log("성공")
+			$('#select_box option').remove();
+			 let str;
+			$.each(data, function(i){
+				str += '<option value="' + data[i].no +'">' + data[i].name+' ('+data[i].deptName +' - ' + data[i].positionName + ')</option>'
+				 
+			}) 
+			$('#select_box').append(str);
+			
+		}
+		,error: function(data){
+		    	console.log("실패");
+		    	console.log(data)
+		    }
+	})
 
 	})
 
@@ -335,7 +332,6 @@ $('#plus').on('click', function(){
 
 $('#addUser').on('click', function(){
 	let userCode = $('#select_box option:selected').val();
-	console.log(userCode)
 	let userOption = $('#select_box option[value=' + userCode + ' ]')[0].outerHTML;
 
 	$('#select_right').append(userOption)
@@ -352,16 +348,14 @@ $("#deleteUser").on('click',function(){
 var i = 0
 $("#select_complete").on('click',function(){
    let userCode = $('#select_right option').val();
-	console.log(userCode)
+
    $('#sign_middle *').remove();
-	approverVal = [];
    let apprTableHtml;
    let rankHtml;
     let nameHtml;
     let markHtml;
    var seq = 1;
   
-   
         $('#select_right option').each(function () {
           var selected = $(this).val();
           approverVal.push(selected);
@@ -492,55 +486,7 @@ $('#approver-submit').on('click', function () {
       })
         $('#approval-table').append(apprTableHtml);
     });
-    $('#writeComplete').on('click',function(){
-
-      if(approverVal.length==0){
-        alert("결재선을 지정해주세요");
-        var content = $('#summernote').summernote('code');
-        console.log(content); 
-      }else{ 
-        var result = confirm("기안서를 작성 하시겠습니까?");
-        if(result==1){
-          var title = $('#s_title').val();
-        var type = $('#doc_type option:selected').val();
-        var content = $('#summernote').summernote('code');
-        
-        let param = {
-        	title:title, 
-            type:type,
-            content:content,
-            sTypeNo : "1",
-            line: JSON.stringify(approverVal)
-        };
-        console.log(param);
-        $.ajax({
-          url :'/md/sign/signWrite',
-        			    type : 'post',
-        			    dataType : 'json', 
-        			    data : param,
-        			    success: function(){ 
-                    console.log("ajax성공");
-                    alert("기안서 작성이 완료 되었습니다");
-                    location.href="/md/sign/list"
-                  }
-        })
-
-       /*  $.ajax({
-          url: '/md/sign/signLine',
-          type: 'post',
-        //  dataType: 'text',
-        //  contentType: "application/json; charset=utf-8",
-          data : {"line": JSON.stringify(approverVal)},
-          success:function(data){
-            console.log("ajax성공");
-            console.log(data);
-            
-          }
-        }) */
-        }
-      
-      }
-    })
+   
 
 
 

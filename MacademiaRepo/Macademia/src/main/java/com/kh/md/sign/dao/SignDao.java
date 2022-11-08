@@ -1,6 +1,7 @@
 package com.kh.md.sign.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.sign.vo.SignLineVo;
+import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
 
 @Repository
@@ -37,6 +39,15 @@ public class SignDao {
 	public int signFirst(SqlSessionTemplate sst, String loginMemberNo) {
 		// TODO Auto-generated method stub
 		return sst.update("signMapper.signFirst", loginMemberNo);
+	}
+
+	public List<SignListVo> selectSignList(SqlSessionTemplate sst,Map map) {
+		return sst.selectList("signMapper.selectSignList", map);
+	}
+
+	public SignListVo selectSignOne(SqlSessionTemplate sst, String no) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

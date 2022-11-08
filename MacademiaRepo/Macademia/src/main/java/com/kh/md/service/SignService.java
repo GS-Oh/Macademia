@@ -3,6 +3,7 @@ package com.kh.md.service;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.sign.dao.SignDao;
 import com.kh.md.sign.vo.SignLineVo;
+import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
 
 @Service
@@ -69,6 +71,17 @@ public class SignService {
 	public int signFirst(String loginMemberNo) {
 		// TODO Auto-generated method stub
 		return dao.signFirst(sst,loginMemberNo);
+	}
+
+
+	public List<SignListVo> selectSignList(Map map) {
+		return dao.selectSignList(sst ,map);
+	}
+
+
+	public SignListVo selectSignOne(String no) {
+		// TODO Auto-generated method stub
+		return dao.selectSignOne(sst, no);
 	}
 
 

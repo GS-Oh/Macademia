@@ -61,64 +61,21 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>내용</th>
+
 							<th>요청날짜</th>
 							<th>마감날짜</th>
 							
 						</tr>
 						
-						<tr>
-							<td>1</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
+						 <c:forEach items="${slVo}" var="x">
+						    <tr>
+							<td>${x.S_NO}</td>
+						 	<td><a href="/md/work/slaveDetail/${x.S_NO}">${x.S_TITLE}</td>
+							<td>${x.S_DATE}</td>
+							
 						</tr>
+   						 </c:forEach>
 						
-						<tr>
-							<td>2</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						
-						<tr>
-							<td>3</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						
-						<tr>
-							<td>4</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						
-						<tr>
-							<td>5</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
 					
 				
 				</table>

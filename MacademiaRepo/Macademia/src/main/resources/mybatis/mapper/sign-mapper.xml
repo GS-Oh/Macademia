@@ -15,6 +15,7 @@
 		FROM POSITION P
 		JOIN DEPT D ON P.DEPT_NO = D.NO
 		JOIN MEMBER M ON M.POSITION_NO = P.NO
+		ORDER BY M.NO ASC
 	</select>
 	<select id="getListDept"
 		resultType="com.kh.md.member.vo.MemberVo">
@@ -29,7 +30,10 @@
 		FROM POSITION P
 		JOIN DEPT D ON P.DEPT_NO = D.NO
 		JOIN MEMBER M ON M.POSITION_NO = P.NO
+		<if test='deptNo != "0"'>
 		WHERE D.NO = #{deptNo}
+		</if>
+		ORDER BY M.NO ASC
 	</select>
 
 	<insert id="signWrite" parameterType="com.kh.md.sign.vo.SignVo">
@@ -73,5 +77,22 @@
 		WHERE E_NO = #{no}
 	</update>
 
+	<select id="selectSignList" resultType="map">
+	 WITH T1 AS
+ (SELECT SL.S_NO AS S_NO, SL.S_LEVEL AS S_LEVEL, SL.S_STEP AS S_STEP,S.S_TITLE AS S_TITLE,S.S_DATE AS S_DATE,S.S_CONTENT,S.S_STATUS,S.A_NO
+ FROM SIGN_LINE SL
+ INNER JOIN SIGN S ON S.S_NO = SL.S_NO
+ WHERE SL.E_NO = #{no}
+ AND SL.S_STEP='N')
+ SELECT * FROM T1
+ INNER JOIN SIGN_LINE SSL ON T1.S_NO = SSL.S_NO
+ WHERE SSL.S_NO = T1.S_NO
+ AND SSL.S_LEVEL  = T1.S_LEVEL-1
+ AND SSL.S_STEP = 'Y'
+ 
+	 
+	 
+    
+	</select>
 
 </mapper>

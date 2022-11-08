@@ -3,6 +3,7 @@ package com.kh.md.sign.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import com.google.gson.JsonElement;
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.service.SignService;
 import com.kh.md.sign.vo.SignLineVo;
+import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
 
 @Controller
@@ -33,7 +36,20 @@ public class SignController {
 	private SignService service;
 
 	@GetMapping("list")
-	public String signList() {
+	public String signList(HttpSession session, Model model) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		String no = loginMember.getNo();
+		
+		  Map map = new HashMap(); map.put("no", no);
+		 
+		List<SignListVo> slVo = service.selectSignList(map);
+		System.out.println(slVo);
+		model.addAttribute("slVo", slVo);
+		
+		
+		
+	
+		
 		
 		return "/sign/signList";
 		
@@ -100,6 +116,15 @@ public class SignController {
 		return 1;
 		
 	}
+	
+	@GetMapping("signDetail/{no}")
+	public String signDetail(@PathVariable String no) {
+		
+		SignListVo signOne = service.selectSignOne(no);
+		
+		return "/sign/signDetail";
+	}
+	
 //	@PostMapping("signLine")
 //	@ResponseBody
 //	public String signLine(HttpServletRequest req, String line,HttpSession session){
@@ -134,13 +159,5 @@ public class SignController {
 //		
 //		
 //	}
-	/*
-	 * @PostMapping("signFirst")
-	 * 
-	 * @ResponseBody public int signFirst(HttpSession session) {
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	
 }
