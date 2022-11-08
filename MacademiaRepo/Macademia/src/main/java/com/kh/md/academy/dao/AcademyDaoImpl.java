@@ -134,8 +134,8 @@ public class AcademyDaoImpl implements AcademyDao{
 
 	//수강생 입실시간 인서트
 	@Override
-	public int insertTime(SqlSessionTemplate sst, Map<String[], String> inputMap) {
-		return sst.insert("academyMapper.insertCheckin", inputMap);
+	public int insertTime(SqlSessionTemplate sst, List<Map<String, String>> list) {
+		return sst.insert("academyMapper.insertCheckin", list);
 	}
 
 

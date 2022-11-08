@@ -144,19 +144,28 @@
         color: white;
         font-weight: bolder;
     }
+    .modal-body{
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr;
+        height: 600px;
+    }
     .modal-footer{
         display: flex;
         justify-content: center;
     }
-    .modal-body{
-        height: 600px;
-    }
     /* 모달바디 */
     .student-list{
-        width: 33%;
+        width: 100%;
         height: 550px;
         border: 1px solid #6667AB;
-        border-radius: 10px;
+        border-radius: 5px;
+    }
+    .student-list-online,.student-list-offline{
+        width: 100%;
+        height: 270px;
+    }
+    .student-list-online{
+        margin-bottom: 10px;
     }
     .student-list-title{
         height: 50px;
@@ -176,6 +185,27 @@
         grid-template-columns: 30px 1fr;
         justify-items: center;
         align-items: center;
+    }
+    .student-list-online-title, .student-list-offline-title{
+        background-color: #6667AB;
+        color: white;
+        height: 50px;
+        font-size: 13px;
+        font-weight: bolder;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        padding-left: 10px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+    .student-list-online-body, .student-list-offline-body{
+        border-right: 1px solid #6667AB;
+        border-left: 1px solid #6667AB;
+        border-bottom: 1px solid #6667AB;
+        padding-bottom: 10px;
+        height: 220px;
+        overflow-y: scroll;
     }
     .student-list-bot{
         /* border: 1px solid red; */
@@ -208,16 +238,40 @@
         justify-items: center;
         align-items: center;
     }
-    .student-list-body::-webkit-scrollbar {
+    .student-list-body::-webkit-scrollbar, .student-list-online-body::-webkit-scrollbar, .student-list-offline-body::-webkit-scrollbar{
         width: 5px;
     }
-    .student-list-body::-webkit-scrollbar-thumb {
+    .student-list-body::-webkit-scrollbar-thumb, .student-list-online-body::-webkit-scrollbar-thumb, .student-list-offline-body::-webkit-scrollbar-thumb{
         background-color: #6667AB;
         border-radius: 50px;
     }
-    .student-list-body::-webkit-scrollbar-track {
+    .student-list-body::-webkit-scrollbar-track, .student-list-online-body::-webkit-scrollbar-track, .student-list-offline-body::-webkit-scrollbar-track{
         background-color: white;
         border-radius: 50px;
+    }
+    .after-time-check{
+        display: grid;
+        grid-template-columns: 100px;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+    }
+    .online-btns{
+        display: grid;
+        grid-template-rows: 30px 30px;
+        /* justify-content: center;
+        align-content: center; */
+    }
+    .after-time-check button{
+        background-color: white;
+        border: 1px solid #6667AB;
+        color: #6667AB;
+        font-weight: bolder;
+        margin: 5px;
+    }
+    .after-time-check button:hover{
+        background-color: #6667AB;
+        color: white;
     }
 </style>
 
@@ -286,8 +340,38 @@
 	                                    </div>
                                         <div class="student-list-bot"><button class="time-input-btn">입실체크</button></div>
 	                                </div>
-	                                <div></div>
-	                                <div></div>
+                                    
+	                                <div class="after-time-check">
+                                        <div class="online-btns">
+                                            <button>></button>
+                                            <button><</button>
+                                        </div>
+                                        <div class="online-btns">
+                                            <button>></button>
+                                            <button><</button>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="student-list-online">
+                                            <div class="student-list-online-title">온라인</div>
+                                            <div class="student-list-online-body">
+                                                <div class="individual-student-list">
+                                                    <div><input type="checkbox" class="checkEach"></div>
+                                                    <div><label for="">김철수</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="student-list-offline">
+                                            <div class="student-list-offline-title">오프라인</div>
+                                            <div class="student-list-offline-body">
+                                                <div class="individual-student-list">
+                                                    <div><input type="checkbox" class="checkEach"></div>
+                                                    <div><label for="">김철수</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 	                            </div>
 	                    
 	                            <!-- Modal footer -->
@@ -443,7 +527,20 @@
                 },
                 success : function(x){
                     console.log('success!');
-                    console.log(x);
+                    
+                    if(x == 'checkedStudents'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: '시간이 입력되었습니다.'
+                        });
+
+                        func01(checkedStudents);
+                    }else{
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Something got wrong!'
+                        });
+                    }
                 },
                 error : function(){
                     console.log('time-input failed!');
@@ -456,5 +553,12 @@
             });
         }
     });
-   
+
+function func01(checkedStudents){
+    // let l = checkedStudents.length
+
+    // for(let i = 0; i < l; i++){
+    //     $('#after-time').append('hi')
+    // }
+}
 </script>

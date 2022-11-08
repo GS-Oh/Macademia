@@ -115,13 +115,13 @@
             </a>
         </div>
         <div id="nav-menu7">
-            <a href="${root}/sign/list">
+            <a href="${root}/sign/list/1">
                 <i class="fa-solid fa-clipboard-check fa-2x"></i><br>
                 <label for="">결재</label>
             </a>
         </div>
         <div id="nav-menu8">
-            <a href="${root}/board/main">
+            <a href="${root}/board/free">
                 <i class="fa-regular fa-note-sticky fa-2x"></i><br>
                 <label for="">게시판</label>
             </a>
