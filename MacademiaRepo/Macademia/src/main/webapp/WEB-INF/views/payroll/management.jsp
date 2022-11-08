@@ -203,11 +203,11 @@
 							<input type="text" class="management-table-content" value="${prVo.deptName}" name="deptName" readonly>
 							<input type="text" class="management-table-content" value="${prVo.rankName}" name="rankName" readonly>
 							<input type="text" class="management-table-content" value="${prVo.name}" name="name" readonly>
-							<input type="text" class="management-table-content" value="${prVo.pay}" name="pay" readonly>
-							<input type="text" class="management-table-content" value="${prVo.taxfree}" name="taxfree" readonly>
-							<input type="text" class="management-table-content" value="${prVo.totalPayment}" name="totalPayment" readonly>
-							<input type="text" class="management-table-content" value="${prVo.totalDeduction + prVo.nationalPension + prVo.healthPremium + prVo.incomeTax + prVo.localTax}" name="totalDeduction" readonly>
-							<input type="text" class="management-table-content " value="${prVo.actualPayment}" name="actualPayment" readonly >
+							<input type="text" class="management-table-content commaC" value="${prVo.pay}" name="pay" readonly>
+							<input type="text" class="management-table-content commaC" value="${prVo.taxfree}" name="taxfree" readonly>
+							<input type="text" class="management-table-content commaC" value="${prVo.totalPayment}" name="totalPayment" readonly>
+							<input type="text" class="management-table-content commaC" value="${prVo.totalDeduction + prVo.nationalPension + prVo.healthPremium + prVo.incomeTax + prVo.localTax}" name="totalDeduction" readonly>
+							<input type="text" class="management-table-content commaC" value="${prVo.actualPayment}" name="actualPayment" readonly >
 							<input type="submit" class="management-table-content submit-Btn" value="자세히보기" style="font-size:1.2rem;" >
 							
 							
@@ -266,8 +266,48 @@
 
 		</div>
 
+		<script>
+			const commaCreate = document.querySelectorAll('.commaC');
 
-		<!--  -->
+			for(let i=0; i<commaCreate.length; i++){
+
+				//콤마작업
+				let num01;
+				let num02;
+				num01 = commaCreate[i].value;
+				num02 = num01.replace(/\D/g,""); 
+				num01 = setComma(num02);
+				commaCreate[i].value =  num01;
+
+			}
+
+			//콤마작업함수
+			function setComma(n) {
+				var reg = /(^[+-]?\d+)(\d{3})/;
+				n += '';         
+				while (reg.test(n)) {
+					n = n.replace(reg, '$1' + ',' + '$2');
+				}         
+				return n;
+			};
+
+			// 콤마 제거
+			function deleteComma(){
+
+				for(let i=0; i<commaCreate.length; i++){
+
+					let number = commaCreate[i].value.replace(/,/g, "");
+					commaCreate[i].value = number;
+					
+				}
+
+			}
+
+		</script>
+
+
+
+		<!-- 검색 값 유지 -->
 		<script>
 
 			
@@ -319,8 +359,8 @@
 
 			for(let i=0; i<submitBtn.length; i++){
 				submitBtn[i].addEventListener('click',function(){
+					deleteComma();
 					totalDeduction[i].value = totalDeduction[i].value - healthPremium[i].value - incomeTax[i].value - localTax[i].value - nationalPension[i].value;
-					console.log(totalDeduction[i].value);
 				});
 			}
 			
@@ -329,54 +369,54 @@
 
 
 
-<!-- 상태 체크 -->
-<script>
-		const statusChoice = document.querySelectorAll('.status-choice');
-		const salNo = document.querySelectorAll('input[name=salNo]')
-		const statucForm = document.querySelector('#statuc-form');
+		<!-- 상태 체크 -->
+		<script>
+				const statusChoice = document.querySelectorAll('.status-choice');
+				const salNo = document.querySelectorAll('input[name=salNo]')
+				const statucForm = document.querySelector('#statuc-form');
 
-		for(let i=0; i<statusChoice.length; i++){
+				for(let i=0; i<statusChoice.length; i++){
 
-			statusChoice[i].addEventListener('click',function(){
-				if(statusChoice[i].value == '대기'){
-					let checkSalNo = salNo[i].value;
-					let stFormDate = document.querySelector('#stFormDate');
-					let stDeptName = document.querySelector('#stDeptName');
-					let deptSelect = document.querySelector('#dept-select');
-					Swal.fire({
-						title: '상태를 선택해 주세요',
-						showDenyButton: true,
-						showCancelButton: true,
-						confirmButtonText: '확정',
-						denyButtonText: '반려'
-						}).then((result) => {
-						/* Read more about isConfirmed, isDenied below */
-						if (result.isConfirmed) {
-							statusChoice[i].type= "submit";
-							statucForm.action = "/md/payroll/checkStatus/CONFIRM/"+salNo[i].value;
+					statusChoice[i].addEventListener('click',function(){
+						if(statusChoice[i].value == '대기'){
+							let checkSalNo = salNo[i].value;
+							let stFormDate = document.querySelector('#stFormDate');
+							let stDeptName = document.querySelector('#stDeptName');
+							let deptSelect = document.querySelector('#dept-select');
+							Swal.fire({
+								title: '상태를 선택해 주세요',
+								showDenyButton: true,
+								showCancelButton: true,
+								confirmButtonText: '확정',
+								denyButtonText: '반려'
+								}).then((result) => {
+								/* Read more about isConfirmed, isDenied below */
+								if (result.isConfirmed) {
+									statusChoice[i].type= "submit";
+									statucForm.action = "/md/payroll/checkStatus/CONFIRM/"+salNo[i].value;
 
-							stFormDate.value = yearSelect.value;
-							stDeptName.value = deptSelect.value;
-							console.log(stFormDate);							
-							console.log(stDeptName);							
-							Swal.fire('최종 확정 해주세요.', '', 'success');
-								
-							statusChoice[i].value = "최종확정하기";
+									stFormDate.value = yearSelect.value;
+									stDeptName.value = deptSelect.value;
+									console.log(stFormDate);							
+									console.log(stDeptName);							
+									Swal.fire('최종 확정 해주세요.', '', 'success');
+										
+									statusChoice[i].value = "최종확정하기";
 
-						} else if (result.isDenied) {
-							statusChoice[i].type= "submit";
-							statucForm.action = "/md/payroll/checkStatus/RETURN/"+salNo[i].value;
+								} else if (result.isDenied) {
+									statusChoice[i].type= "submit";
+									statucForm.action = "/md/payroll/checkStatus/RETURN/"+salNo[i].value;
 
-							stFormDate.value = yearSelect.value;
-							stDeptName.value = deptSelect.value;
+									stFormDate.value = yearSelect.value;
+									stDeptName.value = deptSelect.value;
 
-							Swal.fire('최종 반려 해주세요.', '', 'info')
-							statusChoice[i].value = "최종반려하기";
+									Swal.fire('최종 반려 해주세요.', '', 'info')
+									statusChoice[i].value = "최종반려하기";
+								}
+							})
 						}
-					})
-				}
 
-			});
+					});
 		}
 
 		</script>
