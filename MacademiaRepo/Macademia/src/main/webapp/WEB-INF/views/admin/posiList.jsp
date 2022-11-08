@@ -15,9 +15,7 @@
 </head>
 <body>
 
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
+    <!-- Main wrapper start -->
     <div id="main-wrapper">	
 
 		<c:import url="../common/menubar_admin.jsp"/>
@@ -46,12 +44,12 @@
                             <div class="card-body">
 	                        	<div style="float: right; margin-bottom: 10px;">
 		                            <!-- Button trigger modal -->
-			                       	<button type="button" class="btn btn-outline-dark" id="insertBtnModal" data-toggle="modal" data-target="#insertJob">직위 추가</button>
+			                       	<button type="button" class="btn btn-outline-dark" id="insertBtnModal" data-toggle="modal" data-target="#insertPosi">직위 추가</button>
 			                        <button type="button" class="btn btn-outline-dark" id="deleteBtn">직위 삭제</button>
 	                            </div>
 					              
 	                            <!-- Insert Modal -->
-	                            <div class="modal fade" id="insertJob">
+	                            <div class="modal fade" id="insertPosi">
 	                            	<div class="modal-dialog modal-dialog-centered" role="document">
 	                                	<div class="modal-content">
 	                                    	<div class="modal-header">
@@ -61,11 +59,11 @@
 	                                        </div>
 	                                        <div class="modal-body" style="color: black;">
 	                                        	<span style="color: red;">*</span><label class="col-form-label">명칭</label> 
-	                                            <input id="jobName1" type="text" class="form-control" name="jobName" maxlength="10"><br>
-	                                            <span id="jobNameGuide1" class="guide text-danger"></span><br>
+	                                            <input id="posiName1" type="text" class="form-control" name="posiName" maxlength="10"><br>
+	                                            <span id="posiNameGuide1" class="guide text-danger"></span><br>
 	                                            <span class="text-danger">*</span><label class="col-form-label">정렬 순서</label>
-	                                            <input id="jobOrder1" type="number" class="form-control" name="jobOrder" step="1" min="1"><br>
-	                                            <span id="jobOrderGuide1" class="guide text-danger"></span><br>
+	                                            <input id="posiOrder1" type="number" class="form-control" name="posiOrder" step="1" min="1"><br>
+	                                            <span id="posiOrderGuide1" class="guide text-danger"></span><br>
 	                                        </div>
 	                                        <div class="modal-footer">
 	                                            <button type="button" class="btn btn-primary" id="insertBtn">저장</button>
@@ -76,7 +74,7 @@
 	                          	</div>
 	                          	
 	                            <!-- Update Modal -->
-	                            <div class="modal fade" id="updateJob">
+	                            <div class="modal fade" id="updatePosi">
 	                                <div class="modal-dialog modal-dialog-centered" role="document">
 	                                	<div class="modal-content">
 	                                    	<div class="modal-header">
@@ -86,13 +84,13 @@
 	                                   		</div>
 	                                        <div class="modal-body" style="color: black;">
 	                                        	<span class="text-danger">*</span><label class="col-form-label">명칭</label>
-	                                            <input id="jobName2" type="text" class="form-control" name="jobName" maxlength="10"><br>
-	                                            <span id="jobNameGuide2" class="guide text-danger"></span><br>
+	                                            <input id="posiName2" type="text" class="form-control" name="posiName" maxlength="10"><br>
+	                                            <span id="posiNameGuide2" class="guide text-danger"></span><br>
 	                                            <span class="text-danger">*</span><label class="col-form-label">정렬 순서</label>
-	                                            <input id="jobOrder2" type="number" class="form-control" name="jobOrder" step="1" min="1"><br>
-	                                            <span id="jobOrderGuide2" class="guide text-danger"></span><br>
+	                                            <input id="posiOrder2" type="number" class="form-control" name="posiOrder" step="1" min="1"><br>
+	                                            <span id="posiOrderGuide2" class="guide text-danger"></span><br>
 	                                        </div>
-	                                        <input id="jobId" type="hidden" name="jobId">
+	                                        <input id="posiNo" type="hidden" name="posiNo">
 	                                        <div class="modal-footer">
 	                                        	<button type="button" class="btn btn-primary" id="updateBtn">저장</button>
 	                                            <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
@@ -101,7 +99,7 @@
 	                                </div>
 	                         	</div>
 	                            <div class="table-responsive">
-	                            	<table id="jobList" class="table table-hover table-responsive-sm" style="color: black; text-align: center;">
+	                            	<table id="posiList" class="table table-hover table-responsive-sm" style="color: black; text-align: center;">
 	                                	<thead>
 	                                    	<tr>
 	                                        	<th scope="col" width="30px"><input type="checkbox" id="checkAll"></th>
@@ -111,17 +109,17 @@
 	                                       </tr>
 	                                  	</thead>
 	                                  	<tbody>
-	                                    	<c:if test="${ empty jList }">
+	                                    	<c:if test="${ empty pList }">
 	                                       		<tr>
 			                                		<td colspan="4">등록된 직위가 없습니다.</td>
 		                                   		</tr>
 	                                        </c:if>
-	                                        <c:forEach var="j" items="${ jList }">
+	                                        <c:forEach var="p" items="${ pList }">
 		                                    	<tr>
-			                                		<td><input type="checkbox" class="checkJ" name="jobId" value="${ j.jobId }"></td>
-			                                        <td><a class="updateBtnModal" data-toggle="modal" data-target="#updateJob">${ j.jobName }</a></td>
-			                                        <td>${ j.jobOrder }</td>
-			                                        <td>${ j.memberCount }</td>
+			                                		<td><input type="checkbox" class="checkP" name="jobId" value="${ p.posiNo }"></td>
+			                                        <td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">${ j.posiName }</a></td>
+			                                        <td>${ p.posiOrder }</td>
+			                                        <td>${ p.memberCount }</td>
 		                                        </tr>
 	                                       	</c:forEach>
 	                                   	</tbody>
@@ -133,18 +131,18 @@
 	                       				var checkAll = $(this).prop('checked');
 	                       				
 	                       				if (checkAll) {
-	                       					$('.checkJ').prop('checked', true);
+	                       					$('.checkP').prop('checked', true);
 	                       				} else {
-	                       					$('.checkJ').prop('checked', false);
+	                       					$('.checkP').prop('checked', false);
 	                       				}
 	                       			});
 	                       			
-	                       			$(document).on('change', '.checkJ', function(){
-	                       				var checkJ = document.getElementsByClassName('checkJ');
+	                       			$(document).on('change', '.checkP', function(){
+	                       				var checkP = document.getElementsByClassName('checkP');
 	                       				
 	                       				var checkFlag = true;
-	                       				for (var i in checkJ) {
-	                       					if(checkJ[i].checked == false) {
+	                       				for (var i in checkP) {
+	                       					if(checkP[i].checked == false) {
 	                       						checkFlag = false;
 	                       					}
 	                       				}
@@ -160,45 +158,45 @@
 	                       			var dupCheck = false;
 	                       			
 					        		$('#insertBtnModal').on('click', function(){ // 직위 추가 모달창 열시 input 값 초기화
-					        			$('#insertJob').find('input').val('');
-					        			$('#insertJob').find('.guide').text('');
+					        			$('#insertPosi').find('input').val('');
+					        			$('#insertPosi').find('.guide').text('');
 					        			dupCheck = false;
 					        		});
 	                       			
-	                       			$('#jobName1').on('change', function(){
+	                       			$('#posiName1').on('change', function(){
 	                       				dupCheck = false;
-	                       				var jobName = document.getElementById('jobName1');
-	                       				jobName.value = jobName.value.trim();
-	                       				var jobNameArr = document.getElementsByClassName('updateBtnModal');
+	                       				var posiName = document.getElementById('posiName1');
+	                       				posiName.value = posiName.value.trim();
+	                       				var posiNameArr = document.getElementsByClassName('updateBtnModal');
 	                       				
-	                       				if(jobName.value.trim().length < 1 || jobName.value.trim().length > 10) {									        			
-	                       					$('#jobNameGuide1').text('1~10자리까지 입력해주세요.');
-	                       					jobName.focus();
+	                       				if(posiName.value.trim().length < 1 || posiName.value.trim().length > 10) {									        			
+	                       					$('#posiNameGuide1').text('1~10자리까지 입력해주세요.');
+	                       					posiName.focus();
 	                       				} else {
-	                       					for (var i in jobNameArr) {
-	                       						if(jobName.value.trim() == jobNameArr[i].text) {
+	                       					for (var i in posiNameArr) {
+	                       						if(posiName.value.trim() == posiNameArr[i].text) {
 			                       					dupCheck = true;
 			                       				}
 	                       					}
 	                       				
 		                       				if (dupCheck) {
-		                       					$('#jobNameGuide1').text('이미 사용 중인 직위 명칭입니다.');
-		                       					jobName.focus();
+		                       					$('#posiNameGuide1').text('이미 사용 중인 직위 명칭입니다.');
+		                       					posiName.focus();
 		                       				} else {
-		                       					$('#jobNameGuide1').text('');
+		                       					$('#posiNameGuide1').text('');
 		                       				}
 		                       			}
 	                       				
 	                       			});
 	                       			
-	                       			$('#jobOrder1').on('change', function(){
-	                       				var jobOrder = document.getElementById('jobOrder1');
+	                       			$('#posiOrder1').on('change', function(){
+	                       				var posiOrder = document.getElementById('posiOrder1');
 	                       				
-	                       				if (jobOrder.value == "" || jobOrder.value < 1) {
-	                       					$('#jobOrderGuide1').text('1 이상의 숫자를 입력해주세요.');
-	                       					jobOrder.focus();
+	                       				if (posiOrder.value == "" || posiOrder.value < 1) {
+	                       					$('#posiOrderGuide1').text('1 이상의 숫자를 입력해주세요.');
+	                       					posiOrder.focus();
 	                       				} else {
-	                       					$('#jobOrderGuide1').text('');
+	                       					$('#posiOrderGuide1').text('');
 	                       				}
 	                       			});
 	                       			

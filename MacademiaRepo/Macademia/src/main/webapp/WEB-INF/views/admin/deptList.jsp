@@ -73,8 +73,8 @@
 								   </a>
 								   <a class="badge badge-light" id="deleteDeptBtn" ><i class="bi bi-dash-lg"></i> 삭제</a>
 								   <form id="deleteForm" action="${ contextPath }/admin/ddelete.ad" method="post">
-								   		<input id="deleteDeptId" type="hidden" name="deptId">
-								   		<input id="upperDeptId" type="hidden" name="upperDeptId">
+								   		<input id="deleteDeptNo" type="hidden" name="deptNo">
+								   		<input id="upperDeptNo" type="hidden" name="upperDeptNo">
 								   </form>					              
 		                            <!------------ 부서 추가  Modal창 시작 ---------------->
 		                            <div class="modal fade" id="insertDeptModal">
@@ -93,7 +93,7 @@
 		                                            <input id="insertDeptMgr" type="search" class="form-control insertInput" name="deptManager" list="memberList" placeholder="사원 아이디" autocomplete="off">
 							                        <datalist id="memberList"> <!-- 자동완성 기능 제공 -->
 							                        	<c:forEach var="m" items="${ mList }">
-							                        		<option value="${ m.mId }">${ m.mName } ${ m.jobName }</option> 
+							                        		<option value="${ m.no }">${ m.name } ${ m.posiName }</option> 
 					 	                                 </c:forEach>
 							                        </datalist><br>
 		                                            <span id="insertDeptMgrGuide" class="guide text-danger"></span><br>
