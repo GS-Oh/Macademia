@@ -3,6 +3,7 @@ package com.kh.md.sign.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,11 @@ import com.google.gson.JsonElement;
 import com.kh.md.member.vo.MemberVo;
 import com.kh.md.service.SignService;
 import com.kh.md.sign.vo.SignLineVo;
+import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
+import com.kh.md.work.common.PageVo;
+import com.kh.md.work.common.Pagination;
+import com.kh.md.work.vo.WorkVo;
 
 @Controller
 @RequestMapping("sign")
@@ -32,8 +38,27 @@ public class SignController {
 	@Autowired
 	private SignService service;
 
-	@GetMapping("list")
-	public String signList() {
+	@GetMapping("list/{pno}")
+	public String signList(HttpSession session, Model model,@PathVariable int pno) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		String no = loginMember.getNo();
+		
+		  Map map = new HashMap(); map.put("no", no);
+		
+
+			int totalCount = service.selectTotalCnt(no);
+			
+			PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
+		  
+		List<SignListVo> slVo = service.selectSignList(map);
+		System.out.println(slVo);
+		model.addAttribute("pv", pv);
+		model.addAttribute("slVo", slVo);
+		
+		
+		
+	
+		
 		
 		return "/sign/signList";
 		
@@ -42,9 +67,7 @@ public class SignController {
 	public String signWrtie(Model model, HttpSession session) {
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
-		System.out.println("로그인한" +loginMember);
 		List<MemberVo> memberList = service.getMemberAll();
-		System.out.println(memberList);
 		model.addAttribute("memberList", memberList);
 		
 		return "/sign/write";
@@ -63,23 +86,26 @@ public class SignController {
 	@ResponseBody
 	public List<MemberVo> deptList(HttpServletRequest req ) {
 		String dept = req.getParameter("dept");
-		System.out.println("뎁트코드는" +dept);
 		List<MemberVo> list = service.getDeptMember(dept);
-		System.out.println(list);
 		
 		return list;
 		
 	}
 	@PostMapping("signWrite")
 	@ResponseBody
-	public int signWrite(HttpServletRequest req,HttpSession session) {
+	public int signWrite(HttpServletRequest req,HttpSession session,String line) {
 		String  title= req.getParameter("title");
 		String  type= req.getParameter("type");
 		String  content= req.getParameter("content");
 		String  sTypeNo= req.getParameter("sTypeNo");
-		String[] line = req.getParameterValues("line");
-		System.out.println(line);
 		MemberVo loginMember= (MemberVo) session.getAttribute("loginMember");
+		String loginMemberNo = loginMember.getNo();
+		ArrayList<String> al = new ArrayList<String>();
+		al.add(loginMemberNo);
+		
+		Gson gson = new Gson();
+		ArrayList<String> a2 = gson.fromJson(line, ArrayList.class);
+		/* String[] line = req.getParameterValues("line"); */
 		String no = loginMember.getNo();
 		
 		SignVo vo = new SignVo();
@@ -87,21 +113,27 @@ public class SignController {
 		vo.setSTypeNo(type);
 		vo.setSContent(content);
 		vo.setENo(no);
-		vo.setSTypeNo("1");
-	
-		int result = service.signWrite(vo, line);
-		System.out.println(result);
-		
+		vo.setSTypeNo(sTypeNo);
+		al.addAll(a2);
+		int result = service.signWrite(vo, al);
 		SignVo sVo = new SignVo();
 		String sNo = sVo.getSign();
 		SignLineVo slVo = new SignLineVo();
 		slVo.setSNo(sNo);
-		System.out.println(slVo.getSNo()+"이게 가져온 값입니다..");
-		
+		int result2 = service.signFirst(loginMemberNo);
 		
 		return 1;
 		
 	}
+	
+	@GetMapping("signDetail/{no}")
+	public String signDetail(@PathVariable String no) {
+		
+		SignListVo signOne = service.selectSignOne(no);
+		
+		return "/sign/signDetail";
+	}
+	
 //	@PostMapping("signLine")
 //	@ResponseBody
 //	public String signLine(HttpServletRequest req, String line,HttpSession session){
@@ -136,13 +168,5 @@ public class SignController {
 //		
 //		
 //	}
-	/*
-	 * @PostMapping("signFirst")
-	 * 
-	 * @ResponseBody public int signFirst(HttpSession session) {
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	
 }

@@ -9,7 +9,7 @@
 				
 			
 				
-			<a href="/md/sign/list"><li>나의 결재</li></a>
+			<a href="/md/sign/list/1"><li>나의 결재</li></a>
 			<a href="/md/sign/write"><li>기안서 작성</li></a>
 			<a href="/md/sign/complateSign"><li>결재 완료 문서</li></a>
 			<a href="/md/sign/reference"><li>수신참조</li></a>

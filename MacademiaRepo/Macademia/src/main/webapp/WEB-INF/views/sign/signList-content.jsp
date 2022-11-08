@@ -61,75 +61,38 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>내용</th>
+
 							<th>요청날짜</th>
 							<th>마감날짜</th>
 							
 						</tr>
 						
-						<tr>
-							<td>1</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
+						 <c:forEach items="${slVo}" var="x">
+						    <tr>
+							<td>${x.S_NO}</td>
+						 	<td><a href="/md/work/sign/signDetail/${x.S_NO}">${x.S_TITLE}</td>
+							<td>${x.S_DATE}</td>
+							
 						</tr>
+   						 </c:forEach>
 						
-						<tr>
-							<td>2</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						
-						<tr>
-							<td>3</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						
-						<tr>
-							<td>4</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						
-						<tr>
-							<td>5</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
 					
 				
 				</table>
 				
 				<div id="page-area">
-					<ul id="page">
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
+						<ul id="page">
+						<c:if test="${pv.startPage ne 1}">
+		<li><a href="/md/sign/list/${pv.startPage - 1}" >이전</a></li>
+	</c:if>
+	
+	<c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" var="i">
+	  <li> <a href="/md/sign/list/${i}">${i}</a></li> 
+	</c:forEach>
+	
+	<c:if test="${pv.endPage ne pv.maxPage }">
+		<a href="/md/sign/list/${pv.endPage + 1}">다음</a>
+	</c:if>	
 					</ul>
 				</div>
 				
