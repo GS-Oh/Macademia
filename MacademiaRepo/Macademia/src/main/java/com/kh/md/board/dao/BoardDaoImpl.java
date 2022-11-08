@@ -166,5 +166,15 @@ public class BoardDaoImpl implements BoardDao {
 	public int saveThumbnail(BoardVo vo) {
 		return sst.update("boardMapper.saveThumbnailList", vo);
 	}
+
+	@Override
+	public String selectThumbnailByNo(String valueOf) {
+		return sst.selectOne("boardMapper.selectThumbnailByNo", valueOf);
+	}
+
+	@Override
+	public int deleteThumbnailByNo(String valueOf) {
+		return sst.delete("boardMapper.deleteThumbnailByNo", valueOf);
+	}
 }
 

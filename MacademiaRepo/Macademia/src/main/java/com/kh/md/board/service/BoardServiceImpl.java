@@ -53,7 +53,7 @@ public class BoardServiceImpl implements BoardService {
 					String changedFileName = makeFileName(f);
 					
 					//저장할 경로 파일 객체 생성
-					String rootpath = req.getServletContext().getRealPath("/resources/upload/board/");
+					String rootpath = req.getServletContext().getRealPath("/resources/upload/board/data/");
 					File targetFile = new File(rootpath + changedFileName);
 					
 					AttachmentVo.setFileName(changedFileName);
@@ -130,26 +130,21 @@ public class BoardServiceImpl implements BoardService {
 			//<파일 저장> 		
 			MultipartFile[] fArr = vo.getFile();
 			//파일이 있는지 확인
-			if(!fArr[0].isEmpty()) { //클라이언트로 부터 전달받은 파일 있는 상태
+			
+				if(!fArr[0].isEmpty()) { //클라이언트로 부터 전달받은 파일 있는 상태
 				
 				for(int i =0; i<fArr.length; i++) {
 					MultipartFile f= fArr[i];
 					
-					//원본파일명 얻어오기
-					String originName = f.getOriginalFilename();
-					String ext = originName.substring(originName.lastIndexOf(".")); //확장자명 가져오기 ex) .png
-					//변경할 파일명 붙이기 
-					long now = System.currentTimeMillis();
-					int randomNum = (int)(Math.random() * 90000 + 10000);
-					String changeFileName = now + "_" + randomNum;
+					String changedFileName = makeFileName(f);
 					
 					//저장할 경로 파일 객체 생성
-					String rootpath = req.getServletContext().getRealPath("/resources/upload/board/");
-					File targetFile = new File(rootpath + changeFileName + ext);
+					String rootpath = req.getServletContext().getRealPath("/resources/upload/board/data/");
+					File targetFile = new File(rootpath + changedFileName);
 					
-					AttachmentVo.setFileName(changeFileName+ext);
+					AttachmentVo.setFileName(changedFileName);
 					AttachmentVo.setFilePath(rootpath);					
-					AttachmentVo.setOriginName(originName);
+					AttachmentVo.setOriginName(f.getOriginalFilename());
 					//저장
 					boardDao.insertFile(AttachmentVo);
 					try {
@@ -158,7 +153,7 @@ public class BoardServiceImpl implements BoardService {
 						e.printStackTrace();
 					}
 				}
-			}	
+			}
 			return boardDao.updateOne(vo);
 		}
 		
@@ -231,7 +226,7 @@ public class BoardServiceImpl implements BoardService {
 							String changedFileName = makeFileName(f);
 							
 							//저장할 경로 파일 객체 생성
-							String rootpath = req.getServletContext().getRealPath("/resources/upload/board/");
+							String rootpath = req.getServletContext().getRealPath("/resources/upload/board/free/");
 							File targetFile = new File(rootpath + changedFileName);
 							
 							AttachmentVo.setFileName(changedFileName);
@@ -281,32 +276,35 @@ public class BoardServiceImpl implements BoardService {
 					if(!fArr[0].isEmpty()) { //클라이언트로 부터 전달받은 파일 있는 상태
 						
 						for(int i =0; i<fArr.length; i++) {
+							String savePath = req.getServletContext().getRealPath("/resources/upload/board/free/");
+
+							String fileName = boardDao.selectThumbnailByNo(String.valueOf(vo.getNo()));
+							File file = new File(savePath + fileName);
+							if(file.exists()) {
+								file.delete();			
+							}
+							boardDao.deleteThumbnailByNo(String.valueOf(vo.getNo()));									
 							MultipartFile f= fArr[i];
-							
-							//원본파일명 얻어오기
-							String originName = f.getOriginalFilename();
-							String ext = originName.substring(originName.lastIndexOf(".")); //확장자명 가져오기 ex) .png
-							//변경할 파일명 붙이기 
-							long now = System.currentTimeMillis();
-							int randomNum = (int)(Math.random() * 90000 + 10000);
-							String changeFileName = now + "_" + randomNum;
+							String changedFileName = makeFileName(f);
 							
 							//저장할 경로 파일 객체 생성
-							String rootpath = req.getServletContext().getRealPath("/resources/upload/board/");
-							File targetFile = new File(rootpath + changeFileName + ext);
+							String rootpath = req.getServletContext().getRealPath("/resources/upload/board/free/");
+							File targetFile = new File(rootpath + changedFileName);
 							
-							AttachmentVo.setFileName(changeFileName+ext);
+							AttachmentVo.setFileName(changedFileName);
 							AttachmentVo.setFilePath(rootpath);					
-							AttachmentVo.setOriginName(originName);
+							AttachmentVo.setOriginName(f.getOriginalFilename());
 							//저장
 							boardDao.insertFileFreeBoard(AttachmentVo);
+							vo.setThumbnail(changedFileName);
+							boardDao.saveThumbnail(vo);
 							try {
 								f.transferTo(targetFile);
 							}catch (Exception e) {
 								e.printStackTrace();
 							}
 						}
-					}	
+					}
 					return boardDao.updateOneFreeBoard(vo);
 				}
 				

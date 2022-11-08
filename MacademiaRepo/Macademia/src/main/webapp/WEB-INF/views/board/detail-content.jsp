@@ -84,9 +84,9 @@
             
             <!--게시판 마지막 부분  -->
             <div class="bt_wrap">
-                <a href="/md/board/main" class="on">목록</a>
+                <a href="/md/board/data" class="on">목록</a>
                
-               <c:if test="${loginMember.no eq vo.userNo}">				
+                <c:if test="${loginMember.name eq vo.userNo}">				
                 <a href="${root}/board/data/edit/${vo.no}">수정</a>
 				</c:if> 
             </div>

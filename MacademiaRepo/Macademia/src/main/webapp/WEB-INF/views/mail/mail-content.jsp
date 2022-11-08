@@ -24,7 +24,7 @@
 							<th>보낸사람</th>
 							<th>제목</th>
 							<th>날짜</th>	
-							<th>파일첨부</th>
+							<th>읽음여부</th>
 						</tr>
 					</thead>
 					<tbody>

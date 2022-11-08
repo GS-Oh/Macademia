@@ -90,6 +90,7 @@ public class BoardController {
 		List<BoardReply> replyVo = replyService.selectList(no);
 		List<BoardAttachment> attachments =  service.attachmentList(no); 
 		model.addAttribute("vo", vo);
+		log.info(vo.toString());
 		model.addAttribute("replyVo", replyVo);
 		model.addAttribute("attachments", attachments);
 		return "board/detail";
@@ -216,7 +217,6 @@ public class BoardController {
 			model.addAttribute("queryString", getQueryString(searchCriteria));
 			return "board/freeboard";
 		}
-		
 		//자유게시판 게시글 상세 조회 화면
 		@GetMapping("free/detail/{no}")
 		public String freeboardDetail(@PathVariable(required = false) String no, Model model) {
@@ -228,13 +228,11 @@ public class BoardController {
 			model.addAttribute("attachments", attachments);
 			return "board/freeDetail";
 		}
-		
 		//자유게시판 작성 화면
 		@GetMapping("free/write")
 		public String freeboardWrite(HttpSession session) {
 			return "board/freeWrite";
 		}
-		
 		//자유게시글 작성
 		@PostMapping("free/write")
 		public String freeboardWirte(BoardVo vo, Model model, HttpSession session, HttpServletRequest req) {
@@ -244,19 +242,14 @@ public class BoardController {
 			  vo.setUserNo(no);
 			 
 			//비즈니스 로직
-			int result = service.insertFreeBoard(vo, req);
-
-			
+			int result = service.insertFreeBoard(vo, req);	
 			//화면 선택
 			if(result == 1) {
-				return "redirect:/board/free/";
+				return "redirect:/board/free";
 			}else {
 				return "error/errorPage";
 			}
 		}
-		
-		
-		
 		//자유게시판 게시글 수정 화면
 		@GetMapping("free/edit/{no}")
 		public String freeboardEdit(@PathVariable String no, Model model) {
@@ -266,7 +259,6 @@ public class BoardController {
 			model.addAttribute("attachments", attachments);
 			return "board/freeEdit";
 		}
-			
 		//자유게시판 게시글 수정 로직
 		@PostMapping("free/edit/{no}")
 		public String freeboardEdit(@PathVariable int no, BoardVo vo, HttpServletRequest req) {
@@ -279,7 +271,6 @@ public class BoardController {
 				return "redirect:/";
 			}
 		}
-		
 		//자유게시판 삭제		
 		@GetMapping("free/delete/{no}")
 		public String freeboardDelete(@PathVariable String no, HttpSession session, Model model) {
@@ -292,14 +283,10 @@ public class BoardController {
 				return "common/errorPage";
 			}
 		}
-				
 		//게시글의 업로드 파일 삭제
-		
 		@PostMapping("free/board/deleteFile")
 		public String freeboardDeleteFile(BoardAttachment attachment) {
 			service.deleteFile(attachment);
 			return "";
 		}
-	
-	
 }

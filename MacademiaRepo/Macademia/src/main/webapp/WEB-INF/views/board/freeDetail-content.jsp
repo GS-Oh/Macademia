@@ -30,14 +30,6 @@
                         <dt>조회</dt>
                         <dd>${vo.hit}</dd>
                     </dl>
-                     <dl>
-                        <dt>첨부파일</dt>
-                        <c:if test="${!empty attachments}">
-                        <c:forEach var="x" items="${attachments}">
-                        <dd> <a href="/md/resources/upload/board/free/${x.fileName}">${x.originName}</a> </dd>
-                        </c:forEach>
-                        </c:if>
-                    </dl>
                 </div>
                 <div class="cont" style="height: 1000px ">
                     ${vo.content}
@@ -86,7 +78,7 @@
             <div class="bt_wrap">
                 <a href="/md/board/free" class="on">목록</a>
                
-               <c:if test="${loginMember.no eq vo.userNo}">				
+               <c:if test="${loginMember.name eq vo.userNo}">				
                 <a href="${root}/board/free/edit/${vo.no}">수정</a>
 				</c:if> 
             </div>
