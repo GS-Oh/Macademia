@@ -1,13 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-
 <mapper namespace="adminMapper">
+
+	<resultMap type="MemberVo" id="memberResultSet">
+		<id column="NO" property="no" />
+		<result column="NAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PWD" property="pwd"/>
+<!-- 		<result column="BIRTH_DATE" property="birthDate"/> -->
+		<result column="PRIVATE_EMAILl" property="privateEmail"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="ADDRESS2" property="address2"/>
+		<result column="PHONE" property="phone"/>
+		<result column="PROFILE_NAME" property="profileName"/>
+		<result column="POSITION_NO" property="positionNo"/>
+		<result column="BANK_NO" property="bankNo"/>
+		<result column="ACCOUNT" property="account"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="UPDATE_DATE" property="updateDate"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="QUIT_DATE" property="quitDate"/>
+<!-- 		<result column="STATUS" property="status"/> -->
+		<result column="GRADE" property="grade"/>
+	</resultMap>
 	
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE QUIT_YN = 'N'
+
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResultSet">
+
+	</select>
+	
+	<select id="selectMemberList2" resultMap="memberResultSet">
+
 	</select>
 	
 
+	
+<!-- 	<select id="selectDepartmentList" resultMap="departmentResultSet">
+
+	</select> -->
+	
+<!-- 	<resultMap type="Dept" id="departmentResultSet">
+
+	</resultMap> -->
+	
+<!-- 	<select id="selectJobList" resultMap="jobResultSet">
+
+	</select> -->
+	
+<!-- 	<resultMap type="Job" id="jobResultSet">
+		<id column="JOB_ID" property="jobId"/>
+		<result column="JOB_NAME" property="jobName"/>
+		<result column="JOB_ORDER" property="jobOrder"/>
+		<result column="JOB_STATUS" property="jobStatus"/>
+		<result column="MEMBER_COUNT" property="memberCount"/>
+	</resultMap> -->	
+	
+	<select id="getSearchListCount" resultType="_int">
+
+	</select>
+	
+	<select id="selectSearchMemberList" resultMap="memberResultSet">
+
+	</select>
+		
+	<select id="getMemberCount" resultType="int">
+
+	</select>
+	
+	<update id="updateMultiMember">
+
+	</update>
+	
+	<update id="deleteMember">
+
+	</update>
+		
+	<select id="selectMember" resultMap="memberResultSet">
+
+	</select>
+
+	<update id="updateMember">
+
+	</update>
+	
+	<update id="deleteJob">
+
+	</update>
+	
+	<insert id="insertJob">
+
+	</insert>
+	
+	<update id="updateJob">
+
+	</update>
+	
+	<select id="selectDeptMemberList" resultMap="memberResultSet">
+
+		<if test="upperDept != null">
+
+		</if>
+
+	</select>
+	
+<!-- 	<select id="getSubDeptList" resultMap="">
+
+	</select> -->
+	
+	<insert id="insertDept">
+
+	</insert>
+	
+<!-- 	<select id="selectDept" resultMap="">
+
+	</select>
+ -->	
+	<update id="deleteDept">
+
+	</update>
+	
+	<update id="updateDept">
+
+	</update>
+		
+	<update id="moveDept">
+
+	</update>
+		
+	<update id="sortDeptOrder">
+
+	</update>
+	
+	<select id="getReportListCount" resultType="_int">
+
+	</select>
+	
+<!-- 	<select id="selectBoardReportList" resultMap="reportResultSet">
+
+	</select>	
+	
+	<select id="selectReplyReportList" resultMap="reportResultSet">
+
+	</select> -->	
+	
+<!-- 	<update id="handingBoardReport">
+		UPDATE REPORT
+		SET REPORT_STATUS = #{reportStatus}
+		WHERE REPORT_NO = #{reportNo}
+	</update> -->
+
+	<update id="deleteBoard">
+		UPDATE BOARD
+		SET DELETE_YN = 'Y'
+		WHERE NO = #{no}	
+	</update>
+
+<!-- 	<update id="handingReplyReport">
+		UPDATE REPORT
+		SET REPORT_STATUS = #{reportStatus}
+		WHERE REPORT_NO = #{reportNo}	
+	</update>
+	
+	<update id="deleteReply">
+		UPDATE NOTICE_REPLY
+		SET REPLY_STATUS = 2
+		WHERE REPLY_NO = #{replyNo}		
+	</update>
+	
+	
+	<resultMap type="com.kh.md.admin.vo.Report" id="reportResultSet">
+		<id column="REPORT_NO" property="reportNo" />
+		<result column="REPORT_TYPE" property="reportType"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_STATUS" property="reportStatus"/>
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REPLY_STATUS" property="rStatus"/>
+		<result column="B_NO" property="bNo"/>
+		<result column="B_TITLE" property="bTitle"/>
+		<result column="B_STATUS" property="bStatus"/>
+		<result column="B_TYPE" property="bType"/>
+		<result column="M_NAME" property="writerName"/>
+		<result column="POSITION_NAME" property="writerPositionName"/>
+	</resultMap>	 -->
+
 </mapper>
+

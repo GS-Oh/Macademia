@@ -39,7 +39,7 @@
 
         <!-- Nav header start -->
         <div class="nav-header">
-            <a href="${contextPath}/admin/main" class="brand-logo">
+            <a href="${contextPath}" class="brand-logo">
                 <img class="logo-abbr" src="${contextPath}/resources/img/logo/logo_temp1.png" alt="마카데미아" alt="" style="border-radius: 50%;">
                 <b class="logo-compact" style="font-size: x-large;">MacademiA</b>
                	<b class="brand-title" style="font-size: x-large;">MacademiA</b>
@@ -75,7 +75,7 @@
 <!--                                         <i class="icon-envelope-open"></i> -->
 <!--                                         <span class="ml-2">Chat </span> -->
 <!--                                     </a> -->
-                                    <c:if test="${ loginUser.managerYn == 'Y' }">
+                                    <c:if test="${ loginUser.grade == 'A' }">
 	                                    <a href="#" class="dropdown-item">
 	                                        <i class="fa fa-mail-forward"></i>
 	                                        <span class="ml-2">Admin Page </span>
@@ -107,7 +107,7 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                 	<li class="nav-label first"></li>
-                    <li><a href="${root}/admin/main" aria-expanded="false">
+                    <li><a href="#" aria-expanded="false">
                          <i class="bi bi-house"></i><span class="nav-text">대시보드</span></a>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -133,7 +133,7 @@
                             <li><a href="#">아무게시판</a></li>
                         </ul>
                     </li>
-                    <li><a href="${root}/notice/main" aria-expanded="false">
+                    <li><a href="${contextPath}/notice/main" aria-expanded="false">
                     	<i class="bi bi-megaphone"></i><span class="nav-text">공지사항</span></a>
                     </li>
                     <li><a href="#" aria-expanded="false">
@@ -142,8 +142,8 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     		<i class="bi bi-telephone-plus"></i><span class="nav-text">주소록</span></a>
                     	<ul aria-expanded="false">
-		                    <li><a href="${root}/addr/list">주소록 목록</a></li>
-                            <li><a href="${root}/addr/main">주소록 검색</a></li>
+		                    <li><a href="${contextPath}/addr/list">주소록 목록</a></li>
+                            <li><a href="${contextPath}/addr/main">주소록 검색</a></li>
                        	</ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

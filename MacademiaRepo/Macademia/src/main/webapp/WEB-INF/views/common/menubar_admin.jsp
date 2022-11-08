@@ -66,11 +66,11 @@
                                     <i class="mdi mdi-account"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="${contextPath}/home.do" class="dropdown-item">
+                                    <a href="${contextPath}/home" class="dropdown-item">
                                         <i class="fa fa-home"></i>
-                                        <span class="ml-2">Dashboard </span>
+                                        <span class="ml-2">일반모드</span>
                                     </a>
-                                    <a href="${contextPath}/logout.me" class="dropdown-item">
+                                    <a href="${contextPath}/logout" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -87,13 +87,13 @@
         <div class="quixnav" style="background: #292B30;">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                	<li class="nav-label first">Admin Menu</li>
+                	<li class="nav-label first">관리자 메뉴</li>
                     <li><a class="has-arrow" href="${contextPath}" aria-expanded="false">
                     	<i class="bi bi-diagram-3"></i><span class="nav-text">조직 관리</span></a>
                      	  <ul aria-expanded="false">
                             <li><a href="mlist.ad">사원 관리</a></li>
                             <li><a href="deptlist.ad">부서 관리</a></li>
-                            <li><a href="joblist.ad">직위 관리</a></li>
+                            <li><a href="posilist.ad">직위 관리</a></li>
                         </ul>                   	
                     </li>
                     <li><a href="reportList.ad" aria-expanded="false">
