@@ -158,8 +158,8 @@
 				<div id="main-text-area"><span ><h3 class="content-subtitle">내용</h3></span>${noticeVo.content}</div>
 				
 				<c:if test="${noticeVo.msgNo eq msgVo.msgNo}">
-					<a href="/md/messenger/notice/delete/${noticeVo.noticeNo}" class="badge bg-warning"><h5>삭제하기</h5></a>
-					<a href="/md/messenger/notice/edit/${noticeVo.noticeNo}" class="badge bg-success"><h5>수정하기</h5></a>
+					<a id="deleteCheck" class="badge bg-warning"><h5>삭제하기</h5></a>
+					<a  href="/md/messenger/notice/edit/${noticeVo.noticeNo}" class="badge bg-success"><h5>수정하기</h5></a>
 				</c:if>
 			</div>
 			
@@ -267,26 +267,18 @@
 
 
 	<script>
-		const gwiseok = document.querySelector('#gwiseok');
-		const noticeNo2 = ${noticeVo.noticeNo};
+		const deleteCheck = document.querySelector('#deleteCheck');
 
-		gwiseok.addEventListener('click', function(){
-			Swal.fire('Any fool can use a computer')
+		deleteCheck.addEventListener('click', function(){
+			
+
 			Swal.fire({
-				title: '정말 삭제하시겠습니까?',
-				showDenyButton: true,
+				title: '삭제하시겠습니까?',
 				showCancelButton: true,
-				confirmButtonText: '삭제하기',
-				}).then((result) => {
-				/* Read more about isConfirmed, isDenied below */
-				if (result.isConfirmed) {
-					gwiseok.href = "/md/messenger/notice/delete/"+noticeNo2;
-				} else if (result.isDenied) {
-					gwiseok.href = "";
-				}
-				});
+				confirmButtonText: '<a href="/md/messenger/notice/delete/${noticeVo.noticeNo}" style="text-decoration:none; color:white;"> yes</a>',
+				})
 
-			})
+		})
 
 
 	</script>
