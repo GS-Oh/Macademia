@@ -88,22 +88,20 @@
     #profile{
         border : none !important;
     }
-
-
     #btn-wrap{
         /* border: 1px solid black; */
         display: flex;
-        justify-content: center;
+        justify-content: right;
     }
     #submit-btn{
         background-color: rgb(131, 120, 180);
-        width: 20%;
+        width: 15%;
         height: 40px;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         color: white;
         font-size: 20px;
-        margin: 20px;
+        margin: 10px;
     }
     #submit-btn:hover{
         background-color: rgb(103, 93, 151);
@@ -111,20 +109,17 @@
     }
     #pwd-change-btn{
         background-color: rgb(206, 80, 80);
-        width: 20%;
+        width: 15%;
         height: 40px;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         color: white;
         font-size: 20px;
-        margin: 20px;
+        margin: 10px;
     }
     #pwd-change-btn:hover{
         background-color: rgb(197, 49, 49);
         transition: 0.5s;
-    }
-    #pwd, #pwd2{
-        /* background-color: #cecee3; */
     }
     .modal-content{
         font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
@@ -179,31 +174,30 @@
             <label for="dept">부서</label>
             <input type="text" id="dept" name="dept" value="${loginMember.deptName}" readonly> 
             <label for="phone">전화번호</label>
-            <input type="text" id="phone" name="phone" value="${loginMember.phone}">  
+            <input type="text" id="phone" name="phone" value="${loginMember.phone}" required>  
             <label for="position">직책</label>
             <input type="text" id="position" name="position" value="${loginMember.positionName}" readonly >
             <label for="bank">은행</label>
-            <select id="bank" name="bankNo">
-            	<option value="none">=====선택=====</option>
+            <select id="bank" name="bankNo" required>
+            	<option value="">=====선택=====</option>
             </select>
             <label for="rank">직급</label>
             <input type="text" id="rank" name="rank" value="${loginMember.rankName}" readonly> 
             <label for="email">계좌번호</label>
-            <input type="text" id="account" name="account" value="${loginMember.account}"> 
+            <input type="text" id="account" name="account" value="${loginMember.account}" required> 
             <label id="pwd-label" for="pwd">비밀번호</label>
-            <input type="password" id="pwd" name="pwd"> 
+            <input type="password" id="pwd" name="pwd" required> 
             <label id="pwd2-label" for="pwd2">비밀번호확인</label>
-            <input type="password" id="pwd2" name="pwd2"> 
-
+            <input type="password" id="pwd2" name="pwd2" required> 
 
             <label for="email">사내이메일</label>
             <input type="text" id="email" name="email" value="${loginMember.email}" readonly> 
             <label for="private-email">개인이메일</label>
-            <input type="text" id="private-email" name="privateEmail" value="${loginMember.privateEmail}" readonly> 
+            <input type="text" id="private-email" name="privateEmail" value="${loginMember.privateEmail}" required> 
             <label for="address">주소</label>
-            <input type="text" id="address" name="address" value="${loginMember.address}"> 
+            <input type="text" id="address" name="address" value="${loginMember.address}" required> 
             <label for="address2">상세주소</label>
-            <input type="text" id="address2" name="address2" value="${loginMember.address2}" > 
+            <input type="text" id="address2" name="address2" value="${loginMember.address2}" required> 
 
             <label for="email">프로필사진</label>
             <div id="profile-wrap">
@@ -278,27 +272,25 @@ window.onload = function(){
 
 <!-- 은행목록 불러오기 -->
 <script>
-    window.onload = function(){
-        $.ajax({
-            url : '/md/member/bank/list',
-            method : 'get',
-            success : function(result){
-                console.log(result);
-                $('#bank').children('option:not(:first)').remove();
-                let myBankNo = '${loginMember.bankNo}'
-                $(result).each(function(i){ 
-                    if(result[i].no == myBankNo){
-                        $('#bank').append("<option value='"+result[i].no+"' selected>"+result[i].name+"</option>");
-                    } else {
-                        $('#bank').append("<option value='"+result[i].no+"'>"+result[i].name+"</option>");
-                    }
-                })
-            },
-            error : function(e){
-                console.log("통신이상");
-            }
-        })
-    }
+    $.ajax({
+        url : '/md/member/bank/list',
+        method : 'get',
+        success : function(result){
+            console.log(result);
+            $('#bank').children('option:not(:first)').remove();
+            let myBankNo = '${loginMember.bankNo}'
+            $(result).each(function(i){ 
+                if(result[i].no == myBankNo){
+                    $('#bank').append("<option value='"+result[i].no+"' selected>"+result[i].name+"</option>");
+                } else {
+                    $('#bank').append("<option value='"+result[i].no+"'>"+result[i].name+"</option>");
+                }
+            })
+        },
+        error : function(e){
+            console.log("통신이상");
+        }
+    })
 </script>
 
 <!-- 프로필 사진 미리보기 -->

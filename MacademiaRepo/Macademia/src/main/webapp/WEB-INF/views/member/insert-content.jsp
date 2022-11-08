@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 
-    #edit-content{
+    #insert-content{
         height: 80vh;
         width: 60vw;
         /* border: 1px solid black; */
@@ -22,7 +22,7 @@
         /* border: 1px solid grey; */
         /* border-radius: 15px; */
         grid-template-columns: 200px 200px 270px 200px 270px;
-        grid-template-rows: repeat(10, 50px);
+        grid-template-rows: repeat(9, 50px);
         margin:0 auto;
         font-size: 20px;
     }
@@ -68,14 +68,16 @@
     }
     #name-wrap *{
         height: 100%;
+        width: 100%;
         display: grid;
         align-items: center;
         justify-content: center;
-        background-color: #9393c1;
+        background-color: #9393c1 !important;
         color: white;
         font-weight: 700;
+        border: none !important;
     }
-    #address, #address2, #email, #private-email{
+    #address, #address2{
         grid-column: 2/6;
     }
 
@@ -123,9 +125,6 @@
         background-color: rgb(197, 49, 49);
         transition: 0.5s;
     }
-    #pwd, #pwd2{
-        /* background-color: #cecee3; */
-    }
     .modal-content{
         font-family:'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
         font-size: 20px;
@@ -141,33 +140,23 @@
     .modal-body label{
         text-align: right;
     }
-
-
 </style>
 
 
 
-<div id="edit-content">
-    <h1>사원정보수정</h1>
+<div id="insert-content">
+    <h1>사원 신규입력</h1>
     <hr>
     <form id="member-form" action="" method="post" enctype="multipart/form-data">
         <div id="container">
             <div id="profile-img-wrap">
-                <img id="profile-thumbnail" src="/md/resources/upload/profile/${loginMember.profileName}" alt="프로필이미지">
+                <img id="profile-thumbnail" src="/md/resources/upload/profile/guest12341234.png" alt="프로필이미지">
                 <div id="name-wrap">
-                    <div>성명</div>
-                    <div>${loginMember.name}</div>
+                    <label id="name-label" for="name">성명</label>
+                    <!-- <div>이름</div> -->
+                    <input id="name" name="name" type="text" placeholder="사원성명입력">
                 </div>
-                <c:if test="${loginMember.quitYn == 'N' }">
-                	<span id="quitYnBadge" class="badge rounded-pill bg-success">재직</span>
-                </c:if>
-                <c:if test="${loginMember.quitYn == 'Y' }">
-                	<span id="quitYnBadge" class="badge rounded-pill bg-danger">퇴사</span>
-                </c:if>
             </div>
-
-            <input type="hidden" id="no" name="no" value="${loginMember.no}">
-            <input type="hidden" id="name" name="name" value="${loginMember.name}">
             <input type="hidden" id="profileName" name="profileName" value="${loginMember.profileName}">
             <input type="hidden" id="grade" name="grade" value="${loginMember.grade}">
             <input type="hidden" id="positionNo" name="positionNo" value="${loginMember.positionNo}">
@@ -190,16 +179,11 @@
             <input type="text" id="rank" name="rank" readonly> 
             <label for="email">계좌번호</label>
             <input type="text" id="account" name="account"> 
-            <label id="pwd-label" for="pwd">비밀번호</label>
-            <input type="password" id="pwd" name="pwd"> 
-            <label id="pwd2-label" for="pwd2">비밀번호확인</label>
-            <input type="password" id="pwd2" name="pwd2"> 
-
-
             <label for="email">사내이메일</label>
             <input type="text" id="email" name="email"readonly> 
             <label for="private-email">개인이메일</label>
             <input type="text" id="private-email" name="privateEmail"> 
+
             <label for="address">주소</label>
             <input type="text" id="address" name="address"> 
             <label for="address2">상세주소</label>
@@ -278,27 +262,25 @@ window.onload = function(){
 
 <!-- 은행목록 불러오기 -->
 <script>
-    window.onload = function(){
-        $.ajax({
-            url : '/md/member/bank/list',
-            method : 'get',
-            success : function(result){
-                console.log(result);
-                $('#bank').children('option:not(:first)').remove();
-                let myBankNo = '${loginMember.bankNo}'
-                $(result).each(function(i){ 
-                    if(result[i].no == myBankNo){
-                        $('#bank').append("<option value='"+result[i].no+"' selected>"+result[i].name+"</option>");
-                    } else {
-                        $('#bank').append("<option value='"+result[i].no+"'>"+result[i].name+"</option>");
-                    }
-                })
-            },
-            error : function(e){
-                console.log("통신이상");
-            }
-        })
-    }
+    $.ajax({
+        url : '/md/member/bank/list',
+        method : 'get',
+        success : function(result){
+            console.log(result);
+            $('#bank').children('option:not(:first)').remove();
+            let myBankNo = '${loginMember.bankNo}'
+            $(result).each(function(i){ 
+                if(result[i].no == myBankNo){
+                    $('#bank').append("<option value='"+result[i].no+"' selected>"+result[i].name+"</option>");
+                } else {
+                    $('#bank').append("<option value='"+result[i].no+"'>"+result[i].name+"</option>");
+                }
+            })
+        },
+        error : function(e){
+            console.log("통신이상");
+        }
+    })
 </script>
 
 <!-- 프로필 사진 미리보기 -->
