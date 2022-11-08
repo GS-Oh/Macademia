@@ -63,5 +63,9 @@ public interface BoardDao {
 	//썸네일 이미지
 	List<BoardAttachment> selectThumbnailList();
 	//썸네일 이미지 저장
-	int saveThumbnail(BoardVo vo); 
+	int saveThumbnail(BoardVo vo);
+	//썸네일 이름 가져오기
+	String selectThumbnailByNo(String valueOf);
+	//썸네일 삭제
+	int deleteThumbnailByNo(String valueOf); 
 }

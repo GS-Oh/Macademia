@@ -17,7 +17,10 @@
 	      <div class="card">
 	        <div class="card_image">
 	        <c:if test= "${!empty x.thumbnail }">
-	        	<img src="../resources/upload/board/${x.thumbnail}"></div>
+	        	<img src="../resources/upload/board/free/${x.thumbnail}" style="width: 500px; height: 300px;"></div>
+	        </c:if>
+	        <c:if test= "${empty x.thumbnail }">
+	        	<img src="../resources/upload/board/썸네일.jpg" style="width: 500px; height: 300px;"></div>
 	        </c:if>
 	        <div class="card_content">
 	          <h2 class="card_title">${x.userNo}</h2>

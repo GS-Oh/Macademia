@@ -40,7 +40,7 @@
 			,B.TITLE 
 			,B.CONTENT
 			,B.HIT
-			,B.REGDATE
+			,TO_CHAR(B.REGDATE,'YYYY-MM-DD') AS REGDATE
 		FROM DATA_BOARD B
 		JOIN MEMBER M
 		ON B.USER_NO = M.NO
@@ -61,10 +61,12 @@
 		SELECT 
 			B.NO 
 			,M.NAME AS USER_NO
+			,B.CATEGORY_NO
 			,B.TITLE 
 			,B.CONTENT
 			,B.HIT
 			,B.REGDATE
+			,B.DELETE_YN
 		FROM DATA_BOARD B
 		JOIN MEMBER M
 		ON B.USER_NO = M.NO
@@ -279,17 +281,19 @@
 	<!--게시글 상세 조회  -->
 	<select id="selectOneFreeBoard" resultMap="boardInfo">
 		SELECT 
-			NO
-			,USER_NO 
-			,CATEGORY_NO
-			,TITLE 
-			,CONTENT
-			,HIT
-			,REGDATE
-			,DELETE_YN
-		FROM FREE_BOARD
-		WHERE NO = #{no}
-		AND DELETE_YN = 'N'
+			B.NO 
+			,M.NAME AS USER_NO
+			,B.CATEGORY_NO
+			,B.TITLE 
+			,B.CONTENT
+			,B.HIT
+			,B.REGDATE
+			,B.DELETE_YN
+		FROM FREE_BOARD B
+		JOIN MEMBER M
+		ON B.USER_NO = M.NO
+		WHERE B.NO = #{no}
+		AND B.DELETE_YN = 'N'
 	</select>
 	<!--조회수 증가  -->
 	<update id="increaseHitFreeBoard">
@@ -440,4 +444,17 @@
 				 THUMBNAIL = #{thumbnail}
 		WHERE NO = #{no}
 	</update>
+	
+	<select id="selectThumbnailByNo" resultType="string">
+		SELECT 
+		FILE_NAME
+		FROM FREE_ATTACHMENT
+		WHERE BOARD_NO = #{no}
+	</select>
+	
+	<delete id="deleteThumbnailByNo">
+		DELETE 
+		FROM FREE_ATTACHMENT
+		WHERE BOARD_NO = #{no}
+	</delete>
 </mapper>

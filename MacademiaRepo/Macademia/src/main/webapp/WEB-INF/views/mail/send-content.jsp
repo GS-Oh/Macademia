@@ -24,12 +24,12 @@
 							<th>보낸사람</th>
 							<th>제목</th>
 							<th>날짜</th>	
-							<th>파일첨부</th>
+							<th>읽음여부</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="checkbox" name="select"></td>
+							<td><input type="checkbox" name="select" value=""></td>
 							<td>유저1</td>
 							<td>유저1의 제목 입니다.</td>
 							<td>2022-10-25</td>	

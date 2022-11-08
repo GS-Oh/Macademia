@@ -26,9 +26,8 @@
 			                        </c:if>
 			                    </dl>
 			                    <dl>  
-			                        <dt>첨부파일</dt>         
-			                        <!--첨부파일 없을 시  -->
-			                        <dd><input type="file" placeholder="첨부파일" name="file"></dd>
+			                        <dt>썸네일</dt>         
+			                        <dd><input type="file" placeholder="썸네일" name="file"></dd>
 			                       	
 		                    	</dl>
 		                	</div>
@@ -53,7 +52,7 @@
 		            <div class="bt_wrap">
 		                <a class="on" href="#" onclick="return chk_form()" >수정</a> 
 		                <a href="${root}/board/free/delete/${vo.no}" class="on2">삭제</a>
-		                <a href="${root}/board/free/">취소</a>
+		                <a href="${root}/board/free">취소</a>
 		            </div>
 	                </form>
 		        </div>
