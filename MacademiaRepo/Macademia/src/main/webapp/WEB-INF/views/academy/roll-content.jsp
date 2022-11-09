@@ -333,41 +333,42 @@
 	                                        <div><label for="checkAll">전체</label></div>
 	                                    </div>
 	                                    <div class="student-list-body">
-	                                        <!-- <div class="individual-student-list">
-	                                            <div><input type="checkbox" id="student" class="checkEach"></div>
-	                                            <div><label for="student">김철수</label></div>
-	                                        </div> -->
+                                            <div class="tot-student-list"></div>
+	                                        <!-- <div class="individual-student-list"> -->
+	                                            <!-- <div><input type="checkbox" id="student" class="checkEach"></div>
+	                                            <div><label for="student">김철수</label></div> -->
+	                                        <!-- </div> -->
 	                                    </div>
                                         <div class="student-list-bot"><button class="time-input-btn">입실체크</button></div>
 	                                </div>
                                     
 	                                <div class="after-time-check">
-                                        <div class="online-btns">
-                                            <button>></button>
-                                            <button><</button>
+                                        <!-- <div class="online-btns">
+                                            <button class="add-to-online">></button>
+                                            <button class="remove-from-online"><</button>
                                         </div>
                                         <div class="online-btns">
-                                            <button>></button>
-                                            <button><</button>
-                                        </div>
+                                            <button class="add-to-offline">></button>
+                                            <button class="remove-from-offline"><</button>
+                                        </div> -->
                                     </div>
 
                                     <div>
                                         <div class="student-list-online">
                                             <div class="student-list-online-title">온라인</div>
                                             <div class="student-list-online-body">
-                                                <div class="individual-student-list">
-                                                    <div><input type="checkbox" class="checkEach"></div>
-                                                    <div><label for="">김철수</label></div>
+                                                <div class="online-student-list">
+                                                    <!-- <div><input type="checkbox" class=""></div>
+                                                    <div><label for="">김철수</label></div> -->
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="student-list-offline">
                                             <div class="student-list-offline-title">오프라인</div>
                                             <div class="student-list-offline-body">
-                                                <div class="individual-student-list">
-                                                    <div><input type="checkbox" class="checkEach"></div>
-                                                    <div><label for="">김철수</label></div>
+                                                <div class="offline-student-list">
+                                                    <!-- <div><input type="checkbox" class=""></div>
+                                                    <div><label for="">김철수</label></div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -457,7 +458,7 @@
 
 </div>
 
-<script>
+<script>/* 클릭하면 hidden보여주기 */
     // $('.hidden-area').hide();
     // $('.select-one-class').on('click', function(){
     //     $(this).children('div:eq(8)').show(200);
@@ -494,6 +495,30 @@
                 for(let i = 0; i < l; i++){
                     $('.student-list-body').append('<div class="individual-student-list"> <div><input type="checkbox" id="' + svo[i].no + '" class="checkEach" value="' + svo[i].no + '"></div> <div><label for="' + svo[i].no + '">' + svo[i].name + '</label></div> </div>');
                 }
+
+                $('.add-to-online').on('click', function(){
+                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.online-student-list'));
+                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+                });
+
+                $('.remove-from-online').on('click', function(){
+                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.tot-student-list'));
+                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+                });
+
+                $('.add-to-offline').on('click', function(){
+                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.offline-student-list'));
+                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+                });
+
+                $('.remove-from-offline').on('click', function(){
+                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.tot-student-list'));
+                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+                });
             },
             error : function(){
                 console.log('not good');
@@ -534,7 +559,10 @@
                             title: '시간이 입력되었습니다.'
                         });
 
-                        func01(checkedStudents);
+                        $('#checkAll').prop('checked', false);
+                        $('.checkEach').prop('checked', false);
+
+                        createBtn();
                     }else{
                         Swal.fire({
                             icon: 'warning',
@@ -554,11 +582,13 @@
         }
     });
 
-function func01(checkedStudents){
-    // let l = checkedStudents.length
+    function createBtn(){
+        $('.after-time-check').append('<div class="online-btns"> <button class="add-to-online">></button> <button class="remove-from-online"><</button> </div> <div class="online-btns"> <button class="add-to-offline">></button> <button class="remove-from-offline"><</button> </div>')
 
-    // for(let i = 0; i < l; i++){
-    //     $('#after-time').append('hi')
-    // }
-}
+    }
 </script>
+
+<script>
+    
+</script>
+

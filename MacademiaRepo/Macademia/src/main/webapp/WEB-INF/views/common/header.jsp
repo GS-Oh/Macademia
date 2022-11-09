@@ -127,7 +127,7 @@
             </a>
         </div>
         <div id="nav-menu9">
-            <a href="${root}/payroll/main">
+            <a href="${root}/payroll/history">
                 <i class="fa-regular fa-credit-card fa-2x"></i><br>
                 <label for="">급여</label>
             </a>
