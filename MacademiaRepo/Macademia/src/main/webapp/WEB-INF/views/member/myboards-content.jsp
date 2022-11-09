@@ -84,16 +84,46 @@
         <button id="search-btn" type="submit">검색</button>
     </form>
     <div id="pagination-area">
-        <a href="" class="btn btn-outline-secondary">&lt;&lt;</a>
-        <a href="" class="btn btn-outline-secondary">&lt;</a>
-        <a href="" class="btn btn-outline-secondary">1</a>
-        <a href="" class="btn btn-outline-secondary">2</a>
-        <a href="" class="btn btn-outline-secondary">3</a>
-        <a href="" class="btn btn-outline-secondary">4</a>
-        <a href="" class="btn btn-outline-secondary">5</a>
-        <a href="" class="btn btn-outline-secondary">&gt;</a>
-        <a href="" class="btn btn-outline-secondary">&gt;&gt;</a>
+    	<c:if test="${pv.startPage > 1 }">
+	        <a class="btn btn-outline-secondary" onclick="page(1)">&lt;&lt;</a>
+	        <a class="btn btn-outline-secondary" onclick="page('${pv.startPage-1 }')">&lt;</a>
+        </c:if>
+        <c:forEach begin="${pv.startPage }" end="${pv.endPage}" varStatus="status">
+        	<a  class="btn btn-outline-secondary" onclick="page('${status.index }')">${status.index }</a>
+        </c:forEach>
+        <c:if test="${pv.endPage < pv.maxPage }">
+        	<a class="btn btn-outline-secondary" onclick="page('${pv.endPage+1 }')">&gt;</a>
+        	<a class="btn btn-outline-secondary" onclick="page('${pv.maxPage}')">&gt;&gt;</a>
+        </c:if>
     </div>
 
 
 </div>
+
+<!-- 페이지버튼 클릭시 리스트 보여주기(ajax) -->
+<script>
+    function page(pno){
+        currentPage = pno;
+        let searchName = document.querySelector('#search-input').value.trim();
+        $.ajax({
+            type: "post",
+            url: "/md/myfile/list/"+pno,
+            data:{
+                'searchName' : searchName
+            },
+            success: function(response) {
+                $('#myfile-content').replaceWith(response);
+                makeShortName();
+                pageBtnColor(pno);
+                $('#search-input').focus();
+            },
+            error: function (response) {
+                Swal.fire(
+                '통신에러',
+                '서버와의 통신에 문제가 있네요',
+                'warning'
+                )
+            }
+        });
+    };
+</script>
