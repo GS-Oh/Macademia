@@ -74,11 +74,11 @@
 
 			<div id="reply-title"><h1>쪽지 답장하기</h1></div>
 
-            <form action="/md/messenger/note/write/${noteRepleVo.receiveNo}" method="post" enctype="multipart/form-data">
+            <form action="/md/messenger/note/write/${noteRepleVo.msgNo}" method="post" enctype="multipart/form-data">
 				<!--  -->
 				<div class="write-header-area">
 					<span class="input-group-text"><h4>받는사람</h4></span>
-					<div class="form-control"><h4>${noteRepleVo.receiveName}</h4></div>
+					<div class="form-control"><h4>${noteRepleVo.sendName}</h4></div>
 				</div>
 				
 				<!--  -->

@@ -90,6 +90,11 @@
 			padding-left:15px;
 			padding-top:10px;
 		}
+		
+		.modal-header > div > h3{
+			margin-right:10px;
+		}
+		
 
 		#modal-content-img-wrap{
 			height: 100%;
@@ -110,7 +115,7 @@
 			border: none;
 		}
 		
-
+		
 
 
     </style>
@@ -138,7 +143,7 @@
 				<div class="msg-main-title"><h1>운영기획부</h1><h5 style="color: gray;"></h5></div>
 				
 				<!-- 행정팀(운영기획부) -->
-				<div class="main-partition"><h2>행정팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>행정팀</h2><h5 style="color: gray;"></h5></div>
 
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap" style="width: 100%;">
@@ -154,7 +159,8 @@
 								</div>
 								<div class="content-detail">
 									<div class="detail-name">${msgTotalVo.name}</div>
-									<div class="detail-dept">${msgTotalVo.part}</div>
+									<div class="detail-part">${msgTotalVo.part}</div>
+									<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 									<div class="detail-position">${msgTotalVo.position}</div>
 									<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 									<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -168,7 +174,7 @@
 							
 							
 				<!-- 총무팀(운영기획부) -->
-				<div class="main-partition"><h2>재정팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>재정팀</h2><h5 style="color: gray;"></h5></div>
 				
 				
 				
@@ -186,7 +192,8 @@
 								</div>
 								<div class="content-detail">
 									<div class="detail-name">${msgTotalVo.name}</div>
-									<div class="detail-dept">${msgTotalVo.part}</div>
+									<div class="detail-part">${msgTotalVo.part}</div>
+									<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 									<div class="detail-position">${msgTotalVo.position}</div>
 									<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 									<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -201,7 +208,7 @@
 
 
 				<!-- 시설지원팀(운영기획부) -->
-				<div class="main-partition"><h2>시설지원팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>시설지원팀</h2><h5 style="color: gray;"></h5></div>
 				
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -217,7 +224,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -238,7 +246,7 @@
 				<div class="msg-main-title"><h1>교육훈련부</h1><h5 style="color: gray;"></h5></div>
 				
 				<!-- 교육1팀(교육훈련부) -->
-				<div class="main-partition"><h2>교육1팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>교육1팀</h2><h5 style="color: gray;"></h5></div>
 
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -255,7 +263,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -270,12 +279,13 @@
 							
 							
 				<!-- 교육2팀(교육훈련부) -->
-				<div class="main-partition"><h2>교육2팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>교육2팀</h2><h5 style="color: gray;"></h5></div>
+				
+				<div class="main-content-wrap">
 				
 				<c:forEach items="${msgVoList}" var="msgTotalVo">
 
 					<!-- 부서 보여주는 부분 얘로 감싸고 -->
-					<div class="main-content-wrap">
 							<!-- 운영기획부인 회원 기준 -->										
 							<!-- 교육2팀 직원 수 만큼 반복 -->
 							<c:if test="${msgTotalVo.dept eq '교육2팀' }">
@@ -286,7 +296,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -294,13 +305,14 @@
 								</div>
 								
 							</c:if>
-					</div>		
 					
-				</c:forEach>				
+				</c:forEach>
+								
+				</div>		
 							
 							
 				<!-- 교재지원팀(교육훈련부) -->
-				<div class="main-partition"><h2>교재지원팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>교재지원팀</h2><h5 style="color: gray;"></h5></div>
 				
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -316,7 +328,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -337,7 +350,7 @@
 				<div class="msg-main-title"><h1>취업지원부</h1><h5 style="color: gray;"></h5></div>
 				
 				<!-- 취업팀(취업지원부) -->
-				<div class="main-partition"><h2>취업팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>취업팀</h2><h5 style="color: gray;"></h5></div>
 
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -353,7 +366,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -368,7 +382,7 @@
 							
 							
 				<!-- 상담팀(취업지원부) -->
-				<div class="main-partition"><h2>상담팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>상담팀</h2><h5 style="color: gray;"></h5></div>
 				
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -385,7 +399,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -407,7 +422,7 @@
 				<div class="msg-main-title"><h1>마케팅부</h1><h5 style="color: gray;"></h5></div>
 				
 				<!-- 홍보팀(마케팅부) -->
-				<div class="main-partition"><h2>홍보팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>홍보팀</h2><h5 style="color: gray;"></h5></div>
 
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -424,7 +439,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -440,7 +456,7 @@
 							
 							
 				<!-- 대외협력팀(마케팅부) -->
-				<div class="main-partition"><h2>대외협력팀</h2><h5 style="color: gray;">(3명)</h5></div>
+				<div class="main-partition"><h2>대외협력팀</h2><h5 style="color: gray;"></h5></div>
 				
 				<!-- 부서 보여주는 부분 얘로 감싸고 -->
 				<div class="main-content-wrap">
@@ -457,7 +473,8 @@
 									</div>
 									<div class="content-detail">
 										<div class="detail-name">${msgTotalVo.name}</div>
-										<div class="detail-dept">${msgTotalVo.part}</div>
+										<div class="detail-part">${msgTotalVo.part}</div>
+										<div class="detail-dept" style="display: none;">${msgTotalVo.dept}</div>
 										<div class="detail-position">${msgTotalVo.position}</div>
 										<div class="detail-msgNo" style="display: none;">${msgTotalVo.msgNo}</div>
 										<div class="detail-introduce" style="display: none;">${msgTotalVo.introduce}</div>
@@ -482,7 +499,7 @@
 		
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<div style="display: flex;"><h3><span class="modal-dept badge bg-secondary"></span></h3>-<h3><span class="modal-position badge bg-secondary"></span></h3></div>
+					<div style="display: flex;"><h3><span class="modal-dept badge bg-secondary"></span></h3><h3><span class="modal-part badge bg-secondary"></span></h3><h3><span class="modal-position badge bg-secondary"></span></h3></div>
 					
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
@@ -517,6 +534,7 @@
 			const detailImg = document.querySelectorAll('.detail-img');
 			const detailName = document.querySelectorAll('.detail-name');
 			const detailDept = document.querySelectorAll('.detail-dept');
+			const detailPart = document.querySelectorAll('.detail-part');
 			const detailPosition = document.querySelectorAll('.detail-position');
 			const detailMsgNo = document.querySelectorAll('.detail-msgNo');
 			const detailIntroduce = document.querySelectorAll('.detail-introduce');
@@ -524,6 +542,7 @@
 			const modalImg = document.querySelector('.modal-img');
 			const modalName = document.querySelector('.modal-name');
 			const modalDept = document.querySelector('.modal-dept');
+			const modalPart = document.querySelector('.modal-part');
 			const modalPosition = document.querySelector('.modal-position');
 			const modalMsgNo = document.querySelector('.modal-msgNo');
 			const modalIntroduce = document.querySelector('.modal-introduce');
@@ -537,6 +556,7 @@
 					modalImg.src = detailImg[i].src;
 					modalName.innerText = detailName[i].innerText;
 					modalDept.innerText = detailDept[i].innerText;
+					modalPart.innerText = detailPart[i].innerText;
 					modalPosition.innerText = detailPosition[i].innerText;
 					modalIntroduce.innerText = detailIntroduce[i].innerText;
 					modalMsgNo.href = "/md/messenger/note/write?receiveNo="+detailMsgNo[i].innerText+"&receiveName="+detailName[i].innerText;

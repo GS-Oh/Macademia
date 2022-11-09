@@ -226,7 +226,14 @@
 			const repleProfile = '${msgVo.fileName}';
 			const repleContent = document.querySelector('#reple-content').value;
 			const emptyReple = document.querySelector('#empty-reple');
-			const now = new Date();
+			
+			let today = new Date();
+            let year = today.getFullYear();
+            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+            let day = ('0' + today.getDate()).slice(-2);
+            const dateString = year + '-' + month  + '-' + day;
+	            
+			
 			
 			$.ajax({
 				
@@ -241,7 +248,7 @@
 						const target = document.querySelector('#reple-list-ps');
 						$(target).prepend('<div class="reply-list"><div class="reply-img-wrap" ><img src="/md/resources/upload/messenger/'+ repleProfile +'" alt="" width="90%" height="100%" style="border : 1px solid black;"></div><div><span>'
 												+ repleWriterNick +'</span></div><div><h4>'+repleContent+'</h4></div><div><h6 style="color:gray">'
-												+ now.getFullYear()+"-"+now.getMonth()+"-"+now.getDay()+'</h6></div></div><div></div>');
+												+ dateString +'</h6></div></div><div></div>');
 						
 						//기존에 입력한 내용 지우기
 						document.querySelector('#reple-content').value = "";

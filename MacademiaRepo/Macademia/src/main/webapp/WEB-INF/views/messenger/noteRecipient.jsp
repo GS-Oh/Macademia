@@ -179,25 +179,6 @@
 
 
 
-
-					<h2>부서 하나더있으면 이걸로</h2>
-					<ul class="search-header">
-						<li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li>
-						<li>프론트(중분류)
-							<ul>
-								<li><button>html(소부서)</button></li>
-							</ul>
-						</li>
-						
-						
-					</ul>
-
-
-
 				</ul>
 			</div>
 
