@@ -14,8 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-      
-            
+    
             <div id="side_menu">
 
 			    <ul id="menu-top">
@@ -29,9 +28,8 @@
 		            <a href="/md/messenger/noteSendBox"><li>보낸 쪽지함</li></a>
 		            <a href="/md/messenger/imgFileBox"><li>파일 보관함</li></a>
 		            <a href="/md/messenger/notice/1"><li>공지 톡</li></a>
-		            <a href=""><li>메신저 알림</li></a>
-		            <a href=""><li>메신저 환경설정</li></a>
 			    </ul>
-			
+				
+				
 			        
 			</div>
