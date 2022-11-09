@@ -68,8 +68,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int updateMultiMember(String[] noArr, String quitYn) {
-		return aDAO.updateMultiMember(sqlSession, noArr, quitYn);
+	public int updateMultiMember(String[] noArr, String QuitYn) {
+		return aDAO.updateMultiMember(sqlSession, noArr, QuitYn);
 	}
 
 	@Override

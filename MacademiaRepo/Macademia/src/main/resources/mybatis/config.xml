@@ -13,6 +13,8 @@
 		<typeAlias type="com.kh.md.academy.vo.CurriculumVo" alias="CurriculumVo"/>
 		<typeAlias type="com.kh.md.academy.vo.StudentVo" alias="StudentVo"/>
 		<typeAlias type="com.kh.md.member.vo.MemberVo" alias="MemberVo"/>
+		<typeAlias type="com.kh.md.admin.vo.Dept" alias="DeptVo"/>
+		<typeAlias type="com.kh.md.admin.vo.Position" alias="PositionVo"/>
 	</typeAliases>
 
 
