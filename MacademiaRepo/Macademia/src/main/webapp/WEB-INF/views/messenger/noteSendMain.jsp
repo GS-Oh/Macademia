@@ -14,9 +14,14 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 15% 7% 45% 40%;
+			grid-template-rows: 50px 15% 7% 45% 40%;
 		}
-
+		
+		#sendTitle{
+			border-left : 5px solid #6667AB;
+			padding-left : 20px;
+			margin : 20px 0px 40px 10px;
+		}
 
 		#note-header-area{
 			display: grid;
@@ -179,7 +184,9 @@
 		</aside>        
 
         <main>
-
+			
+			<div><h1 id="sendTitle">보낸 쪽지함</h1></div>
+			
            <!--  -->
 			<div id="note-header-area">
 				

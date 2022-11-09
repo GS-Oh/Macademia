@@ -137,7 +137,7 @@
                     <div class="account-table-content account-part">월급여</div>
                     <div class="account-table-content">${soVo.name}</div>
                     <div class="account-table-content">${soVo.bankName}</div>
-                    <div class="account-table-content">${soVo.account}</div>
+                    <div class="account-table-content">${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</div>
                     <div class="account-table-content">계좌등록완료</div>
                     <div class="account-table-content statusOX">${soVo.monthPay}</div>
                     
@@ -145,7 +145,7 @@
                     <div class="account-table-content account-part" >기본상여금</div>
                     <div class="account-table-content">${soVo.name}</div>
                     <div class="account-table-content">${soVo.bankName}</div>
-                    <div class="account-table-content">${soVo.account}</div>
+                    <div class="account-table-content">${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</div>
                     <div class="account-table-content">계좌등록완료</div>
                     <div class="account-table-content statusOX">${soVo.basicBonus}</div>
                     
@@ -153,7 +153,7 @@
                     <div class="account-table-content account-part" >보너스</div>
                     <div class="account-table-content">${soVo.name}</div>
                     <div class="account-table-content">${soVo.bankName}</div>
-                    <div class="account-table-content">${soVo.account}</div>
+                    <div class="account-table-content">${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</div>
                     <div class="account-table-content">계좌등록완료</div>
                     <div class="account-table-content statusOX" >${soVo.bonus}</div>
 
@@ -177,7 +177,7 @@
                     </div>
                     <div><h4>예금주명  :   ${soVo.name}</h4></div>
                     <div><h4>은 행 명  :   ${soVo.bankName}</h4></div>
-                    <div><h4>계좌번호  :   ${soVo.account}</h4></div>
+                    <div><h4>계좌번호  :   ${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</h4></div>
                     <div id="account-direct">
                         <h4>자동이체  :   </h4>
                         <div>
@@ -214,7 +214,7 @@
                             <div>${soChangeVo.name}</div>
                             <div>${soVo.name}</div>
                             <div>${soVo.bankName}</div>
-                            <div>${soVo.account}</div>
+                            <div>${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</div>
                             <div>${soChangeVo.changeDate}</div>
                             
                         </c:forEach>
@@ -235,8 +235,9 @@
     
     	<c:if test="${empty soVo}">
 	    	<script>
+	    	
 				Swal.fire({
-				title: "${loginMember.name} --- ${loginMember.account}",
+				title: "${loginMember.name} ::: ${loginMember.account.substring(0,3)}-${loginMember.account.substring(3,5)}-${loginMember.account.substring(5)}",
 				text: "자동이체 계좌등록을 하시겠습니까?",
 				icon: "question",
 				showConfirmButton: false,
@@ -292,7 +293,7 @@
 		            	                    +'<div>' + changeName.value + '</div>'
 		            	                    + '<div>${soVo.name}</div>'
 		            	                    + '<div>${soVo.bankName}</div>'
-		            	                    + '<div>${soVo.account}</div>'
+		            	                    + '<div>${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</div>'
 		            	                    + '<div>'+ dateString + '</div>')
 		            	                    
 		            	                    Swal.fire(
@@ -362,7 +363,7 @@
 		            	                    +'<div>' + changeName.value + '</div>'
 		            	                    + '<div>${soVo.name}</div>'
 		            	                    + '<div>${soVo.bankName}</div>'
-		            	                    + '<div>${soVo.account}</div>'
+		            	                    + '<div>${soVo.account.substring(0,3)}-${soVo.account.substring(3,5)}-${soVo.account.substring(5)}</div>'
 		            	                    + '<div>'+ dateString + '</div>')
 		            	                    
 		            	             Swal.fire(

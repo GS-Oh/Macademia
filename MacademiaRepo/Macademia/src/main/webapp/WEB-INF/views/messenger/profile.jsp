@@ -40,7 +40,6 @@
 			width: 100%;
 			height: 100%;
 			padding:10px 20px;
-			border: 1px solid black;
 		}
 
 		
@@ -83,9 +82,9 @@
 				<div id="main-content-img-wrap" >
 					<img src="${root}/resources/upload/messenger/${msgVo.fileName}" alt="" width="100%" height="100%" style="border:1px solid black">
 				</div>
-				<div>${msgVo.name}</div>
+				<div style="border-bottom:3px solid #1315a6; width:60%; margin-left:20%; padding-bottom:30px;">${msgVo.name}</div>
 				<div></div>
-				<div style="grid-row: span 2;">${msgVo.introduce}</div>
+				<div style="grid-row: span 2;"><textarea rows="5" cols="40" readonly style="border:none; text-align:center;">${msgVo.introduce}</textarea></div>
 				<div><a class="btn btn-primary" href="/md/messenger/profile/edit" style="color: white; width: 30%;"><h4>편집</h4></a></div>
 				<div></div>
 			</div>

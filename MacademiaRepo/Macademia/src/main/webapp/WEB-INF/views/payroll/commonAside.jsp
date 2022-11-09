@@ -23,7 +23,6 @@
 	    <ul id="menu">
 	        <a href="${root}/payroll/history"><li>급여지급내역</li></a>
             <a href="${root}/payroll/account"><li>지급계좌 관리</li></a>
-            <a href=""><li>소득세 상세조회</li></a>
 	    </ul>
 	
 	    <ul id="menu-top">

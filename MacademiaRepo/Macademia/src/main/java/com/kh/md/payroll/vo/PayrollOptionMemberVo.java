@@ -7,12 +7,13 @@ public class PayrollOptionMemberVo {
 
 	private String no;
 	private String name;
-	private String payDate;
 	private String positionName;
 	private String deptName;
 	private String rankName;
 	private String deptNo;
 	private String rankNo;
+	private String payDate;
+	private String checkStatus;
 	
 	
 }//class

@@ -90,7 +90,7 @@
 		</c:if>
 		
 		
-		<c:if test="${checkFileDot eq 'etc' || ( not empty dot && (dot ne '.jpg' || dot ne '.png')) }">
+		<c:if test="${checkDownload ne 1 && (checkFileDot eq 'etc' || ( not empty dot && (dot ne '.jpg' || dot ne '.png')) )}">
 			<div class="card-body"><div id="download-img-area"><img src="/md/resources/upload/messenger/download.jpg" alt="파일저장완료" width="100%" height="100%"></div></div>
 		</c:if>
 		

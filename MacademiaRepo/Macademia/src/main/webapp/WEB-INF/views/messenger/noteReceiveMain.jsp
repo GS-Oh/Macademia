@@ -14,9 +14,15 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 15% 7% 45% 40%;
+			grid-template-rows: 50px 15% 7% 45% 40%;
 		}
-
+		
+		#receiveTitle{
+			border-left : 5px solid #6667AB;
+			padding-left : 20px;
+			margin : 20px 0px 40px 10px;
+		}
+		
 
 		#note-header-area{
 			display: grid;
@@ -179,7 +185,9 @@
 		</aside>        
 
         <main>
-
+			
+			<div><h1 id="receiveTitle">받은 쪽지함</h1></div>
+			
            <!--  -->
 			<div id="note-header-area">
 				
@@ -197,7 +205,7 @@
 					</div>
 				</a>
 				
-				<a href="/md/messenger/noteSendBox">
+				<a href="/md/messenger/noteReceiveBox">
 					<div class="header-area-content">
 						<i class="fas fa-sync-alt" style="font-size : 60px;"></i>
 						<h5>새로고침</h5>

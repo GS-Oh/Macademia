@@ -113,7 +113,6 @@
 	        
 	        	<h1 id="management-title">급여대장 관리</h1>
 	        	
-	        	
 	            <div id="management-select-area">
 	                <form action="/md/payroll/management" method="post">
 	
@@ -198,7 +197,7 @@
 	            		
 						<!-- 해당 월 내역 있으면 이거  -->
 						<form action="/md/payroll/history/detail" method="post" class="result-area">
-							<input type="text" class="management-table-content" value="${prVo.salNo}" name="salNo" readonly>
+							<input type="text" class="management-table-content salNo" value="${prVo.salNo}" name="salNo" readonly>
 							<input type="text" class="management-table-content" value="${prVo.payDate}" name="payDate" readonly>
 							<input type="text" class="management-table-content" value="${prVo.deptName}" name="deptName" readonly>
 							<input type="text" class="management-table-content" value="${prVo.rankName}" name="rankName" readonly>
@@ -243,17 +242,17 @@
 						</form>	
 						
 						<!-- action값은 alert으로 정해주었음 -->
-						<form action="" method="post" id="statuc-form">
-							<c:if test="${empty prVo.checkStatus}">
+						<form action="" method="post" class="status-form">
+							<c:if test="${prVo.checkStatus eq 'WAIT'}">
 								<input type="button" class="management-table-content status-choice btn btn-outline-dark" style="width: 100%; margin-left: 5%;" value="대기"></input>
-								<input type="hidden" id="stFormDate">
-								<input type="hidden" id="stDeptName">
+								<input type="hidden" class="stFormDate">
+								<input type="hidden" class="stDeptName">
 							</c:if>
 							<c:if test="${prVo.checkStatus eq 'CONFIRM'}">
-								<div class="management-table-content badge bg-primary" style="width:80%; margin-left:10%;">확정</div>
+								<div class="management-table-content badge bg-primary status-choice" style="width:80%; margin-left:10%;">확정</div>
 							</c:if>
 							<c:if test="${prVo.checkStatus eq 'RETURN'}">
-								<div class="management-table-content badge bg-warning" style="width:80%; margin-left:10%;">반려</div>
+								<div class="management-table-content badge bg-warning status-choice" style="width:80%; margin-left:10%;">반려</div>
 							</c:if>
 						</form>	
 					</c:forEach>
@@ -372,17 +371,20 @@
 		<!-- 상태 체크 -->
 		<script>
 				const statusChoice = document.querySelectorAll('.status-choice');
-				const salNo = document.querySelectorAll('input[name=salNo]')
-				const statucForm = document.querySelector('#statuc-form');
+				const salNo = document.querySelectorAll('.salNo')
+				const statusForm = document.querySelectorAll('.status-form');
 
 				for(let i=0; i<statusChoice.length; i++){
 
 					statusChoice[i].addEventListener('click',function(){
 						if(statusChoice[i].value == '대기'){
+							
 							let checkSalNo = salNo[i].value;
-							let stFormDate = document.querySelector('#stFormDate');
-							let stDeptName = document.querySelector('#stDeptName');
+							let stFormDate = document.querySelectorAll('.stFormDate');
+							let stDeptName = document.querySelectorAll('.stDeptName');
 							let deptSelect = document.querySelector('#dept-select');
+							
+							
 							Swal.fire({
 								title: '상태를 선택해 주세요',
 								showDenyButton: true,
@@ -393,22 +395,22 @@
 								/* Read more about isConfirmed, isDenied below */
 								if (result.isConfirmed) {
 									statusChoice[i].type= "submit";
-									statucForm.action = "/md/payroll/checkStatus/CONFIRM/"+salNo[i].value;
+									statusForm[i].action = "/md/payroll/checkStatus/CONFIRM/"+salNo[i].value;
 
-									stFormDate.value = yearSelect.value;
-									stDeptName.value = deptSelect.value;
-									console.log(stFormDate);							
-									console.log(stDeptName);							
+									stFormDate[i].value = yearSelect.value;
+									stDeptName[i].value = deptSelect.value;
+									
+									console.log(salNo[i].value);							
 									Swal.fire('최종 확정 해주세요.', '', 'success');
 										
 									statusChoice[i].value = "최종확정하기";
 
 								} else if (result.isDenied) {
 									statusChoice[i].type= "submit";
-									statucForm.action = "/md/payroll/checkStatus/RETURN/"+salNo[i].value;
+									statusForm[i].action = "/md/payroll/checkStatus/RETURN/"+salNo[i].value;
 
-									stFormDate.value = yearSelect.value;
-									stDeptName.value = deptSelect.value;
+									stFormDate[i].value = yearSelect.value;
+									stDeptName[i].value = deptSelect.value;
 
 									Swal.fire('최종 반려 해주세요.', '', 'info')
 									statusChoice[i].value = "최종반려하기";
