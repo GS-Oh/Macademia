@@ -60,7 +60,6 @@
 	        </form>
 	        </div>
 	    </div>
-	  
 	   <div class="bt_wrap">
 	       <c:if test="${!empty loginMember}">
 	       <a href="/md/board/free/write" class="on">등록</a>
@@ -75,8 +74,6 @@
 		var condition  = document.getElementById("condition");
 		const conditionValue = (condition.options[condition.selectedIndex].value);
 		const keywordValue = document.getElementById('keyword').value;
-		alert(conditionValue);
-		alert(keywordValue);
 	 	location.href = "/md/board/free?" + conditionValue + "=" + keywordValue;
     });
 </script>

@@ -67,5 +67,8 @@ public interface BoardDao {
 	//썸네일 이름 가져오기
 	String selectThumbnailByNo(String valueOf);
 	//썸네일 삭제
-	int deleteThumbnailByNo(String valueOf); 
+	int deleteThumbnailByNo(String valueOf);
+	//파일 삭제하기
+	int deleteFile(BoardAttachment attachment); 
+	
 }

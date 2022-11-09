@@ -36,7 +36,7 @@ public interface BoardService {
 		//게시글에 파일 업데이트하기
 		int updateattachment(MultipartFile[] file);
 		//게시글의 파일 삭제
-		void deleteFile(BoardAttachment attachment);
+		void deleteFile(BoardAttachment attachment, HttpServletRequest req);
 		
 		//자유게시판 영역
 		int insertFreeBoard(BoardVo vo, HttpServletRequest req);

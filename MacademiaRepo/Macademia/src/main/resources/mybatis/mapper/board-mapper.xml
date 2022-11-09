@@ -11,6 +11,7 @@
 		<result column="REGDATE" property="regdate" />
 		<result column="DELETE_YN" property="deleteYn" />
 		<result column="THUMBNAIL" property="thumbnail" />
+		<result column="POSITION" property="position" />
 	</resultMap>
 	
 	<!--게시글 작성  -->
@@ -34,15 +35,23 @@
 	</insert>
 	<!--전체 글 조회  -->
 	<select id="selectList" resultMap="boardInfo">
-		SELECT 
+		  SELECT 
 			B.NO 
 			,M.NAME AS USER_NO
 			,B.TITLE 
 			,B.CONTENT
 			,B.HIT
 			,TO_CHAR(B.REGDATE,'YYYY-MM-DD') AS REGDATE
+            ,M.POSITION
 		FROM DATA_BOARD B
-		JOIN MEMBER M
+		JOIN  (SELECT 
+        M.NAME
+        ,M.NO
+        ,M.PROFILE_NAME
+        ,P.NAME AS POSITION  
+        FROM MEMBER M
+        JOIN POSITION P
+        ON M.POSITION_NO = P.NO) M
 		ON B.USER_NO = M.NO
 		WHERE B.DELETE_YN = 'N'
 		<if test="title != null">
@@ -145,18 +154,30 @@
 		<result column="CONTENT" property="content" />
 		<result column="NAME" property="name" />
 		<result column="REGDATE" property="regdate" />
+		<result column="PROFILE_NAME" property="profileName" />
+		<result column="POSITION" property="position" />
 	</resultMap>
 	
 	<!--댓글 목록  -->
 	<select id="replyList" resultMap="reply">
-	SELECT 
-			REPLY_NO
-			,CONTENT 
-			,NAME
-			,REGDATE
-		FROM DATA_BOARD_REPLY
-		WHERE BOARD_NO = #{no}
-		ORDER BY REGDATE DESC
+	SELECT
+		B.REPLY_NO
+			,B.CONTENT 
+			,B.NAME
+			,B.REGDATE
+			,M.PROFILE_NAME
+            ,M.POSITION 
+		FROM DATA_BOARD_REPLY B
+		JOIN (SELECT 
+        M.NAME
+        ,M.PROFILE_NAME
+        ,P.NAME AS POSITION  
+        FROM MEMBER M
+        JOIN POSITION P
+        ON M.POSITION_NO = P.NO) M
+		ON B.NAME = M.NAME
+		WHERE B.BOARD_NO = #{no}
+		ORDER BY B.REGDATE ASC
 	</select>
 	<!--댓글 작성  -->
 	<insert id="writeReply">
@@ -317,7 +338,7 @@
 		WHERE DELETE_YN = 'N'
 	</select>
 	<!--게시글 삭제  -->
-	<update id="deleteBoardFreeBoard">
+	<update id="deleteFreeBoard">
 		UPDATE FREE_BOARD
 			SET
 				DELETE_YN = 'Y'
@@ -362,14 +383,17 @@
 	
 	<!--댓글 목록  -->
 	<select id="replyListFreeBoard" resultMap="reply">
-	SELECT 
-			REPLY_NO
-			,CONTENT 
-			,NAME
-			,REGDATE
-		FROM FREE_BOARD_REPLY
-		WHERE BOARD_NO = #{no}
-		ORDER BY REGDATE DESC
+		SELECT 
+			B.REPLY_NO
+			,B.CONTENT 
+			,B.NAME
+			,B.REGDATE
+			,M.PROFILE_NAME
+		FROM FREE_BOARD_REPLY B
+		JOIN MEMBER M
+		ON B.NAME = M.NAME
+		WHERE B.BOARD_NO = #{no}
+		ORDER BY B.REGDATE ASC
 	</select>
 	<!--댓글 작성  -->
 	<insert id="writeReplyFreeBoard">
@@ -457,4 +481,17 @@
 		FROM FREE_ATTACHMENT
 		WHERE BOARD_NO = #{no}
 	</delete>
+	
+	<delete id="deleteFile">
+		DELETE 
+		FROM DATA_ATTACHMENT
+		WHERE BOARD_NO = #{boardNo}
+		AND FILE_NAME = #{fileName}
+	</delete>
+	
+	<select id="getMemberList" resultType="com.kh.md.member.vo.MemberVo">
+		SELECT * 
+		FROM MEMBER
+		
+	</select>
 </mapper>

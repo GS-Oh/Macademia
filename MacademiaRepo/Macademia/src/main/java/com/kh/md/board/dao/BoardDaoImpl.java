@@ -176,5 +176,10 @@ public class BoardDaoImpl implements BoardDao {
 	public int deleteThumbnailByNo(String valueOf) {
 		return sst.delete("boardMapper.deleteThumbnailByNo", valueOf);
 	}
+
+	@Override
+	public int deleteFile(BoardAttachment attachment) {
+		return sst.delete("boardMapper.deleteFile", attachment);
+	}
 }
 

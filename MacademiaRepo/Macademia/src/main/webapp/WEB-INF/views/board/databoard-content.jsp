@@ -19,7 +19,7 @@
 		        <c:forEach items="${boardList}" var="x" >
 			    	<div class="num" >${x.no}</div>
 			    	<div class="title title-center" style="text-align: center;"><a href="${root}/board/data/detail/${x.no}">${x.title}</a></div>
-			    	<div class="writer">${x.userNo}</div>
+			    	<div class="writer">${x.userNo} ${x.position}</div>
 			    	<div class="date">${x.regdate}</div>
 			    	<div class="count">${x.hit}</div>
 			    </c:forEach>
@@ -68,8 +68,6 @@
 		var condition  = document.getElementById("condition");
 		const conditionValue = (condition.options[condition.selectedIndex].value);
 		const keywordValue = document.getElementById('keyword').value;
-		alert(conditionValue);
-		alert(keywordValue);
 	 	location.href = "/md/board/data?" + conditionValue + "=" + keywordValue;
     });
 </script>

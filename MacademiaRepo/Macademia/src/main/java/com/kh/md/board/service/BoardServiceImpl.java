@@ -195,11 +195,16 @@ public class BoardServiceImpl implements BoardService {
 		public int updateattachment(MultipartFile[] file) {
 			return boardDao.updateAttachment(file);
 		}
-
+		
+		//파일 삭제하기
 		@Override
-		public void deleteFile(BoardAttachment attachment) {
-			// TODO Auto-generated method stub
-			
+		public void deleteFile(BoardAttachment attachment, HttpServletRequest req) {
+			String filePath = req.getServletContext().getRealPath("/resources/upload/board/data/");
+			File f = new File(filePath,attachment.getFileName());
+			if(f.exists()) {
+				f.delete();
+			}
+			boardDao.deleteFile(attachment);
 		}
 		
 		//게시글 작성

@@ -30,7 +30,7 @@
 	                 </dl>
 	                 <dl>
 	                     <dt>썸네일</dt>
-	                     <dd><input type="file" multiple="multiple" name="file"></dd>
+	                     <dd><input type="file" name="file"></dd>
 	                 </dl>
 	             </div>
 	             <div class="cont">

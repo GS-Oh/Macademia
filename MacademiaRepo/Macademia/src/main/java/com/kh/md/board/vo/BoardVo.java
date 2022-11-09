@@ -15,4 +15,5 @@ public class BoardVo {
 	private String deleteYn;
 	private MultipartFile[] file;
 	private String thumbnail;
+	private String position;
 }

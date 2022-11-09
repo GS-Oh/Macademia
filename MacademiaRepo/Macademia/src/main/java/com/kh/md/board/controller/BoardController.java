@@ -43,12 +43,6 @@ public class BoardController {
 	private final BoardService service;
 	private final BoardReplyService replyService;
 
-	//자유 게시판
-	@GetMapping("main")
-	public String freeBoard() {
-		return "board/freeboard";
-	}
-	
 	//자료공유 게시판 화면
 	@GetMapping("data")
 	public String dataList(Model model, SearchCriteria searchCriteria) {
@@ -147,8 +141,7 @@ public class BoardController {
 		}
 	}
 	
-		//게시판 삭제
-		
+	//게시판 삭제
 	@GetMapping("/data/delete/{no}")
 	public String delete(@PathVariable String no, HttpSession session, Model model) {
 		int result = service.delete(no);
@@ -192,10 +185,10 @@ public class BoardController {
         return jsonObject;
     }
 	//게시글의 업로드 파일 삭제
-	@PostMapping("/data/board/deleteFile")
-	public String deleteFile(BoardAttachment attachment) {
-		service.deleteFile(attachment);
-		return "";
+	@GetMapping("/data/deleteFile")
+	public String deleteFile(BoardAttachment attachment, HttpServletRequest req) {
+		service.deleteFile(attachment, req);
+		return "redirect:/board/data/edit/" + attachment.getBoardNo();
 	}
 	
 	//자유 게시판 화면
@@ -282,11 +275,5 @@ public class BoardController {
 				//실패 => 메세지, 알람페이지
 				return "common/errorPage";
 			}
-		}
-		//게시글의 업로드 파일 삭제
-		@PostMapping("free/board/deleteFile")
-		public String freeboardDeleteFile(BoardAttachment attachment) {
-			service.deleteFile(attachment);
-			return "";
 		}
 }
