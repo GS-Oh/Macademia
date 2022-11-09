@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
     
     <style>
+    a{
+    color:#000;
+    }
       h3{
     margin: 15px 0 0	;
     font-weight:900;

@@ -103,7 +103,53 @@
 	</select>
 	
 	<select id="selectSignOne" resultType="com.kh.md.sign.vo.SignVo">
-		
+		SELECT
+    S_NO, E_NO, S_TYPE_NO,S_DATE, S_TITLE, S_CONTENT, M.NO, M.NAME AS NAME
+FROM SIGN S JOIN MEMBER M ON S.E_NO = M.NO
+WHERE S_NO = #{no}
+	</select>
+	<select id="selectSignLine" resultType="com.kh.md.sign.vo.SignLineVo">
+		SELECT M.NAME AS NAME, P.NAME AS POSITION_NAME,M.NO AS MEMBER_NO, SL.S_NO AS S_NO , SL.E_NO AS E_NO
+		,SL.S_STEP AS S_STEP
+		, SL.S_LEVEL AS  S_LEVEL
+		FROM MEMBER M JOIN POSITION P ON M.POSITION_NO= P.NO
+		JOIN SIGN_LINE SL ON M.NO = SL.E_NO
+		WHERE SL.S_NO = #{no}
+	
+	
+	</select>
+	<update id="updateSign">
+	UPDATE SIGN_LINE
+	SET
+	S_STEP ='Y'
+	WHERE S_NO = #{signNo}
+	AND E_NO = #{loginNo}
+	
+	</update>
+	<update id="updateCompanion">
+	UPDATE SIGN
+	SET
+	S_STATUS = 'X'
+	WHERE S_NO = #{signNo} 
+	
+	</update>
+	
+	<update id="companion">
+	UPDATE SIGN_LINE
+	SET
+	S_STEP = 'X'
+	WHERE S_NO = #{signNo}
+	AND E_NO = #{loginNo}
+	</update>
+	<select id="companionList" resultType="com.kh.md.sign.vo.SignVo">
+		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
+		WHERE E_NO = #{eNo} AND S_STATUS = 'X'
+	</select>
+	
+	<select id="companionTotalCnt" resultType="int">
+		SELECT COUNT(S_NO)
+		FROM SIGN 
+		WHERE S_STATUS ='X' AND E_NO = #{memberNo}
 	</select>
 
 </mapper>

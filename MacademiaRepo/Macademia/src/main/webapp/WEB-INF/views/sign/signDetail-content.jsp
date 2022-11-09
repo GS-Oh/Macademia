@@ -23,6 +23,14 @@
     
 	    
     }
+    
+    .mark2{
+   width: 79%;
+    height: 84px;
+    /* margin-left: -13px; */
+    margin-top: 10px;
+    background-color: #fff;
+    }
     h5{
     margin: 15px 0 0;
     font-weight:900;
@@ -44,7 +52,8 @@
   width:150px;
   }
    #sign_top tr td:nth-child(2){
-	width:100px;
+	width:150px;
+	color:#000;
 	background-color:#fff;
 	
 	}
@@ -85,9 +94,29 @@ font-size: 20px;;
  background-color:#6667AB;
  color:#fff;
  height: 30px;
+ width:120px;
+ border:1px  solid black;
+ line-height:30px;
+ text-align:center;
+ border-left: 0.5px;
+ border-bottom: 0.5px;
+ }
+ .td_middle{
+ border: 1px solid black;
+ border-left: 0.5px;
+ border-bottom:none;
+ width: 120px;
+ height:110px;
  }
  .td_bottom{
  height:30px;
+ border: 1px solid black;
+ width:120px;
+ line-height:30px;
+ text-align:center;
+ color:#000;
+ border-left: 0.5px;
+ 
  }
  .modal-content{
  width:700px;
@@ -111,7 +140,7 @@ font-size: 20px;;
  }
 
  #modal-wrap{
- border: 1px solid red;
+
  height: 300px;
  width:300px;
  
@@ -165,23 +194,77 @@ color:#fff
   border: 3px solid #6667AB;
   border-radius: 5px;
  }
+ #area{
+ height:300px;	
+ border-radius:5px;
+ border: 1px solid #6667AB;
+ 
+ }
+ #area_top{
+ margin-bottom:10px;
+ height:15px;
+ background-color:#6667AB;
+ border-radius:3px 3px 0 0;
+ }
+ #line{
+ border-left:1px solid black;
+ width: 800px;
+ display : flex;
+ }
+ .level{
+ width:150px;
+ display:inline-block;
+ }
+ #sign_btn{
+ background-color:#6667AB;
+ color:#fff;
+ width:40px;
+ height:30px;
+ border-radius: 5px;
+ cursor:pointer;
+ text-align:center;
+ line-height:30px;
+ 
+ display:inline-block;
+ 
+ }
+ .button_area{
+ 	text-align:center;
+ 	height: 100px;
+ 	line-height:100px;
+ }
+ #sign_btn:hover{
+ opacity: 0.8;
+ }
+ #Companion_btn:hover{
+ opacity:0.8;
+ }
+ 
+ #Companion_btn{
+ background-color:#0f7cc378;
+ color:#fff;
+ width:40px;
+ height:30px;
+ border-radius: 5px;
+ cursor:pointer;
+ text-align:center;
+ line-height:30px;
+ display:inline-block;
+ }
 </style>
 
 <div id="center_menu">
-	<h2>기안서 작성</h2><span id="writeComplete">작성 완료</span>
+	<h2>기안서 상세</h2>
 	<hr>
   <br>
   
 	<table id="sign_top" >
 		<tr>
 			<td>문서 종류</td>
-			<td><select id="doc_type">
-				<option value="1">종류</option>
-				<option value="2">종류2</option>
-				<option value="3">종류3</option>
-			</select></td>
+			<td>${signOne.STypeNo}
+			</td>
 			<td>작성자</td>
-			<td class="writer" id="${loginMember.positionName}">${loginMember.name}</td>
+			<td class="writer" >${signOne.name}</td>
 			
 		
 		</tr>
@@ -190,17 +273,55 @@ color:#fff
 
 	<hr>
   
-  <input type="text" name="s_title" id="s_title">
+  <input type="text" name="s_title" id="s_title" value="${signOne.STitle}" readonly>
 	
 	<br>
 	<br>
-	<h5>결재선 지정</h5>
+	<h5>결재선</h5>
 	<hr>
 	<div id="wrap2">
-		<div id="m_main"><a id="plus" data-toggle="modal" href="#myModal"> 결재 <i class="fa-solid fa-plus"></i></a></div>
-	<table id="sign_middle">
-	</table>
-
+		<div id="m_main">결재</div>
+		
+	
+		
+	
+	
+		
+						 
+						
+						
+	
+		<div id="line">
+		<c:forEach items="${signLine}" var="x">
+		<div class="td_wrap">
+			<div class="td_top">
+			${x.positionName}
+			</div>
+		<div class="td_middle">
+		<c:set var="name" value="${x.SStep}" />
+			<c:if test="${name eq 'Y'}">
+				<span class="level">
+   				<img class='mark2' alt='결재도장' src='${root}/resources/img/sign/sign.png'>
+   				</span>
+			</c:if>
+			
+			<c:set var="eno" value="${x.ENo}"/>
+			<c:set var="mno" value="${loginMember.no}"/>
+				<c:if test="${eno eq mno}">
+				<div class="button_area">
+				
+				<span id="sign_btn">결재</span>
+				<span id="Companion_btn">반려</span>
+				</div>
+				</c:if>
+		</div>
+		<div class="td_bottom" id="${x.memberNo}">${x.name}</div>
+			
+		</div>
+		
+		</c:forEach>
+				
+		</div>
 	</div>
 	
 	
@@ -210,83 +331,9 @@ color:#fff
 	<h5>상세 입력</h5>
 	
 	<hr>
-	<div id="summernote"></div>
+	<div id="area"><div id="area_top"></div>${signOne.SContent}</div>
 	
 </div>
-
-			
-			<!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          
-        <h6 id="m_title">결재선 지정</h4>
-        </div>
-        <div class="modal-body w-100">
-
-			<div class="modal-wrap d-inline-flex w-100">
-				<div class="w-50">
-		          <select id="select_top">
-						<option >전체</option>
-						<option value="1">대표이사</option>
-						<option value="2">부원장</option>
-						<option value="3">운영기획부</option>
-						<option value="4">교육훈련부</option>
-						<option value="5">취업지원부</option>
-						<option value="6">마케팅부</option>
-						<option value="7">행정팀</option>
-						<option value="8">재정팀</option>
-						<option value="9">시설지원팀</option>
-						<option value="10">교육1팀</option>
-						<option value="11">교육2팀</option>
-						<option value="12">교육지원팀</option>
-						<option value="13">취업팀</option>
-						<option value="14">상담팀</option>
-						<option value="15">홍보팀</option>
-						<option value="16">대외협력팀</option>
-					</select> <!-- 사용자 지정 부분③ : 텍스트 메시지 -->
-					
-					<br>
-					<br> 
-					<select multiple id="select_box">
-						<c:forEach items="${memberList}" var="x">
-							<option>${x.name} (${x.deptName} - ${x.positionName})</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="w-25 d-flex flex-column justify-content-center align-items-center">
-					<a id="addUser" class="fe-arrow-right-square">
-						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
-							<path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-						  </svg></a>
-						  <br>
-					<a id="deleteUser" class="bi bi-arrow-left-circle"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-						<path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-					  </svg></a>
-				</div>
-				<div class="w-50">
-					<select multiple id="select_right">
-
-
-					</select>
-				</div>
-			</div>
-
-        </div>
-
-
-        <div class="modal-footer">
-		  <button type="button"  id="select_complete" data-dismiss="modal">선택완료</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
 <script>
   let approverVal = [];
@@ -488,8 +535,56 @@ $('#approver-submit').on('click', function () {
     });
    
 
-
-
+ 
+  
+$('#sign_btn').on('click',function(){
+	result = confirm("결재 하시겠습니까?")
+	if(result==1){
+		var signNo = ${signOne.SNo};
+		var loginNo = ${loginMember.no}
+		console.log(signNo);
+		console.log(loginNo);
+		$.ajax({
+			url:'/md/sign/updateSign',
+			method:'post',
+			data:{signNo : signNo,
+				 loginNo : loginNo},
+			
+			success: function(data){
+				console.log("성공")
+				location.href="/md/sign/list/1"
+					alert("결재 처리가 완료 되었습니다");
+		}
+	})
+	
+	}
+})
+	
+	
+$('#Companion_btn').on('click',function(){
+	result = confirm("반려 하시겠습니까?")
+	if(result==1){
+		var signNo = ${signOne.SNo}
+		var loginNo = ${loginMember.no};
+		console.log(signNo);
+		
+		$.ajax({
+			url:'/md/sign/companionSign',
+			method:'post',
+			data:{signNo : signNo,
+				  loginNo : loginNo 	 
+				},
+			
+			success: function(data){
+				console.log("성공")
+				location.href="/md/sign/list/1"
+					alert("반려 처리가 완료 되었습니다");
+		}
+	})
+	
+	}
+})
 
 </script>
+
 

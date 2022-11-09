@@ -18,8 +18,11 @@
     
     #my_work{
     	width:100%;
-    	height:100%;
     	
+    	
+    }
+    #my_work2{
+    width:100%;
     }
     
      th{
@@ -53,7 +56,7 @@
     </style>
     
 <div id="center_menu">
-	<h3>수신 참조</h3>
+	<h3>반려된 문서</h3>
 	<hr>
 	<div id="work">
 				<table id="my_work" border="1">
@@ -61,75 +64,44 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>내용</th>
-							<th>요청날짜</th>
-							<th>마감날짜</th>
+							
+							
+							<th>등록날짜</th>
 							
 						</tr>
-						
-						<tr>
-							<td>1</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
+					</table>
+						<table id="my_work2">
+							<c:forEach items="${cList}" var="x">
+						    <tr>
+							<td>${x.SNo}</td>
+						 	<td><a href="/md/sign/signDetail/">${x.STitle}</td>
+							<td>${x.SDate}</td>
 						</tr>
+   						 </c:forEach>
+						</table>
 						
-						<tr>
-							<td>2</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
 						
-						</tr>
 						
-						<tr>
-							<td>3</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
 						
-						</tr>
 						
-						<tr>
-							<td>4</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
 						
-						</tr>
-						
-						<tr>
-							<td>5</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>일을 해라</td>
-							<td>잘좀 해라</td>
-							<td>22/10/19</td>
-							<td>22/11/14</td>
-						
-						</tr>
 					
 				
 				</table>
 				
 				<div id="page-area">
 					<ul id="page">
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
+						<c:if test="${pv.startPage ne 1}">
+		<li><a href="/md/sign/reference/${pv.startPage - 1}" >이전</a></li>
+	</c:if>
+	
+	<c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" var="i">
+	  <li> <a href="/md/sign/reference/${i}">${i}</a></li> 
+	</c:forEach>
+	
+	<c:if test="${pv.endPage ne pv.maxPage }">
+		<a href="/md/sign/reference/${pv.endPage + 1}">다음</a>
+	</c:if>	
 					</ul>
 				</div>
 				
