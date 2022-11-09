@@ -12,5 +12,5 @@ public class SignVo {
 	private String sContent;
 	private String aNo;
 	private String sign;
-
+	private String name;
 }

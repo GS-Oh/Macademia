@@ -14,12 +14,23 @@
     height:300px;
     border:1px solid #6667AB;
     margin-top:30px;
+    border-radius: 5px 5px 0 0;
     }
-    
-    #my_work{
+     #my_work2{
     	width:100%;
-    	height:100%;
     	
+    	
+    	
+    }
+    #my_work{
+    	height:40px;	
+    	width:100%;
+    	
+    	
+    }
+    #myWorkTr{
+    border-radius:3px 3px 0 0;
+    border-radius:10px;
     }
     
      th{
@@ -56,28 +67,25 @@
 	<h3>나의 결재</h3>
 	<hr>
 	<div id="work">
-				<table id="my_work" border="1">
+				<table id="my_work">
 					
-						<tr>
+						<tr id="myWorkTr">
 							<th>번호</th>
 							<th>제목</th>
-
+							
 							<th>요청날짜</th>
 							<th>마감날짜</th>
 							
 						</tr>
-						
+						</table>
+						<table id="my_work2">
 						 <c:forEach items="${slVo}" var="x">
 						    <tr>
 							<td>${x.S_NO}</td>
-						 	<td><a href="/md/work/sign/signDetail/${x.S_NO}">${x.S_TITLE}</td>
+						 	<td><a href="/md/sign/signDetail/${x.S_NO}">${x.S_TITLE}</td>
 							<td>${x.S_DATE}</td>
-							
 						</tr>
    						 </c:forEach>
-						
-					
-				
 				</table>
 				
 				<div id="page-area">

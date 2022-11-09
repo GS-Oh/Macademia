@@ -79,7 +79,7 @@ public class SignService {
 	}
 
 
-	public SignListVo selectSignOne(String no) {
+	public SignVo selectSignOne(String no) {
 		// TODO Auto-generated method stub
 		return dao.selectSignOne(sst, no);
 	}
@@ -88,6 +88,42 @@ public class SignService {
 	public int selectTotalCnt(String no) {
 		// TODO Auto-generated method stub
 		return dao.selectTotalCnt(sst, no);
+	}
+
+
+	public List<SignLineVo> selectSignLine(String no) {
+		// TODO Auto-generated method stub
+		return dao.selectSignLine(sst, no);
+	}
+
+
+	public int updateSign(Map map) {
+		// TODO Auto-generated method stub
+		return dao.updateSign(sst, map);
+	}
+
+
+	public int companionSign(Map map) {
+		// TODO Auto-generated method stub
+		return dao.companionSign(sst, map);
+	}
+
+
+	public int companion(Map map) {
+		// TODO Auto-generated method stub
+		return dao.companion(sst, map);
+	}
+
+
+	public List<SignVo> companionList(SignVo sVo) {
+		// TODO Auto-generated method stub
+		return dao.companionList(sst, sVo);
+	}
+
+
+	public int companionTotalCnt(String memberNo) {
+		// TODO Auto-generated method stub
+		return dao.companionTotalCnt(sst, memberNo);
 	}
 
 

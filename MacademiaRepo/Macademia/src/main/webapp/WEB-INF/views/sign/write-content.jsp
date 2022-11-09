@@ -8,7 +8,7 @@
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 
 
@@ -68,7 +68,6 @@ background-color:#6667AB;
 color:#fff;
 line-height: 170px;
 font-size: 20px;;
-
  }
  hr{
  border-top:1px solid gray;
@@ -109,7 +108,6 @@ font-size: 20px;;
 	background-color: #6667AB;
 	color:#fff
  }
-
  #modal-wrap{
  border: 1px solid red;
  height: 300px;
@@ -145,7 +143,6 @@ font-size: 20px;;
 	width:1000px;
 	height:170px;
 color:#fff
-
  }
  #writeComplete{
   display: inline-block;
@@ -155,11 +152,8 @@ color:#fff
   height: 20px;
   background-color: #6667AB;
   cursor: pointer;
-
  }
-
  #s_title{
-
   width:800px;
   height:35px;
   border: 3px solid #6667AB;
@@ -216,21 +210,21 @@ color:#fff
 
 			
 			<!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          
-        <h6 id="m_title">결재선 지정</h4>
-        </div>
-        <div class="modal-body w-100">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+        <h6 id="m_title">결재선 지정</h4>
+        </div>
+        <div class="modal-body w-100">
 
 			<div class="modal-wrap d-inline-flex w-100">
 				<div class="w-50">
-		          <select id="select_top">
+		          <select id="select_top">
 						<option value="0">전체</option>
 						<option value="1">대표이사</option>
 						<option value="2">부원장</option>
@@ -276,16 +270,16 @@ color:#fff
 				</div>
 			</div>
 
-        </div>
+        </div>
 
 
-        <div class="modal-footer">
+        <div class="modal-footer">
 		  <button type="button"  id="select_complete" data-dismiss="modal">선택완료</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 <script>
@@ -326,28 +320,20 @@ $('#select_top').on('change', function(){
 		})
 	
 	
-
 	})
-
 $('#plus').on('click', function(){
 	$('#select_right *').remove();
 })
-
 $('#addUser').on('click', function(){
 	let userCode = $('#select_box option:selected').val();
 	console.log(userCode)
 	let userOption = $('#select_box option[value=' + userCode + ' ]')[0].outerHTML;
-
 	$('#select_right').append(userOption)
 })
-
 $("#deleteUser").on('click',function(){
 	let userCode = $('#select_right option:selected').val();
 	let userOption = $('#select_right option[value=' + userCode+']');
-
 	$('#select_right option[value='+userCode+']').remove();
-
-
 })
 var i = 0
 $("#select_complete").on('click',function(){
@@ -383,13 +369,11 @@ $("#select_complete").on('click',function(){
             markHtml += '<td></td>';
             nameHtml += '<td>' + writer + "("+writerCode+")" + '</td>';
           }
-
           //html 담아두기
           rankHtml += '<td style="width : 110px" class="td_top">' + empRankName + '</td>';
           markHtml += '<td></td>';
           nameHtml += '<td>' + empName + '</td>';
           
-
  
 	})   
 	
@@ -408,10 +392,7 @@ $("#select_complete").on('click',function(){
         if(approverVal.length != 0){
           apprTableHtml += '<tr class="appr-table-color">'  + rankHtml + blankTd + '</tr> <tr style="height: 100px;">' + markHtml + blankTd + '</tr> <tr class="approver-emp">' + nameHtml + blankTd + '</tr>';
         }
-
       
-
-
       $('#sign_middle').append(apprTableHtml);
 	});
 //결재라인 설정 완료하기
@@ -430,7 +411,6 @@ $('#approver-submit').on('click', function () {
       })
       
       let apprTableHtml;
-
       let seq = 1;
       //선택한 결재타입 갯수만큼 반복문
       $.each(checkedVal, function(i){
@@ -460,15 +440,12 @@ $('#approver-submit').on('click', function () {
             markHtml += '<td></td>';
             nameHtml += '<td>' + writer + writerCode + '</td>';
           }
-
           //html 담아두기
           rankHtml += '<td style="width : 80px">' + empRankName + '</td>';
           markHtml += '<td></td>';
           nameHtml += '<td>' + empName + '</td>';
 		  
           
-
-
         })
         //이건 무시하셔도 돼용
         let blankTd;
@@ -493,7 +470,6 @@ $('#approver-submit').on('click', function () {
         $('#approval-table').append(apprTableHtml);
     });
     $('#writeComplete').on('click',function(){
-
       if(approverVal.length==0){
         alert("결재선을 지정해주세요");
         var content = $('#summernote').summernote('code');
@@ -524,7 +500,6 @@ $('#approver-submit').on('click', function () {
                     location.href="/md/sign/list"
                   }
         })
-
        /*  $.ajax({
           url: '/md/sign/signLine',
           type: 'post',
@@ -541,9 +516,4 @@ $('#approver-submit').on('click', function () {
       
       }
     })
-
-
-
-
 </script>
-

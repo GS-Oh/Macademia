@@ -9,6 +9,10 @@ public class SignLineVo {
 	private String sNo; 
 	private String sStep;
 	private int sLevel;
+	private String name;
+	private String positionName;
+	private String memberNo;
+	
 
 
 }

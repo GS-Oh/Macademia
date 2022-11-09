@@ -77,8 +77,24 @@ public class SignController {
 		
 		return "/sign/complateSign";
 	}
-	@GetMapping("reference")
-	public String reference() {
+	@GetMapping("reference/{pno}")
+	public String reference(HttpSession session, Model model, @PathVariable int pno) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
+		String memberNo = loginMember.getNo();
+		SignVo sVo = new SignVo();
+		sVo.setENo(memberNo);
+		
+		int totalCount = service.companionTotalCnt(memberNo);
+		
+		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		
+		List<SignVo> cList = service.companionList(sVo);
+		model.addAttribute("pv", pv);
+		model.addAttribute("cList",cList);
+		
+		
 		
 		return "/sign/reference";
 	}
@@ -127,11 +143,42 @@ public class SignController {
 	}
 	
 	@GetMapping("signDetail/{no}")
-	public String signDetail(@PathVariable String no) {
-		
-		SignListVo signOne = service.selectSignOne(no);
+	public String signDetail(@PathVariable String no, Model model, HttpSession session) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		SignVo signOne = service.selectSignOne(no);
+		List<SignLineVo> signLine = service.selectSignLine(no);
+		System.out.println(signOne);
+		model.addAttribute("signOne",signOne);
+		model.addAttribute("signLine" ,signLine);
+		model.addAttribute("loginMember", loginMember);
 		
 		return "/sign/signDetail";
+	}
+	@PostMapping("updateSign")
+	@ResponseBody
+	public int updateSign(String signNo, String loginNo) {
+		System.out.println(signNo);
+		System.out.println(loginNo);
+		 Map map = new HashMap();
+		 map.put("signNo", signNo);
+		 map.put("loginNo", loginNo);
+		
+		int result = service.updateSign(map);
+		
+		return result;
+		
+	}
+	@PostMapping("companionSign")
+	@ResponseBody
+	public int companionSign(String signNo,String loginNo) {
+		Map map = new HashMap();
+		map.put("signNo", signNo);
+		map.put("loginNo", loginNo);
+		int result = service.companionSign(map);
+		int result2 = service.companion(map);
+		
+		return result;
+			
 	}
 	
 //	@PostMapping("signLine")
