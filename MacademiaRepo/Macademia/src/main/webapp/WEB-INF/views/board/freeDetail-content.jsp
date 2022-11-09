@@ -57,6 +57,7 @@
                     <div class="info">
                     <dl>
                         <input type="hidden" value="${x.replyNo}" id="${x.replyNo}">
+                        <dt><img src="/md/resources/upload/profile/${x.profileName}" style="width: 20px; height: 20px; border-radius: 5px;"></dt>
                         <dt>${x.name}</td>
                         <dd> ${x.regdate} 
                       </dl>  

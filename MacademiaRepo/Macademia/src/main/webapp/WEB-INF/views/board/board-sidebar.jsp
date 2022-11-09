@@ -7,7 +7,7 @@
 		               <li class="">게시판</li>
 			</ul>
 			<ul id="menu">
-				<a href="/md/board/main"><li>자유게시판</li></a>
+				<a href="/md/board/free"><li>자유게시판</li></a>
 				<a href="/md/board/data/"><li>자료공유게시판</li></a>
 			</ul>
 </div>

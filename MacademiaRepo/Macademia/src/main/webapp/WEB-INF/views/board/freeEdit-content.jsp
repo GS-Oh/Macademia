@@ -44,7 +44,6 @@
                       	<c:if test="${!empty attachments}">
                       		<c:forEach var="x" items="${attachments}">
                       		<a class="" href="/md/resources/upload/board/${x.fileName}">${x.originName}</a>
-                      		<a style="color: red" href="/md/board/delete/?fileName=${x.fileName}&boardNo=${x.boardNo}">삭제</a>
                       		</c:forEach>
                        </c:if>
                       </div>

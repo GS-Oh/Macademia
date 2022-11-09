@@ -9,4 +9,6 @@ public class BoardReply {
 	public String content;
 	public String name;
 	public String regdate;
+	public String profileName; 
+	public String position; 
 }

@@ -34,7 +34,7 @@
                         <dt>첨부파일</dt>
                         <c:if test="${!empty attachments}">
                         <c:forEach var="x" items="${attachments}">
-                        <dd> <a href="/md/resources/upload/board/data/${x.fileName}">${x.originName}</a> </dd>
+                        <dd> <a href="/md/resources/upload/board/data/${x.fileName}" download>${x.originName}</a> </dd>
                         </c:forEach>
                         </c:if>
                     </dl>
@@ -65,7 +65,8 @@
                     <div class="info">
                     <dl>
                         <input type="hidden" value="${x.replyNo}" id="${x.replyNo}">
-                        <dt>${x.name}</td>
+                        <dt><img src="/md/resources/upload/profile/${x.profileName}" style="width: 20px; height: 20px; border-radius: 5px;"></dt>
+                        <dt>${x.name} ${x.position}</td>
                         <dd> ${x.regdate} 
                       </dl>  
                         <!-- 로그인한 사람과 현재 보는 글 보는 사람이 같으면 삭제 버튼 보이도록 해주기  -->
