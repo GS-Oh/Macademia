@@ -55,7 +55,7 @@
 			<%@include file="/WEB-INF/views/admin/admin-sidebar.jsp" %>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/admin/main-content.jsp" %>
+			<%@include file="/WEB-INF/views/admin/memberList.jsp" %>
 		</main>
 	</div>
 

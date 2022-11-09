@@ -24,39 +24,67 @@
 		<result column="GRADE" property="grade"/>
 	</resultMap>
 	
+	<!-- 사원 총 인원 -->
 	<select id="getListCount" resultType="_int">
-
+		SELECT COUNT(*)
+			FROM MEMBER
+		WHERE QUIT_YN = 'N'
 	</select>
 	
+	<!-- 사원 총 인원 (순서는 먼저 입사한 사람 <다니고있는사람 -> 퇴사한사람 순 >)  -->
 	<select id="selectMemberList" resultMap="memberResultSet">
-
+		SELECT *
+			FROM (SELECT 
+			        M.NO, M.NAME, M.EMAIL, M.PRIVATE_EMAIL, M.GRADE, M.ADDRESS, M.ADDRESS2
+			        , M.PHONE, M.PROFILE_NAME, M.POSITION_NO, M.BANK_NO, M.ACCOUNT, M.ENROLL_DATE, M.UPDATE_DATE
+			        , M.START_DATE, M.QUIT_DATE, M.QUIT_YN
+			        , P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+					FROM MEMBER M
+					JOIN POSITION P
+					ON M.POSITION_NO = P.NO
+					JOIN RANK R
+					ON P.RANK_NO = R.NO
+					JOIN DEPT D
+					ON P.DEPT_NO = D.NO
+			      WHERE M.QUIT_YN = 'N'
+			      ORDER BY M.ENROLL_DATE DESC)
+			UNION ALL
+		SELECT *
+			FROM (SELECT 
+			        M.NO, M.NAME, M.EMAIL, M.PRIVATE_EMAIL, M.GRADE, M.ADDRESS, M.ADDRESS2
+			        , M.PHONE, M.PROFILE_NAME, M.POSITION_NO, M.BANK_NO, M.ACCOUNT, M.ENROLL_DATE, M.UPDATE_DATE
+			        , M.START_DATE, M.QUIT_DATE, M.QUIT_YN
+			        ,P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+					FROM MEMBER M
+					JOIN POSITION P
+					ON M.POSITION_NO = P.NO
+					JOIN RANK R
+					ON P.RANK_NO = R.NO
+					JOIN DEPT D
+					ON P.DEPT_NO = D.NO
+			      WHERE M.QUIT_YN = 'Y'
+			      ORDER BY M.QUIT_YN ,  M.ENROLL_DATE DESC)
 	</select>
 	
 	<select id="selectMemberList2" resultMap="memberResultSet">
-
+		SELECT DISTINCT M.NAME
+			FROM MEMBER M
+        	LEFT JOIN POSITION P USING(NO)
+			WHERE M.QUIT_YN = 'N'
+        	ORDER BY M.NAME;
 	</select>
 	
 
 	
-<!-- 	<select id="selectDepartmentList" resultMap="departmentResultSet">
+ 	<!-- <select id="selectDepartmentList" resultType="DeptVo">
+		
+	</select>
 
-	</select> -->
 	
-<!-- 	<resultMap type="Dept" id="departmentResultSet">
+	<select id="selectPosiList" resultType="">
 
-	</resultMap> -->
+	</select> 
 	
-<!-- 	<select id="selectJobList" resultMap="jobResultSet">
-
-	</select> -->
-	
-<!-- 	<resultMap type="Job" id="jobResultSet">
-		<id column="JOB_ID" property="jobId"/>
-		<result column="JOB_NAME" property="jobName"/>
-		<result column="JOB_ORDER" property="jobOrder"/>
-		<result column="JOB_STATUS" property="jobStatus"/>
-		<result column="MEMBER_COUNT" property="memberCount"/>
-	</resultMap> -->	
 	
 	<select id="getSearchListCount" resultType="_int">
 
@@ -86,38 +114,60 @@
 
 	</update>
 	
-	<update id="deleteJob">
+	<update id="deletePosi">
 
 	</update>
 	
-	<insert id="insertJob">
+	<insert id="insertPosi">
 
 	</insert>
 	
-	<update id="updateJob">
+	<update id="updatePosi">
 
-	</update>
+	</update> -->
 	
-	<select id="selectDeptMemberList" resultMap="memberResultSet">
-
+	<select id="selectDeptMemberList" resultType="DeptVo">
+		SELECT 
+		    M.NO, M.NAME, M.EMAIL, M.PHONE, M.PROFILE_NAME
+		    , P.NAME AS POSITION_NAME
+		    , R.NAME AS RANK_NAME
+		    , D.NAME AS DEPT_NAME
+		    , M.GRADE
+		    , M.ADDRESS
+		    , M.ENROLL_DATE
+		    , M.UPDATE_DATE
+		    , M.START_DATE
+		    , M.QUIT_DATE
+		    , M.QUIT_YN
+		    , P.NO AS POSITON_NO
+		    , D.NO AS DEPT_NO
+				FROM MEMBER M
+				JOIN POSITION P 
+				ON M.POSITION_NO = P.NO
+				JOIN RANK R
+				ON P.RANK_NO = R.NO
+				JOIN DEPT D
+				ON P.DEPT_NO = D.NO
+				AND M.QUIT_YN = 'N'
 		<if test="upperDept != null">
-
+				AND D.NO = #{upperDept}
 		</if>
+			ORDER BY P.NO ASC;
 
 	</select>
 	
-<!-- 	<select id="getSubDeptList" resultMap="">
+<!--  	<select id="getSubDeptList" resultMap="">
 
-	</select> -->
+	</select> 
 	
 	<insert id="insertDept">
 
 	</insert>
 	
-<!-- 	<select id="selectDept" resultMap="">
+ 	<select id="selectDept" resultMap="">
 
 	</select>
- -->	
+	
 	<update id="deleteDept">
 
 	</update>
@@ -132,13 +182,13 @@
 		
 	<update id="sortDeptOrder">
 
-	</update>
+	</update> 
 	
 	<select id="getReportListCount" resultType="_int">
 
 	</select>
 	
-<!-- 	<select id="selectBoardReportList" resultMap="reportResultSet">
+	<select id="selectBoardReportList" resultMap="reportResultSet">
 
 	</select>	
 	

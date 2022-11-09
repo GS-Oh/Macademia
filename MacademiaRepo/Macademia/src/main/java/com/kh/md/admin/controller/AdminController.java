@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,10 +34,16 @@ import com.kh.md.admin.vo.Position;
 import com.kh.md.member.vo.MemberVo;
 
 @Controller
+//@RequestMapping("admin")
 public class AdminController {
 	
 	@Autowired
 	private AdminService aService;
+	
+//	@GetMapping("main")
+//	public String adminPage(){
+//		return "admin/memberList";
+//	}
 	
     /**
      * 사원 목록 조회
@@ -279,11 +286,11 @@ public class AdminController {
      * 직위 삭제
      */
 	@RequestMapping("admin/pdelete.ad")
-	public void deletePosi(@RequestParam("PosiNoArr") String[] PosiNoArr, HttpServletResponse response) {
+	public void deletePosi(@RequestParam("noArr") String[] noArr, HttpServletResponse response) {
 		
-		int result = aService.deletePosi(PosiNoArr);
+		int result = aService.deletePosi(noArr);
 		
-		if (result != PosiNoArr.length) {
+		if (result != noArr.length) {
 			throw new AdminException("직위 삭제에 실패하였습니다.");
 		}
 		
@@ -364,7 +371,8 @@ public class AdminController {
 	public String selectDepartmentList(Model model, @RequestParam(value="message", required=false) String message) {
 		
 		ArrayList<Dept> dList = aService.selectDepartmentList();
-		ArrayList<MemberVo> mList = aService.selectDeptMemberList(0);
+		@SuppressWarnings("null")
+		ArrayList<MemberVo> mList = aService.selectDeptMemberList((Integer) null);
 		
 		if(dList != null && mList != null) {
 			model.addAttribute("dList", dList);
@@ -526,15 +534,15 @@ public class AdminController {
 		}
 	}
 	
-	public int sortDept(int moveDeptNo, int originUpperDept) {
+	public int sortDept(int deptNo, int upperDeptNo) {
 		
 		// 부서 이동 또는 삭제시 기존에 같은 상위부서를 가지고 있던 부서 그룹 정렬 새로 하기, 1부터 차례대로 값이 들어가게 정렬 
-		ArrayList<Dept> sortDeptList = aService.getSubDeptList(originUpperDept);
+		ArrayList<Dept> sortDeptList = aService.getSubDeptList(upperDeptNo);
 		int result = 0;
 		if (sortDeptList.size() >= 2) {
 			int i = 1;
 			for (Dept d : sortDeptList) {
-				if (d.getNo() != moveDeptNo) {
+				if (d.getNo() != deptNo) {
 					d.setDeptOrder(i);
 					i++;
 				}

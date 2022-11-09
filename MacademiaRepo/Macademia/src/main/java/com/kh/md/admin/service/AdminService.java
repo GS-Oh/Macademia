@@ -33,7 +33,7 @@ public interface AdminService {
 
 	MemberVo selectMember(String no);
 
-	int deletePosi(String[] PosiNoArr);
+	int deletePosi(String[] noArr);
 
 	int insertPosi(Position posi);
 
