@@ -7,7 +7,7 @@
 
 	<!-- 급여대장 ( 검색 ( 옵션에 따른 작성대상 멤버 리스트 가져오기 ) -->
 	<select id="selectPayrollOptionMember" resultType="com.kh.md.payroll.vo.PayrollOptionMemberVo">
-			SELECT B.*
+			SELECT DISTINCT B.*, S.CHECK_STATUS
 			FROM 
 			(
 			        SELECT A.NO, A.NAME, A.POSITION_NAME ,D.NAME AS DEPT_NAME , R.NAME AS RANK_NAME, D.NO AS DEPT_NO, R.NO AS RANK_NO
@@ -22,7 +22,7 @@
 			) B
 			LEFT OUTER JOIN SALARY_BOOK S ON B.NO = S.TARGET_NO
 			
-			WHERE (S.PAY_DATE IS NULL OR (S.PAY_DATE IS NOT NULL AND NOT S.PAY_DATE = #{payDate}))
+			WHERE (S.PAY_DATE IS NULL OR (S.PAY_DATE IS NOT NULL AND S.PAY_DATE = #{payDate}) OR S.CHECK_STATUS = 'CONFIRM' OR CHECK_STATUS = 'WAIT')
 			
 			<if test="deptNo != 0">
 				AND B.DEPT_NO = #{deptNo}
@@ -95,6 +95,7 @@
 			,MUTUAL_FEE	    
 			,SAFE_DEPOSIT	
 		    ,OTHER	        
+		    ,CHECK_STATUS
 		)
 		VALUES
 		(
@@ -141,7 +142,8 @@
 			
 			<if test="other == null">,null</if>
 			<if test="other != null">,#{other}</if>
-		
+			
+			, 'WAIT'
 		)
 		
 	

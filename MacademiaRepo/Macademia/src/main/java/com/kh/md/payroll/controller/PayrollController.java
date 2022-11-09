@@ -73,7 +73,6 @@ public class PayrollController {
 	// 급여지급내역 ( 상세페이지 화면 )
 	@PostMapping("history/detail")
 	public String historyDetail(PayrollVo prVo, Model model) {
-		System.out.println(prVo);
 		model.addAttribute("prVo", prVo);
 		return "payroll/historyDetail";
 	}
@@ -138,12 +137,12 @@ public class PayrollController {
 		return "payroll/create";
 	}
 	
-	//급여대장 작성
+	
+	//급여대장 작성 ( 처리 )
 	@PostMapping("create")
 	public String createSelectPart(PayrollVo prVo, Model model) {
 		
 		List<PayrollOptionMemberVo> prMemberList = ps.selectPayrollOptionMember(prVo);
-		
 		if( prMemberList != null) {
 			model.addAttribute("prMemberList", prMemberList);
 			
@@ -223,6 +222,7 @@ public class PayrollController {
 	//급여대장 관리 ( 상태 변경하기-ALERT으로 요청 )
 	@PostMapping("checkStatus/{checkSt}/{salNo}")
 	public String checkStatus( @PathVariable String checkSt, @PathVariable String salNo, String stFormDate ,String stDeptName, Model model) {
+		
 		
 		Map<String, String> checkStatus = new HashMap<String, String>();
 		checkStatus.put("checkSt", checkSt);

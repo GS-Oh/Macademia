@@ -211,9 +211,18 @@
 							<input type="hidden" name="deptNo" value="${prMember.deptNo}" >
 							<input type="hidden" name="rankNo" value="${prMember.rankNo}" >
 							<div style="grid-column: span 6;  text-align: center; ">
-								
-									<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-secondary btn-lg" type="submit" value="급여 대장 작성하기" style="width:40%;"></h2>
-									
+									<c:if test="${empty prMember.checkStatus}">
+										<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-secondary btn-lg" type="submit" value="급여 대장 작성하기" style="width:40%;"></h2>
+									</c:if>
+									<c:if test="${prMember.checkStatus eq 'CONFIRM'}">
+										<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-outline-primary btn-lg" type="text" value="작성완료" style="width:40%;" readonly></h2>
+									</c:if>
+									<c:if test="${prMember.checkStatus eq 'RETURN'}">
+										<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-outline-warning btn-lg" type="submit" value="반려" style="width:40%;"></h2>
+									</c:if>
+									<c:if test="${prMember.checkStatus eq 'WAIT'}">
+										<h2 style="width:100%; height: 90%; padding-top: 5px;"><input class="btn btn-outline-warning btn-lg" type="submit" value="처리대기중" style="width:40%;"></h2>
+									</c:if>
 							</div>
 						</form>
 						
