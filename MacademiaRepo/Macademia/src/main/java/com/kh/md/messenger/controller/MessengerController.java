@@ -53,7 +53,6 @@ public class MessengerController {
 		
 		//메신저 등록되어있는지 체크
 		MessengerVo msgVo = ms.selectCheckEnroll(memberNo);
-		System.out.println(msgVo);
 		if(msgVo != null) {
 			
 			session.setAttribute("msgVo", msgVo);

@@ -13,7 +13,7 @@
 
 		main{
 			display: grid;
-			grid-template-rows: 20% 70% auto;
+			grid-template-rows: 20% 80% auto;
 			border-radius : 10px;
 		}
 
