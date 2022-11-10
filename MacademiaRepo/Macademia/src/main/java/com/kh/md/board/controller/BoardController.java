@@ -60,6 +60,7 @@ public class BoardController {
 		return "board/databoard";
 	}
 	
+	//검색어 설정
 	private String getQueryString(SearchCriteria searchCriteria) {
 		StringBuilder sb = new StringBuilder();
 		Field[] fields = searchCriteria.getClass().getDeclaredFields();
@@ -99,24 +100,16 @@ public class BoardController {
 	//게시글 작성
 	@PostMapping("data/write")
 	public String wirte(BoardVo vo, Model model, HttpSession session, HttpServletRequest req) {
-		
-		  MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); 
-		  String no = loginMember.getNo();
-		  vo.setUserNo(no);
-		 
-		//비즈니스 로직
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); 
+		String no = loginMember.getNo();
+		vo.setUserNo(no);
 		int result = service.insertBoard(vo, req);
-
-		
-		//화면 선택
 		if(result == 1) {
 			return "redirect:/board/data/";
 		}else {
 			return "error/errorPage";
 		}
 	}
-	
-	
 	
 	//게시글 수정 화면
 	@GetMapping("/data/edit/{no}")
@@ -146,30 +139,22 @@ public class BoardController {
 	public String delete(@PathVariable String no, HttpSession session, Model model) {
 		int result = service.delete(no);
 		if(result == 1 ) {
-			//성공 => 알람, 리스트
 			return "redirect:/board/data/";
 		}else {
-			//실패 => 메세지, 알람페이지
 			return "common/errorPage";
 		}
 	}
-		
 		
 	//파일 등록하기
 	@PostMapping(value="uploadSummernoteImageFile", produces = "application/json")
     @ResponseBody
     public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
-
         JsonObject jsonObject = new JsonObject();
-
         String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-
         String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-
         File targetFile = new File(fileRoot + savedFileName);
-
         try {
             InputStream fileStream = multipartFile.getInputStream();
             FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
@@ -181,7 +166,6 @@ public class BoardController {
             jsonObject.addProperty("responseCode", "error");
             e.printStackTrace();
         }
-
         return jsonObject;
     }
 	//게시글의 업로드 파일 삭제
@@ -257,7 +241,6 @@ public class BoardController {
 		public String freeboardEdit(@PathVariable int no, BoardVo vo, HttpServletRequest req) {
 			vo.setNo(no);
 			int result = service.updateOneFreeBoard(vo, req);
-					
 			if(result == 1) {
 				return "redirect:/board/free/detail/" + no;			
 			}else {
@@ -269,10 +252,8 @@ public class BoardController {
 		public String freeboardDelete(@PathVariable String no, HttpSession session, Model model) {
 			int result = service.deleteFreeBoard(no);
 			if(result == 1 ) {
-				//성공 => 알람, 리스트
 				return "redirect:/board/free/";
 			}else {
-				//실패 => 메세지, 알람페이지
 				return "common/errorPage";
 			}
 		}

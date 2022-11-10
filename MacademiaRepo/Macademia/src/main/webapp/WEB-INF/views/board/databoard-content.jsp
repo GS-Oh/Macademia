@@ -32,7 +32,14 @@
 	    	<a href="/md/board/data?${queryString}page=${pageVo.startPage - 1}" class="bt prev"><</a>    	
     		</c:if>
     	<c:forEach begin="${pageVo.startPage}" end="${pageVo.endPage}" var="i">    		    		    	
-	    	<a href="/md/board/data?${queryString}page=${i}" class="num">${i}</a>
+	    	<c:choose>
+		    	<c:when test="${i==pageVo.currentPage}">
+		    		<a href="/md/board/data?${queryString}page=${i}" style="background-color: #6667AB; color: white "  class="num">${i}</a>
+		    	</c:when>
+		    	<c:otherwise>
+	    			<a href="/md/board/data?${queryString}page=${i}" class="num">${i}</a>
+		    	</c:otherwise>
+	    	</c:choose>
     	</c:forEach>
 	    <c:if test="${pageVo.endPage ne pageVo.maxPage}">
 	    	<a href="/md/board/data?${queryString}page=${pageVo.endPage + 1}" class="bt next">></a>	    
@@ -46,7 +53,6 @@
 		        <select id="condition">
 	        		<option value="title">제목</option>
 		        	<option value="content">내용</option>
-		        	<option value="writer">글쓴이</option>	
 		        </select >
 		        <input id="keyword" type="text" placeholder="입력해 주세요">
 		        <button id="send" style="background-color: #6667AB; color: white; border-radius: 4px 4px 4px 4px">검색하기</button>	

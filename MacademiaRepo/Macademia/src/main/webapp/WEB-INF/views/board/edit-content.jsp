@@ -28,7 +28,7 @@
 			                    <dl>  
 			                        <dt>첨부파일</dt>         
 			                        <!--첨부파일 없을 시  -->
-			                        <dd><input type="file" placeholder="첨부파일" name="file"></dd>
+			                        <dd><input type="file" placeholder="첨부파일" name="file" multiple="multiple"></dd>
 			                       	
 		                    	</dl>
 		                	</div>
@@ -44,8 +44,10 @@
                       	<strong>첨부파일</strong>
                       	<c:if test="${!empty attachments}">
                       		<c:forEach var="x" items="${attachments}">
-                      		<a class="" href="/md/resources/upload/board/${x.fileName}">${x.originName}</a>
-                      		<a style="color: red" href="/md/board/data/deleteFile?fileName=${x.fileName}&boardNo=${x.boardNo}">삭제</a>
+                      		<div>
+	                      		<a class="" href="/md/resources/upload/board/data/${x.fileName}">${x.originName}</a>
+	                      		<button type="button" id="zzz" onclick='deleteFile(this, "${x.fileName}", "${x.boardNo}")' class="btn btn-outline-danger">삭제</button>
+                      		</div>
                       		</c:forEach>
                        </c:if>
                       </div>
@@ -65,7 +67,18 @@
 			function chk_form() {
 				document.getElementById('frm').submit();
 			}
+			
 			</script>
-    
+    		
+    		<script>
+    			function deleteFile(target, fileName, boardNo) {
+    				$.ajax({
+						url : "/md/board/data/deleteFile?fileName=" + fileName + "&boardNo=" + boardNo,
+						success : function () {
+							target.parentNode.remove();
+						} 	
+					})
+    			}
+    		</script>
 		    
 	

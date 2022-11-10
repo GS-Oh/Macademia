@@ -47,7 +47,6 @@
 		JOIN  (SELECT 
         M.NAME
         ,M.NO
-        ,M.PROFILE_NAME
         ,P.NAME AS POSITION  
         FROM MEMBER M
         JOIN POSITION P
@@ -76,8 +75,15 @@
 			,B.HIT
 			,B.REGDATE
 			,B.DELETE_YN
+			,M.POSITION
 		FROM DATA_BOARD B
-		JOIN MEMBER M
+		JOIN(SELECT 
+	        M.NAME
+	        ,M.NO
+	        ,P.NAME AS POSITION  
+	        FROM MEMBER M
+	        JOIN POSITION P
+	        ON M.POSITION_NO = P.NO) M
 		ON B.USER_NO = M.NO
 		WHERE B.NO = #{no}
 		AND B.DELETE_YN = 'N'
