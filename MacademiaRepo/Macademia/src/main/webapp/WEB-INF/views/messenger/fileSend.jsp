@@ -270,7 +270,12 @@
 
 			choiceMember[i].addEventListener('click',function(){
 				
-				choiceCheckBox[i].checked = true;
+				
+				if(choiceCheckBox[i].checked){
+					choiceCheckBox[i].checked = false;
+				}else{
+					choiceCheckBox[i].checked = true;
+				}
 
 				receiveNo.value = choiceReceiveNo[i].innerText;
 				receiveName.value = choiceReceiveName[i].innerText;

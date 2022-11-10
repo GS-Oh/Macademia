@@ -5,9 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-	<%@ include file="/resources/css/common/common.css" %>
 	
+	<%@ include file="/resources/css/common/common.css" %>
 	<style>
 	
 	    <%@ include file="/resources/css/messenger/commonAside.css" %>
@@ -392,8 +391,7 @@
 				
 				if(msgCheckBox[i].checked){
 					repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
-					deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
-					alert(cntCheckbox);
+					deleteHref.href = "/md/messenger/note/deleteReceive/"+ msgNoteNo[i].innerText;
 				}
 
 			});	
@@ -406,7 +404,7 @@
 			if(cntCheckbox > 1){
 				repleHref.href = "";
 				deleteHref.href = "";
-				alert('하나의 쪽지만 선택해 주세요 ^-^');
+				Swal.fire('하나의 쪽지만 선택해 주세요 ^-^');
 			}
 		});
 

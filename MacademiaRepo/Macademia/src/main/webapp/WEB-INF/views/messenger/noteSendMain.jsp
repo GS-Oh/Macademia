@@ -392,7 +392,6 @@
 				if(msgCheckBox[i].checked){
 					repleHref.href = "/md/messenger/note/reple/"+ msgNoteNo[i].innerText;
 					deleteHref.href = "/md/messenger/note/deleteSend/"+ msgNoteNo[i].innerText;
-					alert(cntCheckbox);
 				}
 
 			});	
@@ -405,7 +404,7 @@
 			if(cntCheckbox > 1){
 				repleHref.href = "";
 				deleteHref.href = "";
-				alert('하나의 쪽지만 선택해 주세요 ^-^');
+				Swal.fire('하나의 쪽지만 선택해 주세요 ^-^');
 			}
 		});
 

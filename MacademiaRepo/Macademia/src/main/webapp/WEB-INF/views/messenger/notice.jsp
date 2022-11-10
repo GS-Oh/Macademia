@@ -115,7 +115,7 @@
 				
 					<div class="list-content">${noticeVoList.noticeNo}</div>
 					<div class="list-content"><span  class="badge bg-info" >공지</span></div>
-					<div class="list-content" style="text-align: left; "><a href="${root}/messenger/notice/detail/${noticeVoList.noticeNo}">${noticeVoList.title}</a></div>
+					<div class="list-content" style="text-align:left;"><a href="${root}/messenger/notice/detail/${noticeVoList.noticeNo}" class="titleTrunc">${noticeVoList.title}</a></div>
 					<div class="list-content">${noticeVoList.name}</div>
 					<div class="list-content">${noticeVoList.enrollDate}</div>
 					<div class="list-content">${noticeVoList.count}</div>
@@ -158,5 +158,22 @@
 		
 
     </div>
+    
+    <script>
+    
+		let titleTrunc = document.querySelectorAll('.titleTrunc');
+		
+		for(let i=0; i<titleTrunc.length; i++){
+			
+			const titleOrigin = titleTrunc[i].innerText;
+			titleTrunc[i].innerText = truncate(titleOrigin,30); 
+
+		}
+    
+    	function truncate(str, maxlength) {
+    	  return (str.length > maxlength) ?
+    	    str.slice(0, maxlength - 1) + '…' : str;
+    	}
+    </script>
 
 </html>

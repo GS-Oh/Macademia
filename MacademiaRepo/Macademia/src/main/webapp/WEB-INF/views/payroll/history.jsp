@@ -12,7 +12,7 @@
 
     main{
         display: grid;
-        grid-template-rows: 10% 10% 10% 65% ;
+        grid-template-rows: 10% 10% 10% 70% ;
     }
 
     /*  */
