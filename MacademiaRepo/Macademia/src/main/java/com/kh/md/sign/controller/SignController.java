@@ -164,6 +164,32 @@ public class SignController {
 		
 		return "/sign/signDetail";
 	}
+	@GetMapping("completeDetail/{no}")
+	public String completeDetail(@PathVariable String no, Model model, HttpSession session) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		SignVo signOne = service.selectSignOne(no);
+		List<SignLineVo> signLine = service.selectSignLine(no);
+		System.out.println(signOne);
+		model.addAttribute("signOne",signOne);
+		model.addAttribute("signLine" ,signLine);
+		model.addAttribute("loginMember", loginMember);
+		
+		return "/sign/completeDetail";
+	}
+	@GetMapping("companionDetail/{no}")
+	public String companionDetail(@PathVariable String no, Model model, HttpSession session) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		SignVo signOne = service.selectSignOne(no);
+		List<SignLineVo> signLine = service.selectSignLine(no);
+		System.out.println(signOne);
+		model.addAttribute("signOne",signOne);
+		model.addAttribute("signLine" ,signLine);
+		model.addAttribute("loginMember", loginMember);
+		
+		return "/sign/companionDetail";
+	}
+	
+	
 	@PostMapping("updateSign")
 	@ResponseBody
 	public int updateSign(String signNo, String loginNo) {

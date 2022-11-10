@@ -323,7 +323,7 @@ color:#fff;
   let approverVal = [];
 $(document).ready(function () {
     $('#summernote').summernote({
-        placeholder: '내용을 작성하세요',
+        
         height: 400,
         maxHeight: 400
     });
@@ -517,25 +517,32 @@ $('#approver-submit').on('click', function () {
           var title = $('#s_title').val();
         var type = $('#doc_type option:selected').val();
         var content = $('#summernote').summernote('code');
-        
-        let param = {
-        	title:title, 
-            type:type,
-            content:content,
-            line: JSON.stringify(approverVal)
-        };
-        console.log(param);
-        $.ajax({
-          url :'/md/sign/signWrite',
-        			    type : 'post',
-        			    dataType : 'json', 
-        			    data : param,
-        			    success: function(){ 
-                    console.log("ajax성공");
-                    alert("기안서 작성이 완료 되었습니다");
-                    location.href="/md/sign/list/1"
-                  }
-        })
+        if(title ==null || title==""){
+        	alert("결재문서 제목을 입력해주세요");
+        }else if(content == null || content=="" || content=="내용을 작성하세요"){
+        	alert("결재문서 내용을 입력해주세요");
+        }else{
+        	 let param = {
+        	        	title:title, 
+        	            type:type,
+        	            content:content,
+        	            line: JSON.stringify(approverVal)
+        	        };
+        	        console.log(param);
+        	        $.ajax({
+        	          url :'/md/sign/signWrite',
+        	        			    type : 'post',
+        	        			    dataType : 'json', 
+        	        			    data : param,
+        	        			    success: function(){ 
+        	                    console.log("ajax성공");
+        	                    alert("기안서 작성이 완료 되었습니다");
+        	                    location.href="/md/sign/list/1"
+        	                  }
+        	        })
+        	
+        }
+       
        /*  $.ajax({
           url: '/md/sign/signLine',
           type: 'post',

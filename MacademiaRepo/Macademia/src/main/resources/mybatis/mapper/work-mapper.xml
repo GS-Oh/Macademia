@@ -14,6 +14,7 @@
     FROM POSITION P
     JOIN DEPT D ON P.DEPT_NO = D.NO
     JOIN MEMBER M ON M.POSITION_NO = P.NO
+    ORDER BY M.NO ASC
 
 
 </select>
@@ -30,7 +31,11 @@
     FROM POSITION P
     JOIN DEPT D ON P.DEPT_NO = D.NO
     JOIN MEMBER M ON M.POSITION_NO = P.NO
-    WHERE D.NO = #{deptNo}
+    <if test='deptNo != "0"'>
+     WHERE D.NO = #{deptNo}
+    </if>
+    ORDER BY M.NO ASC
+   
 </select>
 
 <insert id="workWrite">

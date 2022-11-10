@@ -1,29 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <style>
-      h3{
+   <style>
+    h3{
     margin: 15px 0 0	;
-    font-weight:900;
+    
+    
     }
     #work {
     margin: 0 auto;
   
     width:1000px;
-    height:300px;
+    height:500px;
     border:1px solid #6667AB;
     margin-top:30px;
+    border-radius: 5px;
     }
-    
+     #my_work2{
+    	width:100%;
+    	
+    	
+    	
+    }
     #my_work{
+    	height:40px;	
     	width:100%;
     	
     	
     }
-    #my_work2{
-    	width:100%;
-    	
-    	
+    #myWorkTr{
+    border-radius:3px 3px 0 0;
+    border-radius:10px;
     }
     
      th{
@@ -54,6 +61,13 @@
     
     background-color:#6667AB;
     }
+    a{
+    color:#000;
+    }
+    .pageBtn{
+    color:#fff;
+    
+    }
     </style>
     
 <div id="center_menu">
@@ -65,13 +79,12 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>내용</th>
+							
 							<th>요청날짜</th>
 							<th>마감날짜</th>
 							
 						</tr>
-						</table>
-						<table id="my_work2" >
+						
 					 <c:forEach items="${wList}" var="x">
 						    <tr>
 							<td>${x.WNo}</td>
@@ -88,15 +101,15 @@
 				<div id="page-area">
 					<ul id="page">
 						<c:if test="${pv.startPage ne 1}">
-		<li><a href="/md/work/complate/${pv.startPage - 1}" >이전</a></li>
+		<li><a href="/md/work/complate/${pv.startPage - 1}"  class="pageBtn" >이전</a></li>
 	</c:if>
 	
 	<c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" var="i">
-	  <li> <a href="/md/work/complate/${i}">${i}</a></li> 
+	  <li> <a href="/md/work/complate/${i}"  class="pageBtn">${i}</a></li> 
 	</c:forEach>
 	
 	<c:if test="${pv.endPage ne pv.maxPage }">
-		<a href="/md/work/complat/${pv.endPage + 1}">다음</a>
+		<a href="/md/work/complat/${pv.endPage + 1}"  class="pageBtn">다음</a>
 	</c:if>	
 					</ul>
 				</div>

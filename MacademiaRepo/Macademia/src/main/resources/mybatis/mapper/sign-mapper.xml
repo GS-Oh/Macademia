@@ -79,7 +79,7 @@
 
 	<select id="selectSignList" resultType="map">
 	 WITH T1 AS
- (SELECT SL.S_NO AS S_NO, SL.S_LEVEL AS S_LEVEL, SL.S_STEP AS S_STEP,S.S_TITLE AS S_TITLE,S.S_DATE AS S_DATE,S.S_CONTENT,S.S_STATUS,S.A_NO
+ (SELECT SL.S_NO AS S_NO, SL.S_LEVEL AS S_LEVEL, SL.S_STEP AS S_STEP,S.S_TITLE AS S_TITLE,TO_CHAR(S.S_DATE, 'YYYY-MM-DD') AS S_DATE,S.S_CONTENT,S.S_STATUS,S.A_NO
  FROM SIGN_LINE SL
  INNER JOIN SIGN S ON S.S_NO = SL.S_NO
  WHERE SL.E_NO = #{no}
@@ -90,8 +90,7 @@
  AND SSL.S_LEVEL  = T1.S_LEVEL-1
  AND SSL.S_STEP = 'Y'
  ORDER BY T1.S_NO DESC
- 
-	 
+
 	 
     
 	</select>
@@ -143,7 +142,7 @@ WHERE S_NO = #{no}
 	AND E_NO = #{loginNo}
 	</update>
 	<select id="companionList" resultType="com.kh.md.sign.vo.SignVo">
-		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
+		SELECT S_NO, S_TITLE, S_TYPE_NO, TO_CHAR(S_DATE, 'YYYY-MM-DD') AS S_DATE , S_STATUS FROM SIGN
 		WHERE E_NO = #{eNo} AND S_STATUS = 'X'
 		ORDER BY S_NO DESC
 	</select>
@@ -155,7 +154,7 @@ WHERE S_NO = #{no}
 	</select>
 	
 	<select id="getMySign" resultType="com.kh.md.sign.vo.SignVo">
-		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
+		SELECT S_NO, S_TITLE, S_TYPE_NO, TO_CHAR(S_DATE, 'YYYY-MM-DD') AS S_DATE , S_STATUS FROM SIGN
 		WHERE E_NO = #{eNo} AND S_STATUS = 'N'
 		ORDER BY S_NO DESC
 	</select>
@@ -200,7 +199,7 @@ WHERE S_NO = #{no}
 	</select>
 	
 	<select id="completeList" resultType="com.kh.md.sign.vo.SignVo">
-		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
+		SELECT S_NO, S_TITLE, S_TYPE_NO, TO_CHAR(S_DATE, 'YYYY-MM-DD') AS S_DATE , S_STATUS FROM SIGN
 		WHERE E_NO = #{eNo} AND S_STATUS = 'Y'
 		ORDER BY S_NO DESC
 	
