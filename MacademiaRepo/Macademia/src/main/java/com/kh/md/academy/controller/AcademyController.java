@@ -128,6 +128,7 @@ public class AcademyController {
 			return "checkedStudents";
 		}else{
 			return "0";
+			
 		}
 		
 	}

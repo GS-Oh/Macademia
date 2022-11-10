@@ -49,10 +49,27 @@
     }
     
     /* 테이블 */
-    #class-list, #my-class-list{
+    #class-list{
         border-top: 1px solid gray;
         margin-bottom: 50px;
     } 
+    #my-class-list{
+        border-top: 1px solid gray;
+        margin-bottom: 50px;
+        max-height: 60vh;
+        overflow-y: auto;
+    } 
+    #my-class-list::-webkit-scrollbar{
+        width: 5px;
+    }
+    #my-class-list::-webkit-scrollbar-thumb{
+        background-color: #6667AB;
+        border-radius: 50px;
+    }
+    #my-class-list::-webkit-scrollbar-track{
+        background-color: white;
+        border-radius: 50px;
+    }
     #class-list-head, #my-class-list-head{
         display: grid;
         grid-template-columns: 1fr 1.5fr 3fr 1fr 1fr 1fr 1.3fr 0.7fr;
@@ -214,15 +231,15 @@
         justify-content: center;
         align-items: center;
     }
-    .time-input-btn{
+    .time-input-btn, #insert-btn{
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
         width: 70px;
-        height: 30px;
+        height: 27px;
         background-color: #6667AB;
         color: white;
     }
-    .time-input-btn:hover{
+    .time-input-btn:hover, #insert-btn:hover{
         font-weight: bolder;
     }
     .student-list-body{
@@ -251,14 +268,14 @@
     }
     .after-time-check{
         display: grid;
-        grid-template-columns: 100px;
+        grid-template-columns: 40px;
         grid-template-rows: 1fr 1fr;
         justify-content: center;
         align-items: center;
     }
     .online-btns{
         display: grid;
-        grid-template-rows: 30px 30px;
+        grid-template-rows: 40px 40px;
         /* justify-content: center;
         align-content: center; */
     }
@@ -343,19 +360,19 @@
 	                                </div>
                                     
 	                                <div class="after-time-check">
-                                        <!-- <div class="online-btns">
+                                        <div class="online-btns">
                                             <button class="add-to-online">></button>
                                             <button class="remove-from-online"><</button>
                                         </div>
                                         <div class="online-btns">
                                             <button class="add-to-offline">></button>
                                             <button class="remove-from-offline"><</button>
-                                        </div> -->
+                                        </div>
                                     </div>
 
                                     <div>
                                         <div class="student-list-online">
-                                            <div class="student-list-online-title">온라인</div>
+                                            <div class="student-list-online-title">온라인 수강</div>
                                             <div class="student-list-online-body">
                                                 <div class="online-student-list">
                                                     <!-- <div><input type="checkbox" class=""></div>
@@ -364,7 +381,7 @@
                                             </div>
                                         </div>
                                         <div class="student-list-offline">
-                                            <div class="student-list-offline-title">오프라인</div>
+                                            <div class="student-list-offline-title">오프라인 수강</div>
                                             <div class="student-list-offline-body">
                                                 <div class="offline-student-list">
                                                     <!-- <div><input type="checkbox" class=""></div>
@@ -377,6 +394,7 @@
 	                    
 	                            <!-- Modal footer -->
 	                            <div class="modal-footer">
+                                <button type="button" id="insert-btn">등록</button>    
 	                            <button type="button" id="modal-close-btn" class="addbgc btn" data-bs-dismiss="modal">닫기</button>
 	                            </div>
 	                    
@@ -459,10 +477,10 @@
 </div>
 
 <script>/* 클릭하면 hidden보여주기 */
-    // $('.hidden-area').hide();
-    // $('.select-one-class').on('click', function(){
-    //     $(this).children('div:eq(8)').show(200);
-    // });
+    $('.hidden-area').hide();
+    $('.select-one-class').on('click', function(){
+        $(this).children('div:eq(8)').show(200);
+    });
     
 </script>
 
@@ -496,29 +514,7 @@
                     $('.student-list-body').append('<div class="individual-student-list"> <div><input type="checkbox" id="' + svo[i].no + '" class="checkEach" value="' + svo[i].no + '"></div> <div><label for="' + svo[i].no + '">' + svo[i].name + '</label></div> </div>');
                 }
 
-                $('.add-to-online').on('click', function(){
-                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.online-student-list'));
-                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
-                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
-                });
-
-                $('.remove-from-online').on('click', function(){
-                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.tot-student-list'));
-                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
-                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
-                });
-
-                $('.add-to-offline').on('click', function(){
-                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.offline-student-list'));
-                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
-                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
-                });
-
-                $('.remove-from-offline').on('click', function(){
-                    $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.tot-student-list'));
-                    $('input:checkbox[class=checkEach]:checked').prop('checked', false);
-                    $('input:checkbox[id=checkAll]:checked').prop('checked', false);
-                });
+                
             },
             error : function(){
                 console.log('not good');
@@ -562,7 +558,10 @@
                         $('#checkAll').prop('checked', false);
                         $('.checkEach').prop('checked', false);
 
-                        createBtn();
+                        $('.time-input-btn').prop('disabled', true);
+                        $('.time-input-btn').css('color', 'lightgray');
+                        $('.time-input-btn').unbind('hover');
+
                     }else{
                         Swal.fire({
                             icon: 'warning',
@@ -582,13 +581,56 @@
         }
     });
 
-    function createBtn(){
-        $('.after-time-check').append('<div class="online-btns"> <button class="add-to-online">></button> <button class="remove-from-online"><</button> </div> <div class="online-btns"> <button class="add-to-offline">></button> <button class="remove-from-offline"><</button> </div>')
-
-    }
+    
 </script>
 
 <script>
-    
+    $('.add-to-online').on('click', function(){
+        $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.online-student-list'));
+        $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+        $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+    });
+
+    $('.remove-from-online').on('click', function(){
+        $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.tot-student-list'));
+        $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+        $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+    });
+
+    $('.add-to-offline').on('click', function(){
+        $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.offline-student-list'));
+        $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+        $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+    });
+
+    $('.remove-from-offline').on('click', function(){
+        $('input:checkbox[class=checkEach]:checked').parent().parent().insertAfter($('.tot-student-list'));
+        $('input:checkbox[class=checkEach]:checked').prop('checked', false);
+        $('input:checkbox[id=checkAll]:checked').prop('checked', false);
+    });
+
+    $('#insert-btn').on('click', function(){
+        let online = [];
+        let offline = [];
+        $('.student-list-online-body').find('input:checkbox[class=checkEach]').each(function(i){
+            online.push($(this).val());
+        })
+            console.log('online : ' + online);
+        $('.student-list-offline-body').find('input:checkbox[class=checkEach]').each(function(i){
+            offline.push($(this).val());
+        })
+            console.log('offline : ' + offline);
+
+        if(online.length == 0 && offline.length == 0){
+            Swal.fire({
+                icon: 'warning',
+                title: '온,오프라인 여부를 선택해주세요!'
+            });
+        }else{
+            $.ajax({
+                
+            });
+        }
+    });
 </script>
 

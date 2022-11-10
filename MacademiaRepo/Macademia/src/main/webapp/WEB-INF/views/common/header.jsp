@@ -42,7 +42,7 @@
         width: 60vw;
         padding: 0vw 6vw;
         display: grid;
-        grid-template-columns: repeat(12, 4vw);
+        grid-template-columns: repeat(11, 4vw);
         justify-content: center;
     }
     #nav-area a, #alert-area a{
@@ -84,12 +84,12 @@
                 <label for="">홈</label>
             </a>
         </div>
-        <div id="nav-menu2">
+        <%-- <div id="nav-menu2">
             <a href="${root}/employee/myAtdc">
                 <i class="fa-solid fa-business-time fa-2x"></i><br>
                 <label for="">근무</label>
             </a>
-        </div>
+        </div> --%>
         <div id="nav-menu3">
             <a href="${root}/academy/roll/1">
                 <i class="fa-solid fa-chalkboard-user fa-2x"></i><br>

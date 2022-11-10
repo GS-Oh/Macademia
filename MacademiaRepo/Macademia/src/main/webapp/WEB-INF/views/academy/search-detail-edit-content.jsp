@@ -292,7 +292,7 @@
 
         <div id="student-info-area">
             <div id="student-profile">
-                <img src="/${root}/resources/upload/profile/studentProfile/${svo.profile}" id="student-profile-img" width="160px" height="180px" alt="수강생 프로필">
+                <img src="${root}/resources/upload/profile/studentProfile/${svo.profile}" id="student-profile-img" width="160px" height="180px" alt="수강생 프로필">
                 <input type="file" name="f">
             </div>
             <div id="student-name"><input type="hidden" name="name"><h3>${svo.name}</h3></div>
@@ -365,38 +365,11 @@
                                     <div>개강일</div>
                                 </div>
                                 <div id="modal-table-area">
-									<!-- <c:forEach items="${classList}" var="l">
-	                                    <div class="modal-body-class-list">
-	                                        <div>
-                                                <input type="checkbox" value="${l.no}">
-                                            </div>
-                                            <div>${l.classroom}</div>
-                                            <div id="class-name">${l.name}</div>
-                                            <div>${l.memberNo}</div>
-                                            <div>${l.beginDate}</div>
-	                                    </div>
-                                    </c:forEach> -->
+
                                 </div>
                     
                                 <div id="page-area">
-                                    <!-- <c:if test="${pvo.startPage gt 5}">
-                                        <div><a href="${root}/academy/classList/1"><i class="fa-solid fa-angles-left"></i></a></div>
-                                    </c:if>
                                     
-                                    <c:if test="${pvo.startPage ne 1}">
-                                        <div><a href="${root}/academy/classList/${pvo.startPage-1}"><i class="fa-solid fa-angle-left"></i></a></div>
-                                    </c:if>
-                                    
-                                    <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-                                        <div><a href="${root}/academy/classList/${i}">${i}</a></div>
-                                    </c:forEach>
-                                    
-                                    <c:if test="${pvo.endPage ne pvo.maxPage}">
-                                        <div><a href="${root}/academy/classList/${pvo.endPage+1}"><i class="fa-solid fa-angle-right"></i></a></div>
-                                    </c:if>
-                                    <c:if test="${pvo.endPage ne pvo.maxPage}">
-                                        <div><a href="${root}/academy/classList/${pvo.maxPage}"><i class="fa-solid fa-angles-right"></i></a></div>
-                                    </c:if> -->
                                 </div>
                             </div>
                     
