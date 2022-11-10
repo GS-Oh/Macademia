@@ -27,8 +27,8 @@
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                         	<span style="color: black; margin-right: 100px;"><b>사원 수</b></span>
-                        	<span style="color: black; margin-right: 50px;"><b>13</b>명(정상)</span>
-                        	<span style="color: black;"> 중지: <span>5</span>명</span>
+                        	<span style="color: black; margin-right: 50px;"><b>${ memberCount[0] }</b>명(정상)</span>
+                        	<span style="color: black;"> 중지: <span>${ memberCount[1] }</span>명</span>
                         </div>
                    	</div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -50,29 +50,29 @@
 					                	<select id="selectDept" class="form-control" name="selectDept">
 					                    	<option value="">부서</option>  
 					                    	<c:forEach var="d" items="${ dList }">
-					                    		<c:if test="${ selectDept ne d.deptId }">
-					                    			<option value="${ d.deptId }">${ d.deptName }</option>
+					                    		<c:if test="${ selectDept ne d.deptNo }">
+					                    			<option value="${ d.deptNo }">${ d.deptName }</option>
 					                    		</c:if>
-					                    		<c:if test="${ selectDept eq d.deptId }">
-					                    			<option value="${ d.deptId }" selected>${ d.deptName }</option>
+					                    		<c:if test="${ selectDept eq d.deptNo }">
+					                    			<option value="${ d.deptNo }" selected>${ d.deptName }</option>
 					                    		</c:if>
 					                    	</c:forEach>
 					                    </select>
-					                    <select id="selectJob" class="form-control" name="selectJob">
+					                    <select id="selectPosi" class="form-control" name="selectPosi">
 					                    	<option value="">직위</option>
-					                    	<c:forEach var="j" items="${ jList }">
-					                    		<c:if test="${ selectJob ne j.jobId }">
-					                    			<option value="${ j.jobId }">${ j.jobName }</option>
+					                    	<c:forEach var="p" items="${ pList }">
+					                    		<c:if test="${ selectPosi ne p.positionNo }">
+					                    			<option value="${ p.positionNo }">${ p.positionName }</option>
 					                    		</c:if>
-					                    		<c:if test="${ selectJob eq j.jobId }">
-					                    			<option value="${ j.jobId }" selected>${ j.jobName }</option>
+					                    		<c:if test="${ selectPosi eq p.positionNo }">
+					                    			<option value="${ p.positionNo }" selected>${ p.positionName }</option>
 					                    		</c:if>
 					                    	</c:forEach>
 					                    </select>
 					                    <input type="search" class="form-control" name="searchValue"  list="memberList" placeholder="사원 이름" autocomplete="off">
 					                    <datalist id="memberList">
 			                        	<c:forEach var="m2" items="${ mList2 }">
-			                        		<option value="${ m2.mName }"></option>                               		
+			                        		<option value="${ m2.name }"></option>                               		
 	 	                                </c:forEach>
 			                        </datalist>
 					                    
@@ -86,9 +86,9 @@
 					                    	}
 					                    });
 					                    		
-					                    $('#selectJob').on('change', function(){
-					                    	var selectJob = $(this).val();
-					                    	if(selectJob != '직위') {
+					                    $('#selectPosi').on('change', function(){
+					                    	var selectPosi = $(this).val();
+					                    	if(selectPosi != '직위') {
 					                    		$('#searchForm').submit();
 					                    	}
 					                    });
@@ -109,11 +109,16 @@
 	                                                    </button>
 	                                                </div>
 	                                                <div class="modal-body" style="color: black;">
-	                                                	<p>선택한 사원 <span id="countCheck"></span>명의</p>
+	                                                	<!-- <p>선택한 사원 <span id="countCheck"></span>명의</p>
 	                                                	계정 상태 변경  &nbsp;
 	                                                	<select id="mStatus" class="form-control" name="mStatus"  style="width: 100px; display: inline;">
 	                                                		<option value="0">정상</option>
-	                                                		<option value="1">중지</option>
+	                                                		<option value="1">중지</option> -->
+	                                                	<p>선택한 사원 <span id="countCheck"></span>명의</p>
+	                                                	계정 상태 변경  &nbsp;
+	                                                	<select id="quitYn" class="form-control" name="quitYn"  style="width: 100px; display: inline;">
+	                                                		<option value="N">정상</option>
+	                                                		<option value="Y">퇴사</option>
 	                                                	</select>
 	                                                </div>
 	                                                <div class="modal-footer">
@@ -132,20 +137,20 @@
 	                                                <th scope="col" width="100px">이름</th>
 	                                                <th scope="col" width="120px">직위</th>
 	                                                <th scope="col" width="150px">부서</th>
-	                                                <th scope="col" width="120px">아이디</th>
 	                                                <th scope="col" width="180px">이메일</th>
+	                                                <th scope="col" width="180px">개인 이메일</th>
 	                                                <th scope="col" width="130px">입사일</th>
 	                                                <th scope="col" width="120px">계정 상태</th>
 	                                                <th scope="col" width="50px">상세</th>
-	                                                <c:set var="loopFlag" value="false"/>
-	                                                <c:forEach var="m" items="${ mList }">
+	                                                 <c:set var="loopFlag" value="false"/>
+	                                                <%-- <c:forEach var="m" items="${ mList }">
 	                                                	<c:if test="${ not loopFlag }">
 			                                               	<c:if test="${ m.status eq 2 }">  <!-- 가입 대기 상태일 때 -->
 			                                               		<th scope="col" width="150px">가입 승인</th>
 			                                               		<c:set var="loopFlag" value="true"/>
 			                                              	</c:if> 
 	                                                	</c:if>
-	                                                </c:forEach>
+	                                                </c:forEach> --%>
 	                                            </tr>
 	                                        </thead>
 	                                        <tbody>
@@ -161,15 +166,15 @@
 	                                        	</c:if>
 	                                         	<c:forEach var="m" items="${ mList }">
 		                                            <tr>
-		                                            	<td><input type="checkbox" class="checkM" name="mId" value="${ m.mId }"></td>
-		                                                <td>${ m.mName }</td>
-		                                                <td>${ m.jobName }</td>
+		                                            	<td><input type="checkbox" class="checkM" name="no" value="${ m.no }"></td>
+		                                                <td>${ m.name }</td>
+		                                                <td>${ m.PositionName }</td>
 		                                                <td>${ m.deptName }</td>
-		                                                <td>${ m.mId }</td>
 		                                                <td>${ m.email }</td>
-		                                                <td>${ m.hireDate }</td>
+		                                                <td>${ m.privateEmail }</td>
+		                                                <td>${ m.startDate }</td>
 		                                                <td>
-			                                                <c:if test="${ m.status eq 0 }">
+			                                                <%-- <c:if test="${ m.status eq 0 }">
 			                                                	정상
 			                                                </c:if>
 			                                                <c:if test="${ m.status eq 1 }">
@@ -177,16 +182,25 @@
 			                                                </c:if>
 			                                                <c:if test="${ m.status eq 2 }">
 			                                                	승인 대기
+			                                                </c:if> --%>
+			                                                <c:if test="${ m.quitYn eq 'N' }">
+			                                                	정상
+			                                                </c:if>
+			                                                <c:if test="${ m.quitYn eq 'Y' }">
+			                                                	퇴사자
+			                                                <%-- </c:if>
+			                                                <c:if test="${ m.status eq 2 }">
+			                                                	승인 대기 --%>
 			                                                </c:if>		                                                		                                                	
 		                                                </td>
 		                                                <td>
 		                                                    <span>
 		                                                    	<c:url var="mdetail" value="mdetail.ad">
-		                                                    		<c:param name="mId" value="${ m.mId }"/>
+		                                                    		<c:param name="no" value="${ m.no }"/>
 		                                                    		<c:param name="page" value="${ pi.currentPage }"/>
 		                                                    		<c:if test="${ searchValue ne null }"> <!-- null이 아니면 검색을 했다는 뜻 -->
 																		<c:param name="selectDept" value="${ selectDept }"/>
-																		<c:param name="selectJob" value="${ selectJob }"/>
+																		<c:param name="selectPosi" value="${ selectPosi }"/>
 																		<c:param name="searchValue" value="${ searchValue }"/>
 																	</c:if>	
 		                                                    	</c:url>
@@ -198,16 +212,24 @@
 		                                                                class="fa fa-close color-danger"></i></a> -->
 		                                                    </span>
 		                                                </td>
-		                                                <c:if test="${ m.status eq 2 }"> <!-- 가입 대기 상태일 때 -->
+		                                                <%-- <c:if test="${ m.status eq 2 }"> <!-- 가입 대기 상태일 때 -->
 		                                               		<td>
 				                                                <div class="btn-group">
 				                                                	<input type="hidden" name="joinId" value="${ m.mId }">
 								                                    <button type="button" class="btn btn-primary in approveBtn" style="background: #6495ED; border: #6495ED;">승인</button>
 								                                    <button type="button" class="btn btn-primary out rejectBtn" style="background: #CD5C5C; border: #CD5C5C;">거부</button> 
 								                                </div>
+							                                </td> --%>
+							                                <c:if test="${ m.quit eq 'N' }"> <!-- 퇴사 등 -->
+		                                               		<td>
+				                                                <div class="btn-group">
+				                                                	<input type="hidden" name="joinId" value="${ m.no }">
+								                                    <button type="button" class="btn btn-primary in approveBtn" style="background: #6495ED; border: #6495ED;">퇴사</button>
+								                                    <button type="button" class="btn btn-primary out rejectBtn" style="background: #CD5C5C; border: #CD5C5C;">취소</button> 
+								                                </div>
 							                                </td>
 	                                              		</c:if>
-	                                              		<c:if test="${ loopFlag && m.status ne 2 }">
+	                                              		<c:if test="${ loopFlag && m.quitYn ne 'N' }">
 	                                              			<td></td>
 	                                              		</c:if>
 	                                            	</tr>
@@ -266,39 +288,42 @@
 									var checkM = document.getElementsByClassName('checkM');
                        				
                        				var count = 0;
-                       				var managerYn = false;
-                       				var deptMgrYn = false;
-                       				var managerId = "";
-                       				var deptMgrId = "";
+                       				/* var managerYn = false;
+                       				var deptMgrYn = false; */
+                       				var grade = false;
+                       				var managerNo = "";
+                       				/* var deptMgrNo = ""; */
                        				for (var i in checkM) {
                        					if(checkM[i].checked) {
                        						count++;
                        						<c:forEach items="${ mList }" var="m">
-                       							if (checkM[i].value == '${ m.mId }' && '${ m.managerYn }' == 'Y' ) {
-                       							 	managerYn = true;
-                       							 	if (managerId == "") {
-                       							 		managerId = checkM[i].value;
+                       							if (checkM[i].value == '${ m.no }' && '${ m.grade }' == 'A' ) {
+                       							 	grade = true;
+                       							 	if (managerNo == "") {
+                       							 		managerNo = checkM[i].value;
                        							 	} else {
-                       							 		managerId += ", " + checkM[i].value;
+                       							 		managerNo += ", " + checkM[i].value;
                        							 	}
                        								
                        							}
                        						</c:forEach>
                        						
-                       						<c:forEach items="${ dList }" var="d">
+                       						/* 부서책임자 */
+                       						/* <c:forEach items="${ dList }" var="d">
 	                   							if (checkM[i].value == '${ d.deptManager }') {
 	                   								deptMgrYn = true;
-	                   							 	if (deptMgrId == "") {
-	                   							 		deptMgrId = checkM[i].value;
+	                   							 	if (deptMgrNo == "") {
+	                   							 		deptMgrNo = checkM[i].value;
 	                							 	} else {
-	                							 		deptMgrId += ", " + checkM[i].value;
+	                							 		deptMgrNo += ", " + checkM[i].value;
 	                							 	}
 	                   							}
-           									</c:forEach>
+           									</c:forEach> */
                        					}
                        				}                   			
                        				
-                       				if (count > 0 && !managerYn && !deptMgrYn) {
+                       				/* if (count > 0 && !managerYn && !deptMgrYn) { */
+                   					if (count > 0 && !grade) {
                        			 		Swal.fire({
 	                       				  title: '선택된 ' + count + '명의 사원을 삭제하시겠습니까?',
 	                       				  text: '삭제 후 복구할 수 없습니다.',
@@ -313,10 +338,15 @@
 	                       					$('#deleteForm').submit();
 	                       				  }
                        					});
-                       				} else if (managerYn) {
+            
+                       				} /*  else if (managerYn) {
                        					alert('삭제하려면, 먼저 관리자 설정을 해제하여 주세요.', managerId + '은 관리자 계정입니다.')
-                       				} else if (deptMgrYn) {
+                       				}  else if (deptMgrYn) {
                        					alert('삭제하려면, 먼저 부서 책임자 설정을 해제하여 주세요.', deptMgrId + '은 부서 책임자입니다.')
+                       				} */
+                       				 else if(grade){
+                       					alert('삭제하려면, 먼저 관리자 설정을 해제하여 주세요.', managerNo + '은 관리자 계정입니다.')
+                       					}
                        				} else {
                        					alert('적용할 사원을 선택하세요.');
                        				}
@@ -344,52 +374,55 @@
                        			});
                        			
                        			// 사원 정보 수정 모달창에서 상태 변경 저장 버튼 클릭시 실행하는 함수
-                       			$('#btnSubmit2').on('click', function(){
+                       			 $('#btnSubmit2').on('click', function(){
 									var checkM = document.getElementsByClassName('checkM');
                        				var mStatus = $('#mStatus').val();
+                       				var quitYn = ${'#quitYn'}.val();
                        				
-                       				var managerYn = false;
-                       				var deptMgrYn = false;
-                       				var managerId = "";
-                       				var deptMgrId = "";
+                       			   /*  var managerYn = false;
+                       				var deptMgrYn = false;  */
+                       				var grade = false;
+                       				var managerNo = "";
+                       				/*  var deptMgrNo = "";  */
                        				for (var i in checkM) {
                        					if(checkM[i].checked) {
                        						<c:forEach items="${ mList }" var="m">
-                       							if (checkM[i].value == '${ m.mId }' && '${ m.managerYn }' == 'Y') {
-                       							 	managerYn = true;
-                       							 	if (managerId == "") {
-                    							 		managerId = checkM[i].value;
+                       							if (checkM[i].value == '${ m.no }' && '${ m.grade }' == 'A') {
+                       							 	grade = true;
+                       							 	if (managerNo == "") {
+                    							 		managerNo = checkM[i].value;
                     							 	} else {
-                    							 		managerId += ", " + checkM[i].value;
+                    							 		managerNo += ", " + checkM[i].value;
                     							 	}
                        							}
                        						</c:forEach>
                        						
-                       						<c:forEach items="${ dList }" var="d">
+                       						/*  <c:forEach items="${ dList }" var="d">
 	                   							if (checkM[i].value == '${ d.deptManager }') {
 	                   								deptMgrYn = true;
-	                   							 	if (deptMgrId == "") {
-	                   							 		deptMgrId = checkM[i].value;
+	                   							 	if (deptMgrNo == "") {
+	                   							 		deptMgrNo = checkM[i].value;
 	                							 	} else {
-	                							 		deptMgrId += ", " + checkM[i].value;
+	                							 		deptMgrNo += ", " + checkM[i].value;
 	                							 	}
 	                   							}
-               								</c:forEach>
+               								</c:forEach>  */
                        					}
                        				}       
                        				
-                       				if ((!managerYn & !deptMgrYn) || mStatus == 0) {
+                       				/* if ((!managerYn & !deptMgrYn) || mStatus == 0) { 
+                       				   if (!grade || quitYn == 'N') {
                        					$(this).parents('form').attr('action', '${ contextPath }/admin/mupdatemulti.ad');
                        					$(this).parents('form').submit();
                        				} else if (managerYn) {
-                       					alert('계정을 중지하려면, 먼저 관리자 설정을 해제하여 주세요.', managerId + '은 관리자 계정입니다.');
+                       					alert('계정을 중지하려면, 먼저 관리자 설정을 해제하여 주세요.', managerNo + '은 관리자 계정입니다.');
                        				} else {
-                       					alert('계정을 중지하려면, 먼저 부서책임자 설정을 해제하여 주세요.', deptMgrId + '은 부서책임자입니다.');
+                       					alert('계정을 중지하려면, 먼저 부서책임자 설정을 해제하여 주세요.', deptMgrNo + '은 부서책임자입니다.');
                        				}
                        				                      				
-                       			});
+                       			}); */
                        			
-                       			// 가입 승인
+                       			/* // 가입 승인
                        			$('.approveBtn').on('click', function() {
                        				var checkM = document.getElementsByClassName('checkM');
                        				
@@ -444,7 +477,7 @@
 	                       					$('#deleteForm').submit();
 	                       				}
                      				}); 
-                       			});      
+                       			});       */
                        			
                        			// sweet alert customize
 				        		var alert = function(msg, title, icon) {
@@ -478,7 +511,7 @@
 												<c:param name="page" value="${ pi.currentPage - 1 }"/>
 												<c:if test="${ searchValue ne null }"> <!-- null이 아니면 검색을 했다는 뜻 -->
 													<c:param name="selectDept" value="${ selectDept }"/>
-													<c:param name="selectJob" value="${ selectJob }"/>
+													<c:param name="selectPosi" value="${ selectPosi }"/>
 													<c:param name="searchValue" value="${ searchValue }"/>
 												</c:if>												
 											</c:url>
@@ -498,7 +531,7 @@
 	                                        		<c:param name="page" value="${ p }"/>
 	                                        		<c:if test="${ searchValue ne null }"> 
 														<c:param name="selectDept" value="${ selectDept }"/>
-														<c:param name="selectJob" value="${ selectJob }"/>
+														<c:param name="selectJob" value="${ selectPosi }"/>
 														<c:param name="searchValue" value="${ searchValue }"/>
 													</c:if>	
 	                                        	</c:url>
@@ -518,7 +551,7 @@
                                         		<c:param name="page" value="${ pi.currentPage + 1 }"/>
 	                                        	<c:if test="${ searchValue ne null }"> 
 													<c:param name="selectDept" value="${ selectDept }"/>
-													<c:param name="selectJob" value="${ selectJob }"/>
+													<c:param name="selectPosi" value="${ selectPosi }"/>
 													<c:param name="searchValue" value="${ searchValue }"/>
 												</c:if>	                                       		
                                          	</c:url>
@@ -546,7 +579,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}/home.do" target="_blank">MacademiA</a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}" target="_blank">MacademiA</a> 2022</p>
             </div>
         </div>
         <!--**********************************

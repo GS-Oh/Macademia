@@ -60,7 +60,7 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.getMemberCount");
 	}
 
-	public int updateMultiMember(SqlSessionTemplate sqlSession, String[] noArr, String QuitYn) {
+	public int updateMultiMember(SqlSessionTemplate sqlSession, String[] noArr, String quitYn) {
 		int result = 0;
 		for(String no : noArr) {
 //			HashMap<String, String> map = new HashMap<String, String>();
@@ -68,7 +68,7 @@ public class AdminDao {
 //			map.put("mStatus", String.valueOf(mStatus));
 			MemberVo m = new MemberVo();
 			m.setNo(no);
-			m.setQuitYn(QuitYn);
+			m.setQuitYn(quitYn);
 			result += sqlSession.update("adminMapper.updateMultiMember", m);
 		}
 		
@@ -91,21 +91,21 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectMember", no);
 	}
 
-	public int deletePosi(SqlSessionTemplate sqlSession, String[] noArr) {
+	public int deletePosi(SqlSessionTemplate sqlSession, String[] PositionNoArr) {
 		int result = 0;
-		for (String no : noArr) {
-			result += sqlSession.update("adminMapper.deletePosi", no);
+		for (String positionNo : PositionNoArr) {
+			result += sqlSession.update("adminMapper.deletePosi", positionNo);
 		}
 		
 		return result;
 	}
 
-	public int insertPosi(SqlSessionTemplate sqlSession, Position posi) {
-		return sqlSession.insert("adminMapper.insertJob", posi);
+	public int insertPosi(SqlSessionTemplate sqlSession, Position position) {
+		return sqlSession.insert("adminMapper.insertPosi", position);
 	}
 
-	public int updatePosi(SqlSessionTemplate sqlSession, Position posi) {
-		return sqlSession.update("adminMapper.updateJob", posi);
+	public int updatePosi(SqlSessionTemplate sqlSession, Position position) {
+		return sqlSession.update("adminMapper.updatePosi", position);
 	}
 
 	public ArrayList<MemberVo> selectDeptMemberList(SqlSessionTemplate sqlSession, Integer upperDept) {
@@ -147,6 +147,9 @@ public class AdminDao {
 		
 		return result;
 	}
+	
+	
+	
 
 	public int getReportListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("adminMapper.getReportListCount");

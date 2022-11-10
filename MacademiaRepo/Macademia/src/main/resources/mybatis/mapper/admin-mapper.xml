@@ -76,7 +76,7 @@
 	
 
 	
- 	<!-- <select id="selectDepartmentList" resultType="DeptVo">
+	<!-- <select id="selectDepartmentList" resultType="DeptVo">
 		
 	</select>
 
@@ -92,13 +92,19 @@
 	
 	<select id="selectSearchMemberList" resultMap="memberResultSet">
 
-	</select>
+	</select> -->
 		
 	<select id="getMemberCount" resultType="int">
-
+		SELECT COUNT(*)
+			FROM MEMBER
+			WHERE QUIT_YN = 'N'
+    UNION ALL
+		SELECT COUNT(*)
+			FROM MEMBER
+			WHERE QUIT_YN = 'Y'
 	</select>
 	
-	<update id="updateMultiMember">
+	<!-- <update id="updateMultiMember">
 
 	</update>
 	

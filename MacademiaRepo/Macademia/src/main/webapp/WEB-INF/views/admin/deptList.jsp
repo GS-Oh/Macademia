@@ -93,7 +93,7 @@
 		                                            <input id="insertDeptMgr" type="search" class="form-control insertInput" name="deptManager" list="memberList" placeholder="사원 아이디" autocomplete="off">
 							                        <datalist id="memberList"> <!-- 자동완성 기능 제공 -->
 							                        	<c:forEach var="m" items="${ mList }">
-							                        		<option value="${ m.no }">${ m.name } ${ m.posiName }</option> 
+							                        		<option value="${ m.no }">${ m.name } ${ m.positionName }</option> 
 					 	                                 </c:forEach>
 							                        </datalist><br>
 		                                            <span id="insertDeptMgrGuide" class="guide text-danger"></span><br>
@@ -154,7 +154,7 @@
 								  	  
 								  	  // 부서 추가 모달창에서 저장 버튼 클릭시 실행하는 함수
 								  	  $(document).on('click', '#insertBtn', function(){
-								  		 let upperDept = $('#deptId').val();
+								  		 let upperDept = $('#deptNo').val();
 								  		 let deptLevel = "";
 								  		 
 								  		 // 회사 이름 및 부서가 존재하지 않았을시 값 초기화
@@ -215,7 +215,7 @@
 						            						$rootNode.children().last().children().find('div').removeClass('lastExpandable-hitarea');
 
 						            						$li = $('<li class="last">');	
-							            					$input = '<input class="newDept" type="hidden" name="deptId" value="' + data.deptId + '">'
+							            					$input = '<input class="newDept" type="hidden" name="deptNo" value="' + data.deptNo + '">'
 							            					$a = '<a class="dept draggable dropable">' + data.deptName + '</a>';
 							            					$li.append($input);
 							            					$li.append($a);
@@ -243,7 +243,7 @@
 								  	 
 								  	// 부서 삭제 버튼 클릭시 실행하는 함수
 								  	$(document).on('click', '#deleteDeptBtn', function(){
-								  		let deptId = $('#deptId').val().trim();
+								  		let deptNo = $('#deptNo').val().trim();
 								  		let upperDept = "";
 								  			
 								  		let subDeptCount = 0;
@@ -252,7 +252,7 @@
 			 		            				subDeptCount++;
 			 		            			}
 			 		            			
-			 		            			if (deptId == deptArr[i].deptId) {
+			 		            			if (deptNo == deptArr[i].deptNo) {
 			 		            				upperDept = deptArr[i].upperDept;
 			 		            			}
 			 		            		}
@@ -261,14 +261,14 @@
 								  		
 								  		let deptMemberCount = 0;
 								  		<c:forEach var="m" items="${mList}">
-			 		            			if(deptId == '${m.deptId}') {
+			 		            			if(deptNo == '${m.deptNo}') {
 			 		            				deptMemberCount++;
 			 		            			}
 			 		            		</c:forEach>
 								  		
-								  		if (deptId == "") {
+								  		if (deptNo == "") {
 								  			alert('삭제할 부서를 선택해주세요.');
-								  		} else if (deptId == '${ dList[0].deptId }') {
+								  		} else if (deptNo == '${ dList[0].deptNo }') {
 								  			alert('삭제할 수 없습니다.');
 								  		} else if (subDeptCount > 0 ) {
 								  			alert('하위 부서를 삭제한 후 삭제 가능합니다.');
@@ -282,8 +282,8 @@
 				                       		 	cancelButtonText: '취소'	
 					        				}).then((result) => {
 					        					if (result.value) {
-					        						$('#deleteDeptId').val(deptId);
-					        						$('#upperDeptId').val(upperDept);
+					        						$('#deleteDeptNo').val(deptNo);
+					        						$('#upperDeptNo').val(upperDept);
 						        					$('#deleteForm').submit();
 			                       				}
 					        				});
@@ -310,11 +310,11 @@
 	                           		<ul id="deptList">
 	                           		<c:if test="${ fn:length(dList) != 0 }">
 	                                	<li><i class="lv lv1 bi bi-building"></i>
-	                                		<input class="lv lv1" type="hidden" name="deptId" value="${ dList[0].deptId }">
+	                                		<input class="lv lv1" type="hidden" name="deptNo" value="${ dList[0].deptNo }">
 	                                		<a class="dept selectDept dropable">${ dList[0].deptName }</a>
 		                                	<c:set var="hasChildren" value="false"/> 
 		                                    <c:forEach var="m" items="${ mList }">
-							                    <c:if test="${ m.deptId == dList[0].deptId }">
+							                    <c:if test="${ m.deptNo == dList[0].deptNo }">
 							                    	<c:set var="hasChildren" value="true"/> 
 							                    </c:if>
 				 	                        </c:forEach>
@@ -322,17 +322,17 @@
 	                                        	<c:set var="hasChildren" value="false"/> 
 		                                    	<ul class="hasChildren">
 		                                        	<c:forEach var="m" items="${ mList }">
-									                 	<c:if test="${ m.deptId == dList[0].deptId }">
-									                    	<li><span><i class="bi bi-person-fill"></i>${ m.mName } ${ m.jobName }</span></li>
+									                 	<c:if test="${ m.deptNo == dList[0].deptNo }">
+									                    	<li><span><i class="bi bi-person-fill"></i>${ m.name } ${ m.PositionName }</span></li>
 									                    </c:if>
 							 	                    </c:forEach>
 		                                            <c:forEach var="d2" items="${ dList }" varStatus="vs">
-		                                            	<c:if test="${ d2.upperDept == dList[0].deptId }">
+		                                            	<c:if test="${ d2.upperDept == dList[0].deptNo }">
 			                                            	<li>
-		                                            			<input class="lv lv2" type="hidden" name="deptId" value="${ d2.deptId }">
+		                                            			<input class="lv lv2" type="hidden" name="deptNo" value="${ d2.deptNo }">
 		                                            			<a class="dept draggable dropable">${ d2.deptName }</a>
 		                                            			<c:forEach var="m" items="${ mList }">
-												                    <c:if test="${ m.deptId == d2.deptId }">
+												                    <c:if test="${ m.deptNo == d2.deptNo }">
 												                    	<c:set var="hasChildren" value="true"/> 
 												                    </c:if>
 								 	                        	</c:forEach>
@@ -340,20 +340,20 @@
 			                                            			<c:set var="hasChildren" value="false"/> 
 			                                            			<ul class="hasChildren">
 				                                            			<c:forEach var="m" items="${ mList }">
-														                 	<c:if test="${ m.deptId ==  d2.deptId }">
-														                    	<li><span><i class="bi bi-person-fill"></i>${ m.mName } ${ m.jobName }</span></li>
+														                 	<c:if test="${ m.deptNo ==  d2.deptNo }">
+														                    	<li><span><i class="bi bi-person-fill"></i>${ m.name } ${ m.PositionName }</span></li>
 														                    </c:if>
 												 	                    </c:forEach>
 												 	                    <c:set var="lastIndex" value="0"/>
 												 	                    <c:forEach var="d3" items="${ dList }" varStatus="vs">
-				                                            				<c:if test="${ d3.upperDept == d2.deptId }">
+				                                            				<c:if test="${ d3.upperDept == d2.deptNo }">
 				                                            					 <c:set var="lastIndex" value="${ vs.index }"/>
 				                                            				</c:if>
 				                                            			</c:forEach>
 				                                            			<c:forEach var="d3" items="${ dList }" varStatus="vs">
-				                                            				<c:if test="${ d3.upperDept == d2.deptId }">
+				                                            				<c:if test="${ d3.upperDept == d2.deptNo}">
 					                                                            <c:forEach var="m" items="${ mList }">
-																	            	<c:if test="${ m.deptId == d3.deptId }">
+																	            	<c:if test="${ m.deptNo == d3.deptNo }">
 																	                	<c:set var="hasChildren" value="true"/> 
 																	            	</c:if>
 													 	                        </c:forEach>
@@ -366,10 +366,10 @@
 					                                                            <c:if test="${ d3.hasChildren != 1 && !hasChildren }">
 					                                                            	<li>
 					                                                            </c:if>
-					                                                            	<input type="hidden" name="deptId" value="${ d3.deptId }">
+					                                                            	<input type="hidden" name="deptNo" value="${ d3.deptNo }">
 					                                                            	<a class="dept draggable dropable">${ d3.deptName }</a>
 						                                                            <c:forEach var="m" items="${ mList }">
-																	                    <c:if test="${ m.deptId == d3.deptId }">
+																	                    <c:if test="${ m.deptNo == d3.deptNo }">
 																	                    	<c:set var="hasChildren" value="true"/> 
 																	                    </c:if>
 													 	                        	</c:forEach>
@@ -387,18 +387,18 @@
 		                                            	</c:if>
 		                                            </c:forEach>
 		                                            <c:forEach var="m" items="${ mList }">
-													    <c:if test="${ m.deptId == null }">
+													    <c:if test="${ m.deptNo == null }">
 													       <c:set var="hasChildren" value="true"/> 
 													    </c:if>
 								 	                </c:forEach>
-									 	            <li><input class="lv lv2" type="hidden" name="deptId" value="${ null }"> <!-- 부서 미지정 사원 표시 -->
+									 	            <li><input class="lv lv2" type="hidden" name="deptNo" value="${ null }"> <!-- 부서 미지정 사원 표시 -->
 									 	               <i class="bi bi-folder-fill" style="color: gray"></i><a class="noDept"> 부서 미지정</a>    		
 				                                       <c:if test="${ hasChildren }">     	
 				                                       	  <c:set var="hasChildren" value="false"/>      	
 						                                  <ul class="hasChildren">      	
 								                           	<c:forEach var="m" items="${ mList }">         	
-															    <c:if test="${ m.deptId == null }">       
-															    	<li><span><i class="bi bi-person-fill"></i>${ m.mName } ${ m.jobName }</span></li>  	
+															    <c:if test="${ m.deptNo == null }">       
+															    	<li><span><i class="bi bi-person-fill"></i>${ m.name } ${ m.positionName }</span></li>  	
 															    </c:if>
 													 	    </c:forEach>
 												 	      </ul>
@@ -410,7 +410,7 @@
 	                               	</c:if>
 	                            	</ul>
 	                        	</div>
-	                        	<input id="selectDeptId" type="hidden" name="selectDeptId">
+	                        	<input id="selectDeptNo" type="hidden" name="selectDeptNo">
                         	</div>
                     	</div>
                    </div> 
@@ -428,7 +428,7 @@
 		            		let deptObj = {};
 		            		<c:forEach var="d" items="${ dList }">
 		            			deptObj = {
-		            				deptId: '${ d.deptId }',
+		            				deptNo: '${ d.deptNo }',
 		            				deptName: '${ d.deptName }',
 		            				deptManager: '${ d.deptManager }',
 		            				deptManagerName: '${ d.deptManagerName }',
@@ -455,8 +455,8 @@
  		            		$('.dept').removeClass('selectDept');
 		            		$(this).toggleClass('selectDept');
 		            		
-		            		let deptId = $(this).prev().val();
-		            		if (deptId != "") {
+		            		let deptNo = $(this).prev().val();
+		            		if (deptNo != "") {
 			            		$('.update').prop('hidden', true);
 	                    		$('.beforeUpdate').prop('hidden', false);
 	                    		
@@ -468,7 +468,7 @@
 	 		            		let createDate = "";
 	 		            		
 	 		            		for(let i in deptArr) {
-	 		            			if(deptId == deptArr[i].deptId) {
+	 		            			if(deptNo == deptArr[i].deptNo) {
 	 		            				deptName = deptArr[i].deptName;
 	 		            				deptManager = deptArr[i].deptManager == null ? "" : deptArr[i].deptManager;
 	 		            				deptManagerName = deptArr[i].deptManagerName  == null ? "" :  deptArr[i].deptManagerName;
@@ -483,7 +483,7 @@
 			            				upperDeptName =  deptArr[i].deptName;
 			            			}
 	 		            		}
-			            		$('#deptId').val(deptId);
+			            		$('#deptNo').val(deptNo);
 			            		$('#deptNameSpan').text(deptName);
 			            		$('#deptNameInput').val(deptName);
 			            		$('#deptMgrSpan').text(deptManagerName == "" ? "미지정" : deptManagerName + " " + deptManagerJob);
@@ -527,14 +527,14 @@
 														if (i == data.length - 1) {
 							            					$li.attr('class', 'last');
 														}
-														var jobName = data[i].jobName == null ? "" : data[i].jobName;
-				            							$span = $('<span>').html('<i class="bi bi-person-fill"></i>' + data[i].nodeName + ' ' + jobName);
+														var PositionName = data[i].PositionName == null ? "" : data[i].PositionName;
+				            							$span = $('<span>').html('<i class="bi bi-person-fill"></i>' + data[i].nodeName + ' ' + PositionName);
 				            							$li.append($span);
 				            							$rootNode.append($li);
 				            						} else {
 					            						var hasChildren = false;
 				            							<c:forEach var="m" items="${ mList }">
-										                    if ('${ m.deptId }' == data[i].nodeId) {
+										                    if ('${ m.deptNo }' == data[i].nodeId) {
 										                    	hasChildren = true;
 										                    }
 						 	                       		</c:forEach>
@@ -606,8 +606,8 @@
                  		
                  		// 조직도 내 부서 위치 이동(drag and drop function)
                  		function moveDept() {
-                 			let upperDeptId = ""; // drop된 곳에 위치한 부서의 id;
-                 			let moveDeptId = ""; // 드래그되는 객체인 부서의 id
+                 			let upperDeptNo = ""; // drop된 곳에 위치한 부서의 id;
+                 			let moveDeptNo = ""; // 드래그되는 객체인 부서의 id
                  			let count = 0; // 중복 이벤트 방지를 위한 count
 		                    let isRevert = false; // revert check
 	
@@ -636,20 +636,20 @@
 		                        },
 		                     	// 드래그가 중지됐을때 발생
 								stop:function(event,ui){  
-		                        	moveDeptId = $(this).prev().val();
+		                        	moveDeptNo = $(this).prev().val();
 		                                
 		                            // 제대로 droppable 객체 안에 들어갔을때 
-		                            if(isRevert && upperDeptId != "" && moveDeptId != ""){
+		                            if(isRevert && upperDeptNo != "" && moveDeptNo != ""){
 			                        	let upperDeptLevel = 0; // 드롭된 곳에 위치한 부서의 depth level
 		                                let moveDeptLevel = 0; // 드래그되는 객체인 부서의 depth level
-		                                let originUpperDept = 0; // 드래그되는 객체인 부서의 기존 상위부서의 id
+		                                let originUpperDept = 0; // 드래그되는 객체인 부서의 기존 상위부서의 코드
 		                                
 		                                for(let i in deptArr) {
-									  		if (upperDeptId == deptArr[i].deptId) {
+									  		if (upperDeptNo == deptArr[i].deptNo) {
 									  		 	upperDeptLevel = Number(deptArr[i].deptLevel);
 									  		}
 									  		
-									  		if (moveDeptId == deptArr[i].deptId) {
+									  		if (moveDeptNo == deptArr[i].deptNo) {
 									  			moveDeptLevel = Number(deptArr[i].deptLevel);
 									  		 	originUpperDept = Number(deptArr[i].upperDept);
 									  		}
@@ -657,10 +657,10 @@
 		                                	
 		                                // 드래그되어 움직이는 부서가 드롭되면 상위 부서를 드롭된 자리에 있는 부서로 update
 		                                if (upperDeptLevel <= moveDeptLevel) {
-		                                	if (originUpperDept != upperDeptId) {
+		                                	if (originUpperDept != upperDeptNo) {
 		                                		$.ajax({
 													url: 'dmove.ad',
-								                	data: {moveDeptId:moveDeptId, upperDeptId:upperDeptId, upperDeptLevel:upperDeptLevel, originUpperDept:originUpperDept},
+								                	data: {moveDeptNo:moveDeptNo, upperDeptNo:upperDeptNo, upperDeptLevel:upperDeptLevel, originUpperDept:originUpperDept},
 								                	type: 'POST',
 								                	success: function(data){
 								                		console.log(data);
@@ -686,7 +686,7 @@
 	                			accept:".draggable",
 								drop: function( event, ui ) { 
 									if (count == 0) {
-								    	upperDeptId = $(this).prev().val(); 
+								    	upperDeptNo = $(this).prev().val(); 
 								   	}
 								    count++;
 							    }
@@ -699,7 +699,7 @@
                     <div class="col-lg-8 card2">
                         <div class="card">
                             <div class="card-body">
-                            	<input id="deptId" type="hidden" name="deptId" value="${ dList[0].deptId }">
+                            	<input id="deptNo" type="hidden" name="deptNo" value="${ dList[0].deptNo }">
                             <c:if test="${ fn:length(dList) != 0 }">
                             	<h4 class="card-intro-title" style="font-weight: bold;">부서 정보</h4>
                             	<br><br><br>
@@ -714,7 +714,7 @@
 				                     <input id="deptMgrInput" type="search" class="form-control update" name="deptManager" value="${ dList[0].deptManager }" list="memberList" placeholder="사원 아이디" autocomplete="off" hidden="true">
 				                     <datalist id="memberList">
 				                     	<c:forEach var="m" items="${ mList }">
-				                      		<option value="${ m.mId }">${ m.mName } ${ m.jobName }</option> 
+				                      		<option value="${ m.no }">${ m.name } ${ m.PositionName }</option> 
 		 	                            </c:forEach>
 				                     </datalist><br>
 								 	 <div class="guide-display"><span id="deptMgrGuide" class="guide update-guide text-danger">중지된 계정 또는 존재하지 않는 계정입니다.</span><br></div>
@@ -772,7 +772,7 @@
 									  	  
 							// 입력한 사원 아이디가 존재하는 아이디인지 검증
 			                <c:forEach var="m" items="${ mList }">
-								if ("${ m.mId }" == deptManager) {
+								if ("${ m.no }" == deptManager) {
 									existenceCheck2 = true;
 								}
 					 	    </c:forEach>
@@ -788,18 +788,18 @@
 		            	
 					 	// 부서 정보 수정 저장 버튼 눌렀을시 실행하는 함수
 					 	$(document).on('click', '#updateBtn', function(){
-					 		let deptId= $('#deptId').val();
+					 		let deptNo= $('#deptNo').val();
 					 		let deptName = $('#deptNameInput').val();
-					 		let deptManager = $('#deptMgrInput').val();
+					 		let deptManager = $('#deptMgrInput').val();	//사원번호
 					 		let deptManagerName = "미지정";
-					 		let jobName = "";
+					 		let PositionName = "";
 					 		
 					 		// 변경 없을시 입력되어 있는 사원 아이디가 존재하는 아이디인지 검증
 			                <c:forEach var="m" items="${ mList }">
-								if ("${ m.mId }" == deptManager) {
+								if ("${ m.no }" == deptManager) {
 									existenceCheck2 = true;
-									deptManagerName = "${ m.mName }";
-									jobName = "${ m.jobName }";
+									deptManagerName = "${ m.name }";
+									PositionName = "${ m.PositionName }";
 								}
 					 	    </c:forEach>
 					 		
@@ -811,7 +811,7 @@
 			                } else {
 			                	$.ajax({
 			                		url: 'dupdate.ad',
-			                		data: {deptId:deptId, deptName:deptName, deptManager:deptManager},
+			                		data: {deptNo:deptNo, deptName:deptName, deptManager:deptManager},
 			                		type: 'POST',
 			                		success: function(data){
 			                			console.log(data);
@@ -826,11 +826,11 @@
 				                    		$('.beforeUpdate').prop('hidden', false);
 				                    		
 				                    		for(let i in deptArr) {
-				 		            			if(deptId == deptArr[i].deptId) {
+				 		            			if(deptNo == deptArr[i].deptNo) {
 						            				deptArr[i].deptName = deptName;
 						            				deptArr[i].deptManager = deptManager;
-						            				deptArr[i].deptManagerName = deptManagerName
-						            				deptArr[i].deptManagerJob = jobName;
+						            				deptArr[i].deptManagerName = deptManagerName;
+						            				deptArr[i].deptManagerJob = PositionName;
 						            			}
 				 		            		}
 				                    		
@@ -877,7 +877,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}/home.do" target="_blank">MacademiA</a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}" target="_blank">MacademiA</a> 2021</p>
             </div>
         </div>
         <!--**********************************

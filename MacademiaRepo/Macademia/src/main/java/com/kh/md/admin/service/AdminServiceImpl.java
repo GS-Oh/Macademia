@@ -68,8 +68,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int updateMultiMember(String[] noArr, String QuitYn) {
-		return aDAO.updateMultiMember(sqlSession, noArr, QuitYn);
+	public int updateMultiMember(String[] noArr, String quitYn) {
+		return aDAO.updateMultiMember(sqlSession, noArr, quitYn);
 	}
 
 	@Override
@@ -88,18 +88,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int deletePosi(String[] noArr) {
-		return aDAO.deletePosi(sqlSession, noArr);
+	public int deletePosi(String[] positionNoArr) {
+		return aDAO.deletePosi(sqlSession, positionNoArr);
 	}
 
 	@Override
-	public int insertPosi(Position posi) {
-		return aDAO.insertPosi(sqlSession, posi);
+	public int insertPosi(Position position) {
+		return aDAO.insertPosi(sqlSession, position);
 	}
 
 	@Override
-	public int updatePosi(Position posi) {
-		return aDAO.updatePosi(sqlSession, posi);
+	public int updatePosi(Position position) {
+		return aDAO.updatePosi(sqlSession, position);
 	}
 
 	@Override
@@ -147,6 +147,8 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.sortDeptOrder(sqlSession, subDeptList);
 	}
 
+	
+	
 	@Override
 	public int getReportListCount() {
 		return aDAO.getReportListCount(sqlSession); 
