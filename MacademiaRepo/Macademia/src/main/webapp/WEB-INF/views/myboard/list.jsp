@@ -26,7 +26,7 @@
 		<aside>
 		</aside>
 		<main>
-			<%@include file="/WEB-INF/views/member/myboards-content.jsp" %>
+			<%@include file="/WEB-INF/views/myboard/list-content.jsp" %>
 		</main>
 		<div id="sidemenu">
 			<%@include file="/WEB-INF/views/member/mypage-sidemenu.jsp" %>

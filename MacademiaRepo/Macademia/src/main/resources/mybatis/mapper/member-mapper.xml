@@ -138,5 +138,32 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<select id="selectMyboardList" resultMap="boardInfo">
+		  SELECT 
+			B.NO 
+			,M.NAME AS USER_NO
+			,B.TITLE 
+			,B.CONTENT
+			,B.HIT
+			,TO_CHAR(B.REGDATE,'YYYY-MM-DD') AS REGDATE
+            ,M.POSITION
+		FROM DATA_BOARD B
+		JOIN  (SELECT 
+        M.NAME
+        ,M.NO
+        ,M.PROFILE_NAME
+        ,P.NAME AS POSITION  
+        FROM MEMBER M
+        JOIN POSITION P
+        ON M.POSITION_NO = P.NO) M
+		ON B.USER_NO = M.NO
+		WHERE B.DELETE_YN = 'N'
+		<if test="title != null">
+			AND B.TITLE LIKE '%' || #{title} || '%'
+		</if> 
+		AND M.NO = ${memberNo};
+		ORDER BY B.NO DESC
+	</select>
+	
 	
 </mapper>

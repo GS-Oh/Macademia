@@ -20,21 +20,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.md.bank.vo.BankVo;
+import com.kh.md.board.service.BoardService;
+import com.kh.md.board.util.Pagination;
+import com.kh.md.board.vo.BoardVo;
+import com.kh.md.board.vo.PageVo;
 import com.kh.md.file.service.FileService;
 import com.kh.md.member.service.MemberService;
 import com.kh.md.member.vo.MemberVo;
+import com.kh.md.member.vo.MyboardSearchVo;
 
 @Controller
 public class MemberController {
 	
 	private final MemberService memberService;
 	private final FileService fileService;
+	private final BoardService boardService;
 	private final JavaMailSender mailSender;
 	
 	@Autowired
-	public MemberController(MemberService memberService, FileService fileService, JavaMailSender mailSender) {
+	public MemberController(MemberService memberService, FileService fileService, BoardService boardService, JavaMailSender mailSender) {
 		this.memberService = memberService;
 		this.fileService = fileService;
+		this.boardService = boardService;
 		this.mailSender = mailSender;
 	}
 	
@@ -170,9 +177,7 @@ public class MemberController {
 		}
 		return result;
 	}
-	@GetMapping("/member/myboards")
-	public String myBoards() {
-		return "member/myboards";
-	}
-	
+
+
+
 }
