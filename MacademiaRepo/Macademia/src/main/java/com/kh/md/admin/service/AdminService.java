@@ -52,6 +52,9 @@ public interface AdminService {
 	int moveDept(HashMap<String, Integer> map);
 	
 	int sortDeptOrder(ArrayList<Dept> subDeptList);
+	
+	
+	
 
 	ArrayList<Report> selectBoardReportList(PageInfo pi);
 

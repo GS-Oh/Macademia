@@ -134,10 +134,10 @@ public class AdminController {
      */
 	@RequestMapping("admin/mupdatemulti.ad")
 	public String updateMultiMember(@RequestParam("no") String[] noArr, 
-									@RequestParam("quitYn") String QuitYn, 
+									@RequestParam("quitYn") String quitYn, 
 									HttpSession session) {
 		
-		int result = aService.updateMultiMember(noArr, QuitYn);
+		int result = aService.updateMultiMember(noArr, quitYn);
 		
 		if (result == 1) {
 			MemberVo loginUser = (MemberVo)session.getAttribute("loginUser");
@@ -286,11 +286,11 @@ public class AdminController {
      * 직위 삭제
      */
 	@RequestMapping("admin/pdelete.ad")
-	public void deletePosi(@RequestParam("noArr") String[] noArr, HttpServletResponse response) {
+	public void deletePosi(@RequestParam("noArr") String[] positionNoArr, HttpServletResponse response) {
 		
-		int result = aService.deletePosi(noArr);
+		int result = aService.deletePosi(positionNoArr);
 		
-		if (result != noArr.length) {
+		if (result != positionNoArr.length) {
 			throw new AdminException("직위 삭제에 실패하였습니다.");
 		}
 		
@@ -314,9 +314,9 @@ public class AdminController {
      * 직위 등록
      */
 	@RequestMapping("admin/pinsert.ad")
-	public void insertPosi(@ModelAttribute Position posi, HttpServletResponse response) {
+	public void insertPosi(@ModelAttribute Position position, HttpServletResponse response) {
 		
-		int result = aService.insertPosi(posi);
+		int result = aService.insertPosi(position);
 		
 		if (result <= 0) {
 			throw new AdminException("직위 등록에 실패하였습니다.");
@@ -341,9 +341,9 @@ public class AdminController {
      * 직위 수정
      */
 	@RequestMapping("admin/pupdate.ad")
-	public void updatePosi(@ModelAttribute Position posi, HttpServletResponse response) {
+	public void updatePosi(@ModelAttribute Position position, HttpServletResponse response) {
 		
-		int result = aService.updatePosi(posi);
+		int result = aService.updatePosi(position);
 		
 		if (result <= 0) {
 			throw new AdminException("직위 수정에 실패하였습니다.");
@@ -408,7 +408,7 @@ public class AdminController {
 			Posij.put("nodeType", "member");
 			Posij.put("nodeName", m.getName());
 			Posij.put("hasChildren", null);
-			Posij.put("PosiName", m.getPositionName());
+			Posij.put("PositionName", m.getPositionName());
 			
 			jArr.add(Posij);
 		}
@@ -419,7 +419,7 @@ public class AdminController {
 			Posij.put("nodeType", "dept");
 			Posij.put("nodeName", d.getName());
 			Posij.put("hasChildren", d.getHasChildren());
-			Posij.put("PosiName", null);
+			Posij.put("PositionName", null);
 			
 			jArr.add(Posij);
 		}
@@ -556,6 +556,10 @@ public class AdminController {
 		
 		return result;
 	}
+	
+	
+	
+	
 	
     /**
      * 신고글 목록 조회

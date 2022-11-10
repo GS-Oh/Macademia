@@ -31,7 +31,7 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">조직 관리</li>
-                            <li class="breadcrumb-item active"><a href="joblist.ad">직위 관리</a></li>
+                            <li class="breadcrumb-item active"><a href="posilist.ad">직위 관리</a></li>
                         </ol>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
 	                                        </div>
 	                                        <div class="modal-body" style="color: black;">
 	                                        	<span style="color: red;">*</span><label class="col-form-label">명칭</label> 
-	                                            <input id="posiName1" type="text" class="form-control" name="posiName" maxlength="10"><br>
-	                                            <span id="posiNameGuide1" class="guide text-danger"></span><br>
+	                                            <input id="positionName1" type="text" class="form-control" name="positionName" maxlength="10"><br>
+	                                            <span id="positionNameGuide1" class="guide text-danger"></span><br>
 	                                            <span class="text-danger">*</span><label class="col-form-label">정렬 순서</label>
 	                                            <input id="posiOrder1" type="number" class="form-control" name="posiOrder" step="1" min="1"><br>
 	                                            <span id="posiOrderGuide1" class="guide text-danger"></span><br>
@@ -84,8 +84,8 @@
 	                                   		</div>
 	                                        <div class="modal-body" style="color: black;">
 	                                        	<span class="text-danger">*</span><label class="col-form-label">명칭</label>
-	                                            <input id="posiName2" type="text" class="form-control" name="posiName" maxlength="10"><br>
-	                                            <span id="posiNameGuide2" class="guide text-danger"></span><br>
+	                                            <input id="positionName2" type="text" class="form-control" name="positionName" maxlength="10"><br>
+	                                            <span id="positionNameGuide2" class="guide text-danger"></span><br>
 	                                            <span class="text-danger">*</span><label class="col-form-label">정렬 순서</label>
 	                                            <input id="posiOrder2" type="number" class="form-control" name="posiOrder" step="1" min="1"><br>
 	                                            <span id="posiOrderGuide2" class="guide text-danger"></span><br>
@@ -116,8 +116,8 @@
 	                                        </c:if>
 	                                        <c:forEach var="p" items="${ pList }">
 		                                    	<tr>
-			                                		<td><input type="checkbox" class="checkP" name="jobId" value="${ p.posiNo }"></td>
-			                                        <td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">${ j.posiName }</a></td>
+			                                		<td><input type="checkbox" class="checkP" name="positionNo" value="${ p.no }"></td>
+			                                        <td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">${ p.name }</a></td>
 			                                        <td>${ p.posiOrder }</td>
 			                                        <td>${ p.memberCount }</td>
 		                                        </tr>
@@ -163,27 +163,27 @@
 					        			dupCheck = false;
 					        		});
 	                       			
-	                       			$('#posiName1').on('change', function(){
+	                       			$('#positionName1').on('change', function(){
 	                       				dupCheck = false;
-	                       				var posiName = document.getElementById('posiName1');
-	                       				posiName.value = posiName.value.trim();
-	                       				var posiNameArr = document.getElementsByClassName('updateBtnModal');
+	                       				var positionName = document.getElementById('positionName1');
+	                       				positionName.value = positionName.value.trim();
+	                       				var positionNameArr = document.getElementsByClassName('updateBtnModal');
 	                       				
-	                       				if(posiName.value.trim().length < 1 || posiName.value.trim().length > 10) {									        			
-	                       					$('#posiNameGuide1').text('1~10자리까지 입력해주세요.');
-	                       					posiName.focus();
+	                       				if(positionName.value.trim().length < 1 || positionName.value.trim().length > 10) {									        			
+	                       					$('#positionNameGuide1').text('1~10자리까지 입력해주세요.');
+	                       					positionName.focus();
 	                       				} else {
-	                       					for (var i in posiNameArr) {
-	                       						if(posiName.value.trim() == posiNameArr[i].text) {
+	                       					for (var i in positionNameArr) {
+	                       						if(positionName.value.trim() == positionNameArr[i].text) {
 			                       					dupCheck = true;
 			                       				}
 	                       					}
 	                       				
 		                       				if (dupCheck) {
-		                       					$('#posiNameGuide1').text('이미 사용 중인 직위 명칭입니다.');
-		                       					posiName.focus();
+		                       					$('#positionNameGuide1').text('이미 사용 중인 직위 명칭입니다.');
+		                       					positionName.focus();
 		                       				} else {
-		                       					$('#posiNameGuide1').text('');
+		                       					$('#positionNameGuide1').text('');
 		                       				}
 		                       			}
 	                       				
@@ -202,32 +202,32 @@
 	                       			
 					        		// 직위 추가
 					        		$(document).on('click', '#insertBtn', function(){
-										var jobName = document.getElementById('jobName1');
-										var jobOrder = document.getElementById('jobOrder1');
+										var positionName = document.getElementById('positionName1');
+										var posiOrder = document.getElementById('posiOrder1');
 											
-										if(jobName.value.trim().length < 1 || jobName.value.trim().length > 10) {	
-	                       					jobName.focus();
-	                       				} else if (jobOrder.value == "" || jobOrder.value < 1) {
-	                       					jobOrder.focus();
+										if(positionName.value.trim().length < 1 || positionName.value.trim().length > 10) {	
+											positionName.focus();
+	                       				} else if (posiOrder.value == "" || posiOrder.value < 1) {
+	                       					posiOrder.focus();
 	                       				} else if (dupCheck) {
-	                       					jobName.focus();
+	                       					positionName.focus();
 	                       				} else {
 											$.ajax({
-												url: 'jinsert.ad',
+												url: 'pinsert.ad',
 		                       					dataType: 'json',
-		                       					data: {jobName:jobName.value, jobOrder:jobOrder.value},
+		                       					data: {positionName:positionName.value, posiOrder:posiOrder.value},
 		                       					type: 'POST',
 		                       					success: function(data){
 		                       						
-		                       						var jobList = $('#jobList tbody');
-		                       						jobList.html('');
+		                       						var posiList = $('#posiList tbody');
+		                       						posiList.html('');
 		                       						
 		                       						var html = "";
 		                       						if(data.length > 0) {
 		                       							for(var i in data) {
-		                       								html += '<tr><td><input type="checkbox" class="checkJ" name="jobId" value="' + data[i].jobId + '"></td>'
-		                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updateJob">' + data[i].jobName + '</a></td>'
-		                       									 	+ '<td>' + data[i].jobOrder + '</td>'
+		                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
+		                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].positionName + '</a></td>'
+		                       									 	+ '<td>' + data[i].posiOrder + '</td>'
 		                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 		                       								$('#checkAll').prop('checked', false);
 		                       							}
@@ -235,14 +235,14 @@
 		                       							html = '<tr><td colspan="4">등록된 직위가 없습니다.</td></tr>';
 		                       						}
 		                       						
-		                       						jobList.append(html);
-		                       						$('#insertJob').modal('hide');
+		                       						posiList.append(html);
+		                       						$('#insertPosi').modal('hide');
 		                       						
 		                       						alert('저장되었습니다.');		                       						
 		                       					},
 		                       					error: function(data){
 		                       						console.log(data);
-		                       						$('#insertJob').modal('hide');
+		                       						$('#insertposi').modal('hide');
 		                       						alert('알 수 없는 오류가 발생했습니다.', '', 'error');
 		                       					}
 	                       					});
@@ -250,84 +250,84 @@
 					        		});
 					        		
 					        		// 직위 수정
-					        		var originJobName = "";
+					        		var originPositionName = "";
 					        		
 					        		// 수정 모달창 열릴시 해당 항목 값으로 초기화
 					        		$(document).on('click', '.updateBtnModal', function(){ 
-					        			$('#updateJob').find('input').val('');
-					        			$('#updateJob').find('.guide').text('');
+					        			$('#updatePosi').find('input').val('');
+					        			$('#updatePosi').find('.guide').text('');
 					        			
-					        			originJobName = $(this).text();
-					        			$('#jobName2').val($(this).text());
-					        			$('#jobOrder2').val($(this).parent().parent().children().eq(2).text());
-					        			$('#jobId').val($(this).parent().parent().children().eq(0).children().val());
+					        			originPositionName = $(this).text();
+					        			$('#positionName2').val($(this).text());
+					        			$('#posiOrder2').val($(this).parent().parent().children().eq(2).text());
+					        			$('#positionNo').val($(this).parent().parent().children().eq(0).children().val());
 					        			dupCheck = false;
 					        		});
 					        		
-	                       			$('#jobName2').on('change', function(){
+	                       			$('#positionName2').on('change', function(){
 	                       				dupCheck = false;
 	                       				
-	                       				var jobName = document.getElementById('jobName2');
-	                       				var jobNameArr = document.getElementsByClassName('updateBtnModal');
+	                       				var positionName = document.getElementById('positionName2');
+	                       				var positionNameArr = document.getElementsByClassName('updateBtnModal');
 	                       				
-	                       				if(jobName.value.trim().length < 1 || jobName.value.trim().length > 10) {									        			
-	                       					$('#jobNameGuide2').text('1~10자리까지 입력해주세요.');
-	                       					jobName.focus();
+	                       				if(positionName.value.trim().length < 1 || positionName.value.trim().length > 10) {									        			
+	                       					$('#positionNameGuide2').text('1~10자리까지 입력해주세요.');
+	                       					positionName.focus();
 	                       				} else {
-	                       					for (var i in jobNameArr) {
-	                       						if(jobName.value.trim() == jobNameArr[i].text && jobName.value.trim() != originJobName) {
+	                       					for (var i in positionNameArr) {
+	                       						if(positionName.value.trim() == positionNameArr[i].text && positionName.value.trim() != originPositionName) {
 			                       					dupCheck = true;
 			                       				}
 	                       					}
 	                       				
 		                       				if (dupCheck) {
-		                       					$('#jobNameGuide2').text('이미 사용 중인 직위 명칭입니다.');
-		                       					jobName.focus();
+		                       					$('#positionNameGuide2').text('이미 사용 중인 직위 명칭입니다.');
+		                       					positionName.focus();
 		                       				} else {
-		                       					$('#jobNameGuide2').text('');
+		                       					$('#positionNameGuide2').text('');
 		                       				}
 		                       			}
 	                       				
 	                       			});
 	                       			
-	                       			$('#jobOrder2').on('change', function(){
-	                       				var jobOrder = document.getElementById('jobOrder2');
+	                       			$('#posiOrder2').on('change', function(){
+	                       				var posiOrder = document.getElementById('posiOrder2');
 	                       				
-	                       				if (jobOrder.value == "" || jobOrder.value < 1) {
-	                       					$('#jobOrderGuide2').text('1 이상의 숫자를 입력해주세요.');
-	                       					jobOrder.focus();
+	                       				if (posiOrder.value == "" || posiOrder.value < 1) {
+	                       					$('#posiOrderGuide2').text('1 이상의 숫자를 입력해주세요.');
+	                       					posiOrder.focus();
 	                       				} else {
 	                       					$('#jobOrderGuide2').text('');
 	                       				}
 	                       			});
 	                       			
 					        		$(document).on('click', '#updateBtn', function(){
-										var jobName = document.getElementById('jobName2');
-										var jobOrder = document.getElementById('jobOrder2');
+										var positionName = document.getElementById('positionName2');
+										var posiOrder = document.getElementById('posiOrder2');
 											
-										if(jobName.value.trim().length < 1 || jobName.value.trim().length > 10) {	
-	                       					jobName.focus();
-	                       				} else if (jobOrder.value == "" || jobOrder.value < 1) {
-	                       					jobOrder.focus();
+										if(positionName.value.trim().length < 1 || positionName.value.trim().length > 10) {	
+											positionName.focus();
+	                       				} else if (posiOrder.value == "" || posiOrder.value < 1) {
+	                       					posiOrder.focus();
 	                       				} else if (dupCheck) {
-	                       					jobName.focus();
+	                       					positionName.focus();
 	                       				} else {
 											$.ajax({
-												url: 'jupdate.ad',
+												url: 'pupdate.ad',
 		                       					dataType: 'json',
-		                       					data: {jobId:$('#jobId').val(), jobName:jobName.value, jobOrder:jobOrder.value},
+		                       					data: {positionNo:$('#positionNo').val(), positionName:positionName.value, posiOrder:posiOrder.value},
 		                       					type: 'POST',
 		                       					success: function(data){
 		                       						
-		                       						var jobList = $('#jobList tbody');
-		                       						jobList.html('');
+		                       						var posiList = $('#posiList tbody');
+		                       						posiList.html('');
 		                       						
 		                       						var html = "";
 		                       						if(data.length > 0) {
 		                       							for(var i in data) {
-		                       								html += '<tr><td><input type="checkbox" class="checkJ" name="jobId" value="' + data[i].jobId + '"></td>'
-		                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updateJob">' + data[i].jobName + '</a></td>'
-		                       									 	+ '<td>' + data[i].jobOrder + '</td>'
+		                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
+		                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].PositionName + '</a></td>'
+		                       									 	+ '<td>' + data[i].posiOrder + '</td>'
 		                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 		                       								$('#checkAll').prop('checked', false);
 		                       							}
@@ -335,14 +335,14 @@
 		                       							html = '<tr><td colspan="4">등록된 직위가 없습니다.</td></tr>';
 		                       						}
 		                       						
-		                       						jobList.append(html);
-		                       						$('#updateJob').modal('hide');
+		                       						posiList.append(html);
+		                       						$('#updatePosi').modal('hide');
 		                       						
 		                       						alert('변경되었습니다.');	                       						
 		                       					},
 		                       					error: function(data){
 		                       						console.log(data);
-		                       						$('#updateJob').modal('hide');
+		                       						$('#updatePosi').modal('hide');
 		                       						alert('알 수 없는 오류가 발생했습니다.', '', 'error');
 		                       					}
 	                       					});
@@ -352,24 +352,24 @@
 					        		
 					        		// 직위 삭제
 					        		$(document).on('click', '#deleteBtn', function(){
-					        			var checkJ = document.getElementsByClassName('checkJ');
+					        			var checkP = document.getElementsByClassName('checkJ');
 					        			
-					        			var jobIdArr = [];
+					        			var positionNoArr = [];
 					        			var userCheck = false;
-					        			for(var i in checkJ) {
-					        				console.log(checkJ[i]);
-					        				if(checkJ[i].checked) {
-					        					jobIdArr.push(checkJ[i].value);
+					        			for(var i in checkP) {
+					        				console.log(checkP[i]);
+					        				if(checkP[i].checked) {
+					        					positionNoArr.push(checkP[i].value);
 												
-					        					if($('#jobList').find('input[value=' + checkJ[i].value + ']').parent().parent().children().eq(3).text() > 0 ){
+					        					if($('#posiList').find('input[value=' + checkP[i].value + ']').parent().parent().children().eq(3).text() > 0 ){
 					        						userCheck = true;
 					        					}
 					        				}
 					        			}
 					        			
-					        			if (jobIdArr.length > 0 && !userCheck) {
+					        			if (positionNoArr.length > 0 && !userCheck) {
 					        				Swal.fire({
-						        				title: jobIdArr.length + '개의 항목을 삭제하시겠습니까?',
+						        				title: positionNoArr.length + '개의 항목을 삭제하시겠습니까?',
 				                       			text: '삭제 후 복구할 수 없습니다.',
 				                       			// icon: 'warning',
 				                       			showCancelButton: true,
@@ -380,22 +380,22 @@
 					        				}).then((result) => {
 			                       				if (result.value) {
 				                       				$.ajax({
-				                       					url: 'jdelete.ad',
+				                       					url: 'pdelete.ad',
 				                       					dataType: 'json',
 				                       					traditional : true, // 배열 전송 위한 옵션
-				                       					data: {jobIdArr:jobIdArr},
+				                       					data: {positionNoArr:positionNoArr},
 				                       					type: 'POST',
 				                       					success: function(data){
 				                       						
-				                       						var jobList = $('#jobList tbody');
-				                       						jobList.html('');
+				                       						var posiList = $('#posiList tbody');
+				                       						posiList.html('');
 				                       						
 				                       						var html = "";
 				                       						if(data.length > 0) {
 				                       							for(var i in data) {
-				                       								html += '<tr><td><input type="checkbox" class="checkJ" name="jobId" value="' + data[i].jobId + '"></td>'
-				                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updateJob">' + data[i].jobName + '</a></td>'
-				                       									 	+ '<td>' + data[i].jobOrder + '</td>'
+				                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
+				                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].PositionName + '</a></td>'
+				                       									 	+ '<td>' + data[i].posiOrder + '</td>'
 				                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 				                       								$('#checkAll').prop('checked', false);
 				                       							}
@@ -403,7 +403,7 @@
 				                       							html = '<tr><td colspan="4">등록된 직위가 없습니다.</td></tr>';
 				                       						}
 				                       						
-				                       						jobList.append(html);
+				                       						posiList.append(html);
 				                       						alert("삭제되었습니다.");
 				                       						
 				                       					},
