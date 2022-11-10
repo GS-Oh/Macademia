@@ -59,17 +59,17 @@
 	<h3>반려된 문서</h3>
 	<hr>
 	<div id="work">
-				<table id="my_work" border="1">
+				<table id="my_work">
 					
-						<tr>
+						<tr id="myWorkTr">
 							<th>번호</th>
 							<th>제목</th>
 							
-							
 							<th>등록날짜</th>
+							<th>결재 여부</th>
 							
 						</tr>
-					</table>
+						</table>
 						<table id="my_work2">
 							<c:forEach items="${cList}" var="x">
 						    <tr>

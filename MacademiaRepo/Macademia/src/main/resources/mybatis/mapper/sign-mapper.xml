@@ -89,6 +89,7 @@
  WHERE SSL.S_NO = T1.S_NO
  AND SSL.S_LEVEL  = T1.S_LEVEL-1
  AND SSL.S_STEP = 'Y'
+ ORDER BY T1.S_NO DESC
  
 	 
 	 
@@ -144,6 +145,7 @@ WHERE S_NO = #{no}
 	<select id="companionList" resultType="com.kh.md.sign.vo.SignVo">
 		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
 		WHERE E_NO = #{eNo} AND S_STATUS = 'X'
+		ORDER BY S_NO DESC
 	</select>
 	
 	<select id="companionTotalCnt" resultType="int">
@@ -151,5 +153,65 @@ WHERE S_NO = #{no}
 		FROM SIGN 
 		WHERE S_STATUS ='X' AND E_NO = #{memberNo}
 	</select>
-
+	
+	<select id="getMySign" resultType="com.kh.md.sign.vo.SignVo">
+		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
+		WHERE E_NO = #{eNo} AND S_STATUS = 'N'
+		ORDER BY S_NO DESC
+	</select>
+	
+	<select id="mySignTotalCnt" resultType="int">
+		SELECT COUNT(S_NO)
+		FROM SIGN
+		WHERE S_STATUS = 'N' AND E_NO = #{memberNo}
+	
+	</select>
+	
+	<update id="setModify">
+	UPDATE SIGN
+	SET 
+	S_TITLE = #{sTitle},
+	S_CONTENT = #{sContent},
+	S_TYPE_NO = #{sTypeNo}
+	WHERE S_NO = #{sNo}
+	</update>
+	<delete id="deleteSign">
+	DELETE FROM SIGN
+	WHERE S_NO=#{no}
+	</delete>
+	<select id="signMax" resultType="int">
+		 select MAX(S_LEVEL) FROM SIGN_LINE
+   		 WHERE S_NO=#{signNo}
+	</select>
+	<select id= "myLevel" resultType="int">
+	select S_LEVEL FROM SIGN_LINE
+    WHERE S_NO = #{signNo} AND E_NO = #{loginNo}
+	</select>
+	<update id="updateSignAll">
+	UPDATE SIGN
+	SET
+	S_STATUS = 'Y'
+	WHERE S_NO = #{signNo} 
+	</update>
+	<select id="completeTotalCnt" resultType="int">
+		SELECT COUNT(S_NO)
+		FROM SIGN
+		WHERE S_STATUS = 'Y' AND E_NO = #{memberNo}
+	</select>
+	
+	<select id="completeList" resultType="com.kh.md.sign.vo.SignVo">
+		SELECT S_NO, S_TITLE, S_TYPE_NO, S_DATE , S_STATUS FROM SIGN
+		WHERE E_NO = #{eNo} AND S_STATUS = 'Y'
+		ORDER BY S_NO DESC
+	
+	</select>
+	
+	<select id="modifyNot" resultType="com.kh.md.sign.vo.SignLineVo">
+	
+	SELECT S_LEVEL, S_STEP FROM SIGN_LINE
+	WHERE S_NO = ${sNo} AND S_LEVEL=2
+	
+	</select>
+	
+	
 </mapper>

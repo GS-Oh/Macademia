@@ -85,6 +85,58 @@ public class SignDao {
 		return sst.selectOne("signMapper.companionTotalCnt", memberNo);
 	}
 
+	public List<SignVo> getMySign(SqlSessionTemplate sst, SignVo sVo) {
+		// TODO Auto-generated method stub
+		return sst.selectList("signMapper.getMySign", sVo);
+	}
+
+	public int mySignTotalCnt(SqlSessionTemplate sst, String memberNo) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("signMapper.mySignTotalCnt", memberNo);
+	}
+
+	public int setModify(SqlSessionTemplate sst, SignVo sVo) {
+		// TODO Auto-generated method stub
+		return sst.update("signMapper.setModify", sVo);
+	}
+
+	public int deleteSign(SqlSessionTemplate sst, String no) {
+		// TODO Auto-generated method stub
+		return sst.delete("signMapper.deleteSign",no);
+	}
+
+	public int signMax(SqlSessionTemplate sst, Map map) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("signMapper.signMax", map);
+	}
+
+	public int myLevel(SqlSessionTemplate sst, Map map) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("signMapper.myLevel", map);
+	}
+
+	public int updateSignAll(SqlSessionTemplate sst, Map map) {
+		// TODO Auto-generated method stub
+		return sst.update("signMapper.updateSignAll", map);
+	}
+
+	public int completeTotalCnt(SqlSessionTemplate sst, String memberNo) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("signMapper.completeTotalCnt", memberNo);
+	}
+
+	public List<SignVo> completeList(SqlSessionTemplate sst, SignVo sVo) {
+		// TODO Auto-generated method stub
+		return sst.selectList("signMapper.completeList", sVo);
+	}
+
+	public SignLineVo modifyNot(SqlSessionTemplate sst, SignLineVo lineOne) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("signMapper.modifyNot", lineOne);
+	}
+
+	
+
 	
 
 }

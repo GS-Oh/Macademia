@@ -1,6 +1,6 @@
 package com.kh.md.service;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -125,6 +125,69 @@ public class SignService {
 		// TODO Auto-generated method stub
 		return dao.companionTotalCnt(sst, memberNo);
 	}
+
+
+	public List<SignVo> getMySign(SignVo sVo) {
+		// TODO Auto-generated method stub
+		return dao.getMySign(sst, sVo);
+	}
+
+
+	public int mySignTotalCnt(String memberNo) {
+		// TODO Auto-generated method stub
+		return dao.mySignTotalCnt(sst, memberNo);
+	}
+
+
+	public int setModify(SignVo sVo) {
+		// TODO Auto-generated method stub
+		return dao.setModify(sst, sVo);
+	}
+
+
+	public int deleteSign(String no) {
+		// TODO Auto-generated method stub
+		return dao.deleteSign(sst, no);
+	}
+
+
+	public int signMax(Map map) {
+		// TODO Auto-generated method stub
+		return dao.signMax(sst, map);
+	}
+
+
+	public int myLevel(Map map) {
+		// TODO Auto-generated method stub
+		return dao.myLevel(sst, map);
+	}
+
+
+	public int updateSignAll(Map map) {
+		// TODO Auto-generated method stub
+		return dao.updateSignAll(sst, map);
+	}
+
+
+	public int completeTotalCnt(String memberNo) {
+		// TODO Auto-generated method stub
+		return dao.completeTotalCnt(sst, memberNo);
+	}
+
+
+	public List<SignVo> completeList(SignVo sVo) {
+		// TODO Auto-generated method stub
+		return dao.completeList(sst, sVo);
+	}
+
+
+	public SignLineVo modifyNot(SignLineVo lineOne) {
+		// TODO Auto-generated method stub
+		return dao.modifyNot(sst, lineOne);
+	}
+
+
+	
 
 
 //	public int insertSignline(SignLineVo slVo) {
