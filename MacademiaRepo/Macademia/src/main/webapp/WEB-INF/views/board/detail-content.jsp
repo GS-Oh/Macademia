@@ -3,7 +3,7 @@
 
  <div class="board_wrap">
         <div class="board_title">
-          <c:if test="${vo.categoryNo eq 2}"><strong>자료공유게시판의 ${vo.no}번 게시물</strong></c:if>
+          <c:if test="${vo.categoryNo eq 2}"><strong>자료공유게시판 ${vo.no}번 게시물</strong></c:if>
         </div>
           
         <div class="board_view_wrap">
@@ -20,7 +20,7 @@
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
-                        <dd>${vo.userNo}</dd>
+                        <dd>${vo.userNo} ${vo.position}</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
@@ -48,7 +48,7 @@
             <div class="board_view">
              	<c:if test="${!empty loginMember}">
 	             	<div>
-					<textarea style="width:100%;" id="reply-content" name="content"></textarea>
+					<textarea style="width:100%; border: 1mm ridge #6667AB;" id="reply-content" name="content" ></textarea>
 						<p style="text-align: right;">
 							<button id="reply-btn" class="reply"  >댓글작성</button>
 						</p>
@@ -65,7 +65,7 @@
                     <div class="info">
                     <dl>
                         <input type="hidden" value="${x.replyNo}" id="${x.replyNo}">
-                        <dt><img src="/md/resources/upload/profile/${x.profileName}" style="width: 20px; height: 20px; border-radius: 5px;"></dt>
+                        <dt><img src="/md/resources/upload/profile/${x.profileName}" style="width: 30px; height: 30px; border-radius: 5px;"></dt>
                         <dt>${x.name} ${x.position}</td>
                         <dd> ${x.regdate} 
                       </dl>  

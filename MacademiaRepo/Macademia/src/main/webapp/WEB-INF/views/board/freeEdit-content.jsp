@@ -43,7 +43,7 @@
                       	<strong>첨부파일</strong>
                       	<c:if test="${!empty attachments}">
                       		<c:forEach var="x" items="${attachments}">
-                      		<a class="" href="/md/resources/upload/board/${x.fileName}">${x.originName}</a>
+                      		<a class="" href="/md/resources/upload/board/free/${x.fileName}">${x.originName}</a>
                       		</c:forEach>
                        </c:if>
                       </div>
