@@ -46,7 +46,7 @@
     td{
     font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
     border-bottom: solid 1px #0000001a;
-     text-align: center;
+     
     
     }
     #page-area{

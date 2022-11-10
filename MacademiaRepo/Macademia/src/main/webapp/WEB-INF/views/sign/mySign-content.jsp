@@ -11,37 +11,29 @@
     margin: 0 auto;
   
     width:1000px;
-    height:500px;
+    height:300px;
     border:1px solid #6667AB;
     margin-top:30px;
-    border-radius: 5px;
     }
-     #my_work2{
-    	width:100%;
-    	
-    	
-    	
-    }
+    
     #my_work{
-    	height:40px;	
     	width:100%;
     	
     	
     }
-    #myWorkTr{
-    border-radius:3px 3px 0 0;
-    border-radius:10px;
+    #my_work2{
+    width:100%;
     }
     
      th{
     background-color:#6667AB;
     color: #fff;
     font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
-    text-align: center;
+    
     }
     td{
     font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
-    text-align: center;
+    text-align:center;
     border-bottom: solid 1px #0000001a;
     }
     #page-area{
@@ -64,41 +56,52 @@
     </style>
     
 <div id="center_menu">
-	<h3>나의 결재</h3>
+	<h3>진행중인 결재 문서</h3>
 	<hr>
 	<div id="work">
-				<table id="my_work">
+				<table id="my_work2">
 					
 						<tr id="myWorkTr">
-							<th>번호</th>
-							<th>제목</th>
-							<th>등록날짜</th>
-							<!-- <th>결재 여부</th> -->
+							<td>번호</td>
+							<td>제목</td>
+							
+							<td>등록날짜</td>
+							<td>결재 여부</td>
 							
 						</tr>
-						 <c:forEach items="${slVo}" var="x">
+						</table>
+						<table id="my_work2">
+							<c:forEach items="${mySign}" var="x">
 						    <tr>
-							<td>${x.S_NO}</td>
-						 	<td><a href="/md/sign/signDetail/${x.S_NO}">${x.S_TITLE}</td>
-							<td>${x.S_DATE}</td>
-							<%-- <td>${x.S_STATUS}</td> --%>
+							<td>${x.SNo}</td>
+						 	<td><a href="/md/sign/mySignDetail/${x.SNo}">${x.STitle}</td>
+							<td>${x.SDate}</td>
+							<td></td>
 						</tr>
-						</c:forEach>
+   						 </c:forEach>
 						</table>
 						
+						
+						
+						
+						
+						
+					
+				
+				</table>
 				
 				<div id="page-area">
-						<ul id="page">
+					<ul id="page">
 						<c:if test="${pv.startPage ne 1}">
-		<li><a href="/md/sign/list/${pv.startPage - 1}" >이전</a></li>
+		<li><a href="/md/sign//${pv.startPage - 1}" >이전</a></li>
 	</c:if>
 	
 	<c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" var="i">
-	  <li> <a href="/md/sign/list/${i}">${i}</a></li> 
+	  <li> <a href="/md/sign//${i}">${i}</a></li> 
 	</c:forEach>
 	
 	<c:if test="${pv.endPage ne pv.maxPage }">
-		<a href="/md/sign/list/${pv.endPage + 1}">다음</a>
+		<a href="/md/sign//${pv.endPage + 1}">다음</a>
 	</c:if>	
 					</ul>
 				</div>
