@@ -5,7 +5,8 @@
         padding: 0px;
         margin: 0px;
     }
-  
+
+  	
 	 main{
 	    	width: 60vw;
 			margin-left:5%;
@@ -26,6 +27,14 @@
     ul, li{
         list-style:none;
     }
+    
+    ul a{
+    	text-decoration : none;
+    }
+    
+    header a{
+		text-decoration:none;
+	}
     
     #side_menu{
         width:13vw;

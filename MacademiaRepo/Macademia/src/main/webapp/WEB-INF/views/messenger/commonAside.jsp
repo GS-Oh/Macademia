@@ -23,11 +23,11 @@
 			    </ul>
 			
 			    <ul id="menu">
-			        <a href="/md/messenger/profile"><li>나의 프로필</li></a>
-		            <a href="/md/messenger/noteReceiveBox"><li>받은 쪽지함</li></a>
-		            <a href="/md/messenger/noteSendBox"><li>보낸 쪽지함</li></a>
-		            <a href="/md/messenger/imgFileBox"><li>파일 보관함</li></a>
-		            <a href="/md/messenger/notice/1"><li>공지 톡</li></a>
+			        <a href="${root}/messenger/profile"><li>나의 프로필</li></a>
+		            <a href="${root}/messenger/noteReceiveBox"><li>받은 쪽지함</li></a>
+		            <a href="${root}/messenger/noteSendBox"><li>보낸 쪽지함</li></a>
+		            <a href="${root}/messenger/imgFileBox"><li>파일 보관함</li></a>
+		            <a href="${root}/messenger/notice/1"><li>공지 톡</li></a>
 			    </ul>
 				
 				
