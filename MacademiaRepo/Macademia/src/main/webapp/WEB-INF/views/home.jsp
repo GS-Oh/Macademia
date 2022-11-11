@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <html>
 <head>
-	<title>Home</title>
-	
+	<title>마카다미아 에 오신것을 환영합니다</title>
+	<link rel="shortcut icon" href="${root}/resources/img/logo/favicon.ico"/>
 	<%@include file="/resources/css/common/common.css" %>
 	
 </head>
