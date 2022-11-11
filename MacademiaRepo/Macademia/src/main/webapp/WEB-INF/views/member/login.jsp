@@ -120,7 +120,8 @@
         animation-iteration-count: 3;  
     }
     #container{
-    margin-top:70px;
+    margin-top:190px;
+    margin-right:40px;
     }
     @keyframes warning{
         0% {transform: translateX(-5px);}

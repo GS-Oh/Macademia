@@ -160,13 +160,21 @@
                 transform: translateX(5px);
             }
         }
+        #log{
+        width:70px;
+        height:40px;}
+        #container img {
+    position: absolute;
+    top: -44px;
+    right: 7px;
+}
     </style>
 </head>
 
 <body>
     <div id="container">
         <h1>비밀번호 찾기</h1>
-        <img src="/md/resources/img/background/macadamia.png" alt="로고" width="40px" height="40px">
+        <img src="/md/resources/img/logo/logo1.png" alt="로고" width="40px" height="40px" id="log">
         <form action="${root}/member/findpwd" method="post" id="login-form">
 
             <div class="input-group">
