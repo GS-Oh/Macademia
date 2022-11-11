@@ -9,7 +9,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
+<head>
+<link rel="shortcut icon" href="${root}/resources/img/logo/favicon.ico"/>
+</head>
 <style>
     /* 헤더 공통 */
     #header-wrap{
@@ -69,22 +71,28 @@
         grid-template-columns: repeat(2, 3vw);
         grid-template-rows: 3vw;
         justify-content: end;
+        
     }
     #alert-icon, #mypage-icon{
         margin: 10px;
+        
        
     }
+    #mypage-icon{
+   	font-size:17px;
+   color:#6667AB;
+   margin-bottom:20px;
 </style>
 
 <div id="header-wrap">
     <div id="logo-area">
-        <a href="${root}/member/login">
+        <a href="${root}/home">
             <img src="${root}/resources/img/logo/logo1.png"id="log" width="100%" alt="로고">
         </a>
     </div>
     <div id="nav-area">
         <div id="nav-menu1">
-            <a href="${root}/member/login">
+            <a href="${root}/home">
                 <i class="fa-solid fa-house fa-2x"></i><br>
                 <label for="">홈</label>
             </a>
@@ -157,14 +165,11 @@
         </div>
     </div>
     <div id="alert-area">
-        <div id="alert-icon">
-            <a href="">
-                <i class="fa-solid fa-bell fa-2x"></i>
-            </a>
-        </div>
+        
         <div id="mypage-icon">
             <a href="${root}/member/mypage">
                 <i class="fa-solid fa-circle-user fa-2x"></i>
+               
             </a>
         </div>
     </div>

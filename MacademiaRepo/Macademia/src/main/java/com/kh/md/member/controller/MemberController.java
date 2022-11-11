@@ -177,7 +177,12 @@ public class MemberController {
 		}
 		return result;
 	}
-
-
+	@GetMapping("home")
+	public String home (HttpSession session, Model model) {
+	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+	model.addAttribute("loginMember",loginMember);
+	return "home";
+	
+	}
 
 }

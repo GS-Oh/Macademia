@@ -37,11 +37,17 @@
 	}
 	#today-to-sign{
 	}
+	h3{
+	margin-top:20px;
+	margin-bottom:20px;
+	margin-right:900px;
+	left:20;
+	}
 </style>
 
 <div id="dashbrd-greeting">
-	<h3>님, 힘찬하루보내세요 :-)</h3>
-	<button>출근하기</button><button>퇴근하기</button>
+	<h3>${loginMember.name}님, 힘찬하루보내세요 :-)</h3>
+	
 </div>
 
 <div id="home-content-wrap">
