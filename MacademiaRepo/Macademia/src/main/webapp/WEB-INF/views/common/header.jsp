@@ -31,6 +31,11 @@
         cursor: pointer;
     }
 /* 헤더 로고부분 */
+	#log{
+	width:150px;
+	height:59px;
+	margin-right:70px;
+	}
     #logo-area{
         width: 15vw;
         display: flex;
@@ -74,7 +79,7 @@
 <div id="header-wrap">
     <div id="logo-area">
         <a href="${root}/member/login">
-            <img src="${root}/resources/img/logo/logo_temp1.png" width="100%" alt="로고">
+            <img src="${root}/resources/img/logo/logo1.png"id="log" width="100%" alt="로고">
         </a>
     </div>
     <div id="nav-area">

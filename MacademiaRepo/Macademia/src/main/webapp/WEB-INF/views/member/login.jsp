@@ -52,7 +52,7 @@
     }
     #container img{
         position:absolute;
-        top: -60px;
+        top: -215px;
         right: 35px;
     }
     .input-group{
@@ -119,6 +119,9 @@
         animation: warning 0.3s ease;
         animation-iteration-count: 3;  
     }
+    #container{
+    margin-top:70px;
+    }
     @keyframes warning{
         0% {transform: translateX(-5px);}
         25% {transform: translateX(5px);}
@@ -139,6 +142,11 @@
     #etc label{
         color: #44347f;
     }
+    #log{
+    width:310px;
+    height:180px;
+    
+    }
 
 
     
@@ -146,8 +154,8 @@
 </head>
 <body>
 <div id="container">
-    <h1>MACADEMIA</h1>
-    <img src="/md/resources/img/background/macadamia.png" alt="로고" width="40px" height="40px">
+   
+    <img src="/md/resources/img/logo/logo1.png" alt="로고" width="40px" height="40px" id="log">
 	<form action="${root}/member/login" method="post" id="login-form">
 
 	  <div class="input-group">
