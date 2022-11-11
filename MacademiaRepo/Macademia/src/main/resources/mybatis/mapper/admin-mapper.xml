@@ -76,23 +76,72 @@
 	
 
 	
-	<!-- <select id="selectDepartmentList" resultType="DeptVo">
-		
+	<select id="selectDepartmentList" resultType="DeptVo">
+		SELECT 
+        	 	D.NO, D.NAME AS DEPT_NAME , P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, M.NAME
+      			, D.UPPER_DEPT, D.LEV, D.DELETE_YN, D.CREATE_DATE
+			FROM DEPT D
+			JOIN POSITION P
+			ON D.NO = P.NO
+        	JOIN MEMBER M
+        	ON P.DEPT_NO = M.NO
+			JOIN RANK R
+			ON P.RANK_NO = R.NO
+			WHERE D.DELETE_YN = 'N'
+        	START WITH UPPER_DEPT IS NULL
+        	CONNECT BY PRIOR D.NO = D.UPPER_DEPT
 	</select>
 
 	
-	<select id="selectPosiList" resultType="">
-
+	<select id="selectPosiList" resultType="PositionVo">
+	SELECT P.NO, P.NAME AS POSITION_NAME, COUNT(M.NO) AS MEMBER_COUNT
+        FROM POSITION P
+		JOIN DEPT D
+		ON D.NO = P.NO
+        JOIN MEMBER M
+        ON P.DEPT_NO = M.NO
+		JOIN RANK R
+		ON P.RANK_NO = R.NO
+		GROUP BY P.NO, P.NAME
+		ORDER BY P.NO;
 	</select> 
 	
 	
 	<select id="getSearchListCount" resultType="_int">
-
+		SELECT COUNT(*)
+        	FROM MEMBER M
+			JOIN POSITION P 
+			ON M.POSITION_NO = P.NO
+			JOIN RANK R
+			ON P.RANK_NO = R.NO
+			JOIN DEPT D
+			ON P.DEPT_NO = D.NO
+			WHERE QUIT_YN IN('Y','N')
+		<if test="selectDept != ''">
+			AND D.NO = #{selectDept}
+		</if>
+		<if test="selectPosi != ''">
+			AND P.NO = #{selectPosi}
+		</if>
+		<if test="searchValue != ''">
+			AND M.NAME LIKE '%' || #{searchValue} || '%'
+		</if>
 	</select>
 	
 	<select id="selectSearchMemberList" resultMap="memberResultSet">
-
-	</select> -->
+		SELECT M.NO, M.NAME, M.EMAIL, M.PHONE, M.PROFILE_NAME, 
+		       P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+		FROM MEMBER M
+		JOIN POSITION P 
+		ON M.POSITION_NO = P.NO
+		JOIN RANK R
+		ON P.RANK_NO = R.NO
+		JOIN DEPT D
+		ON P.DEPT_NO = D.NO
+		WHERE M.NAME LIKE '%${search}%'
+		AND M.QUIT_YN = 'N'
+		ORDER BY P.NO ASC
+	</select> 
 		
 	<select id="getMemberCount" resultType="int">
 		SELECT COUNT(*)

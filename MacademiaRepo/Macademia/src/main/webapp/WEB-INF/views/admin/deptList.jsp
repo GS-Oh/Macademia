@@ -31,7 +31,7 @@
 
 	<!-- tree viewer CSS
 		============================================ -->
-	<link rel="stylesheet" href="${contextPath}/resources/assets/vendor/deptList/css/jquery.treeview.css">
+	<link rel="stylesheet" href="${root}/resources/assets/vendor/deptList/css/jquery.treeview.css">
 	
 	<!--  drag and drop 관련 css -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -72,7 +72,7 @@
 								   	<i class="bi bi-plus-lg"></i> 추가
 								   </a>
 								   <a class="badge badge-light" id="deleteDeptBtn" ><i class="bi bi-dash-lg"></i> 삭제</a>
-								   <form id="deleteForm" action="${ contextPath }/admin/ddelete.ad" method="post">
+								   <form id="deleteForm" action="${root}/admin/ddelete.ad" method="post">
 								   		<input id="deleteDeptNo" type="hidden" name="deptNo">
 								   		<input id="upperDeptNo" type="hidden" name="upperDeptNo">
 								   </form>					              
@@ -138,7 +138,7 @@
 									  	  
 									  	  // 부서책임자 입력란에 입력한 사원 아이디가 존재하는 아이디인지 검증
 			                              <c:forEach var="m" items="${ mList }">
-								          	if ("${ m.mId }" == deptManager) {
+								          	if ("${ m.no }" == deptManager) {
 								          		existenceCheck = true;
 								          	}
 					 	                  </c:forEach>
