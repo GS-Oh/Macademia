@@ -13,7 +13,9 @@
 		SELECT * FROM MYFILE
 		WHERE MEMBER_NO = #{memberNo}
 		AND UPLOAD_PATH = '/resources/upload/myfile/'
-		AND ORIGIN_NAME LIKE '%${searchName}%'
+		<if test="searchName != null">
+			AND ORIGIN_NAME LIKE '%${searchName}%'
+		</if>
 		AND DELETE_YN = 'N'
 		ORDER BY NO DESC	
 	</select>
@@ -36,9 +38,11 @@
 	<select id="selectTotalCountBySearchName" resultType="_int">
 		SELECT COUNT(*) 
 		FROM MYFILE
-		WHERE ORIGIN_NAME LIKE '%${searchName}%'
-		AND DELETE_YN = 'N'
+		WHERE DELETE_YN = 'N'
 		AND UPLOAD_PATH = '/resources/upload/myfile/'
+		<if test="searchName != null">
+			AND ORIGIN_NAME LIKE '%${searchName}%'
+		</if>
 	</select>
 	
 </mapper>

@@ -55,7 +55,7 @@
 <div id="mypage-sidemenu">
     <button id="logout-btn" onclick="location.href='${root}/member/logout'"><i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃</button>
     <div class="menu" onclick="location.href='${root}/member/edit'">사원정보수정</div>
-    <div class="menu" onclick="location.href='${root}/myboard/list'">내가쓴게시글</div>
+    <div class="menu" onclick="location.href='${root}/myboard/list/1'">내가쓴게시글</div>
     <div class="menu" onclick="location.href='${root}/myfile/list/1'">개인자료실</div>
     <div></div>
 

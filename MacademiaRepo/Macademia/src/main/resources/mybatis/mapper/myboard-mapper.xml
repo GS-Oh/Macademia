@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myboardMapper">
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM
+		<if test="categoryNo == 1">
+			FREE_BOARD
+		</if>
+		<if test="categoryNo == 2">
+			DATA_BOARD
+		</if> 
+	  	WHERE DELETE_YN = 'N'
+	  	AND USER_NO = #{memberNo}
+	  	<if test="title != null">
+			AND TITLE LIKE '%${title}%'
+		</if> 
+	</select>
+	
+	<select id="selectList" resultType="com.kh.md.myboard.vo.MyboardVo">
+		SELECT NO, USER_NO, CATEGORY_NO, TITLE, HIT, REGDATE
+		FROM
+		<if test="categoryNo == 1">
+			FREE_BOARD
+		</if>
+		<if test="categoryNo == 2">
+			DATA_BOARD
+		</if> 
+		WHERE DELETE_YN = 'N'
+		AND USER_NO = #{memberNo}
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%'
+		</if> 
+		ORDER BY NO DESC
+	</select>
+	
+</mapper>
