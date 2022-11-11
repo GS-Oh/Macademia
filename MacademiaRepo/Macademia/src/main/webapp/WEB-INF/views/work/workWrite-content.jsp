@@ -186,6 +186,16 @@
  border-radius: 5px;
  margin-top: 47px;
  }
+ #slave{
+ border: 1px solid #6667AB;
+ width: 200px;
+ height:27px;
+ border-radius:5px;
+ line-height:25px;
+ }
+ #userName{
+ width:200px;
+ }
     </style>
     
 <div id="center_menu">
@@ -208,8 +218,8 @@
 			<br>
 			<div class="line">
 			<h5>담당자</h5>
-			<a data-toggle="modal" href="#myModal"><h6><i class="fa-solid fa-plus"></i> 추가/변경</h6></a>
-			
+			<a data-toggle="modal" href="#myModal" id="plus"><h6><i class="fa-solid fa-plus"></i> 추가/변경</h6></a>
+				<span id="slaveOne"><h6 id="slave"></h6></span>
 			</div>
 			
 			<br>
@@ -276,13 +286,14 @@
         <div class="modal-header">
           
         <h6 id="m_title">업무 요청 지정</h4>
+	
         </div>
         <div class="modal-body w-100">
 
 			<div class="modal-wrap d-inline-flex w-100">
 				<div class="w-50">
 		          <select id="select_top">
-						<option >전체</option>
+						<option value="0">전체</option>
 						<option value="1">대표이사</option>
 						<option value="2">부원장</option>
 						<option value="3">운영기획부</option>
@@ -305,7 +316,7 @@
 					<br> 
 					<select multiple id="select_box">
 						<c:forEach items="${memberList}" var="x">
-							<option>${x.name} (${x.deptName} - ${x.positionName})</option>
+							<option value="${x.no}" }>${x.name} (${x.deptName} - ${x.positionName})</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -339,6 +350,12 @@
   </div>
 
 			<script>
+			$('option[name=all]').attr('value', '0');
+			$('#plus').on('click', function(){
+				
+				$('#select_right *').remove();
+			})
+			
 			$('#select_top').on('change', function(){
 				let deptCode = $('#select_top option:selected').val();
 				
@@ -370,7 +387,7 @@
 				
 				
 				$('#addUser').on('click', function(){
-	let userCode = $('#select_box option:selected').val();
+	var userCode = $('#select_box option:selected').val();
 	let userOption = $('#select_box option[value=' + userCode + ' ]')[0].outerHTML;
 
 	$('#select_right').append(userOption)
@@ -384,6 +401,12 @@ $("#deleteUser").on('click',function(){
 
 
 })
+$('#select_complete').on('click',function(){
+		console.log("이거 클릭함 ㅋ")
+		var userCode = $('#select_box option:selected').val();
+		$('#slave').html($('#select_box option[value=' + userCode + ' ]')[0].outerHTML)
+			})
+
 $('#write').on('click',function(){
 	let workUserCode = $('#select_right option').val();
 	let selectWork = $('#select_work').val();
@@ -394,33 +417,51 @@ $('#write').on('click',function(){
 	
 	result = confirm("업무를 요청 하시겠습니까?")
 	if(result==1){
-		$.ajax({
-					url:"/md/work/workWrite",
-					method : "post",
-					data :{wNo : workUserCode,
-							select: selectWork,
-							title : title,
-							deadLine :deadLine,
-							content : content
-					},
-					dataType: 'json',
-					success: function(data){
-						console.log("성공")
-						console.log(data)
-						alert("요청이 완료 되었습니다")
- 				    	 window.location.href = "/md/work/bossList/1";
-						
-						
-						
-						
-						
-					}
-					,error: function(data){
-					    	console.log("실패");
-					    	console.log(data)
-					    }
-				})
+		if(workUserCode == null){
+			alert("업무 담당자를 지정해주세요")
+		}else if(selectWork == null){
+			alert("업무 타입을 지정해주세요")
+		}else if(title == null || title==""){
+			alert('업무 제목을 입력해주세요')
+		}else if(deadLine == null || deadLine=="연도-월-일"){
+			alert('업무 기한을 지정해주세요')
+		}else if(content == null || content==""){
+			alert("업무 내용을 입력해주세요")
+		}else {
+			$.ajax({
+				url:"/md/work/workWrite",
+				method : "post",
+				data :{wNo : workUserCode,
+						select: selectWork,
+						title : title,
+						deadLine :deadLine,
+						content : content
+				},
+				dataType: 'json',
+				success: function(data){
+					console.log("성공")
+					console.log(data)
+					alert("요청이 완료 되었습니다")
+				    	 window.location.href = "/md/work/bossList/1";
+					
+					
+					
+					
+					
+				}
+				,error: function(data){
+				    	console.log("실패");
+				    	console.log(data)
+				    }
+			})
+			
+		}
+		
+		
+		
+		
 	}
 
 })
+
 			</script>

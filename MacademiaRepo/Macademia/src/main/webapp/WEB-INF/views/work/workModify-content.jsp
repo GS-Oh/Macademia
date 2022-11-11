@@ -214,10 +214,7 @@
 			
 			<br>
 			<br>
-			<div class="line">
-			<h5>첨부파일</h5>
-			<input type="file" name="file" id="file">
-			</div>
+			
 			
 		</div>
 		
