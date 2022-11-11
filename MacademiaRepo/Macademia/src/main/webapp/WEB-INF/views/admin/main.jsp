@@ -7,7 +7,7 @@
 	<%@include file="/resources/css/common/common.css" %>
 	<%-- <%@include file="/resources/css/admin/common.css" %> --%>
 	
-<style id="react-tooltip" data-styled="active" data-styled-version="5.3.3"></style>
+<!-- <style id="react-tooltip" data-styled="active" data-styled-version="5.3.3"></style>
 <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
 <script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script>
 <script type="text/javascript" integrity="sha384-0wxZnftk3sv9AeFAckGNlxBwZkOhfIFJHC27hmtbSnUTiKRiRXr1F7ftmkmxIYR6" crossorigin="anonymous" async="" src="https://cdn.amplitude.com/libs/amplitude-8.15.0-min.gz.js"></script>
@@ -29,8 +29,8 @@
 	<meta name="facebook-domain-verification" content="vo5n55gdznhztzukk13vb1m2ghig9y">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
-<!-- 	 <link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css//bootstrap-select.min.css"> -->
+	 <link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css//bootstrap-select.min.css">
 	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
 	<link rel="stylesheet" href="/webapp/resources/css/admin/bootstrap-select-min.css">
 	<link rel="stylesheet" href="/webapp/resources/css/admin/bootstrap.min.css">
@@ -41,7 +41,7 @@
 
 
 <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/50/9/intl/ja_ALL/common.js"></script>
-<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/50/9/intl/ja_ALL/util.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/50/9/intl/ja_ALL/util.js"></script> -->
 
 
 </head>

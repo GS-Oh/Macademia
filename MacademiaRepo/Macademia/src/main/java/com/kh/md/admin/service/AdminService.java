@@ -15,7 +15,7 @@ public interface AdminService {
 	
 	ArrayList<MemberVo> selectMemberList(PageInfo pi);
 
-	ArrayList<Dept> selectDepartmentList();
+	ArrayList<Dept> selectDeptList();
 
 	ArrayList<Position> selectPosiList();
 
@@ -39,9 +39,9 @@ public interface AdminService {
 
 	int updatePosi(Position posi);
 
-	ArrayList<MemberVo> selectDeptMemberList(int upperDept);
+	ArrayList<MemberVo> selectDeptMemberList(Integer upperDept);
 
-	ArrayList<Dept> getSubDeptList(int upperDept);
+	ArrayList<Dept> getSubDeptList(Integer originUpperDept);
 
 	Dept insertDept(Dept dept);
 

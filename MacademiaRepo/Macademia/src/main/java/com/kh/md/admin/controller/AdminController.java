@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,7 +65,7 @@ public class AdminController {
 		ArrayList<Integer> memberCount = aService.getMemberCount();
 		ArrayList<MemberVo> mList = aService.selectMemberList(pi);
 		ArrayList<MemberVo> mList2 = aService.selectMemberList(null); // 사원 이름 검색시 자동완성 기능 제공하기 위한 memberList
-		ArrayList<Dept> dList = aService.selectDepartmentList();
+		ArrayList<Dept> dList = aService.selectDeptList();
 		ArrayList<Position> pList = aService.selectPosiList();
 		
 		if(memberCount != null && mList != null && mList2 != null && dList != null && pList != null) {
@@ -108,7 +109,7 @@ public class AdminController {
 		ArrayList<Integer> memberCount = aService.getMemberCount();
 		ArrayList<MemberVo> mList = aService.selectSearchMemberList(pi, map);
 		ArrayList<MemberVo> mList2 = aService.selectMemberList(null);
-		ArrayList<Dept> dList = aService.selectDepartmentList();
+		ArrayList<Dept> dList = aService.selectDeptList();
 		ArrayList<Position> pList = aService.selectPosiList();
 	
 		if(memberCount != null && mList != null && mList2 != null && dList != null && pList != null) {
@@ -193,7 +194,7 @@ public class AdminController {
 									 @RequestParam(value="searchValue", required=false) String searchValue, 
 									 @RequestParam(value="message", required=false) String message, ModelAndView mv) {
 		MemberVo member = aService.selectMember(no);
-		ArrayList<Dept> dList = aService.selectDepartmentList();
+		ArrayList<Dept> dList = aService.selectDeptList();
 		ArrayList<Position> pList = aService.selectPosiList();
 		
 		if (member != null && dList != null && pList != null) {
@@ -368,11 +369,10 @@ public class AdminController {
      * 부서 목록 조회
      */
 	@RequestMapping("admin/deptlist.ad")
-	public String selectDepartmentList(Model model, @RequestParam(value="message", required=false) String message) {
+	public String selectDeptList(Model model, @RequestParam(value="message", required=false) String message) {
 		
-		ArrayList<Dept> dList = aService.selectDepartmentList();
-		@SuppressWarnings("null")
-		ArrayList<MemberVo> mList = aService.selectDeptMemberList((Integer) null);
+		ArrayList<Dept> dList = aService.selectDeptList();
+		ArrayList<MemberVo> mList = aService.selectDeptMemberList(null);
 		
 		if(dList != null && mList != null) {
 			model.addAttribute("dList", dList);
@@ -390,7 +390,7 @@ public class AdminController {
      */
 	@RequestMapping("admin/subDeptList.ad")
 	@ResponseBody
-	public String getSubDeptList(@RequestParam("upperDept") int upperDept) {
+	public String getSubDeptList(@RequestParam("upperDept") Integer upperDept) {
 		
 		ArrayList<Dept> subDeptList = aService.getSubDeptList(upperDept);
 		ArrayList<MemberVo> deptMemberList = aService.selectDeptMemberList(upperDept);
@@ -534,10 +534,10 @@ public class AdminController {
 		}
 	}
 	
-	public int sortDept(int deptNo, int upperDeptNo) {
+	public int sortDept(int deptNo, int originUpperDept) {
 		
 		// 부서 이동 또는 삭제시 기존에 같은 상위부서를 가지고 있던 부서 그룹 정렬 새로 하기, 1부터 차례대로 값이 들어가게 정렬 
-		ArrayList<Dept> sortDeptList = aService.getSubDeptList(upperDeptNo);
+		ArrayList<Dept> sortDeptList = aService.getSubDeptList(originUpperDept);
 		int result = 0;
 		if (sortDeptList.size() >= 2) {
 			int i = 1;

@@ -36,12 +36,12 @@ public class AdminDao {
 		return mList;
 	}
 
-	public ArrayList<Dept> selectDepartmentList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("adminMapper.selectDepartmentList");
+	public ArrayList<Dept> selectDeptList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectDeptList");
 	}
 
 	public ArrayList<Position> selectPosiList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("adminMapper.selectPositionList");
+		return (ArrayList)sqlSession.selectList("adminMapper.selectPosiList");
 	}
 
 	public int getSearchListCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
@@ -114,7 +114,7 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectDeptMemberList", map);
 	}
 
-	public ArrayList<Dept> getSubDeptList(SqlSessionTemplate sqlSession, int upperDept) {
+	public ArrayList<Dept> getSubDeptList(SqlSessionTemplate sqlSession, Integer upperDept) {
 		return (ArrayList)sqlSession.selectList("adminMapper.getSubDeptList", upperDept);
 	}
 
