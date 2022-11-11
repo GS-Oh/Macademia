@@ -44,7 +44,8 @@ public class FileController {
 		int totalCount = fileService.getTotalCount(searchName);
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
 		List<FileVo> fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
-
+		if(pv.getEndPage()==0) pv.setEndPage(1);
+		
 		if(fileList!=null) {
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("searchName", searchName);
@@ -63,7 +64,8 @@ public class FileController {
 		int totalCount = fileService.getTotalCount(searchName);
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
 		List<FileVo> fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
-
+		if(pv.getEndPage()==0) pv.setEndPage(1);
+		
 		if(fileList!=null) {
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("searchName", searchName);
@@ -79,11 +81,13 @@ public class FileController {
 		int totalCount = fileService.getTotalCount(searchName);
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
 		List<FileVo> fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
+		if(pv.getEndPage()==0) pv.setEndPage(1);
 		
-		model.addAttribute("fileList", fileList);
-		model.addAttribute("searchName", searchName);
-		model.addAttribute("pv", pv);
-		
+		if(fileList!=null) {
+			model.addAttribute("fileList", fileList);
+			model.addAttribute("searchName", searchName);
+			model.addAttribute("pv", pv);
+		}
 		return "myfile/list-fragment";
 	}
 	@PostMapping("/insert")
@@ -108,8 +112,12 @@ public class FileController {
 		int totalCount = fileService.getTotalCount();
 		PageVo pv = Pagination.getPageVo(totalCount, 1, 5, 40);
 		List<FileVo> fileList = fileService.getMyfileList(memberNo,pv);
-		model.addAttribute("fileList", fileList);
-		model.addAttribute("pv", pv);
+		if(pv.getEndPage()==0) pv.setEndPage(1);
+		
+		if(fileList!=null) {
+			model.addAttribute("fileList", fileList);
+			model.addAttribute("pv", pv);
+		}
 		
 		return "myfile/list-fragment";
 		

@@ -37,7 +37,8 @@ public class MyboardController {
 		int totalCount = myboardService.getTotalCount(searchVo);
 		PageVo pageVo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		List<MyboardVo> boardList = myboardService.getList(searchVo, pageVo);
-		System.out.println(pageVo);
+		if(pageVo.getEndPage()==0) pageVo.setEndPage(1);
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageVo", pageVo);
 		model.addAttribute("searchVo", searchVo);
