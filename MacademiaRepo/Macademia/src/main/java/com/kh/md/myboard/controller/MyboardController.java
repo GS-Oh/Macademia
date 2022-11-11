@@ -2,40 +2,45 @@ package com.kh.md.myboard.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.md.board.util.Pagination;
-import com.kh.md.board.vo.BoardVo;
-import com.kh.md.board.vo.PageVo;
-import com.kh.md.member.vo.MyboardSearchVo;
+import com.kh.md.common.PageVo;
+import com.kh.md.common.Pagination;
+import com.kh.md.member.vo.MemberVo;
+import com.kh.md.myboard.service.MyboardService;
+import com.kh.md.myboard.vo.MyboardVo;
+import com.kh.md.myboard.vo.SearchVo;
 
 @Controller
 @RequestMapping("/myboard")
 public class MyboardController {
 	
-	@GetMapping("/list")
-	public String dataList(Model model, Integer boardCategory, MyboardSearchVo myboardSearchVo) {
-		System.out.println(boardCategory);
-		System.out.println(myboardSearchVo);
-		
-		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
-		List<BoardVo> boardList = null;
-		int count = 0 ;
-		if(boardCategory==null || boardCategory==1) {
-			System.out.println("자유게시판 검색 진입");
-			boardList = boardService.selectListFreeBoard(searchCriteria);
-			count = boardService.selectSearchCountFreeBoard(searchCriteria);
-		}else if(boardCategory==2) {
-			System.out.println("자료공유게시판 검색 진입");
-			boardList = boardService.selectList(searchCriteria);
-			count = boardService.selectSearchCount(searchCriteria);
-		}
+	private final MyboardService myboardService;
+	
+	@Autowired
+	public MyboardController(MyboardService myboardService) {
+		this.myboardService = myboardService;
+	}
+
+	@GetMapping("/list/{pno}")
+	public String getList(@PathVariable int pno, Model model, HttpSession session, SearchVo searchVo) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		searchVo.setMemberNo(loginMember.getNo());
+
+		int totalCount = myboardService.getTotalCount(searchVo);
+		PageVo pageVo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		List<MyboardVo> boardList = myboardService.getList(searchVo, pageVo);
+		System.out.println(pageVo);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageVo", pageVo);
-		model.addAttribute("searchCriteria", searchCriteria);
-		return "member/myboard";
+		model.addAttribute("searchVo", searchVo);
+		return "myboard/list";
 	}
 }

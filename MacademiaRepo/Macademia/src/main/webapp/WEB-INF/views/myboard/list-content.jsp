@@ -53,6 +53,7 @@
     table{
         margin-top : 20px;
         width: 80%;
+
     }
     #signature-color{
         background-color: rgb(133, 133, 200);
@@ -60,6 +61,12 @@
     }
     .title{
         width: 600px;
+    }
+    .title:hover{
+        cursor: pointer;
+    }
+    .active{
+        background-color: #7d7dbc !important;
     }
 
 </style>
@@ -70,30 +77,32 @@
     <table class="table table-hover">
         <thead id="signature-color">
             <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>글쓴이</th>
-            <th>작성일</th>
-            <th>조회</th>
+                <th>번호</th>
+                <th class="title">제목</th>
+                <th>작성일</th>
+                <th>조회</th>
             </tr>
         </thead>
         <tbody class="table-light table-hover">
             <c:forEach var="board" items="${boardList }">
                 <tr>
-                    <td></td>
-                    <td class="title">F-35 Lightning II, 미국의 5세대 스텔스 다목적 전투기.</td>
-                    <td class="writer">록히드마틴</td>
-                    <td class="regdate">2022-10-19</td>
-                    <td class="hit">12</td>
+                    <td>${board.no}</td>
+                    <td class="title" onclick="detail('${board.no}','${board.categoryNo}')"><a>${board.title}</a></td>
+                    <td>${board.regdate}</td>
+                    <td>${board.hit}</td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
 
     <div class="search-area">
-        <form action="/md/myboard/list" method="get" id="searchForm"></form>
+        <form action="/md/myboard/list/1" method="get" id="searchForm">
             <div id="search-area" class="input-group mb-3">
-                <input type="text" id="search-input" class="form-control"  name="searchName" value="${searchName}" onkeyup="if(window.event.keyCode==13){page(1)}" placeholder="파일명을 입력해주세요">
+                <select id="category-no" name="categoryNo" >
+                    <option value="1">자유게시판</option>
+                    <option value="2">자료공유게시판</option>
+                </select>
+                <input type="text" id="title" class="form-control"  name="title" value="${searchVo.title}" placeholder="파일명을 입력해주세요">
                 <button type="submit" id="search-btn" class="btn btn-primary" >검색</button>
             </div>
         </form>
@@ -119,32 +128,50 @@
 <script>
 
     function page(pno){
-        let title= document.querySelector('#title').value.trim();
-        $.ajax({
-            type: "get",
-            url: "/md/myboard/list",
-            data:{
-                "page" : pno,
-                "title" : title
-            },
-            success: function(response) {
-                console.log("great!");
-                // $('#myfile-content').replaceWith(response);
-                // pageBtnColor(pno);
-                // $('#title').focus();
-            },
-            error: function (response) {
-                Swal.fire(
-                '통신에러',
-                '서버와의 통신에 문제가 있네요',
-                'warning'
-                )
-            }
-        });
+        let categeryNo = document.getElementById('category-no').value;
+        let title= $('#title')[0].value.trim();
+        location.href = "/md/myboard/list/"+pno+"?categoryNo="+categeryNo+"&title="+title;
     };
 
 </script>
 
+
+
+<!-- 게시판 카테고리 유지 -->
 <script>
-    
+  let categeryNo = document.getElementById('category-no');
+  let length = categeryNo.options.length; 
+  for (let i=0; i<length; i++){  
+    if(categeryNo.options[i].value == '${searchVo.categoryNo}'){
+    	categeryNo.options[i].selected = true;
+    }
+  }  
+</script>
+
+<!-- 현재 페이지버튼에 색상추가 -->
+<script>
+    $(window).ready(pageBtnColor('${pageVo.currentPage}'));
+
+    function pageBtnColor(pno){
+        let pageBtns = $('#pagination-area > a');
+        for(let i = 0 ; i<pageBtns.length ; i++){
+            if(pageBtns[i].innerText==pno){
+                $(pageBtns[i]).addClass('active');
+            }
+        }
+    }
+</script>
+
+<!-- 게시글 상세보기 이동 -->
+<script>
+    function detail(boardNo,category){
+        console.log(boardNo);
+        console.log(category);
+        if(category==1){
+            location.href = '/md/board/free/detail/'+boardNo;
+        }else{
+            location.href = '/md/board/data/detail/'+boardNo;
+        }
+        
+    }
 </script>

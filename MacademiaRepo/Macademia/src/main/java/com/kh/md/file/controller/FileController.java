@@ -33,7 +33,6 @@ public class FileController {
 	}
 	
 	
-	
 	@GetMapping("/list/{pno}")
 	public String myfileList(@PathVariable int pno, HttpSession session,Model model,String searchName) {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
@@ -44,14 +43,8 @@ public class FileController {
 		
 		int totalCount = fileService.getTotalCount(searchName);
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
-		System.out.println(pv);
-		
-		List<FileVo> fileList;
-		if(searchName==null) {
-			fileList = fileService.getMyfileList(loginMember.getNo(),pv);
-		}else {
-			fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
-		}
+		List<FileVo> fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
+
 		if(fileList!=null) {
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("searchName", searchName);
@@ -67,20 +60,10 @@ public class FileController {
 			return "member/mypage";
 		}
 		
-		int totalCount;
-		if(searchName!=null) totalCount = fileService.getTotalCount(searchName);
-		else totalCount = fileService.getTotalCount();
-		
+		int totalCount = fileService.getTotalCount(searchName);
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
-		
-		System.out.println("ajax : "+pv);
-		
-		List<FileVo> fileList;
-		if(searchName==null) {
-			fileList = fileService.getMyfileList(loginMember.getNo(),pv);
-		}else {
-			fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
-		}
+		List<FileVo> fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
+
 		if(fileList!=null) {
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("searchName", searchName);
@@ -95,13 +78,7 @@ public class FileController {
 		
 		int totalCount = fileService.getTotalCount(searchName);
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 40);
-		System.out.println("delete : "+pv);
-		List<FileVo> fileList;
-		if(searchName==null) {
-			fileList = fileService.getMyfileList(loginMember.getNo(),pv);
-		}else {
-			fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
-		}
+		List<FileVo> fileList = fileService.getMyfileListBySearchName(loginMember.getNo(),searchName,pv);
 		
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("searchName", searchName);
