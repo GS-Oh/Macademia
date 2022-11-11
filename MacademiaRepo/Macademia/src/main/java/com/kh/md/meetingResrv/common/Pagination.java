@@ -3,9 +3,8 @@ package com.kh.md.meetingResrv.common;
 import com.kh.md.meetingResrv.vo.PageInfo;
 
 public class Pagination {
-
-	 public static PageInfo getPageInfo(int currentPage, int listCount) {
-		 
+    
+    public static PageInfo getPageInfo(int currentPage, int listCount) {
         int pageLimit = 10;
         int maxPage;
         int startPage;
@@ -24,5 +23,5 @@ public class Pagination {
         
         return pi;
     }
-	    
+    
 }

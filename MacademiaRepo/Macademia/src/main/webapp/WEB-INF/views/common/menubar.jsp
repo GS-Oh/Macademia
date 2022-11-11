@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +12,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>대시보드</title>
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="${contextPath}/assets/resources/images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${root}/assets/resources/images/favicon.png">
 <!-- Custom Stylesheet -->
-<link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet">
+<link href="${root}/resources/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- Google fonts - Noto Sans Korean -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +28,6 @@
 </head>
 <body>
 
-	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
     <!-- Preloader start --> 
     <div id="preloader">
@@ -39,7 +41,7 @@
 
         <!-- Nav header start -->
         <div class="nav-header">
-            <a href="${contextPath}" class="brand-logo">
+            <a href="${root}" class="brand-logo">
                 <img class="logo-abbr" src="${contextPath}/resources/img/logo/logo_temp1.png" alt="마카데미아" alt="" style="border-radius: 50%;">
                 <b class="logo-compact" style="font-size: x-large;">MacademiA</b>
                	<b class="brand-title" style="font-size: x-large;">MacademiA</b>
@@ -133,7 +135,7 @@
                             <li><a href="#">아무게시판</a></li>
                         </ul>
                     </li>
-                    <li><a href="${contextPath}/notice/main" aria-expanded="false">
+                    <li><a href="${root}/notice/main" aria-expanded="false">
                     	<i class="bi bi-megaphone"></i><span class="nav-text">공지사항</span></a>
                     </li>
                     <li><a href="#" aria-expanded="false">
@@ -142,8 +144,8 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     		<i class="bi bi-telephone-plus"></i><span class="nav-text">주소록</span></a>
                     	<ul aria-expanded="false">
-		                    <li><a href="${contextPath}/addr/list">주소록 목록</a></li>
-                            <li><a href="${contextPath}/addr/main">주소록 검색</a></li>
+		                    <li><a href="${root}/addr/list">주소록 목록</a></li>
+                            <li><a href="${root}/addr/main">주소록 검색</a></li>
                        	</ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -196,9 +198,9 @@
  		</script>
 
 	    <!-- vendors -->
-	    <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
-	    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
-	    <script src="${contextPath}/resources/assets/js/custom.min.js"></script>   
+	    <script src="${root}/resources/assets/vendor/global/global.min.js"></script>
+	    <script src="${root}/resources/assets/js/quixnav-init.js"></script>
+	    <script src="${root}/resources/assets/js/custom.min.js"></script>   
 	    
 	    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
 </body>

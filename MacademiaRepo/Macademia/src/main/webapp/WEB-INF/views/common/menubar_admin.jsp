@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +13,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Insert title here</title>
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="${contextPath}/assets/resources/images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${root}/resources/assets/resources/images/favicon.png">
+<link href="${root}/resources/assets/vendor/fullcalendar/packages/core/main.css" rel='stylesheet' />
+<link href="${root}/resources/assets/vendor/fullcalendar/packages/daygrid/main.css" rel='stylesheet' />
+<script src="${root}/resources/assets/vendor/fullcalendar/packages/core/main.js"></script>
+<script src="${root}/resources/assets/vendor/fullcalendar/packages/daygrid/main.js"></script>
+<script src="${root}/resources/assets/vendor/fullcalendar/packages/interaction/main.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- <script type="text/javascript" src="/resources/assets/js/jsQR.js"></script>	 -->
 <!-- Custom Stylesheet -->
-<link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet">
+<link href="${root}/resources/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- Google fonts - Noto Sans Korean -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,8 +37,6 @@
 </head>
 <body>
 
-	<c:set var="root" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-
 <%--     <!-- Preloader start --> 
     <div id="preloader">
         <div class="sk-three-bounce">
@@ -39,8 +49,8 @@
 
         <!-- Nav header start -->
         <div class="nav-header">
-            <a href="${contextPath}/admin/mlist.ad" class="brand-logo" style="background: #2b2d35;">
-                <img class="logo-abbr" src="${contextPath}/resources/img/logo/logo_temp1.png" alt="마카데미아" style="border-radius: 100%; width: 170px; height: 32px;">
+            <a href="${root}/admin/mlist.ad" class="brand-logo" style="background: #2b2d35;">
+                <img class="logo-abbr" src="${root}/resources/img/logo/logo_temp1.png" alt="마카데미아" style="border-radius: 100%; width: 170px; height: 32px;">
                	<b class="logo-compact" style="font-size: x-large;">MacademiA</b>
                	<b class="brand-title" style="font-size: x-large;">MacademiA</b>
             </a>
@@ -66,11 +76,11 @@
                                     <i class="mdi mdi-account"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="${contextPath}/home" class="dropdown-item">
+                                    <a href="${root}/home" class="dropdown-item">
                                         <i class="fa fa-home"></i>
                                         <span class="ml-2">일반모드</span>
                                     </a>
-                                    <a href="${contextPath}/logout" class="dropdown-item">
+                                    <a href="${root}/logout" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>

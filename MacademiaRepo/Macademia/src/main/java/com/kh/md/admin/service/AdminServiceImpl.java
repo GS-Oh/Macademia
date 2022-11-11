@@ -43,8 +43,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<Dept> selectDepartmentList() {
-		return aDAO.selectDepartmentList(sqlSession);
+	public ArrayList<Dept> selectDeptList() {
+		return aDAO.selectDeptList(sqlSession);
 	}
 
 	@Override
@@ -103,14 +103,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<MemberVo> selectDeptMemberList(int upperDept) {
+	public ArrayList<MemberVo> selectDeptMemberList(Integer upperDept) {
 		System.out.println(upperDept);
 		return aDAO.selectDeptMemberList(sqlSession, upperDept);
 		
 	}
 
 	@Override
-	public ArrayList<Dept> getSubDeptList(int upperDept) {
+	public ArrayList<Dept> getSubDeptList(Integer upperDept) {
 		return aDAO.getSubDeptList(sqlSession, upperDept);
 	}
 

@@ -71,12 +71,12 @@
 			FROM MEMBER M
         	LEFT JOIN POSITION P USING(NO)
 			WHERE M.QUIT_YN = 'N'
-        	ORDER BY M.NAME;
+        	ORDER BY M.NAME
 	</select>
 	
 
 	
-	<select id="selectDepartmentList" resultType="DeptVo">
+	<select id="selectDeptList" resultType="DeptVo">
 		SELECT 
         	 	D.NO, D.NAME AS DEPT_NAME , P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, M.NAME
       			, D.UPPER_DEPT, D.LEV, D.DELETE_YN, D.CREATE_DATE
@@ -103,7 +103,7 @@
 		JOIN RANK R
 		ON P.RANK_NO = R.NO
 		GROUP BY P.NO, P.NAME
-		ORDER BY P.NO;
+		ORDER BY P.NO
 	</select> 
 	
 	
@@ -143,7 +143,7 @@
 		ORDER BY P.NO ASC
 	</select> 
 		
-	<select id="getMemberCount" resultType="int">
+	<select id="getMemberCount" resultType="_int">
 		SELECT COUNT(*)
 			FROM MEMBER
 			WHERE QUIT_YN = 'N'
@@ -203,7 +203,7 @@
 				ON P.RANK_NO = R.NO
 				JOIN DEPT D
 				ON P.DEPT_NO = D.NO
-				AND M.QUIT_YN = 'N'
+				WHERE M.QUIT_YN = 'N'
 		<if test="upperDept != null">
 				AND D.NO = #{upperDept}
 		</if>
