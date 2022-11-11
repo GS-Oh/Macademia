@@ -119,7 +119,7 @@
         justify-content: center;
         align-items: center;
     }
-    #edit-btn-area>button{
+    #edit-btn-area>button, #edit-btn-area>input[type=submit]{
         width: 100px;
         height: 30px;
         background-color: #6667AB;
@@ -133,7 +133,7 @@
         width: 100%;
         height: 100%;
     }
-    #edit-btn-area>button:hover{
+    #edit-btn-area>button:hover, #edit-btn-area>input[type=submit]:hover{
         font-weight: bolder;
     }
 
