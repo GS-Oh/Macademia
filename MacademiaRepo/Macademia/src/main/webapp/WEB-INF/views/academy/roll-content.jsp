@@ -478,10 +478,15 @@
 
 <script>/* 클릭하면 hidden보여주기 */
     $('.hidden-area').hide();
+    // $('.hidden-area').attr('style', 'display:none')
     $('.select-one-class').on('click', function(){
-        $(this).children('div:eq(8)').show(200);
+        // if($(this).children('div:eq(8)').css('display') == 'none'){
+            $(this).children('div:eq(8)').show(400);
+            // $(this).children('div:eq(8)').attr('style', 'display:flex')
+        // }else{
+            // $(this).children('div:eq(8)').attr('style', 'display:none')
+        // }
     });
-    
 </script>
 
 <script>

@@ -82,9 +82,8 @@
         border-bottom: 1px solid lightgray;
         padding: 0px 10px 0px 20px;
     }
-    .curriculum-body-area textarea{
+    .curriculum-body-area p{
         margin: 10px 0px 10px 0px;
-        padding: 10px 10px 10px 10px;
         resize: none;
     }
     .curriculum-body-area input, .curriculum-body-area select{

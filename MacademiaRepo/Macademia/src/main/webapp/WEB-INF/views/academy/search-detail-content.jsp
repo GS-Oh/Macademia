@@ -180,7 +180,7 @@
 
     <div id="student-info-area">
         <div id="student-profile">
-            <img src="${root}/resources/upload/profile/studentProfile/${svo.profile}" width="140px" height="180px" alt="수강생 프로필">
+            <img src="${root}/resources/upload/profile/studentProfile/${svo.profile}" width="160px" height="180px" alt="수강생 프로필">
         </div>
         <div id="student-name"><h3>${svo.name}</h3></div>
         <div id="student-phone">
