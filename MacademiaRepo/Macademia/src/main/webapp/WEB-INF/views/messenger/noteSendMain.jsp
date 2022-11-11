@@ -404,7 +404,7 @@
 			if(cntCheckbox > 1){
 				repleHref.href = "";
 				deleteHref.href = "";
-				Swal.fire('하나의 쪽지만 선택해 주세요 ^-^');
+				alert('하나의 쪽지만 선택해 주세요 ^-^');
 			}
 		});
 
