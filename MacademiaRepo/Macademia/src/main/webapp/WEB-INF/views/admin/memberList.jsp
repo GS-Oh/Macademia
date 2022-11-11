@@ -46,7 +46,7 @@
                             </div>
                             <div class="card-body">
 				                <div class="search" style="float: right;">
-					                <form id="searchForm" action="${ contextPath }/admin/msearch.ad" method="get">
+					                <form id="searchForm" action="${root}/admin/msearch.ad" method="get">
 					                	<select id="selectDept" class="form-control" name="selectDept">
 					                    	<option value="">부서</option>  
 					                    	<c:forEach var="d" items="${ dList }">
@@ -94,7 +94,7 @@
 					                    });
 					                </script>
 				                </div>
-				             	<form id="deleteForm" action="${ contextPath }/admin/mdelete.ad" method="post">
+				             	<form id="deleteForm" action="${root}/admin/mdelete.ad" method="post">
 	                            	<div style="margin-bottom: 10px;">
 					                    <button type="button" class="btn btn-dark" id="btnSubmit">계정 삭제</button>
 					                    <!-- Button trigger modal -->
@@ -579,7 +579,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}" target="_blank">MacademiA</a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${root}" target="_blank">MacademiA</a> 2022</p>
             </div>
         </div>
         <!--**********************************

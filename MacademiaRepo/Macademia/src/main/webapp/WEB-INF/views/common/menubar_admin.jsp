@@ -25,9 +25,9 @@
 </head>
 <body>
 
-	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+	<c:set var="root" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 
-    <!-- Preloader start --> 
+<%--     <!-- Preloader start --> 
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
@@ -81,14 +81,14 @@
                 </nav>
             </div>
         </div>
-        <!-- Header end ti-comment-alt -->
+        <!-- Header end ti-comment-alt --> --%>
 
         <!--Sidebar start -->
         <div class="quixnav" style="background: #292B30;">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                 	<li class="nav-label first">관리자 메뉴</li>
-                    <li><a class="has-arrow" href="${contextPath}" aria-expanded="false">
+                    <li><a class="has-arrow" href="${root}" aria-expanded="false">
                     	<i class="bi bi-diagram-3"></i><span class="nav-text">조직 관리</span></a>
                      	  <ul aria-expanded="false">
                             <li><a href="mlist.ad">사원 관리</a></li>
@@ -111,9 +111,9 @@
 	
 	    <!-- Scripts -->
 	    <!-- Required vendors -->
-	    <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
-	    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
-	    <script src="${contextPath}/resources/assets/js/custom.min.js"></script>      
+	    <script src="${root}/resources/assets/vendor/global/global.min.js"></script>
+	    <script src="${root}/resources/assets/js/quixnav-init.js"></script>
+	    <script src="${root}/resources/assets/js/custom.min.js"></script>      
 	    
 	    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

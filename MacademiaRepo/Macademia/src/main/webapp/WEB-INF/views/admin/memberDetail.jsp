@@ -47,25 +47,25 @@
                         <div class="card">
                             <div class="card-body">
                            		<div class="member-info">
-                                    <form action="${ contextPath }/admin/mupdate.ad" method="post">
+                                    <form action="${root}/admin/mupdate.ad" method="post">
                                     	<div class="email-left-box px-0 mb-5">
 		                                	<div class="profile-photo">
 		                                    	<c:if test="${ member.imgChangeName eq null }">
-				                                	<img src="${contextPath}/resources/assets/images/empty-profile.png" alt="profile-image">
+				                                	<img src="${root}/resources/assets/images/empty-profile.png" alt="profile-image">
 				                               	</c:if>
 				                               	<c:if test="${ member.imgChangeName ne null }">
-				                                 	<img src="${contextPath}/resources/uploadFiles/${ member.imgChangeName }" alt="profile-image">
+				                                 	<img src="${root}/resources/uploadFiles/${ member.imgChangeName }" alt="profile-image">
 				                               	</c:if>
 				                       		</div>
 		                               	</div>	
 		                               	<br>
 		                               	<div class="email-right-box ml-0 ml-sm-4 ml-sm-0">
-			                               	<label class="col-form-label">이름</label>${ member.mName }
+			                               	<label class="col-form-label">이름</label>${ member.name }
 			                               	<br>
-			                               	<label class="col-form-label">아이디</label>${ member.mId }
-			                               	<input type="hidden" name="mId" value="${ member.mId }">
+			                               	<label class="col-form-label">아이디</label>${ member.email }
+			                               	<input type="hidden" name="email" value="${ member.email }">
 											<br>
-			                               	<label class="col-form-label">이메일</label>${ member.email }
+			                               	<label class="col-form-label">개인 이메일</label>${ member.privateEmail }
 			                               	<br>
 			                               	<label class="col-form-label">생년월일</label>${ member.birthDate }
 			                               	<br>
@@ -80,14 +80,14 @@
 	                                             </div>
 	                                        </div>
 	                                        <label class="col-form-label">부서</label>
-	                                        <select class="form-control" name="deptId">
+	                                        <select class="form-control" name="deptNo">
 	                                        	<option value="">부서 선택</option>
 	                                        	<c:forEach var="d" items="${ dList }">
-	                                        		<c:if test="${ member.deptId == d.deptId }">
-	                                        			<option value="${ d.deptId }" selected>${ d.deptName }</option>
+	                                        		<c:if test="${ member.deptNo == d.deptNo }">
+	                                        			<option value="${ d.deptNo }" selected>${ d.deptName }</option>
 	                                        		</c:if>
-	                                        		<c:if test="${ member.deptId != d.deptId }">
-	                                        			<option value="${ d.deptId }">${ d.deptName }</option>
+	                                        		<c:if test="${ member.deptNo != d.deptNo }">
+	                                        			<option value="${ d.deptNo }">${ d.deptName }</option>
 	                                        		</c:if>	                                        		
 	                                        	</c:forEach>
 	                                        </select>
@@ -95,19 +95,19 @@
 	                                        <label class="col-form-label">직위</label>
 	                                        <select class="form-control" name="jobId">
 	                                        	<option value="">직위 선택</option>
-						                    	<c:forEach var="j" items="${ jList }">
-						                    		<c:if test="${ member.jobId == j.jobId }">
-						                    			<option value="${ j.jobId }" selected>${ j.jobName }</option>
+						                    	<c:forEach var="p" items="${ pList }">
+						                    		<c:if test="${ member.PositionNo == p.positionNo }">
+						                    			<option value="${ p.positionNo }" selected>${ p.PositionName }</option>
 						                    		</c:if>
-						                    		<c:if test="${ member.jobId != j.jobId }">
-						                    			<option value="${ j.jobId }">${ j.jobName }</option>
+						                    		<c:if test="${ member.positionNo != p.positionNo }">
+						                    			<option value="${ p.positionNo }">${ p.PositionName }</option>
 						                    		</c:if>
 						                    	</c:forEach>	                                        	
 	                                        </select>
 	                                        <br>
 	                                        <label class="col-form-label">입사일</label>
 	                                        <div class="flatpickr" style="display: inline-block;">
-												<input type="text" id="hireDate" name="inputHireDate" class="form-control"  value="${ member.hireDate }"  data-input>
+												<input type="text" id="startDate" name="inputstartDate" class="form-control"  value="${ member.startDate }"  data-input>
 												<a class="input-button" title="toggle" data-toggle>
 													<i class="icon-calendar"></i>
 												</a>
@@ -130,43 +130,43 @@
 											</div>
 	                                        <br>                   
 	                                        <label class="col-form-label">계정 상태</label>
-	                                        <c:if test="${ member.status == 0 }">
-	                                        	<input id="normal" type="radio" name="status" value="0" checked> 정상&nbsp;&nbsp; &nbsp;
-	                                        	<input id="pause" type="radio" name="status" value="1"> 중지
+	                                        <c:if test="${ member.quitYn == 'Y' }">
+	                                        	<input id="normal" type="radio" name="quitYn" value="N" checked> 정상&nbsp;&nbsp; &nbsp;
+	                                        	<input id="pause" type="radio" name="quitYn" value="Y"> 중지
 	                                        </c:if>
-	                                        <c:if test="${ member.status == 1 }">
-	                                        	<input id="normal" type="radio" name="status" value="0"> 정상&nbsp;&nbsp; &nbsp;
-	                                        	<input id="pause" type="radio" name="status" value="1" checked> 중지
+	                                        <c:if test="${ member.quitYn == 'N' }">
+	                                        	<input id="normal" type="radio" name="quitYn" value="N"> 정상&nbsp;&nbsp; &nbsp;
+	                                        	<input id="pause" type="radio" name="quitYn" value="Y" checked> 중지
 	                                        </c:if>
-	                                        <c:if test="${ member.status == 2 }">
+	                                        <%-- <c:if test="${ member.status == 2 }">
 	                                        	<input type="hidden" name="status" value="2"> 승인 대기
-	                                        </c:if>                                        
+	                                        </c:if> --%>                                        
 	                                        <br>
 	                                       
-	                                        <c:if test="${ member.managerYn == 'Y' && member.status != 2 && member.mId != 'admin'}">
+	                                        <c:if test="${ member.grade == 'A' && member.quitYn != 'N' && member.email != 'admin'}">
 	                                        	<label class="col-form-label">관리자로 설정</label>
-	                                        	<input type="checkbox" name="managerYn" value="Y" checked> 
+	                                        	<input type="checkbox" name="grade" value="Y" checked> 
 	                                        	<span style="color: gray; font-size: small">&nbsp;관리자로 설정</span>
 	                                        </c:if>
-	                                        <c:if test="${ member.managerYn != 'Y' && member.status != 2 && member.mId != 'admin'}">
+	                                        <c:if test="${ member.grade != 'A' && member.quitYn != 'N' && member.email != 'admin'}">
 	                                        	<label class="col-form-label">관리자로 설정</label>
-	                                        	<input type="checkbox" name="managerYn" value="Y">
+	                                        	<input type="checkbox" name="grade" value="A">
 	                                        	<span style="color: gray; font-size: small">&nbsp;관리자로 설정</span>
 	                                        </c:if>
-	                                        <c:if test="${ member.mId == 'admin' }"> <!-- 최초 관리자 계정은 관리자 설정 해제 불가 -->
+	                                        <c:if test="${ member.email == 'admin' }"> <!-- 최초 관리자 계정은 관리자 설정 해제 불가 -->
 	                                        	<label class="col-form-label">관리자로 설정</label>
-	                                        	<input type="checkbox" name="managerYn" value="Y" checked readonly>
+	                                        	<input type="checkbox" name="grade" value="A" checked readonly>
 	                                        	<span style="color: gray; font-size: small">&nbsp;관리자 해제 불가</span>
 	                                        </c:if>	
-	                                        <c:if test="${ member.status == 2 }">
-	                                        	<input type="hidden" name="managerYn" value="N">
+	                                        <c:if test="${ member.quitYn == 'Y' }">
+	                                        	<input type="hidden" name="grade" value="N">
 	                                        </c:if>		                                        	                                                                            
 	                                        <br><br>
                                        </div>
                                        <input type="hidden" name="page" value="${ page }">
                                        <c:if test="${ searchValue != null }">
 									   	   <input type="hidden" name="selectDept" value="${ selectDept }">
-	                                       <input type="hidden" name="selectJob" value="${ selectJob }">
+	                                       <input type="hidden" name="selectPosi" value="${ selectPosi }">
 	                                       <input type="hidden" name="searchValue" value="${ searchValue }">		
                                        </c:if>
                                         <div align="center">
@@ -176,7 +176,7 @@
 		                                        <c:url value="msearch.ad" var="msearch">
 		                                        	<c:param name="page" value="${ page }"/>
 													<c:param name="selectDept" value="${ selectDept }"/>
-													<c:param name="selectJob" value="${ selectJob }"/>
+													<c:param name="selectPosi" value="${ selectPosi }"/>
 													<c:param name="searchValue" value="${ searchValue }"/>
 		                                        </c:url>
 		                                        <button type="button" class="btn btn-outline-primary" onclick="location.href='${ msearch }'">목록으로</button>
@@ -189,13 +189,13 @@
                                 </div>
                                 <script>
 									$('#pause').on('click', function(){
-										if($(this).val() == 1 && $('input[name=managerYn]').prop('checked')) {
+										if($(this).val() == 1 && $('input[name=grade]').prop('checked')) {
 											alert('계정을 중지하려면 먼저 관리자 설정을 해제하여 주세요.');
 											$('#normal').prop('checked', true);
 										} 
 									});                 
                                 	
-									$('input[name=managerYn]').on('click', function(){
+									$('input[name=grade]').on('click', function(){
 										if($('#pause').prop('checked') && $(this).prop('checked')) {
 											alert('관리자로 설정하려면 계정 상태가 정상이어야 합니다.');
 											$(this).prop('checked', false);
@@ -217,9 +217,9 @@
 	    				        			});
 		                					<c:remove var="message" scope="request"/>
 		                					
-		                					var url = location.pathname + "?mId=" + '${member.mId}' + "&page=" + '${page}';
+		                					var url = location.pathname + "?no=" + '${member.no}' + "&page=" + '${page}';
 											if ('${searchValue}' != 'null') {
-												url += "&selectDept=" + '${selectDept}' + "&selectJob=" + '${selectJob}' + "&searchValue=" + '${searchValue}';
+												url += "&selectDept=" + '${selectDept}' + "&selectPosi=" + '${selectPosi}' + "&searchValue=" + '${searchValue}';
 											}
 		                					history.replaceState({}, null, url);
 		                				}

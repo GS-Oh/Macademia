@@ -40,10 +40,10 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
-//	@GetMapping("main")
-//	public String adminPage(){
-//		return "admin/memberList";
-//	}
+	@GetMapping("admin/main")
+	public String adminPage(){
+		return "admin/memberList";
+	}
 	
     /**
      * 사원 목록 조회
