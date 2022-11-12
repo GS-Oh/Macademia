@@ -192,6 +192,15 @@
         Swal.fire({
             // title: '${alertMsg}',
             text: '${alertMsg}',
+            icon: 'warning'
+        })
+    }
+</script>
+<script>
+    if('${successMsg}'!= ''){
+        Swal.fire({
+            // title: '${alertMsg}',
+            text: '${alertMsg}',
             icon: 'success'
         })
     }

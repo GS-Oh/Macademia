@@ -213,6 +213,17 @@
 
     </script>
 
+<!-- 경고메세지 출력 -->
+<script>
+    let alertMsg = '${alertMsg}';
+    if(alertMsg!=''){
+        Swal.fire({
+            title : alertMsg,
+            icon : 'warning'
+        })
+    }
+</script>
+
 </body>
 
 </html>

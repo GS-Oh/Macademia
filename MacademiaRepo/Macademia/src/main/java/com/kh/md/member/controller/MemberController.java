@@ -101,7 +101,7 @@ public class MemberController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			model.addAttribute("alertMsg","임시비밀번호 발송완료.");
+			model.addAttribute("successMsg","임시비밀번호 발송완료.");
 			return "member/login";
 		}else {
 			model.addAttribute("alertMsg","사내/개인이메일을 다시 확인해주세요.");

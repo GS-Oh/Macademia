@@ -24,7 +24,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Override
 	public int selectCountByEmail(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.selectOne("memberMapper.selectCountByEmails",map);
+		return sst.selectOne("memberMapper.selectCountByEmail",map);
 	}
 	
 	@Override
