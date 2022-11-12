@@ -126,7 +126,7 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectDept");
 	}
 
-	public int deleteDept(SqlSessionTemplate sqlSession, int deptNo) {
+	public int deleteDept(SqlSessionTemplate sqlSession, int deptNo, int upperDeptNo) {
 		return sqlSession.update("adminMapper.deleteDept", deptNo);
 	}
 
@@ -138,15 +138,15 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.moveDept", map);
 	}
 	
-	public int sortDeptOrder(SqlSessionTemplate sqlSession, ArrayList<Dept> subDeptList) {
-		int result = 0;
-		
-		for (Dept d : subDeptList) {
-			result += sqlSession.update("adminMapper.sortDeptOrder", d);
-		}
-		
-		return result;
-	}
+//	public int sortDeptOrder(SqlSessionTemplate sqlSession, ArrayList<Dept> subDeptList) {
+//		int result = 0;
+//		
+//		for (Dept d : subDeptList) {
+//			result += sqlSession.update("adminMapper.sortDeptOrder", d);
+//		}
+//		
+//		return result;
+//	}
 	
 	
 	

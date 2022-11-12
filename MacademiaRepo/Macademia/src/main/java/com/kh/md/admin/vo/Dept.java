@@ -14,8 +14,8 @@ public class Dept {
 	private Date createDate;
 	private Date deleteDate;
 	private String deleteYn;
-	private int hasChildren;
-	private int deptOrder;
+//	private int hasChildren;
+//	private int deptOrder;
 	
 //	private int deptNo;
 //	private String deptName;

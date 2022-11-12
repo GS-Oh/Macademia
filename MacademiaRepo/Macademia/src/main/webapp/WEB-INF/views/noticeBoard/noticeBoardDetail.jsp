@@ -137,7 +137,7 @@
 	                       				$('.scrap').css('background', 'Lavender');
 	                       			});
 	                       			
-		                       		function scrap(bNum) {
+		                       		function scrap(bNo) {
 		                       			let $scrapBtn = $('.scrapBtn');
 		                       			
 		                       			if (!$scrapBtn.hasClass('scrap')) { // 스크랩한 상태가 아닐때

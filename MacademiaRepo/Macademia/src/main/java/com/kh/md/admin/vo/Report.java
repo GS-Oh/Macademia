@@ -26,6 +26,6 @@ public class Report {
 //	private String replyContent;		//댓글내용
 //	private int rStatus;				//댓글 삭제
 //	
-//	private String writerName;			//작성자 이름
-//	private String writerPositionName;	//작성자 직위
+	private String writerName;			//작성자 이름
+	private String writerPositionName;	//작성자 직위
 }

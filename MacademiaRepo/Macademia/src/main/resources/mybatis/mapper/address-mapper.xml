@@ -2,5 +2,93 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="addressMapper">
 
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+			FROM MEMBER
+		WHERE QUIT_YN = 'N'
+	</select>
+	
+	<select id="getMyListCount" resultType="_int">
+		SELECT COUNT(*)
+			FROM MEMBER
+		WHERE QUIT_YN = 'N'
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER M
+		JOIN DEPT USING(NO)
+		JOIN POSITION USING(NO)
+		WHERE M.QUITYN = 'N' 
+		AND M.NO NOT IN #{userNo}
+	</select>
+	
+		<resultMap type="MemberVo" id="memberResultSet">
+		<id column="NO" property="no" />
+		<result column="NAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PWD" property="pwd"/>
+		<result column="PRIVATE_EMAIL" property="privateEmail"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="ADDRESS2" property="address2"/>
+		<result column="PHONE" property="phone"/>
+		<result column="PROFILE_NAME" property="profileName"/>
+		<result column="POSITION_NO" property="positionNo"/>
+		<result column="BANK_NO" property="bankNo"/>
+		<result column="ACCOUNT" property="account"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="UPDATE_DATE" property="updateDate"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="QUIT_DATE" property="quitDate"/>
+		<result column="GRADE" property="grade"/>
+	</resultMap>
+	
+	<select id="searchMemebrList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER M
+		JOIN DEPT D USING(NO)
+		JOIN POSITION P USING(NO)
+		WHERE  M.QUIT_YN = 'N'
+		<choose>
+			<when test="field == 'name'">
+				AND M.NAME LIKE '%' || #{input} || '%'
+			</when>
+			<when test="field == 'position'">
+				AND P.POSITIONNAME LIKE '%' || #{input} || '%'
+			</when>
+			<otherwise>
+				AND D.NAME LIKE '%' || #{input} || '%'
+			</otherwise>
+		</choose>
+	</select>
 
+	<insert id="addAddress">
+		INSERT INTO ADDRESS
+		VALUES
+		(
+		SEQ_ADDRESS_NO.NEXTVAL
+		, #{mNo}
+		, #{userNo}
+		)
+	</insert>
+	
+	<select id="selectMyList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER M
+		JOIN DEPT D USING(NO)
+		JOIN POSITION P USING(NO)
+		WHERE M.NO IN (
+			SELECT ADDR_M_NO
+			FROM ADDRESS 
+			WHERE M.M_NO = #{userNo} 
+			AND M.QUIT_YN = 'N'
+			)
+	</select>
+	
+	<delete id="minusAddress">
+		DELETE FROM ADDRESS 
+		WHERE ADDR_M_NO = #{mNo} 
+		AND M_NO = #{userNo}
+	</delete>
+	
 </mapper>

@@ -45,13 +45,13 @@ public interface AdminService {
 
 	Dept insertDept(Dept dept);
 
-	int deleteDept(int deptNo);
+	int deleteDept(int deptNo, int upperDeptNo);
 
 	int updateDept(Dept dept);
 
 	int moveDept(HashMap<String, Integer> map);
 	
-	int sortDeptOrder(ArrayList<Dept> subDeptList);
+//	int sortDeptOrder(ArrayList<Dept> subDeptList);
 	
 	
 	
