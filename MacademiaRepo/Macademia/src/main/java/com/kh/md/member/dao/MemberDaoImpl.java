@@ -36,6 +36,12 @@ public class MemberDaoImpl implements MemberDao{
 	public int updatePwd(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.update("memberMapper.updatePwd",map);
 	}
+	
+	@Override
+	public int updatePwd(SqlSessionTemplate sst, MemberVo memberVo) {
+		return sst.update("memberMapper.updatePwd",memberVo);
+	}
+	
 	@Override
 	public List<MemberVo> selectListByDeptNo(SqlSessionTemplate sst, String deptNo) {
 		return sst.selectList("memberMapper.selectListByDeptNo",deptNo);
@@ -56,10 +62,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sst.update("memberMapper.updateOne",memberVo);
 	}
 
-	@Override
-	public int updatePwd(SqlSessionTemplate sst, MemberVo memberVo) {
-		return sst.update("memberMapper.updatePwd",memberVo);
-	}
+
 
 
 

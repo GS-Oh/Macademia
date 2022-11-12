@@ -173,7 +173,7 @@
 
       <div id="etc">
         <div id="save-email">
-            <input type="checkbox" name="saveEmail" id="save-email-check">
+            <input type="checkbox" name="saveEmail" id="save-email-check" checked>
             <label for="save-id-check">이메일저장</label>
         </div>
         <div id="find-pwd">
@@ -191,16 +191,17 @@
     if('${alertMsg}'!= ''){
         Swal.fire({
             // title: '${alertMsg}',
-            text: '${alertMsg}',
+            title: '${alertMsg}',
             icon: 'warning'
         })
     }
 </script>
 <script>
+    console.log('${successMsg}');
     if('${successMsg}'!= ''){
         Swal.fire({
             // title: '${alertMsg}',
-            text: '${alertMsg}',
+            text: '${successMsg}',
             icon: 'success'
         })
     }

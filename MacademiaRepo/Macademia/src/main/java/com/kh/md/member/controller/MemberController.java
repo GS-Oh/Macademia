@@ -134,7 +134,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/edit")
-	public String edit(Model model) {
+	public String edit() {
 		return "member/edit";
 	}
 	
