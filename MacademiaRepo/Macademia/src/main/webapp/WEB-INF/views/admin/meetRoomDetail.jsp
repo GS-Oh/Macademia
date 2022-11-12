@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,10 +52,10 @@
                                     	<div class="email-left-box px-0 mb-5" style="width: 100px;">
 		                                	<div class="profile-photo">
 		                                    	<c:if test="${ meetRoom.img_change_name eq null }">
-				                                	<img src="${contextPath}/resources/assets/images/empty-photo.jpg" alt="profile-image">
+				                                	<img src="${root}/resources/assets/images/empty-photo.jpg" alt="profile-image">
 				                               	</c:if>
 				                               	<c:if test="${ meetRoom.img_change_name ne null }">
-				                                 	<a href="${contextPath}/resources/uploadFiles/${ meetRoom.img_change_name }"><img src="${contextPath}/resources/uploadFiles/${ meetRoom.img_change_name }" alt="profile-image"></a>
+				                                 	<a href="${root}/resources/uploadFiles/${ meetRoom.img_change_name }"><img src="${root}/resources/uploadFiles/${ meetRoom.img_change_name }" alt="profile-image"></a>
 				                               	</c:if>
 				                       		</div>
 		                               	</div>	
@@ -102,10 +103,10 @@
                                     	<div class="email-left-box px-0 mb-5" style="width: 100px;">
 		                                	<div class="profile-photo">
 		                                    	<c:if test="${ meetRoom.img_change_name eq null }">
-				                                	<img id="profile-image" src="${contextPath}/resources/assets/images/empty-photo.jpg" alt="profile-image">
+				                                	<img id="profile-image" src="${root}/resources/assets/images/empty-photo.jpg" alt="profile-image">
 				                               	</c:if>
 				                               	<c:if test="${ meetRoom.img_change_name ne null }">
-				                                 	<img id="profile-image" src="${contextPath}/resources/uploadFiles/${ meetRoom.img_change_name }" alt="profile-image">
+				                                 	<img id="profile-image" src="${root}/resources/uploadFiles/${ meetRoom.img_change_name }" alt="profile-image">
 				                               	</c:if>
 				                               	<label for="input-image">
 													<i class="fa fa-camera" style="color: black; font-size: xx-large;"></i>
@@ -228,7 +229,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="${contextPath}/home.do" target="_blank">MacademiA</a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${root}" target="_blank">MacademiA</a> 2022</p>
             </div>
         </div>
         <!--**********************************

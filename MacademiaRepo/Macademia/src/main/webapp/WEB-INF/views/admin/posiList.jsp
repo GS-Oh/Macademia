@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -352,7 +353,7 @@
 					        		
 					        		// 직위 삭제
 					        		$(document).on('click', '#deleteBtn', function(){
-					        			var checkP = document.getElementsByClassName('checkJ');
+					        			var checkP = document.getElementsByClassName('checkP');
 					        			
 					        			var positionNoArr = [];
 					        			var userCheck = false;
@@ -394,7 +395,7 @@
 				                       						if(data.length > 0) {
 				                       							for(var i in data) {
 				                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
-				                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].PositionName + '</a></td>'
+				                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].positionName + '</a></td>'
 				                       									 	+ '<td>' + data[i].posiOrder + '</td>'
 				                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 				                       								$('#checkAll').prop('checked', false);
@@ -452,7 +453,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="${root}/home" target="_blank">MacademiA</a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${root}" target="_blank">MacademiA</a> 2022</p>
             </div>
         </div>
         <!--**********************************

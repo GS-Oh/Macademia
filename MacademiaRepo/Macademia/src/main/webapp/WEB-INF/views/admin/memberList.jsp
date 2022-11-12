@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,7 +169,7 @@
 		                                            <tr>
 		                                            	<td><input type="checkbox" class="checkM" name="no" value="${ m.no }"></td>
 		                                                <td>${ m.name }</td>
-		                                                <td>${ m.PositionName }</td>
+		                                                <td>${ m.positionName }</td>
 		                                                <td>${ m.deptName }</td>
 		                                                <td>${ m.email }</td>
 		                                                <td>${ m.privateEmail }</td>
@@ -223,7 +224,7 @@
 							                                <c:if test="${ m.quit eq 'N' }"> <!-- 퇴사 등 -->
 		                                               		<td>
 				                                                <div class="btn-group">
-				                                                	<input type="hidden" name="joinId" value="${ m.no }">
+				                                                	<input type="hidden" name="quitYn" value="${ m.no }">
 								                                    <button type="button" class="btn btn-primary in approveBtn" style="background: #6495ED; border: #6495ED;">퇴사</button>
 								                                    <button type="button" class="btn btn-primary out rejectBtn" style="background: #CD5C5C; border: #CD5C5C;">취소</button> 
 								                                </div>

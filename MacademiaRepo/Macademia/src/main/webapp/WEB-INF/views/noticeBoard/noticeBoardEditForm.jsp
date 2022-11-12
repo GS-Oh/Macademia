@@ -101,7 +101,7 @@
 									                             			<!-- 이미지 파일인 경우 -->
 									                             			<c:if test="${ imgFlag }">
 									                             				<!-- 이미지 미리보기  -->
-										 					              		<img id="img${ f.fileNo }" src="${contextPath}/resources/uploadFiles/${ f.fileChangeName }" width="100" height="100" download><br>
+										 					              		<img id="img${ f.fileNo }" src="${root}/resources/uploadFiles/${ f.fileChangeName }" width="100" height="100" download><br>
 										 					                	 <a class="badge-s badge-outline-light" onclick="originFileDelete(${ f.fileNo })"><i class="bi bi-x"></i></a>
 									 										</c:if>
 									 										<!-- 이미지 파일이 아닌 경우-->
@@ -372,8 +372,8 @@
 										<!--**********************************
 										       Summernote  Scripts
 										***********************************-->
-		                            	<script src="${contextPath}/resources/assets/vendor/summernote/summernote-lite.js"></script>
-										<script src="${contextPath}/resources/assets/vendor/summernote/lang/summernote-ko-KR.js"></script>
+		                            	<script src="${root}/resources/assets/vendor/summernote/summernote-lite.js"></script>
+										<script src="${root}/resources/assets/vendor/summernote/lang/summernote-ko-KR.js"></script>
 		                            	<script>
 		                            	
 		                            		let summernoteDeleteFileArr = new Array();

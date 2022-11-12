@@ -27,9 +27,9 @@
 		<aside>
 			<%@include file="/WEB-INF/views/admin/admin-sidebar.jsp" %> 
 		</aside>
-		<main>
+<%-- 		<main>
 			<%@include file="/WEB-INF/views/address/addressList-content.jsp" %>
-		</main>
+		</main> --%>
 
 	</div>
 

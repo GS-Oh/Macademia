@@ -20,7 +20,7 @@
 </style>
 	<!-- summernote CSS
 		============================================ -->
-	<link rel="stylesheet" href="${contextPath}/resources/assets/vendor/summernote/summernote-lite.css">
+	<link rel="stylesheet" href="${root}/resources/assets/vendor/summernote/summernote-lite.css">
 
 </head>
 <body>
@@ -96,7 +96,7 @@
 													</tr>									
 												</tbody>
 											</table>
-											<input type="hidden" name="mId" value="${ loginUser.mId }">
+											<input type="hidden" name="mNo" value="${ loginUser.mNo }">
 											<div id="btnArea" align="center">
 												<button id="submitBtn" type="button" class="btn btn-primary">등록</button>
 												<button type="button" class="btn btn-outline-primary" onclick="location.href='noticeBoardList.nb'">목록으로</button>
@@ -301,8 +301,8 @@
 										<!--**********************************
 										       Summernote  Scripts
 										***********************************-->
-		                            	<script src="${contextPath}/resources/assets/vendor/summernote/summernote-lite.js"></script>
-										<script src="${contextPath}/resources/assets/vendor/summernote/lang/summernote-ko-KR.js"></script>
+		                            	<script src="${root}/resources/assets/vendor/summernote/summernote-lite.js"></script>
+										<script src="${root}/resources/assets/vendor/summernote/lang/summernote-ko-KR.js"></script>
 		                            	<script>
 		                            		$(document).ready(function() {
 		                            			/**

@@ -40,7 +40,7 @@
                                 <h3 class="card-title" style="font-weight: bold; font-size: large;">공지사항</h3>
                             </div>
                             <div class="card-body">
-                            	<c:if test="${loginUser.managerYn == 'Y' }">
+                            	<c:if test="${loginUser.grade == 'A' }">
                             		<div id="btnArea">
                             			<a class="writeFormBtn" href="nbinsertView.nb"><i class="bi bi-pencil"></i> 글쓰기</a>
                             		</div>
@@ -74,10 +74,10 @@
 	                                         		</c:if>
 	                                         		<c:if test="${ nb.pin ne 'Y' }">
 	                                         			<tr>
-	                                         				<td>${ nb.bNum }</td>
+	                                         				<td>${ nb.bNo }</td>
 	                                         		</c:if>
 		                                                <c:url var="noticeBoardDetail" value="noticeBoardDetail.nb">
-		                                                    <c:param name="bNum" value="${ nb.bNum }"/>
+		                                                    <c:param name="bNo" value="${ nb.bNo }"/>
 		                                                    <c:param name="page" value="${ pi.currentPage }"/>
 		                                                    <c:if test="${ searchValue ne null }"> <!-- null이 아니면 검색을 했다는 뜻 -->
 		                                                    	<c:param name="searchCondition" value="${ searchCondition }"/>
@@ -90,7 +90,7 @@
 																	댓글&nbsp;<span>${ nb.replyCount }</span>	
 															</span>
 		                                                </td>
-		                                                <td>${ nb.mName } ${ nb.jobName }</td>
+		                                                <td>${ nb.mName } ${ nb.positionName }</td>
 		                                                <td>${ nb.createDate }</td>
 		                                                <td>${ nb.views }</td>
 	                                            	</tr>

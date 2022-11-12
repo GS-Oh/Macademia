@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>주소록 검색</title>
     <!-- Datatable -->
-    <link href="${contextPath}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="${root}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -54,7 +55,7 @@
                                                 <td id="mName">사원 이름<br></td>
                                             </tr>
                                             <tr>
-                                                <td id="mJob">직위</td>
+                                                <td id="mPosition">직위</td>
                                             </tr>
                                             <tr>
                                                 <td id="mDept">부서</td>
@@ -81,7 +82,7 @@
 		                        		<td>
 		                        			<select id="field" name="field" class="form-control" style="background: #593bdb; color: white;">
                                                 <option selected value="name">이름</option>
-                                                <option value="job">직급</option>
+                                                <option value="position">직급</option>
                                                 <option value="dept">부서</option>
 											</select>
 		                        		</td>
@@ -115,13 +116,13 @@
                                         			<td colspan="7">조회된 사원이 없습니다.</td>
                                         		</tr>
                                         	</c:if>
-                                        	<c:if test="${ !empty list && loginUser != addr.mId }">
+                                        	<c:if test="${ !empty list && loginUser != addr.mNo }">
 	                                            <tr id="info">
 	                                            	<td></td>
 	                                                <td id="name">${ addr.mName }
-	                                                <input type="hidden" class="mId" value="${ addr.mId }">
+	                                                <input type="hidden" class="mNo" value="${ addr.mNo }">
 	                                                </td>
-	                                                <td id="job">${ addr.jobName }</td>
+	                                                <td id="position">${ addr.positionName }</td>
 	                                                <td id="dept">${ addr.deptName }</td>
 	                                                <td id="phone">${ addr.phone }</td>
 	                                                <td id="email">${ addr.email }</td>
@@ -238,13 +239,13 @@
 				$(this).parent().css({'color':'black'});
 			}).click(function() {
 				var tdName = $(this).parent().children().eq(1).text();
-				var tdJob = $(this).parent().children().eq(2).text();
+				var tdPosition = $(this).parent().children().eq(2).text();
 				var tdDept = $(this).parent().children().eq(3).text();
 				var tdPhone = $(this).parent().children().eq(4).text();
 				var tdEmail = $(this).parent().children().eq(5).text();
 				
 				$("#mName").text(tdName);
-				$("#mJob").html(tdJob);
+				$("#mPosition").html(tdPosition);
 				$("#mDept").html(tdDept);
 				$("#mPhone").html(tdPhone);
 				$("#mEmail").html(tdEmail);
@@ -269,7 +270,7 @@
 			
 			$.ajax({
 				url: "add.addr",
-				data: {mId:mId},
+				data: {mNo:mNo},
 				type: "POST",
 				success: function(data) {
 					console.log(data);
@@ -287,8 +288,8 @@
 	</script>
 	    
     <!-- Datatable -->
-    <script src="${contextPath}/resources/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="${contextPath}/resources/assets/js/plugins-init/datatables.init.js"></script>
+    <script src="${root}/resources/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="${root}/resources/assets/js/plugins-init/datatables.init.js"></script>
 
 </body>
 

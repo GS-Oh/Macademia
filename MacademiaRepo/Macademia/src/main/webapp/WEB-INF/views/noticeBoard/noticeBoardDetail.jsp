@@ -117,11 +117,11 @@
                             	<div id="boardArea">
                             		<div id="boardTitle">
                             			<h3>${ board.bTitle }</h3>
-                            			<span> &nbsp;${ board.mName } ${ board.jobName }</span>
+                            			<span> &nbsp;${ board.mName } ${ board.positionName }</span>
                             			<span style="color: gray; font-size: small;"> &nbsp;${ board.createDate } [<fmt:formatDate value="${ board.createDate }" pattern="E"/>] </span>
 										<span style="color: gray; font-size: small;"> 조회수 ${ board.views }</span>
                             			<!-- 스크랩 버튼 -->
-                            			<button class="scrapBtn btn btn-rounded btn-outline-light ${ scrapStatus == 1 ? 'scrap' : '' }" onclick="scrap('${ board.bNum }')">
+                            			<button class="scrapBtn btn btn-rounded btn-outline-light ${ scrapStatus == 1 ? 'scrap' : '' }" onclick="scrap('${ board.bNo }')">
                             				<i class="bi bi-bookmark-star-fill"></i><span> 스크랩</span>
                             			</button>
                             		</div>
@@ -248,12 +248,12 @@
 											<c:if test="${ r.replyStatus == 0 }">
 												<div class="reply">
 													<p id="replyNo${ r.replyNo }">
-														<span>${ r.writerName } ${ r.writerJobName } &nbsp;</span>
+														<span>${ r.writerName } ${ r.writerPositionName } &nbsp;</span>
 														<span style="color: gray;">${ r.replyCreateDate } &nbsp;&nbsp;</span>
 														<a class="nestedReplywriteFormBtn">
 																<i class="bi bi-chat-right"></i> <span>답댓글</span>
 														</a>
-														<c:if test="${ loginUser.mId == r.replyWriter }">
+														<c:if test="${ loginUser.mNo == r.replyWriter }">
 															<span class="replyUpdateBtn">
 																<input type="hidden" name="rNo" value="${ r.replyNo }">
 																<a class="replyEditFormBtn badge badge-light"><i class="bi bi-pencil"></i> 수정</a>
@@ -284,9 +284,9 @@
 											<c:if test="${ r2.parentReplyNo == r.replyNo && r2.replyStatus == 0 }">
 												<div class="reply nestedReply">
 													<p id="replyNo${ r2.replyNo }">
-														<span>${ r2.writerName } ${ r2.writerJobName } &nbsp;</span>
+														<span>${ r2.writerName } ${ r2.writerPositionName } &nbsp;</span>
 														<span style="color: gray;">${ r2.replyCreateDate } &nbsp;&nbsp;</span>
-														<c:if test="${ loginUser.mId == r2.replyWriter }">
+														<c:if test="${ loginUser.mNo == r2.replyWriter }">
 					                            	   		<span class="replyUpdateBtn">
 					                            	   			<input type="hidden" name="rNo" value="${ r2.replyNo }">
 					                            	   			<a class="replyEditFormBtn badge badge-light"><i class="bi bi-pencil"></i> 수정</a>
@@ -349,7 +349,7 @@
 	                       		
 	                       		// 댓글 등록 ajax
 	                       		function insertReply(replyContent, parentReplyNo) {
-	                       			let refBNum = '${board.bNum}';
+	                       			let refBNo = '${board.bNo}';
 	                       			// console.log(parentReplyNo == undefined);
 	                       			
 	                       			if (replyContent.trim() == "") {
@@ -357,7 +357,7 @@
 	 	                       		} else {
 		 	                       		$.ajax({
 	               							url: 'insertReply.nb',
-	               							data: {replyContent:replyContent, refBNum:refBNum, parentReplyNo:parentReplyNo},
+	               							data: {replyContent:replyContent, refBNo:refBNo, parentReplyNo:parentReplyNo},
 	               							type: 'POST',
 	               							dataType: 'json',
 	               							success: function(data){
@@ -395,8 +395,8 @@
 	                       					replyCount++;
 	                       				}
 	                       				
-	                       				if(data[i].writerJobName == null) {
-	                       					data[i].writerJobName = "";
+	                       				if(data[i].writerPositionName == null) {
+	                       					data[i].writerPositionName = "";
 	                       				}
 										
 	                       				// 대댓글이 아닌 경우
@@ -411,12 +411,12 @@
 	                       					if (data[i].replyStatus == 0) {
 	                       						html += '<div class="reply">'
 	                       							+ '<p id="replyNo' +  data[i].replyNo + '">'
-	                       							+ '<span>' + data[i].writerName + " " +  data[i].writerJobName  + ' &nbsp;</span>'
+	                       							+ '<span>' + data[i].writerName + " " +  data[i].writerPositionName  + ' &nbsp;</span>'
 	                       							+ '<span style="color: gray;">' + data[i].replyCreateDate + '&nbsp;&nbsp;</span>'
 	                       							+ '<a class="nestedReplywriteFormBtn"><i class="bi bi-chat-right"></i> <span>답댓글</span></a>';
 	                       						
 	                       						// 자신이 작성한 댓글이면 수정, 삭제 버튼 보이게
-		                       					if ('${loginUser.mId}' == data[i].replyWriter) {
+		                       					if ('${loginUser.mNo}' == data[i].replyWriter) {
 		                       						html += '<span class="replyUpdateBtn">'
 		                       								+ '<input type="hidden" name="rNo" value="' +  data[i].replyNo + '">'
 		                       								+ editBtnArea;
@@ -443,18 +443,18 @@
 	                       				// 대댓글
 	                       				for (let j in data) {
 	                       						
-	                       					if(data[j].writerJobName == null) {
-	    	                       				data[j].writerJobName = "";
+	                       					if(data[j].writerPositionName == null) {
+	    	                       				data[j].writerPositionName = "";
 	    	                       			}
 	                       						
 	                       					if (data[j].parentReplyNo == data[i].replyNo && data[j].replyStatus == 0) {
 	                       						html += '<div class="reply nestedReply">'
 		                       						+ '<p id="replyNo' +  data[j].replyNo + '">'
-		                       						+ '<span>' + data[j].writerName + " " +  data[j].writerJobName  + ' &nbsp;</span>'
+		                       						+ '<span>' + data[j].writerName + " " +  data[j].writerPositionName  + ' &nbsp;</span>'
 		                       						+ '<span style="color: gray;">' + data[j].replyCreateDate + '&nbsp;&nbsp;</span>';
 		                       					
 		                       					// 자신이 작성한 댓글이면 수정, 삭제 버튼 보이게
-				                       			if ('${loginUser.mId}' == data[j].replyWriter) {
+				                       			if ('${loginUser.mNo}' == data[j].replyWriter) {
 				                       				html += '<span class="replyUpdateBtn">'
 				                       						+ '<input type="hidden" name="rNo" value="' +  data[j].replyNo + '">'
 				                       						+ editBtnArea;
@@ -515,14 +515,14 @@
 								$(document).on('click', '.replyEditBtn', function() {
 									let replyNo = $(this).next().val();
 									let replyContent = $(this).prev().prev().val();
-									let refBNum = '${board.bNum}';
+									let refBNo = '${board.bNo}';
 									
 									if (replyContent.trim() == "") {
 	 	                       			alert('내용이 비어있습니다.');
 	 	                       		} else {
 		 	                       		$.ajax({
 	               							url: 'updateReply.nb',
-	               							data: {replyContent:replyContent, replyNo:replyNo, refBNum:refBNum},
+	               							data: {replyContent:replyContent, replyNo:replyNo, refBNo:refBNo},
 	               							type: 'POST',
 	               							dataType: 'json',
 	               							success: function(data){
@@ -544,7 +544,7 @@
 	                       		
 	                       		// 댓글 삭제
 	                       		$(document).on('click', '.replyDeleteBtn', function() {
-	                       			let refBNum = '${board.bNum}';
+	                       			let refBNum = '${board.bNo}';
 	                       			let replyNo = $(this).prev().prev().val();
 	                       			
 	                       			console.log(replyNo)
@@ -559,7 +559,7 @@
 	                       				if (result.value) {
 	                       					$.ajax({
 		               							url: 'deleteReply.nb',
-		               							data: {replyNo:replyNo, refBNum:refBNum},
+		               							data: {replyNo:replyNo, refBNo:refBNo},
 		               							type: 'POST',
 		               							dataType: 'json',
 		               							success: function(data){
@@ -586,7 +586,7 @@
 	                					alert('수정되었습니다.');
 	                					<c:remove var="message" scope="request"/>
 	                					
-										let qureyString = "?bNum=${ board.bNum }&page=${page}"
+										let qureyString = "?bNo=${ board.bNo }&page=${page}"
 										<c:if test="${ searchValue ne null }">
 											qureyString += "&searchCondition=${ searchCondition }&searchValue=${searchValue}"
 										</c:if>		

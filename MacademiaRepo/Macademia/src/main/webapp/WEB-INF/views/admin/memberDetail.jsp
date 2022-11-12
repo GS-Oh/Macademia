@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,14 +94,14 @@
 	                                        </select>
 	                                        <br>
 	                                        <label class="col-form-label">직위</label>
-	                                        <select class="form-control" name="jobId">
+	                                        <select class="form-control" name="positionNo">
 	                                        	<option value="">직위 선택</option>
 						                    	<c:forEach var="p" items="${ pList }">
 						                    		<c:if test="${ member.PositionNo == p.positionNo }">
-						                    			<option value="${ p.positionNo }" selected>${ p.PositionName }</option>
+						                    			<option value="${ p.positionNo }" selected>${ p.positionName }</option>
 						                    		</c:if>
 						                    		<c:if test="${ member.positionNo != p.positionNo }">
-						                    			<option value="${ p.positionNo }">${ p.PositionName }</option>
+						                    			<option value="${ p.positionNo }">${ p.positionName }</option>
 						                    		</c:if>
 						                    	</c:forEach>	                                        	
 	                                        </select>
@@ -119,7 +120,7 @@
 	                                        <br>                                        
 	                                        <label class="col-form-label">퇴사일</label>
 	                                        <div class="flatpickr" style="display: inline-block;">
-												<input type="text" id="endDate" name="inputEndDate" class="form-control"  value="${ member.endDate }"  data-input>
+												<input type="text" id="quitDate" name="inputQuitDate" class="form-control"  value="${ member.quitDate }"  data-input>
 												<a class="input-button" title="toggle" data-toggle>
 													<i class="icon-calendar"></i>
 												</a>
@@ -246,8 +247,8 @@
 								<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
 								<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
                             	<script>
-	                            	const $flatpickr1 = $("#hireDate").flatpickr();
-	                            	const $flatpickr2 = $("#endDate").flatpickr();
+	                            	const $flatpickr1 = $("#startDate").flatpickr();
+	                            	const $flatpickr2 = $("#quitDate").flatpickr();
 	                            	
 	                            	flatpickr.localize(flatpickr.l10ns.ko);
 	                            	flatpickr("mySelector");
@@ -262,23 +263,23 @@
 		                            });
 	                            	
 	                            	// 입사일은 퇴사일 이전 날짜만 선택 가능
-	                            	$("#hireDate").flatpickr({
+	                            	$("#startDate").flatpickr({
 	                            		dateFormat: "Y-m-d",
 	                            		"locale": "ko", // 언어 한글로 설정
 	                            		onChange: function(selectedDates, dateStr, instance) {
-	                            			$('#endDate').flatpickr({"minDate": new Date(dateStr)});
+	                            			$('#quitDate').flatpickr({"minDate": new Date(dateStr)});
 	                            		},
-	                            		maxDate : new Date('${ member.endDate }'),
+	                            		maxDate : new Date('${ member.quitDate }'),
 	                            	})
 	                            	
 	                            	// 퇴사일은 입사일 이후 날짜만 선택 가능
-	                            	$("#endDate").flatpickr({
+	                            	$("#quitDate").flatpickr({
 	                            		dateFormat: "Y-m-d",
 	                            		"locale": "ko", // 언어 한글로 설정
 	                            		onChange: function(selectedDates, dateStr, instance) {
-	                            			$('#hireDate').flatpickr({"maxDate": new Date(dateStr)});
+	                            			$('#startDate').flatpickr({"maxDate": new Date(dateStr)});
 	                            		},
-	                            		minDate : new Date('${ member.hireDate }'),
+	                            		minDate : new Date('${ member.startDate }'),
 	                            	});
 	                            	
                             	</script>
