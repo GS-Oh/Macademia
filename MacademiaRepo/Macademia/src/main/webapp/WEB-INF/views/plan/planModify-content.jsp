@@ -147,7 +147,7 @@
 		<div class="line">
 			<h5>등록자</h5>
 			<br>
-			<input type="text" class="text" id="userName"name="userName" readonly value="심투용">
+			<input type="text" class="text" id="userName"name="userName" readonly value="${loginMember.name}">
 		</div>
 		
 			<br>
