@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,7 @@
 		                                        <div class="modal-body" style="color: black;">
 			                                        	<div class="email-left-box px-0 mb-5" style="margin-right: 20px;">
 			                                        		<div class="profile-photo">
-						                                		<img id="profile-image" src="${contextPath}/resources/assets/images/empty-photo.jpg" alt="profile-image">
+						                                		<img id="profile-image" src="${root}/resources/assets/images/empty-photo.jpg" alt="profile-image">
 						                                		<label for="input-image">
 															        <i class="fa fa-camera" style="color: black; font-size: xx-large;"></i>
 															    </label>
@@ -92,7 +93,7 @@
 	                          	<script>
 	                        		// 회의실 등록 버튼 클릭시 모닮창 내용 초기화
 	                       			$('#insertBtnModal').on('click', function(){
-	                       				$('#profile-image').attr('src', '${contextPath}/resources/assets/images/empty-photo.jpg');
+	                       				$('#profile-image').attr('src', '${root}/resources/assets/images/empty-photo.jpg');
 	                       				$('#input-image').val('');
 	                       				$('#meetRoomName').val('');
 	                       				$('#meetInfo').val('');

@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>주소록 검색</title>
     <!-- Datatable -->
-    <link href="${contextPath}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="${root}/resources/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -50,7 +50,7 @@
                                                 <td id="mName">사원 이름<br></td>
                                             </tr>
                                             <tr>
-                                                <td id="mJob">직위</td>
+                                                <td id="mPosition">직위</td>
                                             </tr>
                                             <tr>
                                                 <td id="mDept">부서</td>
@@ -80,7 +80,7 @@
 		                        		<td>
 		                        			<select id="field" name="field" class="form-control" style="background: #593bdb; color: white;">
                                                 <option selected value="name">이름</option>
-                                                <option value="job">직급</option>
+                                                <option value="position">직급</option>
                                                 <option value="dept">부서</option>
 											</select>
 		                        		</td>
@@ -118,9 +118,9 @@
 	                                            <tr id="info">
 	                                            	<td></td>
 	                                                <td id="name">${ addr.mName }
-	                                               		<input type="hidden" class="mId" value="${ addr.mId }">	
+	                                               		<input type="hidden" class="mNo" value="${ addr.mNo }">	
 	                                                </td>
-	                                                <td id="job">${ addr.jobName }</td>
+	                                                <td id="position">${ addr.positionName }</td>
 	                                                <td id="dept">${ addr.deptName }</td>
 	                                                <td id="phone">${ addr.phone }</td>
 	                                                <td id="email">${ addr.email }</td>
@@ -251,7 +251,7 @@
 				var tdEmail = $(this).parent().children().eq(5).text();
 				
 				$("#mName").text(tdName);
-				$("#mJob").html(tdJob);
+				$("#mPosition").html(tdPosition);
 				$("#mDept").html(tdDept);
 				$("#mPhone").html(tdPhone);
 				$("#mEmail").html(tdEmail);
@@ -272,13 +272,13 @@
 		// 주소록 추가 버튼
 		$('.addrPlus').click(function() {
 			var thisRow = $(this).closest('tr');
-			var mId = thisRow.find('td:eq(1)').find('input').val();
+			var mNo = thisRow.find('td:eq(1)').find('input').val();
 			
 			console.log(mId);
 			
 			$.ajax({
 				url: "add.addr",
-				data: {mId:mId},
+				data: {mNo:mNo},
 				type: "POST",
 				success: function(data) {
 					console.log(data);
@@ -296,8 +296,8 @@
 	</script>
 	    
     <!-- Datatable -->
-    <script src="${contextPath}/resources/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="${contextPath}/resources/assets/js/plugins-init/datatables.init.js"></script>
+    <script src="${root}/resources/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="${root}/resources/assets/js/plugins-init/datatables.init.js"></script>
 
 </body>
 

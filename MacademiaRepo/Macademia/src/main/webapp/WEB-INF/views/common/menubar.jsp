@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>대시보드</title>
+<title>마카데미아</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="${root}/assets/resources/images/favicon.png">
 <!-- Custom Stylesheet -->
