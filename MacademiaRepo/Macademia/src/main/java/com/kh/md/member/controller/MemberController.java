@@ -86,7 +86,7 @@ public class MemberController {
 		map.put("privateEmail", privateEmail);
 		
 		String newPwd = memberService.findPwd(map);
-		
+		System.out.println("newPwd : "+newPwd);
 		if(newPwd != null) {
 			try {
 				MimeMessage mimeMessage = mailSender.createMimeMessage();
