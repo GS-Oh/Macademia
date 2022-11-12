@@ -407,7 +407,7 @@ public class AdminController {
 			Posij.put("nodeId", m.getNo());
 			Posij.put("nodeType", "member");
 			Posij.put("nodeName", m.getName());
-			Posij.put("hasChildren", null);
+//			Posij.put("hasChildren", null);
 			Posij.put("PositionName", m.getPositionName());
 			
 			jArr.add(Posij);
@@ -418,7 +418,7 @@ public class AdminController {
 			Posij.put("nodeId", d.getNo());
 			Posij.put("nodeType", "dept");
 			Posij.put("nodeName", d.getName());
-			Posij.put("hasChildren", d.getHasChildren());
+//			Posij.put("hasChildren", d.getHasChildren());
 			Posij.put("PositionName", null);
 			
 			jArr.add(Posij);
@@ -435,9 +435,9 @@ public class AdminController {
 		
 		if (dept.getUpperDept() != null) {
 			ArrayList<Dept> subDeptList = aService.getSubDeptList(dept.getUpperDept());
-			dept.setDeptOrder(subDeptList.size() + 1); // 같은 상위부서를 가지고 있는 하위부서 목록에서 정렬순서가 마지막이 되도록 설정
-		} else {
-			dept.setDeptOrder(1);
+//			dept.setDeptOrder(subDeptList.size() + 1); // 같은 상위부서를 가지고 있는 하위부서 목록에서 정렬순서가 마지막이 되도록 설정
+//		} else {
+//			dept.setDeptOrder(1);
 		}
 		
 		Dept d = aService.insertDept(dept);
@@ -462,13 +462,13 @@ public class AdminController {
 	public String deleteDept(@RequestParam("deptNo") int deptNo, @RequestParam("upperDeptNo") int upperDeptNo) {
 		
 		// 부서  삭제시 기존에 같은 상위부서를 가지고 있던 부서 그룹 정렬 새로 하기, 1부터 차례대로 값이 들어가게 정렬 
-		int result1 = sortDept(deptNo, upperDeptNo);
+//		int result1 = sortDept(deptNo, upperDeptNo);
 		
 		// 정렬순서 업데이트 성공시 부서 삭제
 		int result2 = 0;
-		if (result1 == 1) {
-			result2 = aService.deleteDept(deptNo);
-		}
+//		if (result1 == 1) {
+			result2 = aService.deleteDept(deptNo, upperDeptNo);
+//		}
 		
 		if (result2 <= 0) {
 			throw new AdminException("부서 삭제에 실패하였습니다.");
@@ -511,19 +511,19 @@ public class AdminController {
 		int deptLevel = upperDeptLevel + 1; // 이동하려는 상위부서의 부서level + 1
 		
 		ArrayList<Dept> subDeptList = aService.getSubDeptList(upperDeptNo);
-		int deptOrder = subDeptList.size() + 1; // 같은 그룹내 가장 마지막 순서로 이동되게 정렬순서 세팅
+//		int deptOrder = subDeptList.size() + 1; // 같은 그룹내 가장 마지막 순서로 이동되게 정렬순서 세팅
 		
 		// 부서 이동시 기존에 같은 상위부서를 가지고 있던 부서 그룹 정렬 새로 하기, 1부터 차례대로 값이 들어가게 정렬 
-		int result1 = sortDept(moveDeptNo, originUpperDept);
+//		int result1 = sortDept(moveDeptNo, originUpperDept);
 		
 		// 정렬순서 업데이트 성공시 부서 위치 이동
 		int result2 = 0;
-		if (result1 == 1) {
+		if (result2 == 1) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("moveDeptNo", moveDeptNo);
 			map.put("upperDeptNo", upperDeptNo);
 			map.put("deptLevel", deptLevel);
-			map.put("deptOrder", deptOrder);
+//			map.put("deptOrder", deptOrder);
 			result2 = aService.moveDept(map);
 		}
 		
@@ -534,28 +534,28 @@ public class AdminController {
 		}
 	}
 	
-	public int sortDept(int deptNo, int originUpperDept) {
-		
-		// 부서 이동 또는 삭제시 기존에 같은 상위부서를 가지고 있던 부서 그룹 정렬 새로 하기, 1부터 차례대로 값이 들어가게 정렬 
-		ArrayList<Dept> sortDeptList = aService.getSubDeptList(originUpperDept);
-		int result = 0;
-		if (sortDeptList.size() >= 2) {
-			int i = 1;
-			for (Dept d : sortDeptList) {
-				if (d.getNo() != deptNo) {
-					d.setDeptOrder(i);
-					i++;
-				}
-			}
-			
-			result = aService.sortDeptOrder(sortDeptList) >= sortDeptList.size() ? 1 : 0;
-			
-		} else {
-			result = 1;
-		}
-		
-		return result;
-	}
+//	public int sortDept(int deptNo, int originUpperDept) {
+//		
+//		// 부서 이동 또는 삭제시 기존에 같은 상위부서를 가지고 있던 부서 그룹 정렬 새로 하기, 1부터 차례대로 값이 들어가게 정렬 
+//		ArrayList<Dept> sortDeptList = aService.getSubDeptList(originUpperDept);
+//		int result = 0;
+//		if (sortDeptList.size() >= 2) {
+//			int i = 1;
+//			for (Dept d : sortDeptList) {
+//				if (d.getNo() != deptNo) {
+//					d.setDeptOrder(i);
+//					i++;
+//				}
+//			}
+//			
+//			result = aService.sortDeptOrder(sortDeptList) >= sortDeptList.size() ? 1 : 0;
+//			
+//		} else {
+//			result = 1;
+//		}
+//		
+//		return result;
+//	}
 	
 	
 	

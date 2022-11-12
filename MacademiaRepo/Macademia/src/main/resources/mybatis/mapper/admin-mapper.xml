@@ -7,8 +7,7 @@
 		<result column="NAME" property="name"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PWD" property="pwd"/>
-<!-- 		<result column="BIRTH_DATE" property="birthDate"/> -->
-		<result column="PRIVATE_EMAILl" property="privateEmail"/>
+		<result column="PRIVATE_EMAIL" property="privateEmail"/>
 		<result column="ADDRESS" property="address"/>
 		<result column="ADDRESS2" property="address2"/>
 		<result column="PHONE" property="phone"/>
@@ -20,9 +19,31 @@
 		<result column="UPDATE_DATE" property="updateDate"/>
 		<result column="START_DATE" property="startDate"/>
 		<result column="QUIT_DATE" property="quitDate"/>
-<!-- 		<result column="STATUS" property="status"/> -->
 		<result column="GRADE" property="grade"/>
 	</resultMap>
+	
+ 		<resultMap type="PositionVo" id="positionResultSet">
+		<result column="NO" property="no"/>
+		<result column="NAME" property="name"/>
+		<result column="RANK_NO" property="rankNo"/>
+		<result column="DEPT_NO" property="deptNo"/>
+	</resultMap>
+	
+		<resultMap type="DeptVo" id="deptResultSet">
+		<result column="NO" property="no"/>
+		<result column="NAME" property="name"/>
+		<result column="UPPER_DEPT" property="upperDept"/>
+		<result column="LEV" property="lev"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="DELETE_DATE" property="deleteDate"/>
+		<result column="DELETE_YN" property="deleteYn"/>
+		</resultMap>
+		
+		<resultMap type="RankVo" id="RankResultSet">
+		<result column="NO" property="no"/>
+		<result column="NAME" property="name"/>
+		<result column="LEV" property="lev"/>	
+		</resultMap>
 	
 	<!-- 사원 총 인원 -->
 	<select id="getListCount" resultType="_int">
@@ -76,7 +97,7 @@
 	
 
 	
-	<select id="selectDeptList" resultType="DeptVo">
+	<select id="selectDeptList" resultMap="deptResultSet">
 		SELECT 
         	 	D.NO, D.NAME AS DEPT_NAME , P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, M.NAME
       			, D.UPPER_DEPT, D.LEV, D.DELETE_YN, D.CREATE_DATE
@@ -93,7 +114,7 @@
 	</select>
 
 	
-	<select id="selectPosiList" resultType="PositionVo">
+	<select id="selectPosiList" resultMap="positionResultSet">
 	SELECT P.NO, P.NAME AS POSITION_NAME, COUNT(M.NO) AS MEMBER_COUNT
         FROM POSITION P
 		JOIN DEPT D
@@ -153,35 +174,89 @@
 			WHERE QUIT_YN = 'Y'
 	</select>
 	
-	<!-- <update id="updateMultiMember">
-
+	<update id="updateMultiMember">
+	UPDATE MEMBER
+		SET QUIT_YN = #{quitYn},
+			UPDATE_DATE = SYSDATE
+		WHERE NO = #{no}
 	</update>
 	
 	<update id="deleteMember">
-
+	UPDATE MEMBER
+		SET QUIT_YN = 'Y'
+		WHERE NO = #{no}
 	</update>
 		
 	<select id="selectMember" resultMap="memberResultSet">
-
+	SELECT 
+		M.NO
+		,M.NAME
+		,M.EMAIL
+		,M.PWD
+		,M.PRIVATE_EMAIL
+		,M.GRADE
+		,M.ADDRESS
+		,M.ADDRESS2
+		,M.PHONE
+		,M.PROFILE_NAME
+		,M.POSITION_NO
+		,M.BANK_NO
+		,M.ACCOUNT
+		,M.ENROLL_DATE
+		,M.UPDATE_DATE
+		,M.START_DATE
+		,M.QUIT_DATE
+		,M.QUIT_YN
+		,P.NAME AS POSITION_NAME, R.NAME AS RANK_NAME, D.NAME AS DEPT_NAME
+		FROM MEMBER M
+		JOIN POSITION P 
+		ON M.POSITION_NO = P.NO
+		JOIN RANK R
+		ON P.RANK_NO = R.NO
+		JOIN DEPT D
+		ON P.DEPT_NO = D.NO
+		WHERE M.NO = #{no}
 	</select>
 
-	<update id="updateMember">
-
+ 	<update id="updateMember">
+		UPDATE MEMBER M
+			SET M.START_DATE = #{startDate},
+			M.QUIT_DATE = #{quitDate},
+			m.QUIT_YN = #{quitYn},
+			M.GRADE = #{grade},
+			M.POSITION_NO = #{positionNo},
+			M.UPDATE_DATE = SYSDATE
+		WHERE M.NO = #{no}
 	</update>
 	
-	<update id="deletePosi">
-
-	</update>
-	
-	<insert id="insertPosi">
-
-	</insert>
-	
-	<update id="updatePosi">
+<!-- 	<update id="deletePosi">
 
 	</update> -->
 	
-	<select id="selectDeptMemberList" resultType="DeptVo">
+ 	<insert id="insertPosi">
+		INSERT INTO POSITION
+			(
+			NO
+			,NAME
+			,RANK_NO
+			,DEPT_NO
+			)VALUES
+			(SEQ_POSITION_NO.NEXTVAL
+			,#{positionName}
+			,#{rankNo}
+			,#{deptNo}
+	</insert>
+	
+<!-- 	<update id="updatePosi">
+		UPDATE POSITION
+			SET
+			NAME = #{positionName}
+			,RANK_NO = #{rankNo}
+			,DEPT_NO = #{deptNo}
+			WHERE NO = #{positionNo}
+	</update> --> 
+	
+	<select id="selectDeptMemberList" resultMap="memberResultSet">
 		SELECT 
 		    M.NO, M.NAME, M.EMAIL, M.PHONE, M.PROFILE_NAME
 		    , P.NAME AS POSITION_NAME
@@ -207,23 +282,55 @@
 		<if test="upperDept != null">
 				AND D.NO = #{upperDept}
 		</if>
-			ORDER BY P.NO ASC;
+			ORDER BY P.NO ASC
 
 	</select>
 	
-<!--  	<select id="getSubDeptList" resultMap="">
+  	<!-- <select id="getSubDeptList" resultMap="departmentResultSet">
 
-	</select> 
+	</select>   -->
 	
-	<insert id="insertDept">
-
+ 	<insert id="insertDept">
+		INSERT INTO DEPT
+		(
+		NO
+		,NAME
+		,UPPER_DEPT
+		,LEV
+		,CREATE_DATE
+		,DELETE_YN)
+			VALUES(
+		SEQ_DEPT_NO.NEXTVAL
+		, #{deptName}
+		, #{upperDept}
+		, #{deptLevel}
+		, #{createDate}
+		, #{deleteYn}
+		)
 	</insert>
 	
- 	<select id="selectDept" resultMap="">
-
+  	<select id="selectDept" resultMap="deptResultSet">
+		SELECT 
+			D.NO
+			, D.NAME AS DEPT_NAME 
+	        , P.NO AS DEPT_MANAGER 
+	        , M.NAME
+	        , P.NAME AS POSITION_NAME 
+	        , D.UPPER_DEPT
+	        , D.LEV
+	        , D.DELETE_YN
+	        , D.CREATE_DATE
+			FROM DEPT D
+			JOIN POSITION P
+			ON D.NO = P.NO
+	        JOIN MEMBER M
+	        ON P.DEPT_NO = M.NO
+			JOIN RANK R
+			ON P.RANK_NO = R.NO
+			WHERE D.DELETE_YN ='N' 
 	</select>
 	
-	<update id="deleteDept">
+<!-- 	<update id="deleteDept">
 
 	</update>
 	
@@ -249,7 +356,7 @@
 	
 	<select id="selectReplyReportList" resultMap="reportResultSet">
 
-	</select> -->	
+	</select> -->
 	
 <!-- 	<update id="handingBoardReport">
 		UPDATE REPORT

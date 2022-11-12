@@ -109,10 +109,10 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
-	@Override
-	public ArrayList<Dept> getSubDeptList(Integer upperDept) {
-		return aDAO.getSubDeptList(sqlSession, upperDept);
-	}
+//	@Override
+//	public ArrayList<Dept> getSubDeptList(Integer upperDept) {
+//		return aDAO.getSubDeptList(sqlSession, upperDept);
+//	}
 
 	@Override
 	@Transactional // 트랜잭션 관리
@@ -128,8 +128,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int deleteDept(int deptNo) {
-		return aDAO.deleteDept(sqlSession, deptNo);
+	public int deleteDept(int deptNo, int upperDeptNo) {
+		return aDAO.deleteDept(sqlSession, deptNo, upperDeptNo);
 	}
 
 	@Override
@@ -142,10 +142,10 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.moveDept(sqlSession, map);
 	}
 	
-	@Override
-	public int sortDeptOrder(ArrayList<Dept> subDeptList) {
-		return aDAO.sortDeptOrder(sqlSession, subDeptList);
-	}
+//	@Override
+//	public int sortDeptOrder(ArrayList<Dept> subDeptList) {
+//		return aDAO.sortDeptOrder(sqlSession, subDeptList);
+//	}
 
 	
 	
@@ -188,6 +188,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public ArrayList<Dept> getSubDeptList(Integer originUpperDept) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

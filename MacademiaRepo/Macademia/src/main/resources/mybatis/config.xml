@@ -15,6 +15,13 @@
 		<typeAlias type="com.kh.md.member.vo.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.md.admin.vo.Dept" alias="DeptVo"/>
 		<typeAlias type="com.kh.md.admin.vo.Position" alias="PositionVo"/>
+		<typeAlias type="com.kh.md.admin.vo.Rank" alias="RankVo"/>
+		<typeAlias type="com.kh.md.address.vo.Address" alias="AddressVo"/>
+		<typeAlias type="com.kh.md.meetingResrv.vo.MeetingResrv" alias="MeetingResrv"/>
+		<typeAlias type="com.kh.md.meetingResrv.vo.MeetingRoom" alias="MeetingRoom"/>
+		<typeAlias type="com.kh.md.noticeBoard.vo.NoticeBoard" alias="NoticeBoard"/>
+		<typeAlias type="com.kh.md.noticeBoard.vo.NoticeBoardReply" alias="NoticeBoardReply"/>
+		<typeAlias type="com.kh.md.noticeBoard.vo.NoticeBoardFile" alias="NoticeBoardFile"/>
 	</typeAliases>
 
 

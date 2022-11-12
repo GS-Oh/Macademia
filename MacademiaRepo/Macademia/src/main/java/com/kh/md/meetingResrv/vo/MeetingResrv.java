@@ -20,7 +20,7 @@ public class MeetingResrv {
     private String meetName;           // 예약한 회의실 이름
     private String mName;               // 예약자 이름
     private String email;               // 예약자 이메일
-    private String PositionName;        // 예약자 직위
+    private String positionName;        // 예약자 직위
     private String deptName;            // 예약자 부서
     
     private String revTime;            // 예약날짜 정보(YYYY-MM-DD HH:MM ~ HH:MM)
