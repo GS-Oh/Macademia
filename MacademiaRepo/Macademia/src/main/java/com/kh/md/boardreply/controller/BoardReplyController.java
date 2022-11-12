@@ -29,7 +29,7 @@ public class BoardReplyController {
 		return result;
 	}
 	
-	@PostMapping("/data/delete")
+	@GetMapping("/data/delete")
 	public String replyRemove(BoardReply replyVo) {
 		log.info(replyVo.toString());
 		String boardNo = replyVo.getBoardNo();
