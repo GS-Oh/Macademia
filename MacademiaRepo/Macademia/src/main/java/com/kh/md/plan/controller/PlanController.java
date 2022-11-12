@@ -2,7 +2,6 @@ package com.kh.md.plan.controller;
 
 import java.util.List;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -91,27 +90,30 @@ public class PlanController {
 		
 }
 	@GetMapping("modify")
-	public String planGetModify(HttpServletRequest req, String no, Model model, HttpSession session ) {
-		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+	public String planGetModify(HttpServletRequest req, String no, Model model) {
 		PlanVo vo = service.getModify(no);
 		model.addAttribute("vo", vo);
-		model.addAttribute("loginMember",loginMember);
 		
 		
 		
 		
 		return "/plan/planModify";
 	}
-	@PostMapping("modify/")
-	public String planModify(PlanVo vo,@PathVariable String no) {
-		vo.setPNo(no);
+	@PostMapping("modify/{pno}")
+	@ResponseBody
+	public int planModify(@PathVariable String pno, PlanVo vo, String title, String content, String type, String start, String end) {
+		vo.setPNo(pno);
+		vo.setPTitle(title);
+		vo.setPContent(content);
+		vo.setPStartDate(start);
+		vo.setPEndDate(end);
+		vo.setPType(type);
+		
 		System.out.println(vo);
-		
-		
 		int result = service.modify(vo);
 		System.out.println(result);
 		
-			return "redirect:/plan/list";
+			return result;
 		
 		
 	}

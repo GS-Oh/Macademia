@@ -15,6 +15,7 @@ import com.kh.md.sign.dao.SignDao;
 import com.kh.md.sign.vo.SignLineVo;
 import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
+import com.kh.md.work.common.PageVo;
 
 @Service
 public class SignService {
@@ -74,8 +75,8 @@ public class SignService {
 	}
 
 
-	public List<SignListVo> selectSignList(Map map) {
-		return dao.selectSignList(sst ,map);
+	public List<SignListVo> selectSignList(Map map, PageVo pv) {
+		return dao.selectSignList(sst ,map, pv);
 	}
 
 
@@ -115,9 +116,9 @@ public class SignService {
 	}
 
 
-	public List<SignVo> companionList(SignVo sVo) {
+	public List<SignVo> companionList(SignVo sVo, PageVo pv) {
 		// TODO Auto-generated method stub
-		return dao.companionList(sst, sVo);
+		return dao.companionList(sst, sVo, pv);
 	}
 
 
@@ -127,9 +128,9 @@ public class SignService {
 	}
 
 
-	public List<SignVo> getMySign(SignVo sVo) {
+	public List<SignVo> getMySign(SignVo sVo, PageVo pv) {
 		// TODO Auto-generated method stub
-		return dao.getMySign(sst, sVo);
+		return dao.getMySign(sst, sVo, pv);
 	}
 
 
@@ -175,9 +176,9 @@ public class SignService {
 	}
 
 
-	public List<SignVo> completeList(SignVo sVo) {
+	public List<SignVo> completeList(SignVo sVo, PageVo pv) {
 		// TODO Auto-generated method stub
-		return dao.completeList(sst, sVo);
+		return dao.completeList(sst, sVo, pv);
 	}
 
 

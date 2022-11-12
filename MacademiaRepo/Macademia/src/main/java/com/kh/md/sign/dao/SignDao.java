@@ -3,6 +3,7 @@ package com.kh.md.sign.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import com.kh.md.member.vo.MemberVo;
 import com.kh.md.sign.vo.SignLineVo;
 import com.kh.md.sign.vo.SignListVo;
 import com.kh.md.sign.vo.SignVo;
+import com.kh.md.work.common.PageVo;
 
 @Repository
 public class SignDao {
@@ -41,8 +43,10 @@ public class SignDao {
 		return sst.update("signMapper.signFirst", loginMemberNo);
 	}
 
-	public List<SignListVo> selectSignList(SqlSessionTemplate sst,Map map) {
-		return sst.selectList("signMapper.selectSignList", map);
+	public List<SignListVo> selectSignList(SqlSessionTemplate sst,Map map, PageVo pv) {
+		int offset = (pv.getCurrentPage()-1) * pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+		return sst.selectList("signMapper.selectSignList", map, rb);
 	}
 
 	public SignVo selectSignOne(SqlSessionTemplate sst, String no) {
@@ -75,9 +79,11 @@ public class SignDao {
 		return sst.update("signMapper.companion", map);
 	}
 
-	public List<SignVo> companionList(SqlSessionTemplate sst, SignVo sVo) {
+	public List<SignVo> companionList(SqlSessionTemplate sst, SignVo sVo, PageVo pv) {
 		// TODO Auto-generated method stubs
-		return sst.selectList("signMapper.companionList", sVo);
+		int offset = (pv.getCurrentPage()-1) * pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+		return sst.selectList("signMapper.companionList", sVo, rb);
 	}
 
 	public int companionTotalCnt(SqlSessionTemplate sst, String memberNo) {
@@ -85,9 +91,11 @@ public class SignDao {
 		return sst.selectOne("signMapper.companionTotalCnt", memberNo);
 	}
 
-	public List<SignVo> getMySign(SqlSessionTemplate sst, SignVo sVo) {
+	public List<SignVo> getMySign(SqlSessionTemplate sst, SignVo sVo, PageVo pv) {
 		// TODO Auto-generated method stub
-		return sst.selectList("signMapper.getMySign", sVo);
+		int offset = (pv.getCurrentPage()-1) * pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+		return sst.selectList("signMapper.getMySign", sVo, rb);
 	}
 
 	public int mySignTotalCnt(SqlSessionTemplate sst, String memberNo) {
@@ -125,9 +133,11 @@ public class SignDao {
 		return sst.selectOne("signMapper.completeTotalCnt", memberNo);
 	}
 
-	public List<SignVo> completeList(SqlSessionTemplate sst, SignVo sVo) {
+	public List<SignVo> completeList(SqlSessionTemplate sst, SignVo sVo, PageVo pv) {
 		// TODO Auto-generated method stub
-		return sst.selectList("signMapper.completeList", sVo);
+		int offset = (pv.getCurrentPage()-1) * pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+		return sst.selectList("signMapper.completeList", sVo, rb);
 	}
 
 	public SignLineVo modifyNot(SqlSessionTemplate sst, SignLineVo lineOne) {
