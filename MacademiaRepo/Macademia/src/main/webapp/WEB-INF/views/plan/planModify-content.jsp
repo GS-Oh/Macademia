@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -130,7 +131,7 @@
     
     }
     </style>
-<form action="/md/plan/modify" method="post">
+
 
 
 <div id="center_menu">
@@ -140,6 +141,7 @@
 	<div id="work_top">
 		<h5>일정 제목</h5> <input id="write" type="submit" value="일정 수정하기">
 		<br>
+		<input type="hidden" name="pNo" value="${vo.getPNo()}">
 		<input class="text"type="text" id="title"name="pTitle" value="${vo.getPTitle()}">
 	</div>
 	<div id="work_middle">
@@ -186,7 +188,7 @@
 			
 			<div class="line">
 			<h5>일정 기한</h5>
-			<input type="date" value="${vo.getPStartDate()}" name="pStartDate" required> ~ <input type="date" value="${vo.getPEndDate()}" name="pEndDate" required>
+			<input type="date" value="${vo.getPStartDate()}" name="pStartDate" required id="pStartDate"> ~ <input type="date" id="pEndDate" value="${vo.getPEndDate()}" name="pEndDate" required>
 			
 			</div>
 			
@@ -195,26 +197,45 @@
 	</div>
 	<div id="work_bottom">
 		<h5>일정 내용</h5>
-		<textarea rows="5" cols="100" name="pContent" required>${vo.getPContent()}</textarea>
+		<textarea rows="5" cols="100" name="pContent" id="content" required value="${vo.getPContent()}">${vo.getPContent()}</textarea>
 		
 		</div>
 		</div>
-		</form>    
+	   
 					<script>
 				$('#write').click(function(){
 					var result = confirm("일정을 수정 하시겠습니까?")
 						if(result===true){
-							alert("일정이 수정되었습니다.")
-							return true;
+							var title= $('#title').val();
+							var content = $('#content').val();
+							var start = $('#pStartDate').val();
+							var end = $('#pEndDate').val()
+							var type =	$('#select_work').val();
+							$.ajax({
+								url:'/md/plan/modify/${vo.getPNo()}'
+								,method:'post',
+								data:{title : title,
+									  content: content,
+									  start: start,
+									  end : end,
+									  type : type
+								},
+								success: function(data){
+									console.log("ajax 성공");
+									alert("일정이 수정되었습니다.")
+									location.href="/md/plan/list"
+								},
+								error: function(data){
+									console.log("ajax실패")
+									alert("일정 수정이 실패하였습니다")
+								}
+							})
+						
+							
 						}else{
 							alert("일정등록이 취소되었습니다.")
 							return false;
 						}
 				})
+						
 				</script>
-				
-		
-				
-				
-			
-			

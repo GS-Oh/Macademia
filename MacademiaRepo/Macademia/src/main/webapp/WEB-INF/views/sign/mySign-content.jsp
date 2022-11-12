@@ -104,15 +104,15 @@
 				<div id="page-area">
 					<ul id="page">
 						<c:if test="${pv.startPage ne 1}">
-		<li><a href="/md/sign//${pv.startPage - 1}" class="pageBtn" >이전</a></li>
+		<li><a href="/md/sign/mySign/${pv.startPage - 1}" class="pageBtn" >이전</a></li>
 	</c:if>
 	
 	<c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" var="i">
-	  <li> <a href="/md/sign//${i}" class="pageBtn">${i}</a></li> 
+	  <li> <a href="/md/sign/mySign/${i}" class="pageBtn">${i}</a></li> 
 	</c:forEach>
 	
 	<c:if test="${pv.endPage ne pv.maxPage }">
-		<a href="/md/sign//${pv.endPage + 1}" class="pageBtn">다음</a>
+		<a href="/md/sign/mySign/${pv.endPage + 1}" class="pageBtn">다음</a>
 	</c:if>	
 					</ul>
 				</div>

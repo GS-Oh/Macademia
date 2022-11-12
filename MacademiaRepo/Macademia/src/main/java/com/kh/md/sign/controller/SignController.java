@@ -50,7 +50,7 @@ public class SignController {
 			
 			PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
 		  
-		List<SignListVo> slVo = service.selectSignList(map);
+		List<SignListVo> slVo = service.selectSignList(map, pv);
 		System.out.println(slVo);
 		model.addAttribute("pv", pv);
 		model.addAttribute("slVo", slVo);
@@ -82,7 +82,7 @@ public class SignController {
 		int totalCount = service.completeTotalCnt(memberNo);
 		
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
-		List<SignVo> cList = service.completeList(sVo);
+		List<SignVo> cList = service.completeList(sVo, pv);
 		model.addAttribute("pv", pv);
 		model.addAttribute("cList",cList);
 		
@@ -101,7 +101,7 @@ public class SignController {
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
 		
-		List<SignVo> cList = service.companionList(sVo);
+		List<SignVo> cList = service.companionList(sVo, pv);
 		model.addAttribute("pv", pv);
 		model.addAttribute("cList",cList);
 		
@@ -236,7 +236,7 @@ public class SignController {
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
 		SignVo sVo = new SignVo();
 		sVo.setENo(memberNo);
-		List<SignVo> mySign = service.getMySign(sVo);
+		List<SignVo> mySign = service.getMySign(sVo, pv);
 		model.addAttribute("mySign", mySign);
 		model.addAttribute("pv", pv);
 		
