@@ -393,6 +393,7 @@ window.onload = function(){
                 preConfirm: () => {
                     return {
                         no : document.getElementById('no').value,
+                        email : document.getElementById('email').value,
                         pwd : document.getElementById('swal-input1').value,
                         pwd2 : document.getElementById('swal-input2').value
                     }
@@ -410,7 +411,7 @@ window.onload = function(){
                                 Swal.fire({title : "비밀번호 변경 성공!", icon : 'success'});
                                 document.getElementById('pwd').value = "";
                                 document.getElementById('pwd2').value = "";
-                                
+
                             } 
                         },
                         error : function(e){

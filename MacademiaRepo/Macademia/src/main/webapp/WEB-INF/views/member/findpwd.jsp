@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <c:set var="root" value="${pageContext.request.contextPath }" />
 
@@ -218,7 +218,7 @@
     let alertMsg = '${alertMsg}';
     if(alertMsg!=''){
         Swal.fire({
-            title : alertMsg,
+            text : '${alertMsg}',
             icon : 'warning'
         })
     }
