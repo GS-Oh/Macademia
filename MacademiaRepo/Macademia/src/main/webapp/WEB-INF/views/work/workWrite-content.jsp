@@ -243,8 +243,10 @@
 			<h5 id="type">업무 종류</h5>
 			<select name="select_work" id="select_work">
 				<option vlaue="문서작성">문서작성</option>
-				<option vlaue="문서작성">문서작성</option>
-				<option vlaue="문서작성">문서작성</option>
+				<option vlaue="업무의뢰">업무의뢰</option>
+				<option vlaue="설문조사">설문조사</option>
+				<option vlaue="인원조사">인원조사</option>
+				<option vlaue="기타">기타</option>
 			</select>
 			</div>
 			

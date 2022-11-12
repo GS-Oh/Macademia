@@ -11,7 +11,7 @@
     margin: 0 auto;
   
     width:1000px;
-    height:500px;
+   height:340px;
     border:1px solid #6667AB;
     margin-top:30px;
     border-radius: 5px;
