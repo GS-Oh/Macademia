@@ -128,7 +128,7 @@
 	<update id="updatePwd">
 		UPDATE MEMBER SET 
 		PWD = #{pwd}
-		WHERE NO = #{no}
+		WHERE EMAIL = #{email}
 	</update>
 	
 	<update id="deleteOne">

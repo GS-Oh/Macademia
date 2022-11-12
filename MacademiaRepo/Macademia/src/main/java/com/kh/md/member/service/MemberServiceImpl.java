@@ -49,12 +49,14 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String findPwd(Map<String, String> map) {
 		int result1 = memberDao.selectCountByEmail(sst,map);
+		System.out.println("result1 : "+result1);
 		int result2;
 		String newPwd;
 		if(result1 == 1) {
 			newPwd = UUID.randomUUID().toString().substring(0,8);
 			map.put("newPwd",newPwd);
 			result2  = memberDao.updatePwd(sst,map);
+			System.out.println("result2 : "+result2);
 			if(result2 == 1) return newPwd;
 			else return null;
 		}else return null;
