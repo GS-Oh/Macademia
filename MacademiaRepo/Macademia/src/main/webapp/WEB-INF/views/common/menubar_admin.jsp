@@ -37,7 +37,7 @@
 </head>
 <body>
 
-<%--     <!-- Preloader start --> 
+    <!-- Preloader start --> 
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
@@ -91,7 +91,7 @@
                 </nav>
             </div>
         </div>
-        <!-- Header end ti-comment-alt --> --%>
+        <!-- Header end ti-comment-alt -->
 
         <!--Sidebar start -->
         <div class="quixnav" style="background: #292B30;">

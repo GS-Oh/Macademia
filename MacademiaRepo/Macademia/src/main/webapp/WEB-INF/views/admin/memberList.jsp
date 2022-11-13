@@ -52,7 +52,7 @@
 					                    	<option value="">부서</option>  
 					                    	<c:forEach var="d" items="${ dList }">
 					                    		<c:if test="${ selectDept ne d.deptNo }">
-					                    			<option value="${ d.deptNo }">${ d.deptName }</option>
+					                    			<option value="${ d.deptNo }">${ d.deptNo }</option>
 					                    		</c:if>
 					                    		<c:if test="${ selectDept eq d.deptNo }">
 					                    			<option value="${ d.deptNo }" selected>${ d.deptName }</option>
@@ -62,11 +62,11 @@
 					                    <select id="selectPosi" class="form-control" name="selectPosi">
 					                    	<option value="">직위</option>
 					                    	<c:forEach var="p" items="${ pList }">
-					                    		<c:if test="${ selectPosi ne p.positionNo }">
-					                    			<option value="${ p.positionNo }">${ p.positionName }</option>
+					                    		<c:if test="${ selectPosi ne p.no }">
+					                    			<option value="${ p.no }">${ p.name }</option>
 					                    		</c:if>
-					                    		<c:if test="${ selectPosi eq p.positionNo }">
-					                    			<option value="${ p.positionNo }" selected>${ p.positionName }</option>
+					                    		<c:if test="${ selectPosi eq p.no }">
+					                    			<option value="${ p.no }" selected>${ p.name }</option>
 					                    		</c:if>
 					                    	</c:forEach>
 					                    </select>
@@ -221,7 +221,7 @@
 								                                    <button type="button" class="btn btn-primary out rejectBtn" style="background: #CD5C5C; border: #CD5C5C;">거부</button> 
 								                                </div>
 							                                </td> --%>
-							                                <c:if test="${ m.quit eq 'N' }"> <!-- 퇴사 등 -->
+							                                <c:if test="${ m.quitYn eq 'N' }"> <!-- 퇴사 등 -->
 		                                               		<td>
 				                                                <div class="btn-group">
 				                                                	<input type="hidden" name="quitYn" value="${ m.no }">
@@ -292,7 +292,7 @@
                        				/* var managerYn = false;
                        				var deptMgrYn = false; */
                        				var grade = false;
-                       				var managerNo = "";
+                       				/* var managerNo = "";
                        				/* var deptMgrNo = ""; */
                        				for (var i in checkM) {
                        					if(checkM[i].checked) {
@@ -307,7 +307,7 @@
                        							 	}
                        								
                        							}
-                       						</c:forEach>
+                       						</c:forEach> */
                        						
                        						/* 부서책임자 */
                        						/* <c:forEach items="${ dList }" var="d">

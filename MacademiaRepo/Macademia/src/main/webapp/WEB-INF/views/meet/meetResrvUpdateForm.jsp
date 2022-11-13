@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
     pageContext.setAttribute("CR", "\r");
     pageContext.setAttribute("LF", "\n");
@@ -15,10 +16,10 @@
 <meta charset="UTF-8">
     <title>회의실 예약 - 수정 하기 </title>
     <!-- Pick date -->
-    <link rel="stylesheet" href="${contextPath}/resources/assets/vendor/pickadate/themes/default.css">
-    <link rel="stylesheet" href="${contextPath}/resources/assets/vendor/pickadate/themes/default.date.css">
+    <link rel="stylesheet" href="${root}/resources/assets/vendor/pickadate/themes/default.css">
+    <link rel="stylesheet" href="${root}/resources/assets/vendor/pickadate/themes/default.date.css">
     <!-- Custom Stylesheet -->
-    <link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet">
+    <link href="${root}/resources/assets/css/style.css" rel="stylesheet">
     <style>
         #chkMsg {
             color: black;
@@ -83,9 +84,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="jobName">직위</label>
+                                                    <label class="col-lg-4 col-form-label" for="positionName">직위</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="jobName" name="jobName" value="${ loginUser.jobName != NULL ? loginUser.jobName : '-' }" readonly>
+                                                        <input type="text" class="form-control" id="positionName" name="positionName" value="${ loginUser.positionName != NULL ? loginUser.positionName : '-' }" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -203,7 +204,7 @@
                                             <div class="col-xl-6">
                                                 <div class="form-group row">
                                                     <div class="col-lg-4">
-                                                        <img class="img-fluid" id="room_img" src="${contextPath}/resources/assets/images/empty-photo.jpg" alt="회의실 사진">
+                                                        <img class="img-fluid" id="room_img" src="${root}/resources/assets/images/empty-photo.jpg" alt="회의실 사진">
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <textarea class="form-control" rows="8" id="room_info" readonly></textarea>
@@ -345,7 +346,7 @@
         <!-- Footer start -->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">MacademiA</a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a href="${root}" target="_blank">MacademiA</a> 2022</p>
             </div>
         </div>
         <!-- Footer end -->      
@@ -354,21 +355,21 @@
      <!-- Main wrapper end -->
     
     <!-- vendors -->
-    <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
-    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
-    <script src="${contextPath}/resources/assets/js/custom.min.js"></script>
+    <script src="${root}/resources/assets/vendor/global/global.min.js"></script>
+    <script src="${root}/resources/assets/js/quixnav-init.js"></script>
+    <script src="${root}/resources/assets/js/custom.min.js"></script>
 
 
 
     <!-- Daterangepicker -->
     <!-- momment js is must -->
-    <script src="${contextPath}/resources/assets/vendor/moment/moment.min.js"></script>
-    <script src="${contextPath}/resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="${root}/resources/assets/vendor/moment/moment.min.js"></script>
+    <script src="${root}/resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
     <!-- pickdate -->
-    <script src="${contextPath}/resources/assets/vendor/pickadate/picker.js"></script>
-    <script src="${contextPath}/resources/assets/vendor/pickadate/picker.time.js"></script>
-    <script src="${contextPath}/resources/assets/vendor/pickadate/picker.date.js"></script>
-    <script src="${contextPath}/resources/assets/vendor/pickadate/translations/ko_KR.js"></script>
+    <script src="${root}/resources/assets/vendor/pickadate/picker.js"></script>
+    <script src="${root}/resources/assets/vendor/pickadate/picker.time.js"></script>
+    <script src="${root}/resources/assets/vendor/pickadate/picker.date.js"></script>
+    <script src="${root}/resources/assets/vendor/pickadate/translations/ko_KR.js"></script>
     <!-- pickadate 옵션 수정 : 오늘 날짜 이후 + 주중만 선택 가능 -->
     <script>
         jQuery.extend(jQuery.fn.pickadate.defaults,{format: "yyyy-mm-dd", formatSubmit: "yyyy-mm-dd", firstDay: 0, disable: [7, 8], min: "0"});
@@ -377,12 +378,12 @@
 
 
     <!-- Pickdate -->
-    <script src="${contextPath}/resources/assets/js/plugins-init/pickadate-init.js"></script>
+    <script src="${root}/resources/assets/js/plugins-init/pickadate-init.js"></script>
 
     <!-- Jquery Validation -->
-    <script src="${contextPath}/resources/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="${root}/resources/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
     <!-- Form validate init -->
-    <script src="${contextPath}/resources/assets/js/plugins-init/jquery.validate-init.js"></script>
+    <script src="${root}/resources/assets/js/plugins-init/jquery.validate-init.js"></script>
     
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.6/dist/sweetalert2.all.min.js"></script>
@@ -617,7 +618,7 @@
         
         function roomInfoChk() {
             if(isEmpty(inputRoom)) {
-                $('#room_img').attr('src', '${contextPath}/resources/assets/images/empty-photo.jpg');
+                $('#room_img').attr('src', '${root}/resources/assets/images/empty-photo.jpg');
                 $('#room_info').text('');
             }
         }
@@ -629,7 +630,7 @@
             for(var i in roomInfoList) {
                 if(roomInfoList[i].meet_no == inputRoom) {
                     if(!isEmpty(roomInfoList[i].img_change_name)) {
-                        $('#room_img').attr('src', '${contextPath}/resources/uploadFiles/' + roomInfoList[i].img_change_name);
+                        $('#room_img').attr('src', '${root}/resources/uploadFiles/' + roomInfoList[i].img_change_name);
                     }
                     $('#room_info').text(roomInfoList[i].meet_info);
                 }

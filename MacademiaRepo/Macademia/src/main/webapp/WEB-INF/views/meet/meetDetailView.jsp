@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
     <title>회의실 예약 - 조회 하기 </title>
     <!-- Stylesheet -->
-    <link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet">
+    <link href="${root}/resources/assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -69,9 +70,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label" for="jobName">직위</label>
+                                                <label class="col-lg-4 col-form-label" for="positionName">직위</label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="form-control" id="jobName" name="jobName" value="${ mr.jobName != NULL ? mr.jobName : '-' }" readonly>
+                                                    <input type="text" class="form-control" id="positionName" name="positionName" value="${ mr.positionName != NULL ? mr.positionName : '-' }" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -144,10 +145,10 @@
                                             <div class="form-group row">
                                                 <div class="col-lg-4">
                                                     <c:if test="${ mInfo.img_change_name eq null }">
-                                                        <img class="img-fluid" id="room_img" src="${contextPath}/resources/assets/images/empty-photo.jpg" alt="회의실 사진">
+                                                        <img class="img-fluid" id="room_img" src="${root}/resources/assets/images/empty-photo.jpg" alt="회의실 사진">
                                                     </c:if>
                                                     <c:if test="${ mInfo.img_change_name ne null }">
-                                                        <img class="img-fluid" id="room_img" src="${contextPath}/resources/uploadFiles/${ mInfo.img_change_name }" alt="회의실 사진">
+                                                        <img class="img-fluid" id="room_img" src="${root}/resources/uploadFiles/${ mInfo.img_change_name }" alt="회의실 사진">
                                                     </c:if>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -180,9 +181,9 @@
     
  
     <!-- Required vendors -->
-    <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
-    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
-    <script src="${contextPath}/resources/assets/js/custom.min.js"></script>
+    <script src="${root}/resources/assets/vendor/global/global.min.js"></script>
+    <script src="${root}/resources/assets/js/quixnav-init.js"></script>
+    <script src="${root}/resources/assets/js/custom.min.js"></script>
 
 
 

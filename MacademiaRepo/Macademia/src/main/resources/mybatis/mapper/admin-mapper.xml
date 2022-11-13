@@ -30,10 +30,10 @@
 	</resultMap>
 	
 		<resultMap type="DeptVo" id="deptResultSet">
-		<result column="NO" property="no"/>
-		<result column="NAME" property="name"/>
+		<result column="NO" property="deptNo"/>
+		<result column="NAME" property="deptName"/>
 		<result column="UPPER_DEPT" property="upperDept"/>
-		<result column="LEV" property="lev"/>
+		<result column="LEV" property="deptLevel"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="DELETE_DATE" property="deleteDate"/>
 		<result column="DELETE_YN" property="deleteYn"/>

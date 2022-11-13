@@ -52,11 +52,11 @@
 			<%@include file="/WEB-INF/views/common/header.jsp" %>
 		</header>
 		<aside>
-			<%@include file="/WEB-INF/views/common/menubar_admin.jsp" %>
+			<%@include file="/WEB-INF/views/common/menubar.jsp" %>
 		</aside>
-		<main>
+		<%-- <main>
 			<%@include file="/WEB-INF/views/admin/memberList.jsp" %>
-		</main>
+		</main> --%>
 	</div>
 
 </body>
