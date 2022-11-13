@@ -12,7 +12,7 @@
 
     main{
         display: grid;
-        grid-template-rows: 10% 10% 10% 70% ;
+        grid-template-rows: 10% 10% 10% 80% ;
     }
 
     /*  */
@@ -49,11 +49,11 @@
 
     /* 지급년월 본봉 ~~ 실수령액 부분 */
     #history-table-outer{
-        font-size: 1.3rem;
+        font-size: 1.1rem;
 
         display: grid;
-        grid-template-columns: repeat(10, 10%);
-        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: repeat(10, 9%);
+        grid-template-rows: repeat(13, 1fr);
         row-gap: 10px;
         align-content : center;
         align-items: center;
