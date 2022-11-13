@@ -76,7 +76,7 @@ public class AdminController {
 			mv.addObject("dList", dList);
 			mv.addObject("pList", pList);
 			mv.addObject("message", message);
-			mv.setViewName("memberList");
+			mv.setViewName("admin/memberList");
 		} else {
 			throw new AdminException("멤버 리스트 조회에 실패하였습니다.");
 		}
@@ -122,11 +122,10 @@ public class AdminController {
 			mv.addObject("selectDept", selectDept);
 			mv.addObject("selectPosi", selectPosi);
 			mv.addObject("searchValue", searchValue);
-			mv.setViewName("memberList");
+			mv.setViewName("admin/memberList");
 		} else {
 			throw new AdminException("멤버 검색 결과 조회에 실패하였습니다.");
 		}
-		
 		return mv;
 	}
 	
@@ -406,7 +405,7 @@ public class AdminController {
 			Posij = new JSONObject();
 			Posij.put("nodeId", m.getNo());
 			Posij.put("nodeType", "member");
-			Posij.put("nodeName", m.getName());
+			Posij.put("nodeName", m.getDeptName());
 //			Posij.put("hasChildren", null);
 			Posij.put("PositionName", m.getPositionName());
 			
@@ -415,9 +414,9 @@ public class AdminController {
 		
 		for (Dept d : subDeptList) {
 			Posij = new JSONObject();
-			Posij.put("nodeId", d.getNo());
+			Posij.put("nodeId", d.getDeptNo());
 			Posij.put("nodeType", "dept");
-			Posij.put("nodeName", d.getName());
+			Posij.put("nodeName", d.getDeptName());
 //			Posij.put("hasChildren", d.getHasChildren());
 			Posij.put("PositionName", null);
 			

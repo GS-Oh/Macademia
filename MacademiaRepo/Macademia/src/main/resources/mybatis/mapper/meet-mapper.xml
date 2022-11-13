@@ -11,24 +11,24 @@
         SELECT REV_NO, REV_DATE, REV_START_TIME, REV_END_TIME, REV_CONTENT, REV_STATUS,
                REV_APPLY_DATE, MEET_NO, M_NO, MEET_NAME, M_NAME, M_EMAIL, POSITION_NAME, DEPT_NAME
         FROM MEET_RESERVATION
-             LEFT JOIN MEMBER M USING(NO)
-             LEFT JOIN MEETING_ROOM MR USING(MEET_NO)
-             LEFT JOIN POSITION P USING(NO)
-             LEFT JOIN DEPT D USING(NO)
+             LEFT JOIN MEMBER USING(NO)
+             LEFT JOIN MEETING_ROOM USING(MEET_NO)
+             LEFT JOIN POSITION USING(NO)
+             LEFT JOIN DEPT USING(NO)
         ORDER BY REV_DATE DESC, REV_START_TIME
     </select>
 
 	<resultMap type="MeetingResrv" id="meetResrvResultSet">
-        <id column="REV_NO" property="revNo"/>
-        <result column="REV_DATE" property="revDate"/>
-        <result column="REV_START_TIME" property="revstartTime"/>
-        <result column="REV_END_TIME" property="revEndTime"/>
+        <id column="REV_NO" property="rev_no"/>
+        <result column="REV_DATE" property="rev_date"/>
+        <result column="REV_START_TIME" property="rev_start_time"/>
+        <result column="REV_END_TIME" property="rev_end_time"/>
         <result column="REV_CONTENT" property="rev_content"/>
-        <result column="REV_STATUS" property="revStatus"/>
-        <result column="REV_APPLY_DATE" property="revApplyDate"/>
-        <result column="MEET_NO" property="meetNo"/>
+        <result column="REV_STATUS" property="rev_status"/>
+        <result column="REV_APPLY_DATE" property="rev_apply_date"/>
+        <result column="MEET_NO" property="meet_no"/>
         <result column="M_NO" property="mNo"/>
-        <result column="MEET_NAME" property="meetName"/>
+        <result column="MEET_NAME" property="meet_name"/>
         <result column="M_NAME" property="mName"/>
         <result column="M_EMAIL" property="email"/>
         <result column="POSITION_NAME" property="positionName"/>
@@ -47,7 +47,7 @@
         FROM MEET_RESERVATION
              LEFT JOIN MEMBER USING(NO)
              LEFT JOIN MEETING_ROOM USING(MEET_NO)
-             LEFT JOIN POSITION USING(POSITION)
+             LEFT JOIN POSITION USING(NO)
              LEFT JOIN DEPT USING(NO)
         WHERE M_NO = #{mNo}
         ORDER BY REV_DATE DESC, REV_START_TIME

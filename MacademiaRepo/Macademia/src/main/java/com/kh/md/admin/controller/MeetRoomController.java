@@ -38,7 +38,7 @@ public class MeetRoomController {
 		if (meetList != null) {
 			model.addAttribute("meetList", meetList);
 			model.addAttribute("message", message);
-			return "meetRoomList";
+			return "admin/meetRoomList";
 		} else {
 			throw new AdminException("회의실 등록에 실패하였습니다.");
 		}
@@ -57,8 +57,8 @@ public class MeetRoomController {
 			renameFileName = fileManager.saveFile(uploadFile, request, "/uploadFiles");
 			
 			if (renameFileName != null) {
-				meetRoom.setImgOriginName(uploadFile.getOriginalFilename());
-				meetRoom.setImgChangeName(renameFileName);
+				meetRoom.setImg_origin_name(uploadFile.getOriginalFilename());
+				meetRoom.setImg_change_name(renameFileName);
 			}
 		}
 		
@@ -88,7 +88,7 @@ public class MeetRoomController {
 		if (meetRoom != null) {
 			model.addAttribute("meetRoom", meetRoom);
 			model.addAttribute("message", message);
-			return "meetRoomDetail";
+			return "admin/meetRoomDetail";
 		} else {
 			throw new AdminException("회의실 상세 보기에 실패하였습니다.");
 		}
@@ -104,15 +104,15 @@ public class MeetRoomController {
 		if (reloadFile != null && !reloadFile.isEmpty()) { // 수정할 파일 존재
 			
 			// 수정할 파일 존재 + 기존 파일 존재 = 기존 파일 삭제
-			if (meetRoom.getImgChangeName() != null) {
-				 fileManager.deleteFile(meetRoom.getImgOriginName(), request, "/uploadFiles");
+			if (meetRoom.getImg_change_name() != null) {
+				 fileManager.deleteFile(meetRoom.getImg_origin_name(), request, "/uploadFiles");
 			}
 			
 			String renameFileName =  fileManager.saveFile(reloadFile, request, "/uploadFiles");
 			
 			if (renameFileName != null) {
-				meetRoom.setImgOriginName(reloadFile.getOriginalFilename());
-				meetRoom.setImgChangeName(renameFileName);
+				meetRoom.setImg_origin_name(reloadFile.getOriginalFilename());
+				meetRoom.setImg_change_name(renameFileName);
 			}
 		}
 		
@@ -122,7 +122,7 @@ public class MeetRoomController {
 			throw new AdminException("회의실 수정에 실패하였습니다.");
 		}
 		
-		return "redirect:meetdetail.ad?meet_no=" + meetRoom.getMeetNo() + "&message=success";
+		return "redirect:meetdetail.ad?meet_no=" + meetRoom.getMeet_no() + "&message=success";
 	}
 	
     /**

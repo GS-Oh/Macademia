@@ -157,12 +157,22 @@
                 <label for="">메일</label>
             </a>
         </div>
+        <c:if test="${loginMember.grade == 'A'}">
         <div id="nav-menu12">
             <a href="${root}/admin/main">
                 <i class="fa-solid fa-user-gear fa-2x"></i><br>
                 <label for="">관리자</label>
             </a>
         </div>
+        </c:if>
+        <c:if test="${loginMember.grade == 'N'}">
+        <div id="nav-menu13">
+            <a href="${root}/meet/mrlist.mr">
+                <i class="fa-solid fa-people-group fa-2x"></i><br>
+                <label for="">회의실</label>
+            </a>
+        </div>
+        </c:if>
     </div>
     <div id="alert-area">
         

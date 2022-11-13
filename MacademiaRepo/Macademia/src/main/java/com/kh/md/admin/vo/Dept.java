@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class Dept {
 
-	private int no;
-	private String name;
+	private int deptNo;
+	private String deptName;
 	private Integer upperDept;
-	private int lev;
+	private int deptLevel;
 	private Date createDate;
 	private Date deleteDate;
 	private String deleteYn;

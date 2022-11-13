@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
     <title>회의실 예약 - 예약 목록 </title>
-    <link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet">
+    <link href="${root}}/resources/assets/css/style.css" rel="stylesheet">
     <style>
         table {
             align-content: center;
@@ -97,7 +98,7 @@
                                                                             if($('#searchCondition1').val() == 'r_no')
                                                                                 $('#searchKeyword1').prop('placeholder', "예시:  '1'");
                                                                             else if($('#searchCondition1').val() == 'r_date')
-                                                                                $('#searchKeyword1').prop('placeholder', "예시:  '2022-01-26'");
+                                                                                $('#searchKeyword1').prop('placeholder', "예시:  '2022-11-14'");
                                                                             else if($('#searchCondition1').val() == 'r_status')
                                                                                 $('#searchKeyword1').prop('placeholder', "예시:  '예약 완료'");
                                                                             else if($('#searchCondition1').val() == 'r_meetName')
@@ -111,7 +112,7 @@
                                                                             if($('#searchCondition1').val() == 'r_no')
                                                                                 $('#searchKeyword1').prop('placeholder', "예시:  '1'");
                                                                             else if($('#searchCondition1').val() == 'r_date')
-                                                                                $('#searchKeyword1').prop('placeholder', "예시:  '2022-01-26'");
+                                                                                $('#searchKeyword1').prop('placeholder', "예시:  '2022-11-14'");
                                                                             else if($('#searchCondition1').val() == 'r_status')
                                                                                 $('#searchKeyword1').prop('placeholder', "예시:  '예약 완료'");
                                                                             else if($('#searchCondition1').val() == 'r_meetName')
@@ -387,7 +388,7 @@
                                                                             if($('#searchCondition2').val() == 'r_no')
                                                                                 $('#searchKeyword2').prop('placeholder', "예시:  '1'");
                                                                             else if($('#searchCondition2').val() == 'r_date')
-                                                                                $('#searchKeyword2').prop('placeholder', "예시:  '2022-01-26'");
+                                                                                $('#searchKeyword2').prop('placeholder', "예시:  '2022-11-14'");
                                                                             else if($('#searchCondition2').val() == 'r_status')
                                                                                 $('#searchKeyword2').prop('placeholder', "예시:  '예약 완료'");
                                                                             else if($('#searchCondition2').val() == 'r_meetName')
@@ -401,7 +402,7 @@
                                                                             if($('#searchCondition2').val() == 'r_no')
                                                                                 $('#searchKeyword2').prop('placeholder', "예시:  '1'");
                                                                             else if($('#searchCondition2').val() == 'r_date')
-                                                                                $('#searchKeyword2').prop('placeholder', "예시:  '2022-01-26'");
+                                                                                $('#searchKeyword2').prop('placeholder', "예시:  '2022-11-14'");
                                                                             else if($('#searchCondition2').val() == 'r_status')
                                                                                 $('#searchKeyword2').prop('placeholder', "예시:  '예약 완료'");
                                                                             else if($('#searchCondition2').val() == 'r_meetName')
@@ -993,9 +994,9 @@
     
 
         <!-- vendors -->
-        <script src="${contextPath}/resources/assets/vendor/global/global.min.js"></script>
-        <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
-        <script src="${contextPath}/resources/assets/js/custom.min.js"></script>
+        <script src="${root}/resources/assets/vendor/global/global.min.js"></script>
+        <script src="${root}/resources/assets/js/quixnav-init.js"></script>
+        <script src="${root}/resources/assets/js/custom.min.js"></script>
         
         <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.6/dist/sweetalert2.all.min.js"/>

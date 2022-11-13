@@ -148,13 +148,13 @@
 <!--                                         <span class="ml-2">Chat </span> -->
 <!--                                     </a> -->
                                     <c:if test="${ loginUser.grade == 'A' }">
-	                                    <a href="${contextPath}/admin/mlist.ad" class="dropdown-item">
+	                                    <a href="${root}/admin/mlist.ad" class="dropdown-item">
 	                                        <i class="fa fa-mail-forward"></i>
 	                                        <span class="ml-2">Admin Page </span>
 	                                    </a>
                                     </c:if>
                                      <c:if test="${ loginUser != null }">
-	                                    <a href="logout" class="dropdown-item">
+	                                    <a href="${logout}" class="dropdown-item">
 	                                        <i class="icon-key"></i>
 	                                        <span class="ml-2">Logout </span>
                                     	</a>
@@ -204,10 +204,10 @@
                     		<i class="bi bi-people"></i><span class="nav-text">커뮤니티</span></a>
                         <ul aria-expanded="false">
                             <li><a href="Commblist.bo">자유게시판</a></li>
-                            <li><a href="marketblist.bo">중고장터</a></li>
+                            <li><a href="anyblist.bo">익명게시판</a></li>
                         </ul>
                     </li>
-                    <li><a href="noticeBoardList.nb" aria-expanded="false">
+                    <li><a href="${root}/noticeBoardList.nb" aria-expanded="false">
                     	<i class="bi bi-megaphone"></i><span class="nav-text">공지사항</span></a>
                     </li>
                     <li><a href="archive.arch" aria-expanded="false">
@@ -216,16 +216,16 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     		<i class="bi bi-telephone-plus"></i><span class="nav-text">주소록</span></a>
                     	<ul aria-expanded="false">
-		                    <li><a href="list.addr">주소록 목록</a></li>
-                            <li><a href="search.addr">주소록 검색</a></li>
+		                    <li><a href="${root}/list.addr">주소록 목록</a></li>
+                            <li><a href="${root}/search.addr">주소록 검색</a></li>
                        	</ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="bi bi-pencil-square"></i><span class="nav-text">회의실 예약</span></a>
                         <ul aria-expanded="false">
-							<li><a href="mrlist.mr">예약 목록</a></li>
-							<li><a href="mrcalview.mr">예약 캘린더</a></li>
-                            <li><a href="mrinsertview.mr">예약 신청</a></li>
+							<li><a href="${root}/mrlist.mr">예약 목록</a></li>
+							<li><a href="${root}/mrcalview.mr">예약 캘린더</a></li>
+                            <li><a href="${root}/mrinsertview.mr">예약 신청</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -246,7 +246,7 @@
                                 class="bi bi-person-circle"></i><span class="nav-text">마이페이지</span></a>
                         <ul aria-expanded="false">
                             <li><a href="myInfo.mp">내 정보</a></li>
-                            <li><a href="scrapList.mp">스크랩 관리</a></li>
+                            <li><a href="${root}/scrapList.mp">스크랩 관리</a></li>
                         </ul>
                     </li>
                 </ul>

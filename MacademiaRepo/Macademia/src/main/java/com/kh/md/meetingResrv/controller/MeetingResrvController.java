@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,8 +34,13 @@ public class MeetingResrvController {
     @Autowired
     private MeetingResrvService mrService;
     
+    @GetMapping("meet/mrlist.mr")
+    public String meetRoomHome() {
+    	return "meet/meetListView";
+    }
+    
     // 예약 목록 조회(전체 + 내)
-    @RequestMapping("mrlist.mr")
+    @RequestMapping("meet/mrlist.mr")
     public ModelAndView meetingRoomResrvList(@RequestParam(value = "page1", required = false) Integer page1,
             @RequestParam(value = "page2", required = false) Integer page2, ModelAndView mv, HttpSession session) {
         // 예약 종료 시간 이후에는 자동적으로 사용 완료로 변경
@@ -58,7 +64,7 @@ public class MeetingResrvController {
         if (page2 != null)
             currentPage2 = page2;
         
-        String loginUserNo = ((MemberVo) session.getAttribute("loginUser")).getNo();
+        String loginUserNo = ((MemberVo) session.getAttribute("loginMember")).getNo();
         
         int listCount2 = mrService.getMyListCount(loginUserNo);
         
@@ -75,18 +81,18 @@ public class MeetingResrvController {
         SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
         
         for (MeetingResrv meetingResrv : list1) {
-            Date rev_date = meetingResrv.getRevDate();
-            Timestamp rev_start_time = meetingResrv.getRevStartTime();
-            Timestamp rev_end_time = meetingResrv.getRevEndTime();
+            Date rev_date = meetingResrv.getRev_date();
+            Timestamp rev_start_time = meetingResrv.getRev_start_time();
+            Timestamp rev_end_time = meetingResrv.getRev_end_time();
             
             meetingResrv.setRevTime(sdf_date.format(rev_date) + "   " + sdf_time.format(rev_start_time) + " ~ "
                     + sdf_time.format(rev_end_time));
         }
         
         for (MeetingResrv meetingResrv : list2) {
-            Date rev_date = meetingResrv.getRevDate();
-            Timestamp rev_start_time = meetingResrv.getRevStartTime();
-            Timestamp rev_end_time = meetingResrv.getRevEndTime();
+            Date rev_date = meetingResrv.getRev_date();
+            Timestamp rev_start_time = meetingResrv.getRev_start_time();
+            Timestamp rev_end_time = meetingResrv.getRev_end_time();
             
             meetingResrv.setRevTime(sdf_date.format(rev_date) + "   " + sdf_time.format(rev_start_time) + " ~ "
                     + sdf_time.format(rev_end_time));
@@ -109,7 +115,7 @@ public class MeetingResrvController {
             mv.addObject("pi2", pi2);
             mv.addObject("list2", list2);
             
-            mv.setViewName("meetListView");
+            mv.setViewName("meet/meetListView");
         } else
             throw new MeetingResrvException("예약 내역 조회에 실패하였습니다.");
         
@@ -117,13 +123,13 @@ public class MeetingResrvController {
     }
     
     // 예약 캘린더 페이지 연결
-    @RequestMapping("mrcalview.mr")
+    @RequestMapping("meet/mrcalview.mr")
     public String meetingResrvCalView() {
-        return "meetCalcView";
+        return "meet/meetCalcView";
     }
     
     // 예약 캘린더 용 데이터 전송(ajax)
-    @RequestMapping(value = "mrcal.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "meet/mrcal.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String meetingResrvCal() {
         // 예약 종료 시간 이후에는 자동적으로 사용 완료로 변경
@@ -139,42 +145,42 @@ public class MeetingResrvController {
     }
     
     // 예약 신청 페이지 연결
-    @RequestMapping("mrinsertview.mr")
+    @RequestMapping("meet/mrinsertview.mr")
     public String meetingResrvInsertView() {
-        return "meetResrvInsertForm";
+        return "meet/meetResrvInsertForm";
     }
     
     // 예약 신청
-    @RequestMapping("mrinsert.mr")
+    @RequestMapping("meet/mrinsert.mr")
     public String meetingResrvInsert(@RequestParam("datepicker") Date r_date,
             @RequestParam("r_start_time") String r_start_time, @RequestParam("r_end_time") String r_end_time,
             @RequestParam("r_room") int r_room, @RequestParam("r_content") String r_content, HttpSession session) {
         // 예약 정보 입력
         MeetingResrv mr = new MeetingResrv();
         
-        mr.setRevDate(r_date);   // 예약 날짜 입력
+        mr.setRev_date(r_date);   // 예약 날짜 입력
         
         // Timestamp 양식으로 변하기 위한 조건(예시 : String timeStr = "2022-01-01 12:30:00.0";)으로 변경
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String start_time = sdf.format(r_date) + " " + r_start_time + ":00";
         String end_time = sdf.format(r_date) + " " + r_end_time + ":00";
         
-        mr.setRevStartTime(Timestamp.valueOf(start_time));    // 예약 시작시간 입력
-        mr.setRevEndTime(Timestamp.valueOf(end_time));    // 예약 종료 시간 입력
-        mr.setRevContent(r_content);   // 예약목적 내용 입력
-        mr.setMeetNo(r_room);  // 예약 회의실 번호 입력
-        mr.setMNo(((MemberVo) session.getAttribute("loginUser")).getNo());   // 예약자 번호 입력
+        mr.setRev_start_time(Timestamp.valueOf(start_time));    // 예약 시작시간 입력
+        mr.setRev_end_time(Timestamp.valueOf(end_time));    // 예약 종료 시간 입력
+        mr.setRev_ontent(r_content);   // 예약목적 내용 입력
+        mr.setMeet_no(r_room);  // 예약 회의실 번호 입력
+        mr.setM_no(((MemberVo) session.getAttribute("loginMember")).getNo());   // 예약자 번호 입력
         
         int result = mrService.insertMeetingResrv(mr);
         
         if (result > 0)
-            return "redirect:mrlist.mr";
+            return "redirect:meet/mrlist.mr";
         else
             throw new MeetingResrvException("회의실 예약 등록에 실패하였습니다.");
     }
     
     // 예약 신청 시 가능한 회의실 조회(ajax)
-    @RequestMapping(value = "mrcheckrooms.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "meet/mrcheckrooms.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String checkRooms(@RequestParam("inputDate") Date inputDate,
             @RequestParam("inputStartTime") String inputStartTime, @RequestParam("inputEndTime") String inputEndTime) {
@@ -198,7 +204,7 @@ public class MeetingResrvController {
     }
     
     // 예약 수정 시 가능한 회의실 조회(ajax)
-    @RequestMapping(value = "mrcheckroomsupdate.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "meet/mrcheckroomsupdate.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String checkRoomsUpdate(@RequestParam("inputDate") Date inputDate,
             @RequestParam("inputStartTime") String inputStartTime, @RequestParam("inputEndTime") String inputEndTime,
@@ -224,11 +230,11 @@ public class MeetingResrvController {
     }
     
     // 예약 내역 세부 조회
-    @RequestMapping("mrdetail.mr")
+    @RequestMapping("meet/mrdetail.mr")
     public String meetingDetail(@RequestParam("rNo") int rNo, @RequestParam("page1") int page1, Model model,
             @RequestParam("cal") int cal) {
         MeetingResrv mr = mrService.selectMeetingResrv(rNo);
-        MeetingRoom mInfo = mrService.selectMeetingRoom(mr.getMeetNo());
+        MeetingRoom mInfo = mrService.selectMeetingRoom(mr.getMeet_no());
         
         if (mr != null) {
             model.addAttribute("mr", mr);
@@ -238,22 +244,22 @@ public class MeetingResrvController {
         } else
             throw new MeetingResrvException("예약 정보 상세 조회에 실패하였습니다.");
         
-        return "meetDetailView";
+        return "meet/meetDetailView";
     }
     
     // 예약 내역 수정 페이지 연결
-    @RequestMapping("mrupdateview.mr")
+    @RequestMapping("meet/mrupdateview.mr")
     public String meetingResrvUpdateView(@RequestParam("rNo") int rNo, @RequestParam("page2") int page2, Model model,
             @RequestParam("cal") int cal) {
         MeetingResrv mr = mrService.selectMeetingResrv(rNo);
         
         model.addAttribute("mr", mr).addAttribute("rNo", rNo).addAttribute("page2", page2).addAttribute("cal", cal);
         
-        return "meetResrvUpdateForm";
+        return "meet/meetResrvUpdateForm";
     }
     
     // 예약 내역 수정(입력 정보)
-    @RequestMapping("mrupdate.mr")
+    @RequestMapping("meet/mrupdate.mr")
     public String meetingResrvUpdate(@RequestParam("r_no") int r_no, @RequestParam("page2") int page2,
             @RequestParam("datepicker") Date r_date, @RequestParam("r_start_time") String r_start_time,
             @RequestParam("r_end_time") String r_end_time, @RequestParam("r_room") int r_room,
@@ -262,19 +268,19 @@ public class MeetingResrvController {
         // 예약 정보 입력
         MeetingResrv mr = new MeetingResrv();
         
-        mr.setRevNo(r_no);  // 예약 번호 입력
-        mr.setRevDate(r_date);   // 예약 날짜 입력
+        mr.setRev_no(r_no);  // 예약 번호 입력
+        mr.setRev_date(r_date);   // 예약 날짜 입력
         
         // Timestamp 양식으로 변하기 위한 조건(예시 : String timeStr = "2022-01-01 12:30:00.0";)으로 변경
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String start_time = sdf.format(r_date) + " " + r_start_time + ":00";
         String end_time = sdf.format(r_date) + " " + r_end_time + ":00";
         
-        mr.setRevStartTime(Timestamp.valueOf(start_time));    // 예약 시작시간 입력
-        mr.setRevEndTime(Timestamp.valueOf(end_time));    // 예약 종료 시간 입력
-        mr.setRevContent(r_content);   // 예약목적 내용 입력
-        mr.setMeetNo(r_room);  // 예약 회의실 번호 입력
-        mr.setMNo(((MemberVo) session.getAttribute("loginUser")).getNo());   // 예약자 아이디 입력
+        mr.setRev_start_time(Timestamp.valueOf(start_time));    // 예약 시작시간 입력
+        mr.setRev_end_time(Timestamp.valueOf(end_time));    // 예약 종료 시간 입력
+        mr.setRev_ontent(r_content);   // 예약목적 내용 입력
+        mr.setMeet_no(r_room);  // 예약 회의실 번호 입력
+        mr.setM_no(((MemberVo) session.getAttribute("loginMember")).getNo());   // 예약자 아이디 입력
         
         int result = mrService.updateMeetingResrv(mr);
         
@@ -286,11 +292,11 @@ public class MeetingResrvController {
         } else
             throw new MeetingResrvException("회의실 예약 수정에 실패하였습니다.");
         
-        return "redirect:mrdetail.mr?rNo=" + mr.getRevNo();
+        return "redirect:meet/mrdetail.mr?rNo=" + mr.getRev_no();
     }
     
     // 사용 완료 상태로 변경(수정 페이지: 1개)
-    @RequestMapping("mrcomplete.mr")
+    @RequestMapping("meet/mrcomplete.mr")
     public String meetingResrvComplete(@RequestParam("rNo") int rNo, @RequestParam("page2") int page2, Model model,
             @RequestParam("cal") int cal) {
         int result = mrService.completeMeetingResrv(rNo);
@@ -307,7 +313,7 @@ public class MeetingResrvController {
     }
     
     // 사용 완료 상태로 변경(조회 페이지: 1개 이상)
-    @RequestMapping(value = "mrcompletes.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "meet/mrcompletes.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String meetingResrvCompletes(@RequestParam(value = "chks[]") List<Integer> chksList) {
         int result = mrService.completesMeetingResrv(chksList);
@@ -319,7 +325,7 @@ public class MeetingResrvController {
     }
     
     // 예약 취소 상태로 변경(수정 페이지: 1개)
-    @RequestMapping("mrcancel.mr")
+    @RequestMapping("meet/mrcancel.mr")
     public String meetingResrvCancel(@RequestParam("rNo") int rNo, @RequestParam("page2") int page2, Model model,
             @RequestParam("cal") int cal) {
         int result = mrService.cancelMeetingResrv(rNo);
@@ -332,11 +338,11 @@ public class MeetingResrvController {
         } else
             throw new MeetingResrvException("회의실 예약 상태 수정(예약 취소)에 실패하였습니다.");
         
-        return "redirect:mrdetail.mr?rNo=" + rNo;
+        return "redirect:meet/mrdetail.mr?rNo=" + rNo;
     }
     
     // 예약 취소 상태로 변경(조회 페이지: 1개 이상)
-    @RequestMapping(value = "mrcancels.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "meet/mrcancels.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String meetingResrvCancels(@RequestParam(value = "chks[]") List<Integer> chksList) {
         int result = mrService.cancelsMeetingResrv(chksList);
@@ -348,7 +354,7 @@ public class MeetingResrvController {
     }
     
     // 검색 목록 조회
-    @RequestMapping("mrsearch.mr")
+    @RequestMapping("meet/mrsearch.mr")
     public ModelAndView meetingRoomResrvSearchList(@RequestParam(value = "page1", required = false) Integer page1,
             @RequestParam(value = "page2", required = false) Integer page2, Search search, ModelAndView mv,
             HttpSession session) {
@@ -378,7 +384,7 @@ public class MeetingResrvController {
         if (page2 != null)
             currentPage2 = page2;
         
-        String loginUserNo = ((MemberVo) session.getAttribute("loginUser")).getNo();
+        String loginUserNo = ((MemberVo) session.getAttribute("loginMember")).getNo();
         
         map.put("mNo", loginUserNo);
         
@@ -438,18 +444,18 @@ public class MeetingResrvController {
         SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
         
         for (MeetingResrv meetingResrv : searchList1) {
-            Date rev_date = meetingResrv.getRevDate();
-            Timestamp rev_start_time = meetingResrv.getRevStartTime();
-            Timestamp rev_end_time = meetingResrv.getRevEndTime();
+            Date rev_date = meetingResrv.getRev_date();
+            Timestamp rev_start_time = meetingResrv.getRev_start_time();
+            Timestamp rev_end_time = meetingResrv.getRev_end_time();
             
             meetingResrv.setRevTime(sdf_date.format(rev_date) + "   " + sdf_time.format(rev_start_time) + " ~ "
                     + sdf_time.format(rev_end_time));
         }
         
         for (MeetingResrv meetingResrv : searchList2) {
-            Date rev_date = meetingResrv.getRevDate();
-            Timestamp rev_start_time = meetingResrv.getRevStartTime();
-            Timestamp rev_end_time = meetingResrv.getRevEndTime();
+            Date rev_date = meetingResrv.getRev_date();
+            Timestamp rev_start_time = meetingResrv.getRev_start_time();
+            Timestamp rev_end_time = meetingResrv.getRev_end_time();
             
             meetingResrv.setRevTime(sdf_date.format(rev_date) + "   " + sdf_time.format(rev_start_time) + " ~ "
                     + sdf_time.format(rev_end_time));
@@ -472,7 +478,7 @@ public class MeetingResrvController {
             mv.addObject("searchPi2", searchPi2);
             mv.addObject("searchList2", searchList2);
             
-            mv.setViewName("meetListView");
+            mv.setViewName("meet/meetListView");
         } else
             throw new MeetingResrvException("예약 내역 검색에 실패하였습니다.");
         
