@@ -102,7 +102,7 @@
                     <option value="1">자유게시판</option>
                     <option value="2">자료공유게시판</option>
                 </select>
-                <input type="text" id="title" class="form-control"  name="title" value="${searchVo.title}" placeholder="파일명을 입력해주세요">
+                <input type="text" id="title" class="form-control"  name="title" value="${searchVo.title}" placeholder="제목명을 입력해주세요">
                 <button type="submit" id="search-btn" class="btn btn-primary" >검색</button>
             </div>
         </form>
