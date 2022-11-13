@@ -62,7 +62,7 @@
                             <div class="card-body">
                             	<!-------- 버튼 영역 --------->
                             	<div id="btnArea">
-                            		<c:if test="${ loginUser.mNo == board.mNo }">
+                            		<c:if test="${ loginMember.mNo == board.mNo }">
                             			<!-- 수정 페이지 이동  -->
 	                            		<c:url var="nbUpdateView" value="nbUpdateView.nb">
 	                            		   <c:param name="bNo" value="${ board.bNo }"/>
@@ -143,7 +143,7 @@
 		                       			if (!$scrapBtn.hasClass('scrap')) { // 스크랩한 상태가 아닐때
 		                       				// 스크랩 추가
 		                       				$.ajax({
-	                   							url: 'insertScrap.nb',
+	                   							url: 'noticeBoard/insertScrap.nb',
 	                   							data: {bNo:bNo},
 	                   							type: 'POST',
 	                   							success: function(data){
@@ -165,7 +165,7 @@
 		                       			} else { // 스크랩한 상태일때
 		                       				// 스크랩 삭제
 		                       				$.ajax({
-	                   							url: 'deleteScrap.nb',
+	                   							url: 'noticeBoard/deleteScrap.nb',
 	                   							data: {bNo:bNo},
 	                   							type: 'POST',
 	                   							success: function(data){
@@ -521,7 +521,7 @@
 	 	                       			alert('내용이 비어있습니다.');
 	 	                       		} else {
 		 	                       		$.ajax({
-	               							url: 'updateReply.nb',
+	               							url: 'noticeBoard/updateReply.nb',
 	               							data: {replyContent:replyContent, replyNo:replyNo, refBNo:refBNo},
 	               							type: 'POST',
 	               							dataType: 'json',

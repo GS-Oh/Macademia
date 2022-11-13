@@ -77,8 +77,8 @@
     
     <!-- vendors -->
     <script src="${root}/resources/assets/vendor/global/global.min.js"></script>
-    <script src="${contextPath}/resources/assets/js/quixnav-init.js"></script>
-    <script src="${contextPath}/resources/assets/js/custom.min.js"></script>
+    <script src="${root}/resources/assets/js/quixnav-init.js"></script>
+    <script src="${root}/resources/assets/js/custom.min.js"></script>
 
 
 
@@ -91,7 +91,7 @@
     
     <script>
         $('#calendar').fullCalendar('destroy');
-        var uId = '${ loginUser.mNo }';
+        var uNo = '${ loginMember.no }';
         
         $('#calendar').fullCalendar({
             locale: 'ko',
@@ -114,7 +114,7 @@
             eventLimit: true,
             events: function(start, end, timezone, callback) {
                 $.ajax({
-                    url: 'mrcal.mr',
+                    url: 'mr/mrcal.mr',
                     dataType: 'json',
                     success: function(data) {
                         console.log(data);
@@ -127,9 +127,9 @@
                                     title: item.meet_name + ' [' + item.rev_no + '] ' + item.mName,
                                     start: item.rev_start_time,
                                     end: item.rev_end_time,
-                                    id: item.rev_no,
+                                    no: item.rev_no,
                                     color: item.rev_status == 0 ? '#71d540' : (item.rev_status == 1 ? '#6e32b3' : '#ffad33'),
-                                    url: (item.mNo != uId || (item.mNo == uId &&item.rev_status != 0)) ? ('mrdetail.mr?rNo=' + item.rev_no + '&page1=1&cal=1') : ('mrupdateview.mr?rNo=' + item.rev_no + '&page2=1&cal=1')
+                                    url: (item.mNo != uNo || (item.mNo == uNo &&item.rev_status != 0)) ? ('mrdetail.mr?rNo=' + item.rev_no + '&page1=1&cal=1') : ('mrupdateview.mr?rNo=' + item.rev_no + '&page2=1&cal=1')
                                 });
                             }
                         });

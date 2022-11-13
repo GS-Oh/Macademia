@@ -63,7 +63,6 @@
 	                                            <input id="positionName1" type="text" class="form-control" name="positionName" maxlength="10"><br>
 	                                            <span id="positionNameGuide1" class="guide text-danger"></span><br>
 	                                            <span class="text-danger">*</span><label class="col-form-label">정렬 순서</label>
-	                                            <input id="posiOrder1" type="number" class="form-control" name="posiOrder" step="1" min="1"><br>
 	                                            <span id="posiOrderGuide1" class="guide text-danger"></span><br>
 	                                        </div>
 	                                        <div class="modal-footer">
@@ -88,7 +87,7 @@
 	                                            <input id="positionName2" type="text" class="form-control" name="positionName" maxlength="10"><br>
 	                                            <span id="positionNameGuide2" class="guide text-danger"></span><br>
 	                                            <span class="text-danger">*</span><label class="col-form-label">정렬 순서</label>
-	                                            <input id="posiOrder2" type="number" class="form-control" name="posiOrder" step="1" min="1"><br>
+	                                            <input id="posiOrder2" type="text" class="form-control" name="posiOrder"><br>
 	                                            <span id="posiOrderGuide2" class="guide text-danger"></span><br>
 	                                        </div>
 	                                        <input id="posiNo" type="hidden" name="posiNo">
@@ -119,7 +118,6 @@
 		                                    	<tr>
 			                                		<td><input type="checkbox" class="checkP" name="positionNo" value="${ p.no }"></td>
 			                                        <td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">${ p.name }</a></td>
-			                                        <td>${ p.posiOrder }</td>
 			                                        <td>${ p.memberCount }</td>
 		                                        </tr>
 	                                       	</c:forEach>
@@ -190,33 +188,22 @@
 	                       				
 	                       			});
 	                       			
-	                       			$('#posiOrder1').on('change', function(){
-	                       				var posiOrder = document.getElementById('posiOrder1');
-	                       				
-	                       				if (posiOrder.value == "" || posiOrder.value < 1) {
-	                       					$('#posiOrderGuide1').text('1 이상의 숫자를 입력해주세요.');
-	                       					posiOrder.focus();
-	                       				} else {
-	                       					$('#posiOrderGuide1').text('');
-	                       				}
-	                       			});
+	                       			
 	                       			
 					        		// 직위 추가
 					        		$(document).on('click', '#insertBtn', function(){
 										var positionName = document.getElementById('positionName1');
-										var posiOrder = document.getElementById('posiOrder1');
+										
 											
 										if(positionName.value.trim().length < 1 || positionName.value.trim().length > 10) {	
 											positionName.focus();
-	                       				} else if (posiOrder.value == "" || posiOrder.value < 1) {
-	                       					posiOrder.focus();
-	                       				} else if (dupCheck) {
+	                       				}  else if (dupCheck) {
 	                       					positionName.focus();
 	                       				} else {
 											$.ajax({
 												url: 'pinsert.ad',
 		                       					dataType: 'json',
-		                       					data: {positionName:positionName.value, posiOrder:posiOrder.value},
+		                       					data: {positionName:positionName.value},
 		                       					type: 'POST',
 		                       					success: function(data){
 		                       						
@@ -228,7 +215,6 @@
 		                       							for(var i in data) {
 		                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
 		                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].positionName + '</a></td>'
-		                       									 	+ '<td>' + data[i].posiOrder + '</td>'
 		                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 		                       								$('#checkAll').prop('checked', false);
 		                       							}
@@ -243,7 +229,7 @@
 		                       					},
 		                       					error: function(data){
 		                       						console.log(data);
-		                       						$('#insertposi').modal('hide');
+		                       						$('#insertPosi').modal('hide');
 		                       						alert('알 수 없는 오류가 발생했습니다.', '', 'error');
 		                       					}
 	                       					});
@@ -260,7 +246,7 @@
 					        			
 					        			originPositionName = $(this).text();
 					        			$('#positionName2').val($(this).text());
-					        			$('#posiOrder2').val($(this).parent().parent().children().eq(2).text());
+					        			
 					        			$('#positionNo').val($(this).parent().parent().children().eq(0).children().val());
 					        			dupCheck = false;
 					        		});
@@ -291,32 +277,20 @@
 	                       				
 	                       			});
 	                       			
-	                       			$('#posiOrder2').on('change', function(){
-	                       				var posiOrder = document.getElementById('posiOrder2');
-	                       				
-	                       				if (posiOrder.value == "" || posiOrder.value < 1) {
-	                       					$('#posiOrderGuide2').text('1 이상의 숫자를 입력해주세요.');
-	                       					posiOrder.focus();
-	                       				} else {
-	                       					$('#jobOrderGuide2').text('');
-	                       				}
-	                       			});
 	                       			
 					        		$(document).on('click', '#updateBtn', function(){
 										var positionName = document.getElementById('positionName2');
-										var posiOrder = document.getElementById('posiOrder2');
+									
 											
 										if(positionName.value.trim().length < 1 || positionName.value.trim().length > 10) {	
 											positionName.focus();
-	                       				} else if (posiOrder.value == "" || posiOrder.value < 1) {
-	                       					posiOrder.focus();
 	                       				} else if (dupCheck) {
 	                       					positionName.focus();
 	                       				} else {
 											$.ajax({
 												url: 'pupdate.ad',
 		                       					dataType: 'json',
-		                       					data: {positionNo:$('#positionNo').val(), positionName:positionName.value, posiOrder:posiOrder.value},
+		                       					data: {positionNo:$('#positionNo').val(), positionName:positionName.value}
 		                       					type: 'POST',
 		                       					success: function(data){
 		                       						
@@ -328,7 +302,6 @@
 		                       							for(var i in data) {
 		                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
 		                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].PositionName + '</a></td>'
-		                       									 	+ '<td>' + data[i].posiOrder + '</td>'
 		                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 		                       								$('#checkAll').prop('checked', false);
 		                       							}
@@ -395,8 +368,7 @@
 				                       						if(data.length > 0) {
 				                       							for(var i in data) {
 				                       								html += '<tr><td><input type="checkbox" class="checkP" name="positionNo" value="' + data[i].positionNo + '"></td>'
-				                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].positionName + '</a></td>'
-				                       									 	+ '<td>' + data[i].posiOrder + '</td>'
+				                       									 	+ '<td><a class="updateBtnModal" data-toggle="modal" data-target="#updatePosi">' + data[i].positionName + '</a></td>
 				                       									 	+ '<td>' + data[i].memberCount + '</td></tr>';
 				                       								$('#checkAll').prop('checked', false);
 				                       							}

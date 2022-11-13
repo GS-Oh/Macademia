@@ -137,16 +137,16 @@
 			ON P.RANK_NO = R.NO
 			JOIN DEPT D
 			ON P.DEPT_NO = D.NO
-			WHERE QUIT_YN IN('Y','N')
 		<if test="selectDept != ''">
-			AND D.NO = #{selectDept}
+			AND D.NAME = #{selectDept}
 		</if>
 		<if test="selectPosi != ''">
-			AND P.NO = #{selectPosi}
+			AND P.NAME = #{selectPosi}
 		</if>
 		<if test="searchValue != ''">
 			AND M.NAME LIKE '%' || #{searchValue} || '%'
 		</if>
+			WHERE QUIT_YN IN('Y','N')
 	</select>
 	
 	<select id="selectSearchMemberList" resultMap="memberResultSet">

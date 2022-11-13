@@ -96,7 +96,7 @@
 													</tr>									
 												</tbody>
 											</table>
-											<input type="hidden" name="mNo" value="${ loginUser.mNo }">
+											<input type="hidden" name="mNo" value="${ loginMember.mNo }">
 											<div id="btnArea" align="center">
 												<button id="submitBtn" type="button" class="btn btn-primary">등록</button>
 												<button type="button" class="btn btn-outline-primary" onclick="location.href='noticeBoardList.nb'">목록으로</button>
@@ -248,7 +248,7 @@
 														console.log(fileExist)
 														if (fileExist) {
 															$.ajax({
-					                          					url: "uploadFiles.nb",
+					                          					url: "noticeBoard/uploadFiles.nb",
 					                          					data: fileData,
 					                          					dataType: 'json',
 					                          					type : "POST",

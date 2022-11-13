@@ -52,31 +52,31 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" action="mrinsert.mr" method="post" onsubmit="return insertValidate();">
+                                    <form class="form-valide" action="meet/mrinsert.mr" method="post" onsubmit="return insertValidate();">
                                         <div class="row">
                                             <div class="col-xl-6">
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="mName">사원명</label>
+                                                    <label class="col-lg-4 col-form-label" for="name">사원명</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="mName" name="mName" value="${ loginUser.mName != NULL ? loginUser.mName : '-' }" readonly>
+                                                        <input type="text" class="form-control" id="name" name="name" value="${loginMember.name}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="email">이메일</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="email" name="email" value="${ loginUser.email != NULL ? loginUser.email : '-' }" readonly>
+                                                        <input type="text" class="form-control" id="email" name="email" value="${ loginMember.email}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="positionName">직위</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="positionName" name="positionName" value="${ loginUser.positionName != NULL ? loginUser.posositionName : '-' }" readonly>
+                                                        <input type="text" class="form-control" id="positionName" name="positionName" value="${ loginMember.positionName}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="deptName">부서</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="deptName" name="deptName" value="${ loginUser.deptName != NULL ? loginUser.deptName : '-' }" readonly>
+                                                        <input type="text" class="form-control" id="deptName" name="deptName" value="${ loginMember.deptName}" readonly>
                                                     </div>
                                                 </div>
                                             </div>

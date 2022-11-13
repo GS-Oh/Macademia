@@ -52,7 +52,7 @@
 					                    	<option value="">부서</option>  
 					                    	<c:forEach var="d" items="${ dList }">
 					                    		<c:if test="${ selectDept ne d.deptNo }">
-					                    			<option value="${ d.deptNo }">${ d.deptNo }</option>
+					                    			<option value="${ d.deptNo }">${ d.deptName }</option>
 					                    		</c:if>
 					                    		<c:if test="${ selectDept eq d.deptNo }">
 					                    			<option value="${ d.deptNo }" selected>${ d.deptName }</option>
@@ -118,7 +118,7 @@
 	                                                	<p>선택한 사원 <span id="countCheck"></span>명의</p>
 	                                                	계정 상태 변경  &nbsp;
 	                                                	<select id="quitYn" class="form-control" name="quitYn"  style="width: 100px; display: inline;">
-	                                                		<option value="N">정상</option>
+	                                                		<option value="N">재직</option>
 	                                                		<option value="Y">퇴사</option>
 	                                                	</select>
 	                                                </div>
@@ -225,8 +225,8 @@
 		                                               		<td>
 				                                                <div class="btn-group">
 				                                                	<input type="hidden" name="quitYn" value="${ m.no }">
-								                                    <button type="button" class="btn btn-primary in approveBtn" style="background: #6495ED; border: #6495ED;">퇴사</button>
-								                                    <button type="button" class="btn btn-primary out rejectBtn" style="background: #CD5C5C; border: #CD5C5C;">취소</button> 
+								                                    <button type="button" class="btn btn-primary in approveBtn" style="background: #6495ED; border: #6495ED;">재직</button>
+								                                    <button type="button" class="btn btn-primary out rejectBtn" style="background: #CD5C5C; border: #CD5C5C;">퇴직</button> 
 								                                </div>
 							                                </td>
 	                                              		</c:if>
@@ -283,47 +283,30 @@
                        				
                        			});
                        			
-                       			// 계정 삭제 버튼 클릭시 실행하는 함수
+                       			 // 계정 삭제 버튼 클릭시 실행하는 함수
                        			$('#btnSubmit').on('click', function(){
                        				
 									var checkM = document.getElementsByClassName('checkM');
                        				
                        				var count = 0;
-                       				/* var managerYn = false;
-                       				var deptMgrYn = false; */
+         
                        				var grade = false;
-                       				/* var managerNo = "";
-                       				/* var deptMgrNo = ""; */
+                       				
                        				for (var i in checkM) {
                        					if(checkM[i].checked) {
                        						count++;
                        						<c:forEach items="${ mList }" var="m">
                        							if (checkM[i].value == '${ m.no }' && '${ m.grade }' == 'A' ) {
                        							 	grade = true;
-                       							 	if (managerNo == "") {
-                       							 		managerNo = checkM[i].value;
-                       							 	} else {
-                       							 		managerNo += ", " + checkM[i].value;
+                       				
                        							 	}
                        								
                        							}
-                       						</c:forEach> */
-                       						
-                       						/* 부서책임자 */
-                       						/* <c:forEach items="${ dList }" var="d">
-	                   							if (checkM[i].value == '${ d.deptManager }') {
-	                   								deptMgrYn = true;
-	                   							 	if (deptMgrNo == "") {
-	                   							 		deptMgrNo = checkM[i].value;
-	                							 	} else {
-	                							 		deptMgrNo += ", " + checkM[i].value;
-	                							 	}
-	                   							}
-           									</c:forEach> */
+                       						</c:forEach>
                        					}
-                       				}                   			
+                       				}                 			
                        				
-                       				/* if (count > 0 && !managerYn && !deptMgrYn) { */
+                       			
                    					if (count > 0 && !grade) {
                        			 		Swal.fire({
 	                       				  title: '선택된 ' + count + '명의 사원을 삭제하시겠습니까?',
@@ -346,7 +329,7 @@
                        					alert('삭제하려면, 먼저 부서 책임자 설정을 해제하여 주세요.', deptMgrId + '은 부서 책임자입니다.')
                        				} */
                        				 else if(grade){
-                       					alert('삭제하려면, 먼저 관리자 설정을 해제하여 주세요.', managerNo + '은 관리자 계정입니다.')
+                       					alert('삭제하려면, 먼저 관리자 설정을 해제하여 주세요.', grade + '은 관리자 계정입니다.')
                        					}
                        				} else {
                        					alert('적용할 사원을 선택하세요.');
@@ -380,106 +363,20 @@
                        				var mStatus = $('#mStatus').val();
                        				var quitYn = ${'#quitYn'}.val();
                        				
-                       			   /*  var managerYn = false;
-                       				var deptMgrYn = false;  */
                        				var grade = false;
-                       				var managerNo = "";
-                       				/*  var deptMgrNo = "";  */
+
                        				for (var i in checkM) {
                        					if(checkM[i].checked) {
                        						<c:forEach items="${ mList }" var="m">
                        							if (checkM[i].value == '${ m.no }' && '${ m.grade }' == 'A') {
                        							 	grade = true;
-                       							 	if (managerNo == "") {
-                    							 		managerNo = checkM[i].value;
-                    							 	} else {
-                    							 		managerNo += ", " + checkM[i].value;
-                    							 	}
-                       							}
-                       						</c:forEach>
-                       						
-                       						/*  <c:forEach items="${ dList }" var="d">
-	                   							if (checkM[i].value == '${ d.deptManager }') {
-	                   								deptMgrYn = true;
-	                   							 	if (deptMgrNo == "") {
-	                   							 		deptMgrNo = checkM[i].value;
-	                							 	} else {
-	                							 		deptMgrNo += ", " + checkM[i].value;
-	                							 	}
-	                   							}
-               								</c:forEach>  */
+                       							 	
+                       							} 
+                       						</c:forEach>	                       						
                        					}
                        				}       
                        				
-                       				/* if ((!managerYn & !deptMgrYn) || mStatus == 0) { 
-                       				   if (!grade || quitYn == 'N') {
-                       					$(this).parents('form').attr('action', '${ contextPath }/admin/mupdatemulti.ad');
-                       					$(this).parents('form').submit();
-                       				} else if (managerYn) {
-                       					alert('계정을 중지하려면, 먼저 관리자 설정을 해제하여 주세요.', managerNo + '은 관리자 계정입니다.');
-                       				} else {
-                       					alert('계정을 중지하려면, 먼저 부서책임자 설정을 해제하여 주세요.', deptMgrNo + '은 부서책임자입니다.');
-                       				}
-                       				                      				
-                       			}); */
-                       			
-                       			/* // 가입 승인
-                       			$('.approveBtn').on('click', function() {
-                       				var checkM = document.getElementsByClassName('checkM');
                        				
-                       				for(var i in checkM) {
-                       					if(checkM[i].value == $(this).prev().val()) { // 승인하려는 멤버만 선택되어 있게 함
-                       						checkM[i].checked = true;
-                       					} else {
-                       						checkM[i].checked = false;
-                       					}
-                       				}
-                       				
-									$('#mStatus').eq(0).attr('selected', 'selected'); // 계정 상태 변경 : 정상  선택
-									
-                   			 	 	Swal.fire({
-	                       				title: '가입을 승인하시겠습니까?',
-	                       				text: '승인 후 계정 상태가 정상으로 변경됩니다.',
-	                       				showCancelButton: true,
-	                       				confirmButtonColor: '#3085d6',
-	                       				cancelButtonColor: 'gray',
-	                       				confirmButtonText: '승인',
-	                       				cancelButtonText: '취소'
-	                       			}).then((result) => {
-	                       				if (result.value) {
-	                       					$(this).parents('form').attr('action', '${ contextPath }/admin/mupdatemulti.ad');
-	                           				$(this).parents('form').submit();
-	                       				}
-                     				});
-                       			});
-                       			
-                       			// 가입 거부
-                       			$('.rejectBtn').on('click', function() {
-                       				var checkM = document.getElementsByClassName('checkM');
-                       				
-                       				for(var i in checkM) {
-                       					if(checkM[i].value == $(this).prev().prev().val()) { // 가입 거부하려는 멤버만 선택되어 있게 함
-                       						checkM[i].checked = true;
-                       					} else {
-                       						checkM[i].checked = false;
-                       					}
-                       				}
-                       				
-                   			 	 	Swal.fire({
-	                       				title: '가입을 거부하시겠습니까?',
-	                       				text: '계정이 삭제되며 복구할 수 없습니다.',
-	                       				showCancelButton: true,
-	                       				confirmButtonColor: '#CD5C5C',
-	                       				cancelButtonColor: 'gray',
-	                       				confirmButtonText: '가입 거부',
-	                       				cancelButtonText: '취소'
-	                       			}).then((result) => {
-	                       				if (result.value) {
-	                       					$('#deleteForm').submit();
-	                       				}
-                     				}); 
-                       			});       */
-                       			
                        			// sweet alert customize
 				        		var alert = function(msg, title, icon) {
 				        			Swal.fire({
@@ -532,7 +429,7 @@
 	                                        		<c:param name="page" value="${ p }"/>
 	                                        		<c:if test="${ searchValue ne null }"> 
 														<c:param name="selectDept" value="${ selectDept }"/>
-														<c:param name="selectJob" value="${ selectPosi }"/>
+														<c:param name="selectPosi" value="${ selectPosi }"/>
 														<c:param name="searchValue" value="${ searchValue }"/>
 													</c:if>	
 	                                        	</c:url>

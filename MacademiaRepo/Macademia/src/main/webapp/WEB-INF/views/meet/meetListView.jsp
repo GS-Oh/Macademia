@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
     <title>회의실 예약 - 예약 목록 </title>
-    <link href="${root}}/resources/assets/css/style.css" rel="stylesheet">
+    <link href="${root}/resources/assets/css/style.css" rel="stylesheet">
     <style>
         table {
             align-content: center;
@@ -432,7 +432,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:if test="${ !empty loginUser }">
+                                                    <c:if test="${ !empty loginMember }">
                                                         <c:if test="${ pi2.listCount == 0 || searchPi2.listCount == 0 }">
                                                             <tr>
                                                                 <td colspan="6" class="nothing">예약 내역이 존재하지 않습니다.</td>
@@ -639,7 +639,7 @@
                                                     <!-- 예약 관련 버튼 시작 -->
                                                     <tr>
                                                         <td colspan="6">
-                                                            <c:if test="${ !empty loginUser }">
+                                                            <c:if test="${ !empty loginMember }">
                                                             <div class="d-flex justify-content-end">
                                                                 <button type="button" class="btn btn-primary btn-sm mr-2" onclick="location.href='mrinsertview.mr'">예약 신청</button>
                                                                 <c:if test="${ !list2.isEmpty() and !searchList2.isEmpty() }">

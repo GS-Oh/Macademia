@@ -49,7 +49,7 @@ public class NoticeBoardController {
     /**
      * 공지사항 목록 조회
      */	
-	@RequestMapping("noticeBoardList.nb")
+	@RequestMapping("noticeBoard/noticeBoardList.nb")
 	public ModelAndView noticeBoardList(@RequestParam(value="page", required=false) Integer page, 
 								        @RequestParam(value="message", required=false) String message, ModelAndView mv) {
 		
@@ -69,7 +69,7 @@ public class NoticeBoardController {
 			mv.addObject("pi", pi);
 			mv.addObject("nbList", nbList);
 			mv.addObject("message", message);
-			mv.setViewName("noticeBoardList");
+			mv.setViewName("noticeBoard/noticeBoardList");
 
 			return mv;
 			
@@ -81,7 +81,7 @@ public class NoticeBoardController {
     /**
      *  공지사항 검색
      */		
-	@RequestMapping("searchNoticeBoard.nb")
+	@RequestMapping("noticeBoard/searchNoticeBoard.nb")
 	public ModelAndView selectSearchMemberList(@RequestParam(value="page", required=false) Integer page, 
 										 @RequestParam("searchCondition") String searchCondition, @RequestParam("searchValue") String searchValue, 
 										 @RequestParam(value="message", required=false) String message, ModelAndView mv) {
@@ -106,7 +106,7 @@ public class NoticeBoardController {
 			mv.addObject("message", message);
 			mv.addObject("searchCondition", searchCondition);
 			mv.addObject("searchValue", searchValue);
-			mv.setViewName("noticeBoardList");
+			mv.setViewName("noticeBoard/noticeBoardList");
 			
 			return mv;
 			
@@ -118,10 +118,10 @@ public class NoticeBoardController {
     /**
      *  게시글 작성 페이지로 이동
      */	
-	@RequestMapping("nbinsertView.nb")
+	@RequestMapping("noticeBoard/nbinsertView.nb")
 	public String noticeBoardInsertView() {
 		
-		return "noticeBoardInsertForm";
+		return "noticeBoard/noticeBoardInsertForm";
 	}
 	
 	/**
@@ -185,7 +185,7 @@ public class NoticeBoardController {
 	/**
      * 다중파일 업로드
      */	
-	@RequestMapping(value="uploadFiles.nb", produces = "application/json")
+	@RequestMapping(value="noticeBoard/uploadFiles.nb", produces = "application/json")
 	public void uploadFiles(@RequestParam("files") List<MultipartFile> uploadFileList, HttpServletRequest request, HttpServletResponse response) {
 		// System.out.println(uploadFileList.get(0));
 		// System.out.println(uploadFileList.size());
@@ -232,7 +232,7 @@ public class NoticeBoardController {
 	/**
      * 게시글 등록
      */	
-	@RequestMapping("nbinsert.nb")
+	@RequestMapping("noticeBoard/nbinsert.nb")
 	public String insertNoticeBoard(@ModelAttribute NoticeBoard noticeBoard, 
 									@RequestParam(value="fileOriginName", required=false) String[] fileOriginName, 
 									@RequestParam(value="fileChangeName", required=false) String[] fileChangeName,
@@ -276,7 +276,7 @@ public class NoticeBoardController {
 	/**
      * 게시글 상세 조회
      */		
-	@RequestMapping("noticeBoardDetail.nb")
+	@RequestMapping("noticeBoard/noticeBoardDetail.nb")
 	public ModelAndView selectNoticeBoard(@RequestParam("bNo") int bNo, @RequestParam("page") int page, 
 								    @RequestParam(value="searchCondition", required=false) String searchCondition, 
 								    @RequestParam(value="searchValue", required=false) String searchValue, 
@@ -289,7 +289,7 @@ public class NoticeBoardController {
 		
 		List<NoticeBoardFile> fileList = nbService.selectFileList(bNo); 
 		
-		String mNo = ((MemberVo)session.getAttribute("loginUser")).getNo();
+		String mNo = ((MemberVo)session.getAttribute("loginMember")).getNo();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("bNo", String.valueOf(bNo));
@@ -308,7 +308,7 @@ public class NoticeBoardController {
 			mv.addObject("searchCondition", searchCondition);
 			mv.addObject("searchValue", searchValue);
 			
-			mv.setViewName("noticeBoardDetail");
+			mv.setViewName("noticeBoard/noticeBoardDetail");
 			
 			return mv;
 			
@@ -322,11 +322,11 @@ public class NoticeBoardController {
 	/**
      * 글 스크랩 추가
      */		
-	@RequestMapping("insertScrap.nb")
+	@RequestMapping("noticeBoard/insertScrap.nb")
 	@ResponseBody
 	public String insertScrap(@RequestParam("bNo") String bNo, HttpSession session) {
 		
-		String mNo = ((MemberVo)session.getAttribute("loginUser")).getNo();
+		String mNo = ((MemberVo)session.getAttribute("loginMember")).getNo();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("bNo", bNo);
@@ -345,7 +345,7 @@ public class NoticeBoardController {
 	@ResponseBody
 	public String deleteScrap(@RequestParam("bNo") String bNo, HttpSession session) {
 		
-		String mNo = ((MemberVo)session.getAttribute("loginUser")).getNo();
+		String mNo = ((MemberVo)session.getAttribute("loginMember")).getNo();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("bNo", bNo);
@@ -360,10 +360,10 @@ public class NoticeBoardController {
 	/**
      * 댓글 등록
      */		
-	@RequestMapping("insertReply.nb")
+	@RequestMapping("noticeBoard/insertReply.nb")
 	public void insertReply(@ModelAttribute NoticeBoardReply reply, HttpSession session, HttpServletResponse response) {
 		
-		String mNo = ((MemberVo)session.getAttribute("loginUser")).getNo();
+		String mNo = ((MemberVo)session.getAttribute("loginMember")).getNo();
 		System.out.println(reply);
 		reply.setReplyWriter(mNo);
 		
@@ -388,7 +388,7 @@ public class NoticeBoardController {
 	/**
      * 댓글 수정
      */		
-	@RequestMapping("updateReply.nb")
+	@RequestMapping("noticeBoard/updateReply.nb")
 	public void updateReply(@ModelAttribute NoticeBoardReply reply, HttpSession session, HttpServletResponse response) {
 		
 		int result = nbService.updateReply(reply);
@@ -412,7 +412,7 @@ public class NoticeBoardController {
 	/**
      * 댓글 삭제
      */		
-	@RequestMapping("deleteReply.nb")
+	@RequestMapping("noticeBoard/deleteReply.nb")
 	public void deleteReply(@ModelAttribute NoticeBoardReply reply, HttpSession session, HttpServletResponse response) {
 		
 		int result = nbService.deleteReply(reply.getReplyNo());
@@ -435,7 +435,7 @@ public class NoticeBoardController {
 	/**
      * 게시글 삭제
      */		
-	@RequestMapping("nbDelete.nb")
+	@RequestMapping("noticeBoard/nbDelete.nb")
 	public String deleteNoticeBoard(@RequestParam("bNo") int bNo, HttpServletRequest request) {
 		
 		int result = nbService.deleteNoticeBoard(bNo);
@@ -452,14 +452,14 @@ public class NoticeBoardController {
 				}
 				
 				if (result2 < fileList.size()) {
-					throw new NoticeBoardException("삭제 파일 상태 변경에 실패하엿습니다.");	
+					throw new NoticeBoardException("삭제 파일 상태 변경에 실패하였습니다.");	
 				}
 			}
 			
 			return "redirect:noticeBoardList.nb?message=d";
 			
 		} else {
-			throw new NoticeBoardException("게시글 삭제에 실패였엿습니다.");	
+			throw new NoticeBoardException("게시글 삭제에 실패하였습니다.");	
 		}
 		
 	}
@@ -467,7 +467,7 @@ public class NoticeBoardController {
 	/**
      * 게시글 수정 페이지로 이동
      */		
-	@RequestMapping("nbUpdateView.nb")
+	@RequestMapping("noticeBoard/nbUpdateView.nb")
 	public ModelAndView noticeBoardUpdateView(@RequestParam("bNo") int bNo, @RequestParam("page") int page, 
 								    @RequestParam(value="searchCondition", required=false) String searchCondition, 
 								    @RequestParam(value="searchValue", required=false) String searchValue, ModelAndView mv) {
@@ -484,7 +484,7 @@ public class NoticeBoardController {
 			mv.addObject("searchCondition", searchCondition);
 			mv.addObject("searchValue", searchValue);
 			
-			mv.setViewName("noticeBoardEditForm");
+			mv.setViewName("noticeBoard/noticeBoardEditForm");
 			
 			return mv;
 			
@@ -497,7 +497,7 @@ public class NoticeBoardController {
 	/**
      * 게시글 수정
      */		
-	@RequestMapping("nbupdate.nb")
+	@RequestMapping("noticeBoard/nbupdate.nb")
 	public String updateNoticeBoard(@ModelAttribute NoticeBoard noticeBoard, 
 										@RequestParam(value="fileOriginName", required=false) String[] fileOriginName, 
 										@RequestParam(value="fileChangeName", required=false) String[] fileChangeName,
@@ -581,7 +581,7 @@ public class NoticeBoardController {
 	/**
      * 메인 페이지 공지사항 리스트 조회(최신순 5개)
      */	
-	@RequestMapping("noticeBoardListMain.nb")
+	@RequestMapping("noticeBoard/noticeBoardListMain.nb")
 	public void noticeBoardListMain(HttpServletResponse response) {
 		
 		List<NoticeBoard> nBoardList = nbService.selectNoticeBoardListMain();

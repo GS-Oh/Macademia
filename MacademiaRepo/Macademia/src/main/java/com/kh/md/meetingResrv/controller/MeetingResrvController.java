@@ -129,7 +129,7 @@ public class MeetingResrvController {
     }
     
     // 예약 캘린더 용 데이터 전송(ajax)
-    @RequestMapping(value = "meet/mrcal.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "mrcal.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String meetingResrvCal() {
         // 예약 종료 시간 이후에는 자동적으로 사용 완료로 변경
@@ -174,13 +174,13 @@ public class MeetingResrvController {
         int result = mrService.insertMeetingResrv(mr);
         
         if (result > 0)
-            return "redirect:meet/mrlist.mr";
+            return "redirect:mrlist.mr";
         else
             throw new MeetingResrvException("회의실 예약 등록에 실패하였습니다.");
     }
     
     // 예약 신청 시 가능한 회의실 조회(ajax)
-    @RequestMapping(value = "meet/mrcheckrooms.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "mrcheckrooms.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String checkRooms(@RequestParam("inputDate") Date inputDate,
             @RequestParam("inputStartTime") String inputStartTime, @RequestParam("inputEndTime") String inputEndTime) {
@@ -204,7 +204,7 @@ public class MeetingResrvController {
     }
     
     // 예약 수정 시 가능한 회의실 조회(ajax)
-    @RequestMapping(value = "meet/mrcheckroomsupdate.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "mrcheckroomsupdate.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String checkRoomsUpdate(@RequestParam("inputDate") Date inputDate,
             @RequestParam("inputStartTime") String inputStartTime, @RequestParam("inputEndTime") String inputEndTime,
@@ -292,7 +292,7 @@ public class MeetingResrvController {
         } else
             throw new MeetingResrvException("회의실 예약 수정에 실패하였습니다.");
         
-        return "redirect:meet/mrdetail.mr?rNo=" + mr.getRev_no();
+        return "redirect:mrdetail.mr?rNo=" + mr.getRev_no();
     }
     
     // 사용 완료 상태로 변경(수정 페이지: 1개)
@@ -313,7 +313,7 @@ public class MeetingResrvController {
     }
     
     // 사용 완료 상태로 변경(조회 페이지: 1개 이상)
-    @RequestMapping(value = "meet/mrcompletes.mr", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "mrcompletes.mr", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String meetingResrvCompletes(@RequestParam(value = "chks[]") List<Integer> chksList) {
         int result = mrService.completesMeetingResrv(chksList);
@@ -338,7 +338,7 @@ public class MeetingResrvController {
         } else
             throw new MeetingResrvException("회의실 예약 상태 수정(예약 취소)에 실패하였습니다.");
         
-        return "redirect:meet/mrdetail.mr?rNo=" + rNo;
+        return "redirect:mrdetail.mr?rNo=" + rNo;
     }
     
     // 예약 취소 상태로 변경(조회 페이지: 1개 이상)

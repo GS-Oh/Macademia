@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>회의실 상세</title>
 <style>
+
+	
 	.profile-photo img{width: 280px; height: 240px; margin-left: 10px;}
 	.profile-photo{position: relative; margin-top: 30px;}
 	.profile-photo label{display: inline; position: absolute; top: 220px; left: 260px;}
