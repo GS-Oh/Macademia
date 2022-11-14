@@ -27,12 +27,17 @@ public class AddressController {
 	@Autowired
 	private AddressService addrService;
 	
-	@RequestMapping("list.addr")
+	@GetMapping("addressListView")
+	public String addressMain() {
+		return "address/addressListView";
+	}
+	
+	@RequestMapping("address/list.addr")
 	public ModelAndView addressListView(@RequestParam(value="page", required = false) Integer page,
 										HttpServletRequest request,
 										ModelAndView mv) {
 		
-		String userNo = ((MemberVo)request.getSession().getAttribute("loginUser")).getNo();
+		String userNo = ((MemberVo)request.getSession().getAttribute("loginMember")).getNo();
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -43,7 +48,7 @@ public class AddressController {
 		
 		if(list != null) {
 			mv.addObject("list", list);
-			mv.setViewName("addressListView");
+			mv.setViewName("address/addressListView");
 			
 		} else {
 			throw new AddressException("내 주소록 조회에 실패했습니다.");
@@ -52,7 +57,7 @@ public class AddressController {
 		return mv;
 	}
 	
-	@RequestMapping("search.addr")
+	@RequestMapping("address/search.addr")
 	public ModelAndView addressSearchView(@RequestParam(value="page", required = false) Integer page,
 										  HttpServletRequest request,
 										  ModelAndView mv) {
@@ -65,14 +70,14 @@ public class AddressController {
 		
 		PageInfo pi =  Pagination.getPageInfo(currentPage, listCount);
 		
-		String userNo = ((MemberVo)request.getSession().getAttribute("loginUser")).getNo();
+		String userNo = ((MemberVo)request.getSession().getAttribute("loginMember")).getNo();
 		
 		ArrayList<MemberVo> list = addrService.selectMemebrList(pi, userNo);
 		
 		if(list != null) {
 			mv.addObject("pi", pi);
 			mv.addObject("list", list);
-			mv.setViewName("addressSearchView");
+			mv.setViewName("address/addressSearchView");
 			
 		} else {
 			throw new AddressException("주소록 조회에 실패했습니다.");
@@ -82,7 +87,7 @@ public class AddressController {
 		return mv;
 	}
 	
-	@RequestMapping("research.addr")
+	@RequestMapping("address/research.addr")
 	public ModelAndView addressSearch(@RequestParam(value="input", required = false) String input,
 									  @RequestParam(value="field", required = false) String field,
 									  @RequestParam(value="page", required = false) Integer page,
@@ -104,7 +109,7 @@ public class AddressController {
 		if(list != null) {
 			mv.addObject("pi", pi);
 			mv.addObject("list", list);
-			mv.setViewName("searchResultView");
+			mv.setViewName("address/searchResultView");
 			
 		} else {
 			throw new AddressException("주소록 검색에 실패했습니다.");
@@ -112,13 +117,13 @@ public class AddressController {
 		return mv;
 	}
 	
-	@RequestMapping(value="add.addr", method = RequestMethod.POST)
+	@RequestMapping(value="address/add.addr", method = RequestMethod.POST)
 	@ResponseBody
 	public String addAddress(@ModelAttribute Address addr,
 							 @RequestParam(value="mNo", required = false) String mNo,
 							 HttpServletRequest request) {
 		
-		String userNo = ((MemberVo)request.getSession().getAttribute("loginUser")).getNo();
+		String userNo = ((MemberVo)request.getSession().getAttribute("loginMember")).getNo();
 		addr.setMyMNo(userNo);
 		
 		System.out.println(userNo);
@@ -134,13 +139,13 @@ public class AddressController {
 		}
 	}
 	
-	@RequestMapping(value="minus.addr", method = RequestMethod.POST)
+	@RequestMapping(value="address/minus.addr", method = RequestMethod.POST)
 	@ResponseBody
 	public String minusAddress(@ModelAttribute Address addr,
 							 @RequestParam(value="mNo", required = false) String mNo,
 							 HttpServletRequest request) {
 		
-		String userNo = ((MemberVo)request.getSession().getAttribute("loginUser")).getNo();
+		String userNo = ((MemberVo)request.getSession().getAttribute("loginMember")).getNo();
 		addr.setMyMNo(userNo);
 		
 		System.out.println(userNo);

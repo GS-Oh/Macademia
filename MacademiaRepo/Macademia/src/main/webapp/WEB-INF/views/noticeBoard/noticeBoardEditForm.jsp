@@ -145,7 +145,7 @@
 													</tr>									
 												</tbody>
 											</table>
-											<input type="hidden" name="mNo" value="${ loginUser.mNo }">
+											<input type="hidden" name="mNo" value="${ loginMember.mNo }">
 											<div id="btnArea" align="center">
 												<button id="submitBtn" type="button" class="btn btn-primary">저장</button>
 											</div>

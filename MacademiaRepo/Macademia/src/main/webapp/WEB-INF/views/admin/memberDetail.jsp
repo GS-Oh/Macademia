@@ -68,11 +68,11 @@
 											<br>
 			                               	<label class="col-form-label">개인 이메일</label>${ member.privateEmail }
 			                               	<br>
-			                               	<label class="col-form-label">생년월일</label>${ member.birthDate }
-			                               	<br>
 			                               	<label class="col-form-label">전화번호</label>${ member.phone }
 			                               	<br>
 			                               	<label class="col-form-label">주소</label>${ member.address }
+			                               	<br>
+			                               	<label class="col-form-label">상세주소</label>${ member.address2 }
 			                               	<br>
 			                               	<div class="form-group row">
 	                                             <label class="form-col col-form-label">자기소개</label>
@@ -97,11 +97,11 @@
 	                                        <select class="form-control" name="positionNo">
 	                                        	<option value="">직위 선택</option>
 						                    	<c:forEach var="p" items="${ pList }">
-						                    		<c:if test="${ member.PositionNo == p.positionNo }">
-						                    			<option value="${ p.positionNo }" selected>${ p.positionName }</option>
+						                    		<c:if test="${ member.positionNo == p.no }">
+						                    			<option value="${ p.no }" selected>${ p.name }</option>
 						                    		</c:if>
 						                    		<c:if test="${ member.positionNo != p.positionNo }">
-						                    			<option value="${ p.positionNo }">${ p.positionName }</option>
+						                    			<option value="${ p.no }">${ p.name }</option>
 						                    		</c:if>
 						                    	</c:forEach>	                                        	
 	                                        </select>

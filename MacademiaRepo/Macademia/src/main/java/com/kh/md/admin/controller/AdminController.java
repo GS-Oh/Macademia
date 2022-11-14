@@ -35,7 +35,6 @@ import com.kh.md.admin.vo.Position;
 import com.kh.md.member.vo.MemberVo;
 
 @Controller
-//@RequestMapping("admin")
 public class AdminController {
 	
 	@Autowired
@@ -140,7 +139,7 @@ public class AdminController {
 		int result = aService.updateMultiMember(noArr, quitYn);
 		
 		if (result == 1) {
-			MemberVo loginUser = (MemberVo)session.getAttribute("loginUser");
+			MemberVo loginUser = (MemberVo)session.getAttribute("loginMember");
 			String loginUserNo = loginUser.getNo();
 			
 			for (String no : noArr) {
@@ -155,7 +154,7 @@ public class AdminController {
 			throw new AdminException("멤버 정보 수정에 실패하였습니다.");
 		}
 		
-		return "redirect:mlist.ad?message=u";
+		return "redirect:/admin/mlist.ad?message=u";
 	}
 	
 	/**
@@ -166,7 +165,7 @@ public class AdminController {
 		
 		int result = aService.deleteMember(noArr);
 		
-		MemberVo loginUser = (MemberVo)session.getAttribute("loginUser");
+		MemberVo loginUser = (MemberVo)session.getAttribute("loginMember");
 		String loginUserNo = loginUser.getNo();
 		
 		for (String no : noArr) {
@@ -180,7 +179,7 @@ public class AdminController {
 			throw new AdminException("멤버 삭제에 실패하였습니다.");
 		}
 		
-		return "redirect:mlist.ad?message=d";
+		return "redirect:/admin/mlist.ad?message=d";
 	}	
 	
     /**
@@ -205,7 +204,7 @@ public class AdminController {
 			mv.addObject("selectPosi", selectPosi);
 			mv.addObject("searchValue", searchValue);
 			mv.addObject("message", message);
-			mv.setViewName("memberDetail");
+			mv.setViewName("admin/memberDetail");
 		} else {
 			throw new AdminException("멤버 상세 조회에 실패하였습니다.");
 		}
@@ -250,7 +249,7 @@ public class AdminController {
 			throw new AdminException("멤버 정보 수정에 실패하였습니다.");
 		}
 		
-		MemberVo loginUser = (MemberVo)session.getAttribute("loginUser");
+		MemberVo loginUser = (MemberVo)session.getAttribute("loginMember");
 		String loginUserNo = loginUser.getNo();
 			
 		if (loginUserNo.equals(m.getNo())) {
@@ -262,7 +261,7 @@ public class AdminController {
 		model.addAttribute("no", m.getNo()).addAttribute("message", "success").addAttribute("page", page);
 		model.addAttribute("selectDept", selectDept).addAttribute("selectPosi", selectPosi).addAttribute("searchValue", searchValue);
 		
-		return "redirect:mdetail.ad";
+		return "redirect:/admin/mdetail.ad";
 	}
 	
     /**
@@ -279,7 +278,7 @@ public class AdminController {
 			throw new AdminException("직위 목록 조회에 실패하였습니다.");
 		}
 		
-		return "posilist";
+		return "admin/posiList";
 	}
 	
     /**
@@ -381,7 +380,7 @@ public class AdminController {
 			throw new AdminException("직위 목록 조회에 실패하였습니다.");
 		}
 		
-		return "deptList";		
+		return "admin/deptList";		
 	}	
 	
     /**
@@ -472,7 +471,7 @@ public class AdminController {
 		if (result2 <= 0) {
 			throw new AdminException("부서 삭제에 실패하였습니다.");
 		} else {
-			return "redirect:deptlist.ad?message=d";
+			return "redirect:/admin/deptlist.ad?message=d";
 		}
 	}
 	
@@ -584,7 +583,7 @@ public class AdminController {
 			mv.addObject("replyReportList", replyReportList);
 			mv.addObject("pi", pi);
 			mv.addObject("message", message);
-			mv.setViewName("reportList");
+			mv.setViewName("admin/reportList");
 		} else {
 			throw new AdminException("신고글 목록 조회에 실패하였습니다.");
 		}
@@ -615,7 +614,7 @@ public class AdminController {
 			throw new AdminException("신고글 처리에 실패하였습니다.");
 		}
 			
-		return "redirect:reportList.ad";
+		return "redirect:/admin/reportList.ad";
 	}
 	
     /**
@@ -641,7 +640,7 @@ public class AdminController {
 			throw new AdminException("신고글 처리에 실패하였습니다.");
 		}
 			
-		return "redirect:reportList.ad";
+		return "redirect:/admin/reportList.ad";
 	}
 	
 }

@@ -198,7 +198,7 @@
                             <!------------- 글 검색 -------------->
                             <div>
 	                            <div class="searchArea" align="center">
-					                <form id="searchForm" action="${ contextPath }/searchNoticeBoard.nb" method="get">
+					                <form id="searchForm" action="${ root }/searchNoticeBoard.nb" method="get">
 					                    <select class="form-control" id="searchCondition" name="searchCondition" >
 											<option value="title">제목</option>
 											<option value="content">내용</option>

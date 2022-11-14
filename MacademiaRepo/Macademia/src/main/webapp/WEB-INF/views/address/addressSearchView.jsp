@@ -116,7 +116,7 @@
                                         			<td colspan="7">조회된 사원이 없습니다.</td>
                                         		</tr>
                                         	</c:if>
-                                        	<c:if test="${ !empty list && loginUser != addr.mNo }">
+                                        	<c:if test="${ !empty list && loginMember != addr.mNo }">
 	                                            <tr id="info">
 	                                            	<td></td>
 	                                                <td id="name">${ addr.mName }

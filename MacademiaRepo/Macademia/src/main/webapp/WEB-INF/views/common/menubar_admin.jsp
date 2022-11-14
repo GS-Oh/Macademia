@@ -78,7 +78,7 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="${root}/home" class="dropdown-item">
                                         <i class="fa fa-home"></i>
-                                        <span class="ml-2">일반모드</span>
+                                        <span class="ml-2">홈으로</span>
                                     </a>
                                     <a href="${root}/logout" class="dropdown-item">
                                         <i class="icon-key"></i>
