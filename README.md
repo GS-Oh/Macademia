@@ -22,7 +22,7 @@
 
 코드관련
 
-급여관리 :payroll
-메신저 : messenger
-컨트롤러/서비스/dao 및 Vo 작업 경로 ( Macademia/MacademiaRepo/Macademia/src/main/java/com/kh/md/ ) + payroll || messenger
-view 작업 경로 ( Macademia/MacademiaRepo/Macademia/src/main/webapp/WEB-INF/views/ ) + payroll || messenger
+- 급여관리 :payroll
+- 메신저 : messenger
+- 컨트롤러/서비스/dao 및 Vo 작업 경로 ( Macademia/MacademiaRepo/Macademia/src/main/java/com/kh/md/ ) + payroll || messenger
+- view 작업 경로 ( Macademia/MacademiaRepo/Macademia/src/main/webapp/WEB-INF/views/ ) + payroll || messenger
